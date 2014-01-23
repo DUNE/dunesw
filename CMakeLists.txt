@@ -65,7 +65,7 @@ include(BuildPlugins)
 # ADD SOURCE CODE SUBDIRECTORIES HERE
 add_subdirectory(lbne)
 # subdirectory for test code
-add_subdirectory(test)
+# add_subdirectory(test)
 # ups - table and config files
 add_subdirectory(ups)
 
