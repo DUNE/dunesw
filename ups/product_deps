@@ -31,7 +31,7 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v1_00_00
+larsoft         v1_00_01
 gcc		v4_8_1
 
 # list products required ONLY for the build
