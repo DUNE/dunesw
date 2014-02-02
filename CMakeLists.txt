@@ -36,7 +36,7 @@ cet_cmake_env()
 
 set_install_root()
 
-cet_set_compiler_flags(DIAGS VIGILANT
+cet_set_compiler_flags(DIAGS CAUTIOUS
   WERROR
   NO_UNDEFINED
   EXTRA_FLAGS -pedantic -Wno-unused-local-typedefs
