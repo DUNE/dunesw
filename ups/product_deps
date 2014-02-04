@@ -23,6 +23,7 @@ fcldir product_dir job
 # to find gdml files:
 table_fragment_begin
     pathPrepend(FW_SEARCH_PATH, ${LBNECODE_DIR}/gdml)
+    pathPrepend(FHICL_FILE_PATH, .:./job)
 table_fragment_end
 
 
