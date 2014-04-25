@@ -2,8 +2,8 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03)
-parent lbnecode v1_00_08
-defaultqual e4
+parent lbnecode v1_01_00
+defaultqual e5
 
 # These optional lines define where headers, libraries, and executables go and should
 # be used only if your product does not conform to the defaults.
@@ -32,8 +32,8 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v1_00_08
-gcc		v4_8_1
+larsoft         v1_01_00
+gcc		v4_8_2
 
 # list products required ONLY for the build
 # any products here must NOT have qualifiers
@@ -41,14 +41,14 @@ only_for_build  cetbuildtools   v3_07_11
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes". 
-# e4  - with gcc 4.8.1 and -std=c++11
+# e5  - with gcc 4.8.1 and -std=c++11
 qualifier	larsoft		gcc	notes
-e4:debug	e4:debug	-nq-
-e4:opt		e4:opt		-nq-
-e4:prof		e4:prof		-nq-
-e4:noifdh:debug	e4:noifdh:debug	-nq-		-nq-
-e4:noifdh:opt	e4:noifdh:opt	-nq-		-nq-
-e4:noifdh:prof	e4:noifdh:prof	-nq-		-nq-
+e5:debug	e5:debug	-nq-
+e5:opt		e5:opt		-nq-
+e5:prof		e5:prof		-nq-
+e5:noifdh:debug	e5:noifdh:debug	-nq-		-nq-
+e5:noifdh:opt	e5:noifdh:opt	-nq-		-nq-
+e5:noifdh:prof	e5:noifdh:prof	-nq-		-nq-
 
 # Preserve tabs and formatting in emacs and vi / vim:
 
