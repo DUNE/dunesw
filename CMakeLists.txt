@@ -55,8 +55,6 @@ find_ups_product( clhep v2_1_3_0 )
 find_ups_product( messagefacility v1_10_00 )
 find_ups_product( cetbuildtools v3_05_00 )
 
-cet_check_gcc()
-
 # macros for dictionary and simple_plugin
 include(ArtDictionary)
 include(ArtMake)
