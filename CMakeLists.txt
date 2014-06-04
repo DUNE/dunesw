@@ -55,6 +55,7 @@ find_ups_product( art v1_09_00 )
 find_ups_product( clhep v2_1_3_0 )
 find_ups_product( messagefacility v1_10_00 )
 find_ups_product( cetbuildtools v3_10_00 )
+find_ups_product( postgresql v9_1_5 )
 
 # macros for dictionary and simple_plugin
 include(ArtDictionary)
