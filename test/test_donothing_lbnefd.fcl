@@ -1,0 +1,50 @@
+# File:     test_donothing_lbnefd.fcl
+# Brief:    does nothing after loading the standard LBNE services
+# Author:   Gianluca Petrillo (petrillo@fnal.gov)
+# Date:     20140618
+# Version:  1.0
+#
+
+#include "services_lbne.fcl"
+
+process_name: DoNothing
+
+
+services: {
+  TFileService:          { fileName: "hists_donothing_lbnefd.root" }
+  Timing:                {}
+  RandomNumberGenerator: {}
+  user:                  @local::lbnefd_services
+} # services
+
+
+source: {
+  module_type: EmptyEvent
+  maxEvents:   100         # Number of events to create
+  firstRun:    1           # Run number to use for this file
+  firstEvent:  1           # number of first event in the file
+} # source
+
+
+physics: {
+
+  producers: {
+    rns:       { module_type: "RandomNumberSaver" }
+  }
+
+  idle: [ rns ]
+  
+  stream1:  [ out1 ]
+  
+  trigger_paths: [ idle ]
+  
+  end_paths:     [ stream1 ]
+} # physics
+
+
+outputs: {
+  out1: {
+    module_type: RootOutput
+    fileName:    "donothing_lbnefd.root"
+  }
+} # outputs
