@@ -4,6 +4,7 @@ include(CetTest)
 
 cet_enable_asserts()
 
+add_subdirectory(EventGenerator)
 add_subdirectory(Geometry)
 
 # these tests run a FCL file and fail only if lar exits with a bad exit code;
