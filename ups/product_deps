@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03)
-parent lbnecode v02_05_03
+parent lbnecode v02_06_00
 defaultqual e5
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -32,12 +32,12 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v02_05_03
+larsoft         v02_06_00
 gcc		v4_8_2
 
 # list products required ONLY for the build
 # any products here must NOT have qualifiers
-only_for_build  cetbuildtools   v3_11_00
+only_for_build  cetbuildtools   v3_13_00
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes". 
