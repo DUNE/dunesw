@@ -70,4 +70,3 @@ physics: {
 
 # Uncomment if you want to check for overlaps
 # physics.analyzers.geotest.CheckForOverlaps: true 
-
