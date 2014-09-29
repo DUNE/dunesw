@@ -34,7 +34,7 @@ table_fragment_end
 product          version
 larsoft         v03_01_00
 gcc		v4_9_1
-artdaq_core	v1_03_05
+artdaq_core	v1_03_06
 
 cetbuildtools	v4_02_02	-	only_for_build
 end_product_list
