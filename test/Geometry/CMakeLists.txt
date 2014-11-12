@@ -29,3 +29,14 @@ cet_test(geometry_lbne35t HANDBUILT
   TEST_ARGS --rethrow-all --config ./test_geometry_lbne35t.fcl
 )
 
+cet_test(geometry_iterator_lbne35t HANDBUILT
+  DATAFILES test_geometry_iterators_lbne35t.fcl
+  TEST_EXEC lar
+  TEST_ARGS --rethrow-all --config ./test_geometry_iterators_lbne35t.fcl
+)
+
+cet_test(geometry_iterator_lbnefd HANDBUILT
+  DATAFILES test_geometry_iterators_lbnefd.fcl
+  TEST_EXEC lar
+  TEST_ARGS --rethrow-all --config ./test_geometry_iterators_lbnefd.fcl
+)

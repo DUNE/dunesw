@@ -59,6 +59,11 @@ physics: {
     geotest: {
       module_type: "GeometryTest"
       PrintWires:  true
+      # The test feeds a out-of-world coordinate to NearestWire() and expects
+      # an exception to be thrown; LBNE currently prefers to cap the wire ID to
+      # a valid wire.
+      # Therefore we disable that part of the test.
+      DisableWireBoundaryCheck: true
     }
   }
 
@@ -70,4 +75,3 @@ physics: {
 
 # Uncomment if you want to check for overlaps
 # physics.analyzers.geotest.CheckForOverlaps: true 
-
