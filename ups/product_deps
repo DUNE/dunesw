@@ -36,7 +36,7 @@ larsoft         v03_04_01
 gcc		v4_9_1
 artdaq_core	v1_03_07
 
-cetbuildtools	v4_03_01	-	only_for_build
+cetbuildtools	v4_03_03	-	only_for_build
 end_product_list
 
 
