@@ -13,6 +13,8 @@ echo "source.maxEvents: -1" >> ./prodsingle_lbne35t.fcl
 # We want to just run detsim in this job
 sed -e '/generator/s/^/#/g' -i prodsingle_lbne35t.fcl 
 sed -e '/largeant/s/^/#/g'  -i prodsingle_lbne35t.fcl 
+# These add lines back in
 sed -i '/simulate\: /asimulate\: [ daq, rns ]' -i prodsingle_lbne35t.fcl
+sed -i '/RandomNumberGenerator/a  RandomNumberGenerator\: \{\} \# Added back ' -i prodsingle_lbne35t.fcl
 
 lar --process-name citest-detsim -c prodsingle_lbne35t.fcl -s $1 -n 1 -o openclose_detsim_lbne.root -T openclose_detsim_hist_lbne.root
