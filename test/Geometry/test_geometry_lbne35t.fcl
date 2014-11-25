@@ -4,7 +4,7 @@
 # Version: 1.0
 #
 
-#include "geometry.fcl"
+#include "geometry_lbne.fcl"
 
 process_name: testGeo
 
