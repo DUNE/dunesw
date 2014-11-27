@@ -22,6 +22,7 @@ gdmldir product_dir gdml
 # table fragment to set FW_SEARCH_PATH needed 
 # to find gdml files:
 table_fragment_begin
+    pathPrepend(FW_SEARCH_PATH, ${LBNECODE_DIR}/LArPandora/scripts)
     pathPrepend(FW_SEARCH_PATH, ${LBNECODE_DIR}/gdml)
     pathPrepend(FHICL_FILE_PATH, .:./job)
 table_fragment_end
