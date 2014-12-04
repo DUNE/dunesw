@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03)
-parent lbnecode v03_02_00
+parent lbnecode v03_04_04
 defaultqual e6
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -22,6 +22,7 @@ gdmldir product_dir gdml
 # table fragment to set FW_SEARCH_PATH needed 
 # to find gdml files:
 table_fragment_begin
+    pathPrepend(FW_SEARCH_PATH, ${LBNECODE_DIR}/scripts)
     pathPrepend(FW_SEARCH_PATH, ${LBNECODE_DIR}/gdml)
     pathPrepend(FHICL_FILE_PATH, .:./job)
 table_fragment_end
@@ -32,11 +33,11 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v03_02_00
+larsoft         v03_04_04
 gcc		v4_9_1
-artdaq_core	v1_03_07
+artdaq_core	v1_04_07
 
-cetbuildtools	v4_03_01	-	only_for_build
+cetbuildtools	v4_03_03	-	only_for_build
 end_product_list
 
 
@@ -57,3 +58,4 @@ end_qualifier_list
 ### Local Variables:
 ### tab-width: 8
 ### End:
+
