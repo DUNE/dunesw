@@ -36,7 +36,7 @@ product          version
 larsoft         v03_04_04
 gcc		v4_9_1
 artdaq_core	v1_04_07
-ubutil          v01_08_01
+lbneutil          v01_00_00
 
 cetbuildtools	v4_03_03	-	only_for_build
 end_product_list
@@ -45,7 +45,7 @@ end_product_list
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes". 
 # e6  - with gcc 4.9.1 and -std=c++1y
-qualifier	larsoft		ubutil		gcc	artdaq_core	notes
+qualifier	larsoft		lbneutil	gcc	artdaq_core	notes
 e6:debug	e6:debug	e6:debug	-nq-	nu:e6:s5:debug
 e6:opt		e6:opt		e6:opt		-nq-	nu:e6:s5:opt
 e6:prof		e6:prof		e6:prof		-nq-	nu:e6:s5:prof
