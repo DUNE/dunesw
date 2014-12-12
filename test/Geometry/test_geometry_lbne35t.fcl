@@ -19,7 +19,7 @@ services: {
         type:       "file"
         filename:   "geometry_lbne35t.txt"
         append:     false
-        threshold:  "INFO"
+        threshold:  "DEBUG"
         categories:{
           default:      { limit: 0 }
           GeometryTest: { limit: -1 }
