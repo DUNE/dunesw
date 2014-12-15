@@ -1,4 +1,4 @@
 #include "standard_detsim_lbne35t.fcl"
 
-services.user:  @local::lbne35t_milliblock_simulation_services
+services.user:  @local::lbne35t_milliblock_detsim_services
 outputs.out1.fileName: "%ifb_%tc_detsim_milliblock.root"
