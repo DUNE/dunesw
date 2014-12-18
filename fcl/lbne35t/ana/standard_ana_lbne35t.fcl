@@ -1,7 +1,7 @@
 #include "services_lbne.fcl"
 ###include "analysistreemodule.fcl"
 
-process_name: Ana
+process_name: Mergeana
 
 services:
 {
