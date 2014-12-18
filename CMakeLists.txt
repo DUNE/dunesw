@@ -73,6 +73,8 @@ add_subdirectory(test)
 add_subdirectory(ups)
 # subdirectory for fcl files
 add_subdirectory(fcl)
+# subdirectory for fcl files
+add_subdirectory(lbneutil)
 
 # packaging utility
 include(UseCPack)
