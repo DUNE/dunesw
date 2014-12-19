@@ -10,12 +10,13 @@ services:
   # Load the service that manages root files for histograms.
   TFileService: { fileName: "ana_hist.root" }
   Timing:       {}
+  RandomNumberGenerator: {}
   SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
 #  message:      @local::microboone_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  user:         @local::lbne35t_basic_services
+  user:         @local::lbne35t_simulation_services
 }
-
+services.user.PhotonVisibilityService:      @local::lbne35t_photonvisibilityservice
 #source is now a root file
 source:
 {
@@ -26,9 +27,12 @@ source:
 # Define and configure some modules to do work on each event.
 # First modules are defined; they are scheduled later.
 # Modules are grouped by type.
-pmtresponse: @local::lbne35t_simphotoncounter
 physics:
 {
+ analyzers:
+{
+ pmtresponse: @local::lbne35t_simphotoncounter
+}
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
 
