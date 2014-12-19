@@ -37,7 +37,7 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v03_04_05
+larsoft         v03_04_06
 gcc		v4_9_1
 artdaq_core	v1_04_07
 larbatch        v01_00_00
