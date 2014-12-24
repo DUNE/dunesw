@@ -78,12 +78,14 @@ physics: {
 #          "PlanePitch",
 #          "Stepping" 
 #      ]
+    }
 
-
+    geotest35: {
+      module_type: "GeometryTest35"
     }
   }
 
-  ana:           [ geotest ]
+  ana:           [ geotest, geotest35 ]
 
   trigger_paths: [ ]
   end_paths:     [ ana ]

@@ -114,7 +114,7 @@ namespace geo{
       //mf::LogVerbatim("35tAuxDetTest") << " Center: (" << AuxDetWorld[0] << ", " 
       //			       << AuxDetWorld[1] << ", " 
       //			       << AuxDetWorld[2] << ")";
-      //mf::LogVerbatim("35tAuxDetTest") << " width  = " << 2*geom->AuxDet(a).HalfWidth();
+      //mf::LogVerbatim("35tAuxDetTest") << " width  = " << 2*geom->AuxDet(a).HalfWidth1();
       //mf::LogVerbatim("35tAuxDetTest") << " height = " << 2*geom->AuxDet(a).HalfHeight();
       //mf::LogVerbatim("35tAuxDetTest") << " length = " << geom->AuxDet(a).Length();
 
@@ -126,25 +126,27 @@ namespace geo{
 
       if( strncmp( geom->AuxDet(a).TotalVolume()->GetName(), "volAuxDetTrap", 13 ) == 0 ){
 
-      //       Small Width
-      //          ____          Height is the thickness
-      //         /    \     T     of the trapezoid
-      //        /      \    |
-      //       /        \   | Length
-      //      /__________\  _ 
-      //         Width 
+	// in 35t gdml, width 2 is the smaller width at +z/2 in local coordinates
+	// 
+	//        Width 2
+	//          ____          Height is the thickness
+	//         /    \     T     of the trapezoid
+	//        /      \    |
+	//       /        \   | Length
+	//      /__________\  _ 
+	//        Width 1 
 
 	CounterType = "trapezoid";
 	testPos1[1]   += geom->AuxDet(a).Length()/2 - 0.1;
-        testPos2a[2]  += geom->AuxDet(a).HalfSmallWidth();
-	testPos2b[0]  += geom->AuxDet(a).HalfSmallWidth();
+        testPos2a[2]  += geom->AuxDet(a).HalfWidth2();
+	testPos2b[0]  += geom->AuxDet(a).HalfWidth2();
 
-	double TrapCheckPtA[3] = { AuxDetWorld[0]+geom->AuxDet(a).HalfWidth(), 
+	double TrapCheckPtA[3] = { AuxDetWorld[0]+geom->AuxDet(a).HalfWidth1(), 
 				   AuxDetWorld[1]+geom->AuxDet(a).Length()/2-0.1, 
 				   AuxDetWorld[2]};
 	double TrapCheckPtB[3] = { AuxDetWorld[0], 
 				   AuxDetWorld[1]+geom->AuxDet(a).Length()/2-0.1, 
-				   AuxDetWorld[2]+geom->AuxDet(a).HalfWidth()};
+				   AuxDetWorld[2]+geom->AuxDet(a).HalfWidth1()};
 
 	// these points are close to the small end and should not be found
 	if(    (geom->FindAuxDetAtPosition(TrapCheckPtA) == a) 
@@ -156,8 +158,8 @@ namespace geo{
 
       } else {
 	CounterType = "box";
-        testPos2a[2] += geom->AuxDet(a).HalfSmallWidth();
-        testPos2b[0] += geom->AuxDet(a).HalfSmallWidth();
+        testPos2a[2] += geom->AuxDet(a).HalfWidth2();
+        testPos2b[0] += geom->AuxDet(a).HalfWidth2();
       }
 
       mf::LogVerbatim("35tAuxDetTest") << "AuxDet " << a << ": " << CounterType 
