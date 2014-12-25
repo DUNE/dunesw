@@ -64,10 +64,28 @@ physics: {
       # a valid wire.
       # Therefore we disable that part of the test.
       DisableWireBoundaryCheck: true
+
+      # Tests can be selected individually using a list of strings called RunTests
+      # See source code for specific strings in case new tests are added
+#      RunTests:  [
+#          "Cryostat",
+#          "ChannelToWire",
+#          "FindPlaneCenters",
+#          "Projection",
+#          "NearestWire",
+#          "WireIntersection",
+#          "WirePitch",
+#          "PlanePitch",
+#          "Stepping" 
+#      ]
+    }
+
+    geotest35: {
+      module_type: "GeometryTest35"
     }
   }
 
-  ana:           [ geotest ]
+  ana:           [ geotest, geotest35 ]
 
   trigger_paths: [ ]
   end_paths:     [ ana ]
