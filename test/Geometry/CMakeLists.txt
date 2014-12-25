@@ -40,3 +40,14 @@ cet_test(geometry_iterator_lbnefd HANDBUILT
   TEST_EXEC lar
   TEST_ARGS --rethrow-all --config ./test_geometry_iterators_lbnefd.fcl
 )
+
+simple_plugin ( GeometryTest35 "module"
+                     Geometry
+                     Geometry_service
+                     ${MF_MESSAGELOGGER}
+                     ${MF_UTILITIES}
+                     ${FHICLCPP}
+                     ${CETLIB}
+                     ${ROOT_BASIC_LIB_LIST}
+               BASENAME_ONLY
+          )
