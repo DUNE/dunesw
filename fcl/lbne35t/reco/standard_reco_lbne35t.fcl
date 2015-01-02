@@ -42,7 +42,7 @@ physics:
 # actual hit finder
   gaushit:      @local::lbne35t_gaushitfinder
 # disambiguation cheater that removes duplicate hits
-  dcheat:       @local::standard_disambigcheat
+  dcheat:       @local::lbne35t_disambigcheat
 # reconstruction using gaushit and disambiguration cheater
   clusterdc:    @local::lbne35t_fuzzycluster
   costrkdc:     @local::lbne35t_cosmictracker
@@ -92,15 +92,9 @@ physics.producers.clustercheat.HitModuleLabel:         "hitcheat"
 physics.producers.trackcheat.CheatedClusterLabel:      "clustercheat"
 physics.producers.clusterdc.HitsModuleLabel:           "dcheat"
 physics.producers.costrkdc.ClusterModuleLabel:         "clusterdc"
-physics.producers.costrkdc.CleanUpHits:                true
 physics.producers.stitchdc.TrackModuleLabel:           "costrkdc"
 physics.producers.stitchdc.SpptModuleLabel:            "costrkdc"
-physics.producers.stitchdc.StitchAlg.SpptSepTolerance: 100
-physics.producers.stitchdc.StitchAlg.CosAngTolerance:  0.80
 physics.producers.cluster.HitsModuleLabel:             "hit35t"
 physics.producers.costrk.ClusterModuleLabel:           "cluster"
-physics.producers.costrk.CleanUpHits:                  true
 physics.producers.stitch.TrackModuleLabel:             "costrk"
 physics.producers.stitch.SpptModuleLabel:              "costrk"
-physics.producers.stitch.StitchAlg.SpptSepTolerance:   100
-physics.producers.stitch.StitchAlg.CosAngTolerance:    0.80
