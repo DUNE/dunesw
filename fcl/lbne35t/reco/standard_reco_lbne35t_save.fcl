@@ -44,13 +44,13 @@ physics:
 # disambiguation cheater that removes duplicate hits
   dcheat:       @local::lbne35t_disambigcheat
 # reconstruction using gaushit and disambiguration cheater
-  clusterdc:    @local::lbne35t_fuzzycluster
+  fuzzydc:      @local::lbne35t_fuzzycluster
   costrkdc:     @local::lbne35t_cosmictracker
   stitchdc:     @local::lbne35t_trackstitcher
 # actual disambiguation
   hit35t:       @local::lbne35t_hitfinder35t
 # reconstruction using disambiguated hits
-  cluster:      @local::lbne35t_fuzzycluster
+  fuzzy:        @local::lbne35t_fuzzycluster
   costrk:       @local::lbne35t_cosmictracker
   stitch:       @local::lbne35t_trackstitcher
 
@@ -59,8 +59,8 @@ physics:
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, caldata, hitcheat, clustercheat, trackcheat,
-         gaushit, dcheat, clusterdc, costrkdc, stitchdc,
-         hit35t, cluster, costrk, stitch]
+         gaushit, dcheat, fuzzydc, costrkdc, stitchdc,
+         hit35t, fuzzy, costrk, stitch]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -90,11 +90,11 @@ outputs:
 ### Here, we overwrite ALL module labels with the ones defined above.
 physics.producers.clustercheat.HitModuleLabel:         "hitcheat"
 physics.producers.trackcheat.CheatedClusterLabel:      "clustercheat"
-physics.producers.clusterdc.HitsModuleLabel:           "dcheat"
-physics.producers.costrkdc.ClusterModuleLabel:         "clusterdc"
+physics.producers.fuzzydc.HitsModuleLabel:           "dcheat"
+physics.producers.costrkdc.ClusterModuleLabel:         "fuzzydc"
 physics.producers.stitchdc.TrackModuleLabel:           "costrkdc"
 physics.producers.stitchdc.SpptModuleLabel:            "costrkdc"
-physics.producers.cluster.HitsModuleLabel:             "hit35t"
-physics.producers.costrk.ClusterModuleLabel:           "cluster"
+physics.producers.fuzzy.HitsModuleLabel:             "hit35t"
+physics.producers.costrk.ClusterModuleLabel:           "fuzzy"
 physics.producers.stitch.TrackModuleLabel:             "costrk"
 physics.producers.stitch.SpptModuleLabel:              "costrk"
