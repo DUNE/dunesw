@@ -71,6 +71,8 @@ add_subdirectory(releaseDB)
 add_subdirectory(test)
 # ups - table and config files
 add_subdirectory(ups)
+# subdirectory for fcl files
+add_subdirectory(fcl)
 
 # packaging utility
 include(UseCPack)
