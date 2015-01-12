@@ -3,6 +3,7 @@
 #include "hitfindermodules_lbne35t.fcl"
 #include "cluster_lbne.fcl"
 #include "trackfindermodules_lbne.fcl"
+#include "pandoramodules_lbne.fcl"
 
 process_name: Reco
 
