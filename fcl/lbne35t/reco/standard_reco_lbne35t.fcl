@@ -34,28 +34,34 @@ physics:
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
-  caldata:         @local::lbne35t_calwire	    
+  caldata:            @local::lbne35t_calwire
 # cheater reconstruction
-  hitcheat:        @local::lbne35t_hitcheater
-  clustercheat:    @local::lbne35t_clustercheater
-  trackcheat:      @local::lbne35t_trackcheater
+  hitcheat:           @local::lbne35t_hitcheater
+  clustercheat:       @local::lbne35t_clustercheater
+  trackcheat:         @local::lbne35t_trackcheater
 # actual hit finder
-  gaushit:         @local::lbne35t_gaushitfinder
+  gaushit:            @local::lbne35t_gaushitfinder
 # disambiguation cheater that removes duplicate hits
-  dcheat:          @local::lbne35t_disambigcheat
+  dcheat:             @local::lbne35t_disambigcheat
 # reconstruction using gaushit and disambiguration cheater
-  fuzzydc:         @local::lbne35t_fuzzycluster
-  dbclusterdc:     @local::lbne35t_dbcluster
-  costrkdc:        @local::lbne35t_cosmictracker
-  stitchdc:        @local::lbne35t_trackstitcher
+  fuzzydc:            @local::lbne35t_fuzzycluster
+  dbclusterdc:        @local::lbne35t_dbcluster
+  costrkdc:           @local::lbne35t_cosmictracker
+  stitchdc:           @local::lbne35t_trackstitcher
+  pandoradc:          @local::lbne35t_pandora
+  particlestitcherdc: @local::lbne35t_particlestitcher
+  particletracksdc:   {module_type: PFParticleTrackMaker}
 # actual disambiguation
-  hit35t:          @local::lbne35t_hitfinder35t
+  hit35t:             @local::lbne35t_hitfinder35t
 # reconstruction using disambiguated hits
-  fuzzy:           @local::lbne35t_fuzzycluster
-  dbcluster:       @local::lbne35t_dbcluster
-  costrk:          @local::lbne35t_cosmictracker
-  stitch:          @local::lbne35t_trackstitcher
-#  kalmanhit:       @local::lbne35t_track3Dkalmanhit
+  fuzzy:              @local::lbne35t_fuzzycluster
+  dbcluster:          @local::lbne35t_dbcluster
+  costrk:             @local::lbne35t_cosmictracker
+  stitch:             @local::lbne35t_trackstitcher
+  pandora:            @local::lbne35t_pandora
+  particlestitcher:   @local::lbne35t_particlestitcher
+  particletracks:     {module_type: PFParticleTrackMaker}
+#  kalmanhit:         @local::lbne35t_track3Dkalmanhit
 
  }
 
@@ -105,3 +111,14 @@ physics.producers.stitch.TrackModuleLabel:             "costrk"
 physics.producers.stitch.SpptModuleLabel:              "costrk"
 #physics.producers.kalmanhit.HitModuleLabel:            "hit35t"
 #physics.producers.kalmanhit.ClusterModuleLabel:        "fuzzy"
+#Pandora configurations
+physics.producers.pandoradc.HitFinderModuleLabel:           "dcheat"
+physics.producers.particlestitcherdc.PFParticleModuleLabel: "pandoradc"
+physics.producers.particlestitcherdc.UseXCoordinate:        false
+physics.producers.particletracksdc.PFParticleModuleLabel:   "particlestitcherdc"
+physics.producers.particletracksdc.SpacePointModuleLabel:   "pandoradc"
+physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
+physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
+physics.producers.particlestitcher.UseXCoordinate:          false
+physics.producers.particletracks.PFParticleModuleLabel:     "particlestitcher"
+physics.producers.particletracks.SpacePointModuleLabel:     "pandora"
