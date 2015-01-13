@@ -69,8 +69,8 @@ physics:
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, caldata, hitcheat, clustercheat, trackcheat,
-         gaushit, dcheat, fuzzydc, dbclusterdc, costrkdc, stitchdc,
-         hit35t, fuzzy, dbcluster, costrk, stitch ]
+         gaushit, dcheat, fuzzydc, dbclusterdc, costrkdc, stitchdc, pandoradc, particlestitcherdc, particletracksdc,
+         hit35t, fuzzy, dbcluster, costrk, stitch, pandora, particlestitcher, particletracks ]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
