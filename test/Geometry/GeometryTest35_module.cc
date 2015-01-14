@@ -111,14 +111,6 @@ namespace geo{
     for(unsigned int a = 0; a < geom->NAuxDets(); ++a) {
       geom->AuxDet(a).LocalToWorld(origin, AuxDetWorld);
 
-      //mf::LogVerbatim("35tAuxDetTest") << " Center: (" << AuxDetWorld[0] << ", " 
-      //			       << AuxDetWorld[1] << ", " 
-      //			       << AuxDetWorld[2] << ")";
-      //mf::LogVerbatim("35tAuxDetTest") << " width  = " << 2*geom->AuxDet(a).HalfWidth1();
-      //mf::LogVerbatim("35tAuxDetTest") << " height = " << 2*geom->AuxDet(a).HalfHeight();
-      //mf::LogVerbatim("35tAuxDetTest") << " length = " << geom->AuxDet(a).Length();
-
-
       double testPos1[3]   = {AuxDetWorld[0], AuxDetWorld[1], AuxDetWorld[2]};
       double testPos2a[3]  = {AuxDetWorld[0], AuxDetWorld[1], AuxDetWorld[2]};
       double testPos2b[3]  = {AuxDetWorld[0], AuxDetWorld[1], AuxDetWorld[2]};
