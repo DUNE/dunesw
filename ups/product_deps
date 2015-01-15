@@ -33,9 +33,9 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v03_05_01
+larsoft         v03_06_00
 gcc		v4_9_1
-artdaq_core	v1_04_07
+artdaq_core	v1_04_08
 lbneutil        v01_00_01
 
 cetbuildtools	v4_04_03	-	only_for_build
@@ -46,12 +46,12 @@ end_product_list
 # Make a table by adding columns before "notes". 
 # e6  - with gcc 4.9.1 and -std=c++1y
 qualifier	larsoft		lbneutil	gcc	artdaq_core	notes
-e6:debug	e6:debug	e6:debug	-nq-	nu:e6:s5:debug
-e6:opt		e6:opt		e6:opt		-nq-	nu:e6:s5:opt
-e6:prof		e6:prof		e6:prof		-nq-	nu:e6:s5:prof
-e6:noifdh:debug	e6:noifdh:debug	e6:debug	-nq-	nu:e6:s5:debug	-nq-
-e6:noifdh:opt	e6:noifdh:opt	e6:opt		-nq-	nu:e6:s5:opt	-nq-
-e6:noifdh:prof	e6:noifdh:prof	e6:prof		-nq-	nu:e6:s5:prof	-nq-
+e6:debug	e6:debug	e6:debug	-nq-	nu:e6:s6:debug
+e6:opt		e6:opt		e6:opt		-nq-	nu:e6:s6:opt
+e6:prof		e6:prof		e6:prof		-nq-	nu:e6:s6:prof
+e6:noifdh:debug	e6:noifdh:debug	e6:debug	-nq-	nu:e6:s6:debug	-nq-
+e6:noifdh:opt	e6:noifdh:opt	e6:opt		-nq-	nu:e6:s6:opt	-nq-
+e6:noifdh:prof	e6:noifdh:prof	e6:prof		-nq-	nu:e6:s6:prof	-nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
