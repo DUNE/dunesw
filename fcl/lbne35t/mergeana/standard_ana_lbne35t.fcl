@@ -1,7 +1,8 @@
 #include "services_lbne.fcl"
 #include "photpropservices_lbne.fcl"
 #include "opticaldetectormodules_lbne.fcl"
-###include "analysistreemodule.fcl"
+#include "anatreemodule.fcl"
+#include "pandoramodules_lbne.fcl"
 
 process_name: Mergeana
 
@@ -16,7 +17,7 @@ services:
   FileCatalogMetadata:  @local::art_file_catalog_mc
   user:         @local::lbne35t_simulation_services
 }
-services.user.PhotonVisibilityService:      @local::lbne35t_photonvisibilityservice
+#services.user.PhotonVisibilityService:      @local::lbne35t_photonvisibilityservice
 #source is now a root file
 source:
 {
@@ -31,14 +32,26 @@ physics:
 {
  analyzers:
 {
- pmtresponse: @local::lbne35t_simphotoncounter
+ pmtresponse:       @local::lbne35t_simphotoncounter
+ anatreecheat:      @local::anatree_anatree
+ anatreedc:         @local::anatree_anatree
+ anatree:           @local::anatree_anatree
+ anatreepandoradc:  @local::anatree_anatree
+ anatreepandora:    @local::anatree_anatree
+ pandorana:         {module_type: PFParticleAnalysis}
+ pandoramonitoring: {module_type: PFParticleMonitoring}
+ pandoranadc:         {module_type: PFParticleAnalysis}
+ pandoradcmonitoring: {module_type: PFParticleMonitoring}
+
 }
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- ana:  [ pmtresponse ]
+ ana:  [ pmtresponse, anatreecheat, anatreedc, anatree,
+         pandoranadc, pandoradcmonitoring, anatreepandoradc,
+         pandorana, pandoramonitoring, anatreepandora]
 
  #end_paths is a keyword and contains the paths that do not modify the art::Event, 
  #ie analyzers and output streams.  these all run simultaneously
@@ -61,3 +74,54 @@ outputs:
 }
 
 ### Here, we overwrite ALL module labels with the ones defined above.
+
+physics.analyzers.anatree.TrackModuleLabel: "stitch"
+physics.analyzers.anatree.HitsModuleLabel: "hit35t"
+physics.analyzers.anatree.TrkSpptAssocModuleLabel: "stitch"
+physics.analyzers.anatree.HitSpptAssocModuleLabel: "stitch"
+physics.analyzers.anatree.ClusterModuleLabel: "dbcluster"
+physics.analyzers.anatree.pdg: -13
+physics.analyzers.anatree.IgnoreSign: false
+
+physics.analyzers.anatreedc.TrackModuleLabel: "stitchdc"
+physics.analyzers.anatreedc.HitsModuleLabel: "dcheat"
+physics.analyzers.anatreedc.TrkSpptAssocModuleLabel: "stitchdc"
+physics.analyzers.anatreedc.HitSpptAssocModuleLabel: "stitchdc"
+physics.analyzers.anatreedc.ClusterModuleLabel: "dbclusterdc"
+physics.analyzers.anatreedc.pdg: -13
+physics.analyzers.anatreedc.IgnoreSign: false
+
+physics.analyzers.anatreecheat.TrackModuleLabel: "trackcheat"
+physics.analyzers.anatreecheat.HitsModuleLabel: "hitcheat"
+physics.analyzers.anatreecheat.TrkSpptAssocModuleLabel: "trackcheat"
+physics.analyzers.anatreecheat.HitSpptAssocModuleLabel: "trackcheat"
+physics.analyzers.anatreecheat.ClusterModuleLabel: "clustercheat"
+physics.analyzers.anatreecheat.pdg: -13
+physics.analyzers.anatreecheat.IgnoreSign: false
+
+#
+### Configure the Pandora Analyzer modules
+physics.analyzers.pandoradcmonitoring.UseDaughterPFParticles:  true
+physics.analyzers.pandoradcmonitoring.HitFinderModule: "dcheat"
+physics.analyzers.pandoradcmonitoring.SpacePointModule: "pandoradc"
+physics.analyzers.pandoradcmonitoring.PFParticleModule: "particlestitcherdc"
+physics.analyzers.pandoranadc.PFParticleModule: "particlestitcherdc"
+
+### Configure the Analysis Tree module
+physics.analyzers.anatreepandoradc.TrackModuleLabel: "particletracksdc"
+physics.analyzers.anatreepandoradc.ClusterModuleLabel: "particlestitcherdc"
+physics.analyzers.anatreepandoradc.HitsModuleLabel: "dcheat"
+physics.analyzers.anatreepandoradc.SimulationLabel: "largeant"
+
+### Configure the Pandora Analyzer modules
+physics.analyzers.pandoramonitoring.UseDaughterPFParticles:  true
+physics.analyzers.pandoramonitoring.HitFinderModule: "hit35t"
+physics.analyzers.pandoramonitoring.SpacePointModule: "pandora"
+physics.analyzers.pandoramonitoring.PFParticleModule: "particlestitcher"
+physics.analyzers.pandorana.PFParticleModule: "particlestitcher"
+
+### Configure the Analysis Tree module
+physics.analyzers.anatreepandora.TrackModuleLabel: "particletracks"
+physics.analyzers.anatreepandora.ClusterModuleLabel: "particlestitcher"
+physics.analyzers.anatreepandora.HitsModuleLabel: "hit35t"
+physics.analyzers.anatreepandora.SimulationLabel: "largeant"
