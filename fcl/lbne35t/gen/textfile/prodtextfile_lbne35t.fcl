@@ -9,6 +9,7 @@ services:
   TFileService: { fileName: "histAntiMuonCutEvents_1000.root" }
   Timing:       {}
   RandomNumberGenerator: {} #ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
   user:         @local::lbne35t_simulation_services
 }
 
@@ -17,7 +18,7 @@ services:
 source:
 {
   module_type: EmptyEvent
-  maxEvents:   -1           # Number of events to create
+  maxEvents:   10           # Number of events to create
   firstRun:    1           # Run number to use for this file
   firstEvent:  1           # number of first event in the file
 }
