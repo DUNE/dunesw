@@ -9,6 +9,7 @@ cp  ${LBNECODE_DIR}/job/prodsingle_lbne35t.fcl .
 echo "outputs.out1.fileName: 'openclose_detsim_lbne.root'" >> ./prodsingle_lbne35t.fcl
 echo "source.module_type: RootInput" >> ./prodsingle_lbne35t.fcl
 echo "source.maxEvents: -1" >> ./prodsingle_lbne35t.fcl
+echo "services.user.TimeService.TriggerOffsetTPC: -1600" >> ./prodsingle_lbne35t.fcl # for consistency with the (probably inadvertently set) parameter in file at /pnfs/lbne/mc/lbne/simulated/002/singleparticle_antimu_20141105_Simulation009.root that this test reads
 
 # We want to just run detsim in this job
 sed -e '/generator/s/^/#/g' -i prodsingle_lbne35t.fcl 

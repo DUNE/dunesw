@@ -1,0 +1,4 @@
+#include "prodcosmics_lbne35t_onewindow.fcl"
+
+physics.producers.generator: @local::lbne35t_milliblock_cry
+outputs.out1.fileName:    "prodcosmics_lbne35t_milliblock_%tc_gen.root"
