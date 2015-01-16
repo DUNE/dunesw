@@ -58,7 +58,7 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "AntiMuonCutEvents_%tc_gen.root" #default file name, can override from command line with -o or --output
+   fileName:    "AntiMuonCutEvents_lbne35t_%tc_gen.root" #default file name, can override from command line with -o or --output
    dataTier:    "generated"
    compressionLevel: 1
  }

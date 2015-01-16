@@ -14,6 +14,7 @@ services:
   Timing:       {}
   SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
   RandomNumberGenerator: {} #ART native random number generator
+  message:      @local::lbne_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
   user:         @local::lbne35t_services
 }
@@ -96,7 +97,7 @@ outputs:
  {
    module_type: RootOutput
    fileName:    "%ifb_%tc_reco.root"
-   dataTier:    "reconstructed"
+   dataTier:    "full-reconstructed"
    compressionLevel: 1
  }
 }
