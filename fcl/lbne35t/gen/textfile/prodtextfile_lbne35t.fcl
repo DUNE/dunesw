@@ -59,7 +59,7 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "AntiMuonCutEvents_lbne35t_%tc_gen.root" #default file name, can override from command line with -o or --output
+   fileName:    "AntiMuonCutEvents_LSU_v2_lbne35t_%tc_gen.root" #default file name, can override from command line with -o or --output
    dataTier:    "generated"
    compressionLevel: 1
  }
@@ -67,3 +67,4 @@ outputs:
 
 #Name of text file input
 physics.producers.generator.InputFileName: "AntiMuonCutEvents_1000.txt"
+physics.producers.generator.MoveY: 900 #new y postion for all particles

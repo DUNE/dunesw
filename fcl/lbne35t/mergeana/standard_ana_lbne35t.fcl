@@ -68,7 +68,7 @@ outputs:
  {
    module_type: RootOutput
    fileName:    "%ifb_%tc_merged.root"
-   dataTier:    "detector-simulated"
+   dataTier:    "full-reconstructed"
    compressionLevel: 1
  }
 }
