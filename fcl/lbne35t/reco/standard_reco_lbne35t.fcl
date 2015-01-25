@@ -1,6 +1,6 @@
 #include "services_lbne.fcl"
 #include "caldata_lbne.fcl"
-#include "hitfindermodules_lbne35t.fcl"
+#include "hitfindermodules_lbne.fcl"
 #include "cluster_lbne.fcl"
 #include "trackfindermodules_lbne.fcl"
 #include "pandoramodules_lbne.fcl"
