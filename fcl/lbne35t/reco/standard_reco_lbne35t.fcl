@@ -73,8 +73,8 @@ physics:
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, caldata, hitcheat, clustercheat, trackcheat,
          fasthit, fasthitdc,
-         gaushit, dcheat, fuzzydc, dbclusterdc, costrkdc, stitchdc, pandoradc, particlestitcherdc, particletracksdc,
-         hit35t, fuzzy, dbcluster, costrk, stitch, pandora, particlestitcher, particletracks ]
+         gaushit, dcheat, dbclusterdc, costrkdc, stitchdc, pandoradc, particlestitcherdc, particletracksdc,
+         hit35t, dbcluster, costrk, stitch, pandora, particlestitcher, particletracks ]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
