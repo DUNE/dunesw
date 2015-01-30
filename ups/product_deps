@@ -18,6 +18,7 @@ defaultqual e6
 #
 fcldir  product_dir job
 gdmldir product_dir gdml
+fwdir  product_dir config_data
 
 # table fragment to set FW_SEARCH_PATH needed 
 # to find gdml files:
