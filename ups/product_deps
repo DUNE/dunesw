@@ -37,7 +37,7 @@ product          version
 larsoft         v04_00_00
 gcc		v4_9_1
 artdaq_core	v1_04_08
-lbneutil        v01_04_01
+lbneutil        v01_04_01	-	optional
 
 cetbuildtools	v4_05_00	-	only_for_build
 end_product_list
