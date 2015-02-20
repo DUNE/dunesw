@@ -4,6 +4,7 @@
 #include "cluster_lbne.fcl"
 #include "trackfindermodules_lbne.fcl"
 #include "pandoramodules_lbne.fcl"
+#include "calorimetry_lbne35t.fcl"
 
 process_name: Reco
 
@@ -52,6 +53,7 @@ physics:
   dbclusterdc:        @local::lbne35t_dbcluster
   costrkdc:           @local::lbne35t_cosmictracker
   stitchdc:           @local::lbne35t_trackstitcher
+  calodc:             @local::lbne35t_calomc
   pandoradc:          @local::lbne35t_pandora
   particlestitcherdc: @local::lbne35t_particlestitcher
   particletracksdc:   {module_type: PFParticleTrackMaker}
@@ -62,6 +64,7 @@ physics:
   dbcluster:          @local::lbne35t_dbcluster
   costrk:             @local::lbne35t_cosmictracker
   stitch:             @local::lbne35t_trackstitcher
+  calo:               @local::lbne35t_calomc
   pandora:            @local::lbne35t_pandora
   particlestitcher:   @local::lbne35t_particlestitcher
   particletracks:     {module_type: PFParticleTrackMaker}
@@ -73,8 +76,8 @@ physics:
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, caldata, hitcheat, clustercheat, trackcheat,
          fasthit, fasthitdc,
-         gaushit, dcheat, dbclusterdc, costrkdc, stitchdc, pandoradc, particlestitcherdc, particletracksdc,
-         hit35t, dbcluster, costrk, stitch, pandora, particlestitcher, particletracks ]
+         gaushit, dcheat, dbclusterdc, costrkdc, stitchdc, calodc, pandoradc, particlestitcherdc, particletracksdc,
+         hit35t, dbcluster, costrk, stitch, calo, pandora, particlestitcher, particletracks ]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -110,11 +113,15 @@ physics.producers.dbclusterdc.HitsModuleLabel:         "dcheat"
 physics.producers.costrkdc.ClusterModuleLabel:         "dbclusterdc"
 physics.producers.stitchdc.TrackModuleLabel:           "costrkdc"
 physics.producers.stitchdc.SpptModuleLabel:            "costrkdc"
+physics.producers.calodc.TrackModuleLabel:             "stitchdc"
+physics.producers.calodc.SpacePointModuleLabel:        "stitchdc"
 physics.producers.fuzzy.HitsModuleLabel:               "hit35t"
 physics.producers.dbcluster.HitsModuleLabel:           "hit35t"
 physics.producers.costrk.ClusterModuleLabel:           "dbcluster"
 physics.producers.stitch.TrackModuleLabel:             "costrk"
 physics.producers.stitch.SpptModuleLabel:              "costrk"
+physics.producers.calo.TrackModuleLabel:               "stitch"
+physics.producers.calo.SpacePointModuleLabel:          "stitch"
 #physics.producers.kalmanhit.HitModuleLabel:            "hit35t"
 #physics.producers.kalmanhit.ClusterModuleLabel:        "fuzzy"
 #Pandora configurations

@@ -82,6 +82,7 @@ physics.analyzers.anatree.HitSpptAssocModuleLabel: "stitch"
 physics.analyzers.anatree.ClusterModuleLabel: "dbcluster"
 physics.analyzers.anatree.pdg: -13
 physics.analyzers.anatree.IgnoreSign: false
+physics.analyzers.anatree.CalorimetryModuleLabel: "calo"
 
 physics.analyzers.anatreedc.TrackModuleLabel: "stitchdc"
 physics.analyzers.anatreedc.HitsModuleLabel: "dcheat"
@@ -90,6 +91,7 @@ physics.analyzers.anatreedc.HitSpptAssocModuleLabel: "stitchdc"
 physics.analyzers.anatreedc.ClusterModuleLabel: "dbclusterdc"
 physics.analyzers.anatreedc.pdg: -13
 physics.analyzers.anatreedc.IgnoreSign: false
+physics.analyzers.anatreedc.CalorimetryModuleLabel: "calodc"
 
 physics.analyzers.anatreecheat.TrackModuleLabel: "trackcheat"
 physics.analyzers.anatreecheat.HitsModuleLabel: "hitcheat"
