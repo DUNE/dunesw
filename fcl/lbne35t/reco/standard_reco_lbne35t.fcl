@@ -56,7 +56,6 @@ physics:
   calodc:             @local::lbne35t_calomc
   pandoradc:          @local::lbne35t_pandora
   particlestitcherdc: @local::lbne35t_particlestitcher
-  particletracksdc:   {module_type: PFParticleTrackMaker}
 # actual disambiguation
   hit35t:             @local::lbne35t_hitfinder35t
 # reconstruction using disambiguated hits
@@ -67,7 +66,6 @@ physics:
   calo:               @local::lbne35t_calomc
   pandora:            @local::lbne35t_pandora
   particlestitcher:   @local::lbne35t_particlestitcher
-  particletracks:     {module_type: PFParticleTrackMaker}
 #  kalmanhit:         @local::lbne35t_track3Dkalmanhit
 
  }
@@ -76,8 +74,8 @@ physics:
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, caldata, hitcheat, clustercheat, trackcheat,
          fasthit, fasthitdc,
-         gaushit, dcheat, dbclusterdc, costrkdc, stitchdc, calodc, pandoradc, particlestitcherdc, particletracksdc,
-         hit35t, dbcluster, costrk, stitch, calo, pandora, particlestitcher, particletracks ]
+         gaushit, dcheat, dbclusterdc, costrkdc, stitchdc, calodc, pandoradc, particlestitcherdc,
+         hit35t, dbcluster, costrk, stitch, calo, pandora, particlestitcher ]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -127,11 +125,10 @@ physics.producers.calo.SpacePointModuleLabel:          "stitch"
 #Pandora configurations
 physics.producers.pandoradc.HitFinderModuleLabel:           "dcheat"
 physics.producers.particlestitcherdc.PFParticleModuleLabel: "pandoradc"
+physics.producers.particlestitcherdc.TrackModuleLabel:      "pandoradc"
 physics.producers.particlestitcherdc.UseXCoordinate:        false
-physics.producers.particletracksdc.PFParticleModuleLabel:   "particlestitcherdc"
-physics.producers.particletracksdc.SpacePointModuleLabel:   "pandoradc"
 physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
 physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
+physics.producers.particlestitcher.TrackModuleLabel:        "pandora"
 physics.producers.particlestitcher.UseXCoordinate:          false
-physics.producers.particletracks.PFParticleModuleLabel:     "particlestitcher"
-physics.producers.particletracks.SpacePointModuleLabel:     "pandora"
+
