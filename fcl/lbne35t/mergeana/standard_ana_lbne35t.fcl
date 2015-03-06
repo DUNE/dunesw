@@ -107,13 +107,14 @@ physics.analyzers.pandoradcmonitoring.UseDaughterPFParticles:  true
 physics.analyzers.pandoradcmonitoring.HitFinderModule: "dcheat"
 physics.analyzers.pandoradcmonitoring.SpacePointModule: "pandoradc"
 physics.analyzers.pandoradcmonitoring.PFParticleModule: "particlestitcherdc"
-physics.analyzers.pandoranadc.PFParticleModule: "particlestitcherdc"
+physics.analyzers.pandoradcmonitoring.TrackModule: "particlestitcherdc"
 physics.analyzers.pandoranadc.SpacePointModule: "pandoradc"
-physics.analyzers.pandoranadc.TrackModule: "particletracksdc"
+physics.analyzers.pandoranadc.PFParticleModule: "particlestitcherdc"
+physics.analyzers.pandoranadc.TrackModule: "particlestitcherdc"
 
 ### Configure the Analysis Tree module
-physics.analyzers.anatreepandoradc.TrackModuleLabel: "particletracksdc"
-physics.analyzers.anatreepandoradc.ClusterModuleLabel: "particlestitcherdc"
+physics.analyzers.anatreepandoradc.TrackModuleLabel: "particlestitcherdc"
+physics.analyzers.anatreepandoradc.ClusterModuleLabel: "pandoradc"
 physics.analyzers.anatreepandoradc.HitsModuleLabel: "dcheat"
 physics.analyzers.anatreepandoradc.SimulationLabel: "largeant"
 
@@ -122,12 +123,13 @@ physics.analyzers.pandoramonitoring.UseDaughterPFParticles:  true
 physics.analyzers.pandoramonitoring.HitFinderModule: "hit35t"
 physics.analyzers.pandoramonitoring.SpacePointModule: "pandora"
 physics.analyzers.pandoramonitoring.PFParticleModule: "particlestitcher"
-physics.analyzers.pandorana.PFParticleModule: "particlestitcher"
+physics.analyzers.pandoramonitoring.TrackModule: "particlestitcher"
 physics.analyzers.pandorana.SpacePointModule: "pandora"
-physics.analyzers.pandorana.TrackModule: "particletracks"
+physics.analyzers.pandorana.PFParticleModule: "particlestitcher"
+physics.analyzers.pandorana.TrackModule: "particlestitcher"
 
 ### Configure the Analysis Tree module
-physics.analyzers.anatreepandora.TrackModuleLabel: "particletracks"
-physics.analyzers.anatreepandora.ClusterModuleLabel: "particlestitcher"
+physics.analyzers.anatreepandora.TrackModuleLabel: "particlestitcher"
+physics.analyzers.anatreepandora.ClusterModuleLabel: "pandora"
 physics.analyzers.anatreepandora.HitsModuleLabel: "hit35t"
 physics.analyzers.anatreepandora.SimulationLabel: "largeant"
