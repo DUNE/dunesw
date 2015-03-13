@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03)
-parent lbnecode v04_02_00
+parent lbnecode v04_02_02
 defaultqual e6
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -34,10 +34,10 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v04_02_00
+larsoft         v04_02_02
 gcc		v4_9_1
 artdaq_core	v1_04_08
-lbneutil        v01_04_03	-	optional
+lbneutil        v01_04_04	-	optional
 lbne_raw_data 	v1_00_00
 
 cetbuildtools	v4_07_03	-	only_for_build
