@@ -45,12 +45,15 @@ physics:
 # actual hit finder
   gaushit:            @local::lbne35t_gaushitfinder
   fasthit:            @local::lbne35t_fasthitfinder
+  cchit:              @local::lbne35t_clustercrawlerhit
 # disambiguation cheater that removes duplicate hits
   dcheat:             @local::lbne35t_disambigcheat
   fasthitdc:          @local::lbne35t_disambigcheat
+  dcheatcc:           @local::lbne35t_disambigcheat
 # reconstruction using gaushit and disambiguration cheater
   fuzzydc:            @local::lbne35t_fuzzycluster
   dbclusterdc:        @local::lbne35t_dbcluster
+  lineclusterdc:      @local::lbne35t_linecluster
   costrkdc:           @local::lbne35t_cosmictracker
   stitchdc:           @local::lbne35t_trackstitcher
   calodc:             @local::lbne35t_calomc
@@ -58,9 +61,11 @@ physics:
   particlestitcherdc: @local::lbne35t_particlestitcher
 # actual disambiguation
   hit35t:             @local::lbne35t_hitfinder35t
+  hit35tcc:           @local::lbne35t_hitfinder35t
 # reconstruction using disambiguated hits
   fuzzy:              @local::lbne35t_fuzzycluster
   dbcluster:          @local::lbne35t_dbcluster
+  linecluster:        @local::lbne35t_linecluster
   costrk:             @local::lbne35t_cosmictracker
   stitch:             @local::lbne35t_trackstitcher
   calo:               @local::lbne35t_calomc
@@ -73,8 +78,9 @@ physics:
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, caldata, hitcheat, clustercheat, trackcheat,
-         fasthit, fasthitdc,
+         fasthit, fasthitdc, 
          gaushit, dcheat, dbclusterdc, costrkdc, stitchdc, calodc, pandoradc, particlestitcherdc,
+         cchit, dcheatcc, lineclusterdc, hit35tcc, linecluster,
          hit35t, dbcluster, costrk, stitch, calo, pandora, particlestitcher ]
 
  #define the output stream, there could be more than one if using filters 
@@ -103,9 +109,11 @@ outputs:
  }
 }
 ### Here, we overwrite ALL module labels with the ones defined above.
+physics.producers.hit35tcc.ChanHitLabel:               "cchit"
 physics.producers.clustercheat.HitModuleLabel:         "hitcheat"
 physics.producers.trackcheat.CheatedClusterLabel:      "clustercheat"
 physics.producers.fasthitdc.ChanHitLabel:              "fasthit"
+physics.producers.dcheatcc.ChanHitLabel:               "cchit"
 physics.producers.fuzzydc.HitsModuleLabel:             "dcheat"
 physics.producers.dbclusterdc.HitsModuleLabel:         "dcheat"
 physics.producers.costrkdc.ClusterModuleLabel:         "dbclusterdc"
@@ -115,6 +123,8 @@ physics.producers.calodc.TrackModuleLabel:             "stitchdc"
 physics.producers.calodc.SpacePointModuleLabel:        "stitchdc"
 physics.producers.fuzzy.HitsModuleLabel:               "hit35t"
 physics.producers.dbcluster.HitsModuleLabel:           "hit35t"
+physics.producers.linecluster.CalDataModuleLabel:      "hit35tcc"
+physics.producers.lineclusterdc.CalDataModuleLabel:    "dcheatcc"
 physics.producers.costrk.ClusterModuleLabel:           "dbcluster"
 physics.producers.stitch.TrackModuleLabel:             "costrk"
 physics.producers.stitch.SpptModuleLabel:              "costrk"
