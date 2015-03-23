@@ -1,0 +1,7 @@
+process: TEST
+
+source:
+{
+  module_type: SplitterInput
+  fileNames: [ "sample_in.root" ]
+}
