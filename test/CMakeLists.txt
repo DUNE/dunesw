@@ -4,6 +4,7 @@ include(CetTest)
 
 cet_enable_asserts()
 
+add_subdirectory(daqinput35t)
 add_subdirectory(EventGenerator)
 add_subdirectory(Geometry)
 add_subdirectory(ci)
