@@ -10,7 +10,7 @@ source:
       "lbne_r000730_sr01_20150317T160905_ten_events_2.root",
       "lbne_r000730_sr02_20150317T160905_ten_events.root"
    ]
-   rawDigitsPerEvent: 1000
+   rawDigitsPerEvent: 100
    maxEvents: 1000
 }
 
@@ -24,9 +24,9 @@ physics: {
    analyzers: {
       testSplitter : {
          module_type : SplitterAnalyzer
-         nExpectedEvents : 31
-         nExpDigitsPerEvent  : 1000
-         nExpDigitsLastEvent : 720
+         nExpectedEvents : 308
+         nExpDigitsPerEvent  : 100
+         nExpDigitsLastEvent : 20
       }
    }
 

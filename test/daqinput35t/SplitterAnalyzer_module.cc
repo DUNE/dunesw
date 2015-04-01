@@ -9,14 +9,13 @@
 #include "art/Framework/Principal/Event.h"
 #include "art/Utilities/InputTag.h"
 #include "fhiclcpp/ParameterSet.h"
+#include "messagefacility/MessageLogger/MessageLogger.h"
 
 // lardata
 #include "RawData/RawDigit.h"
 
 // C++
-#include <iostream>
-
-namespace fhicl { class ParameterSet; }
+#include <cassert>
 
 namespace arttest {
 
@@ -25,23 +24,38 @@ namespace arttest {
   class SplitterAnalyzer : public art::EDAnalyzer {
   public:
 
-    explicit SplitterAnalyzer( fhicl::ParameterSet const& pset) :
-      art::EDAnalyzer(pset),
-      inputTag_("SplitterInput:TPC")
+    explicit SplitterAnalyzer( fhicl::ParameterSet const& ps) :
+      art::EDAnalyzer(ps),
+      inputTag_("SplitterInput:TPC"),
+      nExpectedEvts_(ps.get<std::size_t>("nExpectedEvents")),
+      nEvts_(),
+      nExpDigitsLastEvt_(ps.get<std::size_t>("nExpDigitsLastEvent")),
+      nExpDigitsPerEvt_(ps.get<std::size_t>("nExpDigitsPerEvent"))
     {}
 
     virtual ~SplitterAnalyzer(){}
 
-    virtual void analyze( art::Event const & e  ) override { 
+    virtual void analyze( art::Event const & e  ) override {
 
-      auto rawDigitH = e.getValidHandle<rawDigits_t>( inputTag_ );
-      std::cout << "analyzing event: " << e.id() << " : " << rawDigitH->size() << " digits present" << std::endl;
-      std::cout << "====" << std::endl;
+      ++nEvts_;
+      auto rawDigitsH = e.getValidHandle<rawDigits_t>( inputTag_ );
+      mf::LogDebug("DigitsTest") << "analyzing event: " << e.id() << " : " << rawDigitsH->size() << " digits present";
+
+      if ( nEvts_ < nExpectedEvts_ ) {
+        assert( rawDigitsH->size() == nExpDigitsPerEvt_ );
+      }
+      else {
+        assert( rawDigitsH->size() == nExpDigitsLastEvt_ );
+      }
 
     }
 
   private:
     art::InputTag inputTag_;
+    std::size_t   nExpectedEvts_;
+    std::size_t   nEvts_;
+    std::size_t   nExpDigitsLastEvt_;
+    std::size_t   nExpDigitsPerEvt_;
 
   };  // SplitterAnalyzer
 
