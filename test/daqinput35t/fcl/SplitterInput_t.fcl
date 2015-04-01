@@ -1,7 +1,42 @@
+#include "geometry.fcl"
+
 process: TEST
 
 source:
 {
-  module_type: SplitterInput
-  fileNames: [ "sample_in.root" ]
+   module_type: SplitterInput
+   fileNames: [ 
+      "lbne_r000730_sr01_20150317T160905_ten_events.root",
+      "lbne_r000730_sr01_20150317T160905_ten_events_2.root",
+      "lbne_r000730_sr02_20150317T160905_ten_events.root"
+   ]
+   rawDigitsPerEvent: 2000
+   maxEvents: 1000
+}
+
+services: {  
+   ExptGeoHelperInterface: @local::standard_geometry_helper
+   Geometry : @local::standard_geo
+}
+
+physics: {
+
+   analyzers: {
+      testSplitter : {
+         module_type : SplitterAnalyzer
+      }
+   }
+
+   e1 : [testSplitter,output1]
+   end_paths: [ e1 ]
+
+}
+
+outputs: {
+   
+   output1 : {
+      fileName : "lbne_split_events.root"
+      module_type : RootOutput
+   }
+
 }
