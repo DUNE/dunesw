@@ -3,25 +3,14 @@ simple_plugin( SplitterAnalyzer "module"
   MF_MESSAGELOGGER
   )
 
-cet_test(SplitterInput_t1 HANDBUILT
-         TEST_EXEC lar
-	 TEST_ARGS --rethrow-all --config SplitterInput_t.fcl
+cet_test(splitterInput_t1.sh PREBUILT
 	 DATAFILES
 	 fcl/SplitterInput_t.fcl
-         /scratch/knoepfel/lbne_r000730_sr01_20150317T160905_ten_events.root
-         /scratch/knoepfel/lbne_r000730_sr01_20150317T160905_ten_events_2.root
-         /scratch/knoepfel/lbne_r000730_sr02_20150317T160905_ten_events.root
+         lbne_r000730_sr01_ten_events.root
 )
 
-cet_test(SplitterInput_t2 HANDBUILT
-         TEST_EXEC lar
-	 TEST_ARGS --rethrow-all --config SplitterInput_t2.fcl
+cet_test(splitterInput_t2.sh PREBUILT
 	 DATAFILES
 	 fcl/SplitterInput_t2.fcl
-         /scratch/knoepfel/lbne_r000730_sr01_20150317T160905_ten_events.root
-         /scratch/knoepfel/lbne_r000730_sr01_20150317T160905_ten_events_2.root
-         /scratch/knoepfel/lbne_r000730_sr02_20150317T160905_ten_events.root
+         lbne_r000730_sr01_ten_events.root
 )
-
-
-
