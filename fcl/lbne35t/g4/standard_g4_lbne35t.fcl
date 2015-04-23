@@ -64,26 +64,5 @@ outputs:
    compressionLevel: 1
  }
 }
-services.user.PhotonVisibilityService.LibraryFile: "PhotonPropagation/LibraryData/lib_lbne35tv3_20140829.root"
-services.user.PhotonVisibilityService.NX: 60
-services.user.PhotonVisibilityService.NY: 60
-services.user.PhotonVisibilityService.NZ: 60
-# set quantum efficiency supressed scint yield to 0.03 * 24000
-services.user.LArProperties.ScintYield: 720
-
-# disable Cherenkov light (slow)
-services.user.LArProperties.EnableCerenkovLight: false
-
-# enable "FastOptical" in geant4
-services.user.LArG4Parameters.UseCustomPhysics: true
-services.user.LArG4Parameters.EnabledPhysics: [ "Em",
-                                                "FastOptical",
-                                                "SynchrotronAndGN",
-                                                "Ion",
-                                                "Hadron",
-                                                "Decay",
-                                                "HadronElastic",
-                                                "Stopping",
-                                                "NeutronTrackingCut" ]
 
 
