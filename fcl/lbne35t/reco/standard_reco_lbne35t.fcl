@@ -6,6 +6,7 @@
 #include "pandoramodules_lbne.fcl"
 #include "calorimetry_lbne35t.fcl"
 #include "mctrutht0matching.fcl"
+#include "t0reco.fcl"
 
 process_name: Reco
 
@@ -70,12 +71,13 @@ physics:
 #  kalmanhit:         @local::lbne35t_track3Dkalmanhit
   mctrutht0:          @local::lbne35t_mctrutht0matching
   mctrutht0dc:          @local::lbne35t_mctrutht0matching
-
+  t0counter:          @local::lbne35t_t0counter
  }
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, caldata, hitcheat, clustercheat, trackcheat,
+ reco: [ rns, t0counter, 
+         caldata, hitcheat, clustercheat, trackcheat,
          fasthit, fasthitdc,
          gaushit, dcheat, dbclusterdc, costrkdc, stitchdc, mctrutht0dc, calodc, pandoradc, particlestitcherdc,
          hit35t, dbcluster, costrk, stitch, mctrutht0, calo, pandora, particlestitcher ]
