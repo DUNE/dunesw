@@ -29,11 +29,11 @@ cet_test(optical_digi_lbne35t HANDBUILT
   TEST_ARGS --rethrow-all --config ./test_optical_digi_lbne35t.fcl 
 )
 
-cet_test(optical_reco_lbne35t HANDBUILT
-  DATAFILES test_optical_reco_lbne35t.fcl
-  TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_optical_reco_lbne35t.fcl 
-)
+#cet_test(optical_reco_lbne35t HANDBUILT
+#  DATAFILES test_optical_reco_lbne35t.fcl
+#  TEST_EXEC lar
+#  TEST_ARGS --rethrow-all --config ./test_optical_reco_lbne35t.fcl 
+#)
 
 cet_test(build_oplib_lbne35t HANDBUILT
   DATAFILES test_build_oplib_lbne35t.fcl

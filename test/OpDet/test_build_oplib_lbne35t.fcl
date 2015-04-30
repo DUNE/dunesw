@@ -18,7 +18,7 @@ process_name: LibraryBuild
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "PhotonLibraryFile_lbne35ton.root" }
+  TFileService: { fileName: "test_PhotonLibraryFile_lbne35ton.root" }
   Timing:       {}
   RandomNumberGenerator: {} #ART native random number generator
   user:          @local::lbne35t_photolibbuild_services 
@@ -30,7 +30,7 @@ services:
 source:
 {
   module_type: EmptyEvent
-  maxEvents:   100        # Number of events to create
+  maxEvents:   1           # Number of events to create
   firstRun:    1           # Run number to use for this file
   firstEvent:  1           # number of first event in the file
 }
@@ -76,7 +76,7 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "opticallibrary_lbne35t.root" #default file name, can override from command line with -o or --output
+   fileName:    "test_opticallibrary_lbne35t.root" #default file name, can override from command line with -o or --output
  }
 }
 
@@ -110,7 +110,7 @@ physics.analyzers.pmtresponse.MakeOpDetEventsTree: false
 
 #physics.analyzers.pmtresponse.Verbosity: 3
 
-physics.producers.generator.N: 10000
+physics.producers.generator.N: 10
 
 
 # Number of voxels
