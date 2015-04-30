@@ -7,6 +7,7 @@ cet_enable_asserts()
 add_subdirectory(EventGenerator)
 add_subdirectory(Geometry)
 add_subdirectory(ci)
+add_subdirectory(OpDet)
 
 # these tests run a FCL file and fail only if lar exits with a bad exit code;
 # they are fast and always run.
