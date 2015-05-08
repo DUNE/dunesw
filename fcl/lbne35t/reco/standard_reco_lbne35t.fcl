@@ -70,7 +70,9 @@ physics:
   particlestitcher:   @local::lbne35t_particlestitcher
 #  kalmanhit:         @local::lbne35t_track3Dkalmanhit
   mctrutht0:          @local::lbne35t_mctrutht0matching
-  mctrutht0dc:          @local::lbne35t_mctrutht0matching
+  mctrutht0dc:        @local::lbne35t_mctrutht0matching
+  mctrutht0pandora:   @local::lbne35t_mctrutht0matching
+  mctrutht0pandoradc: @local::lbne35t_mctrutht0matching	
   t0counter:          @local::lbne35t_t0counter
  }
 
@@ -79,8 +81,8 @@ physics:
  reco: [ rns, t0counter, 
          caldata, hitcheat, clustercheat, trackcheat,
          fasthit, fasthitdc,
-         gaushit, dcheat, dbclusterdc, costrkdc, stitchdc, mctrutht0dc, calodc, pandoradc, particlestitcherdc,
-         hit35t, dbcluster, costrk, stitch, mctrutht0, calo, pandora, particlestitcher ]
+         gaushit, dcheat, dbclusterdc, costrkdc, stitchdc, mctrutht0dc, calodc, pandoradc, particlestitcherdc, mctrutht0pandoradc,
+         hit35t, dbcluster, costrk, stitch, mctrutht0, calo, pandora, particlestitcher, mctrutht0pandora ]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -107,10 +109,11 @@ outputs:
    compressionLevel: 1
  }
 }
-### Here, we overwrite ALL module labels with the ones defined above.
+### Here, we overwrite ALL module Labels with the ones defined above.
 physics.producers.clustercheat.HitModuleLabel:         "hitcheat"
 physics.producers.trackcheat.CheatedClusterLabel:      "clustercheat"
 physics.producers.fasthitdc.ChanHitLabel:              "fasthit"
+
 physics.producers.fuzzydc.HitsModuleLabel:             "dcheat"
 physics.producers.dbclusterdc.HitsModuleLabel:         "dcheat"
 physics.producers.costrkdc.ClusterModuleLabel:         "dbclusterdc"
@@ -120,6 +123,7 @@ physics.producers.mctrutht0dc.TrackModuleLabel:        "stitchdc"
 physics.producers.calodc.TrackModuleLabel:             "stitchdc"
 physics.producers.calodc.SpacePointModuleLabel:        "stitchdc"
 physics.producers.calodc.T0ModuleLabel:                "mctrutht0dc"
+
 physics.producers.fuzzy.HitsModuleLabel:               "hit35t"
 physics.producers.dbcluster.HitsModuleLabel:           "hit35t"
 physics.producers.costrk.ClusterModuleLabel:           "dbcluster"
@@ -128,15 +132,19 @@ physics.producers.stitch.SpptModuleLabel:              "costrk"
 physics.producers.mctrutht0.TrackModuleLabel:          "stitch"
 physics.producers.calo.TrackModuleLabel:               "stitch"
 physics.producers.calo.SpacePointModuleLabel:          "stitch"
+physics.producers.calo.T0ModuleLabel:                  "mctrutht0"
 #physics.producers.kalmanhit.HitModuleLabel:            "hit35t"
 #physics.producers.kalmanhit.ClusterModuleLabel:        "fuzzy"
+
 #Pandora configurations
 physics.producers.pandoradc.HitFinderModuleLabel:           "dcheat"
 physics.producers.particlestitcherdc.PFParticleModuleLabel: "pandoradc"
 physics.producers.particlestitcherdc.TrackModuleLabel:      "pandoradc"
 physics.producers.particlestitcherdc.UseXCoordinate:        false
+physics.producers.mctrutht0pandoradc.TrackModuleLabel:      "particlestitcherdc"
 physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
 physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
 physics.producers.particlestitcher.TrackModuleLabel:        "pandora"
 physics.producers.particlestitcher.UseXCoordinate:          false
+physics.producers.mctrutht0pandora.TrackModuleLabel:        "particlestitcher"
 
