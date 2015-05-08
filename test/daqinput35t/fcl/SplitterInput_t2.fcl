@@ -10,8 +10,11 @@ source:
       "lbne_r000730_sr01_ten_events_c2.root",
       "lbne_r000730_sr02_ten_events_c3.root"
    ]
-   rawDigitsPerEvent: 100
    maxEvents: 1000
+   ticksPerEvent: 1000
+   TPCInputTag : "daq:TPC:DAQ" 
+   SSPInputTag : "daq:PHOTON:DAQ" 
+   NOvAClockFrequency : 64.0 # MHz
 }
 
 services: {  
