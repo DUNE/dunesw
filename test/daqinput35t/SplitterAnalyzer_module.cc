@@ -41,12 +41,14 @@ namespace arttest {
       auto rawDigitsH = e.getValidHandle<rawDigits_t>( inputTag_ );
       mf::LogDebug("DigitsTest") << "analyzing event: " << e.id() << " : " << rawDigitsH->size() << " digits present";
 
-      if ( nEvts_ < nExpectedEvts_ ) {
-        assert( rawDigitsH->size() == nExpDigitsPerEvt_ );
-      }
-      else {
-        assert( rawDigitsH->size() == nExpDigitsLastEvt_ );
-      }
+      // convert this into a test on samples -- to do
+
+      //if ( nEvts_ < nExpectedEvts_ ) {
+      //  assert( rawDigitsH->size() == nExpDigitsPerEvt_ );
+      //}
+      //else {
+      //  assert( rawDigitsH->size() == nExpDigitsLastEvt_ );
+      //}
 
     }
 
