@@ -1,0 +1,37 @@
+#include "geometry.fcl"
+
+process: TEST
+
+source:
+{
+   module_type: SplitterInput
+   fileNames: [ 
+      "/scratch/lbne/trj/lbne_r001071_sr01_20150504T210812.root"
+   ]
+   maxEvents: 100
+   ticksPerEvent: 1000
+   TPCInputTag : "daq:TPC:DAQ" 
+   SSPInputTag : "daq:PHOTON:DAQ" 
+   NOvAClockFrequency : 64.0 # MHz
+}
+
+services: {  
+   ExptGeoHelperInterface: @local::standard_geometry_helper
+   Geometry : @local::standard_geo
+}
+
+physics: {
+
+   analyzers: {
+      testSplitter : {
+         module_type : SplitterAnalyzer
+         nExpectedEvents : 100
+         nExpDigitsPerEvent  : 1000
+         nExpDigitsLastEvent : 1000
+      }
+   }
+
+   e1 : [testSplitter]
+   end_paths: [ e1 ]
+
+}
