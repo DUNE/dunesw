@@ -40,15 +40,20 @@ namespace arttest {
       ++nEvts_;
       auto rawDigitsH = e.getValidHandle<rawDigits_t>( inputTag_ );
       mf::LogDebug("DigitsTest") << "analyzing event: " << e.id() << " : " << rawDigitsH->size() << " digits present";
+      std::vector< art::Ptr<raw::RawDigit> >  Digits;
+      art::fill_ptr_vector(Digits, rawDigitsH);
 
-      // convert this into a test on samples -- to do
+      assert (Digits.size() > 0);
+      art::Ptr<raw::RawDigit> digit = Digits.at(0);
+      std::size_t ticks = digit->Samples();
 
-      //if ( nEvts_ < nExpectedEvts_ ) {
-      //  assert( rawDigitsH->size() == nExpDigitsPerEvt_ );
-      //}
-      //else {
-      //  assert( rawDigitsH->size() == nExpDigitsLastEvt_ );
-      //}
+
+      if ( nEvts_ < nExpectedEvts_ ) {
+        assert( ticks == nExpDigitsPerEvt_ );
+      }
+      else {
+        assert( ticks == nExpDigitsLastEvt_ );
+      }
 
     }
 
