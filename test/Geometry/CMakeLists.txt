@@ -41,6 +41,7 @@ cet_test(geometry_iterator_lbnefd HANDBUILT
   TEST_ARGS --rethrow-all --config ./test_geometry_iterators_lbnefd.fcl
 )
 
+
 simple_plugin ( GeometryTest35 "module"
                      Geometry
                      Geometry_service
@@ -62,3 +63,87 @@ simple_plugin ( GeometryTest35 "module"
 
                BASENAME_ONLY
           )
+
+
+#
+# the following are tests equivalent to the module ones, but with no framework
+#
+# unit test (use the hard-coded configuration for DUNE 35t "optimized" geometry)
+# this uses BOOST for the test, and it has not yet been moved into a test
+# algorithm
+cet_test(geometry_iterator_dune35t_test
+  SOURCES geometry_iterator_dune35t_test.cxx
+  LIBRARIES Geometry
+            lbne_Geometry
+            ${MF_MESSAGELOGGER}
+            ${MF_UTILITIES}
+            ${FHICLCPP}
+            ${CETLIB}
+  USE_BOOST_UNIT
+)
+
+# unit test (use the hard-coded configuration for DUNE Far Detector geometry)
+# this uses BOOST for the test, and it has not yet been moved into a test
+# algorithm
+cet_test(geometry_iterator_dunefd_test
+  SOURCES geometry_iterator_dunefd_test.cxx
+  LIBRARIES Geometry
+            lbne_Geometry
+            ${MF_MESSAGELOGGER}
+            ${MF_UTILITIES}
+            ${FHICLCPP}
+            ${CETLIB}
+  USE_BOOST_UNIT
+)
+
+
+# unit test (use the hard-coded configuration for DUNE 35t "optimized" geometry)
+cet_test(geometry_dune35t_test
+  SOURCES geometry_dune35t_test.cxx
+  LIBRARIES Geometry
+            GeometryTestLib
+            lbne_Geometry
+            ${MF_MESSAGELOGGER}
+            ${MF_UTILITIES}
+            ${FHICLCPP}
+            ${CETLIB}
+  USE_BOOST_UNIT
+)
+
+# unit test (use the hard-coded configuration for DUNE Far Detector geometry)
+cet_test(geometry_dunefd_test
+  SOURCES geometry_dunefd_test.cxx
+  LIBRARIES Geometry
+            GeometryTestLib
+            lbne_Geometry
+            ${MF_MESSAGELOGGER}
+            ${MF_UTILITIES}
+            ${FHICLCPP}
+            ${CETLIB}
+  USE_BOOST_UNIT
+)
+
+
+# unit test (use the hard-coded configuration for DUNE 35t "optimized" geometry)
+cet_test(geometry_iterator_loop_dune35t_test
+  SOURCES geometry_iterator_loop_dune35t_test.cxx
+  LIBRARIES Geometry
+            GeometryTestLib
+            lbne_Geometry
+            ${MF_MESSAGELOGGER}
+            ${MF_UTILITIES}
+            ${FHICLCPP}
+            ${CETLIB}
+)
+
+# unit test (use the hard-coded configuration for DUNE Far Detector geometry)
+cet_test(geometry_iterator_loop_dunefd_test
+  SOURCES geometry_iterator_loop_dunefd_test.cxx
+  LIBRARIES Geometry
+            GeometryTestLib
+            lbne_Geometry
+            ${MF_MESSAGELOGGER}
+            ${MF_UTILITIES}
+            ${FHICLCPP}
+            ${CETLIB}
+)
