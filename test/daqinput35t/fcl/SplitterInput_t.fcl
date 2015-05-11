@@ -6,11 +6,9 @@ source:
 {
    module_type: SplitterInput
    fileNames: [ 
-      "lbne_r000730_sr01_ten_events_c1.root",
-      "lbne_r000730_sr01_ten_events_c2.root",
-      "lbne_r000730_sr02_ten_events_c3.root"
+      "/scratch/lbne/trj/lbne_r001071_sr01_20150504T210812.root"
    ]
-   maxEvents: 1000
+   maxEvents: 100
    ticksPerEvent: 1000
    TPCInputTag : "daq:TPC:DAQ" 
    SSPInputTag : "daq:PHOTON:DAQ" 
@@ -27,9 +25,9 @@ physics: {
    analyzers: {
       testSplitter : {
          module_type : SplitterAnalyzer
-         nExpectedEvents : 31
+         nExpectedEvents : 100
          nExpDigitsPerEvent  : 1000
-         nExpDigitsLastEvent : 720
+         nExpDigitsLastEvent : 1000
       }
    }
 
