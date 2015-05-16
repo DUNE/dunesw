@@ -29,18 +29,6 @@ cet_test(geometry_lbne35t HANDBUILT
   TEST_ARGS --rethrow-all --config ./test_geometry_lbne35t.fcl
 )
 
-cet_test(geometry_iterator_lbne35t HANDBUILT
-  DATAFILES test_geometry_iterators_lbne35t.fcl
-  TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_geometry_iterators_lbne35t.fcl
-)
-
-cet_test(geometry_iterator_lbnefd HANDBUILT
-  DATAFILES test_geometry_iterators_lbnefd.fcl
-  TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_geometry_iterators_lbnefd.fcl
-)
-
 
 simple_plugin ( GeometryTest35 "module"
                      Geometry
@@ -69,11 +57,11 @@ simple_plugin ( GeometryTest35 "module"
 # the following are tests equivalent to the module ones, but with no framework
 #
 # unit test (use the hard-coded configuration for DUNE 35t "optimized" geometry)
-# this uses BOOST for the test, and it has not yet been moved into a test
-# algorithm
+# this uses BOOST for the test
 cet_test(geometry_iterator_dune35t_test
   SOURCES geometry_iterator_dune35t_test.cxx
   LIBRARIES Geometry
+            GeometryTestLib
             lbne_Geometry
             ${MF_MESSAGELOGGER}
             ${MF_UTILITIES}
@@ -83,11 +71,11 @@ cet_test(geometry_iterator_dune35t_test
 )
 
 # unit test (use the hard-coded configuration for DUNE Far Detector geometry)
-# this uses BOOST for the test, and it has not yet been moved into a test
-# algorithm
+# this uses BOOST for the test
 cet_test(geometry_iterator_dunefd_test
   SOURCES geometry_iterator_dunefd_test.cxx
   LIBRARIES Geometry
+            GeometryTestLib
             lbne_Geometry
             ${MF_MESSAGELOGGER}
             ${MF_UTILITIES}
@@ -107,7 +95,6 @@ cet_test(geometry_dune35t_test
             ${MF_UTILITIES}
             ${FHICLCPP}
             ${CETLIB}
-  USE_BOOST_UNIT
 )
 
 # unit test (use the hard-coded configuration for DUNE Far Detector geometry)
@@ -120,7 +107,6 @@ cet_test(geometry_dunefd_test
             ${MF_UTILITIES}
             ${FHICLCPP}
             ${CETLIB}
-  USE_BOOST_UNIT
 )
 
 

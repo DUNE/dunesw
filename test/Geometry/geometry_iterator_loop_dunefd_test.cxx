@@ -15,7 +15,7 @@
 
 // LArSoft libraries
 #include "test/Geometry/geometry_unit_test_dune.h"
-#include "test/Geometry/GeometryIteratorTestAlg.h"
+#include "test/Geometry/GeometryIteratorLoopTestAlg.h"
 #include "Geometry/GeometryCore.h"
 #include "lbne/Geometry/ChannelMapAPAAlg.h"
 
@@ -96,7 +96,8 @@ int main(int argc, char const** argv) {
   //
   
   // 1. we initialize it from the configuration in the environment,
-  geo::GeometryIteratorTestAlg Tester(TestEnvironment.TesterConfiguration());
+  geo::GeometryIteratorLoopTestAlg Tester
+    (TestEnvironment.TesterConfiguration());
   
   // 2. we set it up with the geometry from the environment
   Tester.Setup(*TestEnvironment.Geometry());
