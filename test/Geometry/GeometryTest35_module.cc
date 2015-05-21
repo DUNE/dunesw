@@ -140,13 +140,20 @@ namespace geo{
 				   AuxDetWorld[1]+geom->AuxDet(a).Length()/2-0.1, 
 				   AuxDetWorld[2]+geom->AuxDet(a).HalfWidth1()};
 
+
 	// these points are close to the small end and should not be found
-	if(    (geom->FindAuxDetAtPosition(TrapCheckPtA) == a) 
-	    || (geom->FindAuxDetAtPosition(TrapCheckPtB) == a)  )
-	  throw cet::exception("UnexpectedFindAuxDetTrap") 
+
+	bool trpCheckpta(true), trpCheckptb(true);
+	try{ trpCheckpta = (geom->FindAuxDetAtPosition(TrapCheckPtA) == a); }
+	catch(cet::exception &e){ trpCheckpta = false; }
+	try{ trpCheckptb = (geom->FindAuxDetAtPosition(TrapCheckPtB) == a); }
+	catch(cet::exception &e){ trpCheckptb = false; }
+
+	if( trpCheckpta || trpCheckptb )
+	  throw cet::exception("GeometryTest35_AuxDet")
 	    << "\t ...Found unexpected test point outside of trapezoidal AuxDet "
 	    << a << "\n";	  
-	
+
 
       } else {
 	CounterType = "box";
@@ -154,17 +161,25 @@ namespace geo{
         testPos2b[0] += geom->AuxDet(a).HalfWidth2();
       }
 
-      mf::LogVerbatim("35tAuxDetTest") << "AuxDet " << a << ": " << CounterType 
+      mf::LogVerbatim("GeometryTest35_AuxDet") << "AuxDet " << a << ": " << CounterType 
 				       << ", Center: (" << AuxDetWorld[0] << ", " 
 				       << AuxDetWorld[1] << ", " << AuxDetWorld[2] << ")" << std::endl;
       
 
       // if either test point 1 or test point 2 aren't found, something is wrong
       //    one of 2a or 2b should work
-      if(  !(geom->FindAuxDetAtPosition(testPos1) == a) ||
-	   !(    (geom->FindAuxDetAtPosition(testPos2a) == a) 
-	      || (geom->FindAuxDetAtPosition(testPos2b) == a) )  )
-	throw cet::exception("UnexpectedFindAuxDet") 
+      
+      bool tp1(false), tp2a(false), tp2b(false);
+      try{ tp1 = (geom->FindAuxDetAtPosition(testPos1) == a); }
+      catch(cet::exception &e){ }
+      try{ tp2a = (geom->FindAuxDetAtPosition(testPos2a) == a); }
+      catch(cet::exception &e){ }
+      try{ tp2b = (geom->FindAuxDetAtPosition(testPos2b) == a); }
+      catch(cet::exception &e){ }
+
+
+      if(  !tp1 || !( tp2a || tp2b )  )
+	throw cet::exception("GeometryTest35_AuxDet") 
 	  << "\t ...Did not find expected test points around AuxDet "
 	  << a << "\n";
 
