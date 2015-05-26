@@ -61,6 +61,7 @@ physics:
   calodc:             @local::lbne35t_calomc
   pandoradc:          @local::lbne35t_pandora
   particlestitcherdc: @local::lbne35t_particlestitcher
+  pandoracalodc:      @local::lbne35t_calomc
 # actual disambiguation
   hit35t:             @local::lbne35t_hitfinder35t
   hit35tcc:           @local::lbne35t_hitfinder35t
@@ -73,6 +74,7 @@ physics:
   calo:               @local::lbne35t_calomc
   pandora:            @local::lbne35t_pandora
   particlestitcher:   @local::lbne35t_particlestitcher
+  pandoracalo:        @local::lbne35t_calomc
 #  kalmanhit:         @local::lbne35t_track3Dkalmanhit
   mctrutht0:          @local::lbne35t_mctrutht0matching
   mctrutht0dc:        @local::lbne35t_mctrutht0matching
@@ -86,8 +88,8 @@ physics:
  reco: [ rns, t0counter, caldata, hitcheat, clustercheat, trackcheat,
          fasthit, fasthitdc, 
          gaushit, dcheat, cchit, dcheatcc, lineclusterdc, hit35tcc, linecluster,
-         dbclusterdc, costrkdc, stitchdc, mctrutht0dc, calodc, pandoradc, particlestitcherdc, mctrutht0pandoradc,
-         hit35t, dbcluster, costrk, stitch, mctrutht0, calo, pandora, particlestitcher, mctrutht0pandora]
+         dbclusterdc, costrkdc, stitchdc, mctrutht0dc, calodc, pandoradc, particlestitcherdc, mctrutht0pandoradc, pandoracalodc,
+         hit35t, dbcluster, costrk, stitch, mctrutht0, calo, pandora, particlestitcher, mctrutht0pandora, pandoracalo]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -150,11 +152,18 @@ physics.producers.particlestitcherdc.PFParticleModuleLabel: "pandoradc"
 physics.producers.particlestitcherdc.TrackModuleLabel:      "pandoradc"
 physics.producers.particlestitcherdc.UseXCoordinate:        false
 physics.producers.mctrutht0pandoradc.TrackModuleLabel:      "particlestitcherdc"
+physics.producers.pandoracalodc.TrackModuleLabel:           "particlestitcherdc"
+physics.producers.pandoracalodc.SpacePointModuleLabel:      "pandoradc"
+physics.producers.pandoracalodc.T0ModuleLabel:              "mctrutht0pandoradc"
+
 physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
 physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
 physics.producers.particlestitcher.TrackModuleLabel:        "pandora"
 physics.producers.particlestitcher.UseXCoordinate:          false
 physics.producers.mctrutht0pandora.TrackModuleLabel:        "particlestitcher"
+physics.producers.pandoracalo.TrackModuleLabel:             "particlestitcher"
+physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
+physics.producers.pandoracalo.T0ModuleLabel:                "mctrutht0dcpandora"
 
 #physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
 #physics.producers.lineclusterdc.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
