@@ -1,7 +1,7 @@
 #
 # Geometry test module on LBNE full detector geometry
 # 
-# Version: 1.0
+# Version: 1.1
 #
 
 #include "geometry_lbne.fcl"
@@ -9,10 +9,10 @@
 process_name: testGeo
 
 services: {
-  user: {
-    Geometry:               @local::lbnefd_geo
-    ExptGeoHelperInterface: @local::lbne_geometry_helper
-  }
+  
+  Geometry:               @local::lbnefd_geo
+  ExptGeoHelperInterface: @local::lbne_geometry_helper
+  
   message: {
     destinations: {
       LogDebugFile: { 
