@@ -10,6 +10,7 @@
 
 // LArSoft libraries
 #include "test/Geometry/geometry_unit_test_dune.h"
+#include "test/Geometry/geometry_boost_unit_test_base.h"
 #include "test/Geometry/GeometryIteratorTestAlg.h"
 #include "Geometry/GeometryCore.h"
 #include "lbne/Geometry/ChannelMapAPAAlg.h"
@@ -31,10 +32,22 @@
 //---
 
 // we define here all the configuration that is needed;
-// we use an existing class provided for this purpose, since our test
-// environment allows us to tailor it at run time.
-using DUNEFDGeometryConfiguration
-  = lbne::testing::DUNEFDGeometryFixtureConfigurer<geo::ChannelMapAPAAlg>;
+// in the specific, the type of the channel mapping and a proper test name,
+// used for output only; we use DUNEFDGeometryEnvironmentConfiguration
+// as base class, that is already configured to use DUNE FD geometry.
+// We wrap it in testing::BoostCommandLineConfiguration<> so that it can learn
+// the configuration file name from the command line.
+struct DUNEFDGeometryConfiguration:
+  public testing::BoostCommandLineConfiguration<
+    lbne::testing::DUNEFDGeometryEnvironmentConfiguration
+      <geo::ChannelMapAPAAlg>
+    >
+{
+  /// Constructor: overrides the application name; ignores command line
+  DUNEFDGeometryConfiguration()
+    { SetApplicationName("GeometryIteratorUnitTest"); }
+}; // class DUNEFDGeometryConfiguration
+
 
 /*
  * Our fixture is based on GeometryTesterFixture, configured with the object
@@ -49,7 +62,7 @@ using DUNEFDGeometryConfiguration
  * interface is provided.
  */
 class DUNEFDGeometryIteratorTestFixture:
-  private testing::SharedGeometryTesterFixture<DUNEFDGeometryConfiguration>
+  private testing::SharedGeometryTesterEnvironment<DUNEFDGeometryConfiguration>
 {
   using Tester_t = geo::GeometryIteratorTestAlg;
   
@@ -60,8 +73,10 @@ class DUNEFDGeometryIteratorTestFixture:
   /// Constructor: initialize the tester with the Geometry from base class
   DUNEFDGeometryIteratorTestFixture()
     {
-      // create a new global tester
-      TesterRegistry_t::ProposeDefaultSharedResource(TesterConfiguration());
+      // propose a new global tester
+      // (constructed with the specified argumrents);
+      // if there is already one, never mind: we stick to that one
+      TesterRegistry_t::ProposeDefaultSharedResource(TesterParameters());
       // configure it
       GlobalTester().Setup(*Geometry());
     }

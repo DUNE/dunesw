@@ -30,17 +30,18 @@
 // we use an existing class provided for this purpose, since our test
 // environment allows us to tailor it at run time.
 using DUNEFDGeometryConfiguration
-  = lbne::testing::DUNEFDGeometryFixtureConfigurer<geo::ChannelMapAPAAlg>;
+  = lbne::testing::DUNEFDGeometryEnvironmentConfiguration
+    <geo::ChannelMapAPAAlg>;
 
 /*
- * GeometryTesterFixture, configured with the object above, is used in a
+ * GeometryTesterEnvironment, configured with the object above, is used in a
  * non-Boost-unit-test context.
  * It provides:
  * - `geo::GeometryCore const* Geometry()`
  * - `geo::GeometryCore const* GlobalGeometry()` (static member)
  */
 using DUNEFDGeometryTestEnvironment
-  = testing::GeometryTesterFixture<DUNEFDGeometryConfiguration>;
+  = testing::GeometryTesterEnvironment<DUNEFDGeometryConfiguration>;
 
 
 //------------------------------------------------------------------------------
@@ -109,7 +110,7 @@ int main(int argc, char const** argv) {
   //
   
   // 1. we initialize it from the configuration in the environment,
-  geo::GeometryTestAlg Tester(TestEnvironment.TesterConfiguration());
+  geo::GeometryTestAlg Tester(TestEnvironment.TesterParameters());
   
   // 2. we set it up with the geometry from the environment
   Tester.Setup(*TestEnvironment.Geometry());

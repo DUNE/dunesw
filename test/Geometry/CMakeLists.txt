@@ -88,6 +88,8 @@ cet_test(geometry_iterator_dunefd_test
 # unit test (use the hard-coded configuration for DUNE 35t "optimized" geometry)
 cet_test(geometry_dune35t_test
   SOURCES geometry_dune35t_test.cxx
+  DATAFILES test_geometry_lbne35t.fcl
+  TEST_ARGS ./test_geometry_lbne35t.fcl
   LIBRARIES Geometry
             GeometryTestLib
             lbne_Geometry
@@ -100,6 +102,8 @@ cet_test(geometry_dune35t_test
 # unit test (use the hard-coded configuration for DUNE Far Detector geometry)
 cet_test(geometry_dunefd_test
   SOURCES geometry_dunefd_test.cxx
+  DATAFILES test_geometry_lbnefd.fcl
+  TEST_ARGS ./test_geometry_lbnefd.fcl
   LIBRARIES Geometry
             GeometryTestLib
             lbne_Geometry

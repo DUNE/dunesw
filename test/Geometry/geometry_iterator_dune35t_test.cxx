@@ -10,6 +10,7 @@
 
 // LArSoft libraries
 #include "test/Geometry/geometry_unit_test_dune.h"
+#include "test/Geometry/geometry_boost_unit_test_base.h"
 #include "test/Geometry/GeometryIteratorTestAlg.h"
 #include "Geometry/GeometryCore.h"
 #include "lbne/Geometry/ChannelMap35OptAlg.h"
@@ -21,20 +22,28 @@
 #define BOOST_TEST_MODULE GeometryIteratorTestDUNE35t
 #include <boost/test/included/unit_test.hpp>
 
-// C/C++ standard libraries
-#include <string>
-#include <iostream>
-
 
 //------------------------------------------------------------------------------
 //---  The test environment
 //---
 
 // we define here all the configuration that is needed;
-// we use an existing class provided for this purpose, since our test
-// environment allows us to tailor it at run time.
-using DUNE35tGeometryConfiguration
-  = lbne::testing::DUNE35tGeometryFixtureConfigurer<geo::ChannelMap35OptAlg>;
+// in the specific, the type of the channel mapping and a proper test name,
+// used for output only; we use DUNEFDGeometryEnvironmentConfiguration
+// as base class, that is already configured to use DUNE FD geometry.
+// We wrap it in testing::BoostCommandLineConfiguration<> so that it can learn
+// the configuration file name from the command line.
+struct DUNE35tGeometryConfiguration:
+  public testing::BoostCommandLineConfiguration<
+    lbne::testing::DUNE35tGeometryEnvironmentConfiguration
+      <geo::ChannelMap35OptAlg>
+    >
+{
+  /// Constructor: overrides the application name; ignores command line
+  DUNE35tGeometryConfiguration()
+    { SetApplicationName("GeometryIteratorUnitTest"); }
+}; // class DUNE35tGeometryConfiguration
+
 
 /*
  * Our fixture is based on GeometryTesterFixture, configured with the object
@@ -49,7 +58,7 @@ using DUNE35tGeometryConfiguration
  * interface is provided.
  */
 class DUNE35tGeometryIteratorTestFixture:
-  private testing::SharedGeometryTesterFixture<DUNE35tGeometryConfiguration>
+  private testing::SharedGeometryTesterEnvironment<DUNE35tGeometryConfiguration>
 {
   using Tester_t = geo::GeometryIteratorTestAlg;
   
@@ -60,8 +69,10 @@ class DUNE35tGeometryIteratorTestFixture:
   /// Constructor: initialize the tester with the Geometry from base class
   DUNE35tGeometryIteratorTestFixture()
     {
-      // create a new global tester
-      TesterRegistry_t::ProposeDefaultSharedResource(TesterConfiguration());
+      // propose a new global tester
+      // (constructed with the specified argumrents);
+      // if there is already one, never mind: we stick to that one
+      TesterRegistry_t::ProposeDefaultSharedResource(TesterParameters());
       // configure it
       GlobalTester().Setup(*Geometry());
     }

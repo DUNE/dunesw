@@ -31,7 +31,7 @@ namespace lbne {
     /** ************************************************************************
      * @brief Class holding the configuration for a DUNE 35t fixture
      * @tparam CHANNELMAP the class used for channel mapping
-     * @see BasicGeometryFixtureConfigurer, GeometryTesterFixture
+     * @see BasicGeometryEnvironmentConfiguration, GeometryTesterEnvironment
      *
      * This class needs to be fully constructed by the default constructor
      * in order to be useful as Boost unit test fixture.
@@ -42,18 +42,27 @@ namespace lbne {
      * This class should be used with ChannelMap35tOptAlg, since by default it
      * sets a geometry v3.
      * 
-     * We reuse BasicGeometryFixtureConfigurer as base class and we override its
+     * We reuse BasicGeometryEnvironmentConfiguration as base class and we override its
      * setup.
      */
     template <typename CHANNELMAP>
-    struct DUNE35tGeometryFixtureConfigurer:
-      public ::testing::BasicGeometryFixtureConfigurer<CHANNELMAP>
+    struct DUNE35tGeometryEnvironmentConfiguration:
+      public ::testing::BasicGeometryEnvironmentConfiguration<CHANNELMAP>
     {
-      // remember that BasicGeometryFixtureConfigurer is not polymorphic
-      using base_t = ::testing::BasicGeometryFixtureConfigurer<CHANNELMAP>;
+      // remember that BasicGeometryEnvironmentConfiguration is not polymorphic
+      using base_t
+         = ::testing::BasicGeometryEnvironmentConfiguration<CHANNELMAP>;
       
       /// Default constructor; this is what is used in Boost unit test
-      DUNE35tGeometryFixtureConfigurer()
+      DUNE35tGeometryEnvironmentConfiguration() { DUNEdefaultInit(); }
+      
+      /// Constructor; accepts the name as parameter
+      DUNE35tGeometryEnvironmentConfiguration(std::string name):
+        DUNE35tGeometryEnvironmentConfiguration()
+        { base_t::SetApplicationName(name); }
+      
+        private:
+      void DUNEdefaultInit()
         {
           // overwrite the configuration that happened in the base class:
           base_t::SetApplicationName("DUNE35tGeometryTest");
@@ -70,20 +79,15 @@ namespace lbne {
                 } # Geometry
               } # services
             )");
-        } // DUNE35tGeometryFixtureConfigurer()
+        } // DUNE35tGeometryEnvironmentConfiguration()
       
-      /// Constructor; accepts the name as parameter
-      DUNE35tGeometryFixtureConfigurer(std::string name):
-        DUNE35tGeometryFixtureConfigurer()
-        { base_t::SetApplicationName(name); }
-      
-    }; // class DUNE35tGeometryFixtureConfigurer<>
+    }; // class DUNE35tGeometryEnvironmentConfiguration<>
     
     
     /** ************************************************************************
      * @brief Class holding the configuration for a DUNE FD fixture
      * @tparam CHANNELMAP the class used for channel mapping
-     * @see BasicGeometryFixtureConfigurer, GeometryTesterFixture
+     * @see BasicGeometryEnvironmentConfiguration, GeometryTesterEnvironment
      *
      * This class needs to be fully constructed by the default constructor
      * in order to be useful as Boost unit test fixture.
@@ -93,18 +97,19 @@ namespace lbne {
      * 
      * This class should be used with ChannelMapAPAAlg.
      * 
-     * We reuse BasicGeometryFixtureConfigurer as base class and we override its
-     * setup.
+     * We reuse BasicGeometryEnvironmentConfiguration as base class and we
+     * override its setup.
      */
     template <typename CHANNELMAP>
-    struct DUNEFDGeometryFixtureConfigurer:
-      public ::testing::BasicGeometryFixtureConfigurer<CHANNELMAP>
+    struct DUNEFDGeometryEnvironmentConfiguration:
+      public ::testing::BasicGeometryEnvironmentConfiguration<CHANNELMAP>
     {
-      // remember that BasicGeometryFixtureConfigurer is not polymorphic
-      using base_t = ::testing::BasicGeometryFixtureConfigurer<CHANNELMAP>;
+      // remember that BasicGeometryEnvironmentConfiguration is not polymorphic
+      using base_t
+        = ::testing::BasicGeometryEnvironmentConfiguration<CHANNELMAP>;
       
       /// Default constructor; this is what is used in Boost unit test
-      DUNEFDGeometryFixtureConfigurer()
+      DUNEFDGeometryEnvironmentConfiguration()
         {
           // overwrite the configuration that happened in the base class:
           base_t::SetApplicationName("DUNEFDGeometryTest");
@@ -120,14 +125,14 @@ namespace lbne {
                 } # Geometry
               } # services
             )");
-        } // DUNEFDGeometryFixtureConfigurer()
+        } // DUNEFDGeometryEnvironmentConfiguration()
       
       /// Constructor; accepts the name as parameter
-      DUNEFDGeometryFixtureConfigurer(std::string name):
-        DUNEFDGeometryFixtureConfigurer()
+      DUNEFDGeometryEnvironmentConfiguration(std::string name):
+        DUNEFDGeometryEnvironmentConfiguration()
         { base_t::SetApplicationName(name); }
       
-    }; // class DUNEFDGeometryFixtureConfigurer<>
+    }; // class DUNEFDGeometryEnvironmentConfiguration<>
     
     
   } // namespace testing
