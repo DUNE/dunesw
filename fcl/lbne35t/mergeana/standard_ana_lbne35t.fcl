@@ -108,18 +108,20 @@ physics.analyzers.anatreecheat.IgnoreSign: false
 
 # 
 ### ANATREE FOR PANDORA
-physics.analyzers.anatreepandora.TrackModuleLabel: "particlestitcher"
-physics.analyzers.anatreepandora.ClusterModuleLabel: "pandora"
-physics.analyzers.anatreepandora.HitsModuleLabel: "hit35t"
-physics.analyzers.anatreepandora.SimulationLabel: "largeant"
-physics.analyzers.anatreepandora.MCTruthT0ModuleLabel: "mctrutht0pandora"
+physics.analyzers.anatreepandora.TrackModuleLabel:       "particlestitcher"
+physics.analyzers.anatreepandora.ClusterModuleLabel:     "pandora"
+physics.analyzers.anatreepandora.HitsModuleLabel:        "hit35t"
+physics.analyzers.anatreepandora.SimulationLabel:        "largeant"
+physics.analyzers.anatreepandora.MCTruthT0ModuleLabel:   "mctrutht0pandora"
+physics.analyzers.anatreepandora.CalorimetryModuleLabel: "pandoracalo"
 
 ### ANATREE FOR PANDORA DISAMBIG CHEAT
-physics.analyzers.anatreepandoradc.TrackModuleLabel: "particlestitcherdc"
-physics.analyzers.anatreepandoradc.ClusterModuleLabel: "pandoradc"
-physics.analyzers.anatreepandoradc.HitsModuleLabel: "dcheat"
-physics.analyzers.anatreepandoradc.SimulationLabel: "largeant"
-physics.analyzers.anatreepandoradc.MCTruthT0ModuleLabel: "mctrutht0pandoradc"
+physics.analyzers.anatreepandoradc.TrackModuleLabel:       "particlestitcherdc"
+physics.analyzers.anatreepandoradc.ClusterModuleLabel:     "pandoradc"
+physics.analyzers.anatreepandoradc.HitsModuleLabel:        "dcheat"
+physics.analyzers.anatreepandoradc.SimulationLabel:        "largeant"
+physics.analyzers.anatreepandoradc.MCTruthT0ModuleLabel:   "mctrutht0pandoradc"
+physics.analyzers.anatreepandoradc.CalorimetryModuleLabel: "pandoracalodc"
 
 ### Configure the Pandora Analyzer modules
 physics.analyzers.pandoradcmonitoring.UseDaughterPFParticles:  true
