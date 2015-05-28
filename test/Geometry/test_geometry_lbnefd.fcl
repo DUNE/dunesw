@@ -1,7 +1,7 @@
 #
 # Geometry test module on LBNE full detector geometry
 # 
-# Version: 1.0
+# Version: 1.1
 #
 
 #include "geometry_lbne.fcl"
@@ -9,10 +9,10 @@
 process_name: testGeo
 
 services: {
-  user: {
-    Geometry:               @local::lbnefd_geo
-    ExptGeoHelperInterface: @local::lbne_geometry_helper
-  }
+  
+  Geometry:               @local::lbnefd_geo
+  ExptGeoHelperInterface: @local::lbne_geometry_helper
+  
   message: {
     destinations: {
       LogDebugFile: { 
@@ -59,6 +59,33 @@ physics: {
     geotest: {
       module_type: "GeometryTest"
       PrintWires:  true
+      
+      # expected wire pitches; empty to check just that they are all the same
+    #  ExpectedWirePitches: [ 0.487811, 0.500144, 0.449055 ]
+      ExpectedWirePitches: []
+      # plane pitches (#0 -> #1, #1 -> #2)
+      ExpectedWirePitch: [ 0.5, 0.5 ]
+      
+      # Tests can be selected individually using a list of strings called RunTests
+      # See source code for specific strings in case new tests are added
+      # Failing tests:
+      # - WireIntersection fails because the test is not always able to compute
+      #   the correct expected distance from the intersection;
+      #   this is a bug related to having a point not lying on a z wire together
+      #   with the presence of planes in which the wire doesn;t increase with z;
+      #   the test needs to be fixed
+      RunTests:  [
+        "Cryostat",
+        "ChannelToWire",
+        "FindPlaneCenters",
+        "Projection",
+        "NearestWire",
+#         "WireIntersection",
+        "WirePitch",
+        "PlanePitch",
+        "Stepping" 
+      ]
+      
       # The test feeds a out-of-world coordinate to NearestWire() and expects
       # an exception to be thrown; LBNE currently prefers to cap the wire ID to
       # a valid wire.
