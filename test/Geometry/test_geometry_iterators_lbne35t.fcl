@@ -1,7 +1,7 @@
 #
 # Geometry iterators test module on LBNE 35t detector geometry
 # 
-# Version: 1.0
+# Version: 1.1
 #
 
 #include "geometry_lbne.fcl"
@@ -9,10 +9,10 @@
 process_name: testGeoIter
 
 services: {
-  user: {
-    Geometry:               @local::lbne35t_geo
-    ExptGeoHelperInterface: @local::lbne_geometry_helper
-  }
+  
+  Geometry:               @local::lbne35t_geo
+  ExptGeoHelperInterface: @local::lbne_geometry_helper
+  
   message: {
     destinations: {
       LogDebugFile: {
