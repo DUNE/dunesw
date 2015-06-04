@@ -1,6 +1,7 @@
 #include "services_lbne.fcl"
 #include "largeantmodules_lbne.fcl"
 #include "photpropservices_lbne.fcl"
+#include "opticaldetectormodules_lbne.fcl"
 
 process_name: G4
 
@@ -32,12 +33,13 @@ physics:
  producers:
  {
    largeant:  @local::lbne35t_largeant
+   opdigi:    @local::lbne35t_opdigi
    rns:       { module_type: "RandomNumberSaver" }
  }
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- simulate: [ rns, largeant ]
+ simulate: [ rns, largeant, opdigi ]
  
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]

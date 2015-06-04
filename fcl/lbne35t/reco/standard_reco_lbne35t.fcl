@@ -7,6 +7,7 @@
 #include "calorimetry_lbne35t.fcl"
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
+#include "opticaldetectormodules_lbne.fcl"
 
 process_name: Reco
 
@@ -81,11 +82,14 @@ physics:
   mctrutht0pandora:   @local::lbne35t_mctrutht0matching
   mctrutht0pandoradc: @local::lbne35t_mctrutht0matching	
   t0counter:          @local::lbne35t_t0counter
+# photon detector reconstruction
+  opflash:            @local::lbne35t_opflash 
+      
  }
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, t0counter, caldata, hitcheat, clustercheat, trackcheat,
+ reco: [ rns, opflash, t0counter, caldata, hitcheat, clustercheat, trackcheat,
          fasthit, fasthitdc, 
          gaushit, dcheat, cchit, dcheatcc, lineclusterdc, hit35tcc, linecluster,
          dbclusterdc, costrkdc, stitchdc, mctrutht0dc, calodc, pandoradc, particlestitcherdc, mctrutht0pandoradc, pandoracalodc,
@@ -164,6 +168,9 @@ physics.producers.mctrutht0pandora.TrackModuleLabel:        "particlestitcher"
 physics.producers.pandoracalo.TrackModuleLabel:             "particlestitcher"
 physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
 physics.producers.pandoracalo.T0ModuleLabel:                "mctrutht0dcpandora"
+
+#Optical detector configuration
+physics.producers.opflash.InputModule:                      "opdigi"
 
 #physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
 #physics.producers.lineclusterdc.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
