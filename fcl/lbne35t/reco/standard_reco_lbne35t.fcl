@@ -7,6 +7,7 @@
 #include "calorimetry_lbne35t.fcl"
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
+#include "opticaldetectormodules_lbne.fcl"
 
 process_name: Reco
 
