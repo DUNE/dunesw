@@ -79,6 +79,8 @@ physics: {
         "ChannelToWire",
         "FindPlaneCenters",
         "Projection",
+        "WireCoordAngle",
+        "ThirdPlaneSlope",
         "NearestWire",
 #         "WireIntersection",
         "WirePitch",
