@@ -71,25 +71,17 @@ physics: {
       ExpectedWirePitch: [ 0.5, 0.5 ]
       
       # Tests can be selected individually using a list of strings called RunTests
+      # *or* individually skipped using a list called SkipTests
       # See source code for specific strings in case new tests are added
-      # Failing tests:
-      # - WireIntersection fails because the test is not always able to compute
-      #   the correct expected distance from the intersection;
-      #   this is a bug related to having a point not lying on a z wire together
-      #   with the presence of planes in which the wire doesn;t increase with z;
-      #   the test needs to be fixed
-      RunTests:  [
-        "Cryostat",
-        "ChannelToWire",
-        "FindPlaneCenters",
-        "Projection",
-        "WireCoordAngle",
-        "ThirdPlaneSlope",
-        "NearestWire",
-#         "WireIntersection",
-        "WirePitch",
-        "PlanePitch",
-        "Stepping" 
+      SkipTests:  [
+        # - WireIntersection fails because the test is not always able to compute
+        #   the correct expected distance from the intersection;
+        #   this is a bug related to having a point not lying on a z wire together
+        #   with the presence of planes in which the wires don't increase with z;
+        #   the test needs to be fixed
+        "WireIntersection",
+        # - CheckOverlaps disabled because it takes lot of time
+        "CheckOverlaps"
       ]
     }
 
