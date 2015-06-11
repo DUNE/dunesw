@@ -77,10 +77,10 @@ outputs:
 
 ###   NORMAL ANATREE
 physics.analyzers.anatree.TrackModuleLabel: "costrk"
-physics.analyzers.anatree.HitsModuleLabel: "hit35tcc"
+physics.analyzers.anatree.HitsModuleLabel: "linecluster"
 physics.analyzers.anatree.TrkSpptAssocModuleLabel: "costrk"
 physics.analyzers.anatree.HitSpptAssocModuleLabel: "costrk"
-physics.analyzers.anatree.ClusterModuleLabel: "dbcluster"
+physics.analyzers.anatree.ClusterModuleLabel: "linecluster"
 physics.analyzers.anatree.pdg: -13
 physics.analyzers.anatree.IgnoreSign: false
 physics.analyzers.anatree.CalorimetryModuleLabel: "calo"
@@ -91,7 +91,7 @@ physics.analyzers.anatreedc.TrackModuleLabel: "costrkdc"
 physics.analyzers.anatreedc.HitsModuleLabel: "lineclusterdc"
 physics.analyzers.anatreedc.TrkSpptAssocModuleLabel: "costrkdc"
 physics.analyzers.anatreedc.HitSpptAssocModuleLabel: "costrkdc"
-physics.analyzers.anatreedc.ClusterModuleLabel: "dbclusterdc"
+physics.analyzers.anatreedc.ClusterModuleLabel: "lineclusterdc"
 physics.analyzers.anatreedc.pdg: -13
 physics.analyzers.anatreedc.IgnoreSign: false
 physics.analyzers.anatreedc.CalorimetryModuleLabel: "calodc"
