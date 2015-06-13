@@ -91,24 +91,10 @@ BOOST_FIXTURE_TEST_SUITE(GeometryIterators, DUNE35tGeometryIteratorTestFixture)
 // BOOST_GLOBAL_FIXTURE(DUNE35tGeometryIteratorTestFixture)
 
 
-BOOST_AUTO_TEST_CASE( CryostatIDIteratorsTest )
-{
-  GlobalTester().CryostatIDIteratorsTest();
-} // BOOST_AUTO_TEST_CASE( CryostatIDIteratorsTest )
-
-
-
 BOOST_AUTO_TEST_CASE( CryostatIteratorsTest )
 {
   GlobalTester().CryostatIteratorsTest();
 } // BOOST_AUTO_TEST_CASE( CryostatIteratorsTest )
-
-
-
-BOOST_AUTO_TEST_CASE( TPCIDIteratorsTest )
-{
-  GlobalTester().TPCIDIteratorsTest();
-} // BOOST_AUTO_TEST_CASE( TPCIDIteratorsTest )
 
 
 
@@ -119,24 +105,10 @@ BOOST_AUTO_TEST_CASE( TPCIteratorsTest )
 
 
 
-BOOST_AUTO_TEST_CASE( PlaneIDIteratorsTest )
-{
-  GlobalTester().PlaneIDIteratorsTest();
-} // BOOST_AUTO_TEST_CASE( PlaneIDIteratorsTest )
-
-
-
 BOOST_AUTO_TEST_CASE( PlaneIteratorsTest )
 {
   GlobalTester().PlaneIteratorsTest();
 } // BOOST_AUTO_TEST_CASE( PlaneIteratorsTest )
-
-
-
-BOOST_AUTO_TEST_CASE( WireIDIteratorsTest )
-{
-  GlobalTester().WireIDIteratorsTest();
-} // BOOST_AUTO_TEST_CASE( WireIDIteratorsTest )
 
 
 
