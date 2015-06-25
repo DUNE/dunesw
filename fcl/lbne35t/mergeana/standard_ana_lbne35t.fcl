@@ -3,6 +3,8 @@
 #include "opticaldetectormodules_lbne.fcl"
 #include "anatreemodule.fcl"
 #include "pandoramodules_lbne.fcl"
+#include "hitfindermodules_lbne.fcl"
+#include "disambigcheck.fcl"
 
 process_name: Mergeana
 
@@ -42,6 +44,7 @@ physics:
  pandoramonitoring: {module_type: PFParticleMonitoring}
  pandoranadc:         {module_type: PFParticleAnalysis}
  pandoradcmonitoring: {module_type: PFParticleMonitoring}
+ disambigcheck:  @local::standard_disambigcheck
 
 }
  #define the output stream, there could be more than one if using filters 
@@ -51,7 +54,8 @@ physics:
  #filters reject all following items.  see lines starting physics.producers below
  ana:  [ pmtresponse, anatreecheat, anatreedc, anatree,
          pandoranadc, pandoradcmonitoring, anatreepandoradc,
-         pandorana, pandoramonitoring, anatreepandora]
+         pandorana, pandoramonitoring, anatreepandora,
+	 disambigcheck]
 
  #end_paths is a keyword and contains the paths that do not modify the art::Event, 
  #ie analyzers and output streams.  these all run simultaneously

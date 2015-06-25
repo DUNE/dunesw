@@ -61,10 +61,10 @@ physics: {
       PrintWires:  true
       
       # expected wire pitches; empty to check just that they are all the same
-    #  ExpectedWirePitches: [ 0.487811, 0.500144, 0.449055 ]
-      ExpectedWirePitches: []
+      # ExpectedWirePitches: [ 0.487811, 0.500144, 0.449055 ]
+      ExpectedWirePitches: [  ]
       # plane pitches (#0 -> #1, #1 -> #2)
-      ExpectedWirePitch: [ 0.5, 0.5 ]
+      ExpectedPlanePitch: [ 0.5, 0.5 ]
       
       # Tests can be selected individually using a list of strings called RunTests
       # *or* individually skipped using a list called SkipTests
