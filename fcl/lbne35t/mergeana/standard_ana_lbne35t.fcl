@@ -85,8 +85,6 @@ physics.analyzers.anatree.HitsModuleLabel: "linecluster"
 physics.analyzers.anatree.TrkSpptAssocModuleLabel: "costrk"
 physics.analyzers.anatree.HitSpptAssocModuleLabel: "costrk"
 physics.analyzers.anatree.ClusterModuleLabel: "linecluster"
-physics.analyzers.anatree.pdg: -13
-physics.analyzers.anatree.IgnoreSign: false
 physics.analyzers.anatree.CalorimetryModuleLabel: "calo"
 physics.analyzers.anatree.MCTruthT0ModuleLabel: "mctrutht0"
 
@@ -96,8 +94,6 @@ physics.analyzers.anatreedc.HitsModuleLabel: "lineclusterdc"
 physics.analyzers.anatreedc.TrkSpptAssocModuleLabel: "costrkdc"
 physics.analyzers.anatreedc.HitSpptAssocModuleLabel: "costrkdc"
 physics.analyzers.anatreedc.ClusterModuleLabel: "lineclusterdc"
-physics.analyzers.anatreedc.pdg: -13
-physics.analyzers.anatreedc.IgnoreSign: false
 physics.analyzers.anatreedc.CalorimetryModuleLabel: "calodc"
 physics.analyzers.anatreedc.MCTruthT0ModuleLabel: "mctrutht0dc"
 
@@ -107,8 +103,6 @@ physics.analyzers.anatreecheat.HitsModuleLabel: "hitcheat"
 physics.analyzers.anatreecheat.TrkSpptAssocModuleLabel: "trackcheat"
 physics.analyzers.anatreecheat.HitSpptAssocModuleLabel: "trackcheat"
 physics.analyzers.anatreecheat.ClusterModuleLabel: "clustercheat"
-physics.analyzers.anatreecheat.pdg: -13
-physics.analyzers.anatreecheat.IgnoreSign: false
 
 # 
 ### ANATREE FOR PANDORA
