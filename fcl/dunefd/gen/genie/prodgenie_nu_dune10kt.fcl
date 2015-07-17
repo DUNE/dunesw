@@ -1,0 +1,7 @@
+#include "prodgenie_common_dunefd.fcl"
+
+process_name: GenieGen
+
+outputs.out1.fileName: "prodgenie_nu_dune10kt_%tc_gen.root"
+
+physics.producers.generator: @local::dunefd_genie_hist
