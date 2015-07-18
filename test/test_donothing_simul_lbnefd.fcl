@@ -14,7 +14,7 @@ services: {
   TFileService:          { fileName: "hists_donothing_simul_lbnefd.root" }
   Timing:                {}
   RandomNumberGenerator: {}
-  user:                  @local::lbnefd_simulation_services
+  user:                  @local::dunefd_simulation_services
 } # services
 
 
