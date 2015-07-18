@@ -14,7 +14,7 @@ services: {
   TFileService:          { fileName: "hists_donothing_lbnefd.root" }
   Timing:                {}
   RandomNumberGenerator: {}
-  user:                  @local::lbnefd_services
+  user:                  @local::dunefd_services
 } # services
 
 
