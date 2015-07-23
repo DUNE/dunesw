@@ -63,8 +63,8 @@ physics:
   pandoradc:          @local::lbne35t_pandora
   particlestitcherdc: @local::lbne35t_particlestitcher
   pandoracalodc:      @local::lbne35t_calomc
-  pmatrkdc:           @local::lbne35t_pmalgtrackmaker
-  pmatrkcalodc:       @local::lbne35t_calomc
+  pmtrackdc:           @local::lbne35t_pmalgtrackmaker
+  pmtrackcalodc:       @local::lbne35t_calomc
 # actual disambiguation
   hit35t:             @local::lbne35t_hitfinder35t
 #  hit35tcc:           @local::lbne35t_hitfinder35t
@@ -78,15 +78,15 @@ physics:
   pandora:            @local::lbne35t_pandora
   particlestitcher:   @local::lbne35t_particlestitcher
   pandoracalo:        @local::lbne35t_calomc
-  pmatrk:             @local::lbne35t_pmalgtrackmaker
-  pmatrkcalo:         @local::lbne35t_calomc
+  pmtrack:             @local::lbne35t_pmalgtrackmaker
+  pmtrackcalo:         @local::lbne35t_calomc
 #  kalmanhit:         @local::lbne35t_track3Dkalmanhit
   mctrutht0:          @local::lbne35t_mctrutht0matching
   mctrutht0dc:        @local::lbne35t_mctrutht0matching
   mctrutht0pandora:   @local::lbne35t_mctrutht0matching
   mctrutht0pandoradc: @local::lbne35t_mctrutht0matching
-  mctrutht0pmatrk:    @local::lbne35t_mctrutht0matching
-  mctrutht0pmatrkdc:  @local::lbne35t_mctrutht0matching
+  mctrutht0pmtrack:    @local::lbne35t_mctrutht0matching
+  mctrutht0pmtrackdc:  @local::lbne35t_mctrutht0matching
   t0counter:          @local::lbne35t_t0counter
 # photon detector reconstruction
   opflash:            @local::lbne35t_opflash 
@@ -109,7 +109,7 @@ physics:
          #pandora with cheated disambiguation
          pandoradc, particlestitcherdc, mctrutht0pandoradc, pandoracalodc,
          #pmatrack with cheated disambiguation
-         pmatrkdc, mctrutht0pmatrkdc, pmatrkcalodc,
+         pmtrackdc, mctrutht0pmtrackdc, pmtrackcalodc,
          #real disambiguation
          hit35t,
          #cluster reco
@@ -119,7 +119,7 @@ physics:
          #pandora
          pandora, particlestitcher, mctrutht0pandora, pandoracalo,
          #pmatrack
-         pmatrk, mctrutht0pmatrk, pmatrkcalo]
+         pmtrack, mctrutht0pmtrack, pmtrackcalo]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -163,16 +163,16 @@ physics.producers.calodc.TrackModuleLabel:             "costrkdc"
 physics.producers.calodc.SpacePointModuleLabel:        "costrkdc"
 physics.producers.calodc.T0ModuleLabel:                "mctrutht0dc"
 
-physics.producers.pmatrkdc.HitModuleLabel:             "lineclusterdc"
-physics.producers.pmatrkdc.ClusterModuleLabel:         "lineclusterdc"
-physics.producers.pmatrkcalo.TrackModuleLabel:         "pmatrk"
-physics.producers.pmatrkcalo.SpacePointModuleLabel:    "pmatrk"
-physics.producers.pmatrkcalo.T0ModuleLabel:            "mctrutht0pmatrk"
-physics.producers.pmatrkcalodc.TrackModuleLabel:       "pmatrkdc"
-physics.producers.pmatrkcalodc.SpacePointModuleLabel:  "pmatrkdc"
-physics.producers.pmatrkcalodc.T0ModuleLabel:          "mctrutht0pmatrkdc"
-physics.producers.mctrutht0pmatrk.TrackModuleLabel:    "pmatrk"
-physics.producers.mctrutht0pmatrkdc.TrackModuleLabel:  "pmatrkdc"  
+physics.producers.pmtrackdc.HitModuleLabel:             "lineclusterdc"
+physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
+physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
+physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
+physics.producers.pmtrackcalo.T0ModuleLabel:            "mctrutht0pmtrack"
+physics.producers.pmtrackcalodc.TrackModuleLabel:       "pmtrackdc"
+physics.producers.pmtrackcalodc.SpacePointModuleLabel:  "pmtrackdc"
+physics.producers.pmtrackcalodc.T0ModuleLabel:          "mctrutht0pmtrackdc"
+physics.producers.mctrutht0pmtrack.TrackModuleLabel:    "pmtrack"
+physics.producers.mctrutht0pmtrackdc.TrackModuleLabel:  "pmtrackdc"  
 
 #physics.producers.fuzzy.HitsModuleLabel:               "hit35t"
 physics.producers.dbcluster.HitsModuleLabel:           "hit35t"
