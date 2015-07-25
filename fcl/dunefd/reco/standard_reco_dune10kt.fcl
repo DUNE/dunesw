@@ -57,7 +57,7 @@ physics:
 #  fuzzydc:            @local::lbne35t_fuzzycluster
   dbclusterdc:        @local::dunefd_dbcluster
   lineclusterdc:      @local::dunefd_linecluster
-  costrkdc:           @local::lbne35t_cosmictracker
+  costrkdc:           @local::dunefd_cosmictracker
   #stitchdc:           @local::lbne35t_trackstitcher
   calodc:             @local::lbne35t_calomc
   pandoradc:          @local::lbne35t_pandora
@@ -66,7 +66,7 @@ physics:
   pmtrackdc:           @local::lbne35t_pmalgtrackmaker
   pmtrackcalodc:       @local::lbne35t_calomc
 # actual disambiguation
-  hit35t:             @local::lbne35t_hitfinder35t
+  hitfd:             @local::dunefd_hitfinderfd
 #  hit35tcc:           @local::lbne35t_hitfinder35t
 # reconstruction using disambiguated hits
 #  fuzzy:              @local::lbne35t_fuzzycluster
@@ -104,23 +104,27 @@ physics:
          #hit reco with cheated disambiguation
          gaushit, dcheat, cchit, fasthit, fasthitdc,
          #cluster reco with cheated disambiguation
-         dbclusterdc, lineclusterdc
-#         #3D reco with cheated disambiguation
+         dbclusterdc, lineclusterdc,
+         #3D reco with cheated disambiguation
 #         costrkdc, mctrutht0dc, calodc, 
+         costrkdc,
 #         #pandora with cheated disambiguation
 #         pandoradc, particlestitcherdc, mctrutht0pandoradc, pandoracalodc,
-#         #pmatrack with cheated disambiguation
+         #pmatrack with cheated disambiguation
 #         pmtrackdc, mctrutht0pmtrackdc, pmtrackcalodc,
-#         #real disambiguation
-#         hit35t,
+         pmtrackdc,
+         #real disambiguation
+         hitfd,
 #         #cluster reco
-#         dbcluster, linecluster,
-#         #3D reco
+         dbcluster, linecluster,
+         #3D reco
 #         costrk,  mctrutht0, calo,
+         costrk,
 #         #pandora
 #         pandora, particlestitcher, mctrutht0pandora, pandoracalo,
-#         #pmatrack
-#         pmtrack, mctrutht0pmtrack, pmtrackcalo]
+         #pmatrack
+#         pmtrack, mctrutht0pmtrack, pmtrackcalo
+         pmtrack
          ]
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -151,7 +155,7 @@ outputs:
 physics.producers.clustercheat.HitModuleLabel:         "hitcheat"
 physics.producers.trackcheat.CheatedClusterLabel:      "clustercheat"
 physics.producers.fasthitdc.ChanHitLabel:              "fasthit"
-#physics.producers.hit35tcc.ChanHitLabel:               "gaushit"
+#physics.producers.hitfdcc.ChanHitLabel:               "gaushit"
 #physics.producers.dcheatcc.ChanHitLabel:               "gaushit"
 #physics.producers.fuzzydc.HitsModuleLabel:             "dcheat"
 physics.producers.dbclusterdc.HitsModuleLabel:         "dcheat"
@@ -175,9 +179,9 @@ physics.producers.pmtrackcalodc.T0ModuleLabel:          "mctrutht0pmtrackdc"
 physics.producers.mctrutht0pmtrack.TrackModuleLabel:    "pmtrack"
 physics.producers.mctrutht0pmtrackdc.TrackModuleLabel:  "pmtrackdc"  
 
-#physics.producers.fuzzy.HitsModuleLabel:               "hit35t"
-physics.producers.dbcluster.HitsModuleLabel:           "hit35t"
-physics.producers.linecluster.HitFinderModuleLabel:    "hit35t"
+#physics.producers.fuzzy.HitsModuleLabel:               "hitfd"
+physics.producers.dbcluster.HitsModuleLabel:           "hitfd"
+physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
 physics.producers.costrk.ClusterModuleLabel:           "linecluster"
 #physics.producers.stitch.TrackModuleLabel:             "costrk"
 #physics.producers.stitch.SpptModuleLabel:              "costrk"
@@ -185,7 +189,7 @@ physics.producers.mctrutht0.TrackModuleLabel:          "costrk"
 physics.producers.calo.TrackModuleLabel:               "costrk"
 physics.producers.calo.SpacePointModuleLabel:          "costrk"
 physics.producers.calo.T0ModuleLabel:                  "mctrutht0"
-#physics.producers.kalmanhit.HitModuleLabel:            "hit35t"
+#physics.producers.kalmanhit.HitModuleLabel:            "hitfd"
 #physics.producers.kalmanhit.ClusterModuleLabel:        "fuzzy"
 
 #Pandora configurations
@@ -198,7 +202,7 @@ physics.producers.pandoracalodc.TrackModuleLabel:           "particlestitcherdc"
 physics.producers.pandoracalodc.SpacePointModuleLabel:      "pandoradc"
 physics.producers.pandoracalodc.T0ModuleLabel:              "mctrutht0pandoradc"
 
-physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
+physics.producers.pandora.HitFinderModuleLabel:             "hitfd"
 physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
 physics.producers.particlestitcher.TrackModuleLabel:        "pandora"
 physics.producers.particlestitcher.UseXCoordinate:          false
