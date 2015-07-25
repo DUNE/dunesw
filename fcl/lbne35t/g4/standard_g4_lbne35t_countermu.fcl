@@ -1,0 +1,10 @@
+#include "larg4_ewcounterpair.fcl"
+#include "standard_g4_lbne35t.fcl"
+
+physics.filters.filter: @local::lbne35t_larg4extcounterfilter_ewcounterpair
+
+physics.simulate: [rns, largeant, filter ]
+#physics.simulate: [rns, filter ]
+
+outputs.out1.fileName: "%ifb_%tc_g4_countermu.root"
+outputs.out1.SelectEvents: {SelectEvents:[simulate]}
