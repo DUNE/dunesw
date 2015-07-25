@@ -42,21 +42,21 @@ physics:
 # convert raw::RawDigit to recob::wire
   caldata:            @local::lbnefd_calwire
 # cheater reconstruction
-  hitcheat:           @local::lbne35t_hitcheater
-  clustercheat:       @local::lbne35t_clustercheater
-  trackcheat:         @local::lbne35t_trackcheater
+  hitcheat:           @local::dunefd_hitcheater
+  clustercheat:       @local::dunefd_clustercheater
+  trackcheat:         @local::dunefd_trackcheater
 # actual hit finder
-  gaushit:            @local::lbne35t_gaushitfinder
-  fasthit:            @local::lbne35t_fasthitfinder
-  cchit:              @local::lbne35t_clustercrawlerhit
+  gaushit:            @local::dunefd_gaushitfinder
+  fasthit:            @local::dunefd_fasthitfinder
+  cchit:              @local::dunefd_clustercrawlerhit
 # disambiguation cheater that removes duplicate hits
-  dcheat:             @local::lbne35t_disambigcheat
-  fasthitdc:          @local::lbne35t_disambigcheat
+  dcheat:             @local::dunefd_disambigcheat
+  fasthitdc:          @local::dunefd_disambigcheat
 #  dcheatcc:           @local::lbne35t_disambigcheat
 # reconstruction using gaushit and disambiguration cheater
 #  fuzzydc:            @local::lbne35t_fuzzycluster
-  dbclusterdc:        @local::lbne35t_dbcluster
-  lineclusterdc:      @local::lbne35t_linecluster
+  dbclusterdc:        @local::dunefd_dbcluster
+  lineclusterdc:      @local::dunefd_linecluster
   costrkdc:           @local::lbne35t_cosmictracker
   #stitchdc:           @local::lbne35t_trackstitcher
   calodc:             @local::lbne35t_calomc
@@ -96,15 +96,15 @@ physics:
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, 
-         caldata ]
-#         #flash, counter, TPC wire signals
+         #flash, counter, TPC wire signals
 #         opflash, t0counter, caldata, 
-#         #cheater reco
-#         hitcheat, clustercheat, trackcheat,
-#         #hit reco with cheated disambiguation
-#         gaushit, dcheat, cchit, fasthit, fasthitdc,
-#         #cluster reco with cheated disambiguation
-#         dbclusterdc, lineclusterdc,
+         caldata,
+         #cheater reco
+         hitcheat, clustercheat, trackcheat,
+         #hit reco with cheated disambiguation
+         gaushit, dcheat, cchit, fasthit, fasthitdc,
+         #cluster reco with cheated disambiguation
+         dbclusterdc, lineclusterdc
 #         #3D reco with cheated disambiguation
 #         costrkdc, mctrutht0dc, calodc, 
 #         #pandora with cheated disambiguation
@@ -121,7 +121,7 @@ physics:
 #         pandora, particlestitcher, mctrutht0pandora, pandoracalo,
 #         #pmatrack
 #         pmtrack, mctrutht0pmtrack, pmtrackcalo]
-
+         ]
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
 
