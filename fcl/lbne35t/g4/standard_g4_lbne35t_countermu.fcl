@@ -1,6 +1,8 @@
 #include "larg4_ewcounterpair.fcl"
 #include "standard_g4_lbne35t.fcl"
 
+process_name: G4
+
 physics.filters.filter: @local::lbne35t_larg4extcounterfilter_ewcounterpair
 
 physics.simulate: [rns, largeant, filter ]
