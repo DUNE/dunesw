@@ -58,7 +58,25 @@ physics: {
   analyzers: {
     geotest: {
       module_type: "GeometryTest"
-      PrintWires:  true
+      
+      # Tests can be selected individually using a list of strings called
+      # RunTests.
+      # See GeometryTestAlg documentation for specific strings in case new tests
+      # are added.
+      RunTests: [
+        # run the default test suite (actually unnecessary):
+        "@default",
+        # in addition (overriding the default): print wires
+        "+PrintWires",
+        
+        # - WireIntersection fails because the test is not always able to compute
+        #   the correct expected distance from the intersection;
+        #   this is a bug related to having a point not lying on a z wire together
+        #   with the presence of planes in which the wire doesn;t increase with z;
+        #   the test needs to be fixed
+        "-WireIntersection"
+      ]
+      
       # The test feeds a out-of-world coordinate to NearestWire() and expects
       # an exception to be thrown; LBNE currently prefers to cap the wire ID to
       # a valid wire.
@@ -70,19 +88,6 @@ physics: {
       # plane pitches (#0 -> #1, #1 -> #2)
       ExpectedWirePitch: [ 0.5, 0.5 ]
       
-      # Tests can be selected individually using a list of strings called RunTests
-      # *or* individually skipped using a list called SkipTests
-      # See source code for specific strings in case new tests are added
-      SkipTests:  [
-        # - WireIntersection fails because the test is not always able to compute
-        #   the correct expected distance from the intersection;
-        #   this is a bug related to having a point not lying on a z wire together
-        #   with the presence of planes in which the wires don't increase with z;
-        #   the test needs to be fixed
-        "WireIntersection",
-        # - CheckOverlaps disabled because it takes lot of time
-        "CheckOverlaps"
-      ]
     }
 
     geotest35: {
