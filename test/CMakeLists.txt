@@ -16,23 +16,23 @@ add_subdirectory(OpDet)
 # are not installed.
 # OPTIONAL_GROUPS is set to execute the test in the "BROKEN" test suite;
 # that is because this test is currently failing for MicroBooNE
-cet_test(donothing_lbne35t HANDBUILT
-  DATAFILES test_donothing_lbne35t.fcl
+cet_test(donothing_dune35t HANDBUILT
+  DATAFILES test_donothing_dune35t.fcl
   TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_donothing_lbne35t.fcl
+  TEST_ARGS --rethrow-all --config ./test_donothing_dune35t.fcl
 )
-cet_test(donothing_simul_lbne35t HANDBUILT
-  DATAFILES test_donothing_simul_lbne35t.fcl
+cet_test(donothing_simul_dune35t HANDBUILT
+  DATAFILES test_donothing_simul_dune35t.fcl
   TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_donothing_simul_lbne35t.fcl
+  TEST_ARGS --rethrow-all --config ./test_donothing_simul_dune35t.fcl
 )
-cet_test(donothing_lbnefd HANDBUILT
-  DATAFILES test_donothing_lbnefd.fcl
+cet_test(donothing_dunefd HANDBUILT
+  DATAFILES test_donothing_dunefd.fcl
   TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_donothing_lbnefd.fcl
+  TEST_ARGS --rethrow-all --config ./test_donothing_dunefd.fcl
 )
-cet_test(donothing_simul_lbnefd HANDBUILT
-  DATAFILES test_donothing_simul_lbnefd.fcl
+cet_test(donothing_simul_dunefd HANDBUILT
+  DATAFILES test_donothing_simul_dunefd.fcl
   TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_donothing_simul_lbnefd.fcl
+  TEST_ARGS --rethrow-all --config ./test_donothing_simul_dunefd.fcl
 )

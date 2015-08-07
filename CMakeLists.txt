@@ -19,7 +19,7 @@
 # use cmake 2.8 or later
 cmake_minimum_required (VERSION 2.8)
 
-project(lbnecode)
+project(dunetpc)
 
 # cetbuildtools contains our cmake modules
 SET ( CETBUILDTOOLS_VERSION $ENV{CETBUILDTOOLS_VERSION} )
@@ -68,7 +68,7 @@ include(ArtMake)
 include(BuildPlugins)
 
 # ADD SOURCE CODE SUBDIRECTORIES HERE
-add_subdirectory(lbne)
+add_subdirectory(dune)
 # release database
 add_subdirectory(releaseDB)
 # subdirectory for test code

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# LBNE geometry tests.
+# DUNE geometry tests.
 # Usage:
 #
 # testgeo.sh [Geometry ...]
@@ -10,8 +10,8 @@
 # Copied from larcore/Geometry/test/testgeo.csh .
 #
 
-DEFAULT_GEOMETRIES=( 'lbnefd' 'lbne35t' )
-INCLUDE_FILES=( 'geometry_lbne.fcl' )
+DEFAULT_GEOMETRIES=( 'dunefd' 'dune35t' )
+INCLUDE_FILES=( 'geometry_dune.fcl' )
 
 
 ################################################################################
@@ -47,7 +47,7 @@ function TestGeometry() {
 	#include "geotest.fcl"
 	
 	services.user.Geometry:               @local::${Geometry}_geo
-	services.user.ExptGeoHelperInterface: @local::lbne_geometry_helper
+	services.user.ExptGeoHelperInterface: @local::dune_geometry_helper
 	EOC
 	
 	local LogFile="${ConfigFile%.fcl}.log"

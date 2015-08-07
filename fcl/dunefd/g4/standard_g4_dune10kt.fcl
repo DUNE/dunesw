@@ -1,6 +1,6 @@
-#include "services_lbne.fcl"
-#include "largeantmodules_lbne.fcl"
-#include "photpropservices_lbne.fcl"
+#include "services_dune.fcl"
+#include "largeantmodules_dune.fcl"
+#include "photpropservices_dune.fcl"
 
 process_name: G4
 
@@ -31,7 +31,7 @@ physics:
 
  producers:
  {
-   largeant:  @local::lbnefd_largeant
+   largeant:  @local::dunefd_largeant
    rns:       { module_type: "RandomNumberSaver" }
  }
 

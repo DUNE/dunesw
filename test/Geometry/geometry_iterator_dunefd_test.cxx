@@ -17,7 +17,7 @@
 #include "test/Geometry/geometry_boost_unit_test_base.h"
 #include "test/Geometry/GeometryIteratorTestAlg.h"
 #include "Geometry/GeometryCore.h"
-#include "lbne/Geometry/ChannelMapAPAAlg.h"
+#include "dune/Geometry/ChannelMapAPAAlg.h"
 
 // utility libraries
 #include "messagefacility/MessageLogger/MessageLogger.h"
@@ -39,7 +39,7 @@
 // the configuration file name from the command line.
 struct DUNEFDGeometryConfiguration:
   public testing::BoostCommandLineConfiguration<
-    lbne::testing::DUNEFDGeometryEnvironmentConfiguration
+    dune::testing::DUNEFDGeometryEnvironmentConfiguration
       <geo::ChannelMapAPAAlg>
     >
 {

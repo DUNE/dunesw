@@ -1,6 +1,6 @@
-#include "services_lbne.fcl"
-#include "detsimmodules_lbne.fcl"
-#include "opticaldetectormodules_lbne.fcl"
+#include "services_dune.fcl"
+#include "detsimmodules_dune.fcl"
+#include "opticaldetectormodules_dune.fcl"
 
 process_name: Detsim
 
@@ -30,9 +30,9 @@ physics:
 
  producers:
  {
-   daq:            @local::lbnefd_simwire
-#   simcounter:     @local::lbnefd_simcounter
-   opdigi:         @local::lbnefd_opdigi
+   daq:            @local::dunefd_simwire
+#   simcounter:     @local::dunefd_simcounter
+   opdigi:         @local::dunefd_opdigi
    rns:            { module_type: "RandomNumberSaver" }
  }
  

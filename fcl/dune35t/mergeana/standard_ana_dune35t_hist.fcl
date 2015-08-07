@@ -1,0 +1,3 @@
+#include "standard_ana_dune35t.fcl"
+outputs: {}
+physics.stream1: []
