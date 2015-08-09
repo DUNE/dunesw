@@ -23,8 +23,8 @@ fwdir  product_dir config_data
 # table fragment to set FW_SEARCH_PATH needed 
 # to find gdml files:
 table_fragment_begin
-    pathPrepend(FW_SEARCH_PATH, ${DUNECODE_DIR}/scripts)
-    pathPrepend(FW_SEARCH_PATH, ${DUNECODE_DIR}/gdml)
+    pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/scripts)
+    pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/gdml)
     pathPrepend(FHICL_FILE_PATH, .:./job)
 table_fragment_end
 
