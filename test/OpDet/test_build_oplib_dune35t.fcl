@@ -19,7 +19,7 @@ services:
 {
   # Load the service that manages root files for histograms.
   TFileService: { fileName: "test_PhotonLibraryFile_dune35ton.root" }
-  Timing:       {}
+  TimeTracker:       {}
   RandomNumberGenerator: {} #ART native random number generator
   user:          @local::dune35t_photolibbuild_services 
   message:       @local::standard_info

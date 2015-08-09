@@ -12,7 +12,7 @@ process_name: DoNothing
 
 services: {
   TFileService:          { fileName: "hists_donothing_simul_dunefd.root" }
-  Timing:                {}
+  TimeTracker:                {}
   RandomNumberGenerator: {}
   user:                  @local::dunefd_simulation_services
 } # services
