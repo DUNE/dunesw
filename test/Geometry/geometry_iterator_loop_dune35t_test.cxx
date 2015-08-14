@@ -17,7 +17,7 @@
 #include "test/Geometry/geometry_unit_test_dune.h"
 #include "test/Geometry/GeometryIteratorLoopTestAlg.h"
 #include "Geometry/GeometryCore.h"
-#include "lbne/Geometry/ChannelMap35OptAlg.h"
+#include "dune/Geometry/ChannelMap35OptAlg.h"
 
 // utility libraries
 #include "messagefacility/MessageLogger/MessageLogger.h"
@@ -31,7 +31,7 @@
 // we use an existing class provided for this purpose, since our test
 // environment allows us to tailor it at run time.
 using DUNE35tGeometryConfiguration
-  = lbne::testing::DUNE35tGeometryEnvironmentConfiguration
+  = dune::testing::DUNE35tGeometryEnvironmentConfiguration
     <geo::ChannelMap35OptAlg>;
 
 /*

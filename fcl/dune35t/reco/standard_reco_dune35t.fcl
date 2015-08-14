@@ -18,9 +18,9 @@ services:
   TimeTracker:       {}
   SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
   RandomNumberGenerator: {} #ART native random number generator
-  message:              @local::dune_message_services_prod_debug
+  message:      @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::dunefd_services
+  user:         @local::dune35t_services
 }
 #source is now a root file
 source:
@@ -40,24 +40,24 @@ physics:
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
-  caldata:            @local::dunefd_calwire
+  caldata:            @local::dune35t_calwire
 # cheater reconstruction
-  hitcheat:           @local::dunefd_hitcheater
-  clustercheat:       @local::dunefd_clustercheater
-  trackcheat:         @local::dunefd_trackcheater
+  hitcheat:           @local::dune35t_hitcheater
+  clustercheat:       @local::dune35t_clustercheater
+  trackcheat:         @local::dune35t_trackcheater
 # actual hit finder
-  gaushit:            @local::dunefd_gaushitfinder
-  fasthit:            @local::dunefd_fasthitfinder
-  cchit:              @local::dunefd_clustercrawlerhit
+  gaushit:            @local::dune35t_gaushitfinder
+  fasthit:            @local::dune35t_fasthitfinder
+  cchit:              @local::dune35t_clustercrawlerhit
 # disambiguation cheater that removes duplicate hits
-  dcheat:             @local::dunefd_disambigcheat
-  fasthitdc:          @local::dunefd_disambigcheat
+  dcheat:             @local::dune35t_disambigcheat
+  fasthitdc:          @local::dune35t_disambigcheat
 #  dcheatcc:           @local::dune35t_disambigcheat
 # reconstruction using gaushit and disambiguration cheater
 #  fuzzydc:            @local::dune35t_fuzzycluster
-  dbclusterdc:        @local::dunefd_dbcluster
-  lineclusterdc:      @local::dunefd_linecluster
-  costrkdc:           @local::dunefd_cosmictracker
+  dbclusterdc:        @local::dune35t_dbcluster
+  lineclusterdc:      @local::dune35t_linecluster
+  costrkdc:           @local::dune35t_cosmictracker
   #stitchdc:           @local::dune35t_trackstitcher
   calodc:             @local::dune35t_calomc
   pandoradc:          @local::dune35t_pandora
@@ -66,7 +66,7 @@ physics:
   pmtrackdc:           @local::dune35t_pmalgtrackmaker
   pmtrackcalodc:       @local::dune35t_calomc
 # actual disambiguation
-  hitfd:             @local::dunefd_hitfinderfd
+  hit35t:             @local::dune35t_hitfinder35t
 #  hit35tcc:           @local::dune35t_hitfinder35t
 # reconstruction using disambiguated hits
 #  fuzzy:              @local::dune35t_fuzzycluster
@@ -97,8 +97,7 @@ physics:
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, 
          #flash, counter, TPC wire signals
-#         opflash, t0counter, caldata, 
-         caldata,
+         opflash, t0counter, caldata, 
          #cheater reco
          hitcheat, clustercheat, trackcheat,
          #hit reco with cheated disambiguation
@@ -106,26 +105,22 @@ physics:
          #cluster reco with cheated disambiguation
          dbclusterdc, lineclusterdc,
          #3D reco with cheated disambiguation
-#         costrkdc, mctrutht0dc, calodc, 
-         costrkdc,
-#         #pandora with cheated disambiguation
-#         pandoradc, particlestitcherdc, mctrutht0pandoradc, pandoracalodc,
+         costrkdc, mctrutht0dc, calodc, 
+         #pandora with cheated disambiguation
+         pandoradc, particlestitcherdc, mctrutht0pandoradc, pandoracalodc,
          #pmatrack with cheated disambiguation
-#         pmtrackdc, mctrutht0pmtrackdc, pmtrackcalodc,
-         pmtrackdc,
+         pmtrackdc, mctrutht0pmtrackdc, pmtrackcalodc,
          #real disambiguation
-         hitfd,
-#         #cluster reco
+         hit35t,
+         #cluster reco
          dbcluster, linecluster,
          #3D reco
-#         costrk,  mctrutht0, calo,
-         costrk,
-#         #pandora
-#         pandora, particlestitcher, mctrutht0pandora, pandoracalo,
+         costrk,  mctrutht0, calo,
+         #pandora
+         pandora, particlestitcher, mctrutht0pandora, pandoracalo,
          #pmatrack
-#         pmtrack, mctrutht0pmtrack, pmtrackcalo
-         pmtrack
-         ]
+         pmtrack, mctrutht0pmtrack, pmtrackcalo]
+
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
 
@@ -155,7 +150,7 @@ outputs:
 physics.producers.clustercheat.HitModuleLabel:         "hitcheat"
 physics.producers.trackcheat.CheatedClusterLabel:      "clustercheat"
 physics.producers.fasthitdc.ChanHitLabel:              "fasthit"
-#physics.producers.hitfdcc.ChanHitLabel:               "gaushit"
+#physics.producers.hit35tcc.ChanHitLabel:               "gaushit"
 #physics.producers.dcheatcc.ChanHitLabel:               "gaushit"
 #physics.producers.fuzzydc.HitsModuleLabel:             "dcheat"
 physics.producers.dbclusterdc.HitsModuleLabel:         "dcheat"
@@ -179,9 +174,9 @@ physics.producers.pmtrackcalodc.T0ModuleLabel:          "mctrutht0pmtrackdc"
 physics.producers.mctrutht0pmtrack.TrackModuleLabel:    "pmtrack"
 physics.producers.mctrutht0pmtrackdc.TrackModuleLabel:  "pmtrackdc"  
 
-#physics.producers.fuzzy.HitsModuleLabel:               "hitfd"
-physics.producers.dbcluster.HitsModuleLabel:           "hitfd"
-physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
+#physics.producers.fuzzy.HitsModuleLabel:               "hit35t"
+physics.producers.dbcluster.HitsModuleLabel:           "hit35t"
+physics.producers.linecluster.HitFinderModuleLabel:    "hit35t"
 physics.producers.costrk.ClusterModuleLabel:           "linecluster"
 #physics.producers.stitch.TrackModuleLabel:             "costrk"
 #physics.producers.stitch.SpptModuleLabel:              "costrk"
@@ -189,7 +184,7 @@ physics.producers.mctrutht0.TrackModuleLabel:          "costrk"
 physics.producers.calo.TrackModuleLabel:               "costrk"
 physics.producers.calo.SpacePointModuleLabel:          "costrk"
 physics.producers.calo.T0ModuleLabel:                  "mctrutht0"
-#physics.producers.kalmanhit.HitModuleLabel:            "hitfd"
+#physics.producers.kalmanhit.HitModuleLabel:            "hit35t"
 #physics.producers.kalmanhit.ClusterModuleLabel:        "fuzzy"
 
 #Pandora configurations
@@ -202,7 +197,7 @@ physics.producers.pandoracalodc.TrackModuleLabel:           "particlestitcherdc"
 physics.producers.pandoracalodc.SpacePointModuleLabel:      "pandoradc"
 physics.producers.pandoracalodc.T0ModuleLabel:              "mctrutht0pandoradc"
 
-physics.producers.pandora.HitFinderModuleLabel:             "hitfd"
+physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
 physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
 physics.producers.particlestitcher.TrackModuleLabel:        "pandora"
 physics.producers.particlestitcher.UseXCoordinate:          false

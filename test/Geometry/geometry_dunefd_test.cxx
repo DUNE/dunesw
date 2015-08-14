@@ -16,7 +16,7 @@
 #include "test/Geometry/geometry_unit_test_dune.h"
 #include "test/Geometry/GeometryTestAlg.h"
 #include "Geometry/GeometryCore.h"
-#include "lbne/Geometry/ChannelMapAPAAlg.h"
+#include "dune/Geometry/ChannelMapAPAAlg.h"
 
 // utility libraries
 #include "messagefacility/MessageLogger/MessageLogger.h"
@@ -30,7 +30,7 @@
 // we use an existing class provided for this purpose, since our test
 // environment allows us to tailor it at run time.
 using DUNEFDGeometryConfiguration
-  = lbne::testing::DUNEFDGeometryEnvironmentConfiguration
+  = dune::testing::DUNEFDGeometryEnvironmentConfiguration
     <geo::ChannelMapAPAAlg>;
 
 /*
@@ -70,7 +70,7 @@ int main(int argc, char const** argv) {
   DUNEFDGeometryConfiguration config("geometry_test_DUNEFD");
   // there is a bizarre "feature" in the APA ChannelMap algorithms:
   // the test feeds a out-of-world coordinate to NearestWire() and expects
-  // an exception to be thrown; LBNE currently prefers to cap the wire ID to
+  // an exception to be thrown; DUNE currently prefers to cap the wire ID to
   // a valid wire.
   // Therefore we disable that part of the test.
   config.SetDefaultTesterConfiguration(R"(

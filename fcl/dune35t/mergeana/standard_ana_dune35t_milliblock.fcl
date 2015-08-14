@@ -1,0 +1,4 @@
+#include "standard_ana_dune35t.fcl"
+
+services.user:  @local::dune35t_milliblock_simulation_services
+outputs.out1.fileName: "%ifb_%tc_merged_milliblock.root"
