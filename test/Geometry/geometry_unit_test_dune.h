@@ -70,10 +70,10 @@ namespace dune {
               services: {
                 Geometry: {
                   Name:     "dune35t"
-                  GDML:     "dune35t4apa_v3.gdml"
-                  ROOT:     "dune35t4apa_v3.gdml"
+                  GDML:     "dune35t4apa_v5.gdml"
+                  ROOT:     "dune35t4apa_v5.gdml"
                   SortingParameters: {
-                    DetectorVersion: "dune35t4apa_v3" 
+                    DetectorVersion: "dune35t4apa_v5" 
                   } 
                   SurfaceY:  0.0e2 # in cm, vertical distance to the surface
                 } # Geometry
@@ -117,8 +117,8 @@ namespace dune {
               services: {
                 Geometry: {
                   Name:     "dune10kt"
-                  GDML:     "dune10kt.gdml"
-                  ROOT:     "dune10kt.gdml"
+                  GDML:     "dune10kt_v1_workspace.gdml"
+                  ROOT:     "dune10kt_v1_workspace.gdml"
                   SurfaceY:  0.0e2  # in cm, vertical distance to the surface
                  # SurfaceY: 147828 # Underground option. 4850 feet to cm. from DocDb-3833
                   SortingParameters: {}
