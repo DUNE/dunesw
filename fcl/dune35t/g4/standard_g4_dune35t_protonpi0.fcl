@@ -1,9 +1,9 @@
 #include "larg4particlefilter.fcl"
-#include "standard_g4_lbne35t.fcl"
+#include "standard_g4_dune35t.fcl"
 
 process_name: G4
 
-physics.filters.filter: @local::lbne35t_larg4particlefilter
+physics.filters.filter: @local::dune35t_larg4particlefilter
 physics.filters.filter.InterestingPDGs: [2212, -2212, 111]
 physics.simulate: [rns, largeant, filter ]
 
