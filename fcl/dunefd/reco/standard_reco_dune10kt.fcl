@@ -96,8 +96,10 @@ physics:
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, 
-         #flash, counter, TPC wire signals
-#         opflash, t0counter, caldata, 
+         #optical flashes
+         opflash,
+         #counter, TPC wire signals      
+#        t0counter, caldata, 
          caldata,
          #cheater reco
          hitcheat, clustercheat, trackcheat,
