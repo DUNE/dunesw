@@ -1,0 +1,11 @@
+#include "larg4particlefilter.fcl"
+#include "standard_g4_lbne35t.fcl"
+
+process_name: G4
+
+physics.filters.filter: @local::lbne35t_larg4particlefilter
+physics.filters.filter.InterestingPDGs: [2212, -2212, 111]
+physics.simulate: [rns, largeant, filter ]
+
+outputs.out1.fileName: "%ifb_%tc_g4_protonpi0.root"
+outputs.out1.SelectEvents: {SelectEvents:[simulate]}
