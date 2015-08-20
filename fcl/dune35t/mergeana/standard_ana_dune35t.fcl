@@ -89,6 +89,7 @@ physics.analyzers.anatree.HitSpptAssocModuleLabel: "costrk"
 physics.analyzers.anatree.ClusterModuleLabel: "linecluster"
 physics.analyzers.anatree.CalorimetryModuleLabel: "calo"
 physics.analyzers.anatree.MCTruthT0ModuleLabel: "mctrutht0"
+physics.analyzers.anatree.PhotonT0ModuleLabel:  "photont0costrk"
 
 ###   COSMIC TRACKER DISAMBIG CHEAT ANATREE
 physics.analyzers.anatreedc.TrackModuleLabel: "costrkdc"
@@ -98,14 +99,15 @@ physics.analyzers.anatreedc.HitSpptAssocModuleLabel: "costrkdc"
 physics.analyzers.anatreedc.ClusterModuleLabel: "lineclusterdc"
 physics.analyzers.anatreedc.CalorimetryModuleLabel: "calodc"
 physics.analyzers.anatreedc.MCTruthT0ModuleLabel: "mctrutht0dc"
+physics.analyzers.anatreedc.PhotonT0ModuleLabel:  "photont0costrkdc"
 
 ###   ANATREE CHEAT
 physics.analyzers.anatreecheat.TrackModuleLabel: "trackcheat"
 physics.analyzers.anatreecheat.HitsModuleLabel: "hitcheat"
 physics.analyzers.anatreecheat.TrkSpptAssocModuleLabel: "trackcheat"
 physics.analyzers.anatreecheat.HitSpptAssocModuleLabel: "trackcheat"
-physics.analyzers.anatreecheat.ClusterModuleLabel: "clustercheat"
-
+physics.analyzers.anatreecheat.ClusterModuleLabel:      "clustercheat"
+physics.analyzers.anatreecheat.PhotonT0ModuleLabel:     "photont0costrkdc"
 # 
 ### ANATREE FOR PANDORA
 physics.analyzers.anatreepandora.TrackModuleLabel:       "particlestitcher"
@@ -113,6 +115,7 @@ physics.analyzers.anatreepandora.ClusterModuleLabel:     "pandora"
 physics.analyzers.anatreepandora.HitsModuleLabel:        "hit35t"
 physics.analyzers.anatreepandora.SimulationLabel:        "largeant"
 physics.analyzers.anatreepandora.MCTruthT0ModuleLabel:   "mctrutht0pandora"
+physics.analyzers.anatreepandora.PhotonT0ModuleLabel:    "photont0pandora"
 physics.analyzers.anatreepandora.CalorimetryModuleLabel: "pandoracalo"
 
 ### ANATREE FOR PANDORA DISAMBIG CHEAT
@@ -121,6 +124,7 @@ physics.analyzers.anatreepandoradc.ClusterModuleLabel:     "pandoradc"
 physics.analyzers.anatreepandoradc.HitsModuleLabel:        "dcheat"
 physics.analyzers.anatreepandoradc.SimulationLabel:        "largeant"
 physics.analyzers.anatreepandoradc.MCTruthT0ModuleLabel:   "mctrutht0pandoradc"
+physics.analyzers.anatreepandoradc.PhotonT0ModuleLabel:    "photont0pandoradc"
 physics.analyzers.anatreepandoradc.CalorimetryModuleLabel: "pandoracalodc"
 
 ### ANATREE FOR PMTRACK
@@ -129,6 +133,7 @@ physics.analyzers.anatreepmtrack.ClusterModuleLabel:     "linecluster"
 physics.analyzers.anatreepmtrack.HitsModuleLabel:        "linecluster"
 physics.analyzers.anatreepmtrack.SimulationLabel:        "largeant"
 physics.analyzers.anatreepmtrack.MCTruthT0ModuleLabel:   "mctrutht0pmtrack"
+physics.analyzers.anatreepmtrack.PhotonT0ModuleLabel:    "photont0pmtrack"
 physics.analyzers.anatreepmtrack.CalorimetryModuleLabel: "pmtrackcalo"
 
 ### ANATREE FOR PMTRACK DISAMBIG CHEAT
@@ -137,6 +142,7 @@ physics.analyzers.anatreepmtrackdc.ClusterModuleLabel:     "lineclusterdc"
 physics.analyzers.anatreepmtrackdc.HitsModuleLabel:        "lineclusterdc"
 physics.analyzers.anatreepmtrackdc.SimulationLabel:        "largeant"
 physics.analyzers.anatreepmtrackdc.MCTruthT0ModuleLabel:   "mctrutht0pmtrackdc"
+physics.analyzers.anatreepmtrackdc.PhotonT0ModuleLabel:    "photont0pmtrackdc"
 physics.analyzers.anatreepmtrackdc.CalorimetryModuleLabel: "pmtrackcalodc"
 
 ### Configure the Pandora Analyzer modules
