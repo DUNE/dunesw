@@ -23,7 +23,7 @@
 #include <string>
 
 
-namespace lbne {
+namespace dune {
   
   /// Namespace including DUNE-specific testing
   namespace testing {
@@ -69,11 +69,11 @@ namespace lbne {
           base_t::SetDefaultGeometryConfiguration(R"(
               services: {
                 Geometry: {
-                  Name:     "lbne35t"
-                  GDML:     "lbne35t4apa_v3.gdml"
-                  ROOT:     "lbne35t4apa_v3.gdml"
+                  Name:     "dune35t"
+                  GDML:     "dune35t4apa_v5.gdml"
+                  ROOT:     "dune35t4apa_v5.gdml"
                   SortingParameters: {
-                    DetectorVersion: "lbne35t4apa_v3" 
+                    DetectorVersion: "dune35t4apa_v5" 
                   } 
                   SurfaceY:  0.0e2 # in cm, vertical distance to the surface
                 } # Geometry
@@ -116,9 +116,9 @@ namespace lbne {
           base_t::SetDefaultGeometryConfiguration(R"(
               services: {
                 Geometry: {
-                  Name:     "lbne10kt"
-                  GDML:     "lbne10kt.gdml"
-                  ROOT:     "lbne10kt.gdml"
+                  Name:     "dune10kt"
+                  GDML:     "dune10kt_v1_workspace.gdml"
+                  ROOT:     "dune10kt_v1_workspace.gdml"
                   SurfaceY:  0.0e2  # in cm, vertical distance to the surface
                  # SurfaceY: 147828 # Underground option. 4850 feet to cm. from DocDb-3833
                   SortingParameters: {}
@@ -136,6 +136,6 @@ namespace lbne {
     
     
   } // namespace testing
-} // namespace lbne
+} // namespace dune
 
 #endif // TEST_GEOMETRY_UNIT_TEST_DUNE_H

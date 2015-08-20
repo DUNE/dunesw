@@ -1,0 +1,4 @@
+#include "standard_detsim_dune35t.fcl"
+
+services.user:  @local::dune35t_milliblock_detsim_services
+outputs.out1.fileName: "%ifb_%tc_detsim_milliblock.root"

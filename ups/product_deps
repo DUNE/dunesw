@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03)
-parent lbnecode v04_17_00
+parent dunetpc v04_19_00
 defaultqual e7
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -23,8 +23,8 @@ fwdir  product_dir config_data
 # table fragment to set FW_SEARCH_PATH needed 
 # to find gdml files:
 table_fragment_begin
-    pathPrepend(FW_SEARCH_PATH, ${LBNECODE_DIR}/scripts)
-    pathPrepend(FW_SEARCH_PATH, ${LBNECODE_DIR}/gdml)
+    pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/scripts)
+    pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/gdml)
     pathPrepend(FHICL_FILE_PATH, .:./job)
 table_fragment_end
 
@@ -34,25 +34,25 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v04_18_00
-artdaq_core	v1_04_15
-lbneutil        v01_13_00	-	optional
-lbne_raw_data 	v1_03_07
-dune_pardata	v01_02_00
-cetbuildtools	v4_12_05	-	only_for_build
+larsoft         v04_20_00
+artdaq_core	v1_04_17
+duneutil        v01_13_02	-	optional
+lbne_raw_data 	v1_03_08
+dune_pardata	v01_03_00
+cetbuildtools	v4_12_06	-	only_for_build
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes". 
 # e6  - with gcc 4.9.1 and -std=c++1y
-qualifier	larsoft		lbneutil	artdaq_core	lbne_raw_data	dune_pardata	notes
-e7:debug	e7:debug	e7:debug	nu:e7:s14:debug	nu:e7:s14:debug	-nq-
-e7:opt		e7:opt		e7:opt		nu:e7:s14:opt	nu:e7:s14:prof	-nq-
-e7:prof		e7:prof		e7:prof		nu:e7:s14:prof	nu:e7:s14:prof	-nq-
-e7:noifdh:debug	e7:noifdh:debug	e7:debug	nu:e7:s14:debug	nu:e7:s14:debug	-nq-
-e7:noifdh:opt	e7:noifdh:opt	e7:opt		nu:e7:s14:opt	nu:e7:s14:prof	-nq-
-e7:noifdh:prof	e7:noifdh:prof	e7:prof		nu:e7:s14:prof	nu:e7:s14:prof	-nq-
+qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata	notes
+e7:debug	e7:debug	e7:debug	nu:e7:s15:debug	nu:e7:s15:debug	-nq-
+e7:opt		e7:opt		e7:opt		nu:e7:s15:opt	nu:e7:s15:prof	-nq-
+e7:prof		e7:prof		e7:prof		nu:e7:s15:prof	nu:e7:s15:prof	-nq-
+e7:noifdh:debug	e7:noifdh:debug	e7:debug	nu:e7:s15:debug	nu:e7:s15:debug	-nq-
+e7:noifdh:opt	e7:noifdh:opt	e7:opt		nu:e7:s15:opt	nu:e7:s15:prof	-nq-
+e7:noifdh:prof	e7:noifdh:prof	e7:prof		nu:e7:s15:prof	nu:e7:s15:prof	-nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:

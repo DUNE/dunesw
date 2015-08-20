@@ -1,7 +1,0 @@
-#include "prodtext_common_lbne35t.fcl"
-
-outputs.out1.fileName: "AntiMuonCutEvents_LSU_v2_lbne35t_%tc_gen.root"
-
-#Name of text file input
-physics.producers.generator.InputFileName: "AntiMuonCutEvents_100.txt"
-physics.producers.generator.MoveY: 900 #new y postion for all particles
