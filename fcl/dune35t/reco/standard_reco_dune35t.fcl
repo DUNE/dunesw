@@ -90,12 +90,12 @@ physics:
   mctrutht0pmtrack:    @local::dune35t_mctrutht0matching
   mctrutht0pmtrackdc:  @local::dune35t_mctrutht0matching
 # Photon counter T0
-  photont0costrk:    @local::dune35t_photoncountert0matching
-  photont0costrkdc:  @local::dune35t_photoncountert0matching
-  photont0pandora:   @local::dune35t_photoncountert0matching
-  photont0pandoradc: @local::dune35t_photoncountert0matching
-  photont0pmtrack:   @local::dune35t_photoncountert0matching
-  photont0pmtrackdc: @local::dune35t_photoncountert0matching
+  photont0costrk:    @local::lbne35t_photoncountert0matching
+  photont0costrkdc:  @local::lbne35t_photoncountert0matching
+  photont0pandora:   @local::lbne35t_photoncountert0matching
+  photont0pandoradc: @local::lbne35t_photoncountert0matching
+  photont0pmtrack:   @local::lbne35t_photoncountert0matching
+  photont0pmtrackdc: @local::lbne35t_photoncountert0matching
 # Muon Counter T0
   t0counter:          @local::dune35t_t0counter
 # photon detector reconstruction
