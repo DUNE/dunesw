@@ -20,3 +20,5 @@ physics.producers.generator.SigmaThetaXZ: [45.]
 physics.producers.generator.Theta0YZ: [0.]
 physics.producers.generator.SigmaThetaYZ: [45.]
 physics.producers.generator.AngleDist: 0
+
+source.firstRun: 10000006

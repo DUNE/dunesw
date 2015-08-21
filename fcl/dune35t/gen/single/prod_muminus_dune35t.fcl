@@ -14,3 +14,4 @@ physics.producers.generator.SigmaX: [150]
 physics.producers.generator.SigmaZ: [80]
 physics.producers.generator.SigmaThetaXZ: [180]
 physics.producers.generator.SigmaThetaYZ: [45]
+
