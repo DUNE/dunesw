@@ -4,3 +4,4 @@ process_name: CosmicsGen
 
 #duplication for placeholder
 #outputs.out1.fileName:    "prodcosmics_dune35t_milliblock_%tc_gen.root"
+source.firstRun: 10000004
