@@ -4,7 +4,7 @@
 #get-cert -i
 #voms-proxy-init -noregen -rfc -voms dune:/dune/Role=Analysis
 
-cp  ${DUNECODE_DIR}/job/prodsingle_dune35t.fcl .
+cp  ${DUNETPC_DIR}/job/prodsingle_dune35t.fcl .
 #echo "services.user.FileCatalogMetadataExtras.RenameTemplate: '' " >> ./standard_detsim_dune.fc
 echo "outputs.out1.fileName: 'openclose_detsim_dune.root'" >> ./prodsingle_dune35t.fcl
 echo "source.module_type: RootInput" >> ./prodsingle_dune35t.fcl
