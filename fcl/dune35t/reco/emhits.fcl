@@ -89,47 +89,20 @@ physics:
   mctrutht0pandoradc: @local::dune35t_mctrutht0matching
   mctrutht0pmtrack:    @local::dune35t_mctrutht0matching
   mctrutht0pmtrackdc:  @local::dune35t_mctrutht0matching
-# Photon counter T0
-  photont0costrk:    @local::lbne35t_photoncountert0matching
-  photont0costrkdc:  @local::lbne35t_photoncountert0matching
-  photont0pandora:   @local::lbne35t_photoncountert0matching
-  photont0pandoradc: @local::lbne35t_photoncountert0matching
-  photont0pmtrack:   @local::lbne35t_photoncountert0matching
-  photont0pmtrackdc: @local::lbne35t_photoncountert0matching
-# Muon Counter T0
   t0counter:          @local::dune35t_t0counter
 # photon detector reconstruction
-  opflash:            @local::dune35t_opflash 
-      
+  opflash:            @local::dune35t_opflash
+
+  emhits:       @local::dune35t_emlikehits
  }
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, 
-         #flash, counter, TPC wire signals
          opflash, t0counter, caldata, 
-         #cheater reco
-         hitcheat, clustercheat, trackcheat,
-         #hit reco with cheated disambiguation
-         gaushit, dcheat, cchit, fasthit, fasthitdc,
-         #cluster reco with cheated disambiguation
-         dbclusterdc, lineclusterdc,
-         #3D reco with cheated disambiguation
-         costrkdc, mctrutht0dc, photont0costrkdc, calodc, 
-         #pandora with cheated disambiguation
-         pandoradc, particlestitcherdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
-         #pmatrack with cheated disambiguation
-         pmtrackdc, mctrutht0pmtrackdc, photont0pmtrackdc, pmtrackcalodc,
-         #real disambiguation
-         hit35t,
-         #cluster reco
-         dbcluster, linecluster,
-         #3D reco
-         costrk,  mctrutht0, photont0costrk, calo,
-         #pandora
-         pandora, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo,
-         #pmatrack
-         pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo]
+         gaushit, dcheat, lineclusterdc,
+         pmtrackdc, emhits
+ ]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -169,33 +142,34 @@ physics.producers.costrkdc.ClusterModuleLabel:         "lineclusterdc"
 #physics.producers.stitchdc.TrackModuleLabel:          "costrkdc"
 #physics.producers.stitchdc.SpptModuleLabel:           "costrkdc"
 physics.producers.mctrutht0dc.TrackModuleLabel:        "costrkdc"
-physics.producers.photont0costrkdc.TrackModuleLabel:   "costrkdc"
-physics.producers.photont0costrkdc.HitsModuleLabel:    "lineclusterdc"
-physics.producers.photont0costrkdc.ShowerModuleLabel:  ""
-physics.producers.photont0costrkdc.TruthT0ModuleLabel: "mctrutht0dc"
+#physics.producers.photont0costrkdc.TrackModuleLabel:   "costrkdc"
+#physics.producers.photont0costrkdc.HitsModuleLabel:    "lineclusterdc"
+#physics.producers.photont0costrkdc.ShowerModuleLabel:  ""
+#physics.producers.photont0costrkdc.TruthT0ModuleLabel: "mctrutht0dc"
 physics.producers.calodc.TrackModuleLabel:             "costrkdc"
 physics.producers.calodc.SpacePointModuleLabel:        "costrkdc"
-physics.producers.calodc.T0ModuleLabel:                "photont0costrkdc"
+physics.producers.calodc.T0ModuleLabel:                "mctrutht0dc"
 
 physics.producers.pmtrackdc.HitModuleLabel:             "lineclusterdc"
 physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
+physics.producers.pmtrackdc.MinSeedSize2ndPass:         4
 physics.producers.pmtrackcalodc.TrackModuleLabel:       "pmtrackdc"
 physics.producers.pmtrackcalodc.SpacePointModuleLabel:  "pmtrackdc"
-physics.producers.pmtrackcalodc.T0ModuleLabel:          "photont0pmtrackdc"
+physics.producers.pmtrackcalodc.T0ModuleLabel:          "mctrutht0pmtrackdc"
 physics.producers.mctrutht0pmtrackdc.TrackModuleLabel:  "pmtrackdc"
-physics.producers.photont0pmtrackdc.TrackModuleLabel:   "pmtrackdc"
-physics.producers.photont0pmtrackdc.HitsModuleLabel:    "lineclusterdc"
-physics.producers.photont0pmtrackdc.ShowerModuleLabel:  ""
-physics.producers.photont0pmtrackdc.TruthT0ModuleLabel: "mctrutht0pmtrackdc"
+#physics.producers.photont0pmtrackdc.TrackModuleLabel:   "pmtrackdc"
+#physics.producers.photont0pmtrackdc.HitsModuleLabel:    "lineclusterdc"
+#physics.producers.photont0pmtrackdc.ShowerModuleLabel:  ""
+#physics.producers.photont0pmtrackdc.TruthT0ModuleLabel: "mctrutht0pmtrackdc"
 
 physics.producers.pmtrackcalo.TrackModuleLabel:       "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:  "pmtrack"
-physics.producers.pmtrackcalo.T0ModuleLabel:          "photont0pmtrack"
+physics.producers.pmtrackcalo.T0ModuleLabel:          "mctrutht0pmtrack"
 physics.producers.mctrutht0pmtrack.TrackModuleLabel:  "pmtrack"
-physics.producers.photont0pmtrack.TrackModuleLabel:   "pmtrack"
-physics.producers.photont0pmtrack.HitsModuleLabel:    "linecluster"
-physics.producers.photont0pmtrack.ShowerModuleLabel:  ""
-physics.producers.photont0pmtrack.TruthT0ModuleLabel: "mctrutht0pmtrack"
+#physics.producers.photont0pmtrack.TrackModuleLabel:   "pmtrack"
+#physics.producers.photont0pmtrack.HitsModuleLabel:    "linecluster"
+#physics.producers.photont0pmtrack.ShowerModuleLabel:  ""
+#physics.producers.photont0pmtrack.TruthT0ModuleLabel: "mctrutht0pmtrack"
 
 #physics.producers.fuzzy.HitsModuleLabel:            "hit35t"
 physics.producers.dbcluster.HitsModuleLabel:         "hit35t"
@@ -204,13 +178,13 @@ physics.producers.costrk.ClusterModuleLabel:         "linecluster"
 #physics.producers.stitch.TrackModuleLabel:          "costrk"
 #physics.producers.stitch.SpptModuleLabel:           "costrk"
 physics.producers.mctrutht0.TrackModuleLabel:        "costrk"
-physics.producers.photont0costrk.TrackModuleLabel:   "costrk"
-physics.producers.photont0costrk.HitsModuleLabel:    "linecluster"
-physics.producers.photont0costrk.ShowerModuleLabel:  ""
-physics.producers.photont0costrk.TruthT0ModuleLabel: "mctrutht0"
+#physics.producers.photont0costrk.TrackModuleLabel:   "costrk"
+#physics.producers.photont0costrk.HitsModuleLabel:    "linecluster"
+#physics.producers.photont0costrk.ShowerModuleLabel:  ""
+#physics.producers.photont0costrk.TruthT0ModuleLabel: "mctrutht0"
 physics.producers.calo.TrackModuleLabel:             "costrk"
 physics.producers.calo.SpacePointModuleLabel:        "costrk"
-physics.producers.calo.T0ModuleLabel:                "photont0costrk"
+physics.producers.calo.T0ModuleLabel:                "mctrutht0"
 #physics.producers.kalmanhit.HitModuleLabel:         "hit35t"
 #physics.producers.kalmanhit.ClusterModuleLabel:     "fuzzy"
 
@@ -220,29 +194,33 @@ physics.producers.particlestitcherdc.PFParticleModuleLabel: "pandoradc"
 physics.producers.particlestitcherdc.TrackModuleLabel:      "pandoradc"
 physics.producers.particlestitcherdc.UseXCoordinate:        false
 physics.producers.mctrutht0pandoradc.TrackModuleLabel:      "particlestitcherdc"
-physics.producers.photont0pandoradc.TrackModuleLabel:       "particlestitcherdc"
-physics.producers.photont0pandoradc.HitsModuleLabel:        "dcheat"
-physics.producers.photont0pandoradc.ShowerModuleLabel:      ""
-physics.producers.photont0pandoradc.TruthT0ModuleLabel:     "mctrutht0pandoradc"
+#physics.producers.photont0pandoradc.TrackModuleLabel:       "particlestitcherdc"
+#physics.producers.photont0pandoradc.HitsModuleLabel:        "dcheat"
+#physics.producers.photont0pandoradc.ShowerModuleLabel:      ""
+#physics.producers.photont0pandoradc.TruthT0ModuleLabel:     "mctrutht0pandoradc"
 physics.producers.pandoracalodc.TrackModuleLabel:           "particlestitcherdc"
 physics.producers.pandoracalodc.SpacePointModuleLabel:      "pandoradc"
-physics.producers.pandoracalodc.T0ModuleLabel:              "photont0pandoradc"
+physics.producers.pandoracalodc.T0ModuleLabel:              "mctrutht0pandoradc"
 
 physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
 physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
 physics.producers.particlestitcher.TrackModuleLabel:        "pandora"
 physics.producers.particlestitcher.UseXCoordinate:          false
 physics.producers.mctrutht0pandora.TrackModuleLabel:        "particlestitcher"
-physics.producers.photont0pandora.TrackModuleLabel:         "particlestitcher"
-physics.producers.photont0pandora.HitsModuleLabel:          "hit35t"
-physics.producers.photont0pandora.ShowerModuleLabel:        ""
-physics.producers.photont0pandora.TruthT0ModuleLabel:       "mctrutht0pandora"
+#physics.producers.photont0pandora.TrackModuleLabel:         "particlestitcher"
+#physics.producers.photont0pandora.HitsModuleLabel:          "hit35t"
+#physics.producers.photont0pandora.ShowerModuleLabel:        ""
+#physics.producers.photont0pandora.TruthT0ModuleLabel:       "mctrutht0pandora"
 physics.producers.pandoracalo.TrackModuleLabel:             "particlestitcher"
 physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
-physics.producers.pandoracalo.T0ModuleLabel:                "photont0pandora"
+physics.producers.pandoracalo.T0ModuleLabel:                "mctrutht0dcpandora"
 
 #Optical detector configuration
 physics.producers.opflash.InputModule:                      "opdigi"
 
 #physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
 #physics.producers.lineclusterdc.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
+
+physics.producers.emhits.HitModuleLabel: "lineclusterdc"
+physics.producers.emhits.Trk3DModuleLabel: "pmtrackdc"
+

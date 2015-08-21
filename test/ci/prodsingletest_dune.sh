@@ -16,5 +16,5 @@ strace() {
    fi
 }
 
-cp  ${DUNECODE_DIR}/job/prodsingle_dune35t.fcl .
+cp  ${DUNETPC_DIR}/job/prodsingle_dune35t.fcl .
 strace -o lar.strace lar -c ${DUNECODE_DIR}/job/prodsingle_dune35t.fcl -n 1 -o single_dune_gen.root -T single_dune_hist.root

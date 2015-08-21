@@ -10,7 +10,7 @@ process_name: testGeoIter
 
 services: {
   
-  Geometry:               @local::dunefd_geo
+  Geometry:               @local::dune10kt_workspace_geo
   ExptGeoHelperInterface: @local::dune_geometry_helper
   
   message: {

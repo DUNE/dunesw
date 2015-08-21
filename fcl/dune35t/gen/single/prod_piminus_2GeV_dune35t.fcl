@@ -1,0 +1,23 @@
+#include "prodsingle_common_dune35t.fcl"
+
+process_name: SinglesGen
+
+outputs.out1.fileName: "prod_piminus_2GeV_dune35t_%tc_gen.root"
+
+physics.producers.generator.PadOutVectors: true
+physics.producers.generator.PDG: [-211]
+physics.producers.generator.P0: [2.0]
+physics.producers.generator.X0: [100.]
+physics.producers.generator.SigmaX: [2.]
+physics.producers.generator.Y0: [20.]
+physics.producers.generator.SigmaY: [2.]
+physics.producers.generator.Z0: [6.]
+physics.producers.generator.SigmaZ: [2.]
+physics.producers.generator.PosDist: 0
+physics.producers.generator.Theta0XZ: [0.]
+physics.producers.generator.SigmaThetaXZ: [90.]
+physics.producers.generator.Theta0YZ: [45.]
+physics.producers.generator.SigmaThetaYZ: [45.]
+physics.producers.generator.AngleDist: 0
+
+source.firstRun: 10000007

@@ -1,0 +1,44 @@
+#include "services_dune.fcl"
+#include "emenergycalib.fcl"
+
+process_name: Mergeana
+
+services:
+{
+  TFileService: { fileName: "EMEnergyCalib.root" }
+  user: @local::dune35t_services
+}
+
+source:
+{
+  module_type: RootInput
+  maxEvents:  -1        # Number of events to create
+}
+
+physics:
+{
+  analyzers:
+  {
+    energyCalib: @local::emenergycalib
+  }
+ #define the output stream, there could be more than one if using filters 
+ stream1:  [ out1 ]
+
+ ana: [ energyCalib ]
+ end_paths: [ stream1, ana ]
+
+}
+
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_%tc_merged.root"
+   dataTier:    "full-reconstructed"
+   compressionLevel: 1
+ }
+}
+
+physics.analyzers.energyCalib.HitsModuleLabel: "dcheat"
+physics.analyzers.energyCalib.ClusterModuleLabel: "blurredclusterdc"

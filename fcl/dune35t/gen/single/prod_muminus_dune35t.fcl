@@ -1,5 +1,7 @@
 #include "prodsingle_common_dune35t.fcl"
 
+process_name: SinglesGen
+
 outputs.out1.fileName: "prod_muminus_dune35t_%tc_gen.root"
 
 physics.producers.generator.PDG: [ 13 ]            # mu-
@@ -12,3 +14,4 @@ physics.producers.generator.SigmaX: [150]
 physics.producers.generator.SigmaZ: [80]
 physics.producers.generator.SigmaThetaXZ: [180]
 physics.producers.generator.SigmaThetaYZ: [45]
+

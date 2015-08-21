@@ -1,4 +1,7 @@
 #include "prodcosmics_dune35t_onewindow.fcl"
 
+process_name: CosmicsGen
+source.firstRun: 10000002
+
 physics.producers.generator: @local::dune35t_milliblock_cry
 outputs.out1.fileName:    "prodcosmics_dune35t_milliblock_%tc_gen.root"
