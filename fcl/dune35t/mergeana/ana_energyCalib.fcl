@@ -6,13 +6,17 @@ process_name: Mergeana
 services:
 {
   TFileService: { fileName: "EMEnergyCalib.root" }
+  TimeTracker:       {}
+  RandomNumberGenerator: {}
+  SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
+  FileCatalogMetadata:  @local::art_file_catalog_mc
   user: @local::dune35t_services
 }
 
 source:
 {
   module_type: RootInput
-  maxEvents:  -1        # Number of events to create
+  maxEvents:  10        # Number of events to create
 }
 
 physics:
