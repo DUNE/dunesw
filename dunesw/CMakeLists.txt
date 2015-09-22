@@ -9,7 +9,7 @@ add_subdirectory(EventGenerator)
 add_subdirectory(CalData)
 add_subdirectory(RawdataDisplay)
 add_subdirectory(EnergyStudies)
-add_subdirectory(AnaTree)
+#add_subdirectory(AnaTree)
 add_subdirectory(daqinput35t)
 add_subdirectory(OnlineMonitor)
 add_subdirectory(HitFinderDUNE)
@@ -19,6 +19,7 @@ add_subdirectory(CTree)
 add_subdirectory(T0Reco)
 add_subdirectory(SimFilter)
 add_subdirectory(FDSensOpt)
+add_subdirectory(Gaps)
 
 # Respect the order specified in lar_build, which is:
 #
