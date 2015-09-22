@@ -66,7 +66,7 @@ function compare_data_products
 
     if [ ${#DIFF} -gt 0 ]; then
        echo "$DIFF"
-       exitstatus 1 "compare_data_products step $1";
+       exitstatus 1999 "compare_data_products step $1";
     else
        echo -e "none\n\n"
     fi
