@@ -57,7 +57,7 @@ physics:
 #  fuzzydc:            @local::dune35t_fuzzycluster
   dbclusterdc:        @local::dunefd_dbcluster
   lineclusterdc:      @local::dunefd_linecluster
-  costrkdc:           @local::dunefd_cosmictracker
+#  costrkdc:           @local::dunefd_cosmictracker
   #stitchdc:           @local::dune35t_trackstitcher
   calodc:             @local::dune35t_calomc
   pandoradc:          @local::dune35t_pandora
@@ -72,7 +72,7 @@ physics:
 #  fuzzy:              @local::dune35t_fuzzycluster
   dbcluster:          @local::dune35t_dbcluster
   linecluster:        @local::dune35t_linecluster
-  costrk:             @local::dune35t_cosmictracker
+#  costrk:             @local::dune35t_cosmictracker
 #  stitch:             @local::dune35t_trackstitcher
   calo:               @local::dune35t_calomc
   pandora:            @local::dune35t_pandora
@@ -109,7 +109,7 @@ physics:
          dbclusterdc, lineclusterdc,
          #3D reco with cheated disambiguation
 #         costrkdc, mctrutht0dc, calodc, 
-         costrkdc,
+#         costrkdc,
 #         #pandora with cheated disambiguation
 #         pandoradc, particlestitcherdc, mctrutht0pandoradc, pandoracalodc,
          #pmatrack with cheated disambiguation
@@ -121,7 +121,7 @@ physics:
          dbcluster, linecluster,
          #3D reco
 #         costrk,  mctrutht0, calo,
-         costrk,
+#         costrk,
 #         #pandora
 #         pandora, particlestitcher, mctrutht0pandora, pandoracalo,
          #pmatrack
@@ -162,7 +162,7 @@ physics.producers.fasthitdc.ChanHitLabel:              "fasthit"
 #physics.producers.fuzzydc.HitsModuleLabel:             "dcheat"
 physics.producers.dbclusterdc.HitsModuleLabel:         "dcheat"
 physics.producers.lineclusterdc.HitFinderModuleLabel:  "dcheat"
-physics.producers.costrkdc.ClusterModuleLabel:         "lineclusterdc"
+#physics.producers.costrkdc.ClusterModuleLabel:         "lineclusterdc"
 #physics.producers.stitchdc.TrackModuleLabel:           "costrkdc"
 #physics.producers.stitchdc.SpptModuleLabel:            "costrkdc"
 physics.producers.mctrutht0dc.TrackModuleLabel:        "costrkdc"
@@ -184,7 +184,7 @@ physics.producers.mctrutht0pmtrackdc.TrackModuleLabel:  "pmtrackdc"
 #physics.producers.fuzzy.HitsModuleLabel:               "hitfd"
 physics.producers.dbcluster.HitsModuleLabel:           "hitfd"
 physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
-physics.producers.costrk.ClusterModuleLabel:           "linecluster"
+#physics.producers.costrk.ClusterModuleLabel:           "linecluster"
 #physics.producers.stitch.TrackModuleLabel:             "costrk"
 #physics.producers.stitch.SpptModuleLabel:              "costrk"
 physics.producers.mctrutht0.TrackModuleLabel:          "costrk"

@@ -20,6 +20,7 @@ add_subdirectory(T0Reco)
 add_subdirectory(SimFilter)
 add_subdirectory(FDSensOpt)
 add_subdirectory(EMshower3D)
+add_subdirectory(Gaps)
 
 # Respect the order specified in lar_build, which is:
 #
