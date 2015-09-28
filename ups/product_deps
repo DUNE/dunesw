@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03)
-parent dunetpc v04_23_00
+parent dunetpc v04_24_00
 defaultqual e7
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -25,6 +25,7 @@ fwdir  product_dir config_data
 table_fragment_begin
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/scripts)
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/gdml)
+    pathPrepend(FW_SEARCH_PATH, ${DUNE_PARDATA_DIR}/FieldResponse)
     pathPrepend(FHICL_FILE_PATH, .:./job)
 table_fragment_end
 
@@ -34,9 +35,9 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v04_23_00
+larsoft         v04_24_00
 artdaq_core	v1_04_17
-duneutil        v01_15_00	-	optional
+duneutil        v01_15_01	-	optional
 lbne_raw_data 	v1_03_08
 dune_pardata	v01_04_00
 cetbuildtools	v4_13_00	-	only_for_build
