@@ -13,6 +13,7 @@ source:
    TPCInputTag : "daq:TPC:DAQ" 
    SSPInputTag : "daq:PHOTON:DAQ" 
    NOvAClockFrequency : 64.0 # MHz
+   OpDetChannelMapFile : "ssp_channel_map_dune35t.txt"
 }
 
 services: {  
