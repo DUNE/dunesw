@@ -1,0 +1,8 @@
+#include "prodgenie_nu_dune10kt.fcl"
+
+process_name: GenieGen
+
+outputs.out1.fileName: "prodgenie_nu_dune10kt_3mmpitch_workspace_gen.root"
+
+services.Geometry: @local::dune10kt_3mmpitch_workspace_geo
+source.firstRun: 20000001

@@ -1,0 +1,6 @@
+#include "standard_ana_dune10kt_3mmpitch_workspace.fcl"
+
+process_name: Mergeana
+
+outputs: {}
+physics.stream1: []
