@@ -102,11 +102,12 @@ physics:
 #        t0counter, caldata, 
          caldata,
          #cheater reco
-         hitcheat, clustercheat, trackcheat,
+#         hitcheat, clustercheat, trackcheat,
          #hit reco with cheated disambiguation
-         gaushit, dcheat, cchit, fasthit, fasthitdc,
+         gaushit, dcheat, cchit,# fasthit, fasthitdc,
          #cluster reco with cheated disambiguation
-         dbclusterdc, lineclusterdc,
+         #dbclusterdc, 
+         lineclusterdc,
          #3D reco with cheated disambiguation
 #         costrkdc, mctrutht0dc, calodc, 
 #         costrkdc,
@@ -118,7 +119,8 @@ physics:
          #real disambiguation
          hitfd,
 #         #cluster reco
-         dbcluster, linecluster,
+         #dbcluster, 
+         linecluster,
          #3D reco
 #         costrk,  mctrutht0, calo,
 #         costrk,

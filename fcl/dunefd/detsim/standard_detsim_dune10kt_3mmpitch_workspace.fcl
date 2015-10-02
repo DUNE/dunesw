@@ -5,3 +5,5 @@ services.SignalShapingServiceDUNE10kt.FieldResponseFname: "dune35t_response_v1.0
 services.SignalShapingServiceDUNE10kt.FieldBins: 1000
 services.SignalShapingServiceDUNE10kt.InputFieldRespSamplingPeriod: 20.
 services.SignalShapingServiceDUNE10kt.FieldResponseTOffset: [-13.9e3, -13.9e3, -13.9e3]
+services.SignalShapingServiceDUNE10kt.ASICGainInMVPerFC: [28, 28, 28]
+physics.producers.daq.ZeroThreshold: 12
