@@ -2,7 +2,7 @@
 
 process_name: GenieGen
 
-outputs.out1.fileName: "prodgenie_nu_dune10kt_workspace_%tc_gen.root"
+outputs.out1.fileName: "prodgenie_nu_dune10kt_workspace_gen.root"
 
 services.Geometry: @local::dune10kt_workspace_geo
 source.firstRun: 20000001
