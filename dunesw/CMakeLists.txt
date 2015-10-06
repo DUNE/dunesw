@@ -19,7 +19,6 @@ add_subdirectory(CTree)
 add_subdirectory(T0Reco)
 add_subdirectory(SimFilter)
 add_subdirectory(FDSensOpt)
-add_subdirectory(EMshower3D)
 add_subdirectory(Gaps)
 add_subdirectory(TrackingAna)
 
