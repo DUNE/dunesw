@@ -40,7 +40,7 @@ artdaq_core	v1_04_19
 duneutil        v01_17_00	-	optional
 lbne_raw_data 	v1_03_08
 dune_pardata	v01_05_01
-cetbuildtools	v4_14_01	-	only_for_build
+cetbuildtools	v4_14_02	-	only_for_build
 end_product_list
 
 
