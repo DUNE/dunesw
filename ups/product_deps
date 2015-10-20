@@ -38,7 +38,7 @@ product          version
 larsoft         v04_27_00
 artdaq_core	v1_04_19
 duneutil        v01_18_00	-	optional
-lbne_raw_data 	v1_03_09
+lbne_raw_data 	v1_03_10
 dune_pardata	v01_06_00
 cetbuildtools	v4_14_02	-	only_for_build
 end_product_list
