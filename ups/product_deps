@@ -35,10 +35,10 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v04_27_01
-artdaq_core	v1_04_19
-duneutil        v01_18_01	-	optional
-lbne_raw_data 	v1_03_10
+larsoft         v04_28_00
+artdaq_core	v1_04_20
+duneutil        v01_18_02	-	optional
+lbne_raw_data 	v1_03_11
 dune_pardata	v01_06_00
 cetbuildtools	v4_14_02	-	only_for_build
 end_product_list
@@ -48,12 +48,12 @@ end_product_list
 # Make a table by adding columns before "notes". 
 # e9  - with gcc 4.9.3 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata	notes
-e9:debug	e9:debug	e9:debug	nu:e9:s18:debug	nu:e9:s18:debug	-nq-
-e9:opt		e9:opt		e9:opt		nu:e9:s18:opt	nu:e9:s18:prof	-nq-
-e9:prof		e9:prof		e9:prof		nu:e9:s18:prof	nu:e9:s18:prof	-nq-
-e9:noifdh:debug	e9:noifdh:debug	e9:debug	nu:e9:s18:debug	nu:e9:s18:debug	-nq-
-e9:noifdh:opt	e9:noifdh:opt	e9:opt		nu:e9:s18:opt	nu:e9:s18:prof	-nq-
-e9:noifdh:prof	e9:noifdh:prof	e9:prof		nu:e9:s18:prof	nu:e9:s18:prof	-nq-
+e9:debug	e9:debug	e9:debug	nu:e9:s20:debug	nu:e9:s20:debug	-nq-
+e9:opt		e9:opt		e9:opt		nu:e9:s20:opt	nu:e9:s20:prof	-nq-
+e9:prof		e9:prof		e9:prof		nu:e9:s20:prof	nu:e9:s20:prof	-nq-
+e9:noifdh:debug	e9:noifdh:debug	e9:debug	nu:e9:s20:debug	nu:e9:s20:debug	-nq-
+e9:noifdh:opt	e9:noifdh:opt	e9:opt		nu:e9:s20:opt	nu:e9:s20:prof	-nq-
+e9:noifdh:prof	e9:noifdh:prof	e9:prof		nu:e9:s20:prof	nu:e9:s20:prof	-nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
