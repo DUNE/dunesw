@@ -21,9 +21,6 @@ add_subdirectory(SimFilter)
 add_subdirectory(FDSensOpt)
 add_subdirectory(Gaps)
 add_subdirectory(TrackingAna)
-add_subdirectory(T0trigger)
-add_subdirectory(HitDumper)
-add_subdirectory(HitDumperFD)
 
 # Respect the order specified in lar_build, which is:
 #
