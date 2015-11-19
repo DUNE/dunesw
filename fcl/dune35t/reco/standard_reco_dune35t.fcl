@@ -111,7 +111,7 @@ physics:
          #cheater reco
          hitcheat, clustercheat, trackcheat,
          #hit reco with cheated disambiguation
-         gaushit, dcheat, cchit, fasthit, fasthitdc,
+         gaushit, dcheat, cchit, fasthit, 
          #cluster reco with cheated disambiguation
          dbclusterdc, lineclusterdc,
          #3D reco with cheated disambiguation
