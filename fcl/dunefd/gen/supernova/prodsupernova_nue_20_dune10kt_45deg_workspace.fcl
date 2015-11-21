@@ -1,0 +1,8 @@
+#include "prodsupernova_nue_2_dune10kt_workspace.fcl"
+
+process_name: SupernovaGen
+
+outputs.out1.fileName: "prodsupernova_nue_20_dune10kt_45deg_workspace_gen.root"
+
+services.Geometry: @local::dune10kt_45deg_workspace_geo
+physics.producers.generator.GeneratorAlg.MeanNumberOfNeutrinos: 20

@@ -60,11 +60,11 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "prodsupernova_nue_dune10kt_workspace_gen.root" # Default file name, can override from command line with -o or --output
+    fileName:    "prodsupernova_nue_2_dune10kt_workspace_gen.root" # Default file name, can override from command line with -o or --output
     dataTier:    "generated"
     compressionLevel: 1
   }
 }
 
-physics.producers.generator.GeneratorAlg.MeanNumberOfNeutrinos: 5
 services.Geometry: @local::dune10kt_workspace_geo
+physics.producers.generator.GeneratorAlg.MeanNumberOfNeutrinos: 2
