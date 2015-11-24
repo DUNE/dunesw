@@ -15,6 +15,7 @@ function initialize
     LARSOFT_REFERENCE_VERSION=$3
     BASEFILENAME=$4
     EXPCODE=$5
+    #LARSOFT_REFERENCE_VERSION=$(awk '{print $4}' testmask.txt)
 
     #declare -ga STEPS=( ${@:6:$(($#-5))} )
 
@@ -114,19 +115,25 @@ initialize $@
 
 exitstatus $?
 
-TASKSTRING="larsoft_data_production"
-larsoft_data_production
+if [ $(awk '{print $1}' testmask.txt) -eq 1 ] ; then
+    TASKSTRING="larsoft_data_production"
+    larsoft_data_production
 
-exitstatus $?
-
+    exitstatus $?
+fi
 
 COMPAREINIT=0
-TASKSTRING="compare_data_products 0"
-compare_data_products 0 #Check for added/removed data products
 
-exitstatus $?
+if [ $(awk '{print $2}' testmask.txt) -eq 1 ] ; then
+    TASKSTRING="compare_data_products 0"
+    compare_data_products 0 #Check for added/removed data products
 
-TASKSTRING="compare_data_products 1"
-compare_data_products 1 #Check for differences in the size of data products
+    exitstatus $?
+fi
 
-exitstatus $?
+if [ $(awk '{print $3}' testmask.txt) -eq 1 ] ; then
+    TASKSTRING="compare_data_products 1"
+    compare_data_products 1 #Check for differences in the size of data products
+
+    exitstatus $?
+fi
