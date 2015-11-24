@@ -9,6 +9,7 @@
 #include "t0reco.fcl"
 #include "opticaldetectormodules_dune.fcl"
 #include "photoncountert0matching.fcl"
+#include "trackshowerhits.fcl"
 
 process_name: Reco
 
@@ -100,7 +101,10 @@ physics:
   t0counter:          @local::dune35t_t0counter
 # photon detector reconstruction
   opflash:            @local::dune35t_opflash 
-      
+# track shower splitter
+  trkshowersplit:     @local::standard_trackshowerhits
+  trkshowersplitdc:   @local::standard_trackshowerhits
+
  }
 
  #define the producer and filter modules for this path, order matters, 
@@ -113,7 +117,7 @@ physics:
          #hit reco with cheated disambiguation
          gaushit, dcheat, cchit, fasthit, 
          #cluster reco with cheated disambiguation
-         dbclusterdc, lineclusterdc,
+         dbclusterdc, lineclusterdc, trkshowersplitdc,
          #3D reco with cheated disambiguation
          costrkdc, mctrutht0dc, photont0costrkdc, calodc, 
          #pandora with cheated disambiguation
@@ -123,7 +127,7 @@ physics:
          #real disambiguation
          hit35t,
          #cluster reco
-         dbcluster, linecluster,
+         dbcluster, linecluster, trkshowersplit,
          #3D reco
          costrk,  mctrutht0, photont0costrk, calo,
          #pandora
@@ -176,8 +180,10 @@ physics.producers.photont0costrkdc.TruthT0ModuleLabel: "mctrutht0dc"
 physics.producers.calodc.TrackModuleLabel:             "costrkdc"
 physics.producers.calodc.SpacePointModuleLabel:        "costrkdc"
 physics.producers.calodc.T0ModuleLabel:                "photont0costrkdc"
-
-physics.producers.pmtrackdc.HitModuleLabel:             "lineclusterdc"
+physics.producers.trkshowersplitdc.HitModuleLabel:       "lineclusterdc"
+physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
+physics.producers.pmtrack.HitModuleLabel:               "trkshowersplit"
+physics.producers.pmtrackdc.HitModuleLabel:             "trkshowersplitdc"
 physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
 physics.producers.pmtrackcalodc.TrackModuleLabel:       "pmtrackdc"
 physics.producers.pmtrackcalodc.SpacePointModuleLabel:  "pmtrackdc"
