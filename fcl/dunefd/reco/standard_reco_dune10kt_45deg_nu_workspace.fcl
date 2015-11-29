@@ -1,0 +1,5 @@
+#include "standard_reco_dune10kt.fcl"
+process_name: Reco
+services.Geometry: @local::dune10kt_45deg_workspace_geo
+physics.producers.blurredclusterdc.ShowerReconOnly: true
+physics.producers.blurredcluster.ShowerReconOnly: true
