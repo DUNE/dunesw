@@ -10,6 +10,8 @@
 #include "opticaldetectormodules_dune.fcl"
 #include "photoncountert0matching.fcl"
 #include "trackshowerhits.fcl"
+#include "showerfindermodules_dune.fcl"
+#include "emshower3d.fcl"
 
 process_name: Reco
 
@@ -104,7 +106,15 @@ physics:
 # track shower splitter
   trkshowersplit:     @local::standard_trackshowerhits
   trkshowersplitdc:   @local::standard_trackshowerhits
-
+# shower reconstruction
+  blurredclusterdc:      @local::dune35t_blurredcluster
+  emshowerdc:            @local::dune35t_emshower
+  emshower3ddc:          @local::dune35t_emshower3d
+  mergeemshower3ddc:     @local::dune35t_mergeemshower3d
+  blurredcluster:        @local::dune35t_blurredcluster
+  emshower:              @local::dune35t_emshower
+  emshower3d:            @local::dune35t_emshower3d
+  mergeemshower3d:       @local::dune35t_mergeemshower3d
  }
 
  #define the producer and filter modules for this path, order matters, 
@@ -117,23 +127,28 @@ physics:
          #hit reco with cheated disambiguation
          gaushit, dcheat, cchit, fasthit, 
          #cluster reco with cheated disambiguation
-         dbclusterdc, lineclusterdc, trkshowersplitdc,
+         dbclusterdc, lineclusterdc,
          #3D reco with cheated disambiguation
          costrkdc, mctrutht0dc, photont0costrkdc, calodc, 
          #pandora with cheated disambiguation
          pandoradc, particlestitcherdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
          #pmatrack with cheated disambiguation
          pmtrackdc, mctrutht0pmtrackdc, photont0pmtrackdc, pmtrackcalodc,
+         #shower reconstruction
+         blurredclusterdc, emshowerdc, emshower3ddc, mergeemshower3ddc,
          #real disambiguation
          hit35t,
          #cluster reco
-         dbcluster, linecluster, trkshowersplit,
+         dbcluster, linecluster,
          #3D reco
          costrk,  mctrutht0, photont0costrk, calo,
          #pandora
          pandora, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo,
          #pmatrack
-         pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo]
+         pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo,
+         #shower reconstruction
+         blurredcluster, emshower, emshower3d, mergeemshower3d
+]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -182,8 +197,8 @@ physics.producers.calodc.SpacePointModuleLabel:        "costrkdc"
 physics.producers.calodc.T0ModuleLabel:                "photont0costrkdc"
 physics.producers.trkshowersplitdc.HitModuleLabel:       "lineclusterdc"
 physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
-physics.producers.pmtrack.HitModuleLabel:               "trkshowersplit"
-physics.producers.pmtrackdc.HitModuleLabel:             "trkshowersplitdc"
+physics.producers.pmtrack.HitModuleLabel:               "lineclusterdc"
+physics.producers.pmtrackdc.HitModuleLabel:             "lineclusterdc"
 physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
 physics.producers.pmtrackcalodc.TrackModuleLabel:       "pmtrackdc"
 physics.producers.pmtrackcalodc.SpacePointModuleLabel:  "pmtrackdc"
@@ -252,3 +267,47 @@ physics.producers.opflash.InputModule:                      "opdigi"
 
 #physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
 #physics.producers.lineclusterdc.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
+#shower configuration
+physics.producers.blurredclusterdc.HitsModuleLabel: "lineclusterdc"
+physics.producers.blurredclusterdc.TrackModuleLabel: "pmtrackdc"
+physics.producers.blurredclusterdc.CreateDebugPDF:  false
+physics.producers.blurredclusterdc.MergeClusters:   false
+physics.producers.blurredclusterdc.GlobalTPCRecon:  true
+physics.producers.blurredclusterdc.ShowerReconOnly: false
+physics.producers.blurredclusterdc.VertexModuleLabel: "lineclusterdc"
+
+physics.producers.emshowerdc.ClusterModuleLabel: "blurredclusterdc"
+physics.producers.emshowerdc.HitsModuleLabel: "lineclusterdc"
+physics.producers.emshowerdc.TrackModuleLabel: "pmtrackdc"
+
+physics.producers.emshower3ddc.HitsModuleLabel: "lineclusterdc"
+physics.producers.emshower3ddc.ClustersModuleLabel: "blurredclusterdc"
+physics.producers.emshower3ddc.Trk3DModuleLabel: "pmtrackdc"
+
+physics.producers.mergeemshower3ddc.HitsModuleLabel: "lineclusterdc"
+physics.producers.mergeemshower3ddc.ClustersModuleLabel: "blurredclusterdc"
+physics.producers.mergeemshower3ddc.Trk3DModuleLabel: "emshower3ddc"
+physics.producers.mergeemshower3ddc.VtxModuleLabel: "emshower3ddc"
+physics.producers.mergeemshower3ddc.WideConeAngle: 20
+
+physics.producers.blurredcluster.HitsModuleLabel: "linecluster"
+physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"
+physics.producers.blurredcluster.CreateDebugPDF:  false
+physics.producers.blurredcluster.MergeClusters:   false
+physics.producers.blurredcluster.GlobalTPCRecon:  true
+physics.producers.blurredcluster.ShowerReconOnly: false
+physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
+
+physics.producers.emshower.ClusterModuleLabel: "blurredcluster"
+physics.producers.emshower.HitsModuleLabel: "linecluster"
+physics.producers.emshower.TrackModuleLabel: "pmtrack"
+
+physics.producers.emshower3d.HitsModuleLabel: "linecluster"
+physics.producers.emshower3d.ClustersModuleLabel: "blurredcluster"
+physics.producers.emshower3d.Trk3DModuleLabel: "pmtrack"
+
+physics.producers.mergeemshower3d.HitsModuleLabel: "linecluster"
+physics.producers.mergeemshower3d.ClustersModuleLabel: "blurredcluster"
+physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
+physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
+physics.producers.mergeemshower3d.WideConeAngle: 20
