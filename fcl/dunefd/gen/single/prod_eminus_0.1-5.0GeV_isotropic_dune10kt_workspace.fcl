@@ -5,7 +5,7 @@ process_name: SinglesGen
 outputs.out1.fileName: "prod_eminus_0.1-5.0GeV_isotropic_dune10kt_workspace_gen.root"
 
 services.Geometry: @local::dune10kt_workspace_geo
-source.firstRun: 20000004
+source.firstRun: 20000011
 
 physics.producers.generator.PDG: [ 11 ]            # e-
 physics.producers.generator.PosDist: 0             # Flat position dist.

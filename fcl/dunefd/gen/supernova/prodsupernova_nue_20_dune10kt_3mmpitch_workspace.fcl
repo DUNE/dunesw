@@ -6,3 +6,4 @@ outputs.out1.fileName: "prodsupernova_nue_20_dune10kt_3mmpitch_workspace_gen.roo
 
 services.Geometry: @local::dune10kt_3mmpitch_workspace_geo
 physics.producers.generator.GeneratorAlg.MeanNumberOfNeutrinos: 20
+source.firstRun: 20000143

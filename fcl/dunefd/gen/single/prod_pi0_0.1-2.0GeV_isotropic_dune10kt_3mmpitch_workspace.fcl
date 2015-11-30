@@ -5,3 +5,4 @@ process_name: SinglesGen
 outputs.out1.fileName: "prod_pi0_0.1-2.0GeV_isotropic_dune10kt_3mmpitch_workspace_gen.root"
 
 services.Geometry: @local::dune10kt_3mmpitch_workspace_geo
+source.firstRun: 20000113
