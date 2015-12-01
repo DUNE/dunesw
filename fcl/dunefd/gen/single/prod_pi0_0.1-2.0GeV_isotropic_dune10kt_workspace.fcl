@@ -5,7 +5,7 @@ process_name: SinglesGen
 outputs.out1.fileName: "prod_pi0_0.1-2.0GeV_isotropic_dune10kt_workspace_gen.root"
 
 services.Geometry: @local::dune10kt_workspace_geo
-source.firstRun: 20000006
+source.firstRun: 20000013
 
 physics.producers.generator.PDG: [ 111 ]           # pi0
 physics.producers.generator.PosDist: 0             # Flat position dist.

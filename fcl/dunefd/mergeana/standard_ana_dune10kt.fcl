@@ -66,20 +66,10 @@ outputs:
 physics.analyzers.nuetree.TrackModuleLabel:  "pmtrack"
 physics.analyzers.nuetree.HitsModuleLabel:   "linecluster"
 physics.analyzers.nuetree.VertexModuleLabel: "linecluster"
-#physics.analyzers.nuetree.TrkSpptAssocModuleLabel: "costrk"
-#physics.analyzers.nuetree.HitSpptAssocModuleLabel: "costrk"
-#physics.analyzers.nuetree.ClusterModuleLabel: "linecluster"
-#physics.analyzers.nuetree.CalorimetryModuleLabel: "calo"
-#physics.analyzers.nuetree.MCTruthT0ModuleLabel: "mctrutht0"
+physics.analyzers.nuetree.ShowerModuleLabel: "emshower"
 
 ###   COSMIC TRACKER DISAMBIG CHEAT NUETREE
-physics.analyzers.nuetreedc.TrackModuleLabel: "pmtrackdc"
-physics.analyzers.nuetreedc.HitsModuleLabel:  "lineclusterdc"
+physics.analyzers.nuetreedc.TrackModuleLabel:  "pmtrackdc"
+physics.analyzers.nuetreedc.HitsModuleLabel:   "lineclusterdc"
 physics.analyzers.nuetreedc.VertexModuleLabel: "lineclusterdc"
-#physics.analyzers.nuetreedc.TrkSpptAssocModuleLabel: "costrkdc"
-#physics.analyzers.nuetreedc.HitSpptAssocModuleLabel: "costrkdc"
-#physics.analyzers.nuetreedc.ClusterModuleLabel: "lineclusterdc"
-#physics.analyzers.nuetreedc.CalorimetryModuleLabel: "calodc"
-
-##physics.analyzers.nuetreedc.MCTruthT0ModuleLabel: "mctrutht0dc"
-
+physics.analyzers.nuetreedc.ShowerModuleLabel: "emshowerdc"
