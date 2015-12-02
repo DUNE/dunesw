@@ -5,7 +5,7 @@ process_name: SinglesGen
 outputs.out1.fileName: "prod_kplus_0.1-2.0GeV_isotropic_dune10kt_workspace_gen.root"
 
 services.Geometry: @local::dune10kt_workspace_geo
-source.firstRun: 20000008
+source.firstRun: 20000017
 
 physics.producers.generator.PDG: [ 321 ]           # k+
 physics.producers.generator.PosDist: 0             # Flat position dist.

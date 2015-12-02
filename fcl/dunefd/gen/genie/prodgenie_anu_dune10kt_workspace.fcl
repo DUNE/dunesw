@@ -5,4 +5,4 @@ process_name: GenieGen
 outputs.out1.fileName: "prodgenie_anu_dune10kt_workspace_gen.root"
 
 services.Geometry: @local::dune10kt_workspace_geo
-source.firstRun: 20000001
+source.firstRun: 20000004

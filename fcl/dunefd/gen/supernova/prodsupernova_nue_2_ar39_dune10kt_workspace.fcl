@@ -1,5 +1,6 @@
 #include "services_dune.fcl"
 #include "supernova.fcl"
+#include "radiological_gen_dune.fcl"
 
 process_name: SupernovaGen
 
@@ -20,7 +21,7 @@ source:
   module_type: EmptyEvent
   timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
   maxEvents:   10          # Number of events to create
-  firstRun:    20000041           # Run number to use for this file
+  firstRun:    20000042           # Run number to use for this file
   firstEvent:  1           # number of first event in the file
 }
 
@@ -33,12 +34,13 @@ physics:
   producers:
   {
     generator: @local::dunefd_workspace_supernova
+    radiogen:  @local::dune4apa_radiogen
     rns:       { module_type: "RandomNumberSaver" }
   }
  
   # Define the producer and filter modules for this path, order matters, 
   # filters reject all following items. See lines starting physics.producers below
-  simulate:      [ rns, generator ]
+  simulate:      [ rns, generator, radiogen ]
   
   # Define the output stream, there could be more than one if using filters 
   stream1:       [ out1 ]
@@ -60,7 +62,7 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "prodsupernova_nue_2_dune10kt_workspace_gen.root" # Default file name, can override from command line with -o or --output
+    fileName:    "prodsupernova_nue_2_ar39_dune10kt_workspace_gen.root" # Default file name, can override from command line with -o or --output
     dataTier:    "generated"
     compressionLevel: 1
   }
@@ -68,3 +70,6 @@ outputs:
 
 services.Geometry: @local::dune10kt_workspace_geo
 physics.producers.generator.GeneratorAlg.MeanNumberOfNeutrinos: 2
+
+physics.producers.radiogen.T0: [ -2246000.0 ]
+physics.producers.radiogen.T1: [  2246000.0 ]

@@ -18,8 +18,8 @@ services:
 {
   # Load the service that manages root files for histograms.
   TFileService: { fileName: "reco_hist.root" }
+  MemoryTracker:     {}
   TimeTracker:       {}
-  SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
   RandomNumberGenerator: {} #ART native random number generator
   message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
@@ -78,11 +78,11 @@ physics:
   blurredclusterdc:      @local::dune35t_blurredcluster
   emshowerdc:            @local::dune10kt_emshower
   emshower3ddc:          @local::dune10kt_emshower3d
-  mergeemshower3ddc:     @local::mergeemshower3d
+  mergeemshower3ddc:     @local::dune10kt_mergeemshower3d
   blurredcluster:        @local::dune35t_blurredcluster
   emshower:              @local::dune10kt_emshower
   emshower3d:            @local::dune10kt_emshower3d
-  mergeemshower3d:       @local::mergeemshower3d
+  mergeemshower3d:       @local::dune10kt_mergeemshower3d
    
  }
 
@@ -193,7 +193,7 @@ physics.producers.blurredclusterdc.TrackModuleLabel: "pmtrackdc"
 physics.producers.blurredclusterdc.CreateDebugPDF:  false
 physics.producers.blurredclusterdc.MergeClusters:   false
 physics.producers.blurredclusterdc.GlobalTPCRecon:  true
-physics.producers.blurredclusterdc.ShowerReconOnly: true
+physics.producers.blurredclusterdc.ShowerReconOnly: false
 physics.producers.blurredclusterdc.VertexModuleLabel: "lineclusterdc"
 
 physics.producers.emshowerdc.ClusterModuleLabel: "blurredclusterdc"
@@ -215,7 +215,7 @@ physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"
 physics.producers.blurredcluster.CreateDebugPDF:  false
 physics.producers.blurredcluster.MergeClusters:   false
 physics.producers.blurredcluster.GlobalTPCRecon:  true
-physics.producers.blurredcluster.ShowerReconOnly: true
+physics.producers.blurredcluster.ShowerReconOnly: false
 physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
 
 physics.producers.emshower.ClusterModuleLabel: "blurredcluster"
