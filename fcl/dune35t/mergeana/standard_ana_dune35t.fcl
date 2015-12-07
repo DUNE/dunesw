@@ -12,9 +12,9 @@ services:
 {
   # Load the service that manages root files for histograms.
   TFileService: { fileName: "ana_hist.root" }
+  MemoryTracker:     {}
   TimeTracker:       {}
   RandomNumberGenerator: {}
-  SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
 #  message:      @local::microboone_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
   user:         @local::dune35t_simulation_services
