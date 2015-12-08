@@ -34,9 +34,9 @@ table_fragment_begin
     envSet(DBIQEURL, http://dbdata0vm.fnal.gov:8122/QE/dune35t/prod/app/SQ/)
     envSet(DBIHOST, ifdbprod.fnal.gov)
     envSet(DBINAME, dune35t_prod)
-    envSet(DBIPORT, 5422)
+    envSet(DBIPORT, 5442)
     envSet(DBIUSER, dune_reader)
-    envSet(DBIPWDFILE, ~jpaley/dune/db/proddbpwd)
+    envSet(DBIPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
 table_fragment_end
 
 
@@ -46,9 +46,9 @@ table_fragment_end
 
 product          version
 larsoft         v04_30_02
-artdaq_core	v1_04_21
+artdaq_core	v1_04_23
 duneutil        v01_20_01	-	optional
-lbne_raw_data 	v1_03_12
+lbne_raw_data 	v1_03_14
 dune_pardata	v01_06_00
 cetbuildtools	v4_17_00	-	only_for_build
 end_product_list
