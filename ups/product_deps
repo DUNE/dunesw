@@ -34,9 +34,9 @@ table_fragment_begin
     envSet(DBIQEURL, http://dbdata0vm.fnal.gov:8122/QE/dune35t/prod/app/SQ/)
     envSet(DBIHOST, ifdbprod.fnal.gov)
     envSet(DBINAME, dune35t_prod)
-    envSet(DBIPORT, 5422)
+    envSet(DBIPORT, 5442)
     envSet(DBIUSER, dune_reader)
-    envSet(DBIPWDFILE, ~jpaley/dune/db/proddbpwd)
+    envSet(DBIPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
 table_fragment_end
 
 
