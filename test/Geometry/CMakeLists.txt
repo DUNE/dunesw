@@ -137,3 +137,18 @@ cet_test(geometry_iterator_loop_dunefd_test
             ${FHICLCPP}
             ${CETLIB}
 )
+
+
+# This is not really a test, but it dumps channel mapping on a file
+cet_test(dump_channel_map_dune35t_test HANDBUILT
+  DATAFILES dump_dune35t_channelmap.fcl
+  TEST_EXEC lar
+  TEST_ARGS --rethrow-all --config ./dump_dune35t_channelmap.fcl
+)
+
+cet_test(dump_channel_map_dunefd_test HANDBUILT
+  DATAFILES dump_dunefd_channelmap.fcl
+  TEST_EXEC lar
+  TEST_ARGS --rethrow-all --config ./dump_dunefd_channelmap.fcl
+)
+
