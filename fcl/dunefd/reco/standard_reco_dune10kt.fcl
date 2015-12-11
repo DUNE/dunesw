@@ -56,8 +56,8 @@ physics:
   lineclusterdc:      @local::dunefd_linecluster
 #  costrkdc:           @local::dunefd_cosmictracker
   calodc:             @local::dune35t_calomc
-  pandoradc:          @local::dune35t_pandora
-  particlestitcherdc: @local::dune35t_particlestitcher
+  pandoradc:          @local::dune4apa_pandora
+# pandora stitching module goes here when it's ready
   pandoracalodc:      @local::dune35t_calomc
   pmtrackdc:           @local::dunefd_pmalgtrackmaker
   pmtrackcalodc:       @local::dune35t_calomc
@@ -66,8 +66,8 @@ physics:
 # reconstruction using disambiguated hits
   linecluster:        @local::dune35t_linecluster
   calo:               @local::dune35t_calomc
-  pandora:            @local::dune35t_pandora
-  particlestitcher:   @local::dune35t_particlestitcher
+  pandora:            @local::dune4apa_pandora
+# pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune35t_calomc
   pmtrack:             @local::dunefd_pmalgtrackmaker
   pmtrackcalo:         @local::dune35t_calomc
@@ -83,7 +83,6 @@ physics:
   emshower:              @local::dune10kt_emshower
   emshower3d:            @local::dune10kt_emshower3d
   mergeemshower3d:       @local::dune10kt_mergeemshower3d
-   
  }
 
  #define the producer and filter modules for this path, order matters, 
@@ -100,7 +99,7 @@ physics:
          #track shower split
          trkshowersplitdc,
          #pandora with cheated disambiguation
-         #pandoradc, particlestitcherdc 
+         pandoradc, #pandora stitcher goes here
          #pmatrack with cheated disambiguation
          pmtrackdc,
          #shower reconstruction
@@ -112,12 +111,13 @@ physics:
          #track shower split
          trkshowersplit,
          #pandora
-         #pandora, particlestitcher,
+         pandora, #pandora stitcher goes here
          #pmatrack
          pmtrack,
          #shower reconstruction
          blurredcluster, emshower, emshower3d, mergeemshower3d
          ]
+
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
 
@@ -171,17 +171,11 @@ physics.producers.calo.SpacePointModuleLabel:          "costrk"
 
 #Pandora configurations
 physics.producers.pandoradc.HitFinderModuleLabel:           "dcheat"
-physics.producers.particlestitcherdc.PFParticleModuleLabel: "pandoradc"
-physics.producers.particlestitcherdc.TrackModuleLabel:      "pandoradc"
-physics.producers.particlestitcherdc.UseXCoordinate:        false
-physics.producers.pandoracalodc.TrackModuleLabel:           "particlestitcherdc"
+physics.producers.pandoracalodc.TrackModuleLabel:           "pandoradc"
 physics.producers.pandoracalodc.SpacePointModuleLabel:      "pandoradc"
 
 physics.producers.pandora.HitFinderModuleLabel:             "hitfd"
-physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
-physics.producers.particlestitcher.TrackModuleLabel:        "pandora"
-physics.producers.particlestitcher.UseXCoordinate:          false
-physics.producers.pandoracalo.TrackModuleLabel:             "particlestitcher"
+physics.producers.pandoracalo.TrackModuleLabel:             "pandora"
 physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
 
 #Optical detector configuration
