@@ -78,7 +78,7 @@ function compare_data_products
 
     trap - ERR
 
-    DIFF=$(diff  <(echo "${OUTPUT_REFERENCE}" | awk -v MYNF=$((1-$1)) 'NF{NF-=MYNF}1' | sed 's/\.//g' ) <(echo "${OUTPUT_CURRENT}" | awk -v MYNF=$((1-$1)) 'NF{NF-=MYNF}1' | sed 's/\.//g' ) )
+    DIFF=$(diff  <(echo "${OUTPUT_REFERENCE}" | cut -d "|" -f -$((4+$1)) | sed 's/\.//g' ) <(echo "${OUTPUT_CURRENT}" | cut -d "|" -f -$((4+$1)) | sed 's/\.//g' ) )
 
     trap 'LASTERR=$?; echo -e "\nCI MSG BEGIN\n `basename $0`: error at line ${LINENO}\n Stage: ${STEPS[STEP]}\n Task: ${TASKSTRING}\n exit status: ${LASTERR}\nCI MSG END\n"; exit ${LASTERR}' ERR
 
