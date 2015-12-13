@@ -131,7 +131,7 @@ if [ $(awk '{print $2}' testmask.txt) -eq 1 ] ; then
     exitstatus $?
 fi
 
-if [ $(awk '{print $3}' testmask.txt) -eq 1 ] ; then
+if [ $(awk '{print $3}' testmask.txt) -eq 1 -a $(uname -a|grep Linux > /dev/null; echo $?) -eq 0 ] ; then
     TASKSTRING="compare_data_products 1"
     compare_data_products 1 #Check for differences in the size of data products
 
