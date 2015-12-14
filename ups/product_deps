@@ -27,7 +27,7 @@ table_fragment_begin
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/gdml)
     pathPrepend(FW_SEARCH_PATH, ${DUNE_PARDATA_DIR}/FieldResponse)
     pathPrepend(FHICL_FILE_PATH, .:./job)
-    envSet(DBIWSPWDFILE, ~jpaley/dune/db/condb.pwd)
+    envSet(DBIWSPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
     envSet(DBIWSURL, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
     envSet(DBIWSURLINT, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
     envSet(DBIWSURLPUT, http://dbdata0vm.fnal.gov:8117/LBNE35tCon/app/)
@@ -36,7 +36,7 @@ table_fragment_begin
     envSet(DBINAME, dune35t_prod)
     envSet(DBIPORT, 5442)
     envSet(DBIUSER, dune_reader)
-    envSet(DBIPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
+    envSet(DBIPWDFILE, ~jpaley/dune/db/proddbpwd)
 table_fragment_end
 
 
