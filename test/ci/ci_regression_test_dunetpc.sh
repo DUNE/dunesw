@@ -41,10 +41,10 @@ function larsoft_data_production
     trap 'LASTERR=$?; echo -e "\nCI MSG BEGIN\n `basename $0`: error at line ${LINENO}\n Stage: ${STEPS[STEP]}\n Task: ${TASKSTRING}\n exit status: ${LASTERR}\nCI MSG END\n"; exit ${LASTERR}' ERR
 
     echo -e "\nNumber of events for ${STEPS[STEP]} step: $NEVENTS\n"
-    echo lar --rethrow-default -n ${NEVENTS} -o ${OUTPUT_FILE} --config ${FHiCL_FILE} ${INPUT_FILE}
+    echo lar --rethrow-all -n ${NEVENTS} -o ${OUTPUT_FILE} --config ${FHiCL_FILE} ${INPUT_FILE}
     echo
 
-    lar --rethrow-default -n $NEVENTS -o $OUTPUT_FILE --config $FHiCL_FILE ${INPUT_FILE}
+    lar --rethrow-all -n $NEVENTS -o $OUTPUT_FILE --config $FHiCL_FILE ${INPUT_FILE}
 
 }
 
@@ -57,14 +57,14 @@ function compare_data_products
 
     if [ ${COMPAREINIT} -eq 0 ]; then
 
-        #echo lar --rethrow-default -n $NEVENTS --config eventdump.fcl ${BASEFILENAME}_Reference_${STEPS[STEP]}_${LARSOFT_REFERENCE_VERSION}.root
+        #echo lar --rethrow-all -n $NEVENTS --config eventdump.fcl ${BASEFILENAME}_Reference_${STEPS[STEP]}_${LARSOFT_REFERENCE_VERSION}.root
 
-        lar --rethrow-default -n $NEVENTS --config eventdump.fcl ${BASEFILENAME}_Reference_${STEPS[STEP]}_${LARSOFT_REFERENCE_VERSION}.root > ${BASEFILENAME}_Reference_${STEPS[STEP]}.dump
+        lar --rethrow-all -n $NEVENTS --config eventdump.fcl ${BASEFILENAME}_Reference_${STEPS[STEP]}_${LARSOFT_REFERENCE_VERSION}.root > ${BASEFILENAME}_Reference_${STEPS[STEP]}.dump
         OUTPUT_REFERENCE=$(cat ${BASEFILENAME}_Reference_${STEPS[STEP]}.dump | sed -e  '/PROCESS NAME/,/^\s*$/!d ; s/PROCESS NAME.*$// ; /^\s*$/d' )
 
-        #echo lar --rethrow-default -n $NEVENTS --config eventdump.fcl ${BASEFILENAME}_Current_${STEPS[STEP]}.root
+        #echo lar --rethrow-all -n $NEVENTS --config eventdump.fcl ${BASEFILENAME}_Current_${STEPS[STEP]}.root
 
-        lar --rethrow-default -n $NEVENTS --config eventdump.fcl ${BASEFILENAME}_Current_${STEPS[STEP]}.root > ${BASEFILENAME}_Current_${STEPS[STEP]}.dump
+        lar --rethrow-all -n $NEVENTS --config eventdump.fcl ${BASEFILENAME}_Current_${STEPS[STEP]}.root > ${BASEFILENAME}_Current_${STEPS[STEP]}.dump
         OUTPUT_CURRENT=$(cat ${BASEFILENAME}_Current_${STEPS[STEP]}.dump | sed -e  '/PROCESS NAME/,/^\s*$/!d ; s/PROCESS NAME.*$// ; /^\s*$/d' )
 
         echo -e "\nCompare data products."
