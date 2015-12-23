@@ -16,7 +16,7 @@
 #include "test/Geometry/geometry_unit_test_dune.h"
 #include "test/Geometry/geometry_boost_unit_test_base.h"
 #include "test/Geometry/GeometryIteratorTestAlg.h"
-#include "Geometry/GeometryCore.h"
+#include "larcore/Geometry/GeometryCore.h"
 #include "dune/Geometry/ChannelMapAPAAlg.h"
 
 // utility libraries
