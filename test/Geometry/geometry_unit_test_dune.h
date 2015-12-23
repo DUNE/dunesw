@@ -67,17 +67,13 @@ namespace dune {
           // overwrite the configuration that happened in the base class:
           base_t::SetApplicationName("DUNE35tGeometryTest");
           base_t::SetDefaultGeometryConfiguration(R"(
-              services: {
-                Geometry: {
-                  Name:     "dune35t"
-                  GDML:     "dune35t4apa_v5.gdml"
-                  ROOT:     "dune35t4apa_v5.gdml"
-                  SortingParameters: {
-                    DetectorVersion: "dune35t4apa_v5" 
-                  } 
-                  SurfaceY:  0.0e2 # in cm, vertical distance to the surface
-                } # Geometry
-              } # services
+              Name:     "dune35t"
+              GDML:     "dune35t4apa_v5.gdml"
+              ROOT:     "dune35t4apa_v5.gdml"
+              SortingParameters: {
+                DetectorVersion: "dune35t4apa_v5" 
+              } 
+              SurfaceY:  0.0e2 # in cm, vertical distance to the surface
             )");
         } // DUNE35tGeometryEnvironmentConfiguration()
       

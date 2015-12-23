@@ -59,7 +59,7 @@ struct DUNE35tGeometryConfiguration:
  * interface is provided.
  */
 class DUNE35tGeometryIteratorTestFixture:
-  private testing::SharedGeometryTesterEnvironment<DUNE35tGeometryConfiguration>
+  private testing::GeometryTesterEnvironment<DUNE35tGeometryConfiguration>
 {
   using Tester_t = geo::GeometryIteratorTestAlg;
   
