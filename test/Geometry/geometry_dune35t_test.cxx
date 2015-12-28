@@ -68,19 +68,14 @@ using DUNE35tGeometryTestEnvironment
 int main(int argc, char const** argv) {
   
   DUNE35tGeometryConfiguration config("geometry_test_DUNE35t");
+  config.SetMainTesterParameterSetName("geotest");
   // there is a bizarre "feature" in the APA ChannelMap algorithms:
   // the test feeds a out-of-world coordinate to NearestWire() and expects
   // an exception to be thrown; DUNE currently prefers to cap the wire ID to
   // a valid wire.
   // Therefore we disable that part of the test.
-  config.SetDefaultTesterConfiguration(R"(
-    physics: {
-      analyzers: {
-        geotest: {
-          DisableWireBoundaryCheck: true
-        }
-      } # analyzers
-    } # physics
+  config.AddDefaultTesterConfiguration(R"(
+    DisableWireBoundaryCheck: true
     )");
   
   //
@@ -92,9 +87,12 @@ int main(int argc, char const** argv) {
   if (++iParam < argc) config.SetConfigurationPath(argv[iParam]);
   
   // second argument: path of the parameter set for geometry test configuration
-  // (optional; default: "physics.analysers.geotest")
-  config.SetTesterParameterSetPath
-    ((++iParam < argc)? argv[iParam]: "physics.analyzers.geotest");
+  // (optional; default: "physics.analysers.geotest");
+  // if no path is provided, we have a empty default configuration;
+  // if path is provided, we don't have any default configuration
+  // and if the configuration is missing there will be an error
+  if (++iParam < argc) config.SetMainTesterParameterSetPath(argv[iParam]);
+  else                 config.AddDefaultTesterConfiguration("");
   
   // third argument: path of the parameter set for geometry configuration
   // (optional; default: "services.Geometry" from the inherited object)

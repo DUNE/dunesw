@@ -14,7 +14,7 @@
 
 // LArSoft libraries
 #include "test/Geometry/geometry_unit_test_dune.h"
-#include "test/Geometry/geometry_boost_unit_test_base.h"
+#include "test/Geometry/boost_unit_test_base.h"
 #include "test/Geometry/GeometryIteratorTestAlg.h"
 #include "Geometry/GeometryCore.h"
 #include "dune/Geometry/ChannelMapAPAAlg.h"
@@ -62,7 +62,7 @@ struct DUNEFDGeometryConfiguration:
  * interface is provided.
  */
 class DUNEFDGeometryIteratorTestFixture:
-  private testing::SharedGeometryTesterEnvironment<DUNEFDGeometryConfiguration>
+  private testing::GeometryTesterEnvironment<DUNEFDGeometryConfiguration>
 {
   using Tester_t = geo::GeometryIteratorTestAlg;
   
