@@ -16,7 +16,7 @@
 // LArSoft libraries
 #include "test/Geometry/geometry_unit_test_dune.h"
 #include "test/Geometry/GeometryIteratorLoopTestAlg.h"
-#include "larcore/Geometry/GeometryCore.h"
+#include "Geometry/GeometryCore.h"
 #include "dune/Geometry/ChannelMap35OptAlg.h"
 
 // utility libraries

@@ -25,15 +25,15 @@
 #include "TMath.h"
 
 // LArSoft includes
-#include "larcore/Geometry/Geometry.h"
-#include "larcore/Geometry/CryostatGeo.h"
-#include "larcore/Geometry/TPCGeo.h"
-#include "larcore/Geometry/PlaneGeo.h"
-#include "larcore/Geometry/WireGeo.h"
-#include "larcore/Geometry/OpDetGeo.h"
-#include "larcore/Geometry/AuxDetGeo.h"
-#include "larcore/Geometry/geo.h"
-#include "larcore/SimpleTypesAndConstants/geo_types.h"
+#include "Geometry/Geometry.h"
+#include "Geometry/CryostatGeo.h"
+#include "Geometry/TPCGeo.h"
+#include "Geometry/PlaneGeo.h"
+#include "Geometry/WireGeo.h"
+#include "Geometry/OpDetGeo.h"
+#include "Geometry/AuxDetGeo.h"
+#include "Geometry/geo.h"
+#include "SimpleTypesAndConstants/geo_types.h"
 
 // Framework includes
 #include "art/Framework/Core/ModuleMacros.h"

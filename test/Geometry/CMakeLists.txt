@@ -32,7 +32,7 @@ cet_test(geometry_dune35t HANDBUILT
 
 simple_plugin ( GeometryTest35 "module"
                      Geometry
-                     larcore_Geometry_Geometry_service
+                     Geometry_service
 		     ${ART_FRAMEWORK_CORE}
    		     ${ART_FRAMEWORK_PRINCIPAL}
 		     ${ART_FRAMEWORK_SERVICES_REGISTRY}
