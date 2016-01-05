@@ -1,0 +1,8 @@
+#include "standard_g4_dune35t.fcl"
+
+services.user.SeedService.policy: "preDefinedSeed"
+services.user.SeedService.baseSeed: 1234
+services.user.SeedService.largeant: 1234
+
+services.RandomNumberGenerator.restoreFrom: "G4RandomSeeds_Ref.dat"
+services.RandomNumberGenerator.saveTo: "G4RandomSeeds.dat"
