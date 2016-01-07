@@ -12,7 +12,7 @@
 #include "messagefacility/MessageLogger/MessageLogger.h"
 
 // lardata
-#include "RawData/RawDigit.h"
+#include "lardata/RawData/RawDigit.h"
 
 // C++
 #include <cassert>
