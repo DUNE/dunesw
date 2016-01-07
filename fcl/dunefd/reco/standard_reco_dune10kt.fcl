@@ -4,7 +4,7 @@
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
-#include "calorimetry_dune35t.fcl"
+#include "calorimetry_dune10kt.fcl"
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
 #include "opticaldetectormodules_dune.fcl"
@@ -58,9 +58,9 @@ physics:
   calodc:             @local::dune35t_calomc
   pandoradc:          @local::dune4apa_pandora
 # pandora stitching module goes here when it's ready
-  pandoracalodc:      @local::dune35t_calomc
+  pandoracalodc:      @local::dune10kt_calomc
   pmtrackdc:           @local::dunefd_pmalgtrackmaker
-  pmtrackcalodc:       @local::dune35t_calomc
+  pmtrackcalodc:       @local::dune10kt_calomc
 # actual disambiguation
   hitfd:             @local::dunefd_hitfinderfd
 # reconstruction using disambiguated hits
@@ -68,9 +68,9 @@ physics:
   calo:               @local::dune35t_calomc
   pandora:            @local::dune4apa_pandora
 # pandora stitching module goes here when it's ready
-  pandoracalo:        @local::dune35t_calomc
+  pandoracalo:        @local::dune10kt_calomc
   pmtrack:             @local::dunefd_pmalgtrackmaker
-  pmtrackcalo:         @local::dune35t_calomc
+  pmtrackcalo:         @local::dune10kt_calomc
 # photon detector reconstruction
   opflash:            @local::dune35t_opflash 
   trkshowersplit:     @local::standard_trackshowerhits
@@ -100,8 +100,9 @@ physics:
          trkshowersplitdc,
          #pandora with cheated disambiguation
          pandoradc, #pandora stitcher goes here
+         pandoracalodc,
          #pmatrack with cheated disambiguation
-         pmtrackdc,
+         pmtrackdc, pmtrackcalodc,
          #shower reconstruction
          blurredclusterdc, emshowerdc, emshower3ddc, mergeemshower3ddc,
          #real disambiguation
@@ -112,8 +113,9 @@ physics:
          trkshowersplit,
          #pandora
          pandora, #pandora stitcher goes here
+         pandoracalo,
          #pmatrack
-         pmtrack,
+         pmtrack, pmtrackcalo,
          #shower reconstruction
          blurredcluster, emshower, emshower3d, mergeemshower3d
          ]
@@ -160,8 +162,12 @@ physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
+physics.producers.pmtrackcalo.T0ModuleLabel:            ""
+physics.producers.pmtrackcalo.MakeTree:                 false
 physics.producers.pmtrackcalodc.TrackModuleLabel:       "pmtrackdc"
 physics.producers.pmtrackcalodc.SpacePointModuleLabel:  "pmtrackdc"
+physics.producers.pmtrackcalodc.T0ModuleLabel:            ""
+physics.producers.pmtrackcalodc.MakeTree:                 false
 
 physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
 physics.producers.calo.TrackModuleLabel:               "costrk"
@@ -170,13 +176,17 @@ physics.producers.calo.SpacePointModuleLabel:          "costrk"
 #physics.producers.kalmanhit.ClusterModuleLabel:        "fuzzy"
 
 #Pandora configurations
-physics.producers.pandoradc.HitFinderModuleLabel:           "dcheat"
+physics.producers.pandoradc.HitFinderModuleLabel:           "lineclusterdc"
 physics.producers.pandoracalodc.TrackModuleLabel:           "pandoradc"
 physics.producers.pandoracalodc.SpacePointModuleLabel:      "pandoradc"
+physics.producers.pandoracalodc.T0ModuleLabel:            ""
+physics.producers.pandoracalodc.MakeTree:                 false
 
-physics.producers.pandora.HitFinderModuleLabel:             "hitfd"
+physics.producers.pandora.HitFinderModuleLabel:             "linecluster"
 physics.producers.pandoracalo.TrackModuleLabel:             "pandora"
 physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
+physics.producers.pandoracalo.T0ModuleLabel:                ""
+physics.producers.pandoracalo.MakeTree:                     false
 
 #Optical detector configuration
 physics.producers.opflash.InputModule:                      "opdigi"
