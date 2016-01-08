@@ -27,6 +27,16 @@ table_fragment_begin
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/gdml)
     pathPrepend(FW_SEARCH_PATH, ${DUNE_PARDATA_DIR}/FieldResponse)
     pathPrepend(FHICL_FILE_PATH, .:./job)
+    envSet(DBIWSPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
+    envSet(DBIWSURL, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
+    envSet(DBIWSURLINT, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
+    envSet(DBIWSURLPUT, http://dbdata0vm.fnal.gov:8117/LBNE35tCon/app/)
+    envSet(DBIQEURL, http://dbdata0vm.fnal.gov:8122/QE/dune35t/prod/app/SQ/)
+    envSet(DBIHOST, ifdbprod.fnal.gov)
+    envSet(DBINAME, dune35t_prod)
+    envSet(DBIPORT, 5442)
+    envSet(DBIUSER, dune_reader)
+    envSet(DBIPWDFILE, ~jpaley/dune/db/proddbpwd)
 table_fragment_end
 
 
@@ -36,9 +46,9 @@ table_fragment_end
 
 product          version
 larsoft         v05_00_00_rc0
-artdaq_core	v1_04_21
-duneutil        v01_20_01	-	optional
-lbne_raw_data 	v1_03_12
+artdaq_core	v1_04_26
+duneutil        v01_20_03	-	optional
+lbne_raw_data 	v1_03_16
 dune_pardata	v01_06_00
 cetbuildtools	v4_17_03	-	only_for_build
 end_product_list
@@ -48,12 +58,12 @@ end_product_list
 # Make a table by adding columns before "notes". 
 # e9  - with gcc 4.9.3 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata	notes
-e9:debug	e9:debug	e9:debug	nu:e9:s21:debug	nu:e9:s21:debug	-nq-
-e9:opt		e9:opt		e9:opt		nu:e9:s21:opt	nu:e9:s21:prof	-nq-
-e9:prof		e9:prof		e9:prof		nu:e9:s21:prof	nu:e9:s21:prof	-nq-
-e9:noifdh:debug	e9:noifdh:debug	e9:debug	nu:e9:s21:debug	nu:e9:s21:debug	-nq-
-e9:noifdh:opt	e9:noifdh:opt	e9:opt		nu:e9:s21:opt	nu:e9:s21:prof	-nq-
-e9:noifdh:prof	e9:noifdh:prof	e9:prof		nu:e9:s21:prof	nu:e9:s21:prof	-nq-
+e9:debug	e9:debug	e9:debug	nu:e9:s26:debug	nu:e9:s26:debug	-nq-
+e9:opt		e9:opt		e9:opt		nu:e9:s26:opt	nu:e9:s26:prof	-nq-
+e9:prof		e9:prof		e9:prof		nu:e9:s26:prof	nu:e9:s26:prof	-nq-
+e9:noifdh:debug	e9:noifdh:debug	e9:debug	nu:e9:s26:debug	nu:e9:s26:debug	-nq-
+e9:noifdh:opt	e9:noifdh:opt	e9:opt		nu:e9:s26:opt	nu:e9:s26:prof	-nq-
+e9:noifdh:prof	e9:noifdh:prof	e9:prof		nu:e9:s26:prof	nu:e9:s26:prof	-nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
