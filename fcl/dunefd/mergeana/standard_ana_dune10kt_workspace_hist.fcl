@@ -2,5 +2,6 @@
 
 process_name: Mergeana
 
-outputs: {}
-physics.stream1: []
+#outputs: {}
+#physics.stream1: []
+physics.end_paths: [ana]
