@@ -1,4 +1,5 @@
 #include "geometry.fcl"
+#include "SSPToOffline.fcl"
 
 process: TEST
 
@@ -12,8 +13,7 @@ source:
    ticksPerEvent: 1000
    TPCInputTag : "daq:TPC:DAQ" 
    SSPInputTag : "daq:PHOTON:DAQ" 
-   NOvAClockFrequency : 64.0 # MHz
-   OpDetChannelMapFile : "ssp_channel_map_dune35t.txt"
+   SSPReformatter:      @local::ssp_reformatter
 }
 
 services: {  
