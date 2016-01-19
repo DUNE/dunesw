@@ -67,9 +67,11 @@ physics.analyzers.nuetree.TrackModuleLabel:  "pmtrack"
 physics.analyzers.nuetree.HitsModuleLabel:   "linecluster"
 physics.analyzers.nuetree.VertexModuleLabel: "linecluster"
 physics.analyzers.nuetree.ShowerModuleLabel: "emshower"
+physics.analyzers.nuetree.CalorimetryModuleLabel: "pmtrackcalo"                              
 
 ###   COSMIC TRACKER DISAMBIG CHEAT NUETREE
 physics.analyzers.nuetreedc.TrackModuleLabel:  "pmtrackdc"
 physics.analyzers.nuetreedc.HitsModuleLabel:   "lineclusterdc"
 physics.analyzers.nuetreedc.VertexModuleLabel: "lineclusterdc"
 physics.analyzers.nuetreedc.ShowerModuleLabel: "emshowerdc"
+physics.analyzers.nuetreedc.CalorimetryModuleLabel: "pmtrackcalodc"
