@@ -69,7 +69,7 @@ outputs:
 }
 
 services.Geometry: @local::dune10kt_workspace_geo
-physics.producers.generator.GeneratorAlg.MeanNumberOfNeutrinos: 2
+physics.producers.generator.GeneratorAlg.NumberOfNeutrinos: 2
 
 physics.producers.radiogen.T0: [ -2246000.0 ]
 physics.producers.radiogen.T1: [  2246000.0 ]
