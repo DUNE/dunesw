@@ -24,6 +24,7 @@ add_subdirectory(Gaps)
 add_subdirectory(TrackingAna)
 add_subdirectory(RunHistory)
 add_subdirectory(NearlineMonitor)
+add_subdirectory(ArtSupport)
 add_subdirectory(MuonCounters)
 add_subdirectory(HitAnalysis)
 
