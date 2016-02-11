@@ -31,8 +31,8 @@ cet_test(geometry_dune35t HANDBUILT
 
 
 simple_plugin ( GeometryTest35 "module"
-                     Geometry
-                     Geometry_service
+                     larcore_Geometry
+                     larcore_Geometry_Geometry_service
 		     ${ART_FRAMEWORK_CORE}
    		     ${ART_FRAMEWORK_PRINCIPAL}
 		     ${ART_FRAMEWORK_SERVICES_REGISTRY}
@@ -60,7 +60,7 @@ simple_plugin ( GeometryTest35 "module"
 # this uses BOOST for the test
 cet_test(geometry_iterator_dune35t_test
   SOURCES geometry_iterator_dune35t_test.cxx
-  LIBRARIES Geometry
+  LIBRARIES larcore_Geometry
             GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
@@ -74,7 +74,7 @@ cet_test(geometry_iterator_dune35t_test
 # this uses BOOST for the test
 cet_test(geometry_iterator_dunefd_test
   SOURCES geometry_iterator_dunefd_test.cxx
-  LIBRARIES Geometry
+  LIBRARIES larcore_Geometry
             GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
@@ -90,7 +90,7 @@ cet_test(geometry_dune35t_test
   SOURCES geometry_dune35t_test.cxx
   DATAFILES test_geometry_dune35t.fcl
   TEST_ARGS ./test_geometry_dune35t.fcl
-  LIBRARIES Geometry
+  LIBRARIES larcore_Geometry
             GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
@@ -104,7 +104,7 @@ cet_test(geometry_dunefd_test
   SOURCES geometry_dunefd_test.cxx
   DATAFILES test_geometry_dunefd.fcl
   TEST_ARGS ./test_geometry_dunefd.fcl
-  LIBRARIES Geometry
+  LIBRARIES larcore_Geometry
             GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
@@ -117,7 +117,7 @@ cet_test(geometry_dunefd_test
 # unit test (use the hard-coded configuration for DUNE 35t "optimized" geometry)
 cet_test(geometry_iterator_loop_dune35t_test
   SOURCES geometry_iterator_loop_dune35t_test.cxx
-  LIBRARIES Geometry
+  LIBRARIES larcore_Geometry
             GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
@@ -129,7 +129,7 @@ cet_test(geometry_iterator_loop_dune35t_test
 # unit test (use the hard-coded configuration for DUNE Far Detector geometry)
 cet_test(geometry_iterator_loop_dunefd_test
   SOURCES geometry_iterator_loop_dunefd_test.cxx
-  LIBRARIES Geometry
+  LIBRARIES larcore_Geometry
             GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
