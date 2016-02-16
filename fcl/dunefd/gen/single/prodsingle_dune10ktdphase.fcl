@@ -20,7 +20,7 @@ services.user.Geometry: @local::dunedphase10kt_workspace_geo
 
 # map over detsim services
 services.ChannelNoiseService:     @local::chnoiseold
-services.IDetPedestalService:     @local::peddplegacy
+services.DetPedestalService:     @local::peddplegacy
 services.PedestalAdditionService: @local::padprovided
 services.AdcSuppressService:      @local::zsonline
 services.AdcCompressService:      @local::cmpreplace
