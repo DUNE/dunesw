@@ -7,6 +7,7 @@ add_subdirectory(PhotonPropagation)
 add_subdirectory(OpticalDetector)  
 add_subdirectory(DetSim)
 add_subdirectory(EventGenerator)
+add_subdirectory(Daq)
 add_subdirectory(CalData)
 add_subdirectory(RawdataDisplay)
 add_subdirectory(EnergyStudies)
@@ -26,6 +27,9 @@ add_subdirectory(RunHistory)
 add_subdirectory(NearlineMonitor)
 add_subdirectory(ArtSupport)
 add_subdirectory(MuonCounters)
+add_subdirectory(MuonCounterTimes)
+add_subdirectory(HitAnalysis)
+add_subdirectory(EventFilters)
 
 # Respect the order specified in lar_build, which is:
 #
