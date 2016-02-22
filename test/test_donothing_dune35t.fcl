@@ -16,7 +16,7 @@ services: {
   RandomNumberGenerator: {}
   user:                  @local::dune35t_services
 } # services
-#services.user.IDetPedestalService.DetPedestalDUNE.UseDB: true
+#services.user.DetPedestalService.DetPedestalDUNE.UseDB: true
 
 source: {
   module_type: EmptyEvent

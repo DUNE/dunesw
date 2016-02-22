@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
-parent dunetpc v04_36_01
+parent dunetpc v05_01_00
 defaultqual e9
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -45,9 +45,9 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v04_36_01
+larsoft         v05_01_00
 artdaq_core	v1_04_28
-duneutil        v01_20_07	-	optional
+duneutil        v01_20_08	-	optional
 lbne_raw_data 	v1_03_19
 dune_pardata	v01_06_00
 cetbuildtools	v4_18_02	-	only_for_build
@@ -61,9 +61,6 @@ qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata	notes
 e9:debug	e9:debug	e9:debug	nu:e9:s30:debug	nu:e9:s30:debug	-nq-
 e9:opt		e9:opt		e9:opt		nu:e9:s30:opt	nu:e9:s30:prof	-nq-
 e9:prof		e9:prof		e9:prof		nu:e9:s30:prof	nu:e9:s30:prof	-nq-
-e9:noifdh:debug	e9:noifdh:debug	e9:debug	nu:e9:s30:debug	nu:e9:s30:debug	-nq-
-e9:noifdh:opt	e9:noifdh:opt	e9:opt		nu:e9:s30:opt	nu:e9:s30:prof	-nq-
-e9:noifdh:prof	e9:noifdh:prof	e9:prof		nu:e9:s30:prof	nu:e9:s30:prof	-nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:

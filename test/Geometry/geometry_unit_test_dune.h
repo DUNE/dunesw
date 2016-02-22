@@ -67,17 +67,13 @@ namespace dune {
           // overwrite the configuration that happened in the base class:
           base_t::SetApplicationName("DUNE35tGeometryTest");
           base_t::SetDefaultGeometryConfiguration(R"(
-              services: {
-                Geometry: {
-                  Name:     "dune35t"
-                  GDML:     "dune35t4apa_v5.gdml"
-                  ROOT:     "dune35t4apa_v5.gdml"
-                  SortingParameters: {
-                    DetectorVersion: "dune35t4apa_v5" 
-                  } 
-                  SurfaceY:  0.0e2 # in cm, vertical distance to the surface
-                } # Geometry
-              } # services
+              Name:     "dune35t"
+              GDML:     "dune35t4apa_v5.gdml"
+              ROOT:     "dune35t4apa_v5.gdml"
+              SortingParameters: {
+                DetectorVersion: "dune35t4apa_v5" 
+              } 
+              SurfaceY:  0.0e2 # in cm, vertical distance to the surface
             )");
         } // DUNE35tGeometryEnvironmentConfiguration()
       
@@ -114,16 +110,12 @@ namespace dune {
           // overwrite the configuration that happened in the base class:
           base_t::SetApplicationName("DUNEFDGeometryTest");
           base_t::SetDefaultGeometryConfiguration(R"(
-              services: {
-                Geometry: {
-                  Name:     "dune10kt"
-                  GDML:     "dune10kt_v1_workspace.gdml"
-                  ROOT:     "dune10kt_v1_workspace.gdml"
-                  SurfaceY:  0.0e2  # in cm, vertical distance to the surface
-                 # SurfaceY: 147828 # Underground option. 4850 feet to cm. from DocDb-3833
-                  SortingParameters: {}
-                } # Geometry
-              } # services
+              Name:     "dune10kt"
+              GDML:     "dune10kt_v1_workspace.gdml"
+              ROOT:     "dune10kt_v1_workspace.gdml"
+              SurfaceY:  0.0e2  # in cm, vertical distance to the surface
+             # SurfaceY: 147828 # Underground option. 4850 feet to cm. from DocDb-3833
+              SortingParameters: {}
             )");
         } // DUNEFDGeometryEnvironmentConfiguration()
       

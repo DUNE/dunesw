@@ -7,6 +7,7 @@ add_subdirectory(PhotonPropagation)
 add_subdirectory(OpticalDetector)  
 add_subdirectory(DetSim)
 add_subdirectory(EventGenerator)
+add_subdirectory(Daq)
 add_subdirectory(CalData)
 add_subdirectory(RawdataDisplay)
 add_subdirectory(EnergyStudies)
@@ -28,43 +29,43 @@ add_subdirectory(ArtSupport)
 add_subdirectory(MuonCounters)
 add_subdirectory(MuonCounterTimes)
 add_subdirectory(HitAnalysis)
+add_subdirectory(EventFilters)
 
 # Respect the order specified in lar_build, which is:
 #
 #     "SoftRelTools",
 #     "SRT_LAR",
 #     "SimpleTypesAndConstants",
-#     "Geometry",
-#     "SummaryData",
-#     "RawData",
-#     "RecoBase",
-#     "OpticalDetectorData",
-#     "AnalysisBase",
-#     "Utilities",
-#     "Simulation",
-#     "MCCheater",
-#     "AnalysisAlg",
-#     "RecoObjects",
-#     "RecoAlg",
-#     "LArG4",
-#     "PhotonPropagation",
-#     "DetSim",
-#     "EventGenerator",
-#     "Filters",
+#     "larcore_Geometry",
+#     "larcore_SummaryData",
+#     "lardata_RawData",
+#     "lardata_RecoBase",
+#     "lardata_OpticalDetectorData",
+#     "lardata_AnalysisBase",
+#     "lardata_Utilities",
+#     "larsim_Simulation",
+#     "larsim_MCCheater",
+#     "lardata_AnalysisAlg",
+#     "lardata_RecoObjects",
+#     "larreco_RecoAlg",
+#     "larsim_LArG4",
+#     "larsim_PhotonPropagation",
+#     "larsim_DetSim",
+#     "larsim_EventGenerator",
+#     "larevt_Filters",
 #     "CalData",
-#     "ClusterFinder",
-#     "Genfit",
-#     "HitFinder",
-#     "TrackFinder",
-#     "VertexFinder",
-#     "EventFinder",
-#     "TriggerAlgo",
-#     "OpticalDetector",
-#     "Calorimetry", 
-#     "ShowerFinder",
-#     "EventDisplay",
-#     "ParticleIdentification",
-#     "AnalysisExample",
+#     "larreco_ClusterFinder",
+#     "larreco_Genfit",
+#     "larreco_HitFinder",
+#     "larreco_TrackFinder",
+#     "larreco_VertexFinder",
+#     "larreco_EventFinder",
+#     "larsim_TriggerAlgo",
+#     "larana_OpticalDetector",
+#     "larana_Calorimetry", 
+#     "larreco_ShowerFinder",
+#     "lareventdisplay_EventDisplay",
+#     "larana_ParticleIdentification",
+#     "larexamples_AnalysisExample",
 #     "LArPandoraAlgorithms",
-#     "LArPandoraInterface"
-
+#     "larpandora_LArPandoraInterface"
