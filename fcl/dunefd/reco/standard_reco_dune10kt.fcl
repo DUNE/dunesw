@@ -72,6 +72,7 @@ physics:
   pmtrack:             @local::dunefd_pmalgtrackmaker
   pmtrackcalo:         @local::dune10kt_calomc
 # photon detector reconstruction
+  ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
   trkshowersplit:     @local::standard_trackshowerhits
   trkshowersplitdc:   @local::standard_trackshowerhits
@@ -88,8 +89,8 @@ physics:
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, 
-         #optical flashes
-         opflash,
+         #optical hits and flashes
+         ophit, opflash,
          #TPC wire signals      
          caldata,
          #hit reco with cheated disambiguation
@@ -189,7 +190,8 @@ physics.producers.pandoracalo.T0ModuleLabel:                ""
 physics.producers.pandoracalo.MakeTree:                     false
 
 #Optical detector configuration
-physics.producers.opflash.InputModule:                      "opdigi"
+physics.producers.ophit.InputModule:                        "opdigi"
+physics.producers.opflash.InputModule:                      "ophit"
 
 #shower configuration
 physics.producers.blurredclusterdc.HitsModuleLabel: "lineclusterdc"

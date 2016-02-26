@@ -91,6 +91,7 @@ physics:
   mctrutht0pmtrackdc:  @local::dune35t_mctrutht0matching
   t0counter:          @local::dune35t_t0counter
 # photon detector reconstruction
+  ophit:              @local::dune35t_ophit
   opflash:            @local::dune35t_opflash
 
   emhits:       @local::dune35t_emlikehits
@@ -99,7 +100,7 @@ physics:
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, 
-         opflash, t0counter, caldata, 
+         ophit, opflash, t0counter, caldata, 
          gaushit, dcheat, lineclusterdc,
          pmtrackdc, emhits
  ]
@@ -216,7 +217,8 @@ physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
 physics.producers.pandoracalo.T0ModuleLabel:                "mctrutht0dcpandora"
 
 #Optical detector configuration
-physics.producers.opflash.InputModule:                      "opdigi"
+physics.producers.ophit.InputModule:                        "opdigi"
+physics.producers.opflash.InputModule:                      "ophit"
 
 #physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
 #physics.producers.lineclusterdc.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
