@@ -30,6 +30,8 @@ add_subdirectory(MuonCounters)
 add_subdirectory(MuonCounterTimes)
 add_subdirectory(HitAnalysis)
 add_subdirectory(EventFilters)
+add_subdirectory(ClusterFinderDUNE)
+add_subdirectory(RecoAlgDUNE)
 
 # Respect the order specified in lar_build, which is:
 #
