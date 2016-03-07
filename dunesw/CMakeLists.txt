@@ -1,4 +1,5 @@
 add_subdirectory(DuneInterface)
+add_subdirectory(DuneCommon)
 add_subdirectory(Geometry)
 add_subdirectory(Utilities)
 add_subdirectory(Simulation)
