@@ -45,10 +45,10 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v05_01_01
+larsoft         v05_01_02
 artdaq_core	v1_04_28
-duneutil        v01_20_09	-	optional
-lbne_raw_data 	v1_03_21
+duneutil        v01_20_10	-	optional
+lbne_raw_data 	v1_03_22
 dune_pardata	v01_07_00
 cetbuildtools	v4_18_03	-	only_for_build
 end_product_list
