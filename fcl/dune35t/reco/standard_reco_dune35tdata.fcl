@@ -45,9 +45,9 @@ physics:
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
 # noise filter
-  filterwf:           @local::dune35t_filterwf
+  unstick:            @local::dune35t_unstick
 # unstuck code
-  daq:                @local::dune35t_unstick
+  daq:                @local::dune35t_filterwf
 # convert raw::RawDigit to recob::wire
   caldata:            @local::dune35t_calwire
 # cheater reconstruction
@@ -124,10 +124,10 @@ physics:
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, filterwf, daq
+ reco: [ rns, unstick, daq
          #flash, counter, TPC wire signals
          #opflash, t0counter, 
-         #caldata
+#         caldata
          #cheater reco
          #hitcheat, clustercheat, trackcheat,
          #hit reco with cheated disambiguation
@@ -182,7 +182,9 @@ outputs:
  }
 }
 ### Here, we overwrite ALL module labels with the ones defined above.
-physics.producers.daq.DigitModuleLabel:                "filterwf"
+physics.producers.unstick.DigitModuleLabel:            "SplitterInput:TPC"
+physics.producers.daq.DigitModuleLabel:                "unstick:TPC"
+physics.producers.daq.SkipStuckCodes:                  false
 physics.producers.caldata.DigitModuleLabel:            "daq"
 #physics.producers.caldata.DoBaselineSub:               true
 
@@ -331,3 +333,6 @@ services.user.SignalShapingServiceDUNE35t.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-
 services.user.SignalShapingServiceDUNE35t.IndUFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
 services.user.SignalShapingServiceDUNE35t.IndVFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
 services.user.SignalShapingServiceDUNE35t.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.55 ], [ 1.12, 0.86, 6.0, 0.55 ], [ 0.89, 0.66, 4.8, 0.43 ]]
+#services.user.SignalShapingServiceDUNE35t.DebugFieldShape: true
+services.user.SignalShapingServiceDUNE35t.ASICGainInMVPerFC: [14, 14, 14]
+services.user.SignalShapingServiceDUNE35t.ShapeTimeConst: [3, 3, 3]
