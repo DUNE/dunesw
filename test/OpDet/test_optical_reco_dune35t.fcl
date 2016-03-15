@@ -45,6 +45,7 @@ physics:
    generator: @local::dune35t_singlep
    largeant:  @local::dune35t_largeant	  
    opdigi:    @local::dune35t_opdigi    # simple digitizer with no noise and high saturation
+   ophit:     @local::dune35t_ophit   
    opflash:   @local::dune35t_opflash   
    rns:       { module_type: "RandomNumberSaver" }
  }
@@ -56,7 +57,7 @@ physics:
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- simulate: [ generator, largeant, opdigi, opflash, rns ] 
+ simulate: [ generator, largeant, opdigi, ophit, opflash, rns ] 
  analyzeIt:  [ ]
  
  #define the output stream, there could be more than one if using filters 
