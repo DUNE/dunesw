@@ -107,6 +107,7 @@ physics:
 # Muon Counter T0
   t0counter:          @local::dune35t_t0counter
 # photon detector reconstruction
+  ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
 # track shower splitter
   trkshowersplit:     @local::standard_trackshowerhits
@@ -125,35 +126,22 @@ physics:
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, unstick, daq
-         #flash, counter, TPC wire signals
-         #opflash, t0counter, 
-#         caldata
-         #cheater reco
-         #hitcheat, clustercheat, trackcheat,
+         #optical hit reco, flash, counter, TPC wire signals
+         #ophit, opflash, t0counter, 
+         ,caldata
          #hit reco with cheated disambiguation
-         #gaushit #, dcheat, fasthit, 
-         #cluster reco with cheated disambiguation
-         #dbclusterdc, lineclusterdc,
-         #3D reco with cheated disambiguation
-         #costrkdc, mctrutht0dc, photont0costrkdc, calodc, 
-         #pandora with cheated disambiguation
-         #pandoradc, particlestitcherdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
-         #pmatrack with cheated disambiguation
-         #pmtrackdc, mctrutht0pmtrackdc, photont0pmtrackdc, pmtrackcalodc,
-         #shower reconstruction
-         #blurredclusterdc, emshowerdc, emshower3ddc, mergeemshower3ddc,
+         ,gaushit #, fasthit
          #real disambiguation
-         #hit35t,
+         , hit35t
          #cluster reco
-         #dbcluster, linecluster,
-         #3D reco
-         #costrk,  mctrutht0, photont0costrk, calo,
+         #, dbcluster
+	 #, linecluster
          #pandora
-         #pandora, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo,
+         #, pandora, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo
          #pmatrack
-         #pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo,
-         #shower reconstruction
-         #blurredcluster, emshower, emshower3d, mergeemshower3d
+         #, pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo
+	 #shower reconstruction
+	 #, blurredcluster, emshower, emshower3d, mergeemshower3d
 ]
 
  #define the output stream, there could be more than one if using filters 
@@ -188,9 +176,9 @@ physics.producers.daq.SkipStuckCodes:                  false
 physics.producers.caldata.DigitModuleLabel:            "daq"
 #physics.producers.caldata.DoBaselineSub:               true
 
-physics.producers.gaushit.CalDataModuleLabel:          "caldata:TPC"
-physics.producers.gaushit.MinSig:                      [100,100,100]
-physics.producers.gaushit.MinWidth:                    [5,5,5]
+physics.producers.gaushit.CalDataModuleLabel:          "caldata"
+#physics.producers.gaushit.MinSig:                      [100,100,100]
+#physics.producers.gaushit.MinWidth:                    [5,5,5]
 physics.producers.clustercheat.HitModuleLabel:         "hitcheat"
 physics.producers.trackcheat.CheatedClusterLabel:      "clustercheat"
 physics.producers.fasthitdc.ChanHitLabel:              "fasthit"
@@ -278,7 +266,8 @@ physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
 physics.producers.pandoracalo.T0ModuleLabel:                "photont0pandora"
 
 #Optical detector configuration
-physics.producers.opflash.InputModule:                      "opdigi"
+physics.producers.ophit.InputModule:                        "opdigi"
+physics.producers.opflash.InputModule:                      "ophit"
 
 #physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
 #physics.producers.lineclusterdc.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
@@ -329,10 +318,29 @@ physics.producers.mergeemshower3d.WideConeAngle: 20
 
 services.user.DetectorPropertiesService.NumberTimeSamples: 6000
 services.user.DetectorPropertiesService.ReadOutWindowSize: 6000
-services.user.SignalShapingServiceDUNE35t.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
-services.user.SignalShapingServiceDUNE35t.IndUFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
-services.user.SignalShapingServiceDUNE35t.IndVFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
-services.user.SignalShapingServiceDUNE35t.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.55 ], [ 1.12, 0.86, 6.0, 0.55 ], [ 0.89, 0.66, 4.8, 0.43 ]]
+
 #services.user.SignalShapingServiceDUNE35t.DebugFieldShape: true
 services.user.SignalShapingServiceDUNE35t.ASICGainInMVPerFC: [14, 14, 14]
 services.user.SignalShapingServiceDUNE35t.ShapeTimeConst: [3, 3, 3]
+
+services.user.SignalShapingServiceDUNE35t.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.55 ],
+							  [ 1.12, 0.86, 6.0, 0.55 ],
+							  [ 0.89, 0.66, 4.8, 0.43 ]]
+
+##############   The standard parameters -----------------------
+#services.user.SignalShapingServiceDUNE35t.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
+#services.user.SignalShapingServiceDUNE35t.IndUFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
+#services.user.SignalShapingServiceDUNE35t.IndVFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
+
+##############   My new  parameters -----------------------
+
+services.user.SignalShapingServiceDUNE35t.ColFilter:       "(x>0.0)*[0]*(1-1/(1+exp(-(x-[1])/[2])))"
+services.user.SignalShapingServiceDUNE35t.ColFilterParams: [ 1, 0.150, 0.025 ]
+
+services.user.SignalShapingServiceDUNE35t.IndUFilter:       "(x>0.)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
+services.user.SignalShapingServiceDUNE35t.IndUFilterParams: [ 1.0, 0.105, 0.019, 0.018, 0.010 ]
+services.user.SignalShapingServiceDUNE35t.IndVFilter:       "(x>0.)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
+services.user.SignalShapingServiceDUNE35t.IndVFilterParams: [ 0.95, 0.125, 0.019, 0.010, 0.0109 ]
+
+physics.producers.gaushit.MinSig:   [ 8  ,8  , 10  ]
+physics.producers.gaushit.MinWidth: [ 2.5, 2.5, 2.5 ]
