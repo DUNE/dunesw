@@ -67,8 +67,7 @@ outputs:
 }
 
 # Use defaults instead of DB for pedestals.
-services.user.DetPedestalService.DetPedestalDUNE.UseDB:        false
-services.user.DetPedestalService.DetPedestalDUNE.UseDefaults:   true
+services.user.DetPedestalService: @local::dune_fixedpeds
 
 # DetSim services.
 services.SimChannelExtractService: @local::scxgeneric
