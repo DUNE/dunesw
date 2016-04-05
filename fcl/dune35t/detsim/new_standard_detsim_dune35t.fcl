@@ -66,12 +66,14 @@ outputs:
  }
 }
 
+# Use defaults instead of DB for pedestals.
+services.user.DetPedestalService: @local::dune_fixedpeds
+
 # DetSim services.
 services.SimChannelExtractService: @local::scxgeneric
 services.ChannelNoiseService:      @local::chnoiseold
-services.IDetPedestalService:      @local::pedlegacy
 services.PedestalAdditionService:  @local::padprovided
-services.AdcSuppressService:       @local::zsonline
+services.AdcSuppressService:       @local::zsnone
 services.AdcCompressService:       @local::cmpblock
 services.AdcDistortService:        @local::stuckbits
 
