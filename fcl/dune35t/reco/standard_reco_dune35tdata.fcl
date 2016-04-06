@@ -329,8 +329,8 @@ services.user.SignalShapingServiceDUNE35t.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.5
 
 ##############   The standard parameters -----------------------
 #services.user.SignalShapingServiceDUNE35t.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
-#services.user.SignalShapingServiceDUNE35t.IndUFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
-#services.user.SignalShapingServiceDUNE35t.IndVFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
+#services.user.SignalShapingServiceDUNE35t.IndUFilter: "(x>0.0)*gaus(0)*exp(-0.5*pow(x/[3],[4]))"
+#services.user.SignalShapingServiceDUNE35t.IndVFilter: "(x>0.0)*gaus(0)*exp(-0.5*pow(x/[3],[4]))"
 
 ##############   My new  parameters -----------------------
 
