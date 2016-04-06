@@ -48,7 +48,7 @@ product          version
 larsoft         v05_06_00
 artdaq_core	v1_04_28
 duneutil        v01_20_13	-	optional
-lbne_raw_data 	v1_03_22
+lbne_raw_data 	v1_03_23
 dune_pardata	v01_07_00
 cetbuildtools	v4_19_04	-	only_for_build
 end_product_list
@@ -58,9 +58,9 @@ end_product_list
 # Make a table by adding columns before "notes". 
 # e9  - with gcc 4.9.3 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata	notes
-e9:debug	e9:debug	e9:debug	nu:e9:s30:debug	nu:e9:s30:debug	-nq-
-e9:opt		e9:opt		e9:opt		nu:e9:s30:opt	nu:e9:s30:prof	-nq-
-e9:prof		e9:prof		e9:prof		nu:e9:s30:prof	nu:e9:s30:prof	-nq-
+e9:debug	e9:debug	e9:debug	nu:e9:s31:debug	nu:e9:s31:debug	-nq-
+e9:opt		e9:opt		e9:opt		nu:e9:s31:opt	nu:e9:s31:prof	-nq-
+e9:prof		e9:prof		e9:prof		nu:e9:s31:prof	nu:e9:s31:prof	-nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
