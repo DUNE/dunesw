@@ -73,9 +73,9 @@ services.user.DetPedestalService: @local::dune_fixedpeds
 services.SimChannelExtractService: @local::scxgeneric
 services.ChannelNoiseService:      @local::chnoiseold
 services.PedestalAdditionService:  @local::padprovided
-services.AdcSuppressService:       @local::zsnone
-services.AdcCompressService:       @local::cmpblock
+services.AdcSuppressService:       @local::zslegacy
 services.AdcDistortService:        @local::stuckbits
+services.AdcCompressService:       @local::cmpblock
 
 # DetSim flags.
 physics.producers.daq.NoiseOn:     true
