@@ -30,7 +30,7 @@ physics:
 
  producers:
  {
-   daq:            @local::dune_detsim
+   daq:            @local::dune35t_simwire
    simcounter:     @local::dune35t_simcounter
    opdigi:         @local::dune35t_opdigi
    rns:            { module_type: "RandomNumberSaver" }
@@ -65,24 +65,4 @@ outputs:
    compressionLevel: 1
  }
 }
-
-# Use defaults instead of DB for pedestals.
-services.user.DetPedestalService: @local::dune_fixedpeds
-
-# DetSim services.
-services.SimChannelExtractService: @local::scxgeneric
-services.ChannelNoiseService:      @local::chnoiseold
-services.PedestalAdditionService:  @local::padprovided
-services.AdcSuppressService:       @local::zsnone
-services.AdcCompressService:       @local::cmpblock
-services.AdcDistortService:        @local::stuckbits
-
-# DetSim flags.
-physics.producers.daq.NoiseOn:     true
-physics.producers.daq.PedestalOn:  true
-physics.producers.daq.SuppressOn:  true
-physics.producers.daq.DistortOn:   false
-
-# Disable bad channels.
-#services.IChannelStatusService.BadChannels: [ ]
 
