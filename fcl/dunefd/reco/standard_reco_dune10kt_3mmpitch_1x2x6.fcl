@@ -7,6 +7,6 @@ services.SignalShapingServiceDUNE10kt.InputFieldRespSamplingPeriod: 20.
 services.SignalShapingServiceDUNE10kt.FieldResponseTOffset: [-13.9e3, -13.9e3, -13.9e3]
 services.SignalShapingServiceDUNE10kt.ASICGainInMVPerFC: [28, 28, 28]
 physics.producers.caldata.SigThrFact: 2.
-physics.producers.gaushit.MinSig: [4, 4, 4]
+physics.producers.gaushit.MinSig: [2.5, 2.5, 2.5]
 #physics.producers.gaushit.InitWidth: [2.5, 2.5, 2.5]
 
