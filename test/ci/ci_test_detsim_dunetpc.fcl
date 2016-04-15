@@ -1,9 +1,9 @@
 #include "standard_detsim_dune35t.fcl"
 
-services.user.SeedService.policy: "preDefinedSeed"
-services.user.SeedService.baseSeed: 1234
-services.user.SeedService.daq: 1234
-services.user.SeedService.simcounter.rand: 1234
+services.SeedService.policy: "preDefinedSeed"
+services.SeedService.baseSeed: 1234
+services.SeedService.daq: 1234
+services.SeedService.simcounter.rand: 1234
 
 services.RandomNumberGenerator.restoreFrom: "DetSimRandomSeeds_Ref.dat"
 services.RandomNumberGenerator.saveTo: "DetSimRandomSeeds.dat"
