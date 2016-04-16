@@ -19,8 +19,8 @@ services:
 source:
 {
   module_type: RootInput
-  maxEvents: 10000
-  fileNames: ["/lbne/data/users/etw/protoDUNE/g4single_protoDUNE.root"]
+  maxEvents: 30000
+  fileNames: ["g4single_protoDUNE.root"]
 }
 
 # Define and configure some modules to do work on each event.

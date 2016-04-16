@@ -20,7 +20,7 @@ services:
 source:
 {
   module_type: RootInput
-  maxEvents: 10000
+  maxEvents: 30000
   fileNames: ["gensingle_protoDUNE.root"]
 }
 
