@@ -63,6 +63,7 @@ physics:
 # pandora stitching module goes here when it's ready
   pandoracalodc:      @local::dune10kt_calomc
   pmtrackdc:           @local::dunefd_pmalgtrackmaker
+  pmtrackpfpdc:           @local::dunefd_pmalgtrackmaker
   pmtrackcalodc:       @local::dune10kt_calomc
 # actual disambiguation
   hitfd:             @local::dunefd_hitfinderfd
@@ -73,6 +74,7 @@ physics:
 # pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune10kt_calomc
   pmtrack:             @local::dunefd_pmalgtrackmaker
+  pmtrackpfp:           @local::dunefd_pmalgtrackmaker
   pmtrackcalo:         @local::dune10kt_calomc
 # photon detector reconstruction
   ophit:              @local::dune35t_ophit 
@@ -243,6 +245,22 @@ physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.WideConeAngle: 20
 
 #Updates for MCC6
+physics.producers.pmtrack.HitModuleLabel: linecluster
+physics.producers.pmtrack.ClusterModuleLabel: linecluster 
+physics.producers.pmtrack.CluMatchingAlg: 1 
+physics.producers.pmtrack.RunVertexing: true 
+physics.producers.pmtrack.FlipToBeam: true 
+physics.producers.pmtrack.MakePFPs: true
+
+physics.producers.pmtrackpfp.HitModuleLabel: linecluster 
+physics.producers.pmtrackpfp.ClusterModuleLabel: pandora 
+physics.producers.pmtrackpfp.CluMatchingAlg: 3 
+physics.producers.pmtrackpfp.TrackingSkipPdg: [0] 
+physics.producers.pmtrackpfp.RunVertexing: true 
+physics.producers.pmtrackpfp.FlipToBeam: true  
+physics.producers.pmtrackpfp.MakePFPs: true 
+
+
 physics.producers.pmtrackdc.HitModuleLabel: lineclusterdc 
 physics.producers.pmtrackdc.ClusterModuleLabel: lineclusterdc 
 physics.producers.pmtrackdc.CluMatchingAlg: 1 
@@ -257,3 +275,4 @@ physics.producers.pmtrackpfpdc.TrackingSkipPdg: [0]
 physics.producers.pmtrackpfpdc.RunVertexing: true 
 physics.producers.pmtrackpfpdc.FlipToBeam: true  
 physics.producers.pmtrackpfpdc.MakePFPs: true 
+
