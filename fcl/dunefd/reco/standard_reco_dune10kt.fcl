@@ -31,6 +31,7 @@ source:
 {
   module_type: RootInput
   maxEvents:  10        # Number of events to create
+  saveMemoryObjectThreshold: 0
 }
 
 # Define and configure some modules to do work on each event.
@@ -149,6 +150,7 @@ outputs:
    fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
    compressionLevel: 1
+   saveMemoryObjectThreshold: 0
  }
 }
 ### Here, we overwrite ALL module labels with the ones defined above.
