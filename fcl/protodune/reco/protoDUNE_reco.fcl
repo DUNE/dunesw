@@ -63,8 +63,9 @@ physics:
 # pandora stitching module goes here when it's ready
   pandoracalodc:      @local::dune10kt_calomc
   pmtrackdc:           @local::dunefd_pmalgtrackmaker
-  pmtrackpfpdc:           @local::dunefd_pmalgtrackmaker
   pmtrackcalodc:       @local::dune10kt_calomc
+  pmtrackpfpdc:           @local::dunefd_pmalgtrackmaker
+  pmtrackpfpcalodc:    @local::dune10kt_calomc
 # actual disambiguation
   hitfd:             @local::dunefd_hitfinderfd
 # reconstruction using disambiguated hits
@@ -74,8 +75,9 @@ physics:
 # pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune10kt_calomc
   pmtrack:             @local::dunefd_pmalgtrackmaker
-  pmtrackpfp:           @local::dunefd_pmalgtrackmaker
   pmtrackcalo:         @local::dune10kt_calomc
+  pmtrackpfp:           @local::dunefd_pmalgtrackmaker
+  pmtrackpfpcalo:      @local::dune10kt_calomc
 # photon detector reconstruction
   ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
@@ -108,7 +110,7 @@ physics:
          pandoradc, #pandora stitcher goes here
          pandoracalodc,
          #pmatrack with cheated disambiguation
-         pmtrackdc, pmtrackcalodc,
+         pmtrackdc, pmtrackcalodc, pmtrackpfpdc, pmtrackpfpcalodc,
          #shower reconstruction
          #blurredclusterdc, emshowerdc, emshower3ddc, mergeemshower3ddc,
          #real disambiguation
@@ -121,7 +123,7 @@ physics:
          pandora, #pandora stitcher goes here
          pandoracalo,
          #pmatrack
-         pmtrack, pmtrackcalo
+         pmtrack, pmtrackcalo, pmtrackpfp, pmtrackpfpcalo
          #shower reconstruction
          #blurredcluster, emshower, emshower3d, mergeemshower3d
          ]
@@ -146,7 +148,7 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "reco_protoDUNE.root"
+   fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
    compressionLevel: 1
  }
@@ -163,9 +165,33 @@ physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
 
 physics.producers.pmtrackdc.HitModuleLabel:             "trkshowersplitdc"
 physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
+physics.producers.pmtrackdc.CluMatchingAlg:             1
+physics.producers.pmtrackdc.RunVertexing:               true
+physics.producers.pmtrackdc.FlipToBeam:                 true
+physics.producers.pmtrackdc.MakePFPs:                   true
 
-physics.producers.pmtrack.HitModuleLabel:             "trkshowersplit"
-physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
+physics.producers.pmtrack.HitModuleLabel:               "trkshowersplit"
+physics.producers.pmtrack.ClusterModuleLabel:           "linecluster"
+physics.producers.pmtrack.CluMatchingAlg:               1
+physics.producers.pmtrack.RunVertexing:                 true
+physics.producers.pmtrack.FlipToBeam:                   true
+physics.producers.pmtrack.MakePFPs:                     true
+
+physics.producers.pmtrackpfpdc.HitModuleLabel:             "lineclusterdc"
+physics.producers.pmtrackpfpdc.ClusterModuleLabel:         "pandoradc"
+physics.producers.pmtrackpfpdc.CluMatchingAlg:             3
+physics.producers.pmtrackpfpdc.TrackingSkipPdg:            [0]
+physics.producers.pmtrackpfpdc.RunVertexing:               true
+physics.producers.pmtrackpfpdc.FlipToBeam:                 true
+physics.producers.pmtrackpfpdc.MakePFPs:                   true
+
+physics.producers.pmtrackpfp.HitModuleLabel:               "linecluster"
+physics.producers.pmtrackpfp.ClusterModuleLabel:           "pandora"
+physics.producers.pmtrackpfp.CluMatchingAlg:               3
+physics.producers.pmtrackpfp.TrackingSkipPdg:              [0]
+physics.producers.pmtrackpfp.RunVertexing:                 true
+physics.producers.pmtrackpfp.FlipToBeam:                   true
+physics.producers.pmtrackpfp.MakePFPs:                     true
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
@@ -173,8 +199,17 @@ physics.producers.pmtrackcalo.T0ModuleLabel:            ""
 physics.producers.pmtrackcalo.MakeTree:                 false
 physics.producers.pmtrackcalodc.TrackModuleLabel:       "pmtrackdc"
 physics.producers.pmtrackcalodc.SpacePointModuleLabel:  "pmtrackdc"
-physics.producers.pmtrackcalodc.T0ModuleLabel:            ""
-physics.producers.pmtrackcalodc.MakeTree:                 false
+physics.producers.pmtrackcalodc.T0ModuleLabel:          ""
+physics.producers.pmtrackcalodc.MakeTree:               false
+
+physics.producers.pmtrackpfpcalo.TrackModuleLabel:         "pmtrackpfp"
+physics.producers.pmtrackpfpcalo.SpacePointModuleLabel:    "pmtrackpfp"
+physics.producers.pmtrackpfpcalo.T0ModuleLabel:            ""
+physics.producers.pmtrackpfpcalo.MakeTree:                 false
+physics.producers.pmtrackpfpcalodc.TrackModuleLabel:       "pmtrackpfpdc"
+physics.producers.pmtrackpfpcalodc.SpacePointModuleLabel:  "pmtrackpfpdc"
+physics.producers.pmtrackpfpcalodc.T0ModuleLabel:          ""
+physics.producers.pmtrackpfpcalodc.MakeTree:               false
 
 physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
 physics.producers.calo.TrackModuleLabel:               "costrk"
@@ -243,36 +278,3 @@ physics.producers.mergeemshower3d.ClustersModuleLabel: "blurredcluster"
 physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.WideConeAngle: 20
-
-#Updates for MCC6
-physics.producers.pmtrack.HitModuleLabel: linecluster
-physics.producers.pmtrack.ClusterModuleLabel: linecluster 
-physics.producers.pmtrack.CluMatchingAlg: 1 
-physics.producers.pmtrack.RunVertexing: true 
-physics.producers.pmtrack.FlipToBeam: true 
-physics.producers.pmtrack.MakePFPs: true
-
-physics.producers.pmtrackpfp.HitModuleLabel: linecluster 
-physics.producers.pmtrackpfp.ClusterModuleLabel: pandora 
-physics.producers.pmtrackpfp.CluMatchingAlg: 3 
-physics.producers.pmtrackpfp.TrackingSkipPdg: [0] 
-physics.producers.pmtrackpfp.RunVertexing: true 
-physics.producers.pmtrackpfp.FlipToBeam: true  
-physics.producers.pmtrackpfp.MakePFPs: true 
-
-
-physics.producers.pmtrackdc.HitModuleLabel: lineclusterdc 
-physics.producers.pmtrackdc.ClusterModuleLabel: lineclusterdc 
-physics.producers.pmtrackdc.CluMatchingAlg: 1 
-physics.producers.pmtrackdc.RunVertexing: true 
-physics.producers.pmtrackdc.FlipToBeam: true 
-physics.producers.pmtrackdc.MakePFPs: true
-
-physics.producers.pmtrackpfpdc.HitModuleLabel: lineclusterdc 
-physics.producers.pmtrackpfpdc.ClusterModuleLabel: pandoradc 
-physics.producers.pmtrackpfpdc.CluMatchingAlg: 3 
-physics.producers.pmtrackpfpdc.TrackingSkipPdg: [0] 
-physics.producers.pmtrackpfpdc.RunVertexing: true 
-physics.producers.pmtrackpfpdc.FlipToBeam: true  
-physics.producers.pmtrackpfpdc.MakePFPs: true 
-
