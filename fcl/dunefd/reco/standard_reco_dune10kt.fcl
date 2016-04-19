@@ -111,7 +111,7 @@ physics:
          #pmatrack with cheated disambiguation
          pmtrackdc, pmtrackcalodc, pmtrackpfpdc, pmtrackpfpcalodc,
          #shower reconstruction
-         #blurredclusterdc, emshowerdc, emshower3ddc, mergeemshower3ddc,
+         blurredclusterdc, emshowerdc, #emshower3ddc, mergeemshower3ddc,
          #real disambiguation
          hitfd,
          #cluster reco
@@ -122,9 +122,9 @@ physics:
          pandora, #pandora stitcher goes here
          pandoracalo,
          #pmatrack
-         pmtrack, pmtrackcalo, pmtrackpfp, pmtrackpfpcalo
+         pmtrack, pmtrackcalo, pmtrackpfp, pmtrackpfpcalo,
          #shower reconstruction
-         #blurredcluster, emshower, emshower3d, mergeemshower3d
+         blurredcluster, emshower#, emshower3d, mergeemshower3d
          ]
 
  #define the output stream, there could be more than one if using filters 
