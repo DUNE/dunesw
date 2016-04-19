@@ -1,0 +1,8 @@
+#include "prod_pi0_0.1-2.0GeV_isotropic_dune10kt_1x2x6.fcl"
+
+process_name: SinglesGen
+
+outputs.out1.fileName: "prod_pi0_0.1-2.0GeV_isotropic_dune10kt_45deg_1x2x6_gen.root"
+
+services.Geometry: @local::dune10kt_45deg_1x2x6_geo
+source.firstRun: 20000213
