@@ -84,7 +84,7 @@ physics.producers.generator.SigmaZ: [0.0]
 
 physics.producers.generator.AngleDist: 0	 # Angle distribution (0=uniform, 1=gaussian)
 physics.producers.generator.Theta0XZ: [-8.189] # Starting angles (degrees)
-physics.producers.generator.Theta0YZ: [-11.342]
+physics.producers.generator.Theta0YZ: [-11.229]
 physics.producers.generator.SigmaThetaXZ: [0.]	  	 
 physics.producers.generator.SigmaThetaYZ: [0.]	  	 
 
