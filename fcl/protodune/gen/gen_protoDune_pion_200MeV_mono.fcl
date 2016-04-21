@@ -5,4 +5,4 @@ outputs.out1.fileName: "gen_protoDune_pion_200MeV_mono.root"
 physics.producers.generator.PDG: [211]
 physics.producers.generator.P0: [0.2]
 physics.producers.generator.PDist: 0
-
+physics.producers.generator.SigmaP: [0.0]

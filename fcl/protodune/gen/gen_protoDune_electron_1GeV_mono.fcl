@@ -5,4 +5,4 @@ outputs.out1.fileName: "gen_protoDune_electron_1GeV_mono.root"
 physics.producers.generator.PDG: [11]
 physics.producers.generator.P0: [1]
 physics.producers.generator.PDist: 0
-
+physics.producers.generator.SigmaP: [0.0]
