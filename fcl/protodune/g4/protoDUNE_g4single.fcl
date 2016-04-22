@@ -8,7 +8,7 @@ process_name: G4
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "g4single4_protoDUNE_hist.root" }
+  TFileService: { fileName: "g4single_protoDUNE_hist.root" }
   TimeTracker:       {}
   MemoryTracker:     {}
   RandomNumberGenerator: {} #ART native random number generator
@@ -20,7 +20,7 @@ services:
 source:
 {
   module_type: RootInput
-  maxEvents: 10000
+  maxEvents: 30000
   fileNames: ["gensingle_protoDUNE.root"]
 }
 
@@ -60,7 +60,7 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "g4single_protoDUNE.root"
+   fileName:    "%ifb_g4.root"
    dataTier:    "simulated"
    compressionLevel: 1
  }
