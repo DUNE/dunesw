@@ -33,8 +33,8 @@ physics:
  
   producers:
   {
-    generator: @local::dunefd_workspace_supernova
-    radiogen:  @local::dunefd_workspace_ar39
+    generator: @local::dunefd_1x2x6_supernova
+    radiogen:  @local::dunefd_1x2x6_ar39
     rns:       { module_type: "RandomNumberSaver" }
   }
  
@@ -62,13 +62,13 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "prodsupernova_nue_2_ar39_dune10kt_workspace_gen.root" # Default file name, can override from command line with -o or --output
+    fileName:    "prodsupernova_nue_2_ar39_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
     dataTier:    "generated"
     compressionLevel: 1
   }
 }
 
-services.Geometry: @local::dune10kt_workspace_geo
+services.Geometry: @local::dune10kt_1x2x6_geo
 physics.producers.generator.GeneratorAlg.NumberOfNeutrinos: 2
 
 physics.producers.radiogen.T0: [ -2246000.0 ]

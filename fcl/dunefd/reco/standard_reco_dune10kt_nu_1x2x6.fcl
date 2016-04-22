@@ -1,0 +1,13 @@
+#include "standard_reco_dune10kt_1x2x6.fcl"
+process_name: Reco
+
+physics.producers.blurredclusterdc.ShowerReconOnly: true
+physics.producers.blurredcluster.ShowerReconOnly: true
+physics.producers.emshower.ClusterModuleLabel: "pandora"
+physics.producers.emshower.HitsModuleLabel: "linecluster"
+physics.producers.emshower.PFParticleModuleLabel: "pandora"
+physics.producers.emshower.TrackModuleLabel: "pandora"
+physics.producers.emshowerdc.ClusterModuleLabel: "pandoradc"
+physics.producers.emshowerdc.HitsModuleLabel: "lineclusterdc"
+physics.producers.emshowerdc.PFParticleModuleLabel: "pandoradc"
+physics.producers.emshowerdc.TrackModuleLabel: "pandoradc"
