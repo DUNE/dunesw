@@ -1,4 +1,4 @@
-#include "standard_detsim_dune10kt.fcl"
+#include "old_standard_detsim_dune10kt.fcl"
 process_name: Detsim
 services.Geometry: @local::dune10kt_3mmpitch_1x2x6_geo
 services.SignalShapingServiceDUNE.FieldResponseFname: "dune35t_response_v1.0_3mm.root"
