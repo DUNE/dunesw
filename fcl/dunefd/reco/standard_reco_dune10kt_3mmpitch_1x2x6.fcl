@@ -1,0 +1,12 @@
+#include "standard_reco_dune10kt.fcl"
+process_name: Reco
+services.Geometry: @local::dune10kt_3mmpitch_1x2x6_geo
+services.SignalShapingServiceDUNE10kt.FieldResponseFname: "dune35t_response_v1.0_3mm.root"
+services.SignalShapingServiceDUNE10kt.FieldBins: 1000
+services.SignalShapingServiceDUNE10kt.InputFieldRespSamplingPeriod: 20.
+services.SignalShapingServiceDUNE10kt.FieldResponseTOffset: [-13.9e3, -13.9e3, -13.9e3]
+services.SignalShapingServiceDUNE10kt.ASICGainInMVPerFC: [28, 28, 28]
+physics.producers.caldata.SigThrFact: 2.
+physics.producers.gaushit.MinSig: [2.5, 2.5, 2.5]
+#physics.producers.gaushit.InitWidth: [2.5, 2.5, 2.5]
+
