@@ -1,0 +1,3 @@
+#include "protoDUNE_ana.fcl"
+outputs: {}
+physics.stream1: []
