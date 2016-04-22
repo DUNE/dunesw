@@ -1,0 +1,6 @@
+#include "standard_ana_dune10kt_45deg_1x2x6.fcl"
+
+process_name: Mergeana
+
+outputs: {}
+physics.stream1: []

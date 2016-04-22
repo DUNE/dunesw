@@ -1,5 +1,5 @@
 #include "services_dune.fcl"
-#include "supernova.fcl"
+#include "supernova_dune.fcl"
 
 process_name: SupernovaGen
 
