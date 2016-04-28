@@ -1,0 +1,3 @@
+#include "old_standard_detsim_dune10kt.fcl"
+process_name: Detsim
+services.Geometry: @local::dune10kt_workspace_geo

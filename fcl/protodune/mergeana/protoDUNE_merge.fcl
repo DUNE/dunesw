@@ -1,0 +1,53 @@
+#include "services_dune.fcl"
+
+process_name: Mergeana
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "ana_hist.root" }
+  TimeTracker:       {}
+  RandomNumberGenerator: {}
+  SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
+#  message:      @local::microboone_message_services_prod_debug
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+  user:         @local::protodune_simulation_services
+}
+#services.user.PhotonVisibilityService:      @local::protodune_photonvisibilityservice
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents:  10        # Number of events to create
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics:
+{
+ #define the output stream, there could be more than one if using filters 
+ stream1:  [ out1 ]
+
+
+ #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+ #ie analyzers and output streams.  these all run simultaneously
+ end_paths:     [stream1]  
+}
+
+#block to define where the output goes.  if you defined a filter in the physics
+#block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
+#entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_%tc_merged.root"
+   dataTier:    "full-reconstructed"
+   compressionLevel: 1
+ }
+}
+
+### Here, we overwrite ALL module Labels with the ones defined above.
+
