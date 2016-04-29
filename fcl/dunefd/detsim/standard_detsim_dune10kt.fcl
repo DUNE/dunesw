@@ -31,11 +31,10 @@ source: {
 physics: {
  producers: {
    daq:            @local::dune_detsim
-   simcounter:     @local::dune35t_simcounter
    opdigi:         @local::dune35t_opdigi
    rns:            { module_type: "RandomNumberSaver" }
  }
- simulate: [ rns, daq, simcounter, opdigi ]
+ simulate: [ rns, daq, opdigi ]
  stream1:  [ out1 ]
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
