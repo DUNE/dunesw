@@ -15,7 +15,6 @@ function initialize
     LARSOFT_REFERENCE_VERSION=$3
     BASEFILENAME=$4
     EXPCODE=$5
-    #LARSOFT_REFERENCE_VERSION=$(awk '{print $4}' testmask.txt)
 
     #declare -ga STEPS=( ${@:6:$(($#-5))} )
 
@@ -115,25 +114,34 @@ initialize $@
 
 exitstatus $?
 
-if [ $(awk '{print $1}' testmask.txt) -eq 1 ] ; then
+if [ $(sed -n '1p' testmask.txt | cut -d ' ' -f ${STEP}) -eq 1 ]; then
     TASKSTRING="larsoft_data_production"
     larsoft_data_production
 
     exitstatus $?
+else
+    TASKSTRING="larsoft_data_production"
+    echo -e "\nCI MSG BEGIN\n Stage: ${STEPS[STEP]}\n Task: ${TASKSTRING}\n skipped\nCI MSG END\n"
 fi
 
 COMPAREINIT=0
 
-if [ $(awk '{print $2}' testmask.txt) -eq 1 ] ; then
+if [ $(sed -n '2p' testmask.txt | cut -d ' ' -f ${STEP}) -eq 1 ]; then
     TASKSTRING="compare_data_products 0"
     compare_data_products 0 #Check for added/removed data products
 
     exitstatus $?
+else
+    TASKSTRING="compare_data_products 0"
+    echo -e "\nCI MSG BEGIN\n Stage: ${STEPS[STEP]}\n Task: ${TASKSTRING}\n skipped\nCI MSG END\n"
 fi
 
-if [ $(awk '{print $3}' testmask.txt) -eq 1 -a $(uname -a|grep Linux > /dev/null; echo $?) -eq 0 ] ; then
+if [ $(sed -n '3p' testmask.txt | cut -d ' ' -f ${STEP}) -eq 1 ]; then
     TASKSTRING="compare_data_products 1"
     compare_data_products 1 #Check for differences in the size of data products
 
     exitstatus $?
+else
+    TASKSTRING="compare_data_products 1"
+    echo -e "\nCI MSG BEGIN\n Stage: ${STEPS[STEP]}\n Task: ${TASKSTRING}\n skipped\nCI MSG END\n"
 fi

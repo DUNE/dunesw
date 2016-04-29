@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
-parent dunetpc v05_08_00
+parent dunetpc v05_09_01
 defaultqual e9
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -45,11 +45,11 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v05_08_00
+larsoft         v05_10_00
 artdaq_core	v1_04_28
-duneutil        v01_20_14	-	optional
-lbne_raw_data 	v1_03_22
-dune_pardata	v01_08_00
+duneutil        v01_21_02	-	optional
+lbne_raw_data 	v1_03_25
+dune_pardata	v01_09_00
 cetbuildtools	v4_19_04	-	only_for_build
 end_product_list
 

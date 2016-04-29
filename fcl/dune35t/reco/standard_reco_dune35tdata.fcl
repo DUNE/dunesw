@@ -319,28 +319,28 @@ physics.producers.mergeemshower3d.WideConeAngle: 20
 services.user.DetectorPropertiesService.NumberTimeSamples: 6000
 services.user.DetectorPropertiesService.ReadOutWindowSize: 6000
 
-#services.user.SignalShapingServiceDUNE35t.DebugFieldShape: true
-services.user.SignalShapingServiceDUNE35t.ASICGainInMVPerFC: [14, 14, 14]
-services.user.SignalShapingServiceDUNE35t.ShapeTimeConst: [3, 3, 3]
+#services.user.SignalShapingServiceDUNE.DebugFieldShape: true
+services.user.SignalShapingServiceDUNE.ASICGainInMVPerFC: [14, 14, 14]
+services.user.SignalShapingServiceDUNE.ShapeTimeConst: [3, 3, 3]
 
-services.user.SignalShapingServiceDUNE35t.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.55 ],
+services.user.SignalShapingServiceDUNE.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.55 ],
 							  [ 1.12, 0.86, 6.0, 0.55 ],
 							  [ 0.89, 0.66, 4.8, 0.43 ]]
 
 ##############   The standard parameters -----------------------
-#services.user.SignalShapingServiceDUNE35t.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
-#services.user.SignalShapingServiceDUNE35t.IndUFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
-#services.user.SignalShapingServiceDUNE35t.IndVFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
+#services.user.SignalShapingServiceDUNE.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
+#services.user.SignalShapingServiceDUNE.IndUFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
+#services.user.SignalShapingServiceDUNE.IndVFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
 
 ##############   My new  parameters -----------------------
 
-services.user.SignalShapingServiceDUNE35t.ColFilter:       "(x>0.0)*[0]*(1-1/(1+exp(-(x-[1])/[2])))"
-services.user.SignalShapingServiceDUNE35t.ColFilterParams: [ 1, 0.150, 0.025 ]
+services.user.SignalShapingServiceDUNE.ColFilter:       "(x>0.001)*[0]*(1-1/(1+exp(-(x-[1])/[2])))"
+services.user.SignalShapingServiceDUNE.ColFilterParams: [ 1, 0.150, 0.025 ]
 
-services.user.SignalShapingServiceDUNE35t.IndUFilter:       "(x>0.)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
-services.user.SignalShapingServiceDUNE35t.IndUFilterParams: [ 1.0, 0.105, 0.019, 0.018, 0.010 ]
-services.user.SignalShapingServiceDUNE35t.IndVFilter:       "(x>0.)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
-services.user.SignalShapingServiceDUNE35t.IndVFilterParams: [ 0.95, 0.125, 0.019, 0.010, 0.0109 ]
+services.user.SignalShapingServiceDUNE.IndUFilter:       "(x>0.03)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
+services.user.SignalShapingServiceDUNE.IndUFilterParams: [ 1.0, 0.105, 0.019, 0.018, 0.010 ]
+services.user.SignalShapingServiceDUNE.IndVFilter:       "(x>0.03)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
+services.user.SignalShapingServiceDUNE.IndVFilterParams: [ 0.95, 0.125, 0.019, 0.010, 0.0109 ]
 
 physics.producers.gaushit.MinSig:   [ 8  ,8  , 10  ]
 physics.producers.gaushit.MinWidth: [ 2.5, 2.5, 2.5 ]
