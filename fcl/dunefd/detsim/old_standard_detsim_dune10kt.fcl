@@ -31,7 +31,6 @@ physics:
  producers:
  {
    daq:            @local::dunefd_simwire
-#   simcounter:     @local::dunefd_simcounter
    opdigi:         @local::dunefd_opdigi
    rns:            { module_type: "RandomNumberSaver" }
  }
