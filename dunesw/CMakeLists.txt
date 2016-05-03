@@ -34,6 +34,7 @@ add_subdirectory(EventFilters)
 add_subdirectory(ClusterFinderDUNE)
 add_subdirectory(RecoAlgDUNE)
 add_subdirectory(Protodune)
+add_subdirectory(HitDumper)
 
 # Respect the order specified in lar_build, which is:
 #
