@@ -147,8 +147,6 @@ physics.producers.caldata.DigitModuleLabel:            "daq"
 physics.producers.gaushit.CalDataModuleLabel:          "caldata"
 #physics.producers.gaushit.MinSig:                      [100,100,100]
 #physics.producers.gaushit.MinWidth:                    [5,5,5]
-physics.producers.clustercheat.HitModuleLabel:         "hitcheat"
-physics.producers.trackcheat.CheatedClusterLabel:      "clustercheat"
 #physics.producers.hit35tcc.ChanHitLabel:              "gaushit"
 physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
@@ -156,7 +154,6 @@ physics.producers.pmtrack.HitModuleLabel:               "linecluster"
 physics.producers.pmtrackcalo.TrackModuleLabel:       "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:  "pmtrack"
 physics.producers.pmtrackcalo.T0ModuleLabel:          "photont0pmtrack"
-physics.producers.mctrutht0pmtrack.TrackModuleLabel:  "pmtrack"
 physics.producers.photont0pmtrack.TrackModuleLabel:   "pmtrack"
 physics.producers.photont0pmtrack.HitsModuleLabel:    "linecluster"
 physics.producers.photont0pmtrack.ShowerModuleLabel:  ""
@@ -247,3 +244,6 @@ services.user.SignalShapingServiceDUNE.IndVFilterParams: [ 0.95, 0.125, 0.019, 0
 
 physics.producers.gaushit.MinSig:   [ 8  ,8  , 10  ]
 physics.producers.gaushit.MinWidth: [ 2.5, 2.5, 2.5 ]
+
+physics.producers.fasthit.MinSigCol: 80
+physics.producers.fasthit.MinSigInd: 80
