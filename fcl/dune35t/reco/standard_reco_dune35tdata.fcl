@@ -95,7 +95,8 @@ physics:
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, unstick, daq
          #optical hit reco, flash, counter, TPC wire signals
-         #ophit, opflash, t0counter, 
+         #ophit, opflash
+         , t0counter 
          ,caldata
          #hit reco with cheated disambiguation
          ,gaushit #, fasthit
@@ -141,6 +142,7 @@ outputs:
 physics.producers.unstick.DigitModuleLabel:            "SplitterInput:TPC"
 physics.producers.daq.DigitModuleLabel:                "unstick:TPC"
 physics.producers.daq.SkipStuckCodes:                  false
+physics.producers.t0counter.TriggerModuleLabel:        "SplitterInput:TRIGGER"
 physics.producers.caldata.DigitModuleLabel:            "daq"
 #physics.producers.caldata.DoBaselineSub:               true
 
