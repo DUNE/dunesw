@@ -57,6 +57,7 @@ physics:
 # actual disambiguation
   hit35t:             @local::dune35t_hitfinder35t
 #  hit35tcc:           @local::dune35t_hitfinder35t
+  handscan:           @local::dune35t_handscan
 # reconstruction using disambiguated hits
 #  fuzzy:              @local::dune35t_fuzzycluster
   dbcluster:          @local::dune35t_dbcluster
@@ -102,6 +103,8 @@ physics:
          ,gaushit #, fasthit
          #real disambiguation
          , hit35t
+         #manual real-from-noise hit selection
+         #, handscan
          #cluster reco
          #, dbcluster
 	 #, linecluster
