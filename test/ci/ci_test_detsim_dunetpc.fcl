@@ -4,6 +4,9 @@ services.LArSeedService.policy: "preDefinedSeed"
 services.LArSeedService.baseSeed: 1234
 services.LArSeedService.daq: 1234
 services.LArSeedService.simcounter.rand: 1234
+services.LArSeedService.StuckBitAdcDistortionService: 1234
+services.LArSeedService.ExponentialChannelNoiseService: 1234
+services.LArSeedService.ProvidedPedestalAdditionService: 1234
 
 services.RandomNumberGenerator.restoreFrom: "DetSimRandomSeeds_Ref.dat"
 services.RandomNumberGenerator.saveTo: "DetSimRandomSeeds.dat"
