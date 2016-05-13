@@ -62,6 +62,7 @@ outputs:
    fileName:    "%ifb_%tc_g4.root"
    dataTier:    "simulated"
    compressionLevel: 1
+   fastCloning: false
  }
 }
 

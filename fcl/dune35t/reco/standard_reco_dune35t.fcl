@@ -184,6 +184,7 @@ outputs:
    fileName:    "%ifb_%tc_reco.root"
    dataTier:    "full-reconstructed"
    compressionLevel: 1
+   fastCloning: false
  }
 }
 ### Here, we overwrite ALL module labels with the ones defined above.

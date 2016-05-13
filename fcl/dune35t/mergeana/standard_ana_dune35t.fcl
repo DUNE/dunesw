@@ -66,6 +66,7 @@ outputs:
    fileName:    "%ifb_%tc_merged.root"
    dataTier:    "full-reconstructed"
    compressionLevel: 1
+   fastCloning: false
  }
 }
 
