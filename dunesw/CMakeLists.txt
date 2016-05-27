@@ -36,7 +36,8 @@ add_subdirectory(ClusterFinderDUNE)
 add_subdirectory(RecoAlgDUNE)
 add_subdirectory(Protodune)
 add_subdirectory(DAQTriggerSim)
-
+add_subdirectory(SpaceCharge)
+add_subdirectory(SpaceChargeServices)
 
 # Respect the order specified in lar_build, which is:
 #
