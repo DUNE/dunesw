@@ -18,13 +18,16 @@ services:
 
 services.user.Geometry: @local::dunedphase10kt_workspace_geo
 
+# Use fixed values instead of DB for ped
+services.DetPedestalService:       @local::dunedp_fixedpeds
+
 # map over detsim services
-services.ChannelNoiseService:     @local::chnoiseold
-services.DetPedestalService:     @local::peddplegacy
-services.PedestalAdditionService: @local::padprovided
-services.AdcSuppressService:      @local::zsonline
-services.AdcCompressService:      @local::cmpreplace
-services.AdcDistortService:       @local::stuckbits
+services.SimChannelExtractService: @local::scxdp
+services.ChannelNoiseService:      @local::chnoiseold
+services.PedestalAdditionService:  @local::padprovided
+services.AdcSuppressService:       @local::zsonline
+services.AdcCompressService:       @local::cmpreplace
+services.AdcDistortService:        @local::stuckbits
 
 
 #Start each new event with an empty event.
@@ -69,7 +72,7 @@ physics:
 
 # set particle gun
 physics.producers.generator.PDG: [ 13 ]
-physics.producers.generator.P0:  [ 60.0 ]
+physics.producers.generator.P0:  [ 10.0 ]
 physics.producers.generator.Theta0XZ: [0.0]
 physics.producers.generator.Theta0YZ: [0.0]
 physics.producers.generator.X0: [0.0]
