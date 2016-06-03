@@ -42,7 +42,7 @@ add_subdirectory(Protodune)
 #     "SRT_LAR",
 #     "SimpleTypesAndConstants",
 #     "larcore_Geometry",
-#     "larcore_SummaryData",
+#     "larcoreobj_SummaryData",
 #     "lardata_RawData",
 #     "lardata_RecoBase",
 #     "lardata_OpticalDetectorData",
