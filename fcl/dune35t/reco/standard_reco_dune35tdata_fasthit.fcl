@@ -54,6 +54,9 @@ physics:
   fasthit:            @local::dune35t_fasthitfinder
 
   handscan:           @local::dune35t_handscan
+# disambiguation using the counters
+  counterhit:         @local::dune35t_hitfindercounters
+
 # reconstruction using disambiguated hits
 #  fuzzy:              @local::dune35t_fuzzycluster
   dbcluster:          @local::dune35t_dbcluster
@@ -99,6 +102,8 @@ physics:
 
          #manual real-from-noise hit selection
          #, handscan
+	 # disambiguation using the counters.
+	 , counterhit
          #cluster reco
          #, dbcluster
 	 #, linecluster
@@ -149,6 +154,8 @@ physics.producers.fasthit.MinSigInd:        80
 physics.producers.fasthit.DigitModuleLabel: "unstick:TPC"
 
 physics.producers.t0counter.TriggerModuleLabel:        "SplitterInput:TRIGGER"
+
+physics.producers.counterhit.HitsModuleLabel:          "fasthit"
 
 physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
