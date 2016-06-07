@@ -111,11 +111,13 @@ physics:
 	 , counterhit
          #cluster reco
          #, dbcluster
-	 #, linecluster
+	 , linecluster
          #pandora
-         #, pandora, particlestitcher, photont0pandora, pandoracalo
+         , pandora, particlestitcher
+         #, photont0pandora, pandoracalo
          #pmatrack
-         #, pmtrack, photont0pmtrack, pmtrackcalo
+         , pmtrack
+         #, photont0pmtrack, pmtrackcalo
 	 #shower reconstruction
 	 #, blurredcluster, emshower, emshower3d, mergeemshower3d
 ]
@@ -225,8 +227,8 @@ physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.WideConeAngle: 20
 
-services.user.DetectorPropertiesService.NumberTimeSamples: 6000
-services.user.DetectorPropertiesService.ReadOutWindowSize: 6000
+services.user.DetectorPropertiesService.NumberTimeSamples: 15000
+services.user.DetectorPropertiesService.ReadOutWindowSize: 15000
 
 #services.user.SignalShapingServiceDUNE.DebugFieldShape: true
 services.user.SignalShapingServiceDUNE.ASICGainInMVPerFC: [14, 14, 14]
