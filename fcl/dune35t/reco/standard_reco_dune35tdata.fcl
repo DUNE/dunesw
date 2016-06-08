@@ -173,6 +173,42 @@ physics.producers.photont0pmtrack.TruthT0ModuleLabel: "mctrutht0pmtrack"
 #physics.producers.fuzzy.HitsModuleLabel:            "hit35t"
 physics.producers.dbcluster.HitsModuleLabel:         "hit35t"
 physics.producers.linecluster.HitFinderModuleLabel:  "hit35t"
+physics.producers.linecluster.ClusterCrawlerAlg.NumPass:               3  # number of passes through the hit list. 0 = no cluster reco
+physics.producers.linecluster.ClusterCrawlerAlg.MaxHitsFit: [ 100,  8, 4] # number of hits fitted to a line
+physics.producers.linecluster.ClusterCrawlerAlg.MinHits:     [ 50,  8, 3] # minimum size of a cluster
+physics.producers.linecluster.ClusterCrawlerAlg.NHitsAve:    [ 20,  8, 2] # number of hits to find the average charge and width
+physics.producers.linecluster.ClusterCrawlerAlg.ChgCut:     [ .8, .8, .8] # max fractional hit charge difference for adding hits
+physics.producers.linecluster.ClusterCrawlerAlg.ChiCut:       [ 4, 8, 10] # stop adding hits to clusters if ChiCut is reached
+physics.producers.linecluster.ClusterCrawlerAlg.MaxWirSkip: [100, 100, 2] # max number of wires to skip without adding a hit
+physics.producers.linecluster.ClusterCrawlerAlg.MinWirAfterSkip: [2, 2, 1] # min reqd number of consecutive wires with a hit after a skip
+physics.producers.linecluster.ClusterCrawlerAlg.KinkChiRat: [1.2, 1.2, 0.] # Max consecutive chisq increase for the last 3 hits on the cluster
+physics.producers.linecluster.ClusterCrawlerAlg.KinkAngCut: [0.4, 0.4, 0.4] # kink angle cut (radians) used to follow or merge
+physics.producers.linecluster.ClusterCrawlerAlg.DoMerge:   [false, true, true] # run cluster merging code?
+physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta: [10., 10., 10.] # max time difference for cluster merging
+physics.producers.linecluster.ClusterCrawlerAlg.MergeChgCut: [0.8, 0.8, 0.8] # max charge ratio for cluster merging
+physics.producers.linecluster.ClusterCrawlerAlg.FindVertices: [true, true, true]  # make 2D vertices after clustering?
+physics.producers.linecluster.ClusterCrawlerAlg.LACrawl: [true, true, true]  # crawl Large Angle clusters?
+physics.producers.linecluster.ClusterCrawlerAlg.LAClusAngleCut:       60 # Large cluster angle cut (0 < 90 degrees). <0 to turn off
+physics.producers.linecluster.ClusterCrawlerAlg.LAClusMaxHitsFit:   		4 # Max hits fit on Large Angle clusters
+physics.producers.linecluster.ClusterCrawlerAlg.MinHitFrac: 				  0.5 # Drop clusters having < (#hits/#wires)
+physics.producers.linecluster.ClusterCrawlerAlg.MinAmp: 				[5, 1, 5] # Min hit signal amplitude for merging per plane
+physics.producers.linecluster.ClusterCrawlerAlg.HitMergeChiCut:        4 # Merge cluster hit-multiplets if the separation chisq
+physics.producers.linecluster.ClusterCrawlerAlg.MergeAllHits:       true # merge all hits before reconstructing clusters
+physics.producers.linecluster.ClusterCrawlerAlg.MergeOverlapAngCut:  0.1 # Set <= 0 to turn off overlapping cluster merging
+physics.producers.linecluster.ClusterCrawlerAlg.ChkClusterDS:      true  # Check reconstruction at DS end of clusters?
+physics.producers.linecluster.ClusterCrawlerAlg.KillGarbageClusters: 0.1 # Kill ghost clusters, etc
+physics.producers.linecluster.ClusterCrawlerAlg.VtxClusterSplit:    true # Split clusters that cross vertices
+physics.producers.linecluster.ClusterCrawlerAlg.FindStarVertices:  false # Find vertices with a star topology
+physics.producers.linecluster.ClusterCrawlerAlg.HitErrFac:           0.8 # hit time error for fitting = fHitErrFac * (hit width)
+physics.producers.linecluster.ClusterCrawlerAlg.HitMinAmp:             2 # ignore hits with PH < this value (seed clusters)
+physics.producers.linecluster.ClusterCrawlerAlg.ClProjErrFac:          3 # cluster projection error factor
+physics.producers.linecluster.ClusterCrawlerAlg.AllowNoHitWire:        5 # Allow skipping N wires w no hits
+physics.producers.linecluster.ClusterCrawlerAlg.Vertex2DCut:          20 # Max equiv dTick cut for attaching a cluster to a vtx
+physics.producers.linecluster.ClusterCrawlerAlg.fVertex2DWireErrCut:	  3 # Max wire error on the fitted vertex position
+physics.producers.linecluster.ClusterCrawlerAlg.Vertex3DCut:          10 # 2D vtx -> 3D vtx matching cut (chisq)
+physics.producers.linecluster.ClusterCrawlerAlg.FindHammerClusters: false # look for hammer type clusters
+physics.producers.linecluster.ClusterCrawlerAlg.RefineVertexClusters:  false
+
 physics.producers.costrk.ClusterModuleLabel:         "linecluster"
 #physics.producers.stitch.TrackModuleLabel:          "costrk"
 #physics.producers.stitch.SpptModuleLabel:           "costrk"
