@@ -113,7 +113,7 @@ physics:
          #, dbcluster
 	 , linecluster
          #pandora
-         , pandora, particlestitcher
+         #, pandora, particlestitcher
          #, photont0pandora, pandoracalo
          #pmatrack
          , pmtrack
@@ -202,7 +202,7 @@ physics.producers.linecluster.ClusterCrawlerAlg.FindStarVertices:  false # Find 
 physics.producers.linecluster.ClusterCrawlerAlg.HitErrFac:           0.8 # hit time error for fitting = fHitErrFac * (hit width)
 physics.producers.linecluster.ClusterCrawlerAlg.HitMinAmp:             2 # ignore hits with PH < this value (seed clusters)
 physics.producers.linecluster.ClusterCrawlerAlg.ClProjErrFac:          3 # cluster projection error factor
-physics.producers.linecluster.ClusterCrawlerAlg.AllowNoHitWire:        5 # Allow skipping N wires w no hits
+physics.producers.linecluster.ClusterCrawlerAlg.AllowNoHitWire:        10 # Allow skipping N wires w no hits
 physics.producers.linecluster.ClusterCrawlerAlg.Vertex2DCut:          20 # Max equiv dTick cut for attaching a cluster to a vtx
 physics.producers.linecluster.ClusterCrawlerAlg.fVertex2DWireErrCut:	  3 # Max wire error on the fitted vertex position
 physics.producers.linecluster.ClusterCrawlerAlg.Vertex3DCut:          10 # 2D vtx -> 3D vtx matching cut (chisq)
@@ -290,7 +290,7 @@ services.user.SignalShapingServiceDUNE.IndUFilterParams: [ 1.0, 0.105, 0.019, 0.
 services.user.SignalShapingServiceDUNE.IndVFilter:       "(x>0.03)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
 services.user.SignalShapingServiceDUNE.IndVFilterParams: [ 0.95, 0.125, 0.019, 0.010, 0.0109 ]
 
-physics.producers.gaushit.MinSig:   [ 8  ,8  , 10  ]
+physics.producers.gaushit.MinSig:   [ 5, 5, 10 ]
 physics.producers.gaushit.MinWidth: [ 2.5, 2.5, 2.5 ]
 
 physics.producers.fasthit.MinSigCol: 80
