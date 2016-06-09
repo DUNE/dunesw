@@ -265,6 +265,7 @@ physics.producers.mergeemshower3d.WideConeAngle: 20
 
 services.user.DetectorPropertiesService.NumberTimeSamples: 15000
 services.user.DetectorPropertiesService.ReadOutWindowSize: 15000
+services.user.DetectorPropertiesService.Efield: [0.25, 0.782, 1.734]
 
 #services.user.SignalShapingServiceDUNE.DebugFieldShape: true
 services.user.SignalShapingServiceDUNE.ASICGainInMVPerFC: [14, 14, 14]
