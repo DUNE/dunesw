@@ -69,6 +69,8 @@ physics:
   pandoracalodc:      @local::dune35t_calomc
   pmtrackdc:           @local::dune35t_pmalgtrackmaker
   pmtrackcalodc:       @local::dune35t_calomc
+  pmtrackpfpdc:        @local::dunefd_pmalgtrackmaker
+  pmtrackpfpcalodc:    @local::dune10kt_calomc
 # actual disambiguation
   hit35t:             @local::dune35t_hitfinder35t
 #  hit35tcc:           @local::dune35t_hitfinder35t
@@ -84,6 +86,8 @@ physics:
   pandoracalo:        @local::dune35t_calomc
   pmtrack:             @local::dune35t_pmalgtrackmaker
   pmtrackcalo:         @local::dune35t_calomc
+  pmtrackpfp:          @local::dunefd_pmalgtrackmaker
+  pmtrackpfpcalo:      @local::dune10kt_calomc
 #  kalmanhit:         @local::dune35t_track3Dkalmanhit
 # MCTruth T0
   mctrutht0:          @local::dune35t_mctrutht0matching
@@ -92,6 +96,8 @@ physics:
   mctrutht0pandoradc: @local::dune35t_mctrutht0matching
   mctrutht0pmtrack:    @local::dune35t_mctrutht0matching
   mctrutht0pmtrackdc:  @local::dune35t_mctrutht0matching
+  mctrutht0pmtrackpfp:    @local::dune35t_mctrutht0matching
+  mctrutht0pmtrackpfpdc:  @local::dune35t_mctrutht0matching
 # Photon counter T0
   photont0costrk:    @local::lbne35t_photoncountert0matching
   photont0costrkdc:  @local::lbne35t_photoncountert0matching
@@ -99,6 +105,8 @@ physics:
   photont0pandoradc: @local::lbne35t_photoncountert0matching
   photont0pmtrack:   @local::lbne35t_photoncountert0matching
   photont0pmtrackdc: @local::lbne35t_photoncountert0matching
+  photont0pmtrackpfp:   @local::lbne35t_photoncountert0matching
+  photont0pmtrackpfpdc: @local::lbne35t_photoncountert0matching
 # Muon Counter T0
   t0counter:          @local::dune35t_t0counter
 # photon detector reconstruction
@@ -135,8 +143,9 @@ physics:
          pandoradc, particlestitcherdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
          #pmatrack with cheated disambiguation
          pmtrackdc, mctrutht0pmtrackdc, photont0pmtrackdc, pmtrackcalodc,
+         pmtrackpfpdc, mctrutht0pmtrackpfpdc, photont0pmtrackpfpdc, pmtrackpfpcalodc,
          #shower reconstruction
-         blurredclusterdc, emshowerdc, emshower3ddc, mergeemshower3ddc,
+         blurredclusterdc, emshowerdc,
          #real disambiguation
          hit35t,
          #cluster reco
@@ -147,8 +156,9 @@ physics:
          pandora, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo,
          #pmatrack
          pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo,
+         pmtrackpfp, mctrutht0pmtrackpfp, photont0pmtrackpfp, pmtrackpfpcalo,
          #shower reconstruction
-         blurredcluster, emshower, emshower3d, mergeemshower3d
+         blurredcluster, emshower
 ]
 
  #define the output stream, there could be more than one if using filters 
@@ -199,8 +209,10 @@ physics.producers.calodc.T0ModuleLabel:                "photont0costrkdc"
 physics.producers.trkshowersplitdc.HitModuleLabel:       "lineclusterdc"
 physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
+physics.producers.pmtrack.MakePFPs:                     true
 physics.producers.pmtrackdc.HitModuleLabel:             "lineclusterdc"
 physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
+physics.producers.pmtrackdc.MakePFPs:                   true
 physics.producers.pmtrackcalodc.TrackModuleLabel:       "pmtrackdc"
 physics.producers.pmtrackcalodc.SpacePointModuleLabel:  "pmtrackdc"
 physics.producers.pmtrackcalodc.T0ModuleLabel:          "photont0pmtrackdc"
@@ -210,6 +222,23 @@ physics.producers.photont0pmtrackdc.HitsModuleLabel:    "lineclusterdc"
 physics.producers.photont0pmtrackdc.ShowerModuleLabel:  ""
 physics.producers.photont0pmtrackdc.TruthT0ModuleLabel: "mctrutht0pmtrackdc"
 
+physics.producers.pmtrackpfpdc.HitModuleLabel:             "lineclusterdc"
+physics.producers.pmtrackpfpdc.ClusterModuleLabel:         "pandoradc"
+physics.producers.pmtrackpfpdc.CluMatchingAlg:             3
+physics.producers.pmtrackpfpdc.TrackingSkipPdg:            [0]
+physics.producers.pmtrackpfpdc.RunVertexing:               true
+physics.producers.pmtrackpfpdc.FlipToBeam:                 true
+physics.producers.pmtrackpfpdc.MakePFPs:                   true
+
+physics.producers.pmtrackpfpcalodc.TrackModuleLabel:       "pmtrackpfpdc"
+physics.producers.pmtrackpfpcalodc.SpacePointModuleLabel:  "pmtrackpfpdc"
+physics.producers.pmtrackpfpcalodc.T0ModuleLabel:          "photont0pmtrackpfpdc"
+physics.producers.mctrutht0pmtrackpfpdc.TrackModuleLabel:  "pmtrackpfpdc"
+physics.producers.photont0pmtrackpfpdc.TrackModuleLabel:   "pmtrackpfpdc"
+physics.producers.photont0pmtrackpfpdc.HitsModuleLabel:    "lineclusterdc"
+physics.producers.photont0pmtrackpfpdc.ShowerModuleLabel:  ""
+physics.producers.photont0pmtrackpfpdc.TruthT0ModuleLabel: "mctrutht0pmtrackpfpdc"
+
 physics.producers.pmtrackcalo.TrackModuleLabel:       "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:  "pmtrack"
 physics.producers.pmtrackcalo.T0ModuleLabel:          "photont0pmtrack"
@@ -218,6 +247,23 @@ physics.producers.photont0pmtrack.TrackModuleLabel:   "pmtrack"
 physics.producers.photont0pmtrack.HitsModuleLabel:    "linecluster"
 physics.producers.photont0pmtrack.ShowerModuleLabel:  ""
 physics.producers.photont0pmtrack.TruthT0ModuleLabel: "mctrutht0pmtrack"
+
+physics.producers.pmtrackpfp.HitModuleLabel:               "linecluster"
+physics.producers.pmtrackpfp.ClusterModuleLabel:           "pandora"
+physics.producers.pmtrackpfp.CluMatchingAlg:               3
+physics.producers.pmtrackpfp.TrackingSkipPdg:              [0]
+physics.producers.pmtrackpfp.RunVertexing:                 true
+physics.producers.pmtrackpfp.FlipToBeam:                   true
+physics.producers.pmtrackpfp.MakePFPs:                     true
+
+physics.producers.pmtrackpfpcalo.TrackModuleLabel:       "pmtrackpfp"
+physics.producers.pmtrackpfpcalo.SpacePointModuleLabel:  "pmtrackpfp"
+physics.producers.pmtrackpfpcalo.T0ModuleLabel:          "photont0pmtrackpfp"
+physics.producers.mctrutht0pmtrackpfp.TrackModuleLabel:  "pmtrackpfp"
+physics.producers.photont0pmtrackpfp.TrackModuleLabel:   "pmtrackpfp"
+physics.producers.photont0pmtrackpfp.HitsModuleLabel:    "linecluster"
+physics.producers.photont0pmtrackpfp.ShowerModuleLabel:  ""
+physics.producers.photont0pmtrackpfp.TruthT0ModuleLabel: "mctrutht0pmtrackpfp"
 
 #physics.producers.fuzzy.HitsModuleLabel:            "hit35t"
 physics.producers.dbcluster.HitsModuleLabel:         "hit35t"

@@ -62,16 +62,18 @@ outputs:
 
 ### Here, we overwrite ALL module Labels with the ones defined above.
 
-###   COSMIC TRACKER NUETREE
-physics.analyzers.nuetree.TrackModuleLabel:  "pmtrack"
+###   NUETREE
+physics.analyzers.nuetree.TrackModuleLabel:  "pandora"
 physics.analyzers.nuetree.HitsModuleLabel:   "linecluster"
-physics.analyzers.nuetree.VertexModuleLabel: "linecluster"
+physics.analyzers.nuetree.VertexModuleLabel: "pandora"
 physics.analyzers.nuetree.ShowerModuleLabel: "emshower"
-physics.analyzers.nuetree.CalorimetryModuleLabel: "pmtrackcalo"                              
+physics.analyzers.nuetree.CalorimetryModuleLabel: "pandoracalo"
+physics.analyzers.nuetree.ClusterModuleLabel: "pandora"
 
-###   COSMIC TRACKER DISAMBIG CHEAT NUETREE
-physics.analyzers.nuetreedc.TrackModuleLabel:  "pmtrackdc"
+###   DISAMBIG CHEAT NUETREE
+physics.analyzers.nuetreedc.TrackModuleLabel:  "pandoradc"
 physics.analyzers.nuetreedc.HitsModuleLabel:   "lineclusterdc"
-physics.analyzers.nuetreedc.VertexModuleLabel: "lineclusterdc"
+physics.analyzers.nuetreedc.VertexModuleLabel: "pandoradc"
 physics.analyzers.nuetreedc.ShowerModuleLabel: "emshowerdc"
-physics.analyzers.nuetreedc.CalorimetryModuleLabel: "pmtrackcalodc"
+physics.analyzers.nuetreedc.CalorimetryModuleLabel: "pandoracalodc"
+physics.analyzers.nuetreedc.ClusterModuleLabel: "pandoradc"

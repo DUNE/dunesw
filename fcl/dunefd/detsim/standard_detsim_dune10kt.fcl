@@ -1,23 +1,26 @@
+# standard_detsim_dune10kt.fcl
+
+# David Adams
+# April 2016
+#
+# Top level FCL for production of 35-ton simulated data.
+
 #include "services_dune.fcl"
 #include "detsimmodules_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
 
-process_name: Detsim
+process_name: detsim
 
-services:
-{
-  # Load the service that manages root files for histograms.
-  TFileService: { fileName: "detsim_hist.root" }
-  TimeTracker:       {}
-  SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
-  RandomNumberGenerator: {} #ART native random number generator
-  FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::dunefd_simulation_services
-}
+services: @local::dunefd_simulation_services
+services.TFileService: { fileName: "detsim_hist.root" }
+services.TimeTracker:       {}
+services.SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
+services.RandomNumberGenerator: {} #ART native random number generator
+services.FileCatalogMetadata:  @local::art_file_catalog_mc
+services.LArSeedService:       @local::random_seedservice  # seedservice.fcl
 
 #source is now a root file
-source:
-{
+source: {
   module_type: RootInput
   maxEvents:  10        # Number of events to create
 }
@@ -25,44 +28,44 @@ source:
 # Define and configure some modules to do work on each event.
 # First modules are defined; they are scheduled later.
 # Modules are grouped by type.
-physics:
-{
-
- producers:
- {
-   daq:            @local::dunefd_simwire
-#   simcounter:     @local::dunefd_simcounter
-   opdigi:         @local::dunefd_opdigi
+physics: {
+ producers: {
+   daq:            @local::dune_detsim
+   opdigi:         @local::dune35t_opdigi
    rns:            { module_type: "RandomNumberSaver" }
  }
- 
- #define the producer and filter modules for this path, order matters, 
- #filters reject all following items.  see lines starting physics.producers below
  simulate: [ rns, daq, opdigi ]
- 
- #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
-
- #trigger_paths is a keyword and contains the paths that modify the art::event, 
- #ie filters and producers
  trigger_paths: [simulate] 
-
- #end_paths is a keyword and contains the paths that do not modify the art::Event, 
- #ie analyzers and output streams.  these all run simultaneously
  end_paths:     [stream1]  
 }
 
-#block to define where the output goes.  if you defined a filter in the physics
-#block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
-#entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
-outputs:
-{
- out1:
- {
+outputs: {
+ out1: {
    module_type: RootOutput
-   fileName:    "%ifb_detsim.root"
+   fileName:    "%ifb_%tc_detsim.root"
    dataTier:    "detector-simulated"
    compressionLevel: 1
  }
 }
+
+# Use fixed values instead of DB for pedestals.
+services.DetPedestalService: @local::dune_fixedpeds
+
+# DetSim flags.
+physics.producers.daq.NoiseOn:     true
+physics.producers.daq.PedestalOn:  true
+physics.producers.daq.DistortOn:   false
+physics.producers.daq.SuppressOn:  true
+
+# DetSim services.
+services.SimChannelExtractService: @local::scxgeneric
+services.ChannelNoiseService:      @local::chnoiseold
+services.PedestalAdditionService:  @local::padprovided
+services.AdcDistortService:        @local::stuckbits
+services.AdcSuppressService:       @local::zslegacy
+services.AdcCompressService:       @local::cmpblock
+
+# Disable bad channels.
+#services.IChannelStatusService.BadChannels: [ ]
 
