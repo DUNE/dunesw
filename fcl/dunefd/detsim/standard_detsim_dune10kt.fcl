@@ -43,7 +43,7 @@ physics: {
 outputs: {
  out1: {
    module_type: RootOutput
-   fileName:    "%ifb_%tc_detsim.root"
+   fileName:    "%ifb_detsim.root"
    dataTier:    "detector-simulated"
    compressionLevel: 1
  }
