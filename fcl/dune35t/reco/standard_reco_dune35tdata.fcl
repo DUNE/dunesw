@@ -2,7 +2,7 @@
 #include "noisefilter_dune.fcl"
 #include "caldata_dune.fcl"
 #include "hitfindermodules_dune.fcl"
-#include "cluster_dune.fcl"
+#include "clusterfinder_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
 #include "calorimetry_dune35t.fcl"
@@ -58,10 +58,13 @@ physics:
   hit35t:             @local::dune35t_hitfinder35t
 #  hit35tcc:           @local::dune35t_hitfinder35t
   handscan:           @local::dune35t_handscan
+# disambiguation using the counters
+  counterhit:         @local::dune35t_hitfindercounters
 # reconstruction using disambiguated hits
 #  fuzzy:              @local::dune35t_fuzzycluster
   dbcluster:          @local::dune35t_dbcluster
-  linecluster:        @local::dune35t_linecluster
+  linecluster:        @local::dune35tdata_linecluster
+  lineclusterch:      @local::dune35tdata_linecluster
   costrk:             @local::dune35t_cosmictracker
 #  stitch:             @local::dune35t_trackstitcher
   calo:               @local::dune35t_calomc
@@ -70,6 +73,8 @@ physics:
   pandoracalo:        @local::dune35t_calomc
   pmtrack:             @local::dune35t_pmalgtrackmaker
   pmtrackcalo:         @local::dune35t_calomc
+  pmtrackch:             @local::dune35t_pmalgtrackmaker
+  
 #  kalmanhit:         @local::dune35t_track3Dkalmanhit
 # Photon counter T0
   photont0costrk:    @local::lbne35t_photoncountert0matching
@@ -105,13 +110,17 @@ physics:
          , hit35t
          #manual real-from-noise hit selection
          #, handscan
+	 # disambiguation using the counters.
+	 , counterhit
          #cluster reco
          #, dbcluster
-	 #, linecluster
+	 , linecluster, lineclusterch
          #pandora
-         #, pandora, particlestitcher, photont0pandora, pandoracalo
+         #, pandora, particlestitcher
+         #, photont0pandora, pandoracalo
          #pmatrack
-         #, pmtrack, photont0pmtrack, pmtrackcalo
+         , pmtrack, pmtrackch
+         #, photont0pmtrack, pmtrackcalo
 	 #shower reconstruction
 	 #, blurredcluster, emshower, emshower3d, mergeemshower3d
 ]
@@ -147,15 +156,16 @@ physics.producers.daq.DigitModuleLabel:                "unstick:TPC"
 physics.producers.daq.SkipStuckCodes:                  false
 physics.producers.t0counter.TriggerModuleLabel:        "SplitterInput:TRIGGER"
 physics.producers.caldata.DigitModuleLabel:            "daq"
+#physics.producers.caldata.fSigThrFact:                 2
 #physics.producers.caldata.DoBaselineSub:               true
 
 physics.producers.gaushit.CalDataModuleLabel:          "caldata"
 #physics.producers.gaushit.MinSig:                      [100,100,100]
 #physics.producers.gaushit.MinWidth:                    [5,5,5]
 #physics.producers.hit35tcc.ChanHitLabel:              "gaushit"
+physics.producers.lineclusterch.HitFinderModuleLabel:  "counterhit"
 physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
-
 physics.producers.pmtrackcalo.TrackModuleLabel:       "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:  "pmtrack"
 physics.producers.pmtrackcalo.T0ModuleLabel:          "photont0pmtrack"
@@ -164,9 +174,10 @@ physics.producers.photont0pmtrack.HitsModuleLabel:    "linecluster"
 physics.producers.photont0pmtrack.ShowerModuleLabel:  ""
 physics.producers.photont0pmtrack.TruthT0ModuleLabel: "mctrutht0pmtrack"
 
+physics.producers.pmtrackch.HitModuleLabel:               "lineclusterch"
+physics.producers.pmtrackch.ClusterModuleLabel:           "lineclusterch"
 #physics.producers.fuzzy.HitsModuleLabel:            "hit35t"
-physics.producers.dbcluster.HitsModuleLabel:         "hit35t"
-physics.producers.linecluster.HitFinderModuleLabel:  "hit35t"
+
 physics.producers.costrk.ClusterModuleLabel:         "linecluster"
 #physics.producers.stitch.TrackModuleLabel:          "costrk"
 #physics.producers.stitch.SpptModuleLabel:           "costrk"
@@ -221,8 +232,9 @@ physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.WideConeAngle: 20
 
-services.user.DetectorPropertiesService.NumberTimeSamples: 6000
-services.user.DetectorPropertiesService.ReadOutWindowSize: 6000
+services.user.DetectorPropertiesService.NumberTimeSamples: 15000
+services.user.DetectorPropertiesService.ReadOutWindowSize: 15000
+services.user.DetectorPropertiesService.Efield: [0.25, 0.782, 1.734]
 
 #services.user.SignalShapingServiceDUNE.DebugFieldShape: true
 services.user.SignalShapingServiceDUNE.ASICGainInMVPerFC: [14, 14, 14]
@@ -247,8 +259,8 @@ services.user.SignalShapingServiceDUNE.IndUFilterParams: [ 1.0, 0.105, 0.019, 0.
 services.user.SignalShapingServiceDUNE.IndVFilter:       "(x>0.03)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
 services.user.SignalShapingServiceDUNE.IndVFilterParams: [ 0.95, 0.125, 0.019, 0.010, 0.0109 ]
 
-physics.producers.gaushit.MinSig:   [ 8  ,8  , 10  ]
-physics.producers.gaushit.MinWidth: [ 2.5, 2.5, 2.5 ]
+physics.producers.gaushit.MinSig:   [ 5, 5, 10 ]
+physics.producers.gaushit.MinWidth: [ 1, 1, 1 ]
 
 physics.producers.fasthit.MinSigCol: 80
 physics.producers.fasthit.MinSigInd: 80
