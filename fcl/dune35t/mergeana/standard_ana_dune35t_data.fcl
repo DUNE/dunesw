@@ -94,7 +94,7 @@ physics.analyzers.pandorana.TrackModule: "particlestitcher"
 physics.analyzers.analysistree.HitsModuleLabel:          "linecluster"
 physics.analyzers.analysistree.TrackModuleLabel:         ["pmtrack"]
 physics.analyzers.analysistree.VertexModuleLabel:        ["pmtrack","linecluster"]
-physics.analyzers.analysistree.CalorimetryModuleLabel:   [""]
+physics.analyzers.analysistree.CalorimetryModuleLabel:   ["pmtrackcalo"]
 physics.analyzers.analysistree.ParticleIDModuleLabel:    [""]
 physics.analyzers.analysistree.MVAPIDTrackModuleLabel:   [""]
 physics.analyzers.analysistree.MVAPIDShowerModuleLabel:  [""]

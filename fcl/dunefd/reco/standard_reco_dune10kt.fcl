@@ -82,11 +82,11 @@ physics:
   opflash:            @local::dune35t_opflash 
   trkshowersplit:     @local::standard_trackshowerhits
   trkshowersplitdc:   @local::standard_trackshowerhits
-  blurredclusterdc:      @local::dune35t_blurredcluster
+  blurredclusterdc:      @local::dune10kt_blurredcluster
   emshowerdc:            @local::dune10kt_emshower
   emshower3ddc:          @local::dune10kt_emshower3d
   mergeemshower3ddc:     @local::dune10kt_mergeemshower3d
-  blurredcluster:        @local::dune35t_blurredcluster
+  blurredcluster:        @local::dune10kt_blurredcluster
   emshower:              @local::dune10kt_emshower
   emshower3d:            @local::dune10kt_emshower3d
   mergeemshower3d:       @local::dune10kt_mergeemshower3d
