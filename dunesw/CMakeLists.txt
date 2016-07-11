@@ -39,6 +39,7 @@ add_subdirectory(Protodune)
 add_subdirectory(DAQTriggerSim)
 add_subdirectory(SpaceCharge)
 add_subdirectory(SpaceChargeServices)
+add_subdirectory(SupernovaAna)
 
 # Respect the order specified in lar_build, which is:
 #
