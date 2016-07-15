@@ -8,3 +8,5 @@ services.user.LArSeedService.largeant.radio: 1234
 
 services.RandomNumberGenerator.restoreFrom: "G4RandomSeeds_Ref.dat"
 services.RandomNumberGenerator.saveTo: "G4RandomSeeds.dat"
+
+outputs.out1.fastCloning: false
