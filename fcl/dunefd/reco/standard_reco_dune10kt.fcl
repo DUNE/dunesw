@@ -56,6 +56,7 @@ physics:
 #  dcheatcc:           @local::dune35t_disambigcheat
 # reconstruction using gaushit and disambiguration cheater
   lineclusterdc:      @local::dunefd_linecluster
+  trajclusterdc:          @local::standard_trajcluster
 #  costrkdc:           @local::dunefd_cosmictracker
   calodc:             @local::dune35t_calomc
   pandoradc:          @local::standard_pandoraneutrino
@@ -65,10 +66,14 @@ physics:
   pmtrackcalodc:       @local::dune10kt_calomc
   pmtrackpfpdc:        @local::dunefd_pmalgtrackmaker
   pmtrackpfpcalodc:    @local::dune10kt_calomc
+  pmtracktcdc:           @local::dunefd_pmalgtrackmaker
+  pmtracktccalodc:       @local::dune10kt_calomc
+
 # actual disambiguation
   hitfd:             @local::dunefd_hitfinderfd
 # reconstruction using disambiguated hits
   linecluster:        @local::dune35t_linecluster
+  trajcluster:          @local::standard_trajcluster
   calo:               @local::dune35t_calomc
   pandora:            @local::standard_pandoraneutrino
 # pandora stitching module goes here when it's ready
@@ -77,6 +82,8 @@ physics:
   pmtrackcalo:         @local::dune10kt_calomc
   pmtrackpfp:          @local::dunefd_pmalgtrackmaker
   pmtrackpfpcalo:      @local::dune10kt_calomc
+  pmtracktc:             @local::dunefd_pmalgtrackmaker
+  pmtracktccalo:         @local::dune10kt_calomc
 # photon detector reconstruction
   ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
@@ -102,27 +109,31 @@ physics:
          #hit reco with cheated disambiguation
          gaushit, dcheat, #cchit, fasthit, fasthitdc,
          #cluster reco with cheated disambiguation
-         lineclusterdc,
+         lineclusterdc, trajclusterdc,
          #track shower split
          trkshowersplitdc,
          #pandora with cheated disambiguation
          pandoradc, #pandora stitcher goes here
          pandoracalodc,
          #pmatrack with cheated disambiguation
-         pmtrackdc, pmtrackcalodc, pmtrackpfpdc, pmtrackpfpcalodc,
+         pmtrackdc, pmtrackcalodc, 
+         pmtrackpfpdc, pmtrackpfpcalodc,
+         pmtracktcdc, pmtracktccalodc,
          #shower reconstruction
          blurredclusterdc, emshowerdc, #emshower3ddc, mergeemshower3ddc,
          #real disambiguation
          hitfd,
          #cluster reco
-         linecluster,
+         linecluster, trajcluster,
          #track shower split
          trkshowersplit,
          #pandora
          pandora, #pandora stitcher goes here
          pandoracalo,
          #pmatrack
-         pmtrack, pmtrackcalo, pmtrackpfp, pmtrackpfpcalo,
+         pmtrack, pmtrackcalo, 
+         pmtrackpfp, pmtrackpfpcalo,
+         pmtracktc, pmtracktccalo,
          #shower reconstruction
          blurredcluster, emshower#, emshower3d, mergeemshower3d
          ]
@@ -156,6 +167,12 @@ outputs:
 ### Here, we overwrite ALL module labels with the ones defined above.
 physics.producers.fasthitdc.ChanHitLabel:               "fasthit"
 physics.producers.lineclusterdc.HitFinderModuleLabel:   "dcheat"
+physics.producers.trajclusterdc.TrajClusterAlg.HitFinderModuleLabel:   "dcheat"
+physics.producers.trajclusterdc.TrajClusterAlg.MaxWireSkipNoSignal: 2
+physics.producers.trajclusterdc.TrajClusterAlg.HitErrFac: 0.4
+physics.producers.trajclusterdc.TrajClusterAlg.KinkAngCut: 0.6
+physics.producers.trajclusterdc.TrajClusterAlg.SkipAlgs:   ["ChainMerge", "MaskHits", "RevProp"]
+
 physics.producers.calodc.TrackModuleLabel:              "costrkdc"
 physics.producers.calodc.SpacePointModuleLabel:         "costrkdc"
 
@@ -175,6 +192,20 @@ physics.producers.pmtrack.CluMatchingAlg:               1
 physics.producers.pmtrack.RunVertexing:                 true
 physics.producers.pmtrack.FlipToBeam:                   true
 physics.producers.pmtrack.MakePFPs:                     true
+
+physics.producers.pmtracktcdc.HitModuleLabel:           "dcheat"
+physics.producers.pmtracktcdc.ClusterModuleLabel:       "trajclusterdc"
+physics.producers.pmtracktcdc.CluMatchingAlg:           1
+physics.producers.pmtracktcdc.RunVertexing:             true
+physics.producers.pmtracktcdc.FlipToBeam:               true
+physics.producers.pmtracktcdc.MakePFPs:                 true
+
+physics.producers.pmtracktc.HitModuleLabel:             "hitfd"
+physics.producers.pmtracktc.ClusterModuleLabel:         "trajcluster"
+physics.producers.pmtracktc.CluMatchingAlg:             1
+physics.producers.pmtracktc.RunVertexing:               true
+physics.producers.pmtracktc.FlipToBeam:                 true
+physics.producers.pmtracktc.MakePFPs:                   true
 
 physics.producers.pmtrackpfpdc.HitModuleLabel:             "lineclusterdc"
 physics.producers.pmtrackpfpdc.ClusterModuleLabel:         "pandoradc"
@@ -201,6 +232,15 @@ physics.producers.pmtrackcalodc.SpacePointModuleLabel:  "pmtrackdc"
 physics.producers.pmtrackcalodc.T0ModuleLabel:          ""
 physics.producers.pmtrackcalodc.MakeTree:               false
 
+physics.producers.pmtracktccalo.TrackModuleLabel:         "pmtracktc"
+physics.producers.pmtracktccalo.SpacePointModuleLabel:    "pmtracktc"
+physics.producers.pmtracktccalo.T0ModuleLabel:            ""
+physics.producers.pmtracktccalo.MakeTree:                 false
+physics.producers.pmtracktccalodc.TrackModuleLabel:       "pmtracktcdc"
+physics.producers.pmtracktccalodc.SpacePointModuleLabel:  "pmtracktcdc"
+physics.producers.pmtracktccalodc.T0ModuleLabel:          ""
+physics.producers.pmtracktccalodc.MakeTree:               false
+
 physics.producers.pmtrackpfpcalo.TrackModuleLabel:         "pmtrackpfp"
 physics.producers.pmtrackpfpcalo.SpacePointModuleLabel:    "pmtrackpfp"
 physics.producers.pmtrackpfpcalo.T0ModuleLabel:            ""
@@ -211,6 +251,12 @@ physics.producers.pmtrackpfpcalodc.T0ModuleLabel:          ""
 physics.producers.pmtrackpfpcalodc.MakeTree:               false
 
 physics.producers.linecluster.HitFinderModuleLabel:     "hitfd"
+physics.producers.trajcluster.TrajClusterAlg.HitFinderModuleLabel:   "hitfd"
+physics.producers.trajcluster.TrajClusterAlg.MaxWireSkipNoSignal: 2
+physics.producers.trajcluster.TrajClusterAlg.HitErrFac: 0.4
+physics.producers.trajcluster.TrajClusterAlg.KinkAngCut: 0.6
+physics.producers.trajcluster.TrajClusterAlg.SkipAlgs:   ["ChainMerge", "MaskHits", "RevProp"]
+
 physics.producers.calo.TrackModuleLabel:                "costrk"
 physics.producers.calo.SpacePointModuleLabel:           "costrk"
 #physics.producers.kalmanhit.HitModuleLabel:            "hitfd"
