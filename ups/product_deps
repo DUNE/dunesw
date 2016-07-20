@@ -3,7 +3,7 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 parent dunetpc v05_15_01
-defaultqual e9
+defaultqual e10
 
 # These optional lines define where headers, libraries, and executables go and should
 # be used only if your product does not conform to the defaults.
@@ -45,22 +45,22 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v05_15_01
-artdaq_core	v1_04_28
-duneutil        v01_23_02	-	optional
-lbne_raw_data 	v1_03_25
+larsoft         v06_00_01
+artdaq_core	v1_05_01
+duneutil        v01_23_03	-	optional
+lbne_raw_data 	v1_04_00
 dune_pardata	v01_12_00
-cetbuildtools	v4_19_04	-	only_for_build
+cetbuildtools	v5_02_02	-	only_for_build
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes". 
-# e9  - with gcc 4.9.3 and -std=c++14
+# e10  - with gcc 4.9.3 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata	notes
-e9:debug	e9:debug	e9:debug	nu:e9:s30:debug	nu:e9:s30:debug	-nq-
-e9:opt		e9:opt		e9:opt		nu:e9:s30:opt	nu:e9:s30:prof	-nq-
-e9:prof		e9:prof		e9:prof		nu:e9:s30:prof	nu:e9:s30:prof	-nq-
+e10:debug	e10:debug	e10:debug	nu:e10:s36:debug nu:e10:s36:debug	-nq-
+e10:opt		e10:opt		e10:opt		nu:e10:s36:opt	 nu:e10:s36:prof	-nq-
+e10:prof	e10:prof	e10:prof	nu:e10:s36:prof	 nu:e10:s36:prof	-nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
