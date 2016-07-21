@@ -1,0 +1,7 @@
+#include "prodgenie_common_dunefd.fcl"
+
+process_name: GenieGen
+
+outputs.out1.fileName: "prodgenie_atmnu_max_dune10kt_gen.root"
+
+physics.producers.generator: @local::dune_fd_genie_atmo_max_flux
