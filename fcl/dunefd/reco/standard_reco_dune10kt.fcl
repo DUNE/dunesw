@@ -164,23 +164,19 @@ physics.producers.trkshowersplit.HitModuleLabel:        "linecluster"
 
 physics.producers.pmtrackdc.HitModuleLabel:             "trkshowersplitdc"
 physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
-physics.producers.pmtrackdc.RunVertexing:               true
-physics.producers.pmtrackdc.FlipToBeam:                 true
+physics.producers.pmtrackdc.PMAlgTracking.RunVertexing: true
+physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:   true
 
 physics.producers.pmtrack.HitModuleLabel:               "trkshowersplit"
 physics.producers.pmtrack.ClusterModuleLabel:           "linecluster"
-physics.producers.pmtrack.RunVertexing:                 true
-physics.producers.pmtrack.FlipToBeam:                   true
+physics.producers.pmtrack.PMAlgTracking.RunVertexing:   true
+physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
 
 physics.producers.pmtrajfitdc.HitModuleLabel:           "lineclusterdc"
 physics.producers.pmtrajfitdc.PfpModuleLabel:           "pandoradc"
-physics.producers.pmtrajfitdc.TrackingSkipPdg:          [0]
-physics.producers.pmtrajfitdc.RunVertexing:             true
 
 physics.producers.pmtrajfit.HitModuleLabel:             "linecluster"
 physics.producers.pmtrajfit.PfpModuleLabel:             "pandora"
-physics.producers.pmtrajfit.TrackingSkipPdg:            [0]
-physics.producers.pmtrajfit.RunVertexing:               true
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"

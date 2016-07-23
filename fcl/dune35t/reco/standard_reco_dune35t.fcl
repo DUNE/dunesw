@@ -222,8 +222,6 @@ physics.producers.photont0pmtrackdc.TruthT0ModuleLabel: "mctrutht0pmtrackdc"
 
 physics.producers.pmtrajfitdc.HitModuleLabel:           "lineclusterdc"
 physics.producers.pmtrajfitdc.PfpModuleLabel:           "pandoradc"
-physics.producers.pmtrajfitdc.TrackingSkipPdg:          [0]
-physics.producers.pmtrajfitdc.RunVertexing:             true
 
 physics.producers.pmtrajfitcalodc.TrackModuleLabel:       "pmtrajfitdc"
 physics.producers.pmtrajfitcalodc.SpacePointModuleLabel:  "pmtrajfitdc"
@@ -245,8 +243,6 @@ physics.producers.photont0pmtrack.TruthT0ModuleLabel: "mctrutht0pmtrack"
 
 physics.producers.pmtrajfit.HitModuleLabel:               "linecluster"
 physics.producers.pmtrajfit.ClusterModuleLabel:           "pandora"
-physics.producers.pmtrajfit.TrackingSkipPdg:              [0]
-physics.producers.pmtrajfit.RunVertexing:                 true
 
 physics.producers.pmtrajfitcalo.TrackModuleLabel:       "pmtrajfit"
 physics.producers.pmtrajfitcalo.SpacePointModuleLabel:  "pmtrajfit"
