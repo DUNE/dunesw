@@ -152,7 +152,8 @@ outputs:
 }
 ### Here, we overwrite ALL module labels with the ones defined above.
 physics.producers.unstick.DigitModuleLabel:            "SplitterInput:TPC"
-physics.producers.daq.DigitModuleLabel:                "unstick:TPC"
+physics.producers.daq.RawDigitModuleLabel:             "unstick"
+physics.producers.daq.RawDigitModuleInstance:          "TPC"
 physics.producers.daq.SkipStuckCodes:                  false
 physics.producers.t0counter.TriggerModuleLabel:        "SplitterInput:TRIGGER"
 physics.producers.caldata.DigitModuleLabel:            "daq"
@@ -245,9 +246,9 @@ services.user.SignalShapingServiceDUNE.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.55 ]
 							  [ 0.89, 0.66, 4.8, 0.43 ]]
 
 ##############   The standard parameters -----------------------
-#services.user.SignalShapingServiceDUNE.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
-#services.user.SignalShapingServiceDUNE.IndUFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
-#services.user.SignalShapingServiceDUNE.IndVFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
+#services.user.SignalShapingServiceDUNE35t.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
+#services.user.SignalShapingServiceDUNE35t.IndUFilter: "(x>0.0)*gaus(0)*exp(-0.5*pow(x/[3],[4]))"
+#services.user.SignalShapingServiceDUNE35t.IndVFilter: "(x>0.0)*gaus(0)*exp(-0.5*pow(x/[3],[4]))"
 
 ##############   My new  parameters -----------------------
 

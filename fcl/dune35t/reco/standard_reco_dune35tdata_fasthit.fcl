@@ -143,7 +143,8 @@ outputs:
 ### Here, we overwrite ALL module labels with the ones defined above.
 physics.producers.unstick.DigitModuleLabel:            "SplitterInput:TPC"
 
-physics.producers.daq.DigitModuleLabel:                "unstick:TPC"
+physics.producers.daq.RawDigitModuleLabel:             "unstick"
+physics.producers.daq.RawDigitModuleInstance:          "TPC"
 physics.producers.daq.SkipStuckCodes:                  false
 
 physics.producers.sigmoid.DigitModuleLabel:            "daq" 
