@@ -243,7 +243,7 @@ physics.producers.photont0pmtrack.ShowerModuleLabel:  ""
 physics.producers.photont0pmtrack.TruthT0ModuleLabel: "mctrutht0pmtrack"
 
 physics.producers.pmtrajfit.HitModuleLabel:               "linecluster"
-physics.producers.pmtrajfit.ClusterModuleLabel:           "pandora"
+physics.producers.pmtrajfit.PfpModuleLabel:               "pandora"
 
 physics.producers.pmtrajfitcalo.TrackModuleLabel:       "pmtrajfit"
 physics.producers.pmtrajfitcalo.SpacePointModuleLabel:  "pmtrajfit"
