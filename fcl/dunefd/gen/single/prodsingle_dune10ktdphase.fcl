@@ -17,6 +17,7 @@ services:
 }
 
 services.user.Geometry: @local::dunedphase10kt_workspace_geo
+services.user.LArG4Parameters.ElectronClusterSize: 6
 
 # Use fixed values instead of DB for ped
 services.DetPedestalService:       @local::dunedp_fixedpeds
