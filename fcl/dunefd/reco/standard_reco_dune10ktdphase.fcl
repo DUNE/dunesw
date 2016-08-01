@@ -98,6 +98,9 @@ outputs:
 }
 ### Here, we overwrite ALL module labels with the ones defined above.
 
+physics.producers.gaushit.MinSig: [5, 5]
+physics.producers.caldata.SigThrFact: 0.5
+
 #PMAlg configuration
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
