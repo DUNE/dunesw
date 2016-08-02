@@ -24,7 +24,7 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:      @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_data
-  user:         @local::dune35t_services
+  @table::dune35t_services
 }
 #source is now a root file
 source:
@@ -233,32 +233,32 @@ physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.WideConeAngle: 20
 
-services.user.DetectorPropertiesService.NumberTimeSamples: 15000
-services.user.DetectorPropertiesService.ReadOutWindowSize: 15000
-services.user.DetectorPropertiesService.Efield: [0.25, 0.782, 1.734]
+services.DetectorPropertiesService.NumberTimeSamples: 15000
+services.DetectorPropertiesService.ReadOutWindowSize: 15000
+services.DetectorPropertiesService.Efield: [0.25, 0.782, 1.734]
 
-#services.user.SignalShapingServiceDUNE.DebugFieldShape: true
-services.user.SignalShapingServiceDUNE.ASICGainInMVPerFC: [14, 14, 14]
-services.user.SignalShapingServiceDUNE.ShapeTimeConst: [3, 3, 3]
+#services.SignalShapingServiceDUNE.DebugFieldShape: true
+services.SignalShapingServiceDUNE.ASICGainInMVPerFC: [14, 14, 14]
+services.SignalShapingServiceDUNE.ShapeTimeConst: [3, 3, 3]
 
-services.user.SignalShapingServiceDUNE.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.55 ],
+services.SignalShapingServiceDUNE.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.55 ],
 							  [ 1.12, 0.86, 6.0, 0.55 ],
 							  [ 0.89, 0.66, 4.8, 0.43 ]]
 
 ##############   The standard parameters -----------------------
-#services.user.SignalShapingServiceDUNE35t.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
-#services.user.SignalShapingServiceDUNE35t.IndUFilter: "(x>0.0)*gaus(0)*exp(-0.5*pow(x/[3],[4]))"
-#services.user.SignalShapingServiceDUNE35t.IndVFilter: "(x>0.0)*gaus(0)*exp(-0.5*pow(x/[3],[4]))"
+#services.SignalShapingServiceDUNE35t.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
+#services.SignalShapingServiceDUNE35t.IndUFilter: "(x>0.0)*gaus(0)*exp(-0.5*pow(x/[3],[4]))"
+#services.SignalShapingServiceDUNE35t.IndVFilter: "(x>0.0)*gaus(0)*exp(-0.5*pow(x/[3],[4]))"
 
 ##############   My new  parameters -----------------------
 
-services.user.SignalShapingServiceDUNE.ColFilter:       "(x>0.001)*[0]*(1-1/(1+exp(-(x-[1])/[2])))"
-services.user.SignalShapingServiceDUNE.ColFilterParams: [ 1, 0.150, 0.025 ]
+services.SignalShapingServiceDUNE.ColFilter:       "(x>0.001)*[0]*(1-1/(1+exp(-(x-[1])/[2])))"
+services.SignalShapingServiceDUNE.ColFilterParams: [ 1, 0.150, 0.025 ]
 
-services.user.SignalShapingServiceDUNE.IndUFilter:       "(x>0.03)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
-services.user.SignalShapingServiceDUNE.IndUFilterParams: [ 1.0, 0.105, 0.019, 0.018, 0.010 ]
-services.user.SignalShapingServiceDUNE.IndVFilter:       "(x>0.03)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
-services.user.SignalShapingServiceDUNE.IndVFilterParams: [ 0.95, 0.125, 0.019, 0.010, 0.0109 ]
+services.SignalShapingServiceDUNE.IndUFilter:       "(x>0.03)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
+services.SignalShapingServiceDUNE.IndUFilterParams: [ 1.0, 0.105, 0.019, 0.018, 0.010 ]
+services.SignalShapingServiceDUNE.IndVFilter:       "(x>0.03)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
+services.SignalShapingServiceDUNE.IndVFilterParams: [ 0.95, 0.125, 0.019, 0.010, 0.0109 ]
 
 physics.producers.gaushit.MinSig:   [ 5, 5, 10 ]
 physics.producers.gaushit.MinWidth: [ 1, 1, 1 ]
