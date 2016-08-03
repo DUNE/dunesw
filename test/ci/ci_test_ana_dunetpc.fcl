@@ -1,7 +1,7 @@
 #include "standard_ana_dune35t.fcl"
 
-services.user.LArSeedService.policy: "preDefinedSeed"
-services.user.LArSeedService.baseSeed: 1234
+services.LArSeedService.policy: "preDefinedSeed"
+services.LArSeedService.baseSeed: 1234
 
 #services.RandomNumberGenerator.restoreFrom: "AnaRandomSeeds_Ref.dat"
 #services.RandomNumberGenerator.saveTo: "AnaRandomSeeds.dat"
