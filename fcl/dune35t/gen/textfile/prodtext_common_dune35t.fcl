@@ -10,7 +10,7 @@ services:
   TimeTracker:       {}
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  user:         @local::dune35t_simulation_services
+  @table::dune35t_simulation_services
 }
 
 
