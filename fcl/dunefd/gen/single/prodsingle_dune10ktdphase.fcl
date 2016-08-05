@@ -17,7 +17,7 @@ services:
 }
 
 services.Geometry: @local::dunedphase10kt_workspace_geo
-services.LArG4Parameters.ElectronClusterSize: 6
+services.LArG4Parameters.MinNumberOfElCluster: 20
 
 # Use fixed values instead of DB for ped
 services.DetPedestalService:       @local::dunedp_fixedpeds
@@ -28,7 +28,6 @@ services.PedestalAdditionService:  @local::padprovided
 services.AdcSuppressService:       @local::zsonline
 services.AdcCompressService:       @local::cmpreplace
 services.AdcDistortService:        @local::stuckbits
-
 
 #Start each new event with an empty event.
 source:
@@ -79,8 +78,8 @@ physics.producers.generator.X0: [0.0]
 physics.producers.generator.Y0: [0.0]
 physics.producers.generator.Z0: [0.0] 
 
-#physics.producers.daq.PedestalOn: true
-#physics.producers.daq.NoiseOn: true
+
+physics.producers.daq.NoiseOn: false
 
 #block to define where the output goes.  if you defined a filter in the physics
 #block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
