@@ -14,7 +14,7 @@ services:
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefd_simulation_services
 }
-#services.user.PhotonVisibilityService:      @local::dune35t_photonvisibilityservice
+#services.PhotonVisibilityService:      @local::dune35t_photonvisibilityservice
 #source is now a root file
 source:
 {

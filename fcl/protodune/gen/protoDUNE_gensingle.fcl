@@ -10,7 +10,7 @@ services:
   TimeTracker:       {}
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  user:         @local::protodune_simulation_services
+  @table::protodune_simulation_services
 }
 
 #Start each new event with an empty event.
