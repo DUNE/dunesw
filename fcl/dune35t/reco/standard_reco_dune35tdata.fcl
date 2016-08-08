@@ -92,7 +92,7 @@ physics:
   trkshowersplit:     @local::standard_trackshowerhits
 # shower reconstruction
   blurredcluster:        @local::dune35t_blurredcluster
-  emshower:              @local::dune35t_emshower
+  emshower:              @local::dune35tdata_emshower
   emshower3d:            @local::dune35t_emshower3d
   mergeemshower3d:       @local::dune35t_mergeemshower3d
  }
