@@ -190,11 +190,13 @@ physics.producers.trkshowersplit.HitModuleLabel:        "linecluster"
 
 physics.producers.pmtrackdc.HitModuleLabel:             "lineclusterdc"
 physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
+physics.producers.pmtrackdc.EmClusterModuleLabel:       "trkshowersplitdc"
 physics.producers.pmtrackdc.PMAlgTracking.RunVertexing: true
 physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:   true
 
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:           "linecluster"
+physics.producers.pmtrack.EmClusterModuleLabel:         "trkshowersplit"
 physics.producers.pmtrack.PMAlgTracking.RunVertexing:   true
 physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
 
