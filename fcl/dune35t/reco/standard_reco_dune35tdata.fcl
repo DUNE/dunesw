@@ -1,6 +1,11 @@
+# standard_reco_dune35tdata.fcl
+#
+# David Adams
+# August 2016
+#
+# Modified to use DataPrep.
+
 #include "services_dune.fcl"
-#include "noisefilter_dune.fcl"
-#include "caldata_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "clusterfinder_dune.fcl"
 #include "trackfindermodules_dune.fcl"
@@ -24,7 +29,7 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:      @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_data
-  @table::dune35t_services
+  @table::dune35tdata_reco_services
 }
 #source is now a root file
 source:
@@ -43,12 +48,8 @@ physics:
  {
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
-# noise filter
-  unstick:            @local::dune35t_unstick
-# unstuck code
-  daq:                @local::dune35t_filterwf
 # convert raw::RawDigit to recob::wire
-  caldata:            @local::dune35t_calwire
+  caldata:            @local::producer_adcprep
 # actual hit finder
   gaushit:            @local::dune35t_gaushitfinder
   fasthit:            @local::dune35t_fasthitfinder
@@ -99,11 +100,11 @@ physics:
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, unstick, daq
+ reco: [ rns
          #optical hit reco, flash, counter, TPC wire signals
          #ophit, opflash
          , t0counter 
-         ,caldata
+         , caldata
          #hit reco with cheated disambiguation
          ,gaushit #, fasthit
          #real disambiguation
@@ -151,14 +152,8 @@ outputs:
  }
 }
 ### Here, we overwrite ALL module labels with the ones defined above.
-physics.producers.unstick.DigitModuleLabel:            "SplitterInput:TPC"
-physics.producers.daq.RawDigitModuleLabel:             "unstick"
-physics.producers.daq.RawDigitModuleInstance:          "TPC"
-physics.producers.daq.SkipStuckCodes:                  false
+physics.producers.caldata.DigitLabel:                  "SplitterInput:TPC"
 physics.producers.t0counter.TriggerModuleLabel:        "SplitterInput:TRIGGER"
-physics.producers.caldata.DigitModuleLabel:            "daq"
-#physics.producers.caldata.fSigThrFact:                 2
-#physics.producers.caldata.DoBaselineSub:               true
 
 physics.producers.gaushit.CalDataModuleLabel:          "caldata"
 #physics.producers.gaushit.MinSig:                      [100,100,100]
