@@ -92,9 +92,9 @@ physics:
   trkshowersplit:     @local::standard_trackshowerhits
 # shower reconstruction
   blurredcluster:        @local::dune35t_blurredcluster
-#dla  emshower:              @local::dune35tdata_emshower
-#dla  emshower3d:            @local::dune35t_emshower3d
-#dla  mergeemshower3d:       @local::dune35t_mergeemshower3d
+  emshower:              @local::dune35tdata_emshower
+  emshower3d:            @local::dune35t_emshower3d
+  mergeemshower3d:       @local::dune35t_mergeemshower3d
  }
 
  #define the producer and filter modules for this path, order matters, 
@@ -219,19 +219,19 @@ physics.producers.blurredcluster.GlobalTPCRecon:  true
 physics.producers.blurredcluster.ShowerReconOnly: false
 physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
 
-#dla physics.producers.emshower.ClusterModuleLabel: "blurredcluster"
-#dla physics.producers.emshower.HitsModuleLabel: "linecluster"
-#dla physics.producers.emshower.TrackModuleLabel: "pmtrack"
+physics.producers.emshower.ClusterModuleLabel: "blurredcluster"
+physics.producers.emshower.HitsModuleLabel: "linecluster"
+physics.producers.emshower.TrackModuleLabel: "pmtrack"
 
-#dla physics.producers.emshower3d.HitsModuleLabel: "linecluster"
-#dla physics.producers.emshower3d.ClustersModuleLabel: "blurredcluster"
-#dla physics.producers.emshower3d.Trk3DModuleLabel: "pmtrack"
+physics.producers.emshower3d.HitsModuleLabel: "linecluster"
+physics.producers.emshower3d.ClustersModuleLabel: "blurredcluster"
+physics.producers.emshower3d.Trk3DModuleLabel: "pmtrack"
 
-#dla physics.producers.mergeemshower3d.HitsModuleLabel: "linecluster"
-#dla physics.producers.mergeemshower3d.ClustersModuleLabel: "blurredcluster"
-#dla physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
-#dla physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
-#dla physics.producers.mergeemshower3d.WideConeAngle: 20
+physics.producers.mergeemshower3d.HitsModuleLabel: "linecluster"
+physics.producers.mergeemshower3d.ClustersModuleLabel: "blurredcluster"
+physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
+physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
+physics.producers.mergeemshower3d.WideConeAngle: 20
 
 services.DetectorPropertiesService.NumberTimeSamples: 15000
 services.DetectorPropertiesService.ReadOutWindowSize: 15000
