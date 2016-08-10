@@ -1,4 +1,12 @@
 #include "standard_reco_dune35t.fcl"
 
-services.user:  @local::dune35t_milliblock_services
+includedServices: @local::services
+
+services: {
+    @table::includedServices
+    @table::dune35t_milliblock_services
+}
+
+includedServices: @erase
+
 outputs.out1.fileName: "%ifb_%tc_reco_milliblock.root"

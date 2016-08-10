@@ -199,6 +199,7 @@ physics.producers.pmtracktcdc.CluMatchingAlg:           1
 physics.producers.pmtracktcdc.RunVertexing:             true
 physics.producers.pmtracktcdc.FlipToBeam:               true
 physics.producers.pmtracktcdc.MakePFPs:                 true
+physics.producers.pmtracktcdc.MinSeedSize2ndPass:       2
 
 physics.producers.pmtracktc.HitModuleLabel:             "hitfd"
 physics.producers.pmtracktc.ClusterModuleLabel:         "trajcluster"
@@ -206,6 +207,7 @@ physics.producers.pmtracktc.CluMatchingAlg:             1
 physics.producers.pmtracktc.RunVertexing:               true
 physics.producers.pmtracktc.FlipToBeam:                 true
 physics.producers.pmtracktc.MakePFPs:                   true
+physics.producers.pmtracktc.MinSeedSize2ndPass:         2
 
 physics.producers.pmtrackpfpdc.HitModuleLabel:             "lineclusterdc"
 physics.producers.pmtrackpfpdc.ClusterModuleLabel:         "pandoradc"
