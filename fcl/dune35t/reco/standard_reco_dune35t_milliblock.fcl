@@ -1,4 +1,0 @@
-#include "standard_reco_dune35t.fcl"
-
-services.user:  @local::dune35t_milliblock_services
-outputs.out1.fileName: "%ifb_%tc_reco_milliblock.root"
