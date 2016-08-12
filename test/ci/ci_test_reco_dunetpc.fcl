@@ -1,4 +1,4 @@
-#include "standard_reco_dune35t.fcl"
+#include "standard_reco_dune35tsim.fcl"
 
 services.LArSeedService.policy: "preDefinedSeed"
 services.LArSeedService.baseSeed: 1234
