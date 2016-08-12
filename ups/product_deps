@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
-parent dunetpc v06_02_00
+parent dunetpc v06_03_00
 defaultqual e10
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -45,10 +45,10 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v06_02_00
-artdaq_core	v1_05_01
-duneutil        v01_23_04	-	optional
-lbne_raw_data 	v1_04_00
+larsoft         v06_03_00
+artdaq_core	v1_05_04
+duneutil        v01_23_05	-	optional
+lbne_raw_data 	v1_04_03
 dune_pardata	v01_12_00
 cetbuildtools	v5_04_03	-	only_for_build
 end_product_list
@@ -58,9 +58,9 @@ end_product_list
 # Make a table by adding columns before "notes". 
 # e10  - with gcc 4.9.3 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata	notes
-e10:debug	e10:debug	e10:debug	nu:e10:s36:debug nu:e10:s36:debug	-nq-
-e10:opt		e10:opt		e10:opt		nu:e10:s36:opt	 nu:e10:s36:prof	-nq-
-e10:prof	e10:prof	e10:prof	nu:e10:s36:prof	 nu:e10:s36:prof	-nq-
+e10:debug	e10:debug	e10:debug	nu:e10:s39:debug nu:e10:s39:debug	-nq-
+e10:opt		e10:opt		e10:opt		nu:e10:s39:opt	 nu:e10:s39:prof	-nq-
+e10:prof	e10:prof	e10:prof	nu:e10:s39:prof	 nu:e10:s39:prof	-nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
