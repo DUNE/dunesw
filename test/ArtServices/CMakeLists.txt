@@ -40,6 +40,7 @@ cet_test(test_LArProperties SOURCES test_LArProperties.cxx
   LIBRARIES
     dune_ArtSupport
     lardata_DetectorInfoServices_LArPropertiesServiceStandard_service
+    ${ROOT_BASIC_LIB_LIST}
 )
 
 cet_test(test_LArSeedService SOURCES test_LArSeedService.cxx
