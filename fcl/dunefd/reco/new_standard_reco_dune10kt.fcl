@@ -1,9 +1,9 @@
 #include "services_dune.fcl"
-#include "caldata_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules.fcl"
+##include "pandoramodules_dune.fcl"
 #include "calorimetry_dune10kt.fcl"
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
@@ -17,22 +17,20 @@ process_name: Reco
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "reco_protoDUNE_hist.root" }
-  TimeTracker:       {}
+  TFileService: { fileName: "reco_hist.root" }
   MemoryTracker:     {}
+  TimeTracker:       {}
   RandomNumberGenerator: {} #ART native random number generator
   message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::protodune_services
-			@table::protodune_simulation_services
+                        @table::dunefd_reco_services
 }
-
 #source is now a root file
 source:
 {
   module_type: RootInput
-  maxEvents: 30000
-  fileNames: ["detsim_single_protoDUNE.root"]
+  maxEvents:  10        # Number of events to create
+  saveMemoryObjectThreshold: 0
 }
 
 # Define and configure some modules to do work on each event.
@@ -46,7 +44,7 @@ physics:
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
-  caldata:            @local::dunefd_calwire
+  caldata:            @local::producer_adcprep
 # actual hit finder
   gaushit:            @local::dunefd_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
@@ -57,37 +55,44 @@ physics:
 #  dcheatcc:           @local::dune35t_disambigcheat
 # reconstruction using gaushit and disambiguration cheater
   lineclusterdc:      @local::dunefd_linecluster
+  trajclusterdc:          @local::standard_trajcluster
 #  costrkdc:           @local::dunefd_cosmictracker
   calodc:             @local::dune35t_calomc
   pandoradc:          @local::standard_pandoraneutrino
 # pandora stitching module goes here when it's ready
   pandoracalodc:      @local::dune10kt_calomc
-  pmtrackdc:          @local::dunefd_pmalgtrackmaker
-  pmtrackcalodc:      @local::dune10kt_calomc
-  pmtrajfitdc:        @local::dunefd_pmalgtrajfitter
-  pmtrajfitcalodc:    @local::dune10kt_calomc
+  pmtrackdc:           @local::dunefd_pmalgtrackmaker
+  pmtrackcalodc:       @local::dune10kt_calomc
+  pmtrackpfpdc:        @local::dunefd_pmalgtrackmaker
+  pmtrackpfpcalodc:    @local::dune10kt_calomc
+  pmtracktcdc:           @local::dunefd_pmalgtrackmaker
+  pmtracktccalodc:       @local::dune10kt_calomc
+
 # actual disambiguation
   hitfd:             @local::dunefd_hitfinderfd
 # reconstruction using disambiguated hits
   linecluster:        @local::dune35t_linecluster
+  trajcluster:          @local::standard_trajcluster
   calo:               @local::dune35t_calomc
   pandora:            @local::standard_pandoraneutrino
 # pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune10kt_calomc
   pmtrack:             @local::dunefd_pmalgtrackmaker
   pmtrackcalo:         @local::dune10kt_calomc
-  pmtrajfit:           @local::dunefd_pmalgtrajfitter
-  pmtrajfitcalo:       @local::dune10kt_calomc
+  pmtrackpfp:          @local::dunefd_pmalgtrackmaker
+  pmtrackpfpcalo:      @local::dune10kt_calomc
+  pmtracktc:             @local::dunefd_pmalgtrackmaker
+  pmtracktccalo:         @local::dune10kt_calomc
 # photon detector reconstruction
   ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
   trkshowersplit:     @local::standard_trackshowerhits
   trkshowersplitdc:   @local::standard_trackshowerhits
-  blurredclusterdc:      @local::dune35t_blurredcluster
+  blurredclusterdc:      @local::dune10kt_blurredcluster
   emshowerdc:            @local::dune10kt_emshower
   emshower3ddc:          @local::dune10kt_emshower3d
   mergeemshower3ddc:     @local::dune10kt_mergeemshower3d
-  blurredcluster:        @local::dune35t_blurredcluster
+  blurredcluster:        @local::dune10kt_blurredcluster
   emshower:              @local::dune10kt_emshower
   emshower3d:            @local::dune10kt_emshower3d
   mergeemshower3d:       @local::dune10kt_mergeemshower3d
@@ -103,29 +108,33 @@ physics:
          #hit reco with cheated disambiguation
          gaushit, dcheat, #cchit, fasthit, fasthitdc,
          #cluster reco with cheated disambiguation
-         lineclusterdc,
+         lineclusterdc, trajclusterdc,
          #track shower split
          trkshowersplitdc,
          #pandora with cheated disambiguation
          pandoradc, #pandora stitcher goes here
          pandoracalodc,
          #pmatrack with cheated disambiguation
-         pmtrackdc, pmtrackcalodc, pmtrajfitdc, pmtrajfitcalodc,
+         pmtrackdc, pmtrackcalodc, 
+         pmtrackpfpdc, pmtrackpfpcalodc,
+         pmtracktcdc, pmtracktccalodc,
          #shower reconstruction
-         #blurredclusterdc, emshowerdc, emshower3ddc, mergeemshower3ddc,
+         blurredclusterdc, emshowerdc, #emshower3ddc, mergeemshower3ddc,
          #real disambiguation
          hitfd,
          #cluster reco
-         linecluster,
+         linecluster, trajcluster,
          #track shower split
          trkshowersplit,
          #pandora
          pandora, #pandora stitcher goes here
          pandoracalo,
          #pmatrack
-         pmtrack, pmtrackcalo, pmtrajfit, pmtrajfitcalo
+         pmtrack, pmtrackcalo, 
+         pmtrackpfp, pmtrackpfpcalo,
+         pmtracktc, pmtracktccalo,
          #shower reconstruction
-         #blurredcluster, emshower, emshower3d, mergeemshower3d
+         blurredcluster, emshower#, emshower3d, mergeemshower3d
          ]
 
  #define the output stream, there could be more than one if using filters 
@@ -151,33 +160,69 @@ outputs:
    fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
    compressionLevel: 1
+   saveMemoryObjectThreshold: 0
  }
 }
-
 ### Here, we overwrite ALL module labels with the ones defined above.
-physics.producers.fasthitdc.ChanHitLabel:              "fasthit"
-physics.producers.lineclusterdc.HitFinderModuleLabel:  "dcheat"
-physics.producers.calodc.TrackModuleLabel:             "costrkdc"
-physics.producers.calodc.SpacePointModuleLabel:        "costrkdc"
+physics.producers.fasthitdc.ChanHitLabel:               "fasthit"
+physics.producers.lineclusterdc.HitFinderModuleLabel:   "dcheat"
+physics.producers.trajclusterdc.TrajClusterAlg.HitFinderModuleLabel:   "dcheat"
+physics.producers.trajclusterdc.TrajClusterAlg.MaxWireSkipNoSignal: 2
+physics.producers.trajclusterdc.TrajClusterAlg.HitErrFac: 0.4
+physics.producers.trajclusterdc.TrajClusterAlg.KinkAngCut: 0.6
+physics.producers.trajclusterdc.TrajClusterAlg.SkipAlgs:   ["ChainMerge", "MaskHits", "RevProp"]
 
-physics.producers.trkshowersplitdc.HitModuleLabel:       "lineclusterdc"
-physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
+physics.producers.calodc.TrackModuleLabel:              "costrkdc"
+physics.producers.calodc.SpacePointModuleLabel:         "costrkdc"
+
+physics.producers.trkshowersplitdc.HitModuleLabel:      "lineclusterdc"
+physics.producers.trkshowersplit.HitModuleLabel:        "linecluster"
 
 physics.producers.pmtrackdc.HitModuleLabel:             "trkshowersplitdc"
 physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
-physics.producers.pmtrackdc.PMAlgTracking.RunVertexing: true
-physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:   true
+physics.producers.pmtrackdc.CluMatchingAlg:             1
+physics.producers.pmtrackdc.RunVertexing:               true
+physics.producers.pmtrackdc.FlipToBeam:                 true
+physics.producers.pmtrackdc.MakePFPs:                   true
 
 physics.producers.pmtrack.HitModuleLabel:               "trkshowersplit"
 physics.producers.pmtrack.ClusterModuleLabel:           "linecluster"
-physics.producers.pmtrack.PMAlgTracking.RunVertexing:   true
-physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
+physics.producers.pmtrack.CluMatchingAlg:               1
+physics.producers.pmtrack.RunVertexing:                 true
+physics.producers.pmtrack.FlipToBeam:                   true
+physics.producers.pmtrack.MakePFPs:                     true
 
-physics.producers.pmtrajfitdc.HitModuleLabel:          "lineclusterdc"
-physics.producers.pmtrajfitdc.PfpModuleLabel:          "pandoradc"
+physics.producers.pmtracktcdc.HitModuleLabel:           "dcheat"
+physics.producers.pmtracktcdc.ClusterModuleLabel:       "trajclusterdc"
+physics.producers.pmtracktcdc.CluMatchingAlg:           1
+physics.producers.pmtracktcdc.RunVertexing:             true
+physics.producers.pmtracktcdc.FlipToBeam:               true
+physics.producers.pmtracktcdc.MakePFPs:                 true
+physics.producers.pmtracktcdc.MinSeedSize2ndPass:       2
 
-physics.producers.pmtrajfit.HitModuleLabel:            "linecluster"
-physics.producers.pmtrajfit.pfpModuleLabel:            "pandora"
+physics.producers.pmtracktc.HitModuleLabel:             "hitfd"
+physics.producers.pmtracktc.ClusterModuleLabel:         "trajcluster"
+physics.producers.pmtracktc.CluMatchingAlg:             1
+physics.producers.pmtracktc.RunVertexing:               true
+physics.producers.pmtracktc.FlipToBeam:                 true
+physics.producers.pmtracktc.MakePFPs:                   true
+physics.producers.pmtracktc.MinSeedSize2ndPass:         2
+
+physics.producers.pmtrackpfpdc.HitModuleLabel:             "lineclusterdc"
+physics.producers.pmtrackpfpdc.ClusterModuleLabel:         "pandoradc"
+physics.producers.pmtrackpfpdc.CluMatchingAlg:             3
+physics.producers.pmtrackpfpdc.TrackingSkipPdg:            [0]
+physics.producers.pmtrackpfpdc.RunVertexing:               true
+physics.producers.pmtrackpfpdc.FlipToBeam:                 true
+physics.producers.pmtrackpfpdc.MakePFPs:                   true
+
+physics.producers.pmtrackpfp.HitModuleLabel:               "linecluster"
+physics.producers.pmtrackpfp.ClusterModuleLabel:           "pandora"
+physics.producers.pmtrackpfp.CluMatchingAlg:               3
+physics.producers.pmtrackpfp.TrackingSkipPdg:              [0]
+physics.producers.pmtrackpfp.RunVertexing:                 true
+physics.producers.pmtrackpfp.FlipToBeam:                   true
+physics.producers.pmtrackpfp.MakePFPs:                     true
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
@@ -188,37 +233,52 @@ physics.producers.pmtrackcalodc.SpacePointModuleLabel:  "pmtrackdc"
 physics.producers.pmtrackcalodc.T0ModuleLabel:          ""
 physics.producers.pmtrackcalodc.MakeTree:               false
 
-physics.producers.pmtrajfitcalo.TrackModuleLabel:         "pmtrajfit"
-physics.producers.pmtrajfitcalo.SpacePointModuleLabel:    "pmtrajfit"
-physics.producers.pmtrajfitcalo.T0ModuleLabel:            ""
-physics.producers.pmtrajfitcalo.MakeTree:                 false
-physics.producers.pmtrajfitcalodc.TrackModuleLabel:       "pmtrajfitdc"
-physics.producers.pmtrajfitcalodc.SpacePointModuleLabel:  "pmtrajfitdc"
-physics.producers.pmtrajfitcalodc.T0ModuleLabel:          ""
-physics.producers.pmtrajfitcalodc.MakeTree:               false
+physics.producers.pmtracktccalo.TrackModuleLabel:         "pmtracktc"
+physics.producers.pmtracktccalo.SpacePointModuleLabel:    "pmtracktc"
+physics.producers.pmtracktccalo.T0ModuleLabel:            ""
+physics.producers.pmtracktccalo.MakeTree:                 false
+physics.producers.pmtracktccalodc.TrackModuleLabel:       "pmtracktcdc"
+physics.producers.pmtracktccalodc.SpacePointModuleLabel:  "pmtracktcdc"
+physics.producers.pmtracktccalodc.T0ModuleLabel:          ""
+physics.producers.pmtracktccalodc.MakeTree:               false
 
-physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
-physics.producers.calo.TrackModuleLabel:               "costrk"
-physics.producers.calo.SpacePointModuleLabel:          "costrk"
+physics.producers.pmtrackpfpcalo.TrackModuleLabel:         "pmtrackpfp"
+physics.producers.pmtrackpfpcalo.SpacePointModuleLabel:    "pmtrackpfp"
+physics.producers.pmtrackpfpcalo.T0ModuleLabel:            ""
+physics.producers.pmtrackpfpcalo.MakeTree:                 false
+physics.producers.pmtrackpfpcalodc.TrackModuleLabel:       "pmtrackpfpdc"
+physics.producers.pmtrackpfpcalodc.SpacePointModuleLabel:  "pmtrackpfpdc"
+physics.producers.pmtrackpfpcalodc.T0ModuleLabel:          ""
+physics.producers.pmtrackpfpcalodc.MakeTree:               false
+
+physics.producers.linecluster.HitFinderModuleLabel:     "hitfd"
+physics.producers.trajcluster.TrajClusterAlg.HitFinderModuleLabel:   "hitfd"
+physics.producers.trajcluster.TrajClusterAlg.MaxWireSkipNoSignal: 2
+physics.producers.trajcluster.TrajClusterAlg.HitErrFac: 0.4
+physics.producers.trajcluster.TrajClusterAlg.KinkAngCut: 0.6
+physics.producers.trajcluster.TrajClusterAlg.SkipAlgs:   ["ChainMerge", "MaskHits", "RevProp"]
+
+physics.producers.calo.TrackModuleLabel:                "costrk"
+physics.producers.calo.SpacePointModuleLabel:           "costrk"
 #physics.producers.kalmanhit.HitModuleLabel:            "hitfd"
 #physics.producers.kalmanhit.ClusterModuleLabel:        "fuzzy"
 
 #Pandora configurations
-physics.producers.pandoradc.HitFinderModuleLabel:           "lineclusterdc"
-physics.producers.pandoracalodc.TrackModuleLabel:           "pandoradc"
-physics.producers.pandoracalodc.SpacePointModuleLabel:      "pandoradc"
-physics.producers.pandoracalodc.T0ModuleLabel:            ""
-physics.producers.pandoracalodc.MakeTree:                 false
+physics.producers.pandoradc.HitFinderModuleLabel:       "lineclusterdc"
+physics.producers.pandoracalodc.TrackModuleLabel:       "pandoradc"
+physics.producers.pandoracalodc.SpacePointModuleLabel:  "pandoradc"
+physics.producers.pandoracalodc.T0ModuleLabel:          ""
+physics.producers.pandoracalodc.MakeTree:               false
 
-physics.producers.pandora.HitFinderModuleLabel:             "linecluster"
-physics.producers.pandoracalo.TrackModuleLabel:             "pandora"
-physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
-physics.producers.pandoracalo.T0ModuleLabel:                ""
-physics.producers.pandoracalo.MakeTree:                     false
+physics.producers.pandora.HitFinderModuleLabel:         "linecluster"
+physics.producers.pandoracalo.TrackModuleLabel:         "pandora"
+physics.producers.pandoracalo.SpacePointModuleLabel:    "pandora"
+physics.producers.pandoracalo.T0ModuleLabel:            ""
+physics.producers.pandoracalo.MakeTree:                 false
 
 #Optical detector configuration
-physics.producers.ophit.InputModule:                        "opdigi"
-physics.producers.opflash.InputModule:                      "ophit"
+physics.producers.ophit.InputModule:                    "opdigi"
+physics.producers.opflash.InputModule:                  "ophit"
 
 #shower configuration
 physics.producers.blurredclusterdc.HitsModuleLabel: "lineclusterdc"
@@ -264,3 +324,4 @@ physics.producers.mergeemshower3d.ClustersModuleLabel: "blurredcluster"
 physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.WideConeAngle: 20
+
