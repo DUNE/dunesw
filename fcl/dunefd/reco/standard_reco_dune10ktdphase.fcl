@@ -57,7 +57,7 @@ physics:
   calo:               @local::dune10kt_calomc
   pandora:            @local::standard_pandoraneutrino
   pmtrack:            @local::dunefd_pmalgtrackmaker
-  pmtrackpfp:	      @local::dunefd_pmalgtrackmaker
+  pmtrajfit:	      @local::dunefd_pmalgtrajfitter
   pmtrackcalo:        @local::dune10kt_calomc
  }
 
@@ -109,22 +109,15 @@ physics.producers.pmtrackcalo.T0ModuleLabel:            "mctrutht0pmtrack"
 physics.producers.pmtrack.HitModuleLabel:             "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
 
-physics.producers.pmtrack.CluMatchingAlg:		1
-physics.producers.pmtrack.MinSeedSize2ndPass:		4
+physics.producers.pmtrack.MinSeedSize2ndPass:         4
 physics.producers.pmtrack.RunVertexing:               true
 physics.producers.pmtrack.FlipToBeam:                 true
 physics.producers.pmtrack.AutoFlip_dQdx:              false
-physics.producers.pmtrack.MakePFPs:                   true
 
-physics.producers.pmtrackpfp.HitModuleLabel:             "linecluster"
-physics.producers.pmtrackpfp.ClusterModuleLabel:         "pandora"
-physics.producers.pmtrackpfp.CluMatchingAlg:		  3
-physics.producers.pmtrackpfp.MinSeedSize2ndPass:	  4
-physics.producers.pmtrackpfp.TrackingSkipPdg:            [0]
-physics.producers.pmtrackpfp.RunVertexing:               false
-physics.producers.pmtrackpfp.FlipToBeam:                 false
-physics.producers.pmtrackpfp.AutoFlip_dQdx:              false
-physics.producers.pmtrackpfp.MakePFPs:                   false
+physics.producers.pmtrajfit.HitModuleLabel:           "linecluster"
+physics.producers.pmtrajfit.PfpModuleLabel:           "pandora"
+physics.producers.pmtrajfit.TrackingSkipPdg:          [0]
+physics.producers.pmtrajfit.RunVertexing:             false
 
 #Pandora configurations
 
