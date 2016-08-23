@@ -11,11 +11,11 @@ physics.producers.generator.PDG: [ 13 ]            # mu-
 physics.producers.generator.PosDist: 0             # Flat position dist.
 physics.producers.generator.X0: [ 0 ]
 physics.producers.generator.Y0: [ 0.0 ]
-physics.producers.generator.Z0: [ 230 ]
+physics.producers.generator.Z0: [ 695 ]
 physics.producers.generator.T0: [ 500.0 ]
 physics.producers.generator.SigmaX: [ 360 ]      # x = (-3.6, 3.6)
 physics.producers.generator.SigmaY: [ 600 ]      # y = (-6, 6)
-physics.producers.generator.SigmaZ: [ 230 ]      # z = (0, 4.6)
+physics.producers.generator.SigmaZ: [ 695 ]      # z = (0, 13.9)
 physics.producers.generator.SigmaT: [ 500.0 ]        # In time
 physics.producers.generator.PDist: 0               # Flat momentum dist. (0.1-2.0 GeV)
 physics.producers.generator.P0: [ 2.55 ]

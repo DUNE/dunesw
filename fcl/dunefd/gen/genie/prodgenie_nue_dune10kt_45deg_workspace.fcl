@@ -1,8 +1,0 @@
-#include "prodgenie_nue_dune10kt.fcl"
-
-process_name: GenieGen
-
-outputs.out1.fileName: "prodgenie_nue_dune10kt_45deg_workspace_gen.root"
-
-services.Geometry: @local::dune10kt_45deg_workspace_geo
-source.firstRun: 20000202
