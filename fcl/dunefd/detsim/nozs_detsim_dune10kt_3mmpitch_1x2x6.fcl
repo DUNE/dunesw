@@ -14,3 +14,4 @@ physics.producers.daq.ZeroThreshold: 12
 physics.producers.daq.SuppressOn: false
 
 services.AdcSuppressService: @local::zsnone
+services.AdcCompressService: @local::cmpreplace
