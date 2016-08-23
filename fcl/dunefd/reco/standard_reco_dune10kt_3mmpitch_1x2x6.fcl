@@ -6,7 +6,7 @@ services.SignalShapingServiceDUNE.FieldBins: 1000
 services.SignalShapingServiceDUNE.InputFieldRespSamplingPeriod: 20.
 services.SignalShapingServiceDUNE.FieldResponseTOffset: [-13.9e3, -13.9e3, -13.9e3]
 services.SignalShapingServiceDUNE.ASICGainInMVPerFC: [28, 28, 28]
-physics.producers.caldata.SigThrFact: 2.
+services.AdcRoiBuildingService.NSigmaStart: 2.0
 physics.producers.gaushit.MinSig: [2.5, 2.5, 2.5]
 #physics.producers.gaushit.InitWidth: [2.5, 2.5, 2.5]
 

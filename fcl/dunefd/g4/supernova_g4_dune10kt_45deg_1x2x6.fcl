@@ -1,16 +1,16 @@
 #include "standard_g4_dune10kt.fcl"
 process_name: G4
-services.Geometry: @local::dune10kt_3mmpitch_1x2x6_geo
+services.Geometry: @local::dune10kt_45deg_1x2x6_geo
 services.PhotonVisibilityService: @local::dune10kt_1x2x6_photonvisibilityservice
 services.LArG4Parameters.UseCustomPhysics: true
-services.LArG4Parameters.EnabledPhysics: [ "Em",
+services.LArG4Parameters.EnabledPhysics: [ "LowEnergyEm",
                                            "FastOptical",
                                            "SynchrotronAndGN",
                                            "Ion",
-                                           "Hadron",
+                                           "NeutronHP",
                                            "Decay",
                                            "HadronElastic",
-                                           "Stopping",
-                                           "NeutronTrackingCut" ]
-
-
+                                           "Stopping" ]
+services.LArG4Parameters.ParticleKineticEnergyCut: 1.0e-5 # GeV
+services.LArG4Parameters.StoreTrajectories: true
+services.LArG4Parameters.KeepEMShowerDaughters: true

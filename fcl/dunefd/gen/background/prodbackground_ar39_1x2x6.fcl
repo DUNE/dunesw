@@ -1,13 +1,12 @@
 #include "services_dune.fcl"
-#include "supernova_dune.fcl"
 #include "radiological_gen_dune.fcl"
 
-process_name: SupernovaGen
+process_name: BackgroundGen
 
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService:          { fileName: "prodsupernova_nue_hist.root" }
+  TFileService:          { fileName: "prodbackground_ar39_hist.root" }
   TimeTracker:           {}
   SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
   RandomNumberGenerator: {}                 # ART native random number generator
@@ -21,7 +20,7 @@ source:
   module_type: EmptyEvent
   timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
   maxEvents:   10          # Number of events to create
-  firstRun:    20000042           # Run number to use for this file
+  firstRun:    20000042    # Run number to use for this file
   firstEvent:  1           # number of first event in the file
 }
 
@@ -33,14 +32,13 @@ physics:
  
   producers:
   {
-    generator: @local::dunefd_workspace_supernova
-    radiogen:  @local::dunefd_workspace_ar39
+    generator: @local::dunefd_1x2x6_ar39
     rns:       { module_type: "RandomNumberSaver" }
   }
  
   # Define the producer and filter modules for this path, order matters, 
   # filters reject all following items. See lines starting physics.producers below
-  simulate:      [ rns, generator, radiogen ]
+  simulate:      [ rns, generator ]
   
   # Define the output stream, there could be more than one if using filters 
   stream1:       [ out1 ]
@@ -62,14 +60,13 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "prodsupernova_nue_2_ar39_dune10kt_workspace_gen.root" # Default file name, can override from command line with -o or --output
+    fileName:    "prodbackground_ar39_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
     dataTier:    "generated"
     compressionLevel: 1
   }
 }
 
-services.Geometry: @local::dune10kt_workspace_geo
-physics.producers.generator.GeneratorAlg.NumberOfNeutrinos: 2
+services.Geometry: @local::dune10kt_1x2x6_geo
 
-physics.producers.radiogen.T0: [ -2246000.0 ]
-physics.producers.radiogen.T1: [  2246000.0 ]
+physics.producers.generator.T0: [ -2246000.0 ]
+physics.producers.generator.T1: [  2246000.0 ]
