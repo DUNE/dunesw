@@ -47,7 +47,6 @@ physics:
 # actual hit finder
   hitcheat:           @local::dunefd_hitcheater
   gaushit:            @local::dunefddphase_gaushitfinder
-#  gaushit:	      @local::dunefd_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
   cchit:              @local::dunefd_clustercrawlerhit
   hitfd:             @local::dunefd_hitfinderfd
@@ -109,15 +108,9 @@ physics.producers.pmtrackcalo.T0ModuleLabel:            "mctrutht0pmtrack"
 physics.producers.pmtrack.HitModuleLabel:             "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
 
-physics.producers.pmtrack.MinSeedSize2ndPass:         4
-physics.producers.pmtrack.RunVertexing:               true
-physics.producers.pmtrack.FlipToBeam:                 true
-physics.producers.pmtrack.AutoFlip_dQdx:              false
-
 physics.producers.pmtrajfit.HitModuleLabel:           "linecluster"
 physics.producers.pmtrajfit.PfpModuleLabel:           "pandora"
 physics.producers.pmtrajfit.TrackingSkipPdg:          [0]
-physics.producers.pmtrajfit.RunVertexing:             false
 
 #Pandora configurations
 

@@ -1,27 +1,25 @@
 #include "services_dune.fcl"
-#include "singles_dune.fcl"
+#include "largeantmodules_dune.fcl"
+#include "photpropservices_dune.fcl"
 
-process_name: SinglesGen
+process_name: G4
 
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "single_hist_dune.root" }
+  TFileService: { fileName: "g4_hist.root" }
   TimeTracker:       {}
   SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::dunefddphase_simulation_services
+  @table::dunefddphase_simulation_services
 }
 
-#Start each new event with an empty event.
+#source is now a root file
 source:
 {
-  module_type: EmptyEvent
-  timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
-  maxEvents:   10          # Number of events to create
-  firstRun:    1           # Run number to use for this file
-  firstEvent:  1           # number of first event in the file
+  module_type: RootInput
+  maxEvents:  10        # Number of events to create
 }
 
 # Define and configure some modules to do work on each event.
@@ -32,14 +30,14 @@ physics:
 
  producers:
  {
-   generator: @local::microboone_singlep
+   largeant:  @local::dunefd_largeant
    rns:       { module_type: "RandomNumberSaver" }
  }
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- simulate: [ rns, generator ]
-
+ simulate: [ rns, largeant ]
+ 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
 
@@ -60,32 +58,25 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "single_gen_dunefd.root"
-   dataTier:    "generated"
+   fileName:    "%ifb_g4.root"
+   dataTier:    "simulated"
    compressionLevel: 1
  }
 }
 
-outputs.out1.fileName: "prodsingle_dune10ktdphase.root"
-
-services:
-{
-  # Load the service that manages root files for histograms.
-  TFileService: { fileName: "single_hist_dune.root" }
-  TimeTracker:       {}
-  SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
-  RandomNumberGenerator: {} #ART native random number generator
-  FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::dunefddphase_simulation_services
-} 
-
 services.Geometry: @local::dunedphase10kt_workspace_geo
-source.firstRun: 20000011
+services.LArG4Parameters.MinNumberOfElCluster: 20
 
-physics.producers.generator.PDG: [ 13 ]
-physics.producers.generator.P0:  [ 10.0 ]
-physics.producers.generator.Theta0XZ: [10.0]
-physics.producers.generator.Theta0YZ: [10.0]
-physics.producers.generator.X0: [0.0]
-physics.producers.generator.Y0: [0.0]
-physics.producers.generator.Z0: [0.0] 
+services.PhotonVisibilityService: @local::dune10kt_workspace_photonvisibilityservice
+services.LArG4Parameters.UseCustomPhysics: true
+services.LArG4Parameters.EnabledPhysics: [ "Em",
+                                           "FastOptical",
+                                           "SynchrotronAndGN",
+                                           "Ion",
+                                           "Hadron",
+                                           "Decay",
+                                           "HadronElastic",
+                                           "Stopping",
+                                           "NeutronTrackingCut" ]
+
+
