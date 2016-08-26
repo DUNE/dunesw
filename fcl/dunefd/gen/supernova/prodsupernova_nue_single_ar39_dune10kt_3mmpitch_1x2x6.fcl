@@ -11,4 +11,4 @@ physics.producers.generator.GeneratorAlg.UsePoissonDistribution: false
 physics.producers.generator.GeneratorAlg.NeutrinoTimeBegin: 0.0 # In ns
 physics.producers.generator.GeneratorAlg.NeutrinoTimeEnd:   1.0 # In ns
 
-source.firstRun: 20000142
+source.firstRun: 20000145

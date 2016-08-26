@@ -5,4 +5,4 @@ process_name: BackgroundGen
 outputs.out1.fileName: "prodbackground_ar39_dune10kt_45deg_1x2x6_gen.root"
 
 services.Geometry: @local::dune10kt_45deg_1x2x6_geo
-source.firstRun: 20000242
+source.firstRun: 20000261
