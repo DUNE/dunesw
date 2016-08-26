@@ -1,7 +1,7 @@
 #include "standard_g4_dune10kt.fcl"
 process_name: G4
 services.Geometry: @local::dune10kt_45deg_1x2x6_geo
-services.PhotonVisibilityService: @local::dune10kt_workspace_photonvisibilityservice
+services.PhotonVisibilityService: @local::dune10kt_1x2x6_photonvisibilityservice
 services.LArG4Parameters.UseCustomPhysics: true
 services.LArG4Parameters.EnabledPhysics: [ "Em",
                                            "FastOptical",

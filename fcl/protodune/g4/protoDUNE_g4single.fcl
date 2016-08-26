@@ -16,6 +16,8 @@ services:
   @table::protodune_simulation_services
 }
 
+services.LArG4Parameters.SkipWireSignalInTPCs: [0,3,4,7,8,11]
+
 #source is now a root file
 source:
 {

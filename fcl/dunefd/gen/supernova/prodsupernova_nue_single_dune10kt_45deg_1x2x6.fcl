@@ -1,0 +1,14 @@
+#include "prodsupernova_nue_2_dune10kt_1x2x6.fcl"
+
+process_name: SupernovaGen
+
+outputs.out1.fileName: "prodsupernova_nue_single_dune10kt_45deg_1x2x6_gen.root"
+
+services.Geometry: @local::dune10kt_45deg_1x2x6_geo
+
+physics.producers.generator.GeneratorAlg.NumberOfNeutrinos: 1
+physics.producers.generator.GeneratorAlg.UsePoissonDistribution: false
+physics.producers.generator.GeneratorAlg.NeutrinoTimeBegin: 0.0 # In ns
+physics.producers.generator.GeneratorAlg.NeutrinoTimeEnd:   1.0 # In ns
+
+source.firstRun: 20000244
