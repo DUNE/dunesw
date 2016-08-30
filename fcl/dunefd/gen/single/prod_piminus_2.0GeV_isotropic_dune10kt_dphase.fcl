@@ -2,7 +2,7 @@
 
 process_name: SinglesGen
 
-outputs.out1.fileName: "prod_piminus_1.0-2.0GeV_isotropic_dphase_gen.root"
+outputs.out1.fileName: "prod_piminus_1.0-2.0GeV_isotropic_dune10kt_dphase_gen.root"
 
 source.firstRun: 20000015
 
