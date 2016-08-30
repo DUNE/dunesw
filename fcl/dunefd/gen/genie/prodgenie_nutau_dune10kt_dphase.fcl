@@ -1,0 +1,7 @@
+#include "prodgenie_nu_dune10kt_dphase.fcl"
+
+process_name: GenieGen
+
+outputs.out1.fileName: "prodgenie_nutau_dune10kt_dphase_gen.root"
+physics.producers.generator.MixerConfig:     "map 12:14 -12:-14 14:16 -14:-16" #swap electron neutrinos with muon neutrinos
+source.firstRun: 21000003
