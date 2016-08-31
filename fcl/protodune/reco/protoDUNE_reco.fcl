@@ -137,7 +137,6 @@ physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
 
 physics.producers.pmtrajfit.HitModuleLabel:            "linecluster"
 physics.producers.pmtrajfit.PfpModuleLabel:            "pandora"
-physics.producers.pmtrajfit.TrackingSkipPdg:            [0]
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
