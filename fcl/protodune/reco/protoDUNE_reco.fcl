@@ -5,6 +5,7 @@
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules.fcl"
 #include "calorimetry_dune10kt.fcl"
+#include "particleid.fcl"
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
 #include "opticaldetectormodules_dune.fcl"
@@ -61,10 +62,13 @@ physics:
   pandora:            @local::standard_pandoraneutrino
 # pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune10kt_calomc
+  pandorapid:          @local::standard_chi2pid
   pmtrack:             @local::dunefd_pmalgtrackmaker
   pmtrackcalo:         @local::dune10kt_calomc
+  pmtrackpid:          @local::standard_chi2pid
   pmtrajfit:           @local::dunefd_pmalgtrajfitter
   pmtrajfitcalo:       @local::dune10kt_calomc
+  pmtrajfitpid:        @local::standard_chi2pid
 # photon detector reconstruction
   ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
@@ -93,9 +97,10 @@ physics:
          trkshowersplit,
          #pandora
          pandora, #pandora stitcher goes here
-         pandoracalo,
+         pandoracalo, pandorapid,
          #pmatrack
-         pmtrack, pmtrackcalo, pmtrajfit, pmtrajfitcalo
+         pmtrack, pmtrackcalo, pmtrackpid,
+         pmtrajfit, pmtrajfitcalo, pmtrajfitpid
          #shower reconstruction
          #blurredcluster, emshower, emshower3d, mergeemshower3d
          ]
@@ -142,11 +147,15 @@ physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
 physics.producers.pmtrackcalo.T0ModuleLabel:            ""
 physics.producers.pmtrackcalo.MakeTree:                 false
+physics.producers.pmtrackpid.CalorimetryModuleLabel:  "pmtrackcalo"
+physics.producers.pmtrackpid.TrackModuleLabel:        "pmtrack"
 
 physics.producers.pmtrajfitcalo.TrackModuleLabel:         "pmtrajfit"
 physics.producers.pmtrajfitcalo.SpacePointModuleLabel:    "pmtrajfit"
 physics.producers.pmtrajfitcalo.T0ModuleLabel:            ""
 physics.producers.pmtrajfitcalo.MakeTree:                 false
+physics.producers.pmtrajfitpid.CalorimetryModuleLabel:  "pmtrajfitcalo"
+physics.producers.pmtrajfitpid.TrackModuleLabel:        "pmtrajfit"
 
 physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
 physics.producers.calo.TrackModuleLabel:               "costrk"
@@ -161,6 +170,8 @@ physics.producers.pandoracalo.TrackModuleLabel:             "pandora"
 physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
 physics.producers.pandoracalo.T0ModuleLabel:                ""
 physics.producers.pandoracalo.MakeTree:                     false
+physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
+physics.producers.pandorapid.TrackModuleLabel:              "pandora"
 
 #Optical detector configuration
 physics.producers.ophit.InputModule:                        "opdigi"
