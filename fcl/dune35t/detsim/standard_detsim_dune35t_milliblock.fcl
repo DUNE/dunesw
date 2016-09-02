@@ -4,7 +4,7 @@ includedServices: @local::services
 
 services: {
     @table::includedServices
-    @table::dune35t_milliblock_reco_services
+    @table::dune35t_milliblock_detsim_services
 }
 
 includedServices: @erase
