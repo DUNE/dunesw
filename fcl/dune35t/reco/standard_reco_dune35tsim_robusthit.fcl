@@ -1,10 +1,3 @@
-# standard_reco_dune35tsim.fcl
-#
-# David Adams
-# August 2016
-#
-# Rename of standard_reco_dune35t.fcl modified to use DataPrep.
-
 #include "services_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
@@ -51,6 +44,7 @@ physics: {
   clustercheat:       @local::dune35t_clustercheater
   trackcheat:         @local::dune35t_trackcheater
 # actual hit finder
+  robusthit:          @local::dune35t_robusthitfindersim
   gaushit:            @local::dune35t_gaushitfinder
   fasthit:            @local::dune35t_fasthitfinder
   cchit:              @local::dune35t_clustercrawlerhit
@@ -131,35 +125,38 @@ physics: {
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, 
          #optical hit reco, flash, counter, TPC wire signals
-         ophit, opflash, t0counter, caldata, 
+         #ophit, opflash, 
+         t0counter, caldata, 
+         #robust hit finder
+         robusthit
          #cheater reco
-         hitcheat, clustercheat, trackcheat,
+         #hitcheat, clustercheat, trackcheat,
          #hit reco with cheated disambiguation
-         gaushit, dcheat, fasthit, 
+         #gaushit, dcheat, fasthit, 
          #cluster reco with cheated disambiguation
-         dbclusterdc, lineclusterdc,
+         #dbclusterdc, lineclusterdc,
          #3D reco with cheated disambiguation
-         costrkdc, mctrutht0dc, photont0costrkdc, calodc, 
+         #costrkdc, mctrutht0dc, photont0costrkdc, calodc, 
          #pandora with cheated disambiguation
-         pandoradc, particlestitcherdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
+         #pandoradc, particlestitcherdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
          #pmatrack with cheated disambiguation
-         pmtrackdc, mctrutht0pmtrackdc, photont0pmtrackdc, pmtrackcalodc,
-         pmtrajfitdc, mctrutht0pmtrajfitdc, photont0pmtrajfitdc, pmtrajfitcalodc,
+         #pmtrackdc, mctrutht0pmtrackdc, photont0pmtrackdc, pmtrackcalodc,
+         #pmtrajfitdc, mctrutht0pmtrajfitdc, photont0pmtrajfitdc, pmtrajfitcalodc,
          #shower reconstruction
-         blurredclusterdc, emshowerdc,
+         #blurredclusterdc, emshowerdc,
          #real disambiguation
-         hit35t,
+         #hit35t,
          #cluster reco
-         dbcluster, linecluster,
+         #dbcluster, linecluster,
          #3D reco
-         costrk,  mctrutht0, photont0costrk, calo,
+         #costrk,  mctrutht0, photont0costrk, calo,
          #pandora
-         pandora, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo,
+         #pandora, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo,
          #pmatrack
-         pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo,
-         pmtrajfit, mctrutht0pmtrajfit, photont0pmtrajfit, pmtrajfitcalo,
+         #pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo,
+         #pmtrajfit, mctrutht0pmtrajfit, photont0pmtrajfit, pmtrajfitcalo,
          #shower reconstruction
-         blurredcluster, emshower
+         #blurredcluster, emshower
 ]
 
  #define the output stream, there could be more than one if using filters 
@@ -349,3 +346,15 @@ physics.producers.mergeemshower3d.ClustersModuleLabel: "blurredcluster"
 physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.WideConeAngle: 20
+
+physics.producers.robusthit.WireModuleLabel: "caldata"
+
+services.RawDigitPrepService.DoDeconvolution: false
+services.RawDigitPrepService.DoEarlySignalFinding: false
+services.RawDigitPrepService.DoMitigation: true
+services.RawDigitPrepService.DoNoiseRemoval: false
+services.RawDigitPrepService.DoPedestalAdjustment: true
+services.RawDigitPrepService.DoROI: false
+services.RawDigitPrepService.DoWires: true
+services.RawDigitPrepService.SkipBad: true
+services.RawDigitPrepService.SkipNoisy: false

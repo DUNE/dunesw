@@ -1,8 +1,6 @@
 #include "services_dune.fcl"
-#include "noisefilter_dune.fcl"
-#include "caldata_dune.fcl"
 #include "hitfindermodules_dune.fcl"
-#include "cluster_dune.fcl"
+#include "clusterfinder_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
 #include "calorimetry_dune35t.fcl"
@@ -12,7 +10,6 @@
 #include "trackshowerhits.fcl"
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
-#include "Sigmoidfilter.fcl"
 
 process_name: Reco
 
@@ -25,7 +22,7 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:      @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_data
-  @table::dune35t_services
+  @table::dune35tdata_reco_services
 }
 #source is now a root file
 source:
@@ -44,23 +41,24 @@ physics:
  {
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
-# noise filter
-  unstick:            @local::dune35t_unstick
-# unstuck code
-  daq:                @local::dune35t_filterwf
-# Frequency filter
-  sigmoid:            @local::dune35t_sigmoid
-# Hit finding
+# convert raw::RawDigit to recob::wire
+  caldata:            @local::producer_adcprep
+# actual hit finder
+  gaushit:            @local::dune35t_gaushitfinder
   fasthit:            @local::dune35t_fasthitfinder
-
+  cchit:              @local::dune35t_clustercrawlerhit
+  robusthit:          @local::dune35t_robusthitfinderdata
+# actual disambiguation
+  hit35t:             @local::dune35t_hitfinder35t
+#  hit35tcc:           @local::dune35t_hitfinder35t
   handscan:           @local::dune35t_handscan
 # disambiguation using the counters
   counterhit:         @local::dune35t_hitfindercounters
-
 # reconstruction using disambiguated hits
 #  fuzzy:              @local::dune35t_fuzzycluster
   dbcluster:          @local::dune35t_dbcluster
-  linecluster:        @local::dune35t_linecluster
+  linecluster:        @local::dune35tdata_linecluster
+  lineclusterch:      @local::dune35tdata_linecluster
   costrk:             @local::dune35t_cosmictracker
 #  stitch:             @local::dune35t_trackstitcher
   calo:               @local::dune35t_calomc
@@ -69,11 +67,16 @@ physics:
   pandoracalo:        @local::dune35t_calomc
   pmtrack:             @local::dune35t_pmalgtrackmaker
   pmtrackcalo:         @local::dune35t_calomc
+  pmtrackch:             @local::dune35t_pmalgtrackmaker
+  
 #  kalmanhit:         @local::dune35t_track3Dkalmanhit
 # Photon counter T0
   photont0costrk:    @local::lbne35t_photoncountert0matching
+  photont0costrkdc:  @local::lbne35t_photoncountert0matching
   photont0pandora:   @local::lbne35t_photoncountert0matching
+  photont0pandoradc: @local::lbne35t_photoncountert0matching
   photont0pmtrack:   @local::lbne35t_photoncountert0matching
+  photont0pmtrackdc: @local::lbne35t_photoncountert0matching
 # Muon Counter T0
   t0counter:          @local::dune35t_t0counterdata
 # photon detector reconstruction
@@ -91,26 +94,28 @@ physics:
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns
-       	 , unstick
-	 , daq
-	 , sigmoid
-         , fasthit
-	 
          #optical hit reco, flash, counter, TPC wire signals
          #ophit, opflash
          , t0counter 
-
+         , caldata
+         #hit reco with cheated disambiguation
+         #,gaushit #, fasthit
+         , robusthit
+         #real disambiguation
+         #, hit35t
          #manual real-from-noise hit selection
          #, handscan
 	 # disambiguation using the counters.
-	 , counterhit
+	 #, counterhit
          #cluster reco
          #, dbcluster
-	 #, linecluster
+	 #, linecluster, lineclusterch
          #pandora
-         #, pandora, particlestitcher, photont0pandora, pandoracalo
+         #, pandora, particlestitcher
+         #, photont0pandora, pandoracalo
          #pmatrack
-         #, pmtrack, photont0pmtrack, pmtrackcalo
+         #, pmtrack, pmtrackch
+         #, photont0pmtrack, pmtrackcalo
 	 #shower reconstruction
 	 #, blurredcluster, emshower, emshower3d, mergeemshower3d
 ]
@@ -141,26 +146,17 @@ outputs:
  }
 }
 ### Here, we overwrite ALL module labels with the ones defined above.
-physics.producers.unstick.DigitModuleLabel:            "SplitterInput:TPC"
-
-physics.producers.daq.RawDigitModuleLabel:             "unstick"
-physics.producers.daq.RawDigitModuleInstance:          "TPC"
-physics.producers.daq.SkipStuckCodes:                  false
-
-physics.producers.sigmoid.DigitModuleLabel:            "daq" 
-physics.producers.sigmoid.DigitModuleInstance:         ""
-
-physics.producers.fasthit.MinSigCol:        80
-physics.producers.fasthit.MinSigInd:        80
-physics.producers.fasthit.DigitModuleLabel: "unstick:TPC"
-
+physics.producers.caldata.DigitLabel:                  "SplitterInput:TPC"
 physics.producers.t0counter.TriggerModuleLabel:        "SplitterInput:TRIGGER"
 
-physics.producers.counterhit.HitsModuleLabel:          "fasthit"
-
+physics.producers.robusthit.WireModuleLabel:           "caldata"
+physics.producers.gaushit.CalDataModuleLabel:          "caldata"
+#physics.producers.gaushit.MinSig:                      [100,100,100]
+#physics.producers.gaushit.MinWidth:                    [5,5,5]
+#physics.producers.hit35tcc.ChanHitLabel:              "gaushit"
+physics.producers.lineclusterch.HitFinderModuleLabel:  "counterhit"
 physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
-
 physics.producers.pmtrackcalo.TrackModuleLabel:       "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:  "pmtrack"
 physics.producers.pmtrackcalo.T0ModuleLabel:          "photont0pmtrack"
@@ -169,9 +165,10 @@ physics.producers.photont0pmtrack.HitsModuleLabel:    "linecluster"
 physics.producers.photont0pmtrack.ShowerModuleLabel:  ""
 physics.producers.photont0pmtrack.TruthT0ModuleLabel: "mctrutht0pmtrack"
 
-#physics.producers.fuzzy.HitsModuleLabel:            "fasthit"
-physics.producers.dbcluster.HitsModuleLabel:         "fasthit"
-physics.producers.linecluster.HitFinderModuleLabel:  "fasthit"
+physics.producers.pmtrackch.HitModuleLabel:               "lineclusterch"
+physics.producers.pmtrackch.ClusterModuleLabel:           "lineclusterch"
+#physics.producers.fuzzy.HitsModuleLabel:            "hit35t"
+
 physics.producers.costrk.ClusterModuleLabel:         "linecluster"
 #physics.producers.stitch.TrackModuleLabel:          "costrk"
 #physics.producers.stitch.SpptModuleLabel:           "costrk"
@@ -182,16 +179,16 @@ physics.producers.photont0costrk.TruthT0ModuleLabel: "mctrutht0"
 physics.producers.calo.TrackModuleLabel:             "costrk"
 physics.producers.calo.SpacePointModuleLabel:        "costrk"
 physics.producers.calo.T0ModuleLabel:                "photont0costrk"
-#physics.producers.kalmanhit.HitModuleLabel:         "fasthit"
+#physics.producers.kalmanhit.HitModuleLabel:         "hit35t"
 #physics.producers.kalmanhit.ClusterModuleLabel:     "fuzzy"
 
 #Pandora configurations
-physics.producers.pandora.HitFinderModuleLabel:             "fasthit"
+physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
 physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
 physics.producers.particlestitcher.TrackModuleLabel:        "pandora"
 physics.producers.particlestitcher.UseXCoordinate:          false
 physics.producers.photont0pandora.TrackModuleLabel:         "particlestitcher"
-physics.producers.photont0pandora.HitsModuleLabel:          "fasthit"
+physics.producers.photont0pandora.HitsModuleLabel:          "hit35t"
 physics.producers.photont0pandora.ShowerModuleLabel:        ""
 physics.producers.photont0pandora.TruthT0ModuleLabel:       "mctrutht0pandora"
 physics.producers.pandoracalo.TrackModuleLabel:             "particlestitcher"
@@ -226,8 +223,9 @@ physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.WideConeAngle: 20
 
-services.DetectorPropertiesService.NumberTimeSamples: 6000
-services.DetectorPropertiesService.ReadOutWindowSize: 6000
+services.DetectorPropertiesService.NumberTimeSamples: 15000
+services.DetectorPropertiesService.ReadOutWindowSize: 15000
+services.DetectorPropertiesService.Efield: [0.25, 0.782, 1.734]
 
 #services.SignalShapingServiceDUNE.DebugFieldShape: true
 services.SignalShapingServiceDUNE.ASICGainInMVPerFC: [14, 14, 14]
@@ -238,9 +236,9 @@ services.SignalShapingServiceDUNE.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.55 ],
 							  [ 0.89, 0.66, 4.8, 0.43 ]]
 
 ##############   The standard parameters -----------------------
-#services.SignalShapingServiceDUNE.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
-#services.SignalShapingServiceDUNE.IndUFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
-#services.SignalShapingServiceDUNE.IndVFilter: "(x>0.0)*gaus*exp(-0.5*pow(x/[3],[4]))"
+#services.SignalShapingServiceDUNE35t.ColFilter: "(x>0.0)*[0]*exp(-0.5*(((x-[1])/[2])^2)^[3])"
+#services.SignalShapingServiceDUNE35t.IndUFilter: "(x>0.0)*gaus(0)*exp(-0.5*pow(x/[3],[4]))"
+#services.SignalShapingServiceDUNE35t.IndVFilter: "(x>0.0)*gaus(0)*exp(-0.5*pow(x/[3],[4]))"
 
 ##############   My new  parameters -----------------------
 
@@ -252,5 +250,18 @@ services.SignalShapingServiceDUNE.IndUFilterParams: [ 1.0, 0.105, 0.019, 0.018, 
 services.SignalShapingServiceDUNE.IndVFilter:       "(x>0.03)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
 services.SignalShapingServiceDUNE.IndVFilterParams: [ 0.95, 0.125, 0.019, 0.010, 0.0109 ]
 
+physics.producers.gaushit.MinSig:   [ 5, 5, 10 ]
+physics.producers.gaushit.MinWidth: [ 1, 1, 1 ]
 
+physics.producers.fasthit.MinSigCol: 80
+physics.producers.fasthit.MinSigInd: 80
 
+services.RawDigitPrepService.DoDeconvolution: false
+services.RawDigitPrepService.DoEarlySignalFinding: false
+services.RawDigitPrepService.DoMitigation: true
+services.RawDigitPrepService.DoNoiseRemoval: false
+services.RawDigitPrepService.DoPedestalAdjustment: true
+services.RawDigitPrepService.DoROI: false
+services.RawDigitPrepService.DoWires: true
+services.RawDigitPrepService.SkipBad: true
+services.RawDigitPrepService.SkipNoisy: false

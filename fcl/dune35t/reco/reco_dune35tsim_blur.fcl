@@ -91,7 +91,7 @@ physics: {
   mctrutht0pandoradc: @local::dune35t_mctrutht0matching
   mctrutht0pmtrack:    @local::dune35t_mctrutht0matching
   mctrutht0pmtrackdc:  @local::dune35t_mctrutht0matching
-  t0counter:          @local::dune35t_t0counter
+  t0counter:          @local::dune35t_t0countersim
 # photon detector reconstruction
   ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
