@@ -7,6 +7,7 @@
 #include "calorimetry_dune10kt.fcl"
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
+#include "particleid.fcl"
 
 process_name: Reco
 
@@ -58,11 +59,12 @@ physics:
   pmtrack:            @local::dunefd_pmalgtrackmaker
   pmtrajfit:	      @local::dunefd_pmalgtrajfitter
   pmtrackcalo:        @local::dune10kt_calomc
+  pmtrackpid:          @local::standard_chi2pid
  }
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, caldata, fasthit, gaushit, cchit, hitfd, linecluster, pmtrack ]
+ reco: [ rns, caldata, fasthit, gaushit, linecluster, pmtrack, pmtrackcalo, pmtrackpid ]
 
 	analyzers:
 	{
@@ -90,7 +92,7 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "reco.root"
+   fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
    compressionLevel: 1
  }
@@ -103,7 +105,10 @@ physics.producers.caldata.SigThrFact: 0.2
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
-physics.producers.pmtrackcalo.T0ModuleLabel:            "mctrutht0pmtrack"
+physics.producers.pmtrackcalo.T0ModuleLabel:            ""
+physics.producers.pmtrackcalo.CaloAlg.CalAreaConstants: [ 4.966e-2, 4.966e-2 ]
+physics.producers.pmtrackpid.CalorimetryModuleLabel:  "pmtrackcalo"
+physics.producers.pmtrackpid.TrackModuleLabel:        "pmtrack"
 
 physics.producers.pmtrack.HitModuleLabel:             "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
@@ -111,6 +116,7 @@ physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
 physics.producers.pmtrajfit.HitModuleLabel:           "linecluster"
 physics.producers.pmtrajfit.PfpModuleLabel:           "pandora"
 physics.producers.pmtrajfit.TrackingSkipPdg:          [0]
+
 
 #Pandora configurations
 
