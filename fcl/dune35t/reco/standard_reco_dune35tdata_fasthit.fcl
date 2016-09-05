@@ -75,7 +75,7 @@ physics:
   photont0pandora:   @local::lbne35t_photoncountert0matching
   photont0pmtrack:   @local::lbne35t_photoncountert0matching
 # Muon Counter T0
-  t0counter:          @local::dune35t_t0counterdata
+  t0counter:          @local::dune35t_t0counter
 # photon detector reconstruction
   ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
