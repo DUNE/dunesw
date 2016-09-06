@@ -1,23 +1,18 @@
-# standard_detsim_dune35t.fcl
-
-# David Adams
-# April 2016
-#
-# Top level FCL for production of 35-ton simulated data.
-
 #include "services_dune.fcl"
-#include "detsimmodules_dune.fcl"
-#include "opticaldetectormodules_dune.fcl"
+#include "singles_dune.fcl"
+#include "largeantmodules_dune.fcl"
 
-process_name: detsim
+process_name: Detsim
 
-services: @local::dune35t_detsim_services
+services: @local::dunefddphase_simulation_services
 services.TFileService: { fileName: "detsim_hist.root" }
 services.TimeTracker:       {}
-MemoryTracker:     {}
+services.SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
 services.RandomNumberGenerator: {} #ART native random number generator
 services.FileCatalogMetadata:  @local::art_file_catalog_mc
 services.LArSeedService:       @local::random_seedservice  # seedservice.fcl
+
+services.Geometry: @local::dunedphase10kt_workspace_geo
 
 #source is now a root file
 source: {
@@ -31,11 +26,9 @@ source: {
 physics: {
  producers: {
    daq:            @local::dune_detsim
-   simcounter:     @local::dune35t_simcounter
-   opdigi:         @local::dune35t_opdigi
    rns:            { module_type: "RandomNumberSaver" }
  }
- simulate: [ rns, daq, simcounter, opdigi ]
+ simulate: [ rns, daq ]
  stream1:  [ out1 ]
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
@@ -44,30 +37,41 @@ physics: {
 outputs: {
  out1: {
    module_type: RootOutput
-   fileName:    "%ifb_%tc_detsim.root"
+   fileName:    "%ifb_detsim.root"
    dataTier:    "detector-simulated"
    compressionLevel: 1
-   fastCloning: false
  }
 }
 
 # Use fixed values instead of DB for pedestals.
-services.DetPedestalService: @local::dune_fixedpeds
+#services.DetPedestalService: @local::dune_fixedpeds
+services.DetPedestalService: @local::dunedp_fixedpeds
 
 # DetSim flags.
-physics.producers.daq.NoiseOn:     true
+physics.producers.daq.NoiseOn:     false
 physics.producers.daq.PedestalOn:  true
 physics.producers.daq.DistortOn:   false
 physics.producers.daq.SuppressOn:  true
 
 # DetSim services.
-services.SimChannelExtractService: @local::scxgeneric
+#services.SimChannelExtractService: @local::scxgeneric
 services.ChannelNoiseService:      @local::chnoiseold
 services.PedestalAdditionService:  @local::padprovided
 services.AdcDistortService:        @local::stuckbits
-services.AdcSuppressService:       @local::zslegacy
-services.AdcCompressService:       @local::cmpblock
+#services.AdcSuppressService:       @local::zslegacy
+services.AdcSuppressService:       @local::zsonline
+#services.AdcCompressService:       @local::cmpblock
+services.AdcCompressService:       @local::cmpreplace
 
 # Disable bad channels.
 #services.IChannelStatusService.BadChannels: [ ]
+
+
+
+
+
+
+
+
+
 

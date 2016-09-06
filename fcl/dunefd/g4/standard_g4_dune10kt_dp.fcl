@@ -1,29 +1,25 @@
 #include "services_dune.fcl"
 #include "largeantmodules_dune.fcl"
 #include "photpropservices_dune.fcl"
-#include "opticaldetectormodules_dune.fcl"
 
 process_name: G4
 
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "g4single_protoDUNE_hist.root" }
+  TFileService: { fileName: "g4_hist.root" }
   TimeTracker:       {}
-  MemoryTracker:     {}
+  SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::protodune_simulation_services
+  @table::dunefddphase_simulation_services
 }
-
-services.LArG4Parameters.SkipWireSignalInTPCs: [0,3,4,7,8,11]
 
 #source is now a root file
 source:
 {
   module_type: RootInput
-  maxEvents: 30000
-  fileNames: ["gensingle_protoDUNE.root"]
+  maxEvents:  10        # Number of events to create
 }
 
 # Define and configure some modules to do work on each event.
@@ -67,5 +63,20 @@ outputs:
    compressionLevel: 1
  }
 }
+
+services.Geometry: @local::dunedphase10kt_workspace_geo
+services.LArG4Parameters.MinNumberOfElCluster: 20
+
+services.PhotonVisibilityService: @local::dune10kt_workspace_photonvisibilityservice
+services.LArG4Parameters.UseCustomPhysics: true
+services.LArG4Parameters.EnabledPhysics: [ "Em",
+                                           "FastOptical",
+                                           "SynchrotronAndGN",
+                                           "Ion",
+                                           "Hadron",
+                                           "Decay",
+                                           "HadronElastic",
+                                           "Stopping",
+                                           "NeutronTrackingCut" ]
 
 

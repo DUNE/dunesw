@@ -53,7 +53,7 @@ add_subdirectory(SupernovaAna)
 #     "lardataobj_OpticalDetectorData",
 #     "lardataobj_AnalysisBase",
 #     "lardata_Utilities",
-#     "larsim_Simulation larsimobj_Simulation",
+#     "larsim_Simulation lardataobj_Simulation",
 #     "larsim_MCCheater",
 #     "lardata_AnalysisAlg",
 #     "lardata_RecoObjects",
