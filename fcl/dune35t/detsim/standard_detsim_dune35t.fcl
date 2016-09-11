@@ -14,7 +14,7 @@ process_name: detsim
 services: @local::dune35t_detsim_services
 services.TFileService: { fileName: "detsim_hist.root" }
 services.TimeTracker:       {}
-services.SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
+MemoryTracker:     {}
 services.RandomNumberGenerator: {} #ART native random number generator
 services.FileCatalogMetadata:  @local::art_file_catalog_mc
 services.LArSeedService:       @local::random_seedservice  # seedservice.fcl
