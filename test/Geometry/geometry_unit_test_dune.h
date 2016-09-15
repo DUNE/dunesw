@@ -72,6 +72,7 @@ namespace dune {
               ROOT:     "dune35t4apa_v5.gdml"
               SortingParameters: {
                 DetectorVersion: "dune35t4apa_v5" 
+                ChannelsPerOpDet: 12
               } 
               SurfaceY:  0.0e2 # in cm, vertical distance to the surface
             )");
@@ -115,7 +116,7 @@ namespace dune {
               ROOT:     "dune10kt_v1_workspace.gdml"
               SurfaceY:  0.0e2  # in cm, vertical distance to the surface
              # SurfaceY: 147828 # Underground option. 4850 feet to cm. from DocDb-3833
-              SortingParameters: {}
+              SortingParameters: {ChannelsPerOpDet:	12}
             )");
         } // DUNEFDGeometryEnvironmentConfiguration()
       
