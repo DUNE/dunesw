@@ -47,7 +47,7 @@ table_fragment_end
 product          version
 larsoft         v06_07_00
 artdaq_core	v1_05_07
-duneutil        v06_07_00	-	optional
+duneutil        v01_23_10	-	optional
 lbne_raw_data 	v1_04_05
 dune_pardata	v01_12_01
 cetbuildtools	v5_04_03	-	only_for_build
