@@ -58,11 +58,11 @@ services.DetPedestalService: @local::dune_fixedpeds
 physics.producers.daq.NoiseOn:     true
 physics.producers.daq.PedestalOn:  true
 physics.producers.daq.DistortOn:   false
-physics.producers.daq.SuppressOn:  true
+physics.producers.daq.SuppressOn:  false
 
 # DetSim services.
 services.SimChannelExtractService: @local::scxgeneric
-services.ChannelNoiseService:      @local::chnoiseold
+services.ChannelNoiseService:      @local::chnoiseexpowhite
 services.PedestalAdditionService:  @local::padprovided
 services.AdcDistortService:        @local::stuckbits
 services.AdcSuppressService:       @local::zslegacy
