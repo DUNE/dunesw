@@ -22,7 +22,8 @@ physics.producers.daq.SuppressOn:  true
 
 # DetSim services.
 services.SimChannelExtractService: @local::scxgeneric
-services.ChannelNoiseService:      @local::chnoiseexpowhite
+#services.ChannelNoiseService:      @local::chnoiseexpowhite
+services.ChannelNoiseService:      @local::chnoiseold
 services.PedestalAdditionService:  @local::padprovided
 services.AdcDistortService:        @local::stuckbits
 services.AdcSuppressService:       @local::zslegacy
