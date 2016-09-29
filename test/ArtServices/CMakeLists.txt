@@ -17,6 +17,7 @@ cet_test(test_Geometry SOURCES test_Geometry.cxx
 
 cet_test(test_RandomNumberGenerator SOURCES test_RandomNumberGenerator.cxx
   LIBRARIES
+    art_Framework_Services_Optional_RandomNumberGenerator_service
     dune_ArtSupport
     ${ART_FRAMEWORK_CORE}
     ${ROOT_BASIC_LIB_LIST}
