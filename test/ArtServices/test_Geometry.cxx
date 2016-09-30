@@ -17,12 +17,14 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include "dune/ArtSupport/ArtServiceHelper.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 
 using std::string;
 using std::cout;
 using std::endl;
+using std::ofstream;
 
 int test_Geometry(string gname) {
   const string myname = "test_Geometry: ";
@@ -39,18 +41,17 @@ int test_Geometry(string gname) {
   ArtServiceHelper& ash = ArtServiceHelper::instance();
 
   cout << myname << line << endl;
-  cout << myname << "Add the Geometry service." << endl;
-  scfg = "DisableWiresInG4: true GDML: \"dune35t4apa_v5.gdml\" Name: \"" + gname +
-         "\" ROOT: \"" + gname + "\" SortingParameters: { DetectorVersion: \"" + gname +
-         "\" } SurfaceY: 0";
-  cout << myname << "Configuration: " << scfg << endl;
-  assert( ash.addService("Geometry", scfg) == 0 );
+  cout << myname << "Create configuration." << endl;
+  const char* ofname = "test_Geometry.fcl";
+  {
+    ofstream fout(ofname);
+    fout << "#include \"geometry_dune.fcl\"" << endl;;
+    fout << "services.Geometry:                   @local::" + gname << endl;;
+    fout << "services.ExptGeoHelperInterface:     @local::dune_geometry_helper" << endl;;
+  }
 
-  cout << myname << line << endl;
-  cout << myname << "Add the DUNE geometry helper service (required to load DUNE geometry)." << endl;
-  scfg = "service_provider: \"DUNEGeometryHelper\"";
-  cout << myname << "Configuration: " << scfg << endl;
-  assert( ash.addService("ExptGeoHelperInterface", scfg) == 0 );
+  cout << myname << "Configuration:\n" << scfg << endl;
+  assert( ash.addServices(ofname, true) == 0 );
 
   cout << myname << line << endl;
   cout << myname << "Load the services." << endl;
@@ -60,14 +61,23 @@ int test_Geometry(string gname) {
   cout << myname << line << endl;
   cout << myname << "Get Geometry service." << endl;
   art::ServiceHandle<geo::Geometry> pgeo;
+  cout << myname << line << endl;
   cout << myname << "Geometry name: " << pgeo->DetectorName() << endl;
 
   cout << myname << line << endl;
   return 0;
 }
 
-int main() {
-  string gname = "dune35t4apa_v5";
+int main(int argc, const char* argv[]) {
+  string gname = "dune35t_geo";
+  if ( argc > 1 ) {
+    string sarg = argv[1];
+    if ( sarg == "-h" ) {
+      cout << argv[0] << ": GEOFCLNAME [dune35t_geo]";
+      return 0;
+    }
+    gname = sarg;
+  }
   test_Geometry(gname);
   return 0;
 }
