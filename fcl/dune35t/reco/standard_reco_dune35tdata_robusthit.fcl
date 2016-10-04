@@ -11,7 +11,7 @@
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 
-process_name: Reco
+process_name: RecoRobust
 
 services:
 {
@@ -256,12 +256,13 @@ physics.producers.gaushit.MinWidth: [ 1, 1, 1 ]
 physics.producers.fasthit.MinSigCol: 80
 physics.producers.fasthit.MinSigInd: 80
 
+services.AdcRoiBuildingService: @local::adcroi_keepall
 services.RawDigitPrepService.DoDeconvolution: false
 services.RawDigitPrepService.DoEarlySignalFinding: false
 services.RawDigitPrepService.DoMitigation: true
 services.RawDigitPrepService.DoNoiseRemoval: false
 services.RawDigitPrepService.DoPedestalAdjustment: true
-services.RawDigitPrepService.DoROI: false
+services.RawDigitPrepService.DoROI: true
 services.RawDigitPrepService.DoWires: true
 services.RawDigitPrepService.SkipBad: true
 services.RawDigitPrepService.SkipNoisy: false
