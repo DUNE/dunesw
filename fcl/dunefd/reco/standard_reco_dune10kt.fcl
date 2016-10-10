@@ -176,10 +176,6 @@ outputs:
 physics.producers.fasthitdc.ChanHitLabel:               "fasthit"
 physics.producers.lineclusterdc.HitFinderModuleLabel:   "dcheat"
 physics.producers.trajclusterdc.TrajClusterAlg.HitFinderModuleLabel:   "dcheat"
-physics.producers.trajclusterdc.TrajClusterAlg.MaxWireSkipNoSignal: 2
-physics.producers.trajclusterdc.TrajClusterAlg.HitErrFac: 0.4
-physics.producers.trajclusterdc.TrajClusterAlg.KinkAngCut: 0.6
-physics.producers.trajclusterdc.TrajClusterAlg.SkipAlgs:   ["ChainMerge", "MaskHits", "RevProp"]
 
 physics.producers.calodc.TrackModuleLabel:              "costrkdc"
 physics.producers.calodc.SpacePointModuleLabel:         "costrkdc"
@@ -202,13 +198,13 @@ physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
 physics.producers.pmtrajfitdc.HitModuleLabel:           "lineclusterdc"
 physics.producers.pmtrajfitdc.PfpModuleLabel:           "pandoradc"
 
-physics.producers.pmtracktcdc.HitModuleLabel:           "dcheat"
+physics.producers.pmtracktcdc.HitModuleLabel:           "trajclusterdc"
 physics.producers.pmtracktcdc.ClusterModuleLabel:       "trajclusterdc"
 physics.producers.pmtracktcdc.PMAlgTracking.RunVertexing:        true
 physics.producers.pmtracktcdc.PMAlgTracking.FlipToBeam:          true
 physics.producers.pmtracktcdc.PMAlgTracking.MinSeedSize2ndPass:  2
 
-physics.producers.pmtracktc.HitModuleLabel:             "hitfd"
+physics.producers.pmtracktc.HitModuleLabel:             "trajcluster"
 physics.producers.pmtracktc.ClusterModuleLabel:         "trajcluster"
 physics.producers.pmtracktc.PMAlgTracking.RunVertexing:          true
 physics.producers.pmtracktc.PMAlgTracking.FlipToBeam:            true
@@ -260,10 +256,6 @@ physics.producers.pmtracktcpid.TrackModuleLabel:        "pmtracktc"
 
 physics.producers.linecluster.HitFinderModuleLabel:     "hitfd"
 physics.producers.trajcluster.TrajClusterAlg.HitFinderModuleLabel:   "hitfd"
-physics.producers.trajcluster.TrajClusterAlg.MaxWireSkipNoSignal: 2
-physics.producers.trajcluster.TrajClusterAlg.HitErrFac: 0.4
-physics.producers.trajcluster.TrajClusterAlg.KinkAngCut: 0.6
-physics.producers.trajcluster.TrajClusterAlg.SkipAlgs:   ["ChainMerge", "MaskHits", "RevProp"]
 
 physics.producers.calo.TrackModuleLabel:                "costrk"
 physics.producers.calo.SpacePointModuleLabel:           "costrk"

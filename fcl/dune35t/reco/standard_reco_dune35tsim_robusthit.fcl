@@ -12,7 +12,7 @@
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 
-process_name: Reco
+process_name: RecoRobust
 
 services: {
   # Load the service that manages root files for histograms.
@@ -349,12 +349,13 @@ physics.producers.mergeemshower3d.WideConeAngle: 20
 
 physics.producers.robusthit.WireModuleLabel: "caldata"
 
+services.AdcRoiBuildingService: @local::adcroi_keepall
 services.RawDigitPrepService.DoDeconvolution: false
 services.RawDigitPrepService.DoEarlySignalFinding: false
-services.RawDigitPrepService.DoMitigation: true
+services.RawDigitPrepService.DoMitigation: false
 services.RawDigitPrepService.DoNoiseRemoval: false
-services.RawDigitPrepService.DoPedestalAdjustment: true
-services.RawDigitPrepService.DoROI: false
+services.RawDigitPrepService.DoPedestalAdjustment: false
+services.RawDigitPrepService.DoROI: true
 services.RawDigitPrepService.DoWires: true
 services.RawDigitPrepService.SkipBad: true
 services.RawDigitPrepService.SkipNoisy: false
