@@ -1,0 +1,12 @@
+#include "protoDUNE_g4single.fcl"
+
+services.LArSeedService.policy: "preDefinedSeed"
+services.LArSeedService.baseSeed: 1234
+services.LArSeedService.largeant.GEANT: 1234
+services.LArSeedService.largeant.propagation: 1234
+services.LArSeedService.largeant.radio: 1234
+
+services.RandomNumberGenerator.restoreFrom: "G4RandomSeeds_Ref_ProtoDUNE.dat"
+services.RandomNumberGenerator.saveTo: "G4RandomSeeds.dat"
+
+#outputs.out1.fastCloning: false
