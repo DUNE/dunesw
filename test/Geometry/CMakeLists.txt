@@ -139,6 +139,22 @@ cet_test(geometry_iterator_loop_dunefd_test
 )
 
 
+# test for CRM channel mapping (BOOST unit test)
+cet_test(geometry_crmchannelmapping_test
+  SOURCES geometry_crmchannelmapping_test.cxx
+  LIBRARIES larcore_Geometry
+            GeometryTestLib
+            dune_Geometry
+            ${MF_MESSAGELOGGER}
+            ${MF_UTILITIES}
+            ${FHICLCPP}
+            ${CETLIB}
+  USE_BOOST_UNIT
+  DATAFILES test_geometry_dunedphase10kt.fcl
+  TEST_ARGS -- ./test_geometry_dunedphase10kt.fcl
+)
+
+
 # This is not really a test, but it dumps channel mapping on a file
 cet_test(dump_channel_map_dune35t_test HANDBUILT
   DATAFILES dump_dune35t_channelmap.fcl
