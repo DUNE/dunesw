@@ -14,7 +14,7 @@ services: {
   TFileService:          { fileName: "hists_donothing_dunefd.root" }
   TimeTracker:                {}
   RandomNumberGenerator: {}
-  user:                  @local::dunefd_services
+                         @table::dunefd_services
 } # services
 
 
