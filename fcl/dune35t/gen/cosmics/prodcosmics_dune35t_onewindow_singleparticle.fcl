@@ -1,5 +1,6 @@
 #include "services_dune.fcl"
 #include "cry_dune.fcl"
+#include "gen_ewcounterpair.fcl"
 
 process_name: CosmicsGen
 
@@ -30,6 +31,11 @@ source:
 physics:
 {
 
+ filters:
+ {
+   counterfilter: @local::dune35t_genextcounterfilter_ewcounterpair
+ }
+
  producers:
  {
    generator: @local::dune35t_cry_single
@@ -38,7 +44,7 @@ physics:
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below 
- simulate: [ rns, generator ] 
+ simulate: [ rns, generator, counterfilter ] 
  
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -63,5 +69,6 @@ outputs:
    fileName:    "prodcosmics_dune35t_onewindow_singleparticle_%tc_gen.root"
    dataTier:    "generated"
    compressionLevel: 1
+   SelectEvents: {SelectEvents:[simulate]}
  }
 }
