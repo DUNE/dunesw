@@ -9,7 +9,8 @@ services:
   # Load the service that manages root files for histograms.
   TFileService: { fileName: "cosmics_hist.root" }
   TimeTracker:       {}
-  SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
+  #SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
+  MemoryTracker: {}
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
   @table::dune35t_gen_services

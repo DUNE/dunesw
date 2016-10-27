@@ -1,5 +1,7 @@
 #include "standard_detsim_dune35t.fcl"
 
+services.MemoryTracker: {}
+
 physics.producers.daq.NoiseOn:     false
 physics.producers.daq.PedestalOn:  false
 physics.producers.daq.DistortOn:   false
