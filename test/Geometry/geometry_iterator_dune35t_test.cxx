@@ -17,7 +17,7 @@
 #include "test/Geometry/GeometryIteratorTestAlg.h"
 #include "larcore/TestUtils/boost_unit_test_base.h"
 #include "larcore/Geometry/GeometryCore.h"
-#include "dune/Geometry/ChannelMap35OptAlg.h"
+#include "dune/Geometry/Dune35tChannelMapAlg.h"
 
 // utility libraries
 #include "messagefacility/MessageLogger/MessageLogger.h"
@@ -37,7 +37,7 @@
 struct DUNE35tGeometryConfiguration:
   public testing::BoostCommandLineConfiguration<
     dune::testing::DUNE35tGeometryEnvironmentConfiguration
-      <geo::ChannelMap35OptAlg>
+      <geo::Dune35tChannelMapAlg>
     >
 {
   /// Constructor: overrides the application name; ignores command line
