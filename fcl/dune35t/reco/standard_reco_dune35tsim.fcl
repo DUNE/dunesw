@@ -133,14 +133,10 @@ physics: {
  reco: [ rns, 
          #optical hit reco, flash, counter, TPC wire signals
          ophit, opflash, t0counter, caldata, 
-         #cheater reco
-         hitcheat, clustercheat, trackcheat,
          #hit reco with cheated disambiguation
          gaushit, dcheat, fasthit, 
          #cluster reco with cheated disambiguation
-         dbclusterdc, lineclusterdc,
-         #3D reco with cheated disambiguation
-         costrkdc, mctrutht0dc, photont0costrkdc, calodc, 
+         lineclusterdc,
          #pandora with cheated disambiguation
          pandoradc, particlestitcherdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
          #pmatrack with cheated disambiguation
@@ -151,9 +147,7 @@ physics: {
          #real disambiguation
          hit35t,
          #cluster reco
-         dbcluster, linecluster,
-         #3D reco
-         costrk,  mctrutht0, photont0costrk, calo,
+         linecluster,
          #pandora
          pandora, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo,
          #pmatrack

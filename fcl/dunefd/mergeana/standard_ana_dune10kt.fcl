@@ -9,7 +9,7 @@ services:
   TFileService: { fileName: "nue.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {}
-  SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
+  MemoryTracker:         { ignoreTotal: 1 } # default is one
 #  message:      @local::microboone_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefd_simulation_services
