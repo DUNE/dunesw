@@ -9,7 +9,6 @@ services:
   # Load the service that manages root files for histograms.
   TFileService: { fileName: "cosmics_hist.root" }
   TimeTracker:       {}
-  #SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
   MemoryTracker: {}
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
@@ -70,6 +69,6 @@ outputs:
    fileName:    "prodcosmics_dune35t_onewindow_singleparticle_%tc_gen.root"
    dataTier:    "generated"
    compressionLevel: 1
-   SelectEvents: {SelectEvents:[simulate]}
+   SelectEvents: [simulate]
  }
 }
