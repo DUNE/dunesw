@@ -87,8 +87,8 @@ physics:
 # Muon Counter T0
   t0counter:          @local::dune35t_t0counter
 # photon detector reconstruction
-  ophit:              @local::dune35t_ophit 
-  opflash:            @local::dune35t_opflash 
+  ophit:              @local::dune35t_ophit_splitdata
+  opflash:            @local::dune35t_opflash_splitdata
 # track shower splitter
   trkshowersplit:     @local::standard_trackshowerhits
 # shower reconstruction
@@ -201,8 +201,8 @@ physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
 physics.producers.pandoracalo.T0ModuleLabel:                "photont0pandora"
 
 #Optical detector configuration
-physics.producers.ophit.InputModule:                        "opdigi"
-physics.producers.opflash.InputModule:                      "ophit"
+#defined in opticaldetectormodules_dune.fcl
+#don't want to overwrite in case standard opdet data config changes
 
 #physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
 #shower configuration
