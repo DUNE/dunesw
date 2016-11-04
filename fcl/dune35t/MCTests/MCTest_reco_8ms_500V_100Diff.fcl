@@ -1,0 +1,5 @@
+#include "standard_reco_dune35tsim_milliblock.fcl"
+
+services.DetectorPropertiesService.Electronlifetime: 8000
+services.DetectorPropertiesService.Efield: [ 0.5, 0.782, 1.734 ]
+
