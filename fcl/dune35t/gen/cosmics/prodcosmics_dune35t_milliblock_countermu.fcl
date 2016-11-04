@@ -9,6 +9,6 @@ physics.simulate: [rns, generator, filter ]
 
 physics.producers.generator: @local::dune35t_milliblock_cry
 outputs.out1.fileName:    "prodcosmics_dune35t_milliblock_%tc_gen_countermu.root"
-outputs.out1.SelectEvents: {SelectEvents:[simulate]}
+outputs.out1.SelectEvents: [simulate]
 
 source.firstRun: 10000003

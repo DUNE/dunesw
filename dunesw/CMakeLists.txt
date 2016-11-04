@@ -1,3 +1,5 @@
+set( IFDH_ART_DIR $ENV{IFDH_ART_DIR} )
+
 add_subdirectory(DuneInterface)
 add_subdirectory(DuneCommon)
 add_subdirectory(Geometry)
@@ -39,6 +41,7 @@ add_subdirectory(Protodune)
 add_subdirectory(DAQTriggerSim)
 add_subdirectory(SpaceCharge)
 add_subdirectory(SpaceChargeServices)
+add_subdirectory(DataOverlay)
 
 # Respect the order specified in lar_build, which is:
 #
