@@ -17,7 +17,7 @@
 #include "test/Geometry/GeometryIteratorTestAlg.h"
 #include "larcore/TestUtils/boost_unit_test_base.h"
 #include "larcore/Geometry/GeometryCore.h"
-#include "dune/Geometry/ChannelMapAPAAlg.h"
+#include "dune/Geometry/DuneApaChannelMapAlg.h"
 
 // utility libraries
 #include "messagefacility/MessageLogger/MessageLogger.h"
@@ -40,7 +40,7 @@
 struct DUNEFDGeometryConfiguration:
   public testing::BoostCommandLineConfiguration<
     dune::testing::DUNEFDGeometryEnvironmentConfiguration
-      <geo::ChannelMapAPAAlg>
+      <geo::DuneApaChannelMapAlg>
     >
 {
   /// Constructor: overrides the application name; ignores command line

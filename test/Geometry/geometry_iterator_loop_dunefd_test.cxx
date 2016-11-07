@@ -17,7 +17,7 @@
 #include "test/Geometry/geometry_unit_test_dune.h"
 #include "test/Geometry/GeometryIteratorLoopTestAlg.h"
 #include "larcore/Geometry/GeometryCore.h"
-#include "dune/Geometry/ChannelMapAPAAlg.h"
+#include "dune/Geometry/DuneApaChannelMapAlg.h"
 
 // utility libraries
 #include "messagefacility/MessageLogger/MessageLogger.h"
@@ -32,7 +32,7 @@
 // environment allows us to tailor it at run time.
 using DUNEFDGeometryConfiguration
   = dune::testing::DUNEFDGeometryEnvironmentConfiguration
-    <geo::ChannelMapAPAAlg>;
+    <geo::DuneApaChannelMapAlg>;
 
 /*
  * GeometryTesterEnvironment, configured with the object above, is used in a
