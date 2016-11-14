@@ -22,7 +22,7 @@ services: {
     destinations: {
       LogChannelMap: { 
         type:       "file"
-        filename:   "dunefd_channelmap.txt"
+        filename:   "dune35t_channelmap.txt"
         append:     false
         threshold:  "INFO"
         categories:{
