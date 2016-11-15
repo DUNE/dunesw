@@ -1,5 +1,4 @@
 # Install fcl files in /job subdirectory.
-add_subdirectory(DataOverlay)
 
 install_fhicl()
 

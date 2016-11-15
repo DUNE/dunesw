@@ -1,0 +1,10 @@
+#include "gen_ewcounterpair.fcl"
+#include "prodcosmics_dune35t_onewindow.fcl"
+
+physics.filters.counterfilter: @local::dune35t_genextcounterfilter_ewcounterpair
+
+physics.producers.generator: @local::dune35t_cry_single
+
+physics.simulate: [ rns, generator, counterfilter ]
+
+outputs.out1.SelectEvents: [simulate]
