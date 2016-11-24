@@ -25,7 +25,6 @@ services:
   message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodune_services
-			@table::protodune_simulation_services
 }
 
 #source is now a root file
