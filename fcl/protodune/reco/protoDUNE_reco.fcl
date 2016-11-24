@@ -71,7 +71,7 @@ physics:
 # photon detector reconstruction
   ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
-  trkshowersplit:     @local::standard_trackshowerhits
+# trkshowersplit:     @local::standard_trackshowerhits
   blurredcluster:        @local::dune35t_blurredcluster
   emshower:              @local::dune10kt_emshower
   emshower3d:            @local::dune10kt_emshower3d
@@ -93,7 +93,7 @@ physics:
          #cluster reco
          linecluster,
          #track shower split
-         trkshowersplit,
+         #trkshowersplit, # will move to use cnn splitter
          #pandora
          pandora, #pandora stitcher goes here
          pandoracalo, pandorapid,
@@ -132,7 +132,7 @@ outputs:
 
 ### Here, we overwrite ALL module labels with the ones defined above.
 
-physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
+#physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
 
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:           "linecluster"
