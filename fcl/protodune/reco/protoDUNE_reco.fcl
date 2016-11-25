@@ -72,7 +72,7 @@ physics:
   ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
 # trkshowersplit:     @local::standard_trackshowerhits
-  blurredcluster:        @local::dune35t_blurredcluster
+  blurredclusterdc:      @local::dune10kt_blurredcluster
   emshower:              @local::dune10kt_emshower
   emshower3d:            @local::dune10kt_emshower3d
   mergeemshower3d:       @local::dune10kt_mergeemshower3d
@@ -177,6 +177,14 @@ physics.producers.ophit.InputModule:                        "opdigi"
 physics.producers.opflash.InputModule:                      "ophit"
 
 #shower configuration
+
+physics.producers.blurredcluster.HitsModuleLabel: "linecluster"
+physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"
+physics.producers.blurredcluster.CreateDebugPDF:  false
+physics.producers.blurredcluster.MergeClusters:   false
+physics.producers.blurredcluster.GlobalTPCRecon:  true
+physics.producers.blurredcluster.ShowerReconOnly: false
+physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
 
 physics.producers.emshower.ClusterModuleLabel: "blurredcluster"
 physics.producers.emshower.HitsModuleLabel: "linecluster"
