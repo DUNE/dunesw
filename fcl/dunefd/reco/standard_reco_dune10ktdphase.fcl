@@ -8,6 +8,7 @@
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
 #include "particleid.fcl"
+#include "showerfindermodules_dune.fcl"
 
 process_name: Reco
 
@@ -61,11 +62,12 @@ physics:
   pmtrackcalo:        @local::dune10kt_calomc
   pmtrackpid:         @local::standard_chi2pid
   blurredcluster:     @local::dune10kt_blurredcluster
+  emshower:           @local::dune10kt_emshower
  }
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, caldata, fasthit, gaushit, linecluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster ]
+ reco: [ rns, caldata, fasthit, gaushit, linecluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster, emshower ]
 
 	analyzers:
 	{
@@ -125,6 +127,10 @@ physics.producers.blurredcluster.MergeClusters:   false
 physics.producers.blurredcluster.GlobalTPCRecon:  true
 physics.producers.blurredcluster.ShowerReconOnly: false
 physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
+
+physics.producers.emshower.ClusterModuleLabel: "blurredcluster"
+physics.producers.emshower.HitsModuleLabel: "linecluster"
+physics.producers.emshower.TrackModuleLabel: "pmtrack"
 
 
 #Pandora configurations
