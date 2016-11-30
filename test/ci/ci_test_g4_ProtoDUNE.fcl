@@ -1,10 +1,10 @@
 #include "protoDUNE_g4single.fcl"
 
-services.LArSeedService.policy: "preDefinedSeed"
-services.LArSeedService.baseSeed: 1234
-services.LArSeedService.largeant.GEANT: 1234
-services.LArSeedService.largeant.propagation: 1234
-services.LArSeedService.largeant.radio: 1234
+services.NuRandomService.policy: "preDefinedSeed"
+services.NuRandomService.baseSeed: 1234
+services.NuRandomService.largeant.GEANT: 1234
+services.NuRandomService.largeant.propagation: 1234
+services.NuRandomService.largeant.radio: 1234
 
 services.RandomNumberGenerator.restoreFrom: "G4RandomSeeds_Ref_ProtoDUNE.dat"
 services.RandomNumberGenerator.saveTo: "G4RandomSeeds.dat"
