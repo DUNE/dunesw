@@ -16,7 +16,7 @@ services:
   TimeTracker:       {}
   RandomNumberGenerator: {}
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::protodune_simulation_services
+  @table::protodune_services
 }
 #services.PhotonVisibilityService:      @local::protodune_photonvisibilityservice
 #source is now a root file
