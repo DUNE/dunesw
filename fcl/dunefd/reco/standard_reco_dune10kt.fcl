@@ -173,29 +173,35 @@ physics.producers.trkshowersplit.HitModuleLabel:        "linecluster"
 physics.producers.pmtrackdc.HitModuleLabel:             "lineclusterdc"
 physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
 physics.producers.pmtrackdc.EmClusterModuleLabel:       "trkshowersplitdc"
-physics.producers.pmtrackdc.PMAlgTracking.RunVertexing: true
-physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:   true
+physics.producers.pmtrackdc.PMAlgTracking.RunVertexing:   true
+physics.producers.pmtrackdc.PMAlgTracking.MinSeedSize2ndPass:  2
+physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:     false
+physics.producers.pmtrackdc.PMAlgTracking.AutoFlip_dQdx: true
 
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:           "linecluster"
 physics.producers.pmtrack.EmClusterModuleLabel:         "trkshowersplit"
 physics.producers.pmtrack.PMAlgTracking.RunVertexing:   true
-physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
+physics.producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:  2
+physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     false
+physics.producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: true
 
 physics.producers.pmtrajfitdc.HitModuleLabel:           "lineclusterdc"
 physics.producers.pmtrajfitdc.PfpModuleLabel:           "pandoradc"
 
 physics.producers.pmtracktcdc.HitModuleLabel:           "trajclusterdc"
 physics.producers.pmtracktcdc.ClusterModuleLabel:       "trajclusterdc"
-physics.producers.pmtracktcdc.PMAlgTracking.RunVertexing:        true
-physics.producers.pmtracktcdc.PMAlgTracking.FlipToBeam:          true
+physics.producers.pmtracktcdc.PMAlgTracking.RunVertexing:   true
 physics.producers.pmtracktcdc.PMAlgTracking.MinSeedSize2ndPass:  2
+physics.producers.pmtracktcdc.PMAlgTracking.FlipToBeam:     false
+physics.producers.pmtracktcdc.PMAlgTracking.AutoFlip_dQdx: true
 
 physics.producers.pmtracktc.HitModuleLabel:             "trajcluster"
 physics.producers.pmtracktc.ClusterModuleLabel:         "trajcluster"
-physics.producers.pmtracktc.PMAlgTracking.RunVertexing:          true
-physics.producers.pmtracktc.PMAlgTracking.FlipToBeam:            true
-physics.producers.pmtracktc.PMAlgTracking.MinSeedSize2ndPass:    2
+physics.producers.pmtracktc.PMAlgTracking.RunVertexing:   true
+physics.producers.pmtracktc.PMAlgTracking.MinSeedSize2ndPass:  2
+physics.producers.pmtracktc.PMAlgTracking.FlipToBeam:     false
+physics.producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx: true
 
 physics.producers.pmtrajfit.HitModuleLabel:             "linecluster"
 physics.producers.pmtrajfit.PfpModuleLabel:             "pandora"
