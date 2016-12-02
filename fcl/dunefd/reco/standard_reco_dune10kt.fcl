@@ -22,7 +22,7 @@ services:
   MemoryTracker:     {}
   TimeTracker:       {}
   RandomNumberGenerator: {} #ART native random number generator
-  message:              @local::dune_message_services_prod_debug
+  message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefd_reco_services
 }
@@ -114,22 +114,9 @@ physics:
          ophit, opflash,
          #TPC wire signals      
          caldata,
-         #hit reco with cheated disambiguation
-         gaushit, dcheat, #cchit, fasthit, fasthitdc,
-         #cluster reco with cheated disambiguation
-         lineclusterdc, trajclusterdc,
-         #track shower split
-         trkshowersplitdc,
-         #pandora with cheated disambiguation
-         pandoradc, #pandora stitcher goes here
-         pandoracalodc, pandorapiddc,
-         #pmatrack with cheated disambiguation
-         pmtrackdc, pmtrackcalodc, pmtrackpiddc,
-         pmtrajfitdc, pmtrajfitcalodc, pmtrajfitpiddc,
-         pmtracktcdc, pmtracktccalodc, pmtracktcpiddc,
-         #shower reconstruction
-         blurredclusterdc, emshowerdc, #emshower3ddc, mergeemshower3ddc,
-         #real disambiguation
+         #hit reco 
+         gaushit, 
+         #disambiguation
          hitfd,
          #cluster reco
          linecluster, trajcluster,
