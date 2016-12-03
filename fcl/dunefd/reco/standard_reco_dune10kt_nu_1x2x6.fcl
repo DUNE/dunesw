@@ -11,3 +11,11 @@ physics.producers.emshowerdc.ClusterModuleLabel: "pandoradc"
 physics.producers.emshowerdc.HitsModuleLabel: "lineclusterdc"
 physics.producers.emshowerdc.PFParticleModuleLabel: "pandoradc"
 physics.producers.emshowerdc.TrackModuleLabel: "pandoradc"
+physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
+physics.producers.pmtrack.PMAlgTracking.AutoFlip_dQdx:  false
+physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:     true
+physics.producers.pmtrackdc.PMAlgTracking.AutoFlip_dQdx:  false
+physics.producers.pmtracktc.PMAlgTracking.FlipToBeam:     true
+physics.producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx:  false
+physics.producers.pmtracktcdc.PMAlgTracking.FlipToBeam:     true
+physics.producers.pmtracktcdc.PMAlgTracking.AutoFlip_dQdx:  false
