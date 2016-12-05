@@ -19,3 +19,4 @@ services.ChannelNoiseService: {
   OldNoiseIndex: false
 }
 
+physics.producers.daq.SuppressOn:  false
