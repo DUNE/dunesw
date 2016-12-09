@@ -1,13 +1,12 @@
 #include "services_dune.fcl"
-#include "AnalysisTree.fcl"
-#include "trackfindermodules.fcl"
+#include "nueanamodule.fcl"
 
 process_name: Mergeana
 
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "anatree.root" }
+  TFileService: { fileName: "nue.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {}
   MemoryTracker:         { ignoreTotal: 1 } # default is one
@@ -30,18 +29,16 @@ physics:
 {
  analyzers:
 {
- analysistree:      @local::dune10kt_analysistree
- pmtrackeff:        @local::standard_neutrinotrackingeff
- pmtracktceff:      @local::standard_neutrinotrackingeff
- pandoraeff:        @local::standard_neutrinotrackingeff
- pmtrajfiteff:      @local::standard_neutrinotrackingeff
+ nuetreepmtrack:               @local::dunefd_nueana
+ nuetreepandora:               @local::dunefd_nueana
+
 }
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- ana:  [ analysistree, pmtrackeff, pmtracktceff, pandoraeff, pmtrajfiteff ]
+ ana:  [ nuetreepmtrack, nuetreepandora ]
 
  #end_paths is a keyword and contains the paths that do not modify the art::Event, 
  #ie analyzers and output streams.  these all run simultaneously
@@ -64,7 +61,18 @@ outputs:
 }
 
 ### Here, we overwrite ALL module Labels with the ones defined above.
-physics.analyzers.pmtrackeff.TrackModuleLabel:       "pmtrack"
-physics.analyzers.pmtracktceff.TrackModuleLabel:     "pmtracktc"
-physics.analyzers.pandoraeff.TrackModuleLabel:       "pandora"
-physics.analyzers.pmtrajfiteff.TrackModuleLabel:     "pmtrajfit"
+
+physics.analyzers.nuetreepandora.TrackModuleLabel:  "pandora"
+physics.analyzers.nuetreepandora.HitsModuleLabel:   "linecluster"
+physics.analyzers.nuetreepandora.VertexModuleLabel: "pandora"
+physics.analyzers.nuetreepandora.ShowerModuleLabel: "emshower"
+physics.analyzers.nuetreepandora.CalorimetryModuleLabel: "pandoracalo"
+physics.analyzers.nuetreepandora.ClusterModuleLabel: "pandora"
+
+physics.analyzers.nuetreepmtrack.TrackModuleLabel:  "pmtrack"
+physics.analyzers.nuetreepmtrack.HitsModuleLabel:   "linecluster"
+physics.analyzers.nuetreepmtrack.VertexModuleLabel: "pmtrack"
+physics.analyzers.nuetreepmtrack.ShowerModuleLabel: "emshower"
+physics.analyzers.nuetreepmtrack.CalorimetryModuleLabel: "pmtrackcalo"
+physics.analyzers.nuetreepmtrack.ClusterModuleLabel: "linecluster"
+

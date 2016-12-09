@@ -1,0 +1,6 @@
+#include "protoDUNE_detsim_noise.fcl"
+
+# tune to have high noise level
+services.ChannelNoiseService.NoiseNormU:   30.0
+services.ChannelNoiseService.NoiseNormV:   30.0
+services.ChannelNoiseService.NoiseNormZ:   15.0

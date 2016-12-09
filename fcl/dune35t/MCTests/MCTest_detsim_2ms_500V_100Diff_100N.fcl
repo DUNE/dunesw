@@ -1,0 +1,8 @@
+#include "standard_detsim_dune35t_milliblock.fcl"
+
+services.DetectorPropertiesService.Electronlifetime: 2000
+services.DetectorPropertiesService.Efield: [ 0.5, 0.782, 1.734 ]
+services.LArG4Parameters.LongitudinalDiffusion: 6.2e-9
+
+services.ChannelNoiseService: @local::chnoiseold
+

@@ -1,0 +1,8 @@
+#include "gen_protoDune_pion_2GeV_mono.fcl"
+
+services.NuRandomService.policy: "preDefinedSeed"
+services.NuRandomService.baseSeed: 1234
+services.NuRandomService.generator: 1234
+
+services.RandomNumberGenerator.restoreFrom: "GenRandomSeeds_Ref_protoDUNE.dat"
+services.RandomNumberGenerator.saveTo: "GenRandomSeeds.dat"
