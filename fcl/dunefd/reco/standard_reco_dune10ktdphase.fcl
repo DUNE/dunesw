@@ -3,7 +3,7 @@
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
-#include "pandoramodules.fcl"
+#include "pandoramodules_dune.fcl"
 #include "calorimetry_dune10kt.fcl"
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
@@ -56,7 +56,7 @@ physics:
   linecluster:        @local::dunefd_linecluster
 #  stitch:             @local::dune35t_trackstitcher
   calo:               @local::dune10kt_calomc
-  pandora:            @local::standard_pandoraneutrino
+  pandora:            @local::dunefd_pandora
   pmtrack:            @local::dunefd_pmalgtrackmaker
   pmtrajfit:	      @local::dunefd_pmalgtrajfitter
   pmtrackcalo:        @local::dune10kt_calomc

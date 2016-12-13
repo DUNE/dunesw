@@ -2,8 +2,7 @@
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
-#include "pandoramodules.fcl"
-##include "pandoramodules_dune.fcl"
+#include "pandoramodules_dune.fcl"
 #include "calorimetry_dune10kt.fcl"
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
@@ -58,7 +57,7 @@ physics:
   trajclusterdc:          @local::standard_trajcluster
 #  costrkdc:           @local::dunefd_cosmictracker
   calodc:             @local::dune35t_calomc
-  pandoradc:          @local::standard_pandoraneutrino
+  pandoradc:          @local::dunefd_pandora
 # pandora stitching module goes here when it's ready
   pandoracalodc:      @local::dune10kt_calomc
   pmtrackdc:           @local::dunefd_pmalgtrackmaker
@@ -74,7 +73,7 @@ physics:
   linecluster:        @local::dune35t_linecluster
   trajcluster:          @local::standard_trajcluster
   calo:               @local::dune35t_calomc
-  pandora:            @local::standard_pandoraneutrino
+  pandora:            @local::dunefd_pandora
 # pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune10kt_calomc
   pmtrack:             @local::dunefd_pmalgtrackmaker
