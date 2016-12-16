@@ -32,7 +32,7 @@ source:
   module_type: RootInput
   maxEvents:  10        # Number of events to create
   saveMemoryObjectThreshold: 0
-  source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco" ]
+  inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco" ]
 }
 
 # Define and configure some modules to do work on each event.

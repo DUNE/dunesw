@@ -1,0 +1,2 @@
+#include "standard_reco1_dune10kt_1x2x6.fcl"
+process_name: Reco1
