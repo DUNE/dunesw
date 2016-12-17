@@ -1,0 +1,25 @@
+#include "standard_reco_dune10kt.fcl"
+
+process_name: Reco2
+
+physics.reco: [ linecluster,
+                trajcluster,
+                trkshowersplit,
+                pandora,
+                pandoracalo, 
+                pandorapid,
+                pmtrack, 
+                pmtrackcalo, 
+                pmtrackpid,
+                pmtrajfit, 
+                pmtrajfitcalo, 
+                pmtrajfitpid,
+                pmtracktc, 
+                pmtracktccalo, 
+                pmtracktcpid,
+                blurredcluster, 
+                emshower
+                ]
+outputs.out1.fileName: "%ifb_reco2.root"
+outputs.out1.dataTier: "full-reconstructed"
+source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco2" ]

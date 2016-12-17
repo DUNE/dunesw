@@ -1,0 +1,3 @@
+#include "standard_reco2_dune10kt.fcl"
+process_name: Reco2
+services.Geometry: @local::dune10kt_45deg_1x2x6_geo
