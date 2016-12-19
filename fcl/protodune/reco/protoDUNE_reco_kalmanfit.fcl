@@ -7,7 +7,7 @@
 physics.producers.finalkalmanfit:                             @local::kalmantrackfit
 physics.producers.finalkalmanfit.inputs.inputPFParticleLabel: ""
 physics.producers.finalkalmanfit.inputs.inputTracksLabel:     pmtrack
-physics.producers.finalkalmanfit.inputs.inputCaloLabel:       pmtrackcalo
+physics.producers.finalkalmanfit.inputs.inputCaloLabel:       ""
 physics.producers.finalkalmanfit.inputs.inputPidLabel:        ""
 physics.producers.finalkalmanfit.options.pdgId:               211  # PDG code for the beam particle
 physics.producers.finalkalmanfit.options.momentumInGeV:       1.0  # beam particle momentum
