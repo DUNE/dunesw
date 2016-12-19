@@ -46,15 +46,10 @@ physics:
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
   caldata:            @local::dunefddphase_calwire
-# actual hit finder
-  hitcheat:           @local::dunefd_hitcheater
+# actual hit finder and recconstruction
   gaushit:            @local::dunefddphase_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
-  cchit:              @local::dunefd_clustercrawlerhit
-  hitfd:             @local::dunefd_hitfinderfd
-# reconstruction using disambiguated hits
   linecluster:        @local::dunefd_linecluster
-#  stitch:             @local::dune35t_trackstitcher
   calo:               @local::dune10kt_calomc
   pandora:            @local::standard_pandoraneutrino
   pmtrack:            @local::dunefd_pmalgtrackmaker
