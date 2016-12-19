@@ -12,5 +12,5 @@ physics.producers.finalkalmanfit.inputs.inputPidLabel:        ""
 physics.producers.finalkalmanfit.options.pdgId:               211  # PDG code for the beam particle
 physics.producers.finalkalmanfit.options.momentumInGeV:       1.0  # beam particle momentum
 
-physics.reco: [ rns, caldata, gaushit, hitfd, linecluster, pmtrack, pmtrackcalo, finalkalmanfit ]
+physics.reco: [ rns, caldata, gaushit, hitfd, linecluster, pmtrack, finalkalmanfit ]
 
