@@ -1,0 +1,24 @@
+#include "protoDUNE_detsim.fcl"
+
+# low (default, old) noise level
+services.ChannelNoiseService: {
+  service_provider: ExponentialChannelNoiseService
+  NoiseNormU: 3.16
+  NoiseNormV: 3.16
+  NoiseNormZ: 3.16
+  NoiseWidthU: 2000
+  NoiseWidthV: 2000
+  NoiseWidthZ: 2000
+  LowCutoffU: 7.5
+  LowCutoffV: 7.5
+  LowCutoffZ: 7.5
+  WhiteNoiseU: 0.0
+  WhiteNoiseV: 0.0
+  WhiteNoiseZ: 0.0
+  NoiseArrayPoints: 1000
+  OldNoiseIndex: true
+}
+
+services.DetectorPropertiesService.Electronlifetime: 1000
+
+physics.producers.daq.SuppressOn:  false
