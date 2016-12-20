@@ -1,4 +1,4 @@
-#include "protoDUNE_g4single.fcl"
+#include "protoDUNE_g4.fcl"
 
 services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
