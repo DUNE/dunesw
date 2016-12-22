@@ -62,7 +62,7 @@ physics:
  reco: [ rns, 
          #TPC wire signals
          caldata,
-         #hit reco with cheated disambiguation
+         #hit reco with real disambiguation
          gaushit, hitfd  #fasthit
        ]
 
