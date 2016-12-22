@@ -1,0 +1,23 @@
+#include "standard_reco_dune35tsim_robusthit.fcl"
+
+physics.reco: [ rns, t0counter, caldata, robusthit ]
+
+physics.producers.caldata.DigitLabel: "mixer:MIXED"
+physics.producers.robusthit.UseMeasuredCounterPositions: false
+physics.producers.robusthit.MakeTree: true
+physics.producers.robusthit.MakeupMissedHits: true
+physics.producers.robusthit.MissedBufferTicksLow: 20
+physics.producers.robusthit.MissedBufferTicksHigh: 20
+physics.producers.robusthit.HitLineFitAlg.LogLevel: 10
+physics.producers.t0counter.CoincidenceTolerance: 40
+
+services.AdcRoiBuildingService: @local::adcroi_keepall
+services.RawDigitPrepService.DoDeconvolution: false
+services.RawDigitPrepService.DoEarlySignalFinding: false
+services.RawDigitPrepService.DoMitigation: true
+services.RawDigitPrepService.DoNoiseRemoval: false
+services.RawDigitPrepService.DoPedestalAdjustment: true
+services.RawDigitPrepService.DoROI: true
+services.RawDigitPrepService.DoWires: true
+services.RawDigitPrepService.SkipBad: true
+services.RawDigitPrepService.SkipNoisy: false

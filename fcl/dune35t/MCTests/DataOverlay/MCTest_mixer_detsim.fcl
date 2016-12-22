@@ -1,7 +1,5 @@
 #include "standard_detsim_dune35t.fcl"
 
-services.DetectorPropertiesService.Electronlifetime: 8000
-
 physics.producers.daq.NoiseOn:     false
 physics.producers.daq.PedestalOn:  false
 physics.producers.daq.DistortOn:   false
