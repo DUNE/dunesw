@@ -19,6 +19,4 @@ services.ChannelNoiseService: {
   OldNoiseIndex: false
 }
 
-services.DetectorPropertiesService.Electronlifetime: 6000
-
 physics.producers.daq.SuppressOn:  false
