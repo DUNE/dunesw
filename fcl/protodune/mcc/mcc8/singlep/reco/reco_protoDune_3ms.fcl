@@ -26,6 +26,8 @@ services:
                         @table::protodune_reco_services
 }
 
+services.DetectorPropertiesService.Electronlifetime: 3000
+
 #source is now a root file
 source:
 {
