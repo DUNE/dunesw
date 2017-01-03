@@ -1,7 +1,7 @@
 #include "larg4_ewcounterpair.fcl"
 #include "standard_g4_dune35t.fcl"
 
-services.DetectorPropertiesService.Electronlifetime: 1000
+services.DetectorPropertiesService.Electronlifetime: 3000
 
 physics.filters.filter: @local::dune35t_larg4extcounterfilter_ewcounterpair
 

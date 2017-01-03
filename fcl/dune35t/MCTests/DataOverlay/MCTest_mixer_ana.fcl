@@ -27,3 +27,4 @@ physics: {
     end_paths: [ ana ]
 }
 
+physics.analyzers.robustmcana.PreviousMCScale: 1.0
