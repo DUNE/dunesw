@@ -1,0 +1,22 @@
+#include "protoDUNE_detsim.fcl"
+
+# tune to have high noise level
+services.ChannelNoiseService: {
+  service_provider: ExponentialChannelNoiseService
+  NoiseNormU:   30.0
+  NoiseNormV:   30.0
+  NoiseNormZ:   15.0
+  NoiseWidthU: 150.0
+  NoiseWidthV: 150.0
+  NoiseWidthZ: 150.0
+  LowCutoffU:    0.0
+  LowCutoffV:    0.0
+  LowCutoffZ:    0.0
+  WhiteNoiseU:   1.6
+  WhiteNoiseV:   1.6
+  WhiteNoiseZ:   1.6
+  NoiseArrayPoints: 1000
+  OldNoiseIndex: false
+}
+
+physics.producers.daq.SuppressOn:  false

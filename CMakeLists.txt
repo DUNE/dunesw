@@ -63,6 +63,7 @@ find_ups_product( cetbuildtools v3_10_00 )
 find_ups_product( postgresql v9_1_5 )
 find_ups_product( lbne_raw_data v0_00_02 )
 find_ups_product( artdaq_core v01_03_6 )
+find_ups_product( ifdh_art )
 
 # macros for dictionary and simple_plugin
 include(ArtDictionary)

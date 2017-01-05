@@ -1,0 +1,9 @@
+#include "protoDUNE_ana.fcl"
+
+services.NuRandomService.policy: "preDefinedSeed"
+services.NuRandomService.baseSeed: 1234
+
+#services.RandomNumberGenerator.restoreFrom: "MergeAnaRandomSeeds_Ref_protoDUNE.dat"
+#services.RandomNumberGenerator.saveTo: "MergeAnaRandomSeeds.dat"
+
+#outputs.out1.fastCloning: false

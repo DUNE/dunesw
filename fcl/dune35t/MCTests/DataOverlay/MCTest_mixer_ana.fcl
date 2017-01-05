@@ -1,0 +1,30 @@
+#include "services_dune.fcl"
+#include "hitanalysismodules_dune.fcl"
+
+process_name: RobustMCAna
+
+services:
+{
+  TFileService: { fileName: "reco_hist.root" }
+  @table::dune35tsim_reco_services
+}
+
+source: {
+    module_type: RootInput
+    maxEvents: -1
+}
+
+physics: {
+    analyzers:
+    {
+        robustmcana: @local::dune35t_robustmcana
+    }
+
+    ana: [ robustmcana ]
+    stream1: [ ]
+    
+    trigger_paths: [ ]
+    end_paths: [ ana ]
+}
+
+physics.analyzers.robustmcana.PreviousMCScale: 1.0

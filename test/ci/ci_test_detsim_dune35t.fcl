@@ -1,0 +1,14 @@
+#include "standard_detsim_dune35t.fcl"
+
+services.NuRandomService.policy: "preDefinedSeed"
+services.NuRandomService.baseSeed: 1234
+services.NuRandomService.daq: 1234
+services.NuRandomService.simcounter.rand: 1234
+services.NuRandomService.StuckBitAdcDistortionService: 1234
+services.NuRandomService.ExponentialChannelNoiseService: 1234
+services.NuRandomService.ProvidedPedestalAdditionService: 1234
+
+services.RandomNumberGenerator.restoreFrom: "DetSimRandomSeeds_Ref_dune35t.dat"
+services.RandomNumberGenerator.saveTo: "DetSimRandomSeeds.dat"
+
+#outputs.out1.fastCloning: false

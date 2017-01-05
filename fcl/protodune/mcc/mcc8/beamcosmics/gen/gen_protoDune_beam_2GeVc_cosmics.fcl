@@ -1,0 +1,5 @@
+#include "gen_protoDune_beam_cosmics.fcl"
+services.TFileService.fileName: "gen_protoDune_beam_2GeV_cosmics_hist.root"
+source.maxEvents: 1000000
+outputs.out1.fileName: "gen_protoDune_beam_2GeV_cosmics.root"
+physics.producers.generator.FileName: "/pnfs/dune/persistent/users/dstefan/h4/H4_TILT22_APR_FTFP_BERT_2GeV_6M.root"

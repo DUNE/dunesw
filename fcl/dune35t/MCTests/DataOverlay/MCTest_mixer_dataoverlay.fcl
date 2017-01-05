@@ -1,0 +1,7 @@
+#include "run_DataOverlayMixer.fcl"
+
+physics.filters.mixer.detail.SamDefname: "goodruns_35ton_sliced_mthiesse"
+physics.filters.mixer.detail.SamProject: "mthiesse_goodruns_35ton_sliced_mthiesse_2016-10-31_09-08-52"
+physics.filters.mixer.detail.SamUser: "mthiesse"
+
+physics.filters.mixer.detail.DefaultMCRawDigitScale: 1.0

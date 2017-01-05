@@ -22,7 +22,7 @@ services:
   MemoryTracker:     {}
   TimeTracker:       {}
   RandomNumberGenerator: {} #ART native random number generator
-  message:              @local::dune_message_services_prod_debug
+  message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefd_reco_services
 }
@@ -32,6 +32,7 @@ source:
   module_type: RootInput
   maxEvents:  10        # Number of events to create
   saveMemoryObjectThreshold: 0
+  inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco" ]
 }
 
 # Define and configure some modules to do work on each event.
@@ -114,22 +115,9 @@ physics:
          ophit, opflash,
          #TPC wire signals      
          caldata,
-         #hit reco with cheated disambiguation
-         gaushit, dcheat, #cchit, fasthit, fasthitdc,
-         #cluster reco with cheated disambiguation
-         lineclusterdc, trajclusterdc,
-         #track shower split
-         trkshowersplitdc,
-         #pandora with cheated disambiguation
-         pandoradc, #pandora stitcher goes here
-         pandoracalodc, pandorapiddc,
-         #pmatrack with cheated disambiguation
-         pmtrackdc, pmtrackcalodc, pmtrackpiddc,
-         pmtrajfitdc, pmtrajfitcalodc, pmtrajfitpiddc,
-         pmtracktcdc, pmtracktccalodc, pmtracktcpiddc,
-         #shower reconstruction
-         blurredclusterdc, emshowerdc, #emshower3ddc, mergeemshower3ddc,
-         #real disambiguation
+         #hit reco 
+         gaushit, 
+         #disambiguation
          hitfd,
          #cluster reco
          linecluster, trajcluster,
@@ -176,10 +164,6 @@ outputs:
 physics.producers.fasthitdc.ChanHitLabel:               "fasthit"
 physics.producers.lineclusterdc.HitFinderModuleLabel:   "dcheat"
 physics.producers.trajclusterdc.TrajClusterAlg.HitFinderModuleLabel:   "dcheat"
-physics.producers.trajclusterdc.TrajClusterAlg.MaxWireSkipNoSignal: 2
-physics.producers.trajclusterdc.TrajClusterAlg.HitErrFac: 0.4
-physics.producers.trajclusterdc.TrajClusterAlg.KinkAngCut: 0.6
-physics.producers.trajclusterdc.TrajClusterAlg.SkipAlgs:   ["ChainMerge", "MaskHits", "RevProp"]
 
 physics.producers.calodc.TrackModuleLabel:              "costrkdc"
 physics.producers.calodc.SpacePointModuleLabel:         "costrkdc"
@@ -190,29 +174,35 @@ physics.producers.trkshowersplit.HitModuleLabel:        "linecluster"
 physics.producers.pmtrackdc.HitModuleLabel:             "lineclusterdc"
 physics.producers.pmtrackdc.ClusterModuleLabel:         "lineclusterdc"
 physics.producers.pmtrackdc.EmClusterModuleLabel:       "trkshowersplitdc"
-physics.producers.pmtrackdc.PMAlgTracking.RunVertexing: true
-physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:   true
+physics.producers.pmtrackdc.PMAlgTracking.RunVertexing:   true
+physics.producers.pmtrackdc.PMAlgTracking.MinSeedSize2ndPass:  2
+physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:     false
+physics.producers.pmtrackdc.PMAlgTracking.AutoFlip_dQdx: true
 
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:           "linecluster"
 physics.producers.pmtrack.EmClusterModuleLabel:         "trkshowersplit"
 physics.producers.pmtrack.PMAlgTracking.RunVertexing:   true
-physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
+physics.producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:  2
+physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     false
+physics.producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: true
 
 physics.producers.pmtrajfitdc.HitModuleLabel:           "lineclusterdc"
 physics.producers.pmtrajfitdc.PfpModuleLabel:           "pandoradc"
 
-physics.producers.pmtracktcdc.HitModuleLabel:           "dcheat"
+physics.producers.pmtracktcdc.HitModuleLabel:           "trajclusterdc"
 physics.producers.pmtracktcdc.ClusterModuleLabel:       "trajclusterdc"
-physics.producers.pmtracktcdc.PMAlgTracking.RunVertexing:        true
-physics.producers.pmtracktcdc.PMAlgTracking.FlipToBeam:          true
+physics.producers.pmtracktcdc.PMAlgTracking.RunVertexing:   true
 physics.producers.pmtracktcdc.PMAlgTracking.MinSeedSize2ndPass:  2
+physics.producers.pmtracktcdc.PMAlgTracking.FlipToBeam:     false
+physics.producers.pmtracktcdc.PMAlgTracking.AutoFlip_dQdx: true
 
-physics.producers.pmtracktc.HitModuleLabel:             "hitfd"
+physics.producers.pmtracktc.HitModuleLabel:             "trajcluster"
 physics.producers.pmtracktc.ClusterModuleLabel:         "trajcluster"
-physics.producers.pmtracktc.PMAlgTracking.RunVertexing:          true
-physics.producers.pmtracktc.PMAlgTracking.FlipToBeam:            true
-physics.producers.pmtracktc.PMAlgTracking.MinSeedSize2ndPass:    2
+physics.producers.pmtracktc.PMAlgTracking.RunVertexing:   true
+physics.producers.pmtracktc.PMAlgTracking.MinSeedSize2ndPass:  2
+physics.producers.pmtracktc.PMAlgTracking.FlipToBeam:     false
+physics.producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx: true
 
 physics.producers.pmtrajfit.HitModuleLabel:             "linecluster"
 physics.producers.pmtrajfit.PfpModuleLabel:             "pandora"
@@ -260,10 +250,6 @@ physics.producers.pmtracktcpid.TrackModuleLabel:        "pmtracktc"
 
 physics.producers.linecluster.HitFinderModuleLabel:     "hitfd"
 physics.producers.trajcluster.TrajClusterAlg.HitFinderModuleLabel:   "hitfd"
-physics.producers.trajcluster.TrajClusterAlg.MaxWireSkipNoSignal: 2
-physics.producers.trajcluster.TrajClusterAlg.HitErrFac: 0.4
-physics.producers.trajcluster.TrajClusterAlg.KinkAngCut: 0.6
-physics.producers.trajcluster.TrajClusterAlg.SkipAlgs:   ["ChainMerge", "MaskHits", "RevProp"]
 
 physics.producers.calo.TrackModuleLabel:                "costrk"
 physics.producers.calo.SpacePointModuleLabel:           "costrk"

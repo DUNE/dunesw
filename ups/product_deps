@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
-parent dunetpc v06_05_00
+parent dunetpc v06_18_01_01
 defaultqual e10
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -45,22 +45,24 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v06_05_00
-artdaq_core	v1_05_05
-duneutil        v01_23_08	-	optional
-lbne_raw_data 	v1_04_04
-dune_pardata	v01_12_01
-cetbuildtools	v5_04_03	-	only_for_build
+larsoft         v06_18_01
+artdaq_core	v1_05_09
+duneutil        v06_18_01_01	-	optional
+lbne_raw_data 	v1_04_07
+dune_pardata	v01_14_00
+genie_xsec      v2_12_0
+genie_phyopt    v2_12_0
+cetbuildtools	v5_06_01	-	only_for_build
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes". 
 # e10  - with gcc 4.9.3 and -std=c++14
-qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata	notes
-e10:debug	e10:debug	e10:debug	nu:e10:s41:debug nu:e10:s41:debug	-nq-
-e10:opt		e10:opt		e10:opt		nu:e10:s41:opt	 nu:e10:s41:prof	-nq-
-e10:prof	e10:prof	e10:prof	nu:e10:s41:prof	 nu:e10:s41:prof	-nq-
+qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt	notes
+e10:debug	e10:debug	e10:debug	nu:e10:s43:debug nu:e10:s43:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e10:opt		e10:opt		e10:opt		nu:e10:s43:opt	 nu:e10:s43:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e10:prof	e10:prof	e10:prof	nu:e10:s43:prof	 nu:e10:s43:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:

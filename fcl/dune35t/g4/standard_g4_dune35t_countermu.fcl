@@ -9,4 +9,4 @@ physics.simulate: [rns, largeant, filter ]
 #physics.simulate: [rns, filter ]
 
 outputs.out1.fileName: "%ifb_%tc_g4_countermu.root"
-outputs.out1.SelectEvents: {SelectEvents:[simulate]}
+outputs.out1.SelectEvents: [simulate]

@@ -9,7 +9,6 @@
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
 #include "opticaldetectormodules_dune.fcl"
-#include "trackshowerhits.fcl"
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 
@@ -24,8 +23,7 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::protodune_services
-			@table::protodune_simulation_services
+                        @table::protodune_reco_services
 }
 
 #source is now a root file
@@ -47,36 +45,33 @@ physics:
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
-  caldata:            @local::dunefd_calwire
+  caldata:            @local::producer_adcprep
 # actual hit finder
   gaushit:            @local::dunefd_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
 #  cchit:              @local::dunefd_clustercrawlerhit
-# disambiguation cheater that removes duplicate hits
-# reconstruction using gaushit and disambiguration cheater
 # actual disambiguation
-  hitfd:             @local::dunefd_hitfinderfd
+  hitfd:              @local::dunefd_hitfinderfd
 # reconstruction using disambiguated hits
   linecluster:        @local::dune35t_linecluster
   calo:               @local::dune35t_calomc
   pandora:            @local::standard_pandoraneutrino
 # pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune10kt_calomc
-  pandorapid:          @local::standard_chi2pid
-  pmtrack:             @local::dunefd_pmalgtrackmaker
-  pmtrackcalo:         @local::dune10kt_calomc
-  pmtrackpid:          @local::standard_chi2pid
-  pmtrajfit:           @local::dunefd_pmalgtrajfitter
-  pmtrajfitcalo:       @local::dune10kt_calomc
-  pmtrajfitpid:        @local::standard_chi2pid
+  pandorapid:         @local::standard_chi2pid
+  pmtrack:            @local::dunefd_pmalgtrackmaker
+  pmtrackcalo:        @local::dune10kt_calomc
+  pmtrackpid:         @local::standard_chi2pid
+  pmtrajfit:          @local::dunefd_pmalgtrajfitter
+  pmtrajfitcalo:      @local::dune10kt_calomc
+  pmtrajfitpid:       @local::standard_chi2pid
 # photon detector reconstruction
   ophit:              @local::dune35t_ophit 
-  opflash:            @local::dune35t_opflash 
-  trkshowersplit:     @local::standard_trackshowerhits
-  blurredcluster:        @local::dune35t_blurredcluster
-  emshower:              @local::dune10kt_emshower
-  emshower3d:            @local::dune10kt_emshower3d
-  mergeemshower3d:       @local::dune10kt_mergeemshower3d
+  opflash:            @local::dune35t_opflash
+  blurredcluster:     @local::dune10kt_blurredcluster
+  emshower:           @local::dune10kt_emshower
+  emshower3d:         @local::dune10kt_emshower3d
+  mergeemshower3d:    @local::dune10kt_mergeemshower3d
  }
 
  #define the producer and filter modules for this path, order matters, 
@@ -86,15 +81,12 @@ physics:
          ophit, opflash,
          #TPC wire signals      
          caldata,
-         #hit reco with cheated disambiguation
+         #hit reconstruction
          gaushit, #cchit, fasthit, 
-         #cluster reco with cheated disambiguation
          #real disambiguation
          hitfd,
          #cluster reco
          linecluster,
-         #track shower split
-         trkshowersplit,
          #pandora
          pandora, #pandora stitcher goes here
          pandoracalo, pandorapid,
@@ -132,8 +124,6 @@ outputs:
 }
 
 ### Here, we overwrite ALL module labels with the ones defined above.
-
-physics.producers.trkshowersplit.HitModuleLabel:       "linecluster"
 
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:           "linecluster"
@@ -178,6 +168,14 @@ physics.producers.ophit.InputModule:                        "opdigi"
 physics.producers.opflash.InputModule:                      "ophit"
 
 #shower configuration
+
+physics.producers.blurredcluster.HitsModuleLabel: "linecluster"
+physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"
+physics.producers.blurredcluster.CreateDebugPDF:  false
+physics.producers.blurredcluster.MergeClusters:   false
+physics.producers.blurredcluster.GlobalTPCRecon:  true
+physics.producers.blurredcluster.ShowerReconOnly: false
+physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
 
 physics.producers.emshower.ClusterModuleLabel: "blurredcluster"
 physics.producers.emshower.HitsModuleLabel: "linecluster"

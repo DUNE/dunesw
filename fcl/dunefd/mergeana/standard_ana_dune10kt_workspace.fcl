@@ -1,3 +1,0 @@
-#include "standard_ana_dune10kt.fcl"
-process_name: Mergeana
-services.Geometry: @local::dune10kt_workspace_geo

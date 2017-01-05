@@ -14,9 +14,9 @@ services: {
   TFileService:          { fileName: "hists_donothing_dune35t.root" }
   TimeTracker:                {}
   RandomNumberGenerator: {}
-  user:                  @local::dune35t_services
+                         @table::dune35t_services
 } # services
-#services.user.DetPedestalService.DetPedestalDUNE.UseDB: true
+#services.DetPedestalService.DetPedestalDUNE.UseDB: true
 
 source: {
   module_type: EmptyEvent

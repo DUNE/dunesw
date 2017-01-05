@@ -9,6 +9,7 @@
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
+#include "pandoramodules.fcl"
 #include "pandoramodules_dune.fcl"
 #include "calorimetry_dune35t.fcl"
 #include "mctrutht0matching.fcl"
@@ -66,7 +67,7 @@ physics: {
   costrkdc:           @local::dune35t_cosmictracker
   #stitchdc:           @local::dune35t_trackstitcher
   calodc:             @local::dune35t_calomc
-  pandoradc:          @local::dune35t_pandora
+  pandoradc:          @local::standard_pandoracosmic
   particlestitcherdc: @local::dune35t_particlestitcher
   pandoracalodc:      @local::dune35t_calomc
   pmtrackdc:          @local::dune35t_pmalgtrackmaker
@@ -83,7 +84,7 @@ physics: {
   costrk:             @local::dune35t_cosmictracker
 #  stitch:             @local::dune35t_trackstitcher
   calo:               @local::dune35t_calomc
-  pandora:            @local::dune35t_pandora
+  pandora:            @local::standard_pandoracosmic
   particlestitcher:   @local::dune35t_particlestitcher
   pandoracalo:        @local::dune35t_calomc
   pmtrack:            @local::dune35t_pmalgtrackmaker
@@ -133,34 +134,28 @@ physics: {
  reco: [ rns, 
          #optical hit reco, flash, counter, TPC wire signals
          ophit, opflash, t0counter, caldata, 
-         #cheater reco
-         hitcheat, clustercheat, trackcheat,
          #hit reco with cheated disambiguation
          gaushit, dcheat, fasthit, 
          #cluster reco with cheated disambiguation
-         dbclusterdc, lineclusterdc,
-         #3D reco with cheated disambiguation
-         costrkdc, mctrutht0dc, photont0costrkdc, calodc, 
+         lineclusterdc,
          #pandora with cheated disambiguation
          pandoradc, particlestitcherdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
          #pmatrack with cheated disambiguation
          pmtrackdc, mctrutht0pmtrackdc, photont0pmtrackdc, pmtrackcalodc,
          pmtrajfitdc, mctrutht0pmtrajfitdc, photont0pmtrajfitdc, pmtrajfitcalodc,
          #shower reconstruction
-         blurredclusterdc, emshowerdc,
+         #blurredclusterdc, emshowerdc,
          #real disambiguation
          hit35t,
          #cluster reco
-         dbcluster, linecluster,
-         #3D reco
-         costrk,  mctrutht0, photont0costrk, calo,
+         linecluster,
          #pandora
          pandora, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo,
          #pmatrack
          pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo,
-         pmtrajfit, mctrutht0pmtrajfit, photont0pmtrajfit, pmtrajfitcalo,
+         pmtrajfit, mctrutht0pmtrajfit, photont0pmtrajfit, pmtrajfitcalo
          #shower reconstruction
-         blurredcluster, emshower
+         #blurredcluster, emshower
 ]
 
  #define the output stream, there could be more than one if using filters 
@@ -194,6 +189,8 @@ outputs:
 physics.producers.clustercheat.HitModuleLabel:         "hitcheat"
 physics.producers.trackcheat.CheatedClusterLabel:      "clustercheat"
 physics.producers.fasthitdc.ChanHitLabel:              "fasthit"
+physics.producers.gaushit.MinSig:                      [5,5,5]
+physics.producers.gaushit.MinWidth:                      [1,1,1]
 #physics.producers.hit35tcc.ChanHitLabel:              "gaushit"
 #physics.producers.dcheatcc.ChanHitLabel:              "gaushit"
 #physics.producers.fuzzydc.HitsModuleLabel:            "dcheat"
@@ -351,3 +348,14 @@ physics.producers.mergeemshower3d.ClustersModuleLabel: "blurredcluster"
 physics.producers.mergeemshower3d.Trk3DModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.VtxModuleLabel: "emshower3d"
 physics.producers.mergeemshower3d.WideConeAngle: 20
+
+services.SignalShapingServiceDUNE.ColFilter:       "(x>0.0)*gaus"
+services.SignalShapingServiceDUNE.ColFilterParams: [ 1.0, 0.0, 0.1 ]
+services.SignalShapingServiceDUNE.IndUFilter:       "(x>0.015)*gaus"
+services.SignalShapingServiceDUNE.IndUFilterParams: [ 1.0, 0.0, 0.1 ]
+services.SignalShapingServiceDUNE.IndVFilter:       "(x>0.015)*gaus"
+services.SignalShapingServiceDUNE.IndVFilterParams: [ 1.0, 0.0, 0.1 ]
+
+services.SignalShapingServiceDUNE.NoiseFactVec:  [[ 1.12, 0.86, 6.0, 0.55 ],
+                                                  [ 1.12, 0.86, 6.0, 0.55 ],
+                                                  [ 0.89, 0.66, 4.8, 0.43 ]]
