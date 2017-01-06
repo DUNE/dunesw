@@ -3,7 +3,7 @@
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
-#include "pandoramodules.fcl"
+#include "pandoramodules_dune.fcl"
 #include "calorimetry_dune10kt.fcl"
 #include "particleid.fcl"
 #include "mctrutht0matching.fcl"
@@ -55,7 +55,7 @@ physics:
 # reconstruction using disambiguated hits
   linecluster:        @local::dune35t_linecluster
   calo:               @local::dune35t_calomc
-  pandora:            @local::standard_pandoraneutrino
+  pandora:            @local::protodune_pandora
 # pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune10kt_calomc
   pandorapid:         @local::standard_chi2pid
