@@ -1,0 +1,16 @@
+#include "kalmanfilterfinaltrackfitter.fcl"
+#include "protoDUNE_reco.fcl"
+
+# Example minimal configuration to run Kalman final fitter on 3D tracks.
+# The configuration is provided for test purposes of the fitter module.
+
+physics.producers.finalkalmanfit:                             @local::kalmantrackfit
+physics.producers.finalkalmanfit.inputs.inputPFParticleLabel: ""
+physics.producers.finalkalmanfit.inputs.inputTracksLabel:     pmtrack
+physics.producers.finalkalmanfit.inputs.inputCaloLabel:       ""
+physics.producers.finalkalmanfit.inputs.inputPidLabel:        ""
+physics.producers.finalkalmanfit.options.pdgId:               211  # PDG code for the beam particle
+physics.producers.finalkalmanfit.options.momentumInGeV:       1.0  # beam particle momentum
+
+physics.reco: [ rns, caldata, gaushit, hitfd, linecluster, pmtrack, finalkalmanfit ]
+

@@ -44,7 +44,7 @@ cet_test(test_LArProperties SOURCES test_LArProperties.cxx
 
 cet_test(test_LArSeedService SOURCES test_LArSeedService.cxx
   LIBRARIES
-    larsim_RandomUtils_LArSeedService_service
+    nutools_RandomUtils_NuRandomService_service
     dune_ArtSupport
     ${ROOT_BASIC_LIB_LIST}
 )

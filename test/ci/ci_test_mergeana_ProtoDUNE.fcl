@@ -1,9 +1,0 @@
-#include "protoDUNE_ana.fcl"
-
-services.LArSeedService.policy: "preDefinedSeed"
-services.LArSeedService.baseSeed: 1234
-
-#services.RandomNumberGenerator.restoreFrom: "AnaRandomSeeds_Ref_ProtoDUNE.dat"
-#services.RandomNumberGenerator.saveTo: "AnaRandomSeeds.dat"
-
-#outputs.out1.fastCloning: false

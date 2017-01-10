@@ -8,10 +8,10 @@ services:
   TFileService: { fileName: "ana_hist.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {}
-  SimpleMemoryCheck:     { ignoreTotal: 1 } # default is one
+  MemoryTracker:         { ignoreTotal: 1 } # default is one
 #  message:      @local::microboone_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::protodune_simulation_services
+  @table::protodune_services
 }
 #services.PhotonVisibilityService:      @local::protodune_photonvisibilityservice
 #source is now a root file

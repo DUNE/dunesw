@@ -69,6 +69,8 @@ function data_production
     TASKSTRING="data_production"
     trap 'LASTERR=$?; echo -e "\nCI MSG BEGIN\n `basename $0`: error at line ${LINENO}\n Stage: ${STAGE_NAME}\n Task: ${TASKSTRING}\n exit status: ${LASTERR}\nCI MSG END\n"; exit ${LASTERR}' ERR
 
+    export TMPDIR=${PWD} #Temporary directory used by IFDHC
+
     #~~~~~~~~~~~~~IF THE TESTMASK VALUE IS SET TO 1 THEN RUN THE PRODUCTION OF THR DATA~~~~~~~~~~~~~~~~~~
     if [[ "${1}" -eq 1 ]]
     then
@@ -82,6 +84,20 @@ function data_production
         echo -e "\nCI MSG BEGIN\n Stage: ${STAGE_NAME}\n Task: ${TASKSTRING}\n skipped\nCI MSG END\n"
     fi
     exitstatus $?
+
+    [[ "${OUTPUT_LIST}" == *"_%#"* ]] && \
+        for CUR_OUT in ${OUTPUT_STREAM//-o/}
+        do
+            CUR_OUT=${CUR_OUT//*:/}
+            CUR_OUT2=$(echo $CUR_OUT | sed -r "s/_%#// ; s/_[0-9]+.root/.root/")
+            [ "${CUR_OUT//_%#.root/_1.root}" = "${CUR_OUT2}" ] || ln -sv ${CUR_OUT//_%#.root/_1.root} ${CUR_OUT2}
+        done
+
+    OUTPUT_LIST=${OUTPUT_LIST//_%#/}
+
+    ### for CUR_OUT in ${OUTPUT_STREAM//-o/}; do CUR_OUT=${CUR_OUT//*:/}; CUR_OUT2=$(echo $CUR_OUT | sed -r "s/_%#// ; s/_[0-9]+.root/.root/"); echo mv ${CUR_OUT//_%#.root/_1.root} ${CUR_OUT2}  ; done
+    ### for CUR_OUT in ${OUTPUT_STREAM//-o/}; do CUR_OUT=${CUR_OUT//*:/}; CUR_OUT2=$(echo $CUR_OUT | sed -r "s/_%#// ; s/_[0-9]+.root/.root/"); [ "${CUR_OUT//_%#.root/_1.root}" = "${CUR_OUT2}" ] || mv -v ${CUR_OUT//_%#.root/_1.root} ${CUR_OUT2}  ; done
+
 }
 
 function generate_data_dump

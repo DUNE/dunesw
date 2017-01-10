@@ -1,0 +1,8 @@
+#include "protoDUNE_gensingle.fcl"
+services.TFileService.fileName: "gen_protoDune_proton_2p5GeV_mono_hist.root"
+source.maxEvents: 30000
+outputs.out1.fileName: "gen_protoDune_proton_2p5GeV_mono.root"
+physics.producers.generator.PDG: [2212]
+physics.producers.generator.P0: [2.5]
+physics.producers.generator.PDist: 0
+physics.producers.generator.SigmaP: [0.0]

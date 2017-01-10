@@ -6,7 +6,7 @@
 // This test demonstrates how to configure and use the LArSoft SeedService
 // service outside the art framework.
 
-#include "larsim/RandomUtils/LArSeedService.h"
+#include "nutools/RandomUtils/NuRandomService.h"
 
 #include <string>
 #include <iostream>
@@ -34,10 +34,10 @@ int test_LArSeedService(string gname) {
   ArtServiceHelper& ash = ArtServiceHelper::instance();
 
   cout << myname << line << endl;
-  cout << myname << "Add the LArSeedService service." << endl;
+  cout << myname << "Add the NuRandomService service." << endl;
   scfg = "endOfJobSummary: \"true\" policy: \"random\"";
   cout << myname << "Configuration: " << scfg << endl;
-  assert( ash.addService("LArSeedService", scfg) == 0 );
+  assert( ash.addService("NuRandomService", scfg) == 0 );
 
   cout << myname << line << endl;
   cout << myname << "Load the services." << endl;
@@ -45,11 +45,11 @@ int test_LArSeedService(string gname) {
   ash.print();
 
   cout << myname << line << endl;
-  cout << myname << "Get LArSeedService service." << endl;
-  art::ServiceHandle<sim::LArSeedService> psrv;
+  cout << myname << "Get NuRandomService service." << endl;
+  art::ServiceHandle<rndm::NuRandomService> psrv;
 
   cout << myname << line << endl;
-  cout << myname << "Use LArSeedService service." << endl;
+  cout << myname << "Use NuRandomService service." << endl;
   try {
     cout << "  Seed: " << psrv->getSeed() << endl;
   } catch(...) {
