@@ -2,9 +2,9 @@
 #include "protoDUNE_reco.fcl"
 
 # Example minimal configuration to run EM/track separation for calorimetric and energy
-# reconstruction studies. The module produces clusters associated to EM-like hits.
-# Separation will be included also in standard reco chain when cnn outputs have their
-# data product to save info on hit, cluster and 3D track level.
+# reconstruction studies. The module produces new clusters collection in order to capture
+# also unclustered hits. New clusters are associated to EM/track outputs from CNN model.
+# CNN outputs are sabed also for individual hits.
 
 physics.producers.emtrackid:                            @local::standard_emtrackclusterid
 physics.producers.emtrackid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_emtrackid_pitch_5_wire_32_drift_32_down_10_maxpool_notes_CollAndInd2GeVPiPlus.nnet"
@@ -14,7 +14,6 @@ physics.producers.emtrackid.PointIdAlg.DriftWindow:     10
 physics.producers.emtrackid.PointIdAlg.DownscaleFn:     "maxpool"
 physics.producers.emtrackid.HitModuleLabel:             "linecluster"
 physics.producers.emtrackid.ClusterModuleLabel:         "linecluster"
-physics.producers.emtrackid.Threshold:                  0.63 # opt. for calorimetric studies
 physics.producers.emtrackid.Views:                      [2]  # now lookinng only at collection views
 
 physics.reco: [ rns, caldata, gaushit, hitfd, linecluster, emtrackid ]

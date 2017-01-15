@@ -21,8 +21,9 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
-			@table::dunefddphase_services
+                        @table::dunefddphase_reco_services
 }
+# services.RawDigitPrepService.DoDeconvolution: false
 
 # services.message.destinations.LogStandardOut.threshold: "INFO"
 
@@ -46,6 +47,7 @@ physics:
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
   caldata:            @local::dunefddphase_calwire
+  # caldata:            @local::producer_adcprep
 # actual hit finder and recconstruction
   gaushit:            @local::dunefddphase_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
@@ -98,6 +100,8 @@ outputs:
 ### Here, we overwrite ALL module labels with the ones defined above.
 
 physics.producers.caldata.SigThrFact: 0.2
+
+# physics.producers.caldata.DoGroups: false
 
 #PMAlg configuration
 
