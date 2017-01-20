@@ -7,6 +7,6 @@ services.LArG4Parameters.LongitudinalDiffusion: 6.2e-9
 services.ChannelNoiseService: @local::chnoiseold
 
 services.ChannelNoiseService.NoiseNormU: 12.64 # 3.16
-services.ChannelNoiseService.NoiseNormU: 12.64 # 3.16
-services.ChannelNoiseService.NoiseNormU: 12.64 # 3.16
+services.ChannelNoiseService.NoiseNormV: 12.64 # 3.16
+services.ChannelNoiseService.NoiseNormZ: 12.64 # 3.16
 

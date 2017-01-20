@@ -19,9 +19,9 @@ declare -a Diffusion=("0" "3.1e-9" "6.2e-9" "12.4e-9")
 declare -a DiffNames=("0Diff" "50Diff" "100Diff" "200Diff")
 
 ### Delcare the noise normalisation arrays
-declare -a NoiseLevel=("3.16" "6.32" "9.48" "12.64")
-declare -a HitThresh=("[ 6, 6, 6 ]" "[ 10, 10, 10 ]" "[ 15, 15, 15 ]" "[ 20, 20, 20 ]")
-declare -a NoiseNames=("100N" "200N" "300N" "400N")
+declare -a NoiseLevel=("3.16" "6.32" "9.48" "12.64" "31.6")
+declare -a HitThresh=("[ 6, 6, 6 ]" "[ 10, 10, 10 ]" "[ 15, 15, 15 ]" "[ 20, 20, 20 ]" "[ 40, 40, 40 ]")
+declare -a NoiseNames=("100N" "200N" "300N" "400N" "1000N")
 
 ### Check that the length of the two electron lifetime arrays are equal
 LifeLen=${#Lifetimes[@]}
@@ -114,15 +114,15 @@ EOF
     if [ $1 -eq 4 ]; then
 	cat<<EOF >> ${MCTestFclDir}MCTest_detsim_${LifeName}_${FieldName}_${DiffName}_${NoiseName}.fcl
 services.ChannelNoiseService.NoiseNormU: ${ThisNoise} # 3.16
-services.ChannelNoiseService.NoiseNormU: ${ThisNoise} # 3.16
-services.ChannelNoiseService.NoiseNormU: ${ThisNoise} # 3.16
+services.ChannelNoiseService.NoiseNormV: ${ThisNoise} # 3.16
+services.ChannelNoiseService.NoiseNormZ: ${ThisNoise} # 3.16
 
 EOF
     fi
     
 ### Make the G4 file
 ### Note that this is using the counter muon GEANT4 fcl file!!!
-    cat <<EOF >> ${MCTestFclDir}MCTest_reco_${LifeName}_${FieldName}_${DiffName}_${NoiseName}.fcl
+    cat <<EOF > ${MCTestFclDir}MCTest_reco_${LifeName}_${FieldName}_${DiffName}_${NoiseName}.fcl
 #include "standard_reco_dune35tsim_milliblock.fcl"
 
 services.DetectorPropertiesService.Electronlifetime: ${ThisLife}
@@ -130,8 +130,10 @@ services.DetectorPropertiesService.Efield: ${ThisField}
 
 EOF
     if [ $1 -eq 4 ]; then
-	cat <<EOF > ${MCTestFclDir}MCTest_reco_${LifeName}_${FieldName}_${DiffName}_${NoiseName}.fcl
+	cat <<EOF >> ${MCTestFclDir}MCTest_reco_${LifeName}_${FieldName}_${DiffName}_${NoiseName}.fcl
 physics.producers.gaushit.MinSig: ${ThisHitTh} # [ 5, 5, 10 ]
+physics.producers.fasthit.MinSigCol: 50
+physics.producers.fasthit.MinSigInd: 50
 EOF
     fi
 }
