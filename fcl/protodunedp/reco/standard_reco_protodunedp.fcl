@@ -1,0 +1,143 @@
+#include "services_dune.fcl"
+#include "caldata_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "cluster_dune.fcl"
+#include "trackfindermodules_dune.fcl"
+#include "pandoramodules_dune.fcl"
+#include "calorimetry_dune10kt.fcl"
+#include "mctrutht0matching.fcl"
+#include "t0reco.fcl"
+#include "particleid.fcl"
+#include "showerfindermodules_dune.fcl"
+
+process_name: Reco
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "hist.root" }
+  TimeTracker:       {}
+  MemoryTracker:     {}
+  RandomNumberGenerator: {} #ART native random number generator
+  message:              @local::dune_message_services_prod_debug
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::dunefddphase_reco_services
+}
+
+services.Geometry: @local::protodunedphase_geo
+services.DetectorPropertiesService: @local::protodunedphase_detproperties
+
+# services.RawDigitPrepService.DoDeconvolution: false
+
+# services.message.destinations.LogStandardOut.threshold: "INFO"
+
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents: -1
+  fileNames: ["detsim.root"]
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics:
+{
+
+ producers:
+ {
+# random number saver
+  rns:                 { module_type: RandomNumberSaver }
+# convert raw::RawDigit to recob::wire
+  caldata:            @local::dunefddphase_calwire
+  # caldata:            @local::producer_adcprep
+# actual hit finder and recconstruction
+  gaushit:            @local::dunefddphase_gaushitfinder
+  fasthit:            @local::dunefd_fasthitfinder
+  linecluster:        @local::dunefd_linecluster
+  calo:               @local::dune10kt_calomc
+  pandora:            @local::dunefd_pandora
+  pmtrack:            @local::dunefd_pmalgtrackmaker
+  pmtrajfit:	      @local::dunefd_pmalgtrajfitter
+  pmtrackcalo:        @local::dune10kt_calomc
+  pmtrackpid:         @local::standard_chi2pid
+  blurredcluster:     @local::dune10kt_blurredcluster
+  emshower:           @local::dune10kt_emshower
+ }
+
+ #define the producer and filter modules for this path, order matters, 
+ #filters reject all following items.  see lines starting physics.producers below
+ reco: [ rns, caldata, fasthit, gaushit, linecluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster, emshower ]
+
+	analyzers:
+	{
+	}
+	 
+	analyzeIt:  [ ]
+
+ #define the output stream, there could be more than one if using filters 
+ stream1:  [ out1 ]
+
+ #trigger_paths is a keyword and contains the paths that modify the art::event, 
+ #ie filters and producers
+ trigger_paths: [reco] 
+
+ #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+ #ie analyzers and output streams.  these all run simultaneously
+ end_paths:     [stream1]  
+}
+
+#block to define where the output goes.  if you defined a filter in the physics
+#block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
+#entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_reco.root"
+   dataTier:    "full-reconstructed"
+   compressionLevel: 1
+ }
+}
+### Here, we overwrite ALL module labels with the ones defined above.
+
+physics.producers.caldata.SigThrFact: 0.2
+
+# physics.producers.caldata.DoGroups: false
+
+#PMAlg configuration
+
+physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
+physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
+physics.producers.pmtrackcalo.T0ModuleLabel:            ""
+physics.producers.pmtrackcalo.CaloAlg.CalAreaConstants: [ 4.966e-2, 4.966e-2 ]
+physics.producers.pmtrackpid.CalorimetryModuleLabel:  "pmtrackcalo"
+physics.producers.pmtrackpid.TrackModuleLabel:        "pmtrack"
+
+physics.producers.pmtrack.HitModuleLabel:             "linecluster"
+physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
+
+physics.producers.pmtrajfit.HitModuleLabel:           "linecluster"
+physics.producers.pmtrajfit.PfpModuleLabel:           "pandora"
+physics.producers.pmtrajfit.TrackingSkipPdg:          [0]
+
+physics.producers.blurredcluster.HitsModuleLabel: "linecluster"
+physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"
+physics.producers.blurredcluster.CreateDebugPDF:  false
+physics.producers.blurredcluster.MergeClusters:   false
+physics.producers.blurredcluster.GlobalTPCRecon:  true
+physics.producers.blurredcluster.ShowerReconOnly: false
+physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
+
+physics.producers.emshower.ClusterModuleLabel: "blurredcluster"
+physics.producers.emshower.HitsModuleLabel: "linecluster"
+physics.producers.emshower.TrackModuleLabel: "pmtrack"
+
+
+#Pandora configurations
+
+#Optical detector configuration
+
+
