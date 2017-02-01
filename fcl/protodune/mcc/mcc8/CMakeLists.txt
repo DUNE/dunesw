@@ -1,3 +1,4 @@
+add_subdirectory(beam)
 add_subdirectory(beamcosmics)
 add_subdirectory(singlep)
 
