@@ -14,7 +14,8 @@ physics.producers.emtrackid.PointIdAlg.DriftWindow:     10
 physics.producers.emtrackid.PointIdAlg.DownscaleFn:     "maxpool"
 physics.producers.emtrackid.HitModuleLabel:             "linecluster"
 physics.producers.emtrackid.ClusterModuleLabel:         "linecluster"
+physics.producers.emtrackid.TrackModuleLabel:           "pmtrack"
 physics.producers.emtrackid.Views:                      [2]  # now lookinng only at collection views
 
-physics.reco: [ rns, caldata, gaushit, hitfd, linecluster, emtrackid ]
+physics.reco: [ rns, caldata, gaushit, hitfd, linecluster, pmtrack, emtrackid ]
 

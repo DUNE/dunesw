@@ -1,0 +1,6 @@
+#include "protoDUNE_g4.fcl"
+
+services.DetectorPropertiesService.Electronlifetime: 3000
+services.SpaceCharge.EnableSimEfieldSCE: true
+services.SpaceCharge.EnableSimSpatialSCE: true
+services.SpaceCharge.EnableSimulationSCE: true
