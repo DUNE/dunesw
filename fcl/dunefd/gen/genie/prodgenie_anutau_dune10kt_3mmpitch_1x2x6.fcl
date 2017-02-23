@@ -1,0 +1,10 @@
+#include "prodgenie_anutau_dune10kt.fcl"
+
+process_name: GenieGen
+
+outputs.out1.fileName: "prodgenie_anutau_dune10kt_3mmpitch_1x2x6_gen.root"
+physics.producers.generator: @local::dune_fd_genie_anu_simple_flux_1x2x6_window
+physics.producers.generator.MixerConfig:     "map 12:14 -12:-14 14:16 -14:-16" #swap electron neutrinos with muon neutrinos
+
+services.Geometry: @local::dune10kt_3mmpitch_1x2x6_geo
+source.firstRun: 20000106
