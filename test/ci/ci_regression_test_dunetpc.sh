@@ -118,15 +118,15 @@ function fetch_files
     echo "fetch_files $@"
     echo
 
-    maxretries_backup= $IFDH_CP_MAXRETRIES
-    debug_backup= $IFDH_DEBUG
+    maxretries_backup=$IFDH_CP_MAXRETRIES
+    debug_backup=$IFDH_DEBUG
     export IFDH_DEBUG=1
     export IFDH_CP_MAXRETRIES=0
 
     for file in ${2//,/ }
     do
         echo "Command: ifdh cp $file ./"
-        ifdh cp $file ./ > fetch_inputs.log  2>&1
+        ifdh cp $file ./
         local copy_exit_code=$?
 
         if [[ $copy_exit_code -ne 0 ]]; then
@@ -322,7 +322,7 @@ function upload_reference_file
         fi
 
         echo "ifdh cp $current_basename ${filename}"
-        ifdh cp "$current_basename" "${filename}" > upload_ref_files.log 2>&1
+        ifdh cp "$current_basename" "${filename}"
 
         if [ $? -ne 0 ];then
             #if the copy fail,let's  consider it failed
