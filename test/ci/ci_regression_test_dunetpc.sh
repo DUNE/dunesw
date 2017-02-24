@@ -262,6 +262,7 @@ function compare_products_names
         if [[ "${STATUS}" -ne 0  ]]; then
             echo "${DIFF}"
             ERRORSTRING="W@Differences in products names@Request new reference files"
+            export COPY_TEST_OUTPUT=true
             exitstatus 201
         else
             echo -e "none\n\n"
@@ -292,6 +293,7 @@ function compare_products_sizes
         if [[ "${STATUS}" -ne 0 ]]; then
             echo "${DIFF}"
             ERRORSTRING="W@Differences in products sizes@Request new reference files"
+            export COPY_TEST_OUTPUT=true
             exitstatus 202
         else
             echo -e "none\n\n"
