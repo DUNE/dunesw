@@ -360,9 +360,11 @@ function exitstatus
 function compare_anatree
 {
 
+    source ${GENERIC_CI_DIR}/bin/reporter_functions.sh
+
     THISCIDIR=$(eval "echo \${${PROJ_PREFIX}_CI_DIR}")
 
-    root -l -b -q ${THISCIDIR}/test/make_stats_plots.C\(\"${1}\",\"${2}\"\)
+    root -l -b -q ${THISCIDIR}/test/compare_anatree.C\(\"${1}\",\"${2}\"\)
 
     for f in *.gif
     do
