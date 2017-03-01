@@ -19,6 +19,7 @@ function usage {
       --input-files             List of input files to be downloaded before to execute the data production
       --reference-files         List of reference files to be downloaded before the product comparison
       --self-update-ref-files   Automatically upload the reference file,if the reference file linked to a test is missing
+      --extra-function          Define and extra function to run with list of required arguments; the elements need to be comma separated
 EOF
 }
 
@@ -60,6 +61,7 @@ function initialize
       x--reference-files)        REFERENCE_FILES="${2}";                                      shift; shift;;
       x--update-ref-files)       UPDATE_REF_FILE_ON=1;                                        shift;;
       x--self-update-ref-files)  SELF_UPDATE_REF_FILES=1;                                     shift;;
+      x--extra-function)         EXTRA_FUNCTION="${2}";                                       shift; shift;;
       x)                                                                                break;;
       x*)            echo "Unknown argument $1"; usage; exit 1;;
       esac
@@ -354,7 +356,23 @@ function exitstatus
 }
 
 
+#~~~~~~~~~~~~~~~~~~~~~~~EXTRA FUNCTIONS TO RUN SPECIAL TESTS~~~~~~~~~~~~~~~~
+function compare_anatree
+{
 
+    THISCIDIR=$(eval "echo \${${PROJ_PREFIX}_CI_DIR}")
+
+    root -l -b -q ${THISCIDIR}/test/make_stats_plots.C\(\"${1}\",\"${2}\"\)
+
+    for f in *.gif
+    do
+        bf=`basename $f`
+        hist_desc="hits ${bf//.gif/}"
+        hist_name="${bf//.gif/}"
+        report_img "ci_tests" "" "$(basename $PWD)" "$hist_name" "$f" "$hist_desc"
+    done
+
+}
 
 
 #~~~~~~~~~~~~~~~~~~~~~~~~MAIN OF THE SCRIPT~~~~~~~~~~~~~~~~~~
@@ -395,4 +413,9 @@ else
         compare_products_sizes "${check_compare_size}"
 
     done
+fi
+
+#~~~~~~~~~~~~~~~~RUN EXTRA FUNCTION~~~~~~~~~~~~~~~~~
+if [ -n "${EXTRA_FUNCTION}" ]; then
+    ${EXTRA_FUNCTION//,/ }
 fi
