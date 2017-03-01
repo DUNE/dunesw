@@ -126,7 +126,7 @@ function fetch_files
     for file in ${2//,/ }
     do
         echo "Command: ifdh cp $file ./"
-        ifdh cp $file ./
+        ifdh cp $file ./ > fetch_inputs.log  2>&1
         local copy_exit_code=$?
 
         if [[ $copy_exit_code -ne 0 ]]; then
@@ -322,7 +322,7 @@ function upload_reference_file
         fi
 
         echo "ifdh cp $current_basename ${filename}"
-        ifdh cp "$current_basename" "${filename}"
+        ifdh cp "$current_basename" "${filename}" > upload_ref_files.log 2>&1
 
         if [ $? -ne 0 ];then
             #if the copy fail,let's  consider it failed
