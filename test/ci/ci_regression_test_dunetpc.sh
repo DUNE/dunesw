@@ -366,13 +366,20 @@ function compare_anatree
 
     root -l -b -q ${THISCIDIR}/test/compare_anatree.C\(\"${1}\",\"${2}\"\)
 
-    for f in *.gif
-    do
-        bf=`basename $f`
-        hist_desc="hits ${bf//.gif/}"
-        hist_name="${bf//.gif/}"
-        report_img "ci_tests" "" "$(basename $PWD)" "$hist_name" "$f" "$hist_desc"
-    done
+    if [ -n "${BUILD_ID}" ] # not in a jenkins build, don't send plots to CI web app
+    then
+        export report_fullname="${JOB_NAME}/${BUILD_NUMBER}"
+        export report_serverurl="${HUDSON_URL}"
+
+        for f in *.gif
+        do
+            bf=`basename $f`
+            hist_desc="hits ${bf//.gif/}"
+            hist_name="${bf//.gif/}"
+            report_img "ci_tests" "" "$(basename $PWD)" "$hist_name" "$f" "$hist_desc"
+        done
+
+    fi
 
 }
 
