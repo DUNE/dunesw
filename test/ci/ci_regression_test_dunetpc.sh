@@ -366,9 +366,12 @@ function compare_anatree
 
     root -l -b -q ${THISCIDIR}/test/compare_anatree.C\(\"${1}\",\"${2}\"\)
 
+
+
     if [ -n "${BUILD_ID}" ] # not in a jenkins build, don't send plots to CI web app
     then
-        export report_fullname="${JOB_NAME}/${BUILD_NUMBER}"
+        BASE_JOB=`echo $JOB_NAME | sed -e 's;/.*;;' -e 's/_jenkins.*//'`
+        export report_fullname="${BASE_JOB}/${BUILD_NUMBER}"
         export report_serverurl="${HUDSON_URL}"
 
         for f in *.gif
