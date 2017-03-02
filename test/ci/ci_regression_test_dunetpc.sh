@@ -377,9 +377,10 @@ function compare_anatree
         for f in *.gif
         do
             bf=`basename $f`
-            hist_desc="hits ${bf//.gif/}"
+            hist_desc="${bf//.gif/} plot"
             hist_name="${bf//.gif/}"
             report_img "ci_tests" "" "$(basename $PWD)" "$hist_name" "$f" "$hist_desc"
+            report_img "ci_tests" "" "end" "$hist_name" "$f" "$hist_desc"
         done
 
     fi
