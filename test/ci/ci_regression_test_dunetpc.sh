@@ -380,7 +380,7 @@ function compare_anatree
             hist_desc="${bf//.gif/} plot"
             hist_name="${bf//.gif/}"
             report_img "ci_tests" "" "$(basename $PWD)" "$hist_name" "$f" "$hist_desc"
-            report_img "ci_tests" "" "end" "$hist_name" "$f" "$hist_desc"
+            # report_img "ci_tests" "" "end" "$hist_name" "$f" "$hist_desc"
         done
 
     fi
@@ -414,6 +414,11 @@ else
             reference_file=$(echo "${current_file}")
         fi
         reference_file="${reference_file//Current/Reference}"
+
+        if [[ "${INPUT}" = *"xroot"* ]]; then
+            XROOTD_PATH=$(echo "${INPUT}" | sed -e 's#\(^.*\)/'${STAGE_NAME}'/.*#\1/'${STAGE_NAME}/'#')
+            reference_file=${XROOTD_PATH}/${reference_file}
+        fi
 
         if [[ "${check_compare_names}" -eq 1  || "${check_compare_size}" -eq 1 ]]; then
             generate_data_dump
