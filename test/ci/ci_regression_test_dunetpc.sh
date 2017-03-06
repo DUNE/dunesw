@@ -26,7 +26,7 @@ EOF
 function initialize
 {
     TASKSTRING="initialize"
-    ERRORSTRING="E@Error initializing the test@Check the log"
+    ERRORSTRING="F@Error initializing the test@Check the log"
     trap 'LASTERR=$?; FUNCTION_NAME=${FUNCNAME[0]:-main};  exitstatus ${LASTERR} trap ${LINENO}; exit ${LASTERR}' ERR
 
     echo "running CI tests for ${proj_PREFIX}_ci."
@@ -115,7 +115,7 @@ function fetch_files
     old_errorstring="$ERRORSTRING"
     TASKSTRING="fetching $1 files"
 
-    ERRORSTRING="E@Error in fetching $1 files@Check if the $1 files are available"
+    ERRORSTRING="F@Error in fetching $1 files@Check if the $1 files are available"
 
     echo "fetching $1 files for ${proj_PREFIX}_ci."
     echo
@@ -150,7 +150,7 @@ function fetch_files
 function data_production
 {
     TASKSTRING="data_production"
-    ERRORSTRING="E@Error in data production@Check the log"
+    ERRORSTRING="F@Error in data production@Check the log"
     trap 'LASTERR=$?; FUNCTION_NAME=${FUNCNAME[0]:-main};  exitstatus ${LASTERR} trap ${LINENO}; exit ${LASTERR}' ERR
 
     export TMPDIR=${PWD} #Temporary directory used by IFDHC
@@ -200,7 +200,7 @@ function data_production
 function generate_data_dump
 {
     TASKSTRING="generate_data_dump for ${file_stream} output stream"
-    ERRORSTRING="E@Error during dump Generation@Check the log"
+    ERRORSTRING="F@Error during dump Generation@Check the log"
 
     trap 'LASTERR=$?; FUNCTION_NAME=${FUNCNAME[0]:-main};  exitstatus ${LASTERR} trap ${LINENO}; exit ${LASTERR}' ERR
 
@@ -265,7 +265,7 @@ function compare_products_names
 function compare_products_sizes
 {
     TASKSTRING="compare_products_sizes for ${file_stream} output stream"
-    ERRORSTRING="E@Error comparing product sizes@Check the log"
+    ERRORSTRING="F@Error comparing product sizes@Check the log"
 
 
     if [[ "${1}" -eq 1 ]]
