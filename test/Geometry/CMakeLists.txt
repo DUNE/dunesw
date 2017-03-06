@@ -57,20 +57,6 @@ simple_plugin ( GeometryTest35 "module"
 # the following are tests equivalent to the module ones, but with no framework
 #
 
-cet_test(geometry_dunedphase10kt_test
-  SOURCES geometry_dunedphase10kt_test.cxx
-  DATAFILES test_geometry_dunedphase10kt_normal.fcl
-  LIBRARIES larcore_Geometry
-            GeometryTestLib
-            dune_Geometry
-            ${MF_MESSAGELOGGER}
-            ${MF_UTILITIES}
-            ${FHICLCPP}
-            ${CETLIB}
-  TEST_ARGS ./test_geometry_dunedphase10kt_normal.fcl
-)
-
-
 # test for CRM channel mapping (BOOST unit test)
 cet_test(geometry_crmchannelmapping_test
   SOURCES geometry_crmchannelmapping_test.cxx
