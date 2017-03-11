@@ -46,13 +46,13 @@ table_fragment_end
 
 product          version
 larsoft         v06_27_00
-artdaq_core	v1_05_09
+artdaq_core	v1_06_01
 duneutil        v06_27_00	-	optional
-lbne_raw_data 	v1_04_07
+lbne_raw_data 	v1_04_08
 dune_pardata	v01_14_00
 genie_xsec      v2_12_0
 genie_phyopt    v2_12_0
-cetbuildtools	v5_06_01	-	only_for_build
+cetbuildtools	v5_06_07	-	only_for_build
 end_product_list
 
 
@@ -60,9 +60,9 @@ end_product_list
 # Make a table by adding columns before "notes". 
 # e10  - with gcc 4.9.3 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt	notes
-e10:debug	e10:debug	e10:debug	nu:e10:s43:debug nu:e10:s43:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau
-e10:opt		e10:opt		e10:opt		nu:e10:s43:opt	 nu:e10:s43:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
-e10:prof	e10:prof	e10:prof	nu:e10:s43:prof	 nu:e10:s43:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e10:debug	e10:debug	e10:debug	nu:e10:s46:debug nu:e10:s46:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e10:opt		e10:opt		e10:opt		nu:e10:s46:opt	 nu:e10:s46:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e10:prof	e10:prof	e10:prof	nu:e10:s46:prof	 nu:e10:s46:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
