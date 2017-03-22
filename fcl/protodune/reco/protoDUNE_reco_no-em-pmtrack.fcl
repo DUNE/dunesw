@@ -1,0 +1,36 @@
+#include "imagepatternalgs.fcl"
+#include "protoDUNE_reco.fcl"
+
+# Example minimal configuration to run EM/track separation in front of 3D track reconstruction
+# The module produces tracks where seed (cluster from which track is initiated) has to be
+# track-like. Since it is still possible that electron track was reconstructed, the resulting
+# 3D track is checked in its best projection and if CNN output there, using all hits, is below
+# track-like threshold, the corresponding PFParticle is tagged with PDG code 11 (electron).
+
+process_name: RecoEm
+
+source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco" ]
+
+physics.producers.emtrkmichelid:                            @local::standard_emtrackmichelid
+physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "/pnfs/dune/persistent/users/rnd/cnn/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet"
+physics.producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
+physics.producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
+physics.producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
+physics.producers.emtrkmichelid.PointIdAlg.DownscaleFn:     "mean"
+physics.producers.emtrkmichelid.HitModuleLabel:             "linecluster"
+physics.producers.emtrkmichelid.ClusterModuleLabel:         "linecluster"
+physics.producers.emtrkmichelid.Views:                      []
+
+physics.producers.pmtrack.HitModuleLabel:                     "linecluster"
+#physics.producers.pmtrack.ClusterModuleLabel:                 "linecluster" # the ususal way, all clusters used to create 3D tracks
+physics.producers.pmtrack.ClusterModuleLabel:                 "emtrkmichelid:emtrkmichel" # 3D track seed has to be track-like over the threshold
+physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:   0.7  # and this is the threshold to be track-like
+physics.producers.pmtrack.PMAlgTracking.RunVertexing:         true
+physics.producers.pmtrack.PMAlgTracking.FlipToBeam:           true
+physics.producers.pmtrack.PMAlgTracking.MatchT0inAPACrossing: false
+physics.producers.pmtrack.PMAlgTracking.MatchT0inCPACrossing: false
+#physics.producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: true
+
+physics.reco: [ rns, caldata, gaushit, hitfd, linecluster, emtrkmichelid, pmtrack ]
+#physics.reco: [ rns, caldata, gaushit, hitfd, linecluster, pmtrack ] # usual reco chain
+
