@@ -12,7 +12,7 @@ process_name: RecoEm
 source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco" ]
 
 physics.producers.emtrkmichelid:                            @local::standard_emtrackmichelid
-physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "/pnfs/dune/persistent/users/rnd/cnn/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet"
+physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "/pnfs/dune/persistent/users/rnd/cnn/models_preliminary/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet"
 physics.producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
 physics.producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
 physics.producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
