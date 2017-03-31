@@ -60,9 +60,9 @@ end_product_list
 # Make a table by adding columns before "notes". 
 # e10  - with gcc 4.9.3 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt	notes
-e10:debug	e10:debug	e10:debug	nu:e10:s43:debug nu:e10:s43:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau
-e10:opt		e10:opt		e10:opt		nu:e10:s43:opt	 nu:e10:s43:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
-e10:prof	e10:prof	e10:prof	nu:e10:s43:prof	 nu:e10:s43:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e10:debug	e10:debug	e10:debug	nu:e10:s48:debug nu:e10:s48:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e10:opt		e10:opt		e10:opt		nu:e10:s48:opt	 nu:e10:s48:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e10:prof	e10:prof	e10:prof	nu:e10:s48:prof	 nu:e10:s48:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:

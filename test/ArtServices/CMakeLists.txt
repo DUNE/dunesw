@@ -32,7 +32,7 @@ cet_test(test_DetectorClocksService SOURCES test_DetectorClocksService.cxx
 cet_test(test_DetectorProperties SOURCES test_DetectorProperties.cxx
   LIBRARIES
     dune_ArtSupport
-    art_Utilities canvas_Utilities
+    art_Utilities canvas
     ${ROOT_BASIC_LIB_LIST}
 )
 
