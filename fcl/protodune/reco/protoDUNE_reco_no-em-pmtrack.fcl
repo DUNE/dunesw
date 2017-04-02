@@ -2,7 +2,7 @@
 #include "protoDUNE_reco.fcl"
 
 # Example minimal configuration to run EM/track separation in front of 3D track reconstruction
-# The module produces tracks where seed (cluster from which track is initiated) has to be
+# The module produces tracks where a seed (cluster from which track is initiated) has to be
 # track-like. Since it is still possible that electron track was reconstructed, the resulting
 # 3D track is checked in its best projection and if CNN output there, using all hits, is below
 # track-like threshold, the corresponding PFParticle is tagged with PDG code 11 (electron).
@@ -12,7 +12,8 @@ process_name: RecoEm
 source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco" ]
 
 physics.producers.emtrkmichelid:                            @local::standard_emtrackmichelid
-physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "/pnfs/dune/persistent/users/rnd/cnn/models_preliminary/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet"
+physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_emtrackid_pitch_5_wire_44_drift_48_down_6_mean_notes_protoduneBeamAndCosmics.nnet"
+#physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet" # another model, prepared on atm. neutrinos ans proton decays
 physics.producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
 physics.producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
 physics.producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
@@ -24,7 +25,7 @@ physics.producers.emtrkmichelid.Views:                      []
 physics.producers.pmtrack.HitModuleLabel:                     "linecluster"
 #physics.producers.pmtrack.ClusterModuleLabel:                 "linecluster" # the ususal way, all clusters used to create 3D tracks
 physics.producers.pmtrack.ClusterModuleLabel:                 "emtrkmichelid:emtrkmichel" # 3D track seed has to be track-like over the threshold
-physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:   0.7  # and this is the threshold to be track-like
+physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:   0.7  # and this is the threshold to be track-like (you may need different value!)
 physics.producers.pmtrack.PMAlgTracking.RunVertexing:         true
 physics.producers.pmtrack.PMAlgTracking.FlipToBeam:           true
 physics.producers.pmtrack.PMAlgTracking.MatchT0inAPACrossing: false
