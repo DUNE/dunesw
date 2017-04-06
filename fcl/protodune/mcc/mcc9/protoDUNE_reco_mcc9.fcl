@@ -1,0 +1,28 @@
+#include "imagepatternalgs.fcl"
+#include "protoDUNE_reco.fcl"
+
+process_name: Reco
+
+physics.producers.emtrkmichelid:                            @local::standard_emtrackmichelid
+physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_emtrackid_pitch_5_wire_44_drift_48_down_6_mean_notes_protoduneBeamAndCosmics.nnet"
+physics.producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
+physics.producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
+physics.producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
+physics.producers.emtrkmichelid.PointIdAlg.DownscaleFn:     "mean"
+physics.producers.emtrkmichelid.HitModuleLabel:             "linecluster"
+physics.producers.emtrkmichelid.ClusterModuleLabel:         "linecluster"
+physics.producers.emtrkmichelid.Views:                      []
+
+physics.producers.pmtrack.HitModuleLabel:                     "linecluster"
+physics.producers.pmtrack.ClusterModuleLabel:                 "emtrkmichelid:emtrkmichel"
+physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:   0.6
+physics.producers.pmtrack.PMAlgTracking.RunVertexing:         true
+physics.producers.pmtrack.PMAlgTracking.FlipToBeam:           true
+physics.producers.pmtrack.PMAlgTracking.MatchT0inAPACrossing: false
+physics.producers.pmtrack.PMAlgTracking.MatchT0inCPACrossing: true
+physics.producers.pmtrack.PMAlgCosmicTagging.TagOutOfDriftTracks:  true
+#physics.producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: true
+
+physics.reco: [ rns, caldata, gaushit, hitfd, linecluster, pandora, pandoracalo, pandorapid, emtrkmichelid, pmtrack, pmtrackcalo, pmtrackpid ]
+
+
