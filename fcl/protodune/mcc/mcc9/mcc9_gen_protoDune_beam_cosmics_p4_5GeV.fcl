@@ -1,0 +1,12 @@
+#include "mcc9_gen_protoDune_beam_cosmics.fcl"
+
+# Specific .fcl for the +4.5 GeV/c momentum setting
+
+services.TFileService.fileName: "gen_protoDune_beam_p4_5GeV_cosmics_hist.root"
+source.maxEvents: 1000000
+outputs.out1.fileName: "gen_protoDune_beam_p4_5GeV_cosmics.root"
+
+
+physics.producers.generator.FileName: "/pnfs/dune/scratch/dunepro/040416/H4_TILT27_FTFP_BERT_4_5GeV_6M.root"
+physics.producers.generator.Intensity: 0.165e6 # Intensity required to give us a good particle rate of ~25 Hz
+
