@@ -3,7 +3,7 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 parent dunetpc v06_31_00
-defaultqual e10
+defaultqual e14
 
 # These optional lines define where headers, libraries, and executables go and should
 # be used only if your product does not conform to the defaults.
@@ -58,11 +58,11 @@ end_product_list
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes". 
-# e10  - with gcc 4.9.3 and -std=c++14
+# e14  - with gcc 4.9.3 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt	notes
-e10:debug	e10:debug	e10:debug	nu:e10:s48:debug nu:e10:s48:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau
-e10:opt		e10:opt		e10:opt		nu:e10:s48:opt	 nu:e10:s48:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
-e10:prof	e10:prof	e10:prof	nu:e10:s48:prof	 nu:e10:s48:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e14:debug	e14:debug	e14:debug	nu:e14:s48:debug nu:e14:s48:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e14:opt		e14:opt		e14:opt		nu:e14:s48:opt	 nu:e14:s48:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
+e14:prof	e14:prof	e14:prof	nu:e14:s48:prof	 nu:e14:s48:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
