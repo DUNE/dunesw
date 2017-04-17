@@ -68,7 +68,7 @@ int test_LArSeedService(string gname) {
 }
 
 int main() {
-  string gname = "dune35t4apa_v5";
+  string gname = "dune35t4apa_v6";
   test_LArSeedService(gname);
   return 0;
 }

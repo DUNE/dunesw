@@ -75,7 +75,7 @@ int test_RandomNumberGenerator(string gname) {
 }
 
 int main() {
-  string gname = "dune35t4apa_v5";
+  string gname = "dune35t4apa_v6";
   test_RandomNumberGenerator(gname);
   return 0;
 }
