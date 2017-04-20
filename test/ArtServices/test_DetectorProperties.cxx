@@ -74,7 +74,7 @@ int test_DetectorPropertiesService(string gname) {
 }
 
 int main() {
-  string gname = "dune35t4apa_v5";
+  string gname = "dune35t4apa_v6";
   test_DetectorPropertiesService(gname);
   return 0;
 }

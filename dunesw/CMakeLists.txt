@@ -1,6 +1,8 @@
 set( IFDH_ART_DIR $ENV{IFDH_ART_DIR} )
 
+add_subdirectory(ArtSupport)
 add_subdirectory(DuneInterface)
+add_subdirectory(DuneServiceAccess)
 add_subdirectory(DuneCommon)
 add_subdirectory(Geometry)
 add_subdirectory(Utilities)
@@ -30,7 +32,6 @@ add_subdirectory(TrackingAna)
 add_subdirectory(ShowerAna)
 add_subdirectory(RunHistory)
 add_subdirectory(NearlineMonitor)
-add_subdirectory(ArtSupport)
 add_subdirectory(MuonCounters)
 add_subdirectory(MuonCounterTimes)
 add_subdirectory(HitAnalysis)
@@ -43,6 +44,7 @@ add_subdirectory(SpaceCharge)
 add_subdirectory(SpaceChargeServices)
 add_subdirectory(SupernovaAna)
 add_subdirectory(DataOverlay)
+add_subdirectory(DAQSimAna)
 
 # Respect the order specified in lar_build, which is:
 #

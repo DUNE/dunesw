@@ -91,14 +91,14 @@ physics:
          #cluster reco
          linecluster,
          trajcluster,
-         emtrackid,
          #pandora
          pandora, #pandora stitcher goes here
          pandoracalo, pandorapid,
          #pmatrack
          pmtrack, pmtrackcalo, pmtrackpid,
          pmtrajfit, pmtrajfitcalo, pmtrajfitpid,
-         pmtracktc, pmtracktccalo, pmtracktcpid
+         pmtracktc, pmtracktccalo, pmtracktcpid,
+         emtrackid
          ]
 
  #define the output stream, there could be more than one if using filters 
@@ -175,7 +175,7 @@ physics.producers.emtrackid.PointIdAlg.DriftWindow:     10
 physics.producers.emtrackid.PointIdAlg.DownscaleFn:     "maxpool"
 physics.producers.emtrackid.HitModuleLabel:             "linecluster"
 physics.producers.emtrackid.ClusterModuleLabel:         "linecluster"
-physics.producers.emtrackid.Threshold:                  0.63 # opt. for calorimetric studies
+physics.producers.emtrackid.TrackModuleLabel:           "pmtrack"
 physics.producers.emtrackid.Views:                      [2]  # now lookinng only at collection views
 
 physics.producers.calo.TrackModuleLabel:               "costrk"

@@ -4,7 +4,6 @@ services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
 services.NuRandomService.largeant.GEANT: 1234
 services.NuRandomService.largeant.propagation: 1234
-services.NuRandomService.largeant.radio: 1234
 
 services.RandomNumberGenerator.restoreFrom: "G4RandomSeeds_Ref_protoDUNE.dat"
 services.RandomNumberGenerator.saveTo: "G4RandomSeeds.dat"

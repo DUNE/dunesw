@@ -1,0 +1,5 @@
+#include "gen_protoDune_beam.fcl"
+services.TFileService.fileName: "gen_protoDune_beam_7GeV_hist.root"
+source.maxEvents: 1000000
+outputs.out1.fileName: "gen_protoDune_beam_7GeV.root"
+physics.producers.generator.FileName: "/pnfs/dune/persistent/users/dstefan/h4/muhalo/H4_TILT22_APR_TARGSEC_ROTCENT_FTFP_BERT_7GeV_6M.root"

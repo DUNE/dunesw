@@ -40,13 +40,13 @@ simple_plugin ( GeometryTest35 "module"
 		     ${ART_FRAMEWORK_SERVICES_OPTIONAL}
 		     ${ART_FRAMEWORK_SERVICES_OPTIONAL_TFILESERVICE_SERVICE}
              	     ${ART_FRAMEWORK_SERVICES_OPTIONAL_RANDOMNUMBERGENERATOR_SERVICE}
-		     art_Persistency_Common canvas_Persistency_Common
-		     art_Persistency_Provenance canvas_Persistency_Provenance
-		     art_Utilities canvas_Utilities
+		     art_Persistency_Common canvas
+		     art_Persistency_Provenance canvas
+		     art_Utilities canvas
                      ${MF_MESSAGELOGGER}
                      ${MF_UTILITIES}
                      ${FHICLCPP}
-                     ${CETLIB}
+                     cetlib cetlib_except
                      ${ROOT_BASIC_LIB_LIST}
 
                BASENAME_ONLY
@@ -66,7 +66,7 @@ cet_test(geometry_crmchannelmapping_test
             ${MF_MESSAGELOGGER}
             ${MF_UTILITIES}
             ${FHICLCPP}
-            ${CETLIB}
+            cetlib cetlib_except
   USE_BOOST_UNIT
   DATAFILES test_geometry_dunedphase10kt.fcl
   TEST_ARGS -- ./test_geometry_dunedphase10kt.fcl

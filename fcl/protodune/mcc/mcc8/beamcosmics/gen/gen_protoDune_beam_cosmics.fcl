@@ -77,9 +77,9 @@ outputs:
 physics.producers.generator.TreeName: "NTuples/GoodParticle"
 physics.producers.generator.StartEvent: 0
 # Set the beam position and direction to fire the particles in the desired way
-physics.producers.generator.BeamX: 118.106 # In cm, taken from protoDUNE_gensingle.fcl
-physics.producers.generator.BeamY: 395.649 
-physics.producers.generator.BeamZ: -196.113
-physics.producers.generator.RotateXZ: -8.189 # In degrees, taken from protoDUNE_gensingle.fcl
-physics.producers.generator.RotateYZ: 11.229  	 
+physics.producers.generator.BeamX: 8.0757 # In cm, taken from protoDUNE_gensingle.fcl
+physics.producers.generator.BeamY: 461.06 
+physics.producers.generator.BeamZ: -196.11
+physics.producers.generator.RotateXZ: -11.844 # In degrees, taken from protoDUNE_gensingle.fcl
+physics.producers.generator.RotateYZ: 11.107  	 
 
