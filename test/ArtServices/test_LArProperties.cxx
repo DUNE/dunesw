@@ -68,7 +68,7 @@ int test_LArPropertiesStandard(string gname) {
 }
 
 int main() {
-  string gname = "dune35t4apa_v5";
+  string gname = "dune35t4apa_v6";
   test_LArPropertiesStandard(gname);
   return 0;
 }

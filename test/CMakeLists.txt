@@ -17,16 +17,24 @@ add_subdirectory(ArtServices)
 # are not installed.
 # OPTIONAL_GROUPS is set to execute the test in the "BROKEN" test suite;
 # that is because this test is currently failing for MicroBooNE
-cet_test(donothing_dune35t HANDBUILT
-  DATAFILES test_donothing_dune35t.fcl
-  TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_donothing_dune35t.fcl
-)
-cet_test(donothing_simul_dune35t HANDBUILT
-  DATAFILES test_donothing_simul_dune35t.fcl
-  TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_donothing_simul_dune35t.fcl
-)
+
+# FIXME the unit tests donothing_dune35t and donothing_simul_dune35t
+# crash with a SEGFAULT on Mac OS,
+# they will be executed only on SLF for now
+
+if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+   cet_test(donothing_dune35t HANDBUILT
+     DATAFILES test_donothing_dune35t.fcl
+     TEST_EXEC lar
+     TEST_ARGS --rethrow-all --config ./test_donothing_dune35t.fcl
+   )
+   cet_test(donothing_simul_dune35t HANDBUILT
+     DATAFILES test_donothing_simul_dune35t.fcl
+     TEST_EXEC lar
+     TEST_ARGS --rethrow-all --config ./test_donothing_simul_dune35t.fcl
+   )
+endif()
+
 cet_test(donothing_dunefd HANDBUILT
   DATAFILES test_donothing_dunefd.fcl
   TEST_EXEC lar
