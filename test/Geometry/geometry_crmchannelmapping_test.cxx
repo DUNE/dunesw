@@ -13,7 +13,7 @@
 #define BOOST_TEST_MODULE GeometryCRMChannelMappingTest
 
 // LArSoft libraries
-#include "dunetpc/dune/Geometry/ChannelMapCRMAlg.h"
+#include "dune/Geometry/ChannelMapCRMAlg.h"
 #include "test/Geometry/geometry_unit_test_base.h"
 #include "test/Geometry/ChannelMapStandardTestAlg.h"
 #include "larcore/Geometry/GeometryCore.h"
