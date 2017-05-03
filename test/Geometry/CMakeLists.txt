@@ -29,6 +29,18 @@ cet_test(geometry_dune35t HANDBUILT
   TEST_ARGS --rethrow-all --config ./test_geometry_dune35t.fcl
 )
 
+cet_test(geometry_dunedphase10kt HANDBUILT
+  DATAFILES test_geometry_dunedphase10kt.fcl
+  TEST_EXEC lar
+  TEST_ARGS --rethrow-all --config ./test_geometry_dunedphase10kt.fcl
+)
+
+cet_test(geometry_dunedphase10kt_workspace HANDBUILT
+  DATAFILES test_geometry_dunedphase10kt_workspace.fcl
+  TEST_EXEC lar
+  TEST_ARGS --rethrow-all --config ./test_geometry_dunedphase10kt_workspace.fcl
+)
+
 
 simple_plugin ( GeometryTest35 "module"
                      larcore_Geometry
@@ -84,5 +96,17 @@ cet_test(dump_channel_map_dunefd_test HANDBUILT
   DATAFILES dump_dunefd_channelmap.fcl
   TEST_EXEC lar
   TEST_ARGS --rethrow-all --config ./dump_dunefd_channelmap.fcl
+)
+
+cet_test(dump_channel_map_dunedphase10kt_test HANDBUILT
+  DATAFILES dump_dunedphase10kt_channelmap.fcl
+  TEST_EXEC lar
+  TEST_ARGS --rethrow-all --config ./dump_dunedphase10kt_channelmap.fcl
+)
+
+cet_test(dump_channel_map_dunedphase10kt_workspace_test HANDBUILT
+  DATAFILES dump_dunedphase10kt_workspace_channelmap.fcl
+  TEST_EXEC lar
+  TEST_ARGS --rethrow-all --config ./dump_dunedphase10kt_workspace_channelmap.fcl
 )
 
