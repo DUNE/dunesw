@@ -1,5 +1,5 @@
 #
-# Geometry test module on DUNE Dual Phase Far Detector geometry
+# Geometry test module on DUNE Dual Phase Far Detector workspace geometry
 # 
 # Version: 1.0
 #
@@ -10,14 +10,14 @@ process_name: testGeo
 
 services: {
   
-  Geometry:               @local::dunedphase10kt_geo
+  Geometry:               @local::dunedphase10kt_workspace_geo
   ExptGeoHelperInterface: @local::dune_geometry_helper
   
   message: {
     destinations: {
       LogDebugFile: { 
         type:       "file"
-        filename:   "geometry_dunedphase10k.txt"
+        filename:   "geometry_dunedphase10k_workspace.txt"
         append:     false
         threshold:  "INFO"
         categories:{
