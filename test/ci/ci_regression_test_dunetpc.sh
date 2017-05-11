@@ -129,8 +129,8 @@ function fetch_files
 
     for file in ${2//,/ }
     do
-        echo "Command: ifdh cp $file ./"
-        ifdh cp $file ./ > fetch_inputs.log  2>&1
+        echo "Command: ifdh cp -D $file ./"
+        ifdh cp -D $file ./ > fetch_inputs.log  2>&1
         local copy_exit_code=$?
 
         if [[ $copy_exit_code -ne 0 ]]; then
