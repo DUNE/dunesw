@@ -13,7 +13,7 @@ source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco" ]
 
 physics.producers.emtrkmichelid:                            @local::standard_emtrackmichelid
 physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_emtrackid_pitch_5_wire_44_drift_48_down_6_mean_notes_protoduneBeamAndCosmics.nnet"
-#physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet" # another model, prepared on atm. neutrinos ans proton decays
+#physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet" # another model, prepared on atm. neutrinos and proton decays
 physics.producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
 physics.producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
 physics.producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
