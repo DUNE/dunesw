@@ -28,6 +28,8 @@ services.Geometry: @local::protodunedphase_geo
 services.DetectorPropertiesService: @local::protodunedphase_detproperties
 services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
 
+ services.RawDigitPrepService.DoDeconvolution: false
+
 # services.message.destinations.LogStandardOut.threshold: "INFO"
 
 #source is now a root file
@@ -48,9 +50,9 @@ physics:
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
-  caldata:            @local::dunefddphase_calwire
+  caldata:            @local::producer_adcprep
 # actual hit finder and recconstruction
-  gaushit:            @local::dunefddphase_gaushitfinder
+  dprawhit:	      @local::dunefddphase_dprawhitfinder
   fasthit:            @local::dunefd_fasthitfinder
   linecluster:        @local::dunefd_linecluster
   calo:               @local::dune10kt_calomc
@@ -65,7 +67,7 @@ physics:
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, caldata, fasthit, gaushit, linecluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster, emshower ]
+ reco: [ rns, caldata, fasthit, dprawhit, linecluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster, emshower ]
 
 	analyzers:
 	{
@@ -100,19 +102,14 @@ outputs:
 }
 ### Here, we overwrite ALL module labels with the ones defined above.
 
-physics.producers.caldata.SigThrFact: 0.2
+physics.producers.caldata.DoGroups: false
 
-#services.AdcRoiBuildingService.NSigmaStart: 3.0
-#services.AdcRoiBuildingService.NSigmaEnd:  2.0
+services.AdcRoiBuildingService.NSigmaStart: 3.0
+services.AdcRoiBuildingService.NSigmaEnd:  2.0
 
 #PMAlg configuration
 
-
-physics.producers.linecluster.dprawhit.Chi2NDFRetry: 1000.
-physics.producers.linecluster.dprawhit.Chi2NDF: 1000.
-physics.producers.linecluster.dprawhit.TryNplus1Fits: true
-
-physics.producers.linecluster.HitFinderModuleLabel:	"gaushit"
+physics.producers.linecluster.HitFinderModuleLabel:	"dprawhit"
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
