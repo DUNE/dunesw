@@ -102,8 +102,6 @@ outputs:
 
 physics.producers.caldata.SigThrFact: 0.2
 
-#services.AdcRoiBuildingService.NSigmaStart: 3.0
-#services.AdcRoiBuildingService.NSigmaEnd:  2.0
 
 #PMAlg configuration
 

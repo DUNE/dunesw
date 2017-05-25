@@ -17,7 +17,7 @@ physics.producers.generator.SigmaX: [ 0. ]
 physics.producers.generator.SigmaY: [ 0. ]
 physics.producers.generator.SigmaZ: [ 0. ]
 physics.producers.generator.AngleDist: 0
-physics.producers.generator.Theta0XZ: [ 0. ]
+physics.producers.generator.Theta0XZ: [ 45. ]
 physics.producers.generator.Theta0YZ: [ 45. ]
 physics.producers.generator.SigmaThetaXZ: [ 0. ]
 physics.producers.generator.SigmaThetaYZ: [ 0. ]
