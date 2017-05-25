@@ -45,7 +45,6 @@ outputs: {
 }
 
 # Use fixed values instead of DB for pedestals.
-#services.DetPedestalService: @local::dune_fixedpeds
 services.DetPedestalService: @local::dunedp_fixedpeds
 
 # DetSim flags.
