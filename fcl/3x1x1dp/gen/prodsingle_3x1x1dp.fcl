@@ -14,8 +14,8 @@ services:
                         @table::dunefddphase_simulation_services
 }
 
-services.Geometry: @local::3x1x1dphase_geo
-services.DetectorPropertiesService: @local::3x1x1dphase_detproperties
+services.Geometry: @local::dphase3x1x1_geo
+services.DetectorPropertiesService: @local::dphase3x1x1_detproperties
 
 #Start each new event with an empty event.
 source:

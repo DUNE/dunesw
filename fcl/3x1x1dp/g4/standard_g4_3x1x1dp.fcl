@@ -64,8 +64,8 @@ outputs:
  }
 }
 
-services.Geometry: @local::3x1x1dphase_geo
-services.DetectorPropertiesService: @local::3x1x1dphase_detproperties
+services.Geometry: @local::dphase3x1x1_geo
+services.DetectorPropertiesService: @local::dphase3x1x1_detproperties
 services.LArG4Parameters.MinNumberOfElCluster: 20
 
 #PhotonVisibilityService in photoproservices_dune.fcl. Has to be adapted to protodunedp?
