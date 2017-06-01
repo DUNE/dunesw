@@ -57,7 +57,7 @@ physics:
 # reconstruction using disambiguated hits
   linecluster:        @local::dune35t_linecluster
   calo:               @local::dune35t_calomc
-  pandora:            @local::protodune_pandora
+  pandora:            @local::protodune_pandoracosmic
 # pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune10kt_calomc
   pandorapid:         @local::standard_chi2pid
