@@ -44,6 +44,7 @@ add_subdirectory(SpaceCharge)
 add_subdirectory(SpaceChargeServices)
 add_subdirectory(DataOverlay)
 add_subdirectory(DAQSimAna)
+add_subdirectory(DataImport)
 
 # Respect the order specified in lar_build, which is:
 #
