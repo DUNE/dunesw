@@ -111,6 +111,9 @@ services.AdcRoiBuildingService.NSigmaEnd:  2.0
 
 physics.producers.linecluster.HitFinderModuleLabel:	"dprawhit"
 
+physics.producers.linecluster.ClusterCrawlerAlg.HitMergeChiCut: 0
+physics.producers.linecluster.ClusterCrawlerAlg.HitErrFac: 0.2
+
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
 physics.producers.pmtrackcalo.T0ModuleLabel:            ""
