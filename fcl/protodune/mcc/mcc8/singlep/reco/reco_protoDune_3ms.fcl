@@ -59,7 +59,7 @@ physics:
   trajcluster:        @local::standard_trajcluster
   emtrackid:          @local::standard_emtrackclusterid
   calo:               @local::dune35t_calomc
-  pandora:            @local::standard_pandoraneutrino
+  pandora:            @local::protodune_pandorabeam
 # pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune10kt_calomc
   pandorapid:         @local::standard_chi2pid
