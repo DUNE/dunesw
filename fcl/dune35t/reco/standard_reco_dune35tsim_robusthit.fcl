@@ -1,7 +1,7 @@
 #include "standard_reco_dune35tsim.fcl"
 process_name: RecoRobust
 
-services.MemoryTracker: { ignoreTotal: 1 } # default is one
+services.MemoryTracker: { } # default is one
 
 physics.producers.robusthit: @local::dune35t_robusthitfindersim
 physics.reco: [ rns, 
