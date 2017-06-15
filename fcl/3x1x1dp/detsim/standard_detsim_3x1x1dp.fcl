@@ -12,13 +12,13 @@ services.RandomNumberGenerator: {} #ART native random number generator
 services.FileCatalogMetadata:  @local::art_file_catalog_mc
 services.NuRandomService:       @local::random_NuRandomService  # seedservice.fcl
 
-services.Geometry: @local::protodunedphase_geo
-services.DetectorPropertiesService: @local::protodunedphase_detproperties
+services.Geometry: @local::dphase3x1x1_geo
+services.DetectorPropertiesService: @local::dphase3x1x1_detproperties
 
 #source is now a root file
 source: {
   module_type: RootInput
-  maxEvents:  -1        # Number of events to create
+  maxEvents:  10        # Number of events to create
 }
 
 # Define and configure some modules to do work on each event.
@@ -52,7 +52,7 @@ services.DetPedestalService: @local::dunedp_fixedpeds
 physics.producers.daq.NoiseOn:     false
 physics.producers.daq.PedestalOn:  true
 physics.producers.daq.DistortOn:   false
-physics.producers.daq.SuppressOn:  true  #false when noise on!
+physics.producers.daq.SuppressOn:  true
 
 # DetSim services.
 #services.SimChannelExtractService: @local::scxgeneric

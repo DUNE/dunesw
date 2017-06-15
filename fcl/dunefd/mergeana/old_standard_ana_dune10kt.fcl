@@ -9,7 +9,7 @@ services:
   TFileService: { fileName: "nue.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {}
-  MemoryTracker:         { ignoreTotal: 1 } # default is one
+  MemoryTracker:         { } # default is one
   message:      @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefd_simulation_services
