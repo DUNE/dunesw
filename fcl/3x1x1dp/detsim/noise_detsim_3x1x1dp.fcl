@@ -12,8 +12,8 @@ services.RandomNumberGenerator: {} #ART native random number generator
 services.FileCatalogMetadata:  @local::art_file_catalog_mc
 services.NuRandomService:       @local::random_NuRandomService  # seedservice.fcl
 
-services.Geometry: @local::protodunedphase_geo
-services.DetectorPropertiesService: @local::protodunedphase_detproperties
+services.Geometry: @local::dphase3x1x1_geo
+services.DetectorPropertiesService: @local::dphase3x1x1_detproperties
 
 #source is now a root file
 source: {
@@ -45,14 +45,13 @@ outputs: {
 }
 
 # Use fixed values instead of DB for pedestals.
-#services.DetPedestalService: @local::dune_fixedpeds
 services.DetPedestalService: @local::dunedp_fixedpeds
 
 # DetSim flags.
-physics.producers.daq.NoiseOn:     false
+physics.producers.daq.NoiseOn:     true
 physics.producers.daq.PedestalOn:  true
 physics.producers.daq.DistortOn:   false
-physics.producers.daq.SuppressOn:  true  #false when noise on!
+physics.producers.daq.SuppressOn:  false #false when noise on!
 
 # DetSim services.
 #services.SimChannelExtractService: @local::scxgeneric
@@ -66,3 +65,22 @@ services.AdcCompressService:       @local::cmpreplace
 
 # Disable bad channels.
 #services.IChannelStatusService.BadChannels: [ ]
+
+# tune to have moderate noise level
+services.ChannelNoiseService: {
+  service_provider: ExponentialChannelNoiseService
+  NoiseNormU:   0.0
+  NoiseNormV:   0.0
+  NoiseNormZ:   0.0
+  NoiseWidthU: 150.0
+  NoiseWidthV: 150.0
+  NoiseWidthZ: 150.0
+  LowCutoffU:    0.0
+  LowCutoffV:    0.0
+  LowCutoffZ:    0.0
+ WhiteNoiseU:   2.4
+ WhiteNoiseV:   2.4
+ WhiteNoiseZ:   2.4
+ NoiseArrayPoints: 1000
+  OldNoiseIndex: false
+}
