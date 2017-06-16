@@ -26,7 +26,6 @@ services:
 
 services.Geometry: @local::protodunedphase_geo
 services.DetectorPropertiesService: @local::protodunedphase_detproperties
-services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
 
 # services.message.destinations.LogStandardOut.threshold: "INFO"
 
@@ -105,11 +104,6 @@ physics.producers.caldata.SigThrFact: 0.2
 
 #PMAlg configuration
 
-
-physics.producers.linecluster.dprawhit.Chi2NDFRetry: 1000.
-physics.producers.linecluster.dprawhit.Chi2NDF: 1000.
-physics.producers.linecluster.dprawhit.TryNplus1Fits: true
-
 physics.producers.linecluster.HitFinderModuleLabel:	"gaushit"
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
@@ -142,5 +136,3 @@ physics.producers.emshower.TrackModuleLabel: "pmtrack"
 #Pandora configurations
 
 #Optical detector configuration
-
-

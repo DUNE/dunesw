@@ -104,8 +104,13 @@ outputs:
 
 physics.producers.caldata.DoGroups: false
 
-services.AdcRoiBuildingService.NSigmaStart: 3.0
-services.AdcRoiBuildingService.NSigmaEnd:  2.0
+services.AdcRoiBuildingService.NSigmaStart: 1.25   #Only pulses with ADC >= NSigmaStart*8 are considered for reco. This reduces fake noise hits.
+services.AdcRoiBuildingService.NSigmaEnd:  1.25
+
+physics.producers.dprawhit.MinSig:    10.0
+physics.producers.dprawhit.MinWidth:   8.0
+physics.producers.dprawhit.NoiseRMS:    2.4
+physics.producers.dprawhit.MIPSignal:    100
 
 #PMAlg configuration
 
