@@ -8,7 +8,7 @@ services:
   TFileService: { fileName: "EMEnergyCalib.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {}
-  MemoryTracker:         { ignoreTotal: 1 } # default is one
+  MemoryTracker:         { } # default is one
   FileCatalogMetadata:  @local::art_file_catalog_mc
   @table::dune35t_services
 }

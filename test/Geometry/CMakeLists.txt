@@ -42,6 +42,13 @@ cet_test(geometry_dunedphase10kt_workspace HANDBUILT
 )
 
 
+cet_test(geometry_iterator_loop_dunefd HANDBUILT
+  DATAFILES test_geometry_iterator_loop_dunefd.fcl
+  TEST_EXEC lar
+  TEST_ARGS --rethrow-all --config ./test_geometry_iterator_loop_dunefd.fcl
+)
+
+
 simple_plugin ( GeometryTest35 "module"
                      larcore_Geometry
                      larcore_Geometry_Geometry_service

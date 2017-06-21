@@ -1,6 +1,7 @@
 #include "services_dune.fcl"
 #include "detsimmodules_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
+#include "tools_dune.fcl"
 
 process_name: Detsim
 
@@ -8,7 +9,7 @@ services:
 {
   TFileService: { fileName: "detsim_single_protoDUNE_hist.root" }
   TimeTracker:       {}
-  MemoryTracker:     { ignoreTotal: 1 }
+  MemoryTracker:     { }
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
   @table::protodune_simulation_services
