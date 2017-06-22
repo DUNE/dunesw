@@ -56,7 +56,7 @@ physics:
 #  dcheatcc:           @local::dune35t_disambigcheat
 # reconstruction using gaushit and disambiguration cheater
   lineclusterdc:      @local::dunefd_linecluster
-  trajclusterdc:          @local::standard_trajcluster
+  trajclusterdc:          @local::dunefdmc_trajcluster
 #  costrkdc:           @local::dunefd_cosmictracker
   calodc:             @local::dune35t_calomc
   pandoradc:          @local::dunefd_pandora
@@ -77,7 +77,7 @@ physics:
   hitfd:             @local::dunefd_hitfinderfd
 # reconstruction using disambiguated hits
   linecluster:        @local::dune35t_linecluster
-  trajcluster:          @local::standard_trajcluster
+  trajcluster:          @local::dunefdmc_trajcluster
   calo:               @local::dune35t_calomc
   pandora:            @local::dunefd_pandora
 # pandora stitching module goes here when it's ready
