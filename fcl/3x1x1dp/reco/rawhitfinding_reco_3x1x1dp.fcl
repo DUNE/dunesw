@@ -24,8 +24,11 @@ services:
                         @table::dunefddphase_reco_services
 }
 
-services.Geometry: @local::protodunedphase_geo
-services.DetectorPropertiesService: @local::protodunedphase_detproperties
+services.Geometry: @local::dphase3x1x1_geo
+services.DetectorPropertiesService: @local::dphase3x1x1_detproperties
+services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
+
+ services.RawDigitPrepService.DoDeconvolution: false
 
 # services.message.destinations.LogStandardOut.threshold: "INFO"
 
@@ -47,9 +50,9 @@ physics:
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
-  caldata:            @local::dunefddphase_calwire
+  caldata:            @local::producer_adcprep
 # actual hit finder and recconstruction
-  gaushit:            @local::dunefddphase_gaushitfinder
+  dprawhit:	      @local::dunefddphase_dprawhitfinder
   fasthit:            @local::dunefd_fasthitfinder
   linecluster:        @local::dunefd_linecluster
   calo:               @local::dune10kt_calomc
@@ -64,7 +67,7 @@ physics:
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, caldata, fasthit, gaushit, linecluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster, emshower ]
+ reco: [ rns, caldata, fasthit, dprawhit, linecluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster, emshower ]
 
 	analyzers:
 	{
@@ -99,12 +102,22 @@ outputs:
 }
 ### Here, we overwrite ALL module labels with the ones defined above.
 
-physics.producers.caldata.SigThrFact: 0.2
+physics.producers.caldata.DoGroups: false
 
+services.AdcRoiBuildingService.NSigmaStart: 1.25   #Only pulses with ADC >= NSigmaStart*8 are considered for reco. This reduces fake noise hits.
+services.AdcRoiBuildingService.NSigmaEnd:  1.25
+
+physics.producers.dprawhit.MinSig:    15.0
+physics.producers.dprawhit.MinWidth:   8.0
+physics.producers.dprawhit.NoiseRMS:    2.4
+physics.producers.dprawhit.MIPSignal:    100
 
 #PMAlg configuration
 
-physics.producers.linecluster.HitFinderModuleLabel:	"gaushit"
+physics.producers.linecluster.HitFinderModuleLabel:	"dprawhit"
+
+physics.producers.linecluster.ClusterCrawlerAlg.HitMergeChiCut: 0
+physics.producers.linecluster.ClusterCrawlerAlg.HitErrFac: 0.2
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
@@ -136,3 +149,5 @@ physics.producers.emshower.TrackModuleLabel: "pmtrack"
 #Pandora configurations
 
 #Optical detector configuration
+
+

@@ -51,7 +51,6 @@ physics:
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
   caldata:            @local::dunefddphase_calwire
-  # caldata:            @local::producer_adcprep
 # actual hit finder and recconstruction
   gaushit:            @local::dunefddphase_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
@@ -105,9 +104,9 @@ outputs:
 
 physics.producers.caldata.SigThrFact: 0.2
 
-# physics.producers.caldata.DoGroups: false
-
 #PMAlg configuration
+
+physics.producers.linecluster.HitFinderModuleLabel:	"gaushit"
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"

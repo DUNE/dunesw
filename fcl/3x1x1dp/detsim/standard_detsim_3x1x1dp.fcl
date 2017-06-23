@@ -7,7 +7,7 @@ process_name: Detsim
 services: @local::dunefddphase_simulation_services
 services.TFileService: { fileName: "detsim_hist.root" }
 services.TimeTracker:       {}
-services.MemoryTracker:         { } # default is one
+services.MemoryTracker:         {} # default is one
 services.RandomNumberGenerator: {} #ART native random number generator
 services.FileCatalogMetadata:  @local::art_file_catalog_mc
 services.NuRandomService:       @local::random_NuRandomService  # seedservice.fcl
@@ -45,7 +45,6 @@ outputs: {
 }
 
 # Use fixed values instead of DB for pedestals.
-#services.DetPedestalService: @local::dune_fixedpeds
 services.DetPedestalService: @local::dunedp_fixedpeds
 
 # DetSim flags.
