@@ -1,6 +1,7 @@
 #include "services_dune.fcl"
 #include "singles_dune.fcl"
 #include "largeantmodules_dune.fcl"
+#include "tools_dune.fcl"
 
 process_name: Detsim
 
