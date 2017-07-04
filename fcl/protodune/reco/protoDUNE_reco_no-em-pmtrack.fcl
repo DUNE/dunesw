@@ -1,4 +1,3 @@
-#include "imagepatternalgs.fcl"
 #include "protoDUNE_reco.fcl"
 
 # Example minimal configuration to run EM/track separation in front of 3D track reconstruction
@@ -11,15 +10,7 @@ process_name: RecoEm
 
 source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco" ]
 
-physics.producers.emtrkmichelid:                            @local::standard_emtrackmichelid
-physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_emtrackid_pitch_5_wire_44_drift_48_down_6_mean_notes_protoduneBeamAndCosmics.nnet"
-physics.producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
-physics.producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
-physics.producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
-physics.producers.emtrkmichelid.PointIdAlg.DownscaleFn:     "mean"
-physics.producers.emtrkmichelid.HitModuleLabel:             "linecluster"
-physics.producers.emtrkmichelid.ClusterModuleLabel:         "linecluster"
-physics.producers.emtrkmichelid.Views:                      []
+physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:     "CnnModels/cnn_emtrackid_pitch_5_wire_44_drift_48_down_6_mean_notes_protoduneBeamAndCosmics.nnet"
 
 physics.producers.pmtrack.HitModuleLabel:                     "linecluster"
 #physics.producers.pmtrack.ClusterModuleLabel:                 "linecluster" # the ususal way, all clusters used to create 3D tracks

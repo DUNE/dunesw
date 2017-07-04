@@ -1,5 +1,6 @@
 #include "services_dune.fcl"
 #include "caldata_dune.fcl"
+#include "featurelabelingmodules_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
@@ -52,6 +53,8 @@ physics:
 #  cchit:              @local::dunefd_clustercrawlerhit
 # actual disambiguation
   hitfd:              @local::dunefd_hitfinderfd
+# event feature labeling
+  emtrkmichelid:      @local::protodune_emtrkmichelid
 # reconstruction using disambiguated hits
   linecluster:        @local::dune35t_linecluster
   calo:               @local::dune35t_calomc
@@ -87,6 +90,8 @@ physics:
          hitfd,
          #cluster reco
          linecluster,
+         #feature labeling
+         emtrkmichelid,
          #pandora
          pandora, #pandora stitcher goes here
          pandoracalo, pandorapid,
@@ -124,11 +129,17 @@ outputs:
 }
 
 ### Here, we overwrite ALL module labels with the ones defined above.
+physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
 
-physics.producers.pmtrack.HitModuleLabel:               "linecluster"
-physics.producers.pmtrack.ClusterModuleLabel:           "linecluster"
-physics.producers.pmtrack.PMAlgTracking.RunVertexing:   true
-physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
+physics.producers.pmtrack.HitModuleLabel:                         "linecluster"
+physics.producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
+physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:       0.63
+physics.producers.pmtrack.PMAlgTracking.MatchT0inCPACrossing:     false
+physics.producers.pmtrack.PMAlgTracking.RunVertexing:             true
+physics.producers.pmtrack.PMAlgTracking.FlipToBeam:               true
+physics.producers.pmtrack.PMAlgCosmicTagging.TagOutOfDriftTracks: true
+physics.producers.pmtrack.PMAlgCosmicTagging.TagFullHeightTracks: true
+physics.producers.pmtrack.PMAlgCosmicTagging.TagNonBeamT0Tracks:  true
 
 physics.producers.pmtrajfit.HitModuleLabel:            "linecluster"
 physics.producers.pmtrajfit.PfpModuleLabel:            "pandora"
@@ -147,7 +158,6 @@ physics.producers.pmtrajfitcalo.MakeTree:                 false
 physics.producers.pmtrajfitpid.CalorimetryModuleLabel:  "pmtrajfitcalo"
 physics.producers.pmtrajfitpid.TrackModuleLabel:        "pmtrajfit"
 
-physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
 physics.producers.calo.TrackModuleLabel:               "costrk"
 physics.producers.calo.SpacePointModuleLabel:          "costrk"
 #physics.producers.kalmanhit.HitModuleLabel:            "hitfd"
