@@ -1,5 +1,7 @@
 #include "prodgenie_nue_dune10kt_1x2x6.fcl"
 
+physics.producers.generator.FluxSearchPaths: "./"
+
 services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
 services.NuRandomService.generator: 1234
