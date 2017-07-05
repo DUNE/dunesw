@@ -309,7 +309,12 @@ function exitstatus
         if [[ -n "$ERRORSTRING" ]];then
             echo "`basename $PWD`~${EXITSTATUS}~$ERRORSTRING" >> $WORKSPACE/data_production_stats${ci_cur_exp_name}.log
         fi
-        exit "${EXITSTATUS}"
+        if  [[ "${EXITSTATUS}" -eq 201 ]]; then
+            # if data product names differs, allows to check the data product size
+            return "${EXITSTATUS}"
+        else
+            exit "${EXITSTATUS}"
+        fi
     fi
 }
 
