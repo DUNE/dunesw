@@ -51,7 +51,7 @@ add_subdirectory(DataImport)
 #     "SoftRelTools",
 #     "SRT_LAR",
 #     "SimpleTypesAndConstants",
-#     "larcore_Geometry",
+#     "larcorealg_Geometry",
 #     "larcoreobj_SummaryData",
 #     "lardataobj_RawData",
 #     "lardataobj_RecoBase",

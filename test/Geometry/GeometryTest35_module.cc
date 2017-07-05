@@ -26,13 +26,13 @@
 
 // LArSoft includes
 #include "larcore/Geometry/Geometry.h"
-#include "larcore/Geometry/CryostatGeo.h"
-#include "larcore/Geometry/TPCGeo.h"
-#include "larcore/Geometry/PlaneGeo.h"
-#include "larcore/Geometry/WireGeo.h"
-#include "larcore/Geometry/OpDetGeo.h"
-#include "larcore/Geometry/AuxDetGeo.h"
-#include "larcore/Geometry/geo.h"
+#include "larcorealg/Geometry/CryostatGeo.h"
+#include "larcorealg/Geometry/TPCGeo.h"
+#include "larcorealg/Geometry/PlaneGeo.h"
+#include "larcorealg/Geometry/WireGeo.h"
+#include "larcorealg/Geometry/OpDetGeo.h"
+#include "larcorealg/Geometry/AuxDetGeo.h"
+#include "larcorealg/Geometry/geo.h"
 #include "larcoreobj/SimpleTypesAndConstants/geo_types.h"
 
 // Framework includes
