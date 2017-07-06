@@ -2,6 +2,8 @@
 #include "detsimmodules_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
 
+#include "tools_dune.fcl"
+
 process_name: Detsim
 
 services:
