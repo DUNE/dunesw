@@ -112,7 +112,7 @@ physics.producers.dprawhit.MinWidth:     15.0   #threshold for single pulses in 
 physics.producers.dprawhit.NoiseRMS:     2.4	#just temporary
 physics.producers.dprawhit.MIPSignal:    100	#just temporary
 physics.producers.dprawhit.Chi2NDFRetry: 10	#Fits with chi2/ndf above this value will be refitted with an additional peak
-
+physics.producers.dprawhit.MaxMultiHit:	 6
 #PMAlg configuration
 
 physics.producers.linecluster.HitFinderModuleLabel:	"dprawhit"
