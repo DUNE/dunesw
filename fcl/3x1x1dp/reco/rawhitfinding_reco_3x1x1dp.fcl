@@ -28,7 +28,7 @@ services.Geometry: @local::dphase3x1x1_geo
 services.DetectorPropertiesService: @local::dphase3x1x1_detproperties
 services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
 
- services.RawDigitPrepService.DoDeconvolution: false
+services.RawDigitPrepService.DoDeconvolution: false
 
 # services.message.destinations.LogStandardOut.threshold: "INFO"
 
@@ -104,13 +104,20 @@ outputs:
 
 physics.producers.caldata.DoGroups: false
 
-services.AdcRoiBuildingService.NSigmaStart: 1.25   #Only pulses with ADC >= NSigmaStart*8 are considered for reco. This reduces fake noise hits.
-services.AdcRoiBuildingService.NSigmaEnd:  1.25
+### Hit finding parameters ###
+services.AdcRoiBuildingService.NSigmaStart: 	  1.25  # only pulses with ADC >= NSigmaStart*8 are considered for hit finding. This reduces fake noise hits.
+services.AdcRoiBuildingService.NSigmaEnd:  	  1.25	# only pulses with ADC >= NSigmaStart*8 are considered for hit finding. This reduces fake noise hits.
 
-physics.producers.dprawhit.MinSig:    15.0
-physics.producers.dprawhit.MinWidth:   8.0
-physics.producers.dprawhit.NoiseRMS:    2.4
-physics.producers.dprawhit.MIPSignal:    100
+physics.producers.dprawhit.MinSig:       	  10.0	# threshold for raw hit fitting algorithm in ADC. No peak with lower amplitude is fitted.
+physics.producers.dprawhit.TicksToStopPeakFinder: 4	# when walking along waveform to find start and end points of a peak, stop when current tick is followed by minimum "TicksToStopPeakFinder" ticks
+							# with equal or higher ADC counts (stop anyway if ADC count of a tick is <= 0)
+physics.producers.dprawhit.MinWidth:     	  15    # threshold for single pulses in ticks (= 400 ns), reduces noise hits
+physics.producers.dprawhit.MaxMultiHit:	 	  6
+physics.producers.dprawhit.TryNplus1Fits:         true	# true: will try to re-fit poorly modeled hits (chi2PerNDF>Chi2NDFRetry) with n+1 exponentials
+ 						  	# false will NOT try to re-fit poorly modled hits
+physics.producers.dprawhit.Chi2NDFRetry: 	  15	# fits with chi2/ndf above this value will be refitted with an additional peak (if TryNplus1Fits is set to true)
+physics.producers.dprawhit.MinTau:		  0.01	# mainimum value of the rising and falling time constants of the fit, in ticks. Sets a minimum width for the fit (~ width the elec.shaping function)
+physics.producers.dprawhit.MaxTau:		  5	# maximum value of the rising and falling time constants of the fit, in ticks. Limits the max. width of the fit (depends on drift distance etc.)
 
 #PMAlg configuration
 
@@ -149,5 +156,4 @@ physics.producers.emshower.TrackModuleLabel: "pmtrack"
 #Pandora configurations
 
 #Optical detector configuration
-
 
