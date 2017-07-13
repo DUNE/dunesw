@@ -16,6 +16,7 @@ physics.producers.pmtrack.HitModuleLabel:                     "linecluster"
 #physics.producers.pmtrack.ClusterModuleLabel:                 "linecluster" # the ususal way, all clusters used to create 3D tracks
 physics.producers.pmtrack.ClusterModuleLabel:                 "emtrkmichelid:emtrkmichel" # 3D track seed has to be track-like over the threshold
 physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:   0.63  # and this is the threshold to be track-like (you may need different value!)
+physics.producers.pmtrack.PMAlgTracking.ValidateOnAdc:        true
 physics.producers.pmtrack.PMAlgTracking.RunVertexing:         true
 physics.producers.pmtrack.PMAlgTracking.FlipToBeam:           true
 physics.producers.pmtrack.PMAlgTracking.MatchT0inAPACrossing: false # use this in FD
