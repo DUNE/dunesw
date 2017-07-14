@@ -16,8 +16,8 @@
 #include "dune/Geometry/ChannelMapCRMAlg.h"
 #include "test/Geometry/geometry_unit_test_base.h"
 #include "test/Geometry/ChannelMapStandardTestAlg.h"
-#include "larcore/Geometry/GeometryCore.h"
-#include "larcore/TestUtils/boost_unit_test_base.h"
+#include "larcorealg/Geometry/GeometryCore.h"
+#include "larcorealg/TestUtils/boost_unit_test_base.h"
 
 // utility libraries
 #include "messagefacility/MessageLogger/MessageLogger.h"

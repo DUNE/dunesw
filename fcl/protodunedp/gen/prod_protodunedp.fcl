@@ -8,7 +8,7 @@ source.firstRun: 21000015
 
 physics.producers.generator.PDG: [ 13 ]
 physics.producers.generator.PosDist: 0
-physics.producers.generator.P0:  [ 1 ]
+physics.producers.generator.P0:  [ 2 ]
 physics.producers.generator.SigmaP: [ 0.0 ]
 physics.producers.generator.X0: [0.0]
 physics.producers.generator.Y0: [10.0]

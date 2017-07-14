@@ -26,10 +26,11 @@ EOF
 function initialize
 {
     TASKSTRING="initialize"
-    ERRORSTRING="F@Error initializing the test@Check the log"
+    ERRORSTRING="F~Error initializing the test~Check the log"
     trap 'LASTERR=$?; FUNCTION_NAME=${FUNCNAME[0]:-main};  exitstatus ${LASTERR} trap ${LINENO}; exit ${LASTERR}' ERR
 
     echo "running CI tests for ${proj_PREFIX}_ci."
+    echo "ci_cur_exp_name: ${ci_cur_exp_name}"
     echo
     echo "initialize $@"
 
@@ -115,7 +116,7 @@ function fetch_files
     old_errorstring="$ERRORSTRING"
     TASKSTRING="fetching $1 files"
 
-    ERRORSTRING="F@Error in fetching $1 files@Check if the $1 files are available"
+    ERRORSTRING="F~Error in fetching $1 files~Check if the $1 files are available"
 
     echo "fetching $1 files for ${proj_PREFIX}_ci."
     echo
@@ -150,7 +151,7 @@ function fetch_files
 function data_production
 {
     TASKSTRING="data_production"
-    ERRORSTRING="F@Error in data production@Check the log"
+    ERRORSTRING="F~Error in data production~Check the log"
     trap 'LASTERR=$?; FUNCTION_NAME=${FUNCNAME[0]:-main};  exitstatus ${LASTERR} trap ${LINENO}; exit ${LASTERR}' ERR
 
     export TMPDIR=${PWD} #Temporary directory used by IFDHC
@@ -200,7 +201,7 @@ function data_production
 function generate_data_dump
 {
     TASKSTRING="generate_data_dump for ${file_stream} output stream"
-    ERRORSTRING="F@Error during dump Generation@Check the log"
+    ERRORSTRING="F~Error during dump Generation~Check the log"
 
     trap 'LASTERR=$?; FUNCTION_NAME=${FUNCNAME[0]:-main};  exitstatus ${LASTERR} trap ${LINENO}; exit ${LASTERR}' ERR
 
@@ -236,7 +237,7 @@ function generate_data_dump
 function compare_products_names
 {
     TASKSTRING="compare_products_names for ${file_stream} output stream"
-    ERRORSTRING="W@Error comparing products names@check the log"
+    ERRORSTRING="W~Error comparing products names~check the log"
 
     if [[ "$1" -eq 1 ]]
     then
@@ -251,7 +252,7 @@ function compare_products_names
         #~~~~~~~~~~~~~~~IF THERE'S A DIFFERENCE EXIT WITH ERROR CODE 201~~~~~~~~~~~~~~~
         if [[ "${STATUS}" -ne 0  ]]; then
             echo "${DIFF}"
-            ERRORSTRING="W@Differences in products names@Request new reference files"
+            ERRORSTRING="W~Differences in products names~Request new reference files"
             exitstatus 201
         else
             echo -e "none\n\n"
@@ -265,7 +266,7 @@ function compare_products_names
 function compare_products_sizes
 {
     TASKSTRING="compare_products_sizes for ${file_stream} output stream"
-    ERRORSTRING="F@Error comparing product sizes@Check the log"
+    ERRORSTRING="F~Error comparing product sizes~Check the log"
 
 
     if [[ "${1}" -eq 1 ]]
@@ -282,7 +283,7 @@ function compare_products_sizes
         #~~~~~~~~~~~~~~~IF THERE'S A DIFFERENCE EXIT WITH ERROR CODE 202 ~~~~~~~~~~~~~~~~~~~~~~~
         if [[ "${STATUS}" -ne 0 ]]; then
             echo "${DIFF}"
-            ERRORSTRING="W@Differences in products sizes@Request new reference files"
+            ERRORSTRING="W~Differences in products sizes~Request new reference files"
             exitstatus 202
         else
             echo -e "none\n\n"
@@ -306,9 +307,14 @@ function exitstatus
     #don't exit if the fetch of the reference failed,because we need to produce one and then upload it
     if [[ "${EXITSTATUS}" -ne 0 ]]; then
         if [[ -n "$ERRORSTRING" ]];then
-            echo "`basename $PWD`@${EXITSTATUS}@$ERRORSTRING" >> $WORKSPACE/data_production_stats.log
+            echo "`basename $PWD`~${EXITSTATUS}~$ERRORSTRING" >> $WORKSPACE/data_production_stats${ci_cur_exp_name}.log
         fi
-        exit "${EXITSTATUS}"
+        if  [[ "${EXITSTATUS}" -eq 201 ]]; then
+            # if data product names differs, allows to check the data product size
+            return "${EXITSTATUS}"
+        else
+            exit "${EXITSTATUS}"
+        fi
     fi
 }
 
@@ -336,7 +342,7 @@ function compare_anatree
             bf=`basename $f`
             hist_desc="${bf//.gif/} plot"
             hist_name="${bf//.gif/}"
-            report_img "ci_tests" "" "$(basename $PWD)" "$hist_name" "$f" "$hist_desc"
+            report_img "ci_tests" "${ci_cur_exp_name}" "" "$(basename $PWD)" "$hist_name" "$f" "$hist_desc"
             # report_img "ci_tests" "" "end" "$hist_name" "$f" "$hist_desc"
         done
 
