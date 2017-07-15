@@ -11,7 +11,7 @@ cet_test(test_TFileService SOURCES test_TFileService.cxx
 cet_test(test_Geometry SOURCES test_Geometry.cxx
   LIBRARIES
     dune_ArtSupport
-    larcore_Geometry
+    larcorealg_Geometry
     ${ROOT_BASIC_LIB_LIST}
 )
 

@@ -50,7 +50,7 @@ cet_test(geometry_iterator_loop_dunefd HANDBUILT
 
 
 simple_plugin ( GeometryTest35 "module"
-                     larcore_Geometry
+                     larcorealg_Geometry
                      larcore_Geometry_Geometry_service
 		     ${ART_FRAMEWORK_CORE}
    		     ${ART_FRAMEWORK_PRINCIPAL}
@@ -79,7 +79,7 @@ simple_plugin ( GeometryTest35 "module"
 # test for CRM channel mapping (BOOST unit test)
 cet_test(geometry_crmchannelmapping_test
   SOURCES geometry_crmchannelmapping_test.cxx
-  LIBRARIES larcore_Geometry
+  LIBRARIES larcorealg_Geometry
             GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
