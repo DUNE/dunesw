@@ -54,7 +54,7 @@ physics:
 # actual hit finder and recconstruction
   dprawhit:	      @local::dunefddphase_dprawhitfinder
   fasthit:            @local::dunefd_fasthitfinder
-  linecluster:        @local::dunefd_linecluster
+  trajcluster:        @local::dunefdmc_trajcluster
   calo:               @local::dune10kt_calomc
   pandora:            @local::dunefd_pandora
   pmtrack:            @local::dunefd_pmalgtrackmaker
@@ -67,7 +67,7 @@ physics:
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, caldata, fasthit, dprawhit, linecluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster, emshower ]
+ reco: [ rns, caldata, fasthit, dprawhit, trajcluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster, emshower ]
 
 	analyzers:
 	{
@@ -108,23 +108,28 @@ physics.producers.caldata.DoGroups: false
 services.AdcRoiBuildingService.NSigmaStart: 	  1.25  # only pulses with ADC >= NSigmaStart*8 are considered for hit finding. This reduces fake noise hits.
 services.AdcRoiBuildingService.NSigmaEnd:  	  1.25	# only pulses with ADC >= NSigmaStart*8 are considered for hit finding. This reduces fake noise hits.
 
-physics.producers.dprawhit.MinSig:       	  10.0	# threshold for raw hit fitting algorithm in ADC. No peak with lower amplitude is fitted.
+physics.producers.dprawhit.MinSig:       	  10	# threshold for raw hit fitting algorithm in ADC. No peak with lower amplitude is fitted.
 physics.producers.dprawhit.TicksToStopPeakFinder: 4	# when walking along waveform to find start and end points of a peak, stop when current tick is followed by minimum "TicksToStopPeakFinder" ticks
 							# with equal or higher ADC counts (stop anyway if ADC count of a tick is <= 0)
-physics.producers.dprawhit.MinWidth:     	  15    # threshold for single pulses in ticks (= 400 ns), reduces noise hits
+physics.producers.dprawhit.MinWidth:     	  10    # threshold for single pulses in ticks (= 400 ns), reduces noise hits
+physics.producers.dprawhit.MinADCSumOverWidth:    4.8   # threshold for ADC sum over width (ADC per ticks). Peaks with smaller values are neither fitted nor stored.
 physics.producers.dprawhit.MaxMultiHit:	 	  6
 physics.producers.dprawhit.TryNplus1Fits:         true	# true: will try to re-fit poorly modeled hits (chi2PerNDF>Chi2NDFRetry) with n+1 exponentials
  						  	# false will NOT try to re-fit poorly modled hits
-physics.producers.dprawhit.Chi2NDFRetry: 	  15	# fits with chi2/ndf above this value will be refitted with an additional peak (if TryNplus1Fits is set to true)
+physics.producers.dprawhit.Chi2NDFRetry: 	  25	# fits with chi2/ndf above this value will be refitted with an additional peak (if TryNplus1Fits is set to true)
 physics.producers.dprawhit.MinTau:		  0.01	# mainimum value of the rising and falling time constants of the fit, in ticks. Sets a minimum width for the fit (~ width the elec.shaping function)
 physics.producers.dprawhit.MaxTau:		  5	# maximum value of the rising and falling time constants of the fit, in ticks. Limits the max. width of the fit (depends on drift distance etc.)
+physics.producers.dprawhit.GroupMaxDistance:	  5	# max distance between two peaks for grouping. grouped hits are fitted together.
+physics.producers.dprawhit.DoMergePeaks:	  true	# true: peak merging (merge two peaks into one) before fitting enabled
+physics.producers.dprawhit.MergeADCSumThreshold:  0.2	# merge two peaks only if (ADC sum of the smaller peak) < MergeADCSumThreshold*(ADC sum of the bigger peak)
+physics.producers.dprawhit.MergeMaxADCThreshold:  0.2	# merge two peaks only if (height of the smaller peak) < MergeADCSumThreshold*(height sum of the bigger peak)
+
 
 #PMAlg configuration
 
-physics.producers.linecluster.HitFinderModuleLabel:	"dprawhit"
-
-physics.producers.linecluster.ClusterCrawlerAlg.HitMergeChiCut: 0
-physics.producers.linecluster.ClusterCrawlerAlg.HitErrFac: 0.2
+physics.producers.trajcluster.TrajClusterAlg.HitFinderModuleLabel:	"dprawhit"
+physics.producers.trajcluster.TrajClusterAlg.HitErrFac: 		0.2
+physics.producers.trajcluster.TrajClusterAlg.MakeNewHits: 		false
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
@@ -133,23 +138,23 @@ physics.producers.pmtrackcalo.CaloAlg.CalAreaConstants: [ 4.966e-2, 4.966e-2 ]
 physics.producers.pmtrackpid.CalorimetryModuleLabel:  "pmtrackcalo"
 physics.producers.pmtrackpid.TrackModuleLabel:        "pmtrack"
 
-physics.producers.pmtrack.HitModuleLabel:             "linecluster"
-physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
+physics.producers.pmtrack.HitModuleLabel:             "trajcluster"
+physics.producers.pmtrack.ClusterModuleLabel:         "trajcluster"
 
-physics.producers.pmtrajfit.HitModuleLabel:           "linecluster"
+physics.producers.pmtrajfit.HitModuleLabel:           "trajcluster"
 physics.producers.pmtrajfit.PfpModuleLabel:           "pandora"
 physics.producers.pmtrajfit.TrackingSkipPdg:          [0]
 
-physics.producers.blurredcluster.HitsModuleLabel: "linecluster"
+physics.producers.blurredcluster.HitsModuleLabel: "trajcluster"
 physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"
 physics.producers.blurredcluster.CreateDebugPDF:  false
 physics.producers.blurredcluster.MergeClusters:   false
 physics.producers.blurredcluster.GlobalTPCRecon:  true
 physics.producers.blurredcluster.ShowerReconOnly: false
-physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
+physics.producers.blurredcluster.VertexModuleLabel: "trajcluster"
 
 physics.producers.emshower.ClusterModuleLabel: "blurredcluster"
-physics.producers.emshower.HitsModuleLabel: "linecluster"
+physics.producers.emshower.HitsModuleLabel: "trajcluster"
 physics.producers.emshower.TrackModuleLabel: "pmtrack"
 
 
