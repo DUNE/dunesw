@@ -114,7 +114,7 @@ physics.producers.dprawhit.MinSig:       	  10	# threshold for raw hit fitting a
 physics.producers.dprawhit.TicksToStopPeakFinder: 4	# when walking along waveform to find start and end points of a peak, stop when current tick is followed by minimum "TicksToStopPeakFinder" ticks
 							# with equal or higher ADC counts (stop anyway if ADC count of a tick is <= 0)
 physics.producers.dprawhit.MinWidth:     	  10    # threshold for single pulses in ticks (= 400 ns), reduces noise hits
-physics.producers.dprawhit.MinADCSumOverWidth:    4.8     # threshold for ADC sum over width (ADC per ticks). Peaks with smaller values are neither fitted nor stored.
+physics.producers.dprawhit.MinADCSumOverWidth:    4.8   # threshold for ADC sum over width (ADC per ticks). Peaks with smaller values are neither fitted nor stored.
 physics.producers.dprawhit.MaxMultiHit:	 	  6
 physics.producers.dprawhit.TryNplus1Fits:         true	# true: will try to re-fit poorly modeled hits (chi2PerNDF>Chi2NDFRetry) with n+1 exponentials
  						  	# false will NOT try to re-fit poorly modled hits
@@ -130,8 +130,8 @@ physics.producers.dprawhit.MergeMaxADCThreshold:  0.2	# merge two peaks only if 
 #PMAlg configuration
 
 physics.producers.trajcluster.TrajClusterAlg.HitFinderModuleLabel:	"dprawhit"
-physics.producers.trajcluster.TrajClusterAlg.HitErrFac: 0.2
-physics.producers.trajcluster.TrajClusterAlg.MakeNewHits: true
+physics.producers.trajcluster.TrajClusterAlg.HitErrFac: 		0.2
+physics.producers.trajcluster.TrajClusterAlg.MakeNewHits: 		false
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
