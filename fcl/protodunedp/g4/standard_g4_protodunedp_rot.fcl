@@ -64,7 +64,7 @@ outputs:
  }
 }
 
-services.Geometry: @local::protodunedphase_geo
+services.Geometry: @local::protodunedphase_rot_geo
 services.DetectorPropertiesService: @local::protodunedphase_detproperties
 services.LArG4Parameters.MinNumberOfElCluster: 20
 
