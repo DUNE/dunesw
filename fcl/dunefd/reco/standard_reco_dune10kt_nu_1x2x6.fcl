@@ -3,19 +3,8 @@ process_name: Reco
 
 physics.producers.blurredclusterdc.ShowerReconOnly: true
 physics.producers.blurredcluster.ShowerReconOnly: true
-physics.producers.emshower.ClusterModuleLabel: "pandora"
-physics.producers.emshower.HitsModuleLabel: "linecluster"
-physics.producers.emshower.PFParticleModuleLabel: "pandora"
-physics.producers.emshower.TrackModuleLabel: "pandora"
-physics.producers.emshowerdc.ClusterModuleLabel: "pandoradc"
-physics.producers.emshowerdc.HitsModuleLabel: "lineclusterdc"
-physics.producers.emshowerdc.PFParticleModuleLabel: "pandoradc"
-physics.producers.emshowerdc.TrackModuleLabel: "pandoradc"
+physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/pdune_em-trk-michel_clean_on_neutrinos_iter100_aw.nnet"
 physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
 physics.producers.pmtrack.PMAlgTracking.AutoFlip_dQdx:  false
 physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:     true
 physics.producers.pmtrackdc.PMAlgTracking.AutoFlip_dQdx:  false
-physics.producers.pmtracktc.PMAlgTracking.FlipToBeam:     true
-physics.producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx:  false
-physics.producers.pmtracktcdc.PMAlgTracking.FlipToBeam:     true
-physics.producers.pmtracktcdc.PMAlgTracking.AutoFlip_dQdx:  false
