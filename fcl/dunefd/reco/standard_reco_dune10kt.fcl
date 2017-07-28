@@ -322,6 +322,7 @@ physics.producers.emshower.TrackModuleLabel:      "pandora"
 physics.producers.emshower.CNNEMModuleLabel:      "emtrkmichelid:emtrkmichel"
 physics.producers.emshower.UseCNNtoIDEMPFP:       true
 physics.producers.emshower.UseCNNtoIDEMHit:       false
+physics.producers.emshower.MinTrackLikeScore:     0.1
 
 physics.producers.emshower3d.HitsModuleLabel: "linecluster"
 physics.producers.emshower3d.ClustersModuleLabel: "blurredcluster"
