@@ -125,6 +125,13 @@ function fetch_files
 
     maxretries_backup=$IFDH_CP_MAXRETRIES
     debug_backup=$IFDH_DEBUG
+
+    ### BEGIN temporary workaround for ifdhc v2_0_9 ###
+    source /cvmfs/fermilab.opensciencegrid.org/products/common/etc/setups.sh
+    unsetup ifdhc_config
+    setup ifdhc_config v2_0_8a
+    ### END temporary workaround for ifdhc v2_0_9 ###
+
     export IFDH_DEBUG=1
     export IFDH_CP_MAXRETRIES=0
 

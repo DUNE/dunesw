@@ -22,7 +22,7 @@ source:
 {
   module_type: EmptyEvent
   timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
-  maxEvents:   10          # Number of events to create
+  maxEvents:   -1          # Number of events to create
   firstRun:    1           # Run number to use for this file
   firstEvent:  1           # number of first event in the file
 }
@@ -68,10 +68,6 @@ outputs:
    compressionLevel: 1
  }
 }
-
-outputs.out1.fileName: "prodsingle_protodunedp.root" 
-
-source.firstRun: 20000011
 
 physics.producers.generator.PDG: [ 13 ]
 physics.producers.generator.P0:  [ 10.0 ]

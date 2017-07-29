@@ -1,7 +1,7 @@
 #include "evd_dune.fcl"
 process_name: EVD
 
-services.Geometry: @local::protodunedphase_geo
+services.Geometry: @local::protodunedphase_rot_geo
 services.RawDrawingOptions.TotalTicks: 20000
 services.DetectorPropertiesService.Efield:	[0.5, 4.0, 0.0]
 services.DetectorClocksService.ClockSpeedTPC: 2.5

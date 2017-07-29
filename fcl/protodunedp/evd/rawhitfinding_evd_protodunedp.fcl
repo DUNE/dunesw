@@ -2,11 +2,11 @@
 process_name: EVD
 
 services.Geometry: @local::protodunedphase_geo
-services.RawDrawingOptions.TotalTicks: 15000
+services.RawDrawingOptions.TotalTicks: 20000
 services.DetectorPropertiesService.Efield:	[0.5, 4.0, 0.0]
 services.DetectorClocksService.ClockSpeedTPC: 2.5
-services.DetectorPropertiesService.NumberTimeSamples: 15000
-services.DetectorPropertiesService.ReadOutWindowSize: 15000
+services.DetectorPropertiesService.NumberTimeSamples: 20000
+services.DetectorPropertiesService.ReadOutWindowSize: 20000
 services.RecoDrawingOptions.HitModuleLabels: ["trajcluster"]
 services.RecoDrawingOptions.ClusterModuleLabels: ["trajcluster"]
 services.RecoDrawingOptions.TrackModuleLabels: ["pmtrack"]
