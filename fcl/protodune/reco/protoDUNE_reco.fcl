@@ -134,6 +134,7 @@ physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
 physics.producers.pmtrack.HitModuleLabel:                         "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
 physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:       0.63
+physics.producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:       3
 physics.producers.pmtrack.PMAlgTracking.Validation:               "adc"
 physics.producers.pmtrack.PMAlgTracking.AdcValidationThr:         [0.8, 0.8, 1.0]
 physics.producers.pmtrack.PMAlgTracking.RunVertexing:             true
