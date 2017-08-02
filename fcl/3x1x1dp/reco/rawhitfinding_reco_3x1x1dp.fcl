@@ -21,11 +21,9 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::dunefddphase_reco_services
+                        @table::dunedphase3x1x1_reco_services
 }
 
-services.Geometry: @local::dphase3x1x1_geo
-services.DetectorPropertiesService: @local::dphase3x1x1_detproperties
 services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
 
 services.RawDigitPrepService.DoDeconvolution: false
