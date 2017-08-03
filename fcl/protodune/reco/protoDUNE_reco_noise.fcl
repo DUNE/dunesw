@@ -1,28 +1,5 @@
-#include "services_dune.fcl"
-#include "caldata_dune.fcl"
-#include "hitfindermodules_dune.fcl"
+#include "protoDUNE_reco.fcl"
 
-# This reco chain is intended to be adopted for the reconstruction of noisy data/sim.
-# Now it is the initial/minimal configuration which includes deconvolution and
-# filtrerinng followed by hit fiding/fitting.
-#
-# More algorithms will be added. More specialized version may be derived from this one
-# for various noise conditions and purposes (eg DQM only, full reco, ...).
-
-
-process_name: Reco
-
-services:
-{
-  # Load the service that manages root files for histograms.
-  TFileService: { fileName: "reco_protoDUNE_hist.root" }
-  TimeTracker:       {}
-  MemoryTracker:     {}
-  RandomNumberGenerator: {} #ART native random number generator
-  message:              @local::dune_message_services_prod_debug
-  FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::protodune_reco_services
-}
 
 # Filter parameters adopted from 35t configuration, should stand high noise:
 services.SignalShapingServiceDUNE.ColFilter:       "(x>0.0)*gaus"
@@ -33,57 +10,6 @@ services.SignalShapingServiceDUNE.IndVFilter:       "(x>0.015)*gaus"
 services.SignalShapingServiceDUNE.IndVFilterParams: [ 1.0, 0.0, 0.1 ]
 
 
-#source is now a root file
-source:
-{
-  module_type: RootInput
-  maxEvents: 30000
-  fileNames: ["reco_protoDUNE.root"]
-}
-
-# Define and configure some modules to do work on each event.
-# First modules are defined; they are scheduled later.
-# Modules are grouped by type.
-physics:
-{
-
- producers:
- {
-# random number saver
-  rns:                 { module_type: RandomNumberSaver }
-# convert raw::RawDigit to recob::wire
-  caldata:            @local::producer_adcprep
-# actual hit finder
-  gaushit:            @local::dunefd_gaushitfinder
-  fasthit:            @local::dunefd_fasthitfinder
-  hitfd:              @local::dunefd_hitfinderfd
- }
-
- reco: [ rns, 
-         #TPC wire signals
-         caldata,
-         #hit reco with real disambiguation
-         gaushit, hitfd  #fasthit
-       ]
-
- stream1:  [ out1 ]
-
- trigger_paths: [reco] 
-
- end_paths:     [stream1]  
-}
-
-outputs:
-{
- out1:
- {
-   module_type: RootOutput
-   fileName:    "%ifb_reco.root"
-   dataTier:    "full-reconstructed"
-   compressionLevel: 1
- }
-}
-
 # Algorithm parameters, adopted from 35t, to be tuned to obtain max performance / speed:
 physics.producers.gaushit.MinSig:    [6.0, 6.0, 6.0]
 physics.producers.gaushit.MinWidth:  [1.0, 1.0, 1.0]
@@ -92,4 +18,5 @@ physics.producers.gaushit.MinWidth:  [1.0, 1.0, 1.0]
 #physics.producers.gaushit.AreaNorms: [13.25, 13.25, 13.25]
 #physics.producers.gaushit.Chi2NDFRetry: 1000.
 
+physics.reco: [ rns, caldata, gaushit, hitfd ]
 

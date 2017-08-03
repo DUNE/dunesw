@@ -13,6 +13,8 @@
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 
+#include "tools_dune.fcl"
+
 process_name: Reco
 
 services:
@@ -134,7 +136,9 @@ physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
 physics.producers.pmtrack.HitModuleLabel:                         "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
 physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:       0.63
-#physics.producers.pmtrack.PMAlgTracking.Validation:               "adc" # commented out, this is the future feature
+physics.producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:       3
+physics.producers.pmtrack.PMAlgTracking.Validation:               "adc"
+physics.producers.pmtrack.PMAlgTracking.AdcValidationThr:         [0.8, 0.8, 1.0]
 physics.producers.pmtrack.PMAlgTracking.RunVertexing:             true
 physics.producers.pmtrack.PMAlgTracking.FlipToBeam:               true
 physics.producers.pmtrack.PMAlgTracking.MatchT0inCPACrossing:     true

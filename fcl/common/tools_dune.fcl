@@ -6,3 +6,4 @@
 # Collect all tool definitions for DUNE.
 
 #include "detsimtools_dune.fcl"
+#include "dataprep_tools.fcl"
