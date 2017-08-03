@@ -48,12 +48,13 @@ physics:
    end_paths:     [ analyzeIt ]
 }
 
-physics.analyzers.purity.CalWireModuleLabel:   "caldata"
-physics.analyzers.purity.HitModuleLabel:       "dprawhit"
-physics.analyzers.purity.ClusterModuleLabel:   "trajcluster"
-physics.analyzers.purity.TrackModuleLabel:     "pmtrack"
-physics.analyzers.purity.TotalGain:             5                               #total gain of the run
-physics.analyzers.purity.EnergyCut:             10                              #cut on the value Energy/(Average mip * 350cm)
-physics.analyzers.purity.DriftGap:              30                              #Gap the mip track start can be found in (in cm)
-physics.analyzers.purity.Length:                100                             #minimal Length to define a crossing mip (in cm)
-physics.analyzers.purity.VolCut:                [10, 10, 30]         #Volume cut for mips going through the TPC
+physics.analyzers.purity.CalorimetryAlg.CalAreaConstants: [ 4.966e-2, 4.966e-2 ]
+physics.analyzers.purity.CalWireModuleLabel:              "caldata"
+physics.analyzers.purity.HitModuleLabel:                  "dprawhit"
+physics.analyzers.purity.ClusterModuleLabel:              "trajcluster"
+physics.analyzers.purity.TrackModuleLabel:                "pmtrack"
+physics.analyzers.purity.TotalGain:                        5                    #total gain of the run
+physics.analyzers.purity.EnergyCut:                        10                   #cut on the value Energy/(Average mip * 350cm)
+physics.analyzers.purity.DriftGap:                         30                   #Gap the mip track start can be found in (in cm)
+physics.analyzers.purity.Length:                           100                  #minimal Length to define a crossing mip (in cm)
+physics.analyzers.purity.VolCut:                           [10, 10, 30]         #Volume cut for mips going through the TPC
