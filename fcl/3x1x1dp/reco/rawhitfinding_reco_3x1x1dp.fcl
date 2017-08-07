@@ -27,7 +27,7 @@ services:
 services.RawDigitPrepService.DoDeconvolution: false
 
 services.RawDigitExtractService.PedestalOption: 3   #1: pedestal saved in rawDigit, 2: pedestal set during detsim, 3: either mean or median (see next line)
-services.PedestalEvaluationService: @local::adcped_median #adcped_median for median, adcped_mean for mean 
+services.PedestalEvaluationService: @local::adcped_median #adcped_median for median, adcped_mean for mean
 
 services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
 
@@ -66,26 +66,26 @@ physics:
   emshower:           @local::dune10kt_emshower
  }
 
- #define the producer and filter modules for this path, order matters, 
+ #define the producer and filter modules for this path, order matters,
  #filters reject all following items.  see lines starting physics.producers below
  reco: [ rns, caldata, fasthit, dprawhit, trajcluster, pmtrack, pmtrackcalo, pmtrackpid ]
 
 	analyzers:
 	{
 	}
-	 
+
 	analyzeIt:  [ ]
 
- #define the output stream, there could be more than one if using filters 
+ #define the output stream, there could be more than one if using filters
  stream1:  [ out1 ]
 
- #trigger_paths is a keyword and contains the paths that modify the art::event, 
+ #trigger_paths is a keyword and contains the paths that modify the art::event,
  #ie filters and producers
- trigger_paths: [reco] 
+ trigger_paths: [reco]
 
- #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+ #end_paths is a keyword and contains the paths that do not modify the art::Event,
  #ie analyzers and output streams.  these all run simultaneously
- end_paths:     [stream1]  
+ end_paths:     [stream1]
 }
 
 #block to define where the output goes.  if you defined a filter in the physics
@@ -124,7 +124,7 @@ physics.producers.dprawhit.GroupMaxDistance:	  5	# max distance between two peak
 physics.producers.dprawhit.DoMergePeaks:	  true	# true: merge two peaks into one before fitting
 physics.producers.dprawhit.MergeADCSumThreshold:  0.2	# merge two peaks only if (ADC sum of the smaller peak) < MergeADCSumThreshold*(ADC sum of the bigger peak)
 physics.producers.dprawhit.MergeMaxADCThreshold:  0.2	# merge two peaks only if (height of the smaller peak) < MergeADCSumThreshold*(height sum of the bigger peak)
-
+physics.producers.dprawhit.MinADCSum:          20.0  # threshold for ADC sum (before fitting). Peaks with smaller values are neither fitted nor stored.
 
 #PMAlg configuration
 
@@ -172,4 +172,3 @@ physics.producers.emshower.TrackModuleLabel: "pmtrack"
 #Pandora configurations
 
 #Optical detector configuration
-
