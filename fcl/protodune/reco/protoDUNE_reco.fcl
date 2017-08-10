@@ -13,8 +13,6 @@
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 
-#include "tools_dune.fcl"
-
 process_name: Reco
 
 services:

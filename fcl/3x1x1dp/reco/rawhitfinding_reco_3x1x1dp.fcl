@@ -117,7 +117,7 @@ physics.producers.dprawhit.MinADCSumOverWidth:    4.0   # threshold for ADC sum 
 physics.producers.dprawhit.MaxMultiHit:	 	  6
 physics.producers.dprawhit.TryNplus1Fits:         false	# true: will try to re-fit poorly modeled hits (chi2PerNDF>Chi2NDFRetry) with n+1 exponentials
  						  	# false will NOT try to re-fit poorly modled hits
-physics.producers.dprawhit.Chi2NDFRetry: 	  100	# fits with chi2/ndf above this value will be refitted with an additional peak (if TryNplus1Fits is set to true)
+#physics.producers.dprawhit.Chi2NDFRetry: 	  100	# fits with chi2/ndf above this value will be refitted with an additional peak (if TryNplus1Fits is set to true)
 physics.producers.dprawhit.MinTau:		  0.01	# mainimum value of the rising and falling time constants of the fit, in ticks. Sets a minimum width for the fit (~ width the elec.shaping function)
 physics.producers.dprawhit.MaxTau:		  5	# maximum value of the rising and falling time constants of the fit, in ticks. Limits the max. width of the fit (depends on drift distance etc.)
 physics.producers.dprawhit.GroupMaxDistance:	  5	# max distance between two peaks for grouping. grouped hits are fitted together.
