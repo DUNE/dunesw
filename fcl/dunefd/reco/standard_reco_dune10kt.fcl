@@ -13,6 +13,8 @@
 #include "emshower3d.fcl"
 #include "imagepatternalgs.fcl"
 
+#include "tools_dune.fcl"
+
 process_name: Reco
 
 services:

@@ -10,6 +10,8 @@
 #include "particleid.fcl"
 #include "showerfindermodules_dune.fcl"
 
+#include "tools_dune.fcl"
+
 process_name: Reco
 
 services:
