@@ -1,0 +1,60 @@
+#standard analyzer for the 3x1x1dp detector
+
+#include "services_dune.fcl"
+#include "pdunedp_analysis.fcl"
+
+process_name: Ana
+
+services:
+{
+ # Load the service that manages root files for histograms.
+ TFileService: { fileName: "hist.root" }
+ TimeTracker:       {}
+ MemoryTracker:     {}
+ RandomNumberGenerator: {} #ART native random number generator
+ message:              @local::dune_message_services_prod_debug
+ FileCatalogMetadata:  @local::art_file_catalog_mc
+                       @table::dunefddphase_reco_services
+}
+
+services.Geometry: @local::dphase3x1x1_geo
+services.DetectorPropertiesService: @local::dphase3x1x1_detproperties
+services.DetectorPropertiesService.Electronlifetime: 1000.0e3         #in us
+services.RawDigitExtractService.PedestalOption: 3   #1: pedestal saved in rawDigit, 2: pedestal set during detsim, 3: either mean or median (see next line)
+services.PedestalEvaluationService: @local::adcped_median #adcped_median for median, adcped_mean for mean
+
+services.SimChannelExtractService.DPGainPerView: 2.5
+
+services.RawDigitPrepService.DoDeconvolution: false
+
+services.message.destinations.LogStandardOut.threshold: "INFO"
+
+#source is now a root file
+source:
+{
+ module_type: RootInput
+ maxEvents: -1
+ fileNames: ["reco.root"]
+}
+
+physics:
+{
+   analyzers:
+   {
+      purity:   @local::pdunedp_purity      #only purity module configured so far
+   }
+
+   analyzeIt:  [ purity ]
+   end_paths:     [ analyzeIt ]
+}
+
+physics.analyzers.purity.CalorimetryAlg.CalAreaConstants: [ 4.966e-2, 4.966e-2 ]
+physics.analyzers.purity.CalWireModuleLabel:              "caldata"
+physics.analyzers.purity.HitModuleLabel:                  "dprawhit"
+physics.analyzers.purity.ClusterModuleLabel:              "trajcluster"
+physics.analyzers.purity.TrackModuleLabel:                "pmtrack"
+physics.analyzers.purity.TotalGain:                        5                    #total gain of the run
+physics.analyzers.purity.EnergyCut:                        10                   #cut on the value Energy/(Average mip * 350cm)
+physics.analyzers.purity.DriftGap:                         30                   #Gap the mip track start can be found in (in cm)
+physics.analyzers.purity.Length:                           100                  #minimal Length to define a crossing mip (in cm)
+physics.analyzers.purity.VolCut:                           [10, 10, 30]         #Volume cut for mips going through the TPC

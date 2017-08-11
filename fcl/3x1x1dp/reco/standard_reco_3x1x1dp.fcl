@@ -26,6 +26,9 @@ services:
 
 # services.RawDigitPrepService.DoDeconvolution: false
 
+services.RawDigitExtractService.PedestalOption: 3   #1: pedestal saved in rawDigit, 2: pedestal set during detsim, 3: either mean or median (see next line)
+services.PedestalEvaluationService: @local::adcped_median #adcped_median for median, adcped_mean for mean 
+
 # services.message.destinations.LogStandardOut.threshold: "INFO"
 
 #source is now a root file
