@@ -29,6 +29,8 @@ services:
                         @table::protodune_reco_services
 }
 
+services.Geometry.SortingParameters.ChannelsPerOpDet: 12
+
 #source is now a root file
 source:
 {
