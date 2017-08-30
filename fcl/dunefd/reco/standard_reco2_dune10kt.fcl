@@ -18,6 +18,7 @@ physics.reco: [ linecluster,
                 pmtracktccalo, 
                 pmtracktcpid,
                 blurredcluster, 
+                emtrkmichelid,
                 emshower
                 ]
 outputs.out1.fileName: "%ifb_reco2.root"
