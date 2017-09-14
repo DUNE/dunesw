@@ -126,12 +126,6 @@ function fetch_files
     maxretries_backup=$IFDH_CP_MAXRETRIES
     debug_backup=$IFDH_DEBUG
 
-    ### BEGIN temporary workaround for ifdhc v2_0_9 ###
-    source /cvmfs/fermilab.opensciencegrid.org/products/common/etc/setups.sh
-    unsetup ifdhc_config
-    setup ifdhc_config v2_0_8a
-    ### END temporary workaround for ifdhc v2_0_9 ###
-
     export IFDH_DEBUG=1
     export IFDH_CP_MAXRETRIES=0
 
@@ -221,7 +215,7 @@ function generate_data_dump
 
     ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl "${reference_file}" > ${REF_DUMP_FILE}
     #~~~~~~~~~~~~~~~~~~~~~~~~~SAVE IN A VARIABLE THE PARSED REFERENCE DUMP FILE ~~~~~~~~~~~~~~~~~~~~~~
-    OUTPUT_REFERENCE=$(cat "${REF_DUMP_FILE}" | sed -e  '/PROCESS NAME/,/^\s*$/!d ; s/PROCESS NAME.*$// ; /^\s*$/d' )
+    OUTPUT_REFERENCE=$(cat "${REF_DUMP_FILE}" | sed -e  '/PRINCIPAL TYPE:/,/^\s*$/!d ; s/PRINCIPAL TYPE:.*$// ; /^\s*$/d' )
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PRINT THE COMMAND TO LOG AND THEN GENERATE THE DUMP FOR THE CURRENT FILE ~~~~~~~~~~~~~~~~~~~
     echo -e "\nGenerating Dump for ${current_file}"
@@ -229,7 +223,7 @@ function generate_data_dump
 
     ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl "${current_file}" > "${current_file//.root}".dump
     #~~~~~~~~~~~~~~~~~~~~~~~~~SAVE IN A VARIABLE THE PARSED CURRENT DUMP FILE ~~~~~~~~~~~~~~~~~~~~~~
-    OUTPUT_CURRENT=$(cat "${current_file//.root}".dump | sed -e  '/PROCESS NAME/,/^\s*$/!d ; s/PROCESS NAME.*$// ; /^\s*$/d' )
+    OUTPUT_CURRENT=$(cat "${current_file//.root}".dump | sed -e  '/PRINCIPAL TYPE:/,/^\s*$/!d ; s/PRINCIPAL TYPE:.*$// ; /^\s*$/d' )
 
     echo -e "\nReference files for ${file_stream} output stream:"
     echo -e "\n${REF_DUMP_FILE}\n"
@@ -251,7 +245,7 @@ function compare_products_names
         REF_DUMP_FILE=$(basename ${reference_file} | sed -e 's/.root/.dump/')
         echo -e "\nCompare products names for ${file_stream} output stream."
         #~~~~~~~~~~~~~~~~CHECK IF THERE'S A DIFFERENCE BEETWEEN THE TWO DUMP FILES IN THE FIRST FOUR COLUMNS~~~~~~~~~~~~~~
-        DIFF=$(diff  <(sed 's/\.//g ; /PROCESS NAME/,/^\s*$/!d ; s/PROCESS NAME.*$// ; /^\s*$/d' ${REF_DUMP_FILE} | cut -d "|" -f -4 ) <(sed 's/\.//g ; /PROCESS NAME/,/^\s*$/!d ; s/PROCESS NAME.*$// ; /^\s*$/d' ${current_file//.root/.dump} | cut -d "|" -f -4 ) )
+        DIFF=$(diff  <(sed 's/\.//g ; /PRINCIPAL TYPE:/,/^\s*$/!d ; s/PRINCIPAL TYPE:.*$// ; /^\s*$/d' ${REF_DUMP_FILE} | cut -d "|" -f -4 ) <(sed 's/\.//g ; /PRINCIPAL TYPE:/,/^\s*$/!d ; s/PRINCIPAL TYPE:.*$// ; /^\s*$/d' ${current_file//.root/.dump} | cut -d "|" -f -4 ) )
         STATUS=$?
 
         echo -e "\nCheck for added/removed data products"
@@ -282,7 +276,7 @@ function compare_products_sizes
         REF_DUMP_FILE=$(basename ${reference_file} | sed -e 's/.root/.dump/')
         echo -e "\nCompare products sizes for ${file_stream} output stream.\n"
         #~~~~~~~~~~~~~~~~CHECK IF THERE'S A DIFFERENCE BEETWEEN THE TWO DUMP FILES,IN ALL THE COLUMNS~~~~~~~~~~~~~~
-        DIFF=$(diff  <(sed 's/\.//g ; /PROCESS NAME/,/^\s*$/!d ; s/PROCESS NAME.*$// ; /^\s*$/d' ${REF_DUMP_FILE}) <(sed 's/\.//g ; /PROCESS NAME/,/^\s*$/!d ; s/PROCESS NAME.*$// ; /^\s*$/d' ${current_file//.root/.dump}) )
+        DIFF=$(diff  <(sed 's/\.//g ; /PRINCIPAL TYPE:/,/^\s*$/!d ; s/PRINCIPAL TYPE:.*$// ; /^\s*$/d' ${REF_DUMP_FILE}) <(sed 's/\.//g ; /PRINCIPAL TYPE:/,/^\s*$/!d ; s/PRINCIPAL TYPE:.*$// ; /^\s*$/d' ${current_file//.root/.dump}) )
         STATUS=$?
         echo -e "\nCheck for differences in the size of data products"
         echo -e "difference(s)\n"
@@ -316,12 +310,7 @@ function exitstatus
         if [[ -n "$ERRORSTRING" ]];then
             echo "`basename $PWD`~${EXITSTATUS}~$ERRORSTRING" >> $WORKSPACE/data_production_stats${ci_cur_exp_name}.log
         fi
-        if  [[ "${EXITSTATUS}" -eq 201 ]]; then
-            # if data product names differs, allows to check the data product size
-            return "${EXITSTATUS}"
-        else
-            exit "${EXITSTATUS}"
-        fi
+        exit "${EXITSTATUS}"
     fi
 }
 
