@@ -21,11 +21,9 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::dunefddphase_reco_services
+                        @table::protodunedphase_reco_services
 }
 
-services.Geometry: @local::protodunedphase_geo
-services.DetectorPropertiesService: @local::protodunedphase_detproperties
 
 # services.message.destinations.LogStandardOut.threshold: "INFO"
 
