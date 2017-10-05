@@ -35,13 +35,14 @@ physics:
  pmtracktceff:      @local::standard_neutrinotrackingeff
  pandoraeff:        @local::standard_neutrinotrackingeff
  pmtrajfiteff:      @local::standard_neutrinotrackingeff
+ pmtrajfittceff:    @local::standard_neutrinotrackingeff
 }
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- ana:  [ analysistree, pmtrackeff, pmtracktceff, pandoraeff, pmtrajfiteff ]
+ ana:  [ analysistree, pmtrackeff, pmtracktceff, pandoraeff, pmtrajfiteff, pmtrajfiteff ]
 
  #end_paths is a keyword and contains the paths that do not modify the art::Event, 
  #ie analyzers and output streams.  these all run simultaneously
@@ -68,3 +69,4 @@ physics.analyzers.pmtrackeff.TrackModuleLabel:       "pmtrack"
 physics.analyzers.pmtracktceff.TrackModuleLabel:     "pmtracktc"
 physics.analyzers.pandoraeff.TrackModuleLabel:       "pandora"
 physics.analyzers.pmtrajfiteff.TrackModuleLabel:     "pmtrajfit"
+physics.analyzers.pmtrajfittceff.TrackModuleLabel:   "pmtrajfittc"
