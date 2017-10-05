@@ -92,9 +92,14 @@ physics:
   pmtrajfit:          @local::dunefd_pmalgtrajfitter
   pmtrajfitcalo:      @local::dune10kt_calomc
   pmtrajfitpid:       @local::standard_chi2pid
-  pmtracktc:             @local::dunefd_pmalgtrajfitter
+# PMA using trajcluster clusters
+  pmtracktc:             @local::dunefd_pmalgtrackmaker
   pmtracktccalo:         @local::dune10kt_calomc
   pmtracktcpid:          @local::standard_chi2pid
+# PMA using trajclustter pfparticles
+  pmtrajfittc:             @local::dunefd_pmalgtrajfitter
+  pmtrajfittccalo:         @local::dune10kt_calomc
+  pmtrajfittcpid:          @local::standard_chi2pid
 # photon detector reconstruction
   ophit:              @local::dune35t_ophit 
   opflash:            @local::dune35t_opflash 
@@ -133,6 +138,7 @@ physics:
          pmtrack, pmtrackcalo, pmtrackpid,
          pmtrajfit, pmtrajfitcalo, pmtrajfitpid,
          pmtracktc, pmtracktccalo, pmtracktcpid,
+         pmtrajfittc, pmtrajfittccalo, pmtrajfittcpid,
          #shower reconstruction
          blurredcluster, emtrkmichelid, emshower#, emshower3d, mergeemshower3d
          ]
@@ -200,9 +206,16 @@ physics.producers.pmtracktcdc.PMAlgTracking.MinSeedSize2ndPass:  2
 physics.producers.pmtracktcdc.PMAlgTracking.FlipToBeam:     false
 physics.producers.pmtracktcdc.PMAlgTracking.AutoFlip_dQdx: true
 
-physics.producers.pmtracktc.HitModuleLabel:             "trajcluster"
-physics.producers.pmtracktc.PfpModuleLabel:             "trajcluster"
-physics.producers.pmtracktc.PMAlgFitting.RunVertexing:   true
+physics.producers.pmtracktc.HitModuleLabel:               "trajcluster"
+physics.producers.pmtracktc.ClusterModuleLabel:           "trajcluster"
+physics.producers.pmtracktc.PMAlgTracking.RunVertexing:   true
+physics.producers.pmtracktc.PMAlgTracking.MinSeedSize2ndPass:  2
+physics.producers.pmtracktc.PMAlgTracking.FlipToBeam:     false
+physics.producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx:  true
+
+physics.producers.pmtrajfittc.HitModuleLabel:             "trajcluster"
+physics.producers.pmtrajfittc.PfpModuleLabel:             "trajcluster"
+physics.producers.pmtrajfittc.PMAlgFitting.RunVertexing:   true
 
 physics.producers.pmtrajfit.HitModuleLabel:             "linecluster"
 physics.producers.pmtrajfit.PfpModuleLabel:             "pandora"
@@ -247,6 +260,14 @@ physics.producers.pmtrajfitpid.CalorimetryModuleLabel:  "pmtrajfitcalo"
 physics.producers.pmtrajfitpid.TrackModuleLabel:        "pmtrajfit"
 physics.producers.pmtracktcpid.CalorimetryModuleLabel:  "pmtracktccalo"
 physics.producers.pmtracktcpid.TrackModuleLabel:        "pmtracktc"
+
+physics.producers.pmtrajfittccalo.TrackModuleLabel:         "pmtrajfittc"
+physics.producers.pmtrajfittccalo.SpacePointModuleLabel:    "pmtrajfittc"
+physics.producers.pmtrajfittccalo.T0ModuleLabel:            ""
+physics.producers.pmtrajfittccalo.MakeTree:                 false
+physics.producers.pmtrajfittcpid.CalorimetryModuleLabel:  "pmtrajfittccalo"
+physics.producers.pmtrajfittcpid.TrackModuleLabel:        "pmtrajfittc"
+
 
 physics.producers.linecluster.HitFinderModuleLabel:     "hitfd"
 physics.producers.trajcluster.TrajClusterAlg.HitFinderModuleLabel:   "hitfd"
