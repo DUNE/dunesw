@@ -11,11 +11,9 @@ services:
   MemoryTracker:         { } # default is one
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::dunefddphase_simulation_services
+                        @table::protodunedphase_simulation_services
 }
 
-services.Geometry: @local::protodunedphase_geo
-services.DetectorPropertiesService: @local::protodunedphase_detproperties
 
 #Start each new event with an empty event.
 source:
