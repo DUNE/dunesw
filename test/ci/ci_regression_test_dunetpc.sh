@@ -20,6 +20,7 @@ function usage {
       --input-files-to-fetch     List of input files to be downloaded before to execute the data production
       --reference-files-to-fetch List of reference files to be downloaded before the product comparison
       --extra-function           Define and extra function to run with list of required arguments; the elements need to be comma separated
+      --extra-options            Define and extra options/arguments for the executable; the elements need to be comma separated
 EOF
 }
 
@@ -43,6 +44,7 @@ function initialize
     REFERENCE_FILES=""
     REFERENCE_FILES_TO_FETCH=""
     WORKSPACE=${WORKSPACE:-$PWD}
+    EXTRA_OPTIONS=""
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     #~~~~~~~~~~~~~~~~~~~~~~GET VALUE FROM THE CI_TESTS.CFG ARGS SECTION~~~~~~~~~~~~~~~
@@ -63,6 +65,7 @@ function initialize
       x--input-files-to-fetch)     INPUT_FILES_TO_FETCH="${2}";                                 shift; shift;;
       x--reference-files-to-fetch) REFERENCE_FILES_TO_FETCH="${2}";                             shift; shift;;
       x--extra-function)           EXTRA_FUNCTION="${2}";                                       shift; shift;;
+      x--extra-options)            EXTRA_OPTIONS="${2//,/ }";                                   shift; shift;;
       x)                                                                                break;;
       x*)            echo "Unknown argument $1"; usage; exit 1;;
       esac
@@ -76,7 +79,9 @@ function initialize
         echo "- existing reference files will not be used"
         echo -e "***************************************************\n"
         TESTMASK=""
-        NEVENTS=1
+        if [[ "$(basename ${0})" != *"lariatsoft"* ]]; then
+            NEVENTS=1
+        fi
         REFERENCE_FILES=""
         REFERENCE_FILES_TO_FETCH=""
     fi
@@ -167,10 +172,24 @@ function data_production
         fi
 
         echo -e "\nNumber of events for ${STAGE_NAME} stage: $NEVENTS\n"
-        echo ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} -o ${OUTPUT_STREAM} --config ${FHiCL_FILE} ${INPUT_FILE}
+        echo ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} ${EXTRA_OPTIONS} -o ${OUTPUT_STREAM} --config ${FHiCL_FILE} ${INPUT_FILE}
         echo
 
-        ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} -o ${OUTPUT_STREAM} --config ${FHiCL_FILE} ${INPUT_FILE}
+        (
+            local counter=0
+            local expcode_exitcode=20
+            until [[ ${expcode_exitcode} -ne 20 || ${counter} -gt 5 ]]; do
+                ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} ${EXTRA_OPTIONS} -o ${OUTPUT_STREAM} --config ${FHiCL_FILE} ${INPUT_FILE}
+                expcode_exitcode=$?
+                if [[ ${expcode_exitcode} -ne 0 ]]; then
+                    let $((counter++))
+                    echo -e "\n\n*** ${EXECUTABLE_NAME} can not access the input file, wait 30 s, then retry #${counter}\n\n"
+                    sleep 30
+                fi
+            done
+ 	    exitstatus $expcode_exitcode
+        )
+
     else
         echo -e "\nCI MSG BEGIN\n Stage: ${STAGE_NAME}\n Task: ${TASKSTRING}\n skipped\nCI MSG END\n"
     fi
@@ -202,26 +221,57 @@ function data_production
 function generate_data_dump
 {
     TASKSTRING="generate_data_dump for ${file_stream} output stream"
-    ERRORSTRING="F~Error during dump Generation~Check the log"
+    ERRORSTRING="W~Error during dump Generation~Check the log"
 
     trap 'LASTERR=$?; FUNCTION_NAME=${FUNCNAME[0]:-main};  exitstatus ${LASTERR} trap ${LINENO}; exit ${LASTERR}' ERR
 
-    local NEVENTS=1
+#     local NEVENTS=1
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PRINT THE COMMAND TO LOG AND THEN GENERATE THE DUMP FOR THE REFERENCE FILE ~~~~~~~~~~~~~~~~~~~
     echo -e "\nGenerating Dump for ${reference_file}"
     REF_DUMP_FILE=$(basename ${reference_file} | sed -e 's/.root/.dump/')
-    echo "${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl ${reference_file} > ${REF_DUMP_FILE}"
+    echo "${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl ${reference_file} 2>&1 | tee ${REF_DUMP_FILE}"
 
-    ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl "${reference_file}" > ${REF_DUMP_FILE}
+    (
+        set -o pipefail
+
+        local counter=0
+        local expcode_exitcode=20
+        until [[ ${expcode_exitcode} -ne 20 || ${counter} -gt 5 ]]; do
+            ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl "${reference_file}" 2>&1 | tee ${REF_DUMP_FILE}
+            expcode_exitcode=$?
+            if [[ ${expcode_exitcode} -ne 0 ]]; then
+                let $((counter++))
+                echo -e "\n\n*** ${EXECUTABLE_NAME} can not access the input file, wait 30 s, then retry #${counter}\n\n"
+                sleep 30
+            fi
+        done
+        exit ${expcode_exitcode}
+    )
+
     #~~~~~~~~~~~~~~~~~~~~~~~~~SAVE IN A VARIABLE THE PARSED REFERENCE DUMP FILE ~~~~~~~~~~~~~~~~~~~~~~
     OUTPUT_REFERENCE=$(cat "${REF_DUMP_FILE}" | sed -e  '/PRINCIPAL TYPE:/,/^\s*$/!d ; s/PRINCIPAL TYPE:.*$// ; /^\s*$/d' )
 
     #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~PRINT THE COMMAND TO LOG AND THEN GENERATE THE DUMP FOR THE CURRENT FILE ~~~~~~~~~~~~~~~~~~~
     echo -e "\nGenerating Dump for ${current_file}"
-    echo "${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl ${current_file} > ${current_file//.root}.dump"
+    echo "${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl ${current_file} 2>&1 | tee ${current_file//.root}.dump"
 
-    ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl "${current_file}" > "${current_file//.root}".dump
+    (
+        set -o pipefail
+
+        local counter=0
+        local expcode_exitcode=20
+        until [[ ${expcode_exitcode} -ne 20 || ${counter} -gt 5 ]]; do
+            ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl "${current_file}" 2>&1 | tee "${current_file//.root}".dump
+            expcode_exitcode=$?
+            if [[ ${expcode_exitcode} -ne 0 ]]; then
+                let $((counter++))
+                echo -e "\n\n*** ${EXECUTABLE_NAME} can not access the input file, wait 30 s, then retry #${counter}\n\n"
+                sleep 30
+            fi
+        done
+        exit ${expcode_exitcode}
+    )
     #~~~~~~~~~~~~~~~~~~~~~~~~~SAVE IN A VARIABLE THE PARSED CURRENT DUMP FILE ~~~~~~~~~~~~~~~~~~~~~~
     OUTPUT_CURRENT=$(cat "${current_file//.root}".dump | sed -e  '/PRINCIPAL TYPE:/,/^\s*$/!d ; s/PRINCIPAL TYPE:.*$// ; /^\s*$/d' )
 
@@ -267,7 +317,7 @@ function compare_products_names
 function compare_products_sizes
 {
     TASKSTRING="compare_products_sizes for ${file_stream} output stream"
-    ERRORSTRING="F~Error comparing product sizes~Check the log"
+    ERRORSTRING="W~Error comparing product sizes~Check the log"
 
 
     if [[ "${1}" -eq 1 ]]
