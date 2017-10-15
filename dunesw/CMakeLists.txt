@@ -46,8 +46,8 @@ add_subdirectory(SupernovaAna)
 add_subdirectory(DataOverlay)
 add_subdirectory(DAQSimAna)
 add_subdirectory(3x1x1dp)
-
 add_subdirectory(CVN)
+add_subdirectory(BeamData)
 
 # Respect the order specified in lar_build, which is:
 #
