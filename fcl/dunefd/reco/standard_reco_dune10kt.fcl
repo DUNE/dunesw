@@ -1,4 +1,4 @@
-#include "services_dune.fcl"
+    #include "services_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
@@ -330,6 +330,7 @@ physics.producers.blurredcluster.ShowerReconOnly: false
 physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
 
 physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet"
+physics.producers.emtrkmichelid.PointIdAlg.NNetOutputs:     ["track", "em", "michel", "none"]
 physics.producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
 physics.producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
 physics.producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
