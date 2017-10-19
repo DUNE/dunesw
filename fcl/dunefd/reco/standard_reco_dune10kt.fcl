@@ -335,6 +335,7 @@ physics.producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
 physics.producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
 physics.producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
 physics.producers.emtrkmichelid.PointIdAlg.DownscaleFn:     "mean"
+physics.producers.emtrkmichelid.PointIdAlg.DownscaleFullView: false
 physics.producers.emtrkmichelid.HitModuleLabel:             "linecluster"
 physics.producers.emtrkmichelid.ClusterModuleLabel:         "linecluster"
 physics.producers.emtrkmichelid.Views:                      []
