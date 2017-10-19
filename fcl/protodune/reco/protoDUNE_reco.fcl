@@ -135,6 +135,11 @@ outputs:
 ### Here, we overwrite ALL module labels with the ones defined above.
 physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
 
+physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:  "CnnModels/cnn_emtrkmichel_pitch_5_wire_44_drift_48_down_6_mean_notes_protoduneBeamAndCosmics_calib_cascadedouts.pb"
+physics.producers.emtrkmichelid.PointIdAlg.NNetOutputs:    ["track", "em", "none", "michel"]
+physics.producers.emtrkmichelid.PointIdAlg.CalorimetryAlg: @local::dune10kt_calorimetryalgmc
+physics.producers.emtrkmichelid.PointIdAlg.CalibrateAmpl:  true
+
 physics.producers.pmtrack.HitModuleLabel:                         "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
 physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:       0.63
