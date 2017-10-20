@@ -1,0 +1,24 @@
+# R.Sulej, Oct. 2017
+#
+# CNN bsed pixel-level feature labeling modules for DUNE.
+
+#include "imagepatternalgs.fcl"
+
+BEGIN_PROLOG
+
+protodune_emtrkmichelid:                              @local::standard_emtrackmichelid
+protodune_emtrkmichelid.PointIdAlg.NNetModelFile:     "CnnModels/cnn_emtrkmichel_pitch_5_wire_44_drift_48_down_6_mean_notes_protoduneBeamAndCosmics_calib_cascadedouts.pb"
+protodune_emtrkmichelid.PointIdAlg.NNetOutputs:       ["track", "em", "none", "michel"]
+protodune_emtrkmichelid.PointIdAlg.CalorimetryAlg:    @local::dune10kt_calorimetryalgmc
+protodune_emtrkmichelid.PointIdAlg.CalibrateAmpl:     true
+protodune_emtrkmichelid.PointIdAlg.PatchSizeW:        44
+protodune_emtrkmichelid.PointIdAlg.PatchSizeD:        48
+protodune_emtrkmichelid.PointIdAlg.DriftWindow:       6
+protodune_emtrkmichelid.PointIdAlg.DownscaleFn:       "mean"
+protodune_emtrkmichelid.PointIdAlg.DownscaleFullView: false
+protodune_emtrkmichelid.HitModuleLabel:               "linecluster"
+protodune_emtrkmichelid.ClusterModuleLabel:           "linecluster"
+protodune_emtrkmichelid.Views:                        []
+
+END_PROLOG
+
