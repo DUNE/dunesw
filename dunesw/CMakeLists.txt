@@ -47,6 +47,8 @@ add_subdirectory(DataOverlay)
 add_subdirectory(DAQSimAna)
 add_subdirectory(3x1x1dp)
 
+add_subdirectory(CVN)
+
 # Respect the order specified in lar_build, which is:
 #
 #     "SoftRelTools",
