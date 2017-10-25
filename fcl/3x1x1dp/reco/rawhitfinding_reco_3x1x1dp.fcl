@@ -10,6 +10,8 @@
 #include "particleid.fcl"
 #include "showerfindermodules_dune.fcl"
 
+#include "tools_dune.fcl"
+
 process_name: Reco
 
 services:
@@ -24,9 +26,12 @@ services:
                         @table::dunedphase3x1x1_reco_services
 }
 
-services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
-
 services.RawDigitPrepService.DoDeconvolution: false
+
+services.RawDigitExtractService.PedestalOption: 3   #1: pedestal saved in rawDigit, 2: pedestal set during detsim, 3: either mean or median (see next line)
+services.PedestalEvaluationService: @local::adcped_median #adcped_median for median, adcped_mean for mean
+
+services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
 
 # services.message.destinations.LogStandardOut.threshold: "INFO"
 
@@ -63,26 +68,26 @@ physics:
   emshower:           @local::dune10kt_emshower
  }
 
- #define the producer and filter modules for this path, order matters, 
+ #define the producer and filter modules for this path, order matters,
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, caldata, fasthit, dprawhit, trajcluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster, emshower ]
+ reco: [ rns, caldata, fasthit, dprawhit, trajcluster, pmtrack, pmtrackcalo, pmtrackpid ]
 
 	analyzers:
 	{
 	}
-	 
+
 	analyzeIt:  [ ]
 
- #define the output stream, there could be more than one if using filters 
+ #define the output stream, there could be more than one if using filters
  stream1:  [ out1 ]
 
- #trigger_paths is a keyword and contains the paths that modify the art::event, 
+ #trigger_paths is a keyword and contains the paths that modify the art::event,
  #ie filters and producers
- trigger_paths: [reco] 
+ trigger_paths: [reco]
 
- #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+ #end_paths is a keyword and contains the paths that do not modify the art::Event,
  #ie analyzers and output streams.  these all run simultaneously
- end_paths:     [stream1]  
+ end_paths:     [stream1]
 }
 
 #block to define where the output goes.  if you defined a filter in the physics
@@ -103,31 +108,41 @@ outputs:
 physics.producers.caldata.DoGroups: false
 
 ### Hit finding parameters ###
-services.AdcRoiBuildingService.NSigmaStart: 	  1.25  # only pulses with ADC >= NSigmaStart*8 are considered for hit finding. This reduces fake noise hits.
-services.AdcRoiBuildingService.NSigmaEnd:  	  1.25	# only pulses with ADC >= NSigmaStart*8 are considered for hit finding. This reduces fake noise hits.
+services.AdcRoiBuildingService.NSigmaStart: 	  0.5  # only pulses with ADC >= NSigmaStart*8 are considered for hit finding. This reduces fake noise hits.
+services.AdcRoiBuildingService.NSigmaEnd:  	  0.0	# only pulses with ADC >= NSigmaStart*8 are considered for hit finding. This reduces fake noise hits.
 
-physics.producers.dprawhit.MinSig:       	  10	# threshold for raw hit fitting algorithm in ADC. No peak with lower amplitude is fitted.
-physics.producers.dprawhit.TicksToStopPeakFinder: 4	# when walking along waveform to find start and end points of a peak, stop when current tick is followed by minimum "TicksToStopPeakFinder" ticks
+physics.producers.dprawhit.MinSig:       	  5	# threshold for raw hit fitting algorithm in ADC. No peak with lower amplitude is fitted.
+physics.producers.dprawhit.TicksToStopPeakFinder: 100	# when walking along waveform to find start and end points of a peak, stop when current tick is followed by minimum "TicksToStopPeakFinder" ticks
 							# with equal or higher ADC counts (stop anyway if ADC count of a tick is <= 0)
 physics.producers.dprawhit.MinWidth:     	  10    # threshold for single pulses in ticks (= 400 ns), reduces noise hits
-physics.producers.dprawhit.MinADCSumOverWidth:    4.8   # threshold for ADC sum over width (ADC per ticks). Peaks with smaller values are neither fitted nor stored.
+physics.producers.dprawhit.MinADCSumOverWidth:    4.0   # threshold for ADC sum over width (ADC per ticks). Peaks with smaller values are neither fitted nor stored.
 physics.producers.dprawhit.MaxMultiHit:	 	  6
-physics.producers.dprawhit.TryNplus1Fits:         true	# true: will try to re-fit poorly modeled hits (chi2PerNDF>Chi2NDFRetry) with n+1 exponentials
+physics.producers.dprawhit.TryNplus1Fits:         false	# true: will try to re-fit poorly modeled hits (chi2PerNDF>Chi2NDFRetry) with n+1 exponentials
  						  	# false will NOT try to re-fit poorly modled hits
-physics.producers.dprawhit.Chi2NDFRetry: 	  25	# fits with chi2/ndf above this value will be refitted with an additional peak (if TryNplus1Fits is set to true)
+#physics.producers.dprawhit.Chi2NDFRetry: 	  100	# fits with chi2/ndf above this value will be refitted with an additional peak (if TryNplus1Fits is set to true)
 physics.producers.dprawhit.MinTau:		  0.01	# mainimum value of the rising and falling time constants of the fit, in ticks. Sets a minimum width for the fit (~ width the elec.shaping function)
 physics.producers.dprawhit.MaxTau:		  5	# maximum value of the rising and falling time constants of the fit, in ticks. Limits the max. width of the fit (depends on drift distance etc.)
 physics.producers.dprawhit.GroupMaxDistance:	  5	# max distance between two peaks for grouping. grouped hits are fitted together.
-physics.producers.dprawhit.DoMergePeaks:	  true	# true: peak merging (merge two peaks into one) before fitting enabled
+physics.producers.dprawhit.DoMergePeaks:	  true	# true: merge two peaks into one before fitting
 physics.producers.dprawhit.MergeADCSumThreshold:  0.2	# merge two peaks only if (ADC sum of the smaller peak) < MergeADCSumThreshold*(ADC sum of the bigger peak)
 physics.producers.dprawhit.MergeMaxADCThreshold:  0.2	# merge two peaks only if (height of the smaller peak) < MergeADCSumThreshold*(height sum of the bigger peak)
-
+physics.producers.dprawhit.MinADCSum:          20.0  # threshold for ADC sum (before fitting). Peaks with smaller values are neither fitted nor stored.
 
 #PMAlg configuration
 
-physics.producers.trajcluster.TrajClusterAlg.HitFinderModuleLabel:	"dprawhit"
-physics.producers.trajcluster.TrajClusterAlg.HitErrFac: 		0.2
-physics.producers.trajcluster.TrajClusterAlg.MakeNewHits: 		false
+physics.producers.trajcluster.TrajClusterAlg.HitFinderModuleLabel: 	"dprawhit"
+physics.producers.trajcluster.TrajClusterAlg.HitErrFac: 		0.5  # hit time error for fitting = fHitErrFac * (hit RMS)
+#physics.producers.trajcluster.TrajClusterAlg.MaxChi: 			100   # Max Chi/DOF for accepting a trajectory fit (long muons)
+physics.producers.trajcluster.TrajClusterAlg.MultHitSep: 		10  # Hits separated by < MultHitSep * RMS may be combined in a trajectory point
+physics.producers.trajcluster.TrajClusterAlg.MaxWireSkipNoSignal:     	30   # max allowed number of not-dead wires if no signal is present
+physics.producers.trajcluster.TrajClusterAlg.MakeNewHits: 		true
+physics.producers.trajcluster.TrajClusterAlg.ChargeCuts: 		[10, 1.5e-1, 2.5e-1]     #ChargeCuts[0] high avoid that charge dissmilarities affects the tracking choice
+physics.producers.trajcluster.TrajClusterAlg.SkipAlgs: 			["All"]
+
+physics.producers.pmtrack.PMAlgTracking.AdcImageAlg.CalibrateLifetime: 	false
+physics.producers.pmtrack.PMAlgTracking.AdcImageAlg.CalibrateAmpl: 	false
+physics.producers.pmtrack.PMAlgTracking.MergeAngle: 			2
+physics.producers.pmtrack.PMAlgTracking.MergeTransverseShift: 		2
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
@@ -159,4 +174,3 @@ physics.producers.emshower.TrackModuleLabel: "pmtrack"
 #Pandora configurations
 
 #Optical detector configuration
-

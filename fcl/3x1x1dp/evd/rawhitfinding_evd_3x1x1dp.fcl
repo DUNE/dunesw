@@ -7,7 +7,7 @@ services.DetectorPropertiesService.Efield:	[0.5, 4.0, 0.0]
 services.DetectorClocksService.ClockSpeedTPC: 2.5
 services.DetectorPropertiesService.NumberTimeSamples: 1667
 services.DetectorPropertiesService.ReadOutWindowSize: 1667
-services.RecoDrawingOptions.HitModuleLabels: ["trajcluster"]
+services.RecoDrawingOptions.HitModuleLabels: ["dprawhit"]
 services.RecoDrawingOptions.ClusterModuleLabels: ["trajcluster"]
 services.RecoDrawingOptions.TrackModuleLabels: ["pmtrack"]
 services.RecoDrawingOptions.VertexModuleLabels: ["pmtrack"]
