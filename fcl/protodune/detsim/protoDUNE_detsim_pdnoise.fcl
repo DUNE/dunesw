@@ -18,4 +18,5 @@ services.ChannelNoiseService: {
   
 }
 
-physics.producers.daq.SuppressOn:  false
+# enable only if you need full raw waveforms:
+#physics.producers.daq.SuppressOn:  false
