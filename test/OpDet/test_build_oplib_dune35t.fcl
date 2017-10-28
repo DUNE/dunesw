@@ -1,5 +1,5 @@
 #include "services_dune.fcl"
-#include "backtrackerservice.fcl"
+#include "backtracker.fcl"
 #include "singles.fcl"
 #include "largeantmodules.fcl"
 #include "detsimmodules.fcl"
@@ -23,7 +23,7 @@ services:
   TimeTracker:       {}
   RandomNumberGenerator: {} #ART native random number generator
                  @table::dune35t_photolibbuild_services
-  BackTracker:   @local::dune35t_backtracker # defined in backtrackerservice.fcl
+  BackTracker:   @local::dune35t_backtracker # defined in backtracker.fcl
   message:       @local::standard_info
 }
 
