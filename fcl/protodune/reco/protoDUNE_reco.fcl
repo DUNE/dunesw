@@ -66,6 +66,8 @@ physics:
   linecluster:        @local::dune35t_linecluster
   calo:               @local::dune35t_calomc
   pandora:            @local::protodune_pandoracosmic
+  pandoraTrack:       @local::dune_pandoraTrackCreation
+  pandoraShower:      @local::dune_pandoraShowerCreation
 # pandora stitching module goes here when it's ready
   pandoracalo:        @local::dune10kt_calomc
   pandorapid:         @local::standard_chi2pid
@@ -102,7 +104,7 @@ physics:
          #feature labeling
          emtrkmichelid,
          #pandora
-         pandora, #pandora stitcher goes here
+         pandora, pandoraTrack, pandoraShower,
          pandoracalo, pandorapid,
          #pmatrack
          pmtrack, pmtrackcalo, pmtrackpid,
@@ -178,12 +180,15 @@ physics.producers.calo.SpacePointModuleLabel:          "costrk"
 #Pandora configurations
 
 physics.producers.pandora.HitFinderModuleLabel:             "linecluster"
-physics.producers.pandoracalo.TrackModuleLabel:             "pandora"
+physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
+physics.producers.pandoraShower.PFParticleLabel:            "pandora"
+
+physics.producers.pandoracalo.TrackModuleLabel:             "pandoraTrack"
 physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
 physics.producers.pandoracalo.T0ModuleLabel:                ""
 physics.producers.pandoracalo.MakeTree:                     false
 physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
-physics.producers.pandorapid.TrackModuleLabel:              "pandora"
+physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
 
 #Optical detector configuration
 physics.producers.ophit.InputModule:                        "opdigi"
