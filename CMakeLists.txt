@@ -63,6 +63,8 @@ find_ups_product( postgresql v9_1_5 )
 find_ups_product( lbne_raw_data v0_00_02 )
 find_ups_product( artdaq_core v01_03_6 )
 find_ups_product( ifdh_art )
+find_ups_product( caffe v1_0e )
+find_ups_product( lapack )
 
 # macros for dictionary and simple_plugin
 include(ArtDictionary)
