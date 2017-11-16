@@ -53,7 +53,7 @@ dune_pardata	v01_22_00
 genie_xsec      v2_12_8
 genie_phyopt    v2_12_8
 cetbuildtools	v5_14_04	-	only_for_build
-caffe           v1_0e
+caffe           v1_0e           -       optional
 end_product_list
 
 
