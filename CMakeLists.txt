@@ -66,7 +66,9 @@ find_ups_product( ifdh_art )
 if(DEFINED ENV{CAFFE_LIB} )
   find_ups_product(caffe)
 endif()
-find_ups_product( lapack )
+if(DEFINED ENV{LAPACK_LIB} )
+  find_ups_product( lapack )
+endif()
 
 # macros for dictionary and simple_plugin
 include(ArtDictionary)
