@@ -45,14 +45,21 @@ outputs: {
 }
 
 # Use fixed values instead of DB for pedestals.
-#services.DetPedestalService: @local::dune_fixedpeds
 services.DetPedestalService: @local::dunedp_fixedpeds
+services.DetPedestalService.FixedDetPedestal.PedMeanErrY: 0
+services.DetPedestalService.FixedDetPedestal.PedMeanErrZ: 0
+services.DetPedestalService.FixedDetPedestal.PedMeanY:    5 #from 3x1x1 data
+services.DetPedestalService.FixedDetPedestal.PedMeanZ:    5 #from 3x1x1 data
+services.DetPedestalService.FixedDetPedestal.PedRmsErrY:  0
+services.DetPedestalService.FixedDetPedestal.PedRmsErrZ:  0
+services.DetPedestalService.FixedDetPedestal.PedRmsY:     0
+services.DetPedestalService.FixedDetPedestal.PedRmsZ:     0
 
 # DetSim flags.
-physics.producers.daq.NoiseOn:     false
+physics.producers.daq.NoiseOn:     true
 physics.producers.daq.PedestalOn:  true
 physics.producers.daq.DistortOn:   false
-physics.producers.daq.SuppressOn:  true
+physics.producers.daq.SuppressOn:  false #false when noise on
 
 # DetSim services.
 #services.SimChannelExtractService: @local::scxgeneric
@@ -66,3 +73,23 @@ services.AdcCompressService:        @local::cmpreplace
 
 # Disable bad channels.
 #services.IChannelStatusService.BadChannels: [ ]
+
+#*************************** Signal shaping constants for DUNE *****************
+
+services.SignalShapingServiceDUNEDPhase.ADCpermV:     1
+services.SignalShapingServiceDUNEDPhase.ASICmVperfC:  3.2
+services.SignalShapingServiceDUNEDPhase.AmpENC:       1700
+
+#*************************** Realist noise model *******************************
+
+services.ChannelNoiseService:{
+  service_provider: DPhaseRealisticNoiseService
+  NoiseModel:       "$MRB_SOURCE/dunetpc/dune/DetSim/NoiseModels/729-0_fft_mirror.root"
+  RandomizeX:       15.0     #amplitude randomization sigma
+  RandomizeY:       15.0     #amplitude randomization sigma
+  Smooth:           1000      #smoothing factor when mirroring
+  SetFirst0:        false    #set first bin of the fft model to 0
+  SetBaseline:      false    #if true, baseline added to real noise model
+  NoiseArrayPoints: 1000     #number of pre-generated waveforms
+  OldNoiseIndex:    false    #From ExponentialChannelNoiseService. Keep false
+}
