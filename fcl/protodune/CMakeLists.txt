@@ -4,5 +4,6 @@ add_subdirectory(detsim)
 add_subdirectory(reco)
 add_subdirectory(mergeana)
 add_subdirectory(mcc)
+add_subdirectory(dc)
 
 install_fhicl()

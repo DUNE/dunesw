@@ -1,0 +1,43 @@
+#include "services_dune.fcl"
+#include "ecalibration.fcl"
+#include "tools_dune.fcl"
+
+process_name: Ana
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "dedx_hist.root" }
+  TimeTracker:       {}
+  MemoryTracker:     {}
+  RandomNumberGenerator: {} #ART native random number generator
+  message:              @local::dune_message_services_prod_debug
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::protodune_data_services
+}
+
+services.message.destinations.LogStandardOut.threshold:  "INFO"
+
+source:
+{
+  module_type: RootInput
+  maxEvents: -1
+#  fileNames: ["reco_protoDUNE.root"]
+}
+
+physics:
+{
+ analyzers:
+ {
+   dedxana:  @local::proto_dedx
+ }
+
+ ana:  [ dedxana ]
+
+ end_paths:     [ ana ]  
+}
+
+physics.analyzers.dedxana.HitModuleLabel: "linecluster"
+physics.analyzers.dedxana.TrackModuleLabel: "pmtrack"
+physics.analyzers.dedxana.ChosenView: 2
+physics.analyzers.dedxana.Cosmics: true
