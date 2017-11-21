@@ -69,7 +69,6 @@ physics: {
   pandoradc:          @local::dune35t_pandora
   pandoraTrackdc:     @local::dune_pandoraTrackCreation
   pandoraShowerdc:    @local::dune_pandoraShowerCreation
-  particlestitcherdc: @local::dune35t_particlestitcher
   pandoracalodc:      @local::dune35t_calomc
   pmtrackdc:          @local::dune35t_pmalgtrackmaker
   pmtrackcalodc:      @local::dune35t_calomc
@@ -88,7 +87,6 @@ physics: {
   pandora:            @local::dune35t_pandora
   pandoraTrack:       @local::dune_pandoraTrackCreation
   pandoraShower:      @local::dune_pandoraShowerCreation
-  particlestitcher:   @local::dune35t_particlestitcher
   pandoracalo:        @local::dune35t_calomc
   pmtrack:            @local::dune35t_pmalgtrackmaker
   pmtrackcalo:        @local::dune35t_calomc
@@ -142,7 +140,7 @@ physics: {
          #cluster reco with cheated disambiguation
          lineclusterdc,
          #pandora with cheated disambiguation
-         pandoradc, pandoraTrackdc, pandoraShowerdc, particlestitcherdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
+         pandoradc, pandoraTrackdc, pandoraShowerdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
          #pmatrack with cheated disambiguation
          pmtrackdc, mctrutht0pmtrackdc, photont0pmtrackdc, pmtrackcalodc,
          pmtrajfitdc, mctrutht0pmtrajfitdc, photont0pmtrajfitdc, pmtrajfitcalodc,
@@ -153,7 +151,7 @@ physics: {
          #cluster reco
          linecluster,
          #pandora
-         pandora, pandoraTrack, pandoraShower, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo,
+         pandora, pandoraTrack, pandoraShower, mctrutht0pandora, photont0pandora, pandoracalo,
          #pmatrack
          pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo,
          pmtrajfit, mctrutht0pmtrajfit, photont0pmtrajfit, pmtrajfitcalo
@@ -278,30 +276,24 @@ physics.producers.calo.T0ModuleLabel:                "photont0costrk"
 physics.producers.pandoradc.HitFinderModuleLabel:           "dcheat"
 physics.producers.pandoraTrackdc.PFParticleLabel:           "pandoradc"
 physics.producers.pandoraShowerdc.PFParticleLabel:          "pandoradc"
-physics.producers.particlestitcherdc.PFParticleModuleLabel: "pandoradc"
-physics.producers.particlestitcherdc.TrackModuleLabel:      "pandoraTrackdc"
-physics.producers.particlestitcherdc.UseXCoordinate:        false
-physics.producers.mctrutht0pandoradc.TrackModuleLabel:      "particlestitcherdc"
-physics.producers.photont0pandoradc.TrackModuleLabel:       "particlestitcherdc"
+physics.producers.mctrutht0pandoradc.TrackModuleLabel:      "pandoraTrackdc"
+physics.producers.photont0pandoradc.TrackModuleLabel:       "pandoraTrackdc"
 physics.producers.photont0pandoradc.HitsModuleLabel:        "dcheat"
 physics.producers.photont0pandoradc.ShowerModuleLabel:      ""
 physics.producers.photont0pandoradc.TruthT0ModuleLabel:     "mctrutht0pandoradc"
-physics.producers.pandoracalodc.TrackModuleLabel:           "particlestitcherdc"
+physics.producers.pandoracalodc.TrackModuleLabel:           "pandoraTrackdc"
 physics.producers.pandoracalodc.SpacePointModuleLabel:      "pandoradc"
 physics.producers.pandoracalodc.T0ModuleLabel:              "photont0pandoradc"
 
 physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
 physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"
-physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
-physics.producers.particlestitcher.TrackModuleLabel:        "pandoraTrack"
-physics.producers.particlestitcher.UseXCoordinate:          false
-physics.producers.mctrutht0pandora.TrackModuleLabel:        "particlestitcher"
-physics.producers.photont0pandora.TrackModuleLabel:         "particlestitcher"
+physics.producers.mctrutht0pandora.TrackModuleLabel:        "pandoraTrack"
+physics.producers.photont0pandora.TrackModuleLabel:         "pandoraTrack"
 physics.producers.photont0pandora.HitsModuleLabel:          "hit35t"
 physics.producers.photont0pandora.ShowerModuleLabel:        ""
 physics.producers.photont0pandora.TruthT0ModuleLabel:       "mctrutht0pandora"
-physics.producers.pandoracalo.TrackModuleLabel:             "particlestitcher"
+physics.producers.pandoracalo.TrackModuleLabel:             "pandoraTrack"
 physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
 physics.producers.pandoracalo.T0ModuleLabel:                "photont0pandora"
 
