@@ -5,13 +5,16 @@
 
 process_name: Detsim
 
-services: @local::dunefddphase_simulation_services
-services.TFileService: { fileName: "detsim_hist.root" }
-services.TimeTracker:       {}
-services.MemoryTracker:         { } # default is one
-services.RandomNumberGenerator: {} #ART native random number generator
-services.FileCatalogMetadata:  @local::art_file_catalog_mc
-services.NuRandomService:       @local::random_NuRandomService  # seedservice.fcl
+services:
+{
+  TFileService: { fileName: "realistic_noise_hist.root" }
+  TimeTracker:       {}
+  MemoryTracker:         {} # default is one
+  RandomNumberGenerator: {} #ART native random number generator
+  FileCatalogMetadata:   @local::art_file_catalog_mc
+  NuRandomService:       @local::random_NuRandomService  # seedservice.fcl
+                         @table::dunefddphase_simulation_services
+}
 
 services.Geometry: @local::dunedphase10kt_workspace_geo
 
@@ -44,12 +47,22 @@ outputs: {
  }
 }
 
+# DetSim services.
+#services.SimChannelExtractService: @local::scxgeneric
+services.ChannelNoiseService:       @local::chnoiseold
+services.PedestalAdditionService:   @local::padprovided
+services.AdcDistortService:         @local::stuckbits
+#services.AdcSuppressService:       @local::zslegacy
+services.AdcSuppressService:        @local::zsonline
+#services.AdcCompressService:       @local::cmpblock
+services.AdcCompressService:        @local::cmpreplace
+
 # Use fixed values instead of DB for pedestals.
 services.DetPedestalService: @local::dunedp_fixedpeds
 services.DetPedestalService.FixedDetPedestal.PedMeanErrY: 0
 services.DetPedestalService.FixedDetPedestal.PedMeanErrZ: 0
-services.DetPedestalService.FixedDetPedestal.PedMeanY:    5 #from 3x1x1 data
-services.DetPedestalService.FixedDetPedestal.PedMeanZ:    5 #from 3x1x1 data
+services.DetPedestalService.FixedDetPedestal.PedMeanY:    60 #from 3x1x1 data
+services.DetPedestalService.FixedDetPedestal.PedMeanZ:    60 #from 3x1x1 data
 services.DetPedestalService.FixedDetPedestal.PedRmsErrY:  0
 services.DetPedestalService.FixedDetPedestal.PedRmsErrZ:  0
 services.DetPedestalService.FixedDetPedestal.PedRmsY:     0
@@ -61,26 +74,8 @@ physics.producers.daq.PedestalOn:  true
 physics.producers.daq.DistortOn:   false
 physics.producers.daq.SuppressOn:  false #false when noise on
 
-# DetSim services.
-#services.SimChannelExtractService: @local::scxgeneric
-services.ChannelNoiseService:       @local::chnoiseold
-services.PedestalAdditionService:   @local::padprovided
-services.AdcDistortService:         @local::stuckbits
-#services.AdcSuppressService:       @local::zslegacy
-services.AdcSuppressService:        @local::zsonline
-#services.AdcCompressService:       @local::cmpblock
-services.AdcCompressService:        @local::cmpreplace
-
 # Disable bad channels.
 #services.IChannelStatusService.BadChannels: [ ]
-
-#*************************** Signal shaping constants for DUNE *****************
-
-services.SignalShapingServiceDUNEDPhase.ADCpermV:     1
-services.SignalShapingServiceDUNEDPhase.ASICmVperfC:  3.2
-services.SignalShapingServiceDUNEDPhase.AmpENC:       1700
-
-#*************************** Realist noise model *******************************
 
 services.ChannelNoiseService:{
   service_provider: DPhaseRealisticNoiseService
