@@ -1,6 +1,7 @@
 #include "services_dune.fcl"
 #include "caldata_dune.fcl"
 #include "hitfindermodules_dune.fcl"
+#include "SpacePointSolver.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
@@ -54,9 +55,11 @@ physics:
 # actual hit finder
   gaushit:            @local::dunefd_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
-#  cchit:              @local::dunefd_clustercrawlerhit
+# space point solver
+  reco3d:             @local::standard_spacepointsolver
 # actual disambiguation
   hitfd:              @local::dunefd_hitfinderfd
+  hitpdune:           @local::pdune_disambigfromsp
 # event feature labeling
   emtrkmichelid:      @local::protodune_emtrkmichelid
 # reconstruction using disambiguated hits
@@ -89,9 +92,9 @@ physics:
          #TPC wire signals      
          caldata,
          #hit reconstruction
-         gaushit, #cchit, fasthit, 
+         gaushit, #fasthit, 
          #real disambiguation
-         hitfd,
+         hitpdune,
          #cluster reco
          linecluster,
          #feature labeling
@@ -133,7 +136,7 @@ outputs:
 }
 
 ### Here, we overwrite ALL module labels with the ones defined above.
-physics.producers.linecluster.HitFinderModuleLabel:    "hitfd"
+physics.producers.linecluster.HitFinderModuleLabel:    "hitpdune"
 
 physics.producers.pmtrack.HitModuleLabel:                         "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
