@@ -31,8 +31,8 @@ physics: {
  }
  simulate: [ rns, daq ]
  stream1:  [ out1 ]
- trigger_paths: [simulate] 
- end_paths:     [stream1]  
+ trigger_paths: [simulate]
+ end_paths:     [stream1]
 }
 
 outputs: {
@@ -56,23 +56,13 @@ physics.producers.daq.SuppressOn:  true
 
 # DetSim services.
 #services.SimChannelExtractService: @local::scxgeneric
-services.ChannelNoiseService:      @local::chnoiseold
-services.PedestalAdditionService:  @local::padprovided
-services.AdcDistortService:        @local::stuckbits
+services.ChannelNoiseService:       @local::chnoiseold
+services.PedestalAdditionService:   @local::padprovided
+services.AdcDistortService:         @local::stuckbits
 #services.AdcSuppressService:       @local::zslegacy
-services.AdcSuppressService:       @local::zsonline
+services.AdcSuppressService:        @local::zsonline
 #services.AdcCompressService:       @local::cmpblock
-services.AdcCompressService:       @local::cmpreplace
+services.AdcCompressService:        @local::cmpreplace
 
 # Disable bad channels.
 #services.IChannelStatusService.BadChannels: [ ]
-
-
-
-
-
-
-
-
-
-
