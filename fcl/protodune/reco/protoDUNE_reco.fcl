@@ -93,6 +93,8 @@ physics:
          caldata,
          #hit reconstruction
          gaushit, #fasthit, 
+         #space point solver
+         reco3d,
          #real disambiguation
          hitpdune,
          #cluster reco
