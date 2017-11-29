@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
-parent dunetpc v06_54_00
+parent dunetpc v06_57_00
 defaultqual e14
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -45,24 +45,25 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v06_54_00
-artdaq_core	v1_07_11
-duneutil        v06_53_00	-	optional
-lbne_raw_data 	v1_04_16
-dune_pardata	v01_22_00
-genie_xsec      v2_12_6
-genie_phyopt    v2_12_6
-cetbuildtools	v5_14_03	-	only_for_build
+larsoft         v06_57_00
+artdaq_core	v1_07_12
+duneutil        v06_57_00	-	optional
+lbne_raw_data 	v1_04_17
+dune_pardata	v01_23_00
+genie_xsec      v2_12_8
+genie_phyopt    v2_12_8
+cetbuildtools	v5_14_04	-	only_for_build
+caffe           v1_0e           -       optional
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes". 
 # e14  - with gcc 4.9.3 and -std=c++14
-qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt	notes
-e14:debug	e14:debug	e14:debug	nu:e14:s54:debug nu:e14:s54:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau
-e14:opt		e14:opt		e14:opt		nu:e14:s54:opt	 nu:e14:s54:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
-e14:prof	e14:prof	e14:prof	nu:e14:s54:prof	 nu:e14:s54:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau
+qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     caffe     notes
+e14:debug	e14:debug	e14:debug	nu:e14:s56:debug nu:e14:s56:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau       e14:debug
+e14:opt		e14:opt		e14:opt		nu:e14:s56:opt	 nu:e14:s56:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau       e14:prof
+e14:prof	e14:prof	e14:prof	nu:e14:s56:prof	 nu:e14:s56:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau       e14:prof
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
