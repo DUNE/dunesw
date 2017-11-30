@@ -136,8 +136,8 @@ function fetch_files
 
     for file in ${2//,/ }
     do
-        echo "Command: ifdh cp -D $file ./"
-        ifdh cp -D $file ./ > fetch_inputs.log  2>&1
+        echo "Command: ifdh cp -- -D $file ./"
+        ifdh cp -- -D $file ./ > fetch_inputs.log  2>&1
         local copy_exit_code=$?
 
         if [[ $copy_exit_code -ne 0 ]]; then
@@ -181,7 +181,7 @@ function data_production
             until [[ ${expcode_exitcode} -ne 20 || ${counter} -gt 5 ]]; do
                 ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} ${EXTRA_OPTIONS} -o ${OUTPUT_STREAM} --config ${FHiCL_FILE} ${INPUT_FILE}
                 expcode_exitcode=$?
-                if [[ ${expcode_exitcode} -ne 0 && ${expcode_exitcode} -ne 20 ]]; then
+                if [[ ${expcode_exitcode} -eq 20 ]]; then
                     let $((counter++))
                     echo -e "\n\n*** ${EXECUTABLE_NAME} can not access the input file, wait 30 s, then retry #${counter}\n\n"
                     sleep 30
@@ -240,7 +240,7 @@ function generate_data_dump
         until [[ ${expcode_exitcode} -ne 20 || ${counter} -gt 5 ]]; do
             ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl "${reference_file}" 2>&1 | tee ${REF_DUMP_FILE}
             expcode_exitcode=$?
-            if [[ ${expcode_exitcode} -ne 0 && ${expcode_exitcode} -ne 20 ]]; then
+            if [[ ${expcode_exitcode} -eq 20 ]]; then
                 let $((counter++))
                 echo -e "\n\n*** ${EXECUTABLE_NAME} can not access the input file, wait 30 s, then retry #${counter}\n\n"
                 sleep 30
@@ -264,7 +264,7 @@ function generate_data_dump
         until [[ ${expcode_exitcode} -ne 20 || ${counter} -gt 5 ]]; do
             ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} --config eventdump.fcl "${current_file}" 2>&1 | tee "${current_file//.root}".dump
             expcode_exitcode=$?
-            if [[ ${expcode_exitcode} -ne 0 && ${expcode_exitcode} -ne 20 ]]; then
+            if [[ ${expcode_exitcode} -eq 20 ]]; then
                 let $((counter++))
                 echo -e "\n\n*** ${EXECUTABLE_NAME} can not access the input file, wait 30 s, then retry #${counter}\n\n"
                 sleep 30
