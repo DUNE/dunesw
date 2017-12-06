@@ -108,11 +108,8 @@ physics.producers.mvaselectnumu.MVAMethod: "BDTG"
 physics.producers.mvaselectnue.Select:  "nue"
 physics.producers.mvaselectnumu.Select: "numu"
 
-physics.producers.mvaselectnue.WeightFile:   "MVASelect/v2.2/TMVAClassification_BDTG.nue.weights.xml"
-physics.producers.mvaselectnumu.WeightFile:  "MVASelect/v2.2/TMVAClassification_BDTG.numu.weights.xml"
-#physics.producers.mvaselectnue.WeightFile:   "/cvmfs/dune.opensciencegrid.org/products/dune/dune_pardata/v01_24_00/MVASelect/v2.2/TMVAClassification_BDTG.nue.weights.xml"
-#physics.producers.mvaselectnumu.WeightFile:  "/cvmfs/dune.opensciencegrid.org/products/dune/dune_pardata/v01_24_00/MVASelect/v2.2/TMVAClassification_BDTG.numu.weights.xml"
-
+physics.producers.mvaselectnue.WeightFile:   "MVASelect/v2.2/TMVAClassification_BDTG.anue.weights.xml"
+physics.producers.mvaselectnumu.WeightFile:  "MVASelect/v2.2/TMVAClassification_BDTG.anumu.weights.xml"
 
 physics.analyzers.cafmaker.MakeWeightTree:          false
 physics.analyzers.cafmaker.Reweight:                false
