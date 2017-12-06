@@ -136,8 +136,8 @@ function fetch_files
 
     for file in ${2//,/ }
     do
-        echo "Command: ifdh cp -- -D $file ./"
-        ifdh cp -- -D $file ./ > fetch_inputs.log  2>&1
+        echo "Command: ifdh cp -D $file ./"
+        ifdh cp -D $file ./ > fetch_inputs.log  2>&1
         local copy_exit_code=$?
 
         if [[ $copy_exit_code -ne 0 ]]; then
@@ -172,14 +172,14 @@ function data_production
         fi
 
         echo -e "\nNumber of events for ${STAGE_NAME} stage: $NEVENTS\n"
-        echo ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} ${EXTRA_OPTIONS} -o ${OUTPUT_STREAM} --config ${FHiCL_FILE} ${INPUT_FILE}
+        echo ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} ${EXTRA_OPTIONS} ${OUTPUT_STREAM:+-o "$OUTPUT_STREAM"} --config ${FHiCL_FILE} ${INPUT_FILE}
         echo
 
         (
             local counter=0
             local expcode_exitcode=20
             until [[ ${expcode_exitcode} -ne 20 || ${counter} -gt 5 ]]; do
-                ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} ${EXTRA_OPTIONS} -o ${OUTPUT_STREAM} --config ${FHiCL_FILE} ${INPUT_FILE}
+                ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} ${EXTRA_OPTIONS} ${OUTPUT_STREAM:+-o "$OUTPUT_STREAM"} --config ${FHiCL_FILE} ${INPUT_FILE}
                 expcode_exitcode=$?
                 if [[ ${expcode_exitcode} -eq 20 ]]; then
                     let $((counter++))
@@ -304,7 +304,7 @@ function compare_products_names
         if [[ "${STATUS}" -ne 0  ]]; then
             echo "${DIFF}"
             ERRORSTRING="W~Differences in products names~Request new reference files"
-            exitstatus 201
+            exitstatus 201 defer
         else
             echo -e "none\n\n"
         fi
@@ -360,7 +360,14 @@ function exitstatus
         if [[ -n "$ERRORSTRING" ]];then
             echo "`basename $PWD`~${EXITSTATUS}~$ERRORSTRING" >> $WORKSPACE/data_production_stats${ci_cur_exp_name}.log
         fi
-        exit "${EXITSTATUS}"
+        if [ "$2" == "defer" ];then
+            PREVSTATUS=${EXITSTATUS}
+        else
+            exit "${EXITSTATUS}"
+        fi
+    fi
+    if [[ -n "${PREVSTATUS}" && "$2" != "defer" ]]; then
+        exit "${PREVSTATUS}"
     fi
 }
 
@@ -445,6 +452,10 @@ do
     compare_products_names "${check_compare_names}"
 
     compare_products_sizes "${check_compare_size}"
+
+    if [[ -n ${PREVSTATE} ]]; then
+        exit ${PREVSTATE}
+    fi
 
 done
 
