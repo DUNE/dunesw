@@ -105,8 +105,8 @@ physics:
          pandora, #pandora stitcher goes here
          pandoracalo, pandorapid,
          #pmatrack
-         pmtrack, pmtrackcalo, pmtrackpid,
-         pmtrajfit, pmtrajfitcalo, pmtrajfitpid
+         pmtrack, pmtrackcalo, pmtrackpid
+         #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
          #shower reconstruction
          #blurredcluster, emshower, emshower3d, mergeemshower3d
          ]
