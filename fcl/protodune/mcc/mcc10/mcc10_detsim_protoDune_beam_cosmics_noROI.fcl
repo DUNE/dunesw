@@ -53,6 +53,8 @@ outputs:
  }
 }
 
+outputs.out1.outputCommands: ["keep *_*_*_*", "drop *_*_*_SinglesGen", "drop *_*_*_G4"]
+
 # Use fixed values instead of DB for pedestals.
 services.DetPedestalService: @local::dune_fixedpeds
 
