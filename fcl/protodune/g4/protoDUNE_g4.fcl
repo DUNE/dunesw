@@ -17,17 +17,6 @@ services:
 }
 
 services.LArG4Parameters.SkipWireSignalInTPCs: [0,3,4,7,8,11]
-services.LArG4Parameters.EnabledPhysics: [
-         "Em",
-         "FastOptical",
-         "SynchrotronAndGN",
-         "Ion",
-         "Hadron",
-         "Decay",
-         "HadronElastic",
-         "Stopping"
-         # removed "NeutronTrackingCut", so such cosmic neutrons can happen throughout full readout window 
-         ]
 
 #source is now a root file
 source:
