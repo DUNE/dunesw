@@ -1,0 +1,8 @@
+#include "standard_detsim_dune10kt.fcl"
+process_name: Detsim
+services.Geometry: @local::dune10kt_1x2x6_geo
+
+### What value do I want for the Noise Level?
+services.ChannelNoiseService.NoiseNormU:  5.75
+services.ChannelNoiseService.NoiseNormV:  5.75
+services.ChannelNoiseService.NoiseNormZ:  4.5
