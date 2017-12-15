@@ -77,8 +77,8 @@ physics:
   pmtrajfitcalo:      @local::dune10kt_calomc
   pmtrajfitpid:       @local::standard_chi2pid
 # photon detector reconstruction
-  ophit:              @local::dune35t_ophit 
-  opflash:            @local::dune35t_opflash
+  ophit:              @local::protodune_ophit 
+  opflash:            @local::protodune_opflash
   blurredcluster:     @local::dune10kt_blurredcluster
   emshower:           @local::dune10kt_emshower
   emshower3d:         @local::dune10kt_emshower3d
