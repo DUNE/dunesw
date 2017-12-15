@@ -65,8 +65,9 @@ physics:
 # reconstruction using disambiguated hits
   linecluster:        @local::dune35t_linecluster
   calo:               @local::dune35t_calomc
-  pandora:            @local::protodune_pandoracosmic
-# pandora stitching module goes here when it's ready
+  pandora:            @local::protodune_pandora
+  pandoraTrack:       @local::dune_pandoraTrackCreation
+  pandoraShower:      @local::dune_pandoraShowerCreation
   pandoracalo:        @local::dune10kt_calomc
   pandorapid:         @local::standard_chi2pid
   pmtrack:            @local::dunefd_pmalgtrackmaker
@@ -76,8 +77,8 @@ physics:
   pmtrajfitcalo:      @local::dune10kt_calomc
   pmtrajfitpid:       @local::standard_chi2pid
 # photon detector reconstruction
-  ophit:              @local::dune35t_ophit 
-  opflash:            @local::dune35t_opflash
+  ophit:              @local::protodune_ophit 
+  opflash:            @local::protodune_opflash
   blurredcluster:     @local::dune10kt_blurredcluster
   emshower:           @local::dune10kt_emshower
   emshower3d:         @local::dune10kt_emshower3d
@@ -102,7 +103,7 @@ physics:
          #feature labeling
          emtrkmichelid,
          #pandora
-         pandora, #pandora stitcher goes here
+         pandora, pandoraTrack, pandoraShower,
          pandoracalo, pandorapid,
          #pmatrack
          pmtrack, pmtrackcalo, pmtrackpid
@@ -176,14 +177,16 @@ physics.producers.calo.SpacePointModuleLabel:          "costrk"
 #physics.producers.kalmanhit.ClusterModuleLabel:        "fuzzy"
 
 #Pandora configurations
-
 physics.producers.pandora.HitFinderModuleLabel:             "linecluster"
-physics.producers.pandoracalo.TrackModuleLabel:             "pandora"
+physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
+physics.producers.pandoraShower.PFParticleLabel:            "pandora"
+
+physics.producers.pandoracalo.TrackModuleLabel:             "pandoraTrack"
 physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
 physics.producers.pandoracalo.T0ModuleLabel:                ""
 physics.producers.pandoracalo.MakeTree:                     false
 physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
-physics.producers.pandorapid.TrackModuleLabel:              "pandora"
+physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
 
 #Optical detector configuration
 physics.producers.ophit.InputModule:                        "opdigi"

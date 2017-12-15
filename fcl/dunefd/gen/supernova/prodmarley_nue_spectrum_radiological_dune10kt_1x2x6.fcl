@@ -1,0 +1,59 @@
+#include "services_dune.fcl"
+#include "marley_dune.fcl"
+#include "radiological_gen_dune_full.fcl"
+
+process_name: MARLEYGen
+
+services:
+{
+  TFileService:          { fileName: "prodmarley_radiological_hist.root" }
+  TimeTracker:           {}
+  #MemoryTracker:         { ignoreTotal: 1 } # default is one
+  RandomNumberGenerator: {}                 # ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::dunefd_services
+}
+
+source:
+{
+  module_type: EmptyEvent
+  timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
+  maxEvents:   10          # Number of events to create
+  firstRun:    20000047           # Run number to use for this file
+  firstEvent:  1           # number of first event in the file
+}
+
+physics:
+{
+  producers:
+  {
+    marley:      @local::dune_marley_nue_spectrum
+    ar39Gen:     @local::dune10kt_1x2x6_39ar
+    ar42Gen:     @local::dune10kt_1x2x6_42ar
+    apaGen:      @local::dune10kt_1x2x6_APA      #Co60 in APA frame
+    cNeutronGen: @local::dune10kt_1x2x6_fc       #Originally use for K40 in Field Cage. Now repurposed  for Neutrons from concrete.
+    cpaGen:      @local::dune10kt_1x2x6_CPA      #K40 from CPA
+    kr85Gen:     @local::dune10kt_1x2x6_85kr     #Kr in LAr
+    rn222Gen:    @local::dune10kt_1x2x6_222rn    #Rn in LAr
+    po210Gen:    @local::dune10kt_1x2x6_210po
+    rns:       { module_type: "RandomNumberSaver" }
+  }
+ 
+  simulate:      [ rns, marley, ar39Gen, ar42Gen, apaGen, cNeutronGen, cpaGen, kr85Gen, rn222Gen, po210Gen ]
+  stream1:       [ out1 ]
+  trigger_paths: [ simulate ] 
+  end_paths:     [ stream1 ]  
+}
+
+outputs:
+{
+  out1:
+  {
+    module_type: RootOutput
+    fileName:    "prodmarley_radiological_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
+    dataTier:    "generated"
+    compressionLevel: 1
+  }
+}
+
+services.Geometry: @local::dune10kt_1x2x6_geo
