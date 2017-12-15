@@ -351,7 +351,7 @@ physics.producers.emtrkmichelid.Views:                      []
 physics.producers.emshower.ClusterModuleLabel:    "pandora"
 physics.producers.emshower.HitsModuleLabel:       "linecluster"
 physics.producers.emshower.PFParticleModuleLabel: "pandora"
-physics.producers.emshower.TrackModuleLabel:      "pandora"
+physics.producers.emshower.TrackModuleLabel:      "pandoraTrack"
 physics.producers.emshower.CNNEMModuleLabel:      "emtrkmichelid:emtrkmichel"
 physics.producers.emshower.UseCNNtoIDEMPFP:       true
 physics.producers.emshower.UseCNNtoIDEMHit:       false
