@@ -47,12 +47,12 @@ table_fragment_end
 product          version
 larsoft         v06_60_00
 artdaq_core	v1_07_12
-duneutil        v06_59_00	-	optional
+duneutil        v06_60_00	-	optional
 lbne_raw_data 	v1_04_17
 dune_pardata	v01_26_00
 genie_xsec      v2_12_8
 genie_phyopt    v2_12_8
-cetbuildtools	v5_14_04	-	only_for_build
+cetbuildtools	v6_01_00	-	only_for_build
 caffe           v1_0e           -       optional
 end_product_list
 
