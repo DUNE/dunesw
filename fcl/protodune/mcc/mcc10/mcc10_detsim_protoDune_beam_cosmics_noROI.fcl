@@ -1,0 +1,77 @@
+#include "services_dune.fcl"
+#include "detsimmodules_dune.fcl"
+#include "opticaldetectormodules_dune.fcl"
+
+#include "tools_dune.fcl"
+
+process_name: DetsimSuppressOnFalse
+
+services:
+{
+  TFileService: { fileName: "detsim_suppressionoff_hist.root" }
+  TimeTracker:       {}
+  MemoryTracker:     { }
+  RandomNumberGenerator: {} #ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+  @table::protodune_simulation_services
+}
+
+source:
+{
+  module_type: RootInput
+  maxEvents: 30000
+  fileNames: ["g4single_protoDUNE.root"]
+}
+
+physics:
+{
+
+ producers:
+ {
+   daq:            @local::dune_detsim
+   opdigi:         @local::dune35t_opdigi # the configuration from 35t experiment. 						  # When ready it will be replaced with DUNE conf.  						  
+   rns:            { module_type: "RandomNumberSaver" }
+ }
+ 
+ simulate: [ rns, daq, opdigi]
+ 
+ stream1:  [ out1 ]
+
+ trigger_paths: [simulate] 
+
+ end_paths:     [stream1]  
+}
+
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_detsim.root"
+   dataTier:    "detector-simulated"
+   compressionLevel: 1
+ }
+}
+
+outputs.out1.outputCommands: ["keep *_*_*_*", "drop *_*_*_SinglesGen", "drop *_*_*_G4"]
+
+# Use fixed values instead of DB for pedestals.
+services.DetPedestalService: @local::dune_fixedpeds
+
+# DetSim flags.
+physics.producers.daq.NoiseOn:     true
+physics.producers.daq.PedestalOn:  true
+physics.producers.daq.DistortOn:   false
+physics.producers.daq.SuppressOn:  false
+
+# DetSim services.
+services.SimChannelExtractService: @local::scxgeneric
+services.ChannelNoiseService:      @local::chnoiseold
+services.PedestalAdditionService:  @local::padprovided
+services.AdcDistortService:        @local::stuckbits
+services.AdcSuppressService:       @local::zslegacy
+services.AdcCompressService:       @local::cmpblock
+
+# Disable bad channels.
+#services.IChannelStatusService.BadChannels: [ ]
+
