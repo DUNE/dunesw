@@ -8,7 +8,7 @@ process_name: Mergeana
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "anatree.root" }
+  TFileService: { fileName: "ana_hist.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {}
   MemoryTracker:         { } # default is one
