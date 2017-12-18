@@ -2,7 +2,7 @@
 
 process_name: Reco1
 
-physics.reco: [ ophit, opflash, caldata, fasthit, gaushit, hitfd ]
+physics.reco: [ ophit, opflash, caldata, gaushit, hitfd ]
 outputs.out1.fileName: "%ifb_reco1.root"
 outputs.out1.dataTier: "hit-reconstructed"
 source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco1" ]

@@ -51,7 +51,7 @@ physics:
   caldata:            @local::producer_adcprep
 # actual hit finder
   gaushit:            @local::dunefd_gaushitfinder
-  fasthit:            @local::dunefd_fasthitfinder
+  #fasthit:            @local::dunefd_fasthitfinder
 #  cchit:              @local::dunefd_clustercrawlerhit
 # disambiguation cheater that removes duplicate hits
   dcheat:             @local::dunefd_disambigcheat
