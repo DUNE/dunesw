@@ -21,7 +21,7 @@ physics.reco: [ rns
                 #, dbcluster
                 #, linecluster, lineclusterch
                 #pandora
-                #, pandora, particlestitcher
+                #, pandora
                 #, photont0pandora, pandoracalo
                 #pmatrack
                 #, pmtrack, pmtrackch
