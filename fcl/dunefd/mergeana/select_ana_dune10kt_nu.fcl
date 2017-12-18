@@ -4,12 +4,12 @@
 #include "CVNMapper.fcl"
 #include "CVNEvaluator.fcl"
 
-process_name: Mergeana
+process_name: Cafana
 
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "caf.root" }
+  TFileService: { fileName: "caf_hist.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {}
   MemoryTracker:         { } # default is one
@@ -100,3 +100,11 @@ physics.producers.cvnmap.HitsModuleLabel: "hitfd"
 physics.producers.cvnmap.TimeResolution: 1600
 physics.producers.cvnmap.PlaneLength: 500
 physics.producers.cvnmap.TdcWidth: 500
+
+dune_tfile_metadata:
+{
+  JSONFileName:          "caf_hist.root.json"
+  GenerateTFileMetadata: true
+  dataTier:              "root-tuple"
+  fileFormat:            "root"
+}
