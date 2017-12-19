@@ -19,7 +19,7 @@ physics.reco: [ rns,
                 #3D reco with cheated disambiguation
                 #costrkdc, mctrutht0dc, photont0costrkdc, calodc, 
                 #pandora with cheated disambiguation
-                #pandoradc, particlestitcherdc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
+                #pandoradc, mctrutht0pandoradc, photont0pandoradc, pandoracalodc,
                 #pmatrack with cheated disambiguation
                 #pmtrackdc, mctrutht0pmtrackdc, photont0pmtrackdc, pmtrackcalodc,
                 #pmtrajfitdc, mctrutht0pmtrajfitdc, photont0pmtrajfitdc, pmtrajfitcalodc,
@@ -32,7 +32,7 @@ physics.reco: [ rns,
                 #3D reco
                 #costrk,  mctrutht0, photont0costrk, calo,
                 #pandora
-                #pandora, particlestitcher, mctrutht0pandora, photont0pandora, pandoracalo,
+                #pandora, mctrutht0pandora, photont0pandora, pandoracalo,
                 #pmatrack
                 #pmtrack, mctrutht0pmtrack, photont0pmtrack, pmtrackcalo,
                 #pmtrajfit, mctrutht0pmtrajfit, photont0pmtrajfit, pmtrajfitcalo,

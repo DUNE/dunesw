@@ -12,7 +12,7 @@ services:
   MemoryTracker:         { } # default is one
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::dunefddphase_simulation_services
+  @table::protodunedphase_simulation_services
 }
 
 #source is now a root file
@@ -70,15 +70,4 @@ services.LArG4Parameters.MinNumberOfElCluster: 20
 
 #PhotonVisibilityService in photoproservices_dune.fcl. Has to be adapted to protodunedp?
 services.PhotonVisibilityService: @local::dune10kt_workspace_photonvisibilityservice
-services.LArG4Parameters.UseCustomPhysics: true
-services.LArG4Parameters.EnabledPhysics: [ "Em",
-                                           "FastOptical",
-                                           "SynchrotronAndGN",
-                                           "Ion",
-                                           "Hadron",
-                                           "Decay",
-                                           "HadronElastic",
-                                           "Stopping",
-                                           "NeutronTrackingCut" ]
-
 

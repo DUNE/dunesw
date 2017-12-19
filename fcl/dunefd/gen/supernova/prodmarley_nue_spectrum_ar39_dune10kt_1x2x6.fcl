@@ -33,14 +33,14 @@ physics:
  
   producers:
   {
-    generator: @local::dune_marley_nue_spectrum
+    marley:    @local::dune_marley_nue_spectrum
     radiogen:  @local::dunefd_1x2x6_ar39
     rns:       { module_type: "RandomNumberSaver" }
   }
  
   # Define the producer and filter modules for this path, order matters, 
   # filters reject all following items. See lines starting physics.producers below
-  simulate:      [ rns, generator, radiogen ]
+  simulate:      [ rns, marley, radiogen ]
   
   # Define the output stream, there could be more than one if using filters 
   stream1:       [ out1 ]

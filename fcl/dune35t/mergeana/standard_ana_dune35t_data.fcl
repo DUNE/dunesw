@@ -75,21 +75,21 @@ outputs:
 physics.analyzers.pandoradcmonitoring.UseDaughterPFParticles:  true
 physics.analyzers.pandoradcmonitoring.HitFinderModule: "dcheat"
 physics.analyzers.pandoradcmonitoring.SpacePointModule: "pandoradc"
-physics.analyzers.pandoradcmonitoring.PFParticleModule: "particlestitcherdc"
-physics.analyzers.pandoradcmonitoring.TrackModule: "particlestitcherdc"
+physics.analyzers.pandoradcmonitoring.PFParticleModule: "pandoraTrackdc"
+physics.analyzers.pandoradcmonitoring.TrackModule: "pandoraTrackdc"
 physics.analyzers.pandoranadc.SpacePointModule: "pandoradc"
-physics.analyzers.pandoranadc.PFParticleModule: "particlestitcherdc"
-physics.analyzers.pandoranadc.TrackModule: "particlestitcherdc"
+physics.analyzers.pandoranadc.PFParticleModule: "pandoraTrackdc"
+physics.analyzers.pandoranadc.TrackModule: "pandoraTrackdc"
 
 ### Configure the Pandora Analyzer modules
 physics.analyzers.pandoramonitoring.UseDaughterPFParticles:  true
 physics.analyzers.pandoramonitoring.HitFinderModule: "hit35t"
 physics.analyzers.pandoramonitoring.SpacePointModule: "pandora"
-physics.analyzers.pandoramonitoring.PFParticleModule: "particlestitcher"
-physics.analyzers.pandoramonitoring.TrackModule: "particlestitcher"
+physics.analyzers.pandoramonitoring.PFParticleModule: "pandoraTrack"
+physics.analyzers.pandoramonitoring.TrackModule: "pandoraTrack"
 physics.analyzers.pandorana.SpacePointModule: "pandora"
-physics.analyzers.pandorana.PFParticleModule: "particlestitcher"
-physics.analyzers.pandorana.TrackModule: "particlestitcher"
+physics.analyzers.pandorana.PFParticleModule: "pandoraTrack"
+physics.analyzers.pandorana.TrackModule: "pandoraTrack"
 
 physics.analyzers.analysistree.HitsModuleLabel:          "linecluster"
 physics.analyzers.analysistree.TrackModuleLabel:         ["pmtrack"]

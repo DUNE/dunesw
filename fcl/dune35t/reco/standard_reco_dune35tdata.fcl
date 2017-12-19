@@ -70,7 +70,6 @@ physics:
 #  stitch:             @local::dune35t_trackstitcher
   calo:               @local::dune35t_calomc
   pandora:            @local::dune35t_pandora
-  particlestitcher:   @local::dune35t_particlestitcher
   pandoracalo:        @local::dune35t_calomc
   pmtrack:             @local::dune35t_pmalgtrackmaker
   pmtrackcalo:         @local::dune35t_calomc
@@ -117,7 +116,7 @@ physics:
          #, dbcluster
 	 , linecluster, lineclusterch
          #pandora
-         #, pandora, particlestitcher
+         #, pandora
          #, photont0pandora, pandoracalo
          #pmatrack
          , pmtrack, pmtrackch
@@ -189,14 +188,11 @@ physics.producers.calo.T0ModuleLabel:                "photont0costrk"
 
 #Pandora configurations
 physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
-physics.producers.particlestitcher.PFParticleModuleLabel:   "pandora"
-physics.producers.particlestitcher.TrackModuleLabel:        "pandora"
-physics.producers.particlestitcher.UseXCoordinate:          false
-physics.producers.photont0pandora.TrackModuleLabel:         "particlestitcher"
+physics.producers.photont0pandora.TrackModuleLabel:         "pandoraTrack"
 physics.producers.photont0pandora.HitsModuleLabel:          "hit35t"
 physics.producers.photont0pandora.ShowerModuleLabel:        ""
 physics.producers.photont0pandora.TruthT0ModuleLabel:       "mctrutht0pandora"
-physics.producers.pandoracalo.TrackModuleLabel:             "particlestitcher"
+physics.producers.pandoracalo.TrackModuleLabel:             "pandoraTrack"
 physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
 physics.producers.pandoracalo.T0ModuleLabel:                "photont0pandora"
 
