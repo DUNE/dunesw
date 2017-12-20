@@ -126,6 +126,7 @@ physics:
          #TPC wire signals      
          caldata,
          #hit reco 
+         fasthit,
          gaushit, 
          #disambiguation
          hitfd,

@@ -6,9 +6,5 @@ physics.producers.costrkdc.ClusterModuleLabel:         "lineclusterdc"
 physics.producers.dbcluster.HitsModuleLabel:           "hit35tcc"
 physics.producers.costrk.ClusterModuleLabel:           "linecluster"
 
-#Pandora configurations
-physics.producers.pandoradc.HitFinderModuleLabel:           "dcheatcc"
-physics.producers.pandora.HitFinderModuleLabel:             "linecluster"
-
 physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
 physics.producers.lineclusterdc.ClusterCrawlerAlg.TimeDelta:    [2,3,3]
