@@ -54,16 +54,17 @@ genie_xsec      v2_12_8
 genie_phyopt    v2_12_8
 cetbuildtools	v6_01_00	-	only_for_build
 caffe           v1_0e           -       optional
+dune_raw_data   v1_09_00        -       optional
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes". 
 # e14  - with gcc 4.9.3 and -std=c++14
-qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     caffe     notes
-e14:debug	e14:debug	e14:debug	nu:e14:s56:debug nu:e14:s56:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau       e14:debug
-e14:opt		e14:opt		e14:opt		nu:e14:s56:opt	 nu:e14:s56:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau       e14:prof
-e14:prof	e14:prof	e14:prof	nu:e14:s56:prof	 nu:e14:s56:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau       e14:prof
+qualifier	larsoft		duneutil	artdaq_core	lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     caffe      dune_raw_data        notes
+e14:debug	e14:debug	e14:debug	nu:e14:s56:debug nu:e14:s56:debug	-nq-    DefaultPlusMECWithNC    dkcharmtau       e14:debug  e14:nu:debug:s56
+e14:opt		e14:opt		e14:opt		nu:e14:s56:opt	 nu:e14:s56:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau       e14:prof   e14:nu:prof:s56
+e14:prof	e14:prof	e14:prof	nu:e14:s56:prof	 nu:e14:s56:prof	-nq-    DefaultPlusMECWithNC    dkcharmtau       e14:prof   e14:nu:prof:s56
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
