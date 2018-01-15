@@ -3,6 +3,7 @@
 #include "CAFMaker.fcl"
 #include "CVNMapper.fcl"
 #include "CVNEvaluator.fcl"
+#include "energyreco.fcl"
 
 process_name: Cafana
 
@@ -31,8 +32,10 @@ physics:
 {
 
  producers:{
-   mvaselectnue:  @local::dunefd_mvaselect
-   mvaselectnumu: @local::dunefd_mvaselect
+   mvaselectnue:   @local::dunefd_mvaselect
+   mvaselectnumu:  @local::dunefd_mvaselect
+   energyreconue:  @local::dunefd_nuenergyreco
+   energyreconumu: @local::dunefd_nuenergyreco
    cvnmap: @local::standard_cvnmapper
    cvneval: @local::standard_cvnevaluator
 
@@ -48,7 +51,7 @@ physics:
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- prod: [mvaselectnue, mvaselectnumu, cvnmap, cvneval]
+ prod: [mvaselectnue, energyreconue, mvaselectnumu, energyreconumu, cvnmap, cvneval]
  caf:  [ cafmaker]
  trigger_paths: [prod] 
 
@@ -80,6 +83,10 @@ physics.producers.mvaselectnumu.MVAMethod: "BDTG"
 
 physics.producers.mvaselectnue.Select:  "nue"
 physics.producers.mvaselectnumu.Select: "numu"
+
+# 1 = longest reco track + hadronic, 2 = reco shower with highest charge + hadronic, 3 = all hit charges
+physics.producers.energyreconue.RecoMethod:   2
+physics.producers.energyreconumu.RecoMethod:  1
 
 physics.producers.mvaselectnue.WeightFile:   "MVASelect/v2.2/TMVAClassification_BDTG.nue.weights.xml"
 physics.producers.mvaselectnumu.WeightFile:  "MVASelect/v2.2/TMVAClassification_BDTG.numu.weights.xml"
