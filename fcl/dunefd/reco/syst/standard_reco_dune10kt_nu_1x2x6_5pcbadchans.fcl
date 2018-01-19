@@ -1,0 +1,4 @@
+#include "RandomChannelStatusService.fcl"
+#include "standard_reco_dune10kt_1x2x6.fcl"
+process_name: Reco
+services.ChannelStatusService: @local::randomchannelservice_5pc
