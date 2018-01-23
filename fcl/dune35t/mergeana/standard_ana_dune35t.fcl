@@ -2,7 +2,6 @@
 #include "photpropservices_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
 #include "AnalysisTree.fcl"
-#include "pandoramodules_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "disambigcheck.fcl"
 
@@ -35,10 +34,6 @@ physics:
 {
  pmtresponse:       @local::dune35t_simphotoncounter
  analysistree:      @local::dune35t_analysistree
- pandorana:         {module_type: PFParticleAnalysis}
- pandoramonitoring: {module_type: PFParticleMonitoring}
- pandoranadc:         {module_type: PFParticleAnalysis}
- pandoradcmonitoring: {module_type: PFParticleMonitoring}
  disambigcheck:  @local::standard_disambigcheck
 
 }
@@ -71,25 +66,4 @@ outputs:
 }
 
 ### Here, we overwrite ALL module Labels with the ones defined above.
-
-### Configure the Pandora Analyzer modules
-physics.analyzers.pandoradcmonitoring.UseDaughterPFParticles:  true
-physics.analyzers.pandoradcmonitoring.HitFinderModule: "dcheat"
-physics.analyzers.pandoradcmonitoring.SpacePointModule: "pandoradc"
-physics.analyzers.pandoradcmonitoring.PFParticleModule: "particlestitcherdc"
-physics.analyzers.pandoradcmonitoring.TrackModule: "particlestitcherdc"
-physics.analyzers.pandoranadc.SpacePointModule: "pandoradc"
-physics.analyzers.pandoranadc.PFParticleModule: "particlestitcherdc"
-physics.analyzers.pandoranadc.TrackModule: "particlestitcherdc"
-
-### Configure the Pandora Analyzer modules
-physics.analyzers.pandoramonitoring.UseDaughterPFParticles:  true
-physics.analyzers.pandoramonitoring.HitFinderModule: "hit35t"
-physics.analyzers.pandoramonitoring.SpacePointModule: "pandora"
-physics.analyzers.pandoramonitoring.PFParticleModule: "particlestitcher"
-physics.analyzers.pandoramonitoring.TrackModule: "particlestitcher"
-physics.analyzers.pandorana.SpacePointModule: "pandora"
-physics.analyzers.pandorana.PFParticleModule: "particlestitcher"
-physics.analyzers.pandorana.TrackModule: "particlestitcher"
-
 

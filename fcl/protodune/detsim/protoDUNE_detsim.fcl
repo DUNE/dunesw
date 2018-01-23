@@ -29,7 +29,7 @@ physics:
  producers:
  {
    daq:            @local::dune_detsim
-   opdigi:         @local::dune35t_opdigi
+   opdigi:         @local::protodune_opdigi
    rns:            { module_type: "RandomNumberSaver" }
  }
  

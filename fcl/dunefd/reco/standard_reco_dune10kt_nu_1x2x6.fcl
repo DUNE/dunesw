@@ -9,3 +9,8 @@ physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
 physics.producers.pmtrack.PMAlgTracking.AutoFlip_dQdx:  false
 physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:     true
 physics.producers.pmtrackdc.PMAlgTracking.AutoFlip_dQdx:  false
+physics.producers.pandoracalo.Flip_dQdx: false
+physics.producers.pmtrackcalo.Flip_dQdx: false
+physics.producers.pmtrajfitcalo.Flip_dQdx: false
+physics.producers.pmtracktccalo.Flip_dQdx: false
+physics.producers.pmtrajfittccalo.Flip_dQdx: false
