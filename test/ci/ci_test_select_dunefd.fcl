@@ -1,0 +1,9 @@
+#include "select_ana_dune10kt_nu.fcl"
+
+services.NuRandomService.policy: "preDefinedSeed"
+services.NuRandomService.baseSeed: 1234
+
+#services.RandomNumberGenerator.restoreFrom: "SelectRandomSeeds_Ref_dunefd.dat"
+#services.RandomNumberGenerator.saveTo: "SelectRandomSeeds.dat"
+
+#outputs.out1.fastCloning: false
