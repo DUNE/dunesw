@@ -1,0 +1,39 @@
+#include "standard_reco_dune10kt.fcl"
+
+process_name: Reco
+services.Geometry: @local::dune10kt_1x2x6_geo
+
+physics.producers.fasthit10: @local::dunefd_fasthitfinder
+physics.producers.fasthit15: @local::dunefd_fasthitfinder
+physics.producers.fasthit20: @local::dunefd_fasthitfinder
+physics.producers.fasthit25: @local::dunefd_fasthitfinder
+physics.producers.fasthit30: @local::dunefd_fasthitfinder
+
+physics.reco: [ rns, ophit, opflash, caldata,
+                fasthit10,
+		fasthit15,
+		fasthit20,
+		fasthit25,
+                fasthit30,
+                gaushit, hitfd ]
+
+
+### Gaus hit threshold
+#physics.producers.gaushit.MinSig:    [ 6, 6, 6 ]
+
+### Fast hit thresholds
+
+physics.producers.fasthit10.MinSigCol: 10
+physics.producers.fasthit10.MinSigInd: 10
+
+physics.producers.fasthit15.MinSigCol: 15
+physics.producers.fasthit15.MinSigInd: 15
+
+physics.producers.fasthit20.MinSigCol: 20
+physics.producers.fasthit20.MinSigInd: 20
+
+physics.producers.fasthit25.MinSigCol: 25
+physics.producers.fasthit25.MinSigInd: 25
+
+physics.producers.fasthit30.MinSigCol: 30
+physics.producers.fasthit30.MinSigInd: 30

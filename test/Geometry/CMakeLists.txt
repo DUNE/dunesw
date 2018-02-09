@@ -67,6 +67,7 @@ simple_plugin ( GeometryTest35 "module"
                      ${FHICLCPP}
                      cetlib cetlib_except
                      ${ROOT_BASIC_LIB_LIST}
+		     ${ROOT_GEOM}
 
                BASENAME_ONLY
           )

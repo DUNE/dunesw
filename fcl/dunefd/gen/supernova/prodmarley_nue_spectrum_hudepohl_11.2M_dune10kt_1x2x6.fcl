@@ -6,7 +6,7 @@ process_name: MARLEYGen
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService:          { fileName: "prodmarley_nue_hist.root" }
+  TFileService:          { fileName: "prodmarley_integrated-hudepohl-shen-cooling-s11.2co_hist.root" }
   TimeTracker:           {}
   MemoryTracker:         { } # default is one
   RandomNumberGenerator: {}                 # ART native random number generator
@@ -33,7 +33,7 @@ physics:
   producers:
   {
     marley: @local::dune_marley_nue_spectrum
-    rns:    { module_type: "RandomNumberSaver" }
+    rns:       { module_type: "RandomNumberSaver" }
   }
  
   # Define the producer and filter modules for this path, order matters, 
@@ -60,10 +60,13 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "prodmarley_nue_spectrum_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
+    fileName:    "prodmarley_integrated-hudepohl-shen-cooling-s11.2co_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
     dataTier:    "generated"
     compressionLevel: 1
   }
 }
 
 services.Geometry: @local::dune10kt_1x2x6_geo
+physics.producers.marley.marley_parameters.source.type: "th1"
+physics.producers.marley.marley_parameters.source.tfile: "integrated_hudepohl_cooling_shen_s11.2co.root"
+physics.producers.marley.marley_parameters.source.namecycle: "hudepohl_cooling_shen_s11_2co"

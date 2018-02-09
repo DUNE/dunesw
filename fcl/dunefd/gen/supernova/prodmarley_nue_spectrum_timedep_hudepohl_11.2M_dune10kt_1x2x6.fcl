@@ -6,7 +6,7 @@ process_name: MARLEYGen
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService:          { fileName: "prodmarley_nue_hist.root" }
+  TFileService:          { fileName: "prodmarley_integrated-hudepohl-shen-cooling-s11.2co_hist.root" }
   TimeTracker:           {}
   MemoryTracker:         { } # default is one
   RandomNumberGenerator: {}                 # ART native random number generator
@@ -32,8 +32,28 @@ physics:
  
   producers:
   {
-    marley: @local::dune_marley_nue_spectrum
-    rns:    { module_type: "RandomNumberSaver" }
+    marley:   { @table::standard_marley
+                 module_type: "MARLEYTimeGen"
+                 
+                 # Sample neutrino arrival times and energies directly from the
+                 # histogram (after reweighting by the reaction cross section).
+                 # If you'd like to perform biased sampling, you may also choose
+                 # "uniform time" or "uniform energy" for the sampling mode.
+                 sampling_mode: "histogram"
+                 
+                 # File containing fit parameters that describe the incident
+                 # (i.e., not cross-section-weighted) supernova neutrino flux
+                 spectrum_file: "SupernovaModels/Huedepohl-Cooling-Shen-s11.2co_parameters.dat"
+                 
+                 spectrum_file_format: "fit"
+                 pinching_parameter_type: "alpha"
+                 fit_Emin: 0.   # MeV
+                 fit_Emax: 100. # MeV
+                 
+                 # The number of neutrino vertices that should be produced by MARLEY in each art::Event
+                 nu_per_event: 1
+               }
+    rns:       { module_type: "RandomNumberSaver" }
   }
  
   # Define the producer and filter modules for this path, order matters, 
@@ -60,7 +80,7 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "prodmarley_nue_spectrum_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
+    fileName:    "prodmarley_integrated-hudepohl-shen-cooling-s11.2co_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
     dataTier:    "generated"
     compressionLevel: 1
   }

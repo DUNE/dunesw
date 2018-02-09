@@ -20,7 +20,7 @@ services:
 }
 #services.PhotonVisibilityService:      @local::protodune_photonvisibilityservice
 #source is now a root file
-services.BackTrackerService: @local::dunefd_backtrackerservice
+#services.BackTrackerService: @local::dunefd_backtrackerservice
 source:
 {
   module_type: RootInput
@@ -66,4 +66,5 @@ outputs:
 }
 
 ### Here, we overwrite ALL module Labels with the ones defined above.
-
+physics.analyzers.analysistree.HitsModuleLabel:     "linecluster"
+physics.analyzers.analysistree.ClusterModuleLabel:  "linecluster"

@@ -1,0 +1,7 @@
+#include "select_ana_dune10kt_nu.fcl"
+
+process_name: Cafana
+
+
+physics.producers.mvaselectnue.WeightFile:   "MVASelect/v2.2/TMVAClassification_BDTG.anue.weights.xml"
+physics.producers.mvaselectnumu.WeightFile:  "MVASelect/v2.2/TMVAClassification_BDTG.anumu.weights.xml"

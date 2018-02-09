@@ -2,13 +2,14 @@
 #include "AnalysisTree.fcl"
 #include "trackfindermodules.fcl"
 #include "showerfindermodules.fcl"
+#include "checkrecoenergy.fcl"
 
 process_name: Mergeana
 
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "anatree.root" }
+  TFileService: { fileName: "ana_hist.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {}
   MemoryTracker:         { } # default is one
@@ -40,13 +41,14 @@ physics:
  pandorashweff:     @local::standard_neutrinoshowereff
  emshowershweff:    @local::standard_neutrinoshowereff
  trajclustershweff: @local::standard_neutrinoshowereff
+ runcheckereco:     @local::dunefd_checkrecoenergy
 }
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- ana:  [ analysistree, pmtrackeff, pmtracktceff, pandoraeff, pmtrajfiteff, pmtrajfittceff, pandorashweff, emshowershweff, trajclustershweff ]
+ ana:  [ analysistree, pmtrackeff, pmtracktceff, pandoraeff, pmtrajfiteff, pmtrajfittceff, pandorashweff, emshowershweff, trajclustershweff, runcheckereco ]
 
  #end_paths is a keyword and contains the paths that do not modify the art::Event, 
  #ie analyzers and output streams.  these all run simultaneously
@@ -71,12 +73,12 @@ outputs:
 ### Here, we overwrite ALL module Labels with the ones defined above.
 physics.analyzers.pmtrackeff.TrackModuleLabel:       "pmtrack"
 physics.analyzers.pmtracktceff.TrackModuleLabel:     "pmtracktc"
-physics.analyzers.pandoraeff.TrackModuleLabel:       "pandora"
+physics.analyzers.pandoraeff.TrackModuleLabel:       "pandoraTrack"
 physics.analyzers.pmtrajfiteff.TrackModuleLabel:     "pmtrajfit"
 physics.analyzers.pmtrajfittceff.TrackModuleLabel:   "pmtrajfittc"
 
 physics.analyzers.pandorashweff.HitModuleLabel:      "linecluster"
-physics.analyzers.pandorashweff.ShowerModuleLabel:   "pandora"
+physics.analyzers.pandorashweff.ShowerModuleLabel:   "pandoraShower"
 
 physics.analyzers.emshowershweff.HitModuleLabel:     "linecluster"
 physics.analyzers.emshowershweff.ShowerModuleLabel:  "emshower"

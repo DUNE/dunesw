@@ -27,7 +27,7 @@ IF (NOT CETBUILDTOOLS_VERSION)
     MESSAGE (FATAL_ERROR "ERROR: setup cetbuildtools to get the cmake modules")
 ENDIF()
 
-set(CMAKE_MODULE_PATH $ENV{CANVAS_DIR}/Modules
+set(CMAKE_MODULE_PATH $ENV{CANVAS_ROOT_IO_DIR}/Modules
 		      $ENV{CETBUILDTOOLS_DIR}/Modules
 		      ${CMAKE_MODULE_PATH})
 
@@ -61,6 +61,8 @@ find_ups_product( messagefacility v1_10_00 )
 find_ups_product( cetbuildtools v3_10_00 )
 find_ups_product( postgresql v9_1_5 )
 find_ups_product( lbne_raw_data v0_00_02 )
+find_ups_product( dune_raw_data v1_10_00 )
+find_ups_product( dunepdsprce v0_0_3 )
 find_ups_product( artdaq_core v01_03_6 )
 find_ups_product( ifdh_art )
 if(DEFINED ENV{CAFFE_LIB} )
