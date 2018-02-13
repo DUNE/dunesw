@@ -1,4 +1,4 @@
-# This @product_deps@ file defines dependencies for this package. 
+# This @product_deps@ file defines dependencies for this package.
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
@@ -9,7 +9,7 @@ defaultqual e15
 # be used only if your product does not conform to the defaults.
 # Format: directory_type directory_path directory_name
 #   where directory_type is one of incdir, libdir, or bindir
-#   where directory_path is one of product_dir, fq_dir and - 
+#   where directory_path is one of product_dir, fq_dir and -
 # Defaults:
 # incdir  product_dir  include
 # fcldir  product_dir  fcl
@@ -20,7 +20,7 @@ fcldir  product_dir job
 gdmldir product_dir gdml
 fwdir  product_dir config_data
 
-# table fragment to set FW_SEARCH_PATH needed 
+# table fragment to set FW_SEARCH_PATH needed
 # to find gdml files:
 table_fragment_begin
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/scripts)
@@ -59,12 +59,12 @@ end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
-# Make a table by adding columns before "notes". 
+# Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	        dune_pardata    genie_xsec              genie_phyopt     caffe          dune_raw_data	        notes
-e15:debug	e15:debug	e15:debug	nu:e15:s62:debug nu:e15:s62:debug	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:debug  	nu:e15:s62:debug	
-e15:opt		e15:opt		e15:opt		nu:e15:s62:opt	 nu:e15:s62:prof	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:prof   	nu:e15:s62:prof	
-e15:prof	e15:prof	e15:prof	nu:e15:s62:prof	 nu:e15:s62:prof	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:prof   	nu:e15:s62:prof	
+e15:debug	e15:debug	e15:debug	nu:e15:s62:debug nu:e15:s62:debug	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:debug  	nu:e15:s62:debug
+e15:opt		e15:opt		e15:opt		nu:e15:s62:opt	 nu:e15:s62:prof	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:prof   	nu:e15:s62:prof
+e15:prof	e15:prof	e15:prof	nu:e15:s62:prof	 nu:e15:s62:prof	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:prof   	nu:e15:s62:prof
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
@@ -72,4 +72,3 @@ end_qualifier_list
 ### Local Variables:
 ### tab-width: 8
 ### End:
-
