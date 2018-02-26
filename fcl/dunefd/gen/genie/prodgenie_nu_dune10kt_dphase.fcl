@@ -11,6 +11,7 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
   @table::dunefddphase_simulation_services
+  IFDH: {}
 }
 services.Geometry: @local::dunedphase10kt_workspace_geo
 #Start each new event with an empty event.
