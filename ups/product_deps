@@ -2,7 +2,7 @@
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
-parent dunetpc v06_69_01
+parent dunetpc v06_70_00
 defaultqual e15
 
 # These optional lines define where headers, libraries, and executables go and should
@@ -45,26 +45,26 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v06_69_01
-artdaq_core	v3_00_08
-duneutil        v06_69_01	-	optional
-lbne_raw_data 	v1_04_19
-dune_pardata	v01_27_00
+larsoft         v06_70_00
+artdaq_core	v3_01_06
+duneutil        v06_70_00	-	optional
+lbne_raw_data 	v1_04_20
+dune_pardata	v01_28_00
 genie_xsec      v2_12_8
 genie_phyopt    v2_12_8
 cetbuildtools	v7_00_03	-	only_for_build
-caffe           v1_0g           -       optional
-dune_raw_data   v1_14_00
+dune_raw_data   v1_15_00
+caffe           v1_0h           -       optional
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
-qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	        dune_pardata    genie_xsec              genie_phyopt     caffe          dune_raw_data	        notes
-e15:debug	e15:debug	e15:debug	nu:e15:s62:debug nu:e15:s62:debug	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:debug  	nu:e15:s62:debug
-e15:opt		e15:opt		e15:opt		nu:e15:s62:opt	 nu:e15:s62:prof	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:prof   	nu:e15:s62:prof
-e15:prof	e15:prof	e15:prof	nu:e15:s62:prof	 nu:e15:s62:prof	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:prof   	nu:e15:s62:prof
+qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     caffe          dune_raw_data	        notes
+e15:debug	e15:debug	e15:debug	e15:s65:debug    e15:nu:s65:debug	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:debug  	e15:nu:s65:debug
+e15:opt		e15:opt		e15:opt		e15:s65:opt	 e15:nu:s65:prof	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:prof   	e15:nu:s65:prof
+e15:prof	e15:prof	e15:prof	e15:s65:prof	 e15:nu:s65:prof	-nq-            DefaultPlusMECWithNC    dkcharmtau       e15:prof   	e15:nu:s65:prof
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
