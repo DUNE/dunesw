@@ -147,7 +147,7 @@ services.AdcCompressService:             @local::cmpreplace
 
 services.ChannelNoiseService:{
 service_provider: DPhaseRealisticNoiseService
-NoiseModel:    "$MRB_SOURCE/dunetpc/dune/DetSim/NoiseModels/729-0_fft_mirror.root"    #path to the noise model root file
+NoiseModel:    "729-0_fft_mirror.root"    #path to the noise model root file
 RandomizeX:    15. #0.002
 RandomizeY:    15. #0.002
 Smooth:        1000
