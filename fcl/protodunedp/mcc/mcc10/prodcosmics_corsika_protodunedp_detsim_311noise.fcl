@@ -10,10 +10,8 @@ services.TFileService: { fileName: "cosmics_corsika_rotation_hist.root" }
 services.TimeTracker:  {}
 services.MemoryTracker:         {} # default is one
 services.RandomNumberGenerator: {} #ART native random number generator
-#               @table::dunefddphase_simulation_services
 services.FileCatalogMetadata:  @local::art_file_catalog_mc
 services.NuRandomService:       @local::random_NuRandomService  # seedservice.fcl
-
 services.Geometry: @local::protodunedphase_geo
 services.DetectorPropertiesService: @local::protodunedphase_detproperties
 
@@ -81,7 +79,6 @@ physics.producers.daq.SuppressOn:        false #false when noise on!
 physics.producers.daq.KeepEmptyChannels: true
 
 # DetSim services.
-#services.SimChannelExtractService:      @local::scxgeneric
 services.ChannelNoiseService:            @local::chnoiseold
 services.PedestalAdditionService:        @local::padprovided
 
@@ -96,45 +93,10 @@ services.DetPedestalService.FixedDetPedestal.PedRmsY: 0
 services.DetPedestalService.FixedDetPedestal.PedRmsZ: 0
 
 services.AdcDistortService:              @local::stuckbits
-#services.AdcSuppressService:            @local::zslegacy
 services.AdcSuppressService:             @local::zsonline
-#services.AdcCompressService:            @local::cmpblock
 services.AdcCompressService:             @local::cmpreplace
 
-services.SignalShapingServiceDUNEDPhase.ADCpermV: 0.48
 services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
-
-services.RawDigitExtractService:     @local::rdx_std
-services.RawDigitExtractService.PedestalOption:    1
-
-services.RawDigitPrepService:        @local::adcprep_sim
-services.RawDigitPrepService.DoNoiseRemoval:       false
-services.RawDigitPrepService.DoDeconvolution:      false
-services.RawDigitPrepService.DoROI:                true
-
-services.AdcNoiseRemovalService:    @local::adcnr_dunedphase3x1x1
-services.AdcNoiseRemovalService.LowPassFlt:        false
-services.AdcNoiseRemovalService.Flatten:           false
-services.AdcNoiseRemovalService.CorrMode:          "median"
-services.AdcNoiseRemovalService.Coherent32:        true
-services.AdcNoiseRemovalService.Coherent16:        true
-services.AdcNoiseRemovalService.Coherent16Groups:  [6, 7, 16, 17, 18, 19]
-services.AdcNoiseRemovalService.RoiStartThreshold: 7
-services.AdcNoiseRemovalService.RoiEndThreshold:   6
-services.AdcNoiseRemovalService.RoiPadLow:         8
-services.AdcNoiseRemovalService.RoiPadHigh:       40
-
-services.AdcWireBuildingService:     @local::adcwire_std
-#
-services.AdcRoiBuildingService:      @local::adcroi_dunefddphase
-services.AdcRoiBuildingService.NSigmaStart:       -20  # 1.25: only pulses with ADC >= NSigmaStart*8
-services.AdcRoiBuildingService.NSigmaEnd:         -20  # 1.25: only pulses with ADC >= NSigmaStart*8
-#services.AdcRoiBuildingService.UseFilter:      true
-
-#services.AdcRoiBuildingService.NSigmaStart:       0.5
-#services.AdcRoiBuildingService.NSigmaEnd:         0.0
-
-# services.message.destinations.LogStandardOut.threshold: "INFO"
 
 
 #===================New noise module ===========================================
