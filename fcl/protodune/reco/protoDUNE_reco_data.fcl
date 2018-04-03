@@ -1,0 +1,16 @@
+#include "protoDUNE_reco.fcl"
+
+process_name: Reco
+
+physics.reco: [
+    #TPC wire signals      
+    caldata
+]
+
+physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+
+services.DetectorPropertiesService.ReadOutWindowSize: 10000
+services.DetectorPropertiesService.NumberTimeSamples: 10000
+
+services.RawDigitPrepService.DoPedestalAdjustment: true
+services.PedestalEvaluationService:   @local::adcped_median
