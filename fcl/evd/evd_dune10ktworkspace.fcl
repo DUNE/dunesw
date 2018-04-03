@@ -1,0 +1,11 @@
+#include "evd_dune.fcl"
+process_name: EVD
+
+includedServices: @local::services
+
+services: {
+    @table::includedServices
+    @table::dunefd_disp
+}
+
+includedServices: @erase

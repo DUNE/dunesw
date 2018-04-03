@@ -1,0 +1,15 @@
+#include "evd_dune.fcl"
+process_name: EVD
+
+includedServices: @local::services
+
+services: {
+    @table::includedServices
+    @table::dune10kt_1x2x6_disp
+}
+
+includedServices: @erase
+
+services.DetPedestalService.FixedDetPedestal.PedMeanU: 1800
+services.DetPedestalService.FixedDetPedestal.PedMeanV: 1800
+services.DetPedestalService.FixedDetPedestal.PedMeanZ: 500

@@ -1,0 +1,30 @@
+#include "evd_dune.fcl"
+process_name: EVD
+
+includedServices: @local::services
+
+services: {
+    @table::includedServices
+    @table::dune35t_disp_data
+}
+
+includedServices: @erase
+
+#services.RawDrawingOptions.RawDataLabel: "SplitterInput:TPC"
+# Change vertical scale to 15000 ticks
+services.RawDrawingOptions.DrawRawDataOrCalibWires:       1
+services.RawDrawingOptions.TotalTicks:               15000
+#services.RawDrawingOptions.TotalTicks:               5200
+#services.RecoDrawingOptions.WireModuleLabels: ["caldata:TPC"]
+services.DetPedestalService.DetPedestalDUNE.UseDB: true
+services.DetectorPropertiesService.Efield: [0.25, 0.782, 1.734]
+#services.IDetPedestalService.DetPedestalDUNE.CSVFile: "/dune/app/users/mstancar/evdisp/offline_databaseRun_9754.csv"
+#services.IDetPedestalService.DetPedestalDUNE.CSVFile: "offline_databaseRun_10873.csv"
+#services.IDetPedestalService.DetPedestalDUNE.UseDefaults: true
+#services.IDetPedestalService.DetPedestalDUNE.DefaultMean: 0
+services.ColorDrawingOptions.RawQHigh: [200]
+services.ColorDrawingOptions.RawQLow: [-200]
+#services.ChannelMapService.FileName: "channelMap.txt"
+services.RecoDrawingOptions.ClusterModuleLabels: "[linecluster]"
+services.RecoDrawingOptions.HitModuleLabels: "[linecluster]"
+services.RecoDrawingOptions.TrackModuleLabels: "[pmtrack]"
