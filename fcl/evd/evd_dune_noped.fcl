@@ -1,0 +1,6 @@
+#include "evd_dune35t.fcl"
+
+services.DetPedestalService.DetPedestalRetrievalAlg.DefaultCollMean: 0
+services.DetPedestalService.DetPedestalRetrievalAlg.DefaultIndMean: 0
+services.RawDrawingOptions.UncompressWithPed:        false
+services.RawDrawingOptions.MinimumSignal:            5

@@ -18,7 +18,7 @@ services.DetectorPropertiesService: @local::protodunedphase_detproperties
 #source is now a root file
 source: {
     module_type: RootInput
-    maxEvents:  -1        # Number of events to create
+    maxEvents:  100        # Number of events to create
 }
 
 
@@ -95,9 +95,6 @@ services.DetPedestalService.FixedDetPedestal.PedRmsZ: 0
 services.AdcDistortService:              @local::stuckbits
 services.AdcSuppressService:             @local::zsonline
 services.AdcCompressService:             @local::cmpreplace
-
-services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
-
 
 #===================New noise module ===========================================
 #Configure realistic noise service for DP detectors based on the 311 data
