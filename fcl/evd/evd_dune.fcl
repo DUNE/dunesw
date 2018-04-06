@@ -1,0 +1,49 @@
+#include "evdservices_dune.fcl"
+
+process_name: EVD
+
+services:
+{
+  message:      @local::evd_message
+                @table::dune10kt_disp
+}
+
+# Define the services
+
+#Look at the input files
+source:
+{
+  module_type: RootInput
+  fileNames:  [ "single_gen.root" ]
+  maxEvents:   -1       # Number of events to create
+}
+
+outputs:{}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics:
+{
+
+ producers: {}
+
+ filters:{}
+
+ analyzers:
+ {
+  evdisp:{module_type: EVD}
+ }
+ 
+ #list the modules for this path, order matters, filters reject all following items
+ evd: [ evdisp ] 
+
+ #end_path are things that do not modify art::Event, includes analyzers 
+ #and output modules. all items here can be run simultaneously
+ end_paths: [evd]  
+}
+
+#services.RawDrawingOptions.DetPedestalRetrievalAlg.DefaultCollMean:  0
+#services.RawDrawingOptions.DetPedestalRetrievalAlg.DefaultIndMean:  0
+services.DetPedestalService.DetPedestalRetrievalAlg.DefaultCollMean: 500
+services.DetPedestalService.DetPedestalRetrievalAlg.DefaultIndMean: 1800

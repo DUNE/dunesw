@@ -1,0 +1,5 @@
+#include "evd_dune35t.fcl"
+
+process_name: EVD
+
+services.RawDrawingOptions.TotalTicks: 15000

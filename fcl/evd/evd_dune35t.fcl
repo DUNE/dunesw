@@ -1,0 +1,13 @@
+#include "evd_dune.fcl"
+process_name: EVD
+
+includedServices: @local::services
+
+services: {
+    @table::includedServices
+    @table::dune35t_disp
+}
+
+includedServices: @erase
+
+services.RawDrawingOptions.TotalTicks: 5200
