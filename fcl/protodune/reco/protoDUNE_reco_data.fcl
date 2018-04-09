@@ -14,3 +14,4 @@ services.DetectorPropertiesService.NumberTimeSamples: 10000
 
 services.RawDigitPrepService.DoPedestalAdjustment: true
 services.PedestalEvaluationService:   @local::adcped_median
+services.AdcRoiBuildingService:       @local::adcroi_keepall
