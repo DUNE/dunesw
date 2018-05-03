@@ -96,7 +96,7 @@ dune35t_disp:              @local::dunefd_disp
 dune35t_disp.DetPedestalService: @local::dune_fixedpeds
 dune35t_disp.DetectorPropertiesService: @local::dune35t_detproperties
 dune35t_disp.Geometry:     @local::dune35t_geo
-dune35t_disp.ChannelStatusService: @local::dune35t_channel_status_may2016
+dune35t_disp.ChannelStatusService: @local::dune35t_channel_status_dla
 dune35t_disp.ChannelMapService: @local::channelmap35t
 dune35t_disp.DetectorClocksService:  @local::dune35t_detectorclocks # defined in detectorclocks_dune.fcl
 dune35t_disp.RawDrawingOptions.TotalTicks:               5200
