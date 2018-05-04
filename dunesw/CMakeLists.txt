@@ -1,5 +1,6 @@
 set( IFDH_ART_DIR $ENV{IFDH_ART_DIR} )
 
+add_subdirectory(obj)
 add_subdirectory(ArtSupport)
 add_subdirectory(DuneInterface)
 add_subdirectory(DuneServiceAccess)
@@ -47,8 +48,8 @@ add_subdirectory(SupernovaAna)
 add_subdirectory(DataOverlay)
 add_subdirectory(DAQSimAna)
 add_subdirectory(3x1x1dp)
-
 add_subdirectory(CVN)
+add_subdirectory(BeamData)
 
 # Respect the order specified in lar_build, which is:
 #

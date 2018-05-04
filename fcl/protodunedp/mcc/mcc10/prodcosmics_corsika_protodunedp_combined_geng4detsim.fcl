@@ -36,7 +36,7 @@ source:
 {
   module_type: EmptyEvent
   timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
-  maxEvents:   20          # Number of events to create
+  maxEvents:   100         # Number of events to create
   firstRun:    1           # Run number to use for this file
   firstEvent:  1           # number of first event in the file
 }
@@ -108,7 +108,7 @@ physics.producers.generator.ShowerInputFiles:     [
 
 
 
-services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
+services.DetectorPropertiesService.Electronlifetime:  3000.0         #in us
 
 services.LArG4Parameters.MinNumberOfElCluster: 20
 

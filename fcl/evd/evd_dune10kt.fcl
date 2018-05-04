@@ -1,0 +1,5 @@
+#include "evd_dune.fcl"
+
+services.DetPedestalService.FixedDetPedestal.PedMeanU: 1800
+services.DetPedestalService.FixedDetPedestal.PedMeanV: 1800
+services.DetPedestalService.FixedDetPedestal.PedMeanZ: 500

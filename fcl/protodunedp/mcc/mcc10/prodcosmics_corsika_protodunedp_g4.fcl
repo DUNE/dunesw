@@ -18,7 +18,7 @@ services.DetectorPropertiesService: @local::protodunedphase_detproperties
 #source is now a root file
 source: {
     module_type: RootInput
-    maxEvents:  -1        # Number of events to create
+    maxEvents:  100        # Number of events to create
 }
 
 
@@ -67,6 +67,7 @@ outputs:
  }
 }
 
+services.DetectorPropertiesService.Electronlifetime:  3000.0         #in us
 services.LArG4Parameters.MinNumberOfElCluster: 20
 
 services.PhotonVisibilityService: @local::protodunedp_photonvisibilityservice
