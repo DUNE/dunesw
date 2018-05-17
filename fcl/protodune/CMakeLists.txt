@@ -6,4 +6,6 @@ add_subdirectory(mergeana)
 add_subdirectory(mcc)
 add_subdirectory(dc)
 
+add_subdirectory(fcldirs)
+
 install_fhicl()
