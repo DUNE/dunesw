@@ -14,7 +14,7 @@
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 
-#include "tools_dune.fcl"
+#include "protodune_tools_dune.fcl"
 
 process_name: Reco
 
