@@ -1,0 +1,10 @@
+#include "evd_protoDUNE_noped.fcl"
+
+services.DetPedestalService.FixedDetPedestal.PedMeanZ:  900
+services.DetPedestalService.FixedDetPedestal.PedMeanV:  2200
+services.DetPedestalService.FixedDetPedestal.PedMeanU:  2200
+services.RawDrawingOptions.RawDataLabel: "tpcrawdecoder:daq"
+services.ColorDrawingOptions.RawQHigh: [200]
+services.ColorDrawingOptions.RawQLow:  [-200]
+services.DetectorPropertiesService.NumberTimeSamples: 10000
+services.DetectorPropertiesService.ReadOutWindowSize: 10000

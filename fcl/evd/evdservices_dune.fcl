@@ -1,0 +1,113 @@
+#
+# Services for the event display -- DUNE settings
+#
+#include "evdservices_base.fcl"
+#include "services_dune.fcl"
+#include "channelstatus_dune.fcl"
+#include "pedestals_dune.fcl"
+#include "channelmap_35t.fcl"
+
+BEGIN_PROLOG
+
+dunefd_colordrawingopt:                       @local::standard_colordrawingopt 
+dunefd_colordrawingopt.ColorOrGrayScale:       0    # use color
+dunefd_rawdrawingopt:                         @local::standard_rawdrawingopt   
+dunefd_rawdrawingopt.TotalTicks:               4492
+dunefd_recodrawingopt:                        @local::standard_recodrawingopt
+dunefd_recodrawingopt.UseHitSelector:          false
+dunefd_recodrawingopt.WireModuleLabels:        [""]
+dunefd_recodrawingopt.HitModuleLabels:         ["apahit"]
+dunefd_recodrawingopt.ClusterModuleLabels:     ["fuzzy"]
+dunefd_recodrawingopt.DrawClusters:            0
+dunefd_simdrawingopt:                         @local::standard_simdrawingopt 
+dunefd_simdrawingopt.ShowMCTruthText:         false
+dunefd_simdrawingopt.ShowMCTruthVectors:      false
+dunefd_simdrawingopt.ShowMCTruthTrajectories: false
+dunefd_analysisdrawingopt:               @local::standard_analysisdrawingopt
+dunefd_analysisdrawingopt.CalorimetryModuleLabels: ["pmtrackcalodc"]
+dunefd_analysisdrawingopt.ParticleIDModuleLabels:  ["pmtrackpiddc"] 
+
+dunefd_evdlayoutopt:   	                      @local::standard_evdlayoutopt  
+dunefd_scanopt:                               @local::standard_scanopt       
+dunefd_evd:                                   @local::standard_evd           
+
+dunefd_disp:
+{
+ ExptGeoHelperInterface:   @local::dune_geometry_helper
+ Geometry:                 @local::dune10kt_workspace_geo 
+ LArPropertiesService:            @local::dunefd_properties
+ DetectorPropertiesService:       @local::dunefd_detproperties
+ DatabaseUtil:		   @local::dunefd_database 
+ ColorDrawingOptions:      @local::dunefd_colordrawingopt
+ SimulationDrawingOptions: @local::dunefd_simdrawingopt  
+ RawDrawingOptions:        @local::dunefd_rawdrawingopt  
+ RecoDrawingOptions:       @local::dunefd_recodrawingopt 
+ AnalysisDrawingOptions:   @local::dunefd_analysisdrawingopt
+ EvdLayoutOptions:	   @local::dunefd_evdlayoutopt
+ EventDisplay:             @local::dunefd_evd            
+ ScanOptions:              @local::dunefd_scanopt
+ LArG4Parameters:          @local::dunefd_largeantparameters
+ LArVoxelCalculator:       @local::dunefd_larvoxelcalculator
+# InfoTransfer: 		   @local::dunefd_infotransfer
+ DetectorClocksService:              @local::dunefd_detectorclocks # defined in detectorclocks_dune.fcl
+}
+dunefd_disp.DetPedestalService: @local::dune_fixedpeds
+dunefd_disp.DetPedestalService.FixedDetPedestal.PedMeanU: 1800
+dunefd_disp.DetPedestalService.FixedDetPedestal.PedMeanV: 1800
+dunefd_disp.DetPedestalService.FixedDetPedestal.PedMeanZ: 500
+dunefd_disp.ChannelStatusService: @local::dunefd_channel_status
+dunefd_disp.RawDrawingOptions.TPC: 1  #TPC 1 is the main drift volume in 35t
+dunefd_disp.RawDrawingOptions.MinimumSignal:              20
+dunefd_disp.ChannelStatusService: @local::dunefd_channel_status
+dunefd_disp.RecoDrawingOptions.WireModuleLabels:           ["caldata"]
+dunefd_disp.RecoDrawingOptions.HitModuleLabels:            ["linecluster"]
+dunefd_disp.RecoDrawingOptions.ClusterModuleLabels:        ["linecluster"]
+dunefd_disp.RecoDrawingOptions.TrackModuleLabels:          ["pmtrack"]
+dunefd_disp.RecoDrawingOptions.DrawClusters:               0
+dunefd_disp.RecoDrawingOptions.DrawTracks:                 3
+dunefd_disp.RecoDrawingOptions.DrawTrackTrajectoryPoints:  1
+dunefd_disp.RecoDrawingOptions.DrawOpFlashes:              1
+dunefd_disp.RecoDrawingOptions.OpFlashModuleLabels:        ["opflash"]
+dunefd_disp.RecoDrawingOptions.DrawVertices:               1
+dunefd_disp.RecoDrawingOptions.VertexModuleLabels:         ["pmtrack"]
+dunefd_disp.RawDrawingOptions.UncompressWithPed:        true
+
+# Different FD geometries
+dunefd3mm_disp:            @local::dunefd_disp
+dunefd3mm_disp.Geometry:   @local::dune10kt_3mmpitch_workspace_geo
+
+dunefd45deg_disp:            @local::dunefd_disp
+dunefd45deg_disp.Geometry:   @local::dune10kt_45deg_workspace_geo
+
+dune10kt_1x2x6_disp:       @local::dunefd_disp
+dune10kt_1x2x6_disp.Geometry:   @local::dune10kt_1x2x6_geo
+
+dune10kt_3mmpitch_1x2x6_disp:            @local::dunefd_disp
+dune10kt_3mmpitch_1x2x6_disp.Geometry:   @local::dune10kt_3mmpitch_1x2x6_geo
+
+dune10kt_45deg_1x2x6_disp:            @local::dunefd_disp
+dune10kt_45deg_1x2x6_disp.Geometry:   @local::dune10kt_45deg_1x2x6_geo
+
+
+# For now, treat 35t like FD,
+# except of course Geometry
+# MW: 3/1/16 and channel map
+dune35t_disp:              @local::dunefd_disp
+dune35t_disp.DetPedestalService: @local::dune_fixedpeds
+dune35t_disp.DetectorPropertiesService: @local::dune35t_detproperties
+dune35t_disp.Geometry:     @local::dune35t_geo
+dune35t_disp.ChannelStatusService: @local::dune35t_channel_status_dla
+dune35t_disp.ChannelMapService: @local::channelmap35t
+dune35t_disp.DetectorClocksService:  @local::dune35t_detectorclocks # defined in detectorclocks_dune.fcl
+dune35t_disp.RawDrawingOptions.TotalTicks:               5200
+dune35t_disp.RawDrawingOptions.MinimumSignal:            10
+dune35t_disp.RawDrawingOptions.UncompressWithPed:        true
+
+
+dune35t_disp_data: @local::dune35t_disp
+dune35t_disp_data.DetPedestalService:  @local::dune_dbpeds 
+
+dune10kt_disp:             @local::dunefd_disp
+dune10kt_disp.Geometry:    @local::dune10kt_geo 
+
+END_PROLOG

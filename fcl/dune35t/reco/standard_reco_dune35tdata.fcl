@@ -9,7 +9,6 @@
 #include "hitfindermodules_dune.fcl"
 #include "clusterfinder_dune.fcl"
 #include "trackfindermodules_dune.fcl"
-#include "pandoramodules_dune.fcl"
 #include "calorimetry_dune35t.fcl"
 #include "t0reco.fcl"
 #include "opticaldetectormodules_dune.fcl"
@@ -17,6 +16,7 @@
 #include "trackshowerhits.fcl"
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
+#include "tools_dune.fcl"
 
 process_name: Reco
 
@@ -69,8 +69,6 @@ physics:
   costrk:             @local::dune35t_cosmictracker
 #  stitch:             @local::dune35t_trackstitcher
   calo:               @local::dune35t_calomc
-  pandora:            @local::dune35t_pandora
-  pandoracalo:        @local::dune35t_calomc
   pmtrack:             @local::dune35t_pmalgtrackmaker
   pmtrackcalo:         @local::dune35t_calomc
   pmtrackch:             @local::dune35t_pmalgtrackmaker
@@ -79,8 +77,6 @@ physics:
 # Photon counter T0
   photont0costrk:    @local::lbne35t_photoncountert0matching
   photont0costrkdc:  @local::lbne35t_photoncountert0matching
-  photont0pandora:   @local::lbne35t_photoncountert0matching
-  photont0pandoradc: @local::lbne35t_photoncountert0matching
   photont0pmtrack:   @local::lbne35t_photoncountert0matching
   photont0pmtrackdc: @local::lbne35t_photoncountert0matching
 # Muon Counter T0
@@ -115,9 +111,6 @@ physics:
          #cluster reco
          #, dbcluster
 	 , linecluster, lineclusterch
-         #pandora
-         #, pandora
-         #, photont0pandora, pandoracalo
          #pmatrack
          , pmtrack, pmtrackch
          #, photont0pmtrack, pmtrackcalo
@@ -185,16 +178,6 @@ physics.producers.calo.SpacePointModuleLabel:        "costrk"
 physics.producers.calo.T0ModuleLabel:                "photont0costrk"
 #physics.producers.kalmanhit.HitModuleLabel:         "hit35t"
 #physics.producers.kalmanhit.ClusterModuleLabel:     "fuzzy"
-
-#Pandora configurations
-physics.producers.pandora.HitFinderModuleLabel:             "hit35t"
-physics.producers.photont0pandora.TrackModuleLabel:         "pandoraTrack"
-physics.producers.photont0pandora.HitsModuleLabel:          "hit35t"
-physics.producers.photont0pandora.ShowerModuleLabel:        ""
-physics.producers.photont0pandora.TruthT0ModuleLabel:       "mctrutht0pandora"
-physics.producers.pandoracalo.TrackModuleLabel:             "pandoraTrack"
-physics.producers.pandoracalo.SpacePointModuleLabel:        "pandora"
-physics.producers.pandoracalo.T0ModuleLabel:                "photont0pandora"
 
 #Optical detector configuration
 #defined in opticaldetectormodules_dune.fcl

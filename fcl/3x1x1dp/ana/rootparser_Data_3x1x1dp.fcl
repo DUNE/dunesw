@@ -5,6 +5,7 @@
 #include "pandoramodules_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "disambigcheck.fcl"
+#include "tools_dune.fcl"
 
 process_name: Mergeana
 
@@ -16,11 +17,11 @@ services:
   TimeTracker:       {}
   RandomNumberGenerator: {}
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::dunedphase3x1x1_services
+  @table::dunedphase3x1x1_reco_services
 }
 #services.PhotonVisibilityService:      @local::protodune_photonvisibilityservice
 #source is now a root file
-services.BackTrackerService: @local::dunefd_backtrackerservice
+#services.BackTrackerService: @local::dunefd_backtrackerservice
 source:
 {
   module_type: RootInput
@@ -66,4 +67,7 @@ outputs:
 }
 
 ### Here, we overwrite ALL module Labels with the ones defined above.
-
+physics.analyzers.analysistree.LogLevel:	    0
+physics.analyzers.analysistree.IsMC:		    false
+physics.analyzers.analysistree.HitsModuleLabel:     "dprawhit"
+physics.analyzers.analysistree.ClusterModuleLabel:  "linecluster"

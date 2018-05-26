@@ -1,0 +1,76 @@
+#include "services_dune.fcl"
+#include "largeantmodules_dune.fcl"
+#include "photpropservices_dune.fcl"
+
+
+process_name: G4
+
+services: @local::protodunedphase_simulation_services
+
+# Load the service that manages root files for histograms.
+services.TFileService: { fileName: "cosmics_corsika_rotation_hist.root" }
+services.TimeTracker:  {}
+services.MemoryTracker: { } # default is one
+services.RandomNumberGenerator: {} #ART native random number generator
+services.Geometry: @local::protodunedphase_geo
+services.DetectorPropertiesService: @local::protodunedphase_detproperties
+
+#source is now a root file
+source: {
+    module_type: RootInput
+    maxEvents:  100        # Number of events to create
+}
+
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics:
+{
+
+ producers:
+ {
+   rns:       { module_type: "RandomNumberSaver" }
+   largeant:            @local::dunefd_largeant
+ }
+
+ #define the producer and filter modules for this path, order matters,
+ #filters reject all following items.  see lines starting physics.producers below
+ simulate: [ rns,
+            largeant
+            ]
+
+ #define the output stream, there could be more than one if using filters
+ stream1:  [ out1 ]
+
+ #trigger_paths is a keyword and contains the paths that modify the art::event,
+ #ie filters and producers
+ trigger_paths: [simulate]
+
+ #end_paths is a keyword and contains the paths that do not modify the art::Event,
+ #ie analyzers and output streams.  these all run simultaneously
+ end_paths:     [stream1]
+}
+
+#block to define where the output goes.  if you defined a filter in the physics
+#block and put it in the trigger_paths then you need to put a 
+SelectEvents: {SelectEvents: [XXX]}
+#entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_g4.root" #default file name, can override from command line with -o or --output
+   dataTier:    "cosmic-detsim"
+   compressionLevel: 1
+ }
+}
+
+services.DetectorPropertiesService.Electronlifetime:  3000.0         #in us
+services.LArG4Parameters.MinNumberOfElCluster: 20
+
+services.PhotonVisibilityService: @local::protodunedp_photonvisibilityservice
+services.PhotonVisibilityService.Interpolate: true
+
+
