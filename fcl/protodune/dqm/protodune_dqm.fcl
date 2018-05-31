@@ -1,0 +1,24 @@
+# protodune_dqm.fcl
+
+# David Adams
+# May 2018
+#
+# Run protodune reco only through data prep and create plots for DQM.
+
+#include "protoDUNE_reco_noise.fcl"
+
+physics.reco: ["caldata"]
+
+process_name: "dqm"
+
+services.RawDigitPrepService.DisplayTools: ["rawAdcPlotter", "preparedAdcPlotter"]
+
+tools.rawAdcPlotter.LogLevel:  2
+tools.rawAdcPlotter.FirstTick: 3000
+tools.rawAdcPlotter.LastTick:  4200
+tools.rawAdcPlotter.MaxSignal: 50
+
+tools.preparedAdcPlotter.LogLevel: @local::tools.rawAdcPlotter.LogLevel
+tools.preparedAdcPlotter.FirstTick: @local::tools.rawAdcPlotter.FirstTick
+tools.preparedAdcPlotter.LastTick: @local::tools.rawAdcPlotter.LastTick
+tools.preparedAdcPlotter.MaxSignal: @local::tools.rawAdcPlotter.MaxSignal 
