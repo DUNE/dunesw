@@ -63,7 +63,7 @@ simple_plugin ( GeometryTest35 "module"
 		     art_Persistency_Provenance canvas
 		     art_Utilities canvas
                      ${MF_MESSAGELOGGER}
-                     ${MF_UTILITIES}
+                     
                      ${FHICLCPP}
                      cetlib cetlib_except
                      ${ROOT_BASIC_LIB_LIST}
@@ -84,7 +84,7 @@ cet_test(geometry_crmchannelmapping_test
             GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
-            ${MF_UTILITIES}
+            
             ${FHICLCPP}
             cetlib cetlib_except
   USE_BOOST_UNIT
