@@ -4,3 +4,4 @@ apas: [5]
 gain: 25.0
 shaping: 2.0
 pulserAmplitude: 9
+pulserSource: 1
