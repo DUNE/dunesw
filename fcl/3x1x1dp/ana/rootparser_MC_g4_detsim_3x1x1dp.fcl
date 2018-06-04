@@ -65,6 +65,7 @@ outputs:
 ### Here, we overwrite ALL module Labels with the ones defined above.
 physics.analyzers.analysistree.LogLevel:		0
 physics.analyzers.analysistree.IsMC:			true
+physics.analyzers.analysistree.SavePhotonInfo:		true
 physics.analyzers.analysistree.SaveGeantInfo:		true
 physics.analyzers.analysistree.SaveGeantInAVInfo:	true
 physics.analyzers.analysistree.SaveGeantTrajectoryInfo:	true

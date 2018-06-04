@@ -5,6 +5,7 @@ add_subdirectory(reco)
 add_subdirectory(mergeana)
 add_subdirectory(mcc)
 add_subdirectory(dc)
+add_subdirectory(dqm)
 
 add_subdirectory(fcldirs)
 
