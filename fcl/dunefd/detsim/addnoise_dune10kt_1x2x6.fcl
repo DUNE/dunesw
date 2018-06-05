@@ -1,10 +1,3 @@
-# standard_detsim_dune10kt.fcl
-
-# David Adams
-# April 2016
-#
-# Top level FCL for production of 35-ton simulated data.
-
 #include "services_dune.fcl"
 #include "detsimmodules_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
@@ -53,24 +46,3 @@ outputs: {
    compressionLevel: 1
  }
 }
-
-# # Use fixed values instead of DB for pedestals.
-# services.DetPedestalService: @local::dune_fixedpeds
-
-# # DetSim flags.
-# physics.producers.daq.NoiseOn:     true
-# physics.producers.daq.PedestalOn:  true
-# physics.producers.daq.DistortOn:   false
-# physics.producers.daq.SuppressOn:  true
-
-# # DetSim services.
-# services.SimChannelExtractService: @local::scxgeneric
-# services.ChannelNoiseService:      @local::chnoiseold
-# services.PedestalAdditionService:  @local::padprovided
-# services.AdcDistortService:        @local::stuckbits
-# services.AdcSuppressService:       @local::zslegacy
-# services.AdcCompressService:       @local::cmpblock
-
-# # Disable bad channels.
-# #services.IChannelStatusService.BadChannels: [ ]
-
