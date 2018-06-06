@@ -1,6 +1,6 @@
 #include "standard_detsim_dune10kt_1x2x6.fcl"
 
-process_name: detsim
+process_name: PrimSim
 
 services: @local::dunefd_simulation_services
 services.TFileService: { fileName: "detsim_hist.root" }
