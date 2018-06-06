@@ -47,12 +47,15 @@ physics: {
 }
 
 outputs: {
- out1: {
-   module_type: RootOutput
-   fileName:    "%ifb_trigprim.root"
-   dataTier:    "detector-simulated"
-   compressionLevel: 1
- }
+   out1: {
+      module_type: RootOutput
+      fileName:    "%ifb_trigprim.root"
+      dataTier:    "detector-simulated"
+      compressionLevel: 1
+      # data product type _ module label _ instance _ process name
+      outputCommands: ["keep *_*_*_*", "drop *_simwire__detsim"]
+      
+   }
 }
 
 # DetSim services. These are used by SimWire to add noise and
@@ -68,6 +71,6 @@ services.DetPedestalService: @local::dune_fixedpeds
 # The name of the trigger primitive finder implementation to use
 #  (replace this with your own)
 services.TriggerPrimitiveFinderService: {
-   module_type: "TriggerPrimitiveFinderPass1"
+   service_provider: "TriggerPrimitiveFinderPass1"
    Threshold: 10
 }
