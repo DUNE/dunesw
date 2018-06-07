@@ -6,5 +6,6 @@
 # Collect all tool definitions for protoDUNE.
 
 #include "detsimtools_dune.fcl"
+#include "dunecommon_tools.fcl"
 #include "protodune_dataprep_tools.fcl"
 
