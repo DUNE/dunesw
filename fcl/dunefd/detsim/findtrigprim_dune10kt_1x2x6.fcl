@@ -76,5 +76,5 @@ services.DetPedestalService: @local::dune_fixedpeds
 #  (replace this with your own)
 services.TriggerPrimitiveFinderService: {
    service_provider: "TriggerPrimitiveFinderPass1"
-   Threshold: 10
+   Threshold: 20
 }
