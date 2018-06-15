@@ -11,3 +11,7 @@ services: {
 includedServices: @erase
 
 services.RawDrawingOptions.TotalTicks: 5200
+
+services.DetPedestalService.FixedDetPedestal.PedMeanU: 1800
+services.DetPedestalService.FixedDetPedestal.PedMeanV: 1800
+services.DetPedestalService.FixedDetPedestal.PedMeanZ: 500
