@@ -19,9 +19,7 @@ services:
   FileCatalogMetadata:  @local::art_file_catalog_mc
   @table::dunedphase3x1x1_reco_services
 }
-#services.PhotonVisibilityService:      @local::protodune_photonvisibilityservice
-#source is now a root file
-#services.BackTrackerService: @local::dunefd_backtrackerservice
+
 source:
 {
   module_type: RootInput
@@ -36,7 +34,6 @@ physics:
  analyzers:
 {
  analysistree:      @local::data_3x1x1_anarootparser
-# disambigcheck:     @local::standard_disambigcheck
 }
 
  #define the output stream, there could be more than one if using filters 
@@ -49,7 +46,6 @@ physics:
  #end_paths is a keyword and contains the paths that do not modify the art::Event, 
  #ie analyzers and output streams.  these all run simultaneously
  end_paths:     [ana]  
-# end_paths:     [stream1, ana]  
 }
 
 #block to define where the output goes.  if you defined a filter in the physics
@@ -67,7 +63,10 @@ outputs:
 }
 
 ### Here, we overwrite ALL module Labels with the ones defined above.
-physics.analyzers.analysistree.LogLevel:	    0
-physics.analyzers.analysistree.IsMC:		    false
-physics.analyzers.analysistree.HitsModuleLabel:     "dprawhit"
-physics.analyzers.analysistree.ClusterModuleLabel:  "linecluster"
+physics.analyzers.analysistree.LogLevel:		0
+physics.analyzers.analysistree.IsMC:			true
+physics.analyzers.analysistree.SavePhotonInfo:		true
+physics.analyzers.analysistree.SaveGeantInfo:		true
+physics.analyzers.analysistree.SaveGeantInAVInfo:	true
+physics.analyzers.analysistree.SaveGeantTrajectoryInfo:	true
+physics.analyzers.analysistree.SaveRawDigitInfo:	true

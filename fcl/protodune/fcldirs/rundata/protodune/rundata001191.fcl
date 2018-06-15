@@ -1,0 +1,7 @@
+run: 1191
+cryostat: coldbox
+apas: [5]
+gain: 25.0
+shaping: 3.0
+pulserAmplitude: 5
+pulserSource: 1

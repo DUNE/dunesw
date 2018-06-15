@@ -1,0 +1,6 @@
+run: 1269
+cryostat: coldbox
+apas: [5]
+gain: 25.0
+shaping: 2.0
+leakage: 1000
