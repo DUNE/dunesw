@@ -1,6 +1,7 @@
 set( IFDH_ART_DIR $ENV{IFDH_ART_DIR} )
 
 add_subdirectory(DuneObjBase)
+add_subdirectory(DuneObjDumpers)
 add_subdirectory(ArtSupport)
 add_subdirectory(DuneInterface)
 add_subdirectory(DuneServiceAccess)
