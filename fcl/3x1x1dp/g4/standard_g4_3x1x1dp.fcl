@@ -65,3 +65,32 @@ outputs:
 }
 
 services.LArG4Parameters.MinNumberOfElCluster: 20
+services.LArG4Parameters.EnabledPhysics: [
+         "Em",
+         "FastOptical",
+         "SynchrotronAndGN",
+         "Ion",
+         "Hadron",
+         "Decay",
+         "HadronElastic",
+         "Stopping"
+      ]
+services.LArG4Parameters.KeepEMShowerDaughters: false
+
+services.PhotonVisibilityService.DoNotLoadLibrary: false
+services.PhotonVisibilityService.Interpolate: false
+services.PhotonVisibilityService.LibraryBuildJob: false
+services.PhotonVisibilityService.LibraryFile: "PhotonPropagation/LibraryData/libext_dunedphase3x1x1_lightsim_20171213.root"
+services.PhotonVisibilityService.NX: 4
+services.PhotonVisibilityService.NY: 4
+services.PhotonVisibilityService.NZ: 12
+services.PhotonVisibilityService.ParametrisedTimePropagation: true
+services.PhotonVisibilityService.ParametrisedTimePropagationFittedFormula: "TMath::Exp([0]*x) + [2]*TMath::Exp([1]*x)"
+services.PhotonVisibilityService.ParametrisedTimePropagationNParameters: 4
+services.PhotonVisibilityService.UseCryoBoundary: false
+services.PhotonVisibilityService.XMax: 50
+services.PhotonVisibilityService.XMin: -50
+services.PhotonVisibilityService.YMax: 50
+services.PhotonVisibilityService.YMin: -50
+services.PhotonVisibilityService.ZMax: 294
+services.PhotonVisibilityService.ZMin: -6
