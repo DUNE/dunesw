@@ -234,8 +234,11 @@ services.SignalShapingServiceDUNE.IndUFilterParams: [ 1.0, 0.105, 0.019, 0.018, 
 services.SignalShapingServiceDUNE.IndVFilter:       "(x>0.03)*[0]*(1-1/(1+exp(-(x-[1])/[2])))*(1/(1+exp(-(x-[3])/[4])))"
 services.SignalShapingServiceDUNE.IndVFilterParams: [ 0.95, 0.125, 0.019, 0.010, 0.0109 ]
 
-physics.producers.gaushit.MinSig:   [ 5, 5, 10 ]
-physics.producers.gaushit.MinWidth: [ 1, 1, 1 ]
+#physics.producers.gaushit.MinSig:   [ 5, 5, 10 ]
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 5.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 5.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 10.0
+#physics.producers.gaushit.MinWidth: [ 1, 1, 1 ]
 
 physics.producers.fasthit.MinSigCol: 80
 physics.producers.fasthit.MinSigInd: 80
