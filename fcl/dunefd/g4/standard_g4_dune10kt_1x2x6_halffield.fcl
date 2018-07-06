@@ -1,0 +1,19 @@
+#include "standard_g4_dune10kt.fcl"
+process_name: G4
+
+services.DetectorPropertiesService.Efield: [0.25, 0.333, 0.4]
+
+services.Geometry: @local::dune10kt_1x2x6_geo
+services.PhotonVisibilityService: @local::dune10kt_1x2x6_photonvisibilityservice
+services.LArG4Parameters.UseCustomPhysics: true
+services.LArG4Parameters.EnabledPhysics: [ "Em",
+                                           "FastOptical",
+                                           "SynchrotronAndGN",
+                                           "Ion",
+                                           "Hadron",
+                                           "Decay",
+                                           "HadronElastic",
+                                           "Stopping",
+                                           "NeutronTrackingCut" ]
+
+
