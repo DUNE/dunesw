@@ -165,80 +165,80 @@ physics.producers.dprawhit.Chi2NDFMaxFactorMultiHits: 	2	# for groups of peaks (
 ###Linecluster configuration###
 physics.producers.linecluster.HitFinderModuleLabel:	"dprawhit"
 
-#physics.producers.linecluster.ClusterCrawlerAlg.NumPass:              	3  # number of passes through the hit list. 0 = no cluster reco
-#physics.producers.linecluster.ClusterCrawlerAlg.MaxHitsFit: 		[ 960,  8, 4] # number of hits fitted to a line   !!CHANGED!!
-#physics.producers.linecluster.ClusterCrawlerAlg.MinHits:    		[ 20,  8, 3] # minimum size of a cluster	  !!CHANGED!!
-#physics.producers.linecluster.ClusterCrawlerAlg.NHitsAve:   		[ 20,  8, 2] # number of hits to find the average charge and width at the end of the cluster. NHitsAve should be 1 or 2
-#physics.producers.linecluster.ClusterCrawlerAlg.ChgCut:    		[ .8, .8, .8] # max fractional hit charge difference for adding hits
-#physics.producers.linecluster.ClusterCrawlerAlg.ChiCut:    		[ 4, 8, 10] # stop adding hits to clusters if ChiCut is reached
-#physics.producers.linecluster.ClusterCrawlerAlg.MaxWirSkip:   		[25, 8, 0] # max number of wires to skip without adding a hit
-#physics.producers.linecluster.ClusterCrawlerAlg.MinWirAfterSkip: 	[2, 2, 1] # min reqd number of consecutive wires with a hit after a skip
-#physics.producers.linecluster.ClusterCrawlerAlg.KinkChiRat: 		[1.2, 1.2, 0.] # Max consecutive chisq increase for the last 3 hits on the cluster 0. = no kink check when following
-#physics.producers.linecluster.ClusterCrawlerAlg.KinkAngCut: 		[0.4, 0.4, 1.5] # kink angle cut (radians) used to follow and merge
-#physics.producers.linecluster.ClusterCrawlerAlg.DoMerge:   		[false, true, true] # run cluster merging code?
-#physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta: 		[ 8, 8, 20] # max time difference for cluster merging
-#physics.producers.linecluster.ClusterCrawlerAlg.MergeChgCut: 		[0.8, 0.8, 0.8] # max charge ratio for cluster merging
-#physics.producers.linecluster.ClusterCrawlerAlg.FindVertices: 		[true, true, true]  # make 2D vertices after clustering?
-#physics.producers.linecluster.ClusterCrawlerAlg.LACrawl:     		[true, true, true]  # crawl Large Angle clusters?
-#  physics.producers.linecluster.ClusterCrawlerAlg.LAClusAngleCut: 	60 # Large cluster angle cut (0 < 90 degrees). <0 to turn off
-#  physics.producers.linecluster.ClusterCrawlerAlg.LAClusMaxHitsFit: 	4 #
-#  physics.producers.linecluster.ClusterCrawlerAlg.MinHitFrac: 		0.6 # Drop clusters having < (#hits/#wires)
-#  physics.producers.linecluster.ClusterCrawlerAlg.MinAmp: 		[5, 5, 5] # Min hit signal amplitude for merging
-#  physics.producers.linecluster.ClusterCrawlerAlg.ChgNearWindow:  	40 # #of ticks for summing charge near a cluster
-#  physics.producers.linecluster.ClusterCrawlerAlg.ChgNearCut: 		1.5 # Cluster end is shower-like if (nearby chg)/(cls chg)> cut
-#physics.producers.linecluster.ClusterCrawlerAlg.HitMergeChiCut: 	2.5 # Merge cluster hit-multiplets if the separation chisq is < cut. Set < 0 for no merging
-#physics.producers.linecluster.ClusterCrawlerAlg.MergeAllHits:  	false # merge all hits before reconstructing clusters
-#physics.producers.linecluster.ClusterCrawlerAlg.MergeOverlapAngCut:  	0.1 # Set <= 0 to turn off overlapping cluster merging
-#physics.producers.linecluster.ClusterCrawlerAlg.ChkClusterDS:       	true # Check reconstruction at DS end of clusters?
-#physics.producers.linecluster.ClusterCrawlerAlg.KillGarbageClusters: 	0.1 # Kill ghost clusters, set to 0 to turn off
-#physics.producers.linecluster.ClusterCrawlerAlg.VtxClusterSplit:    	true # Split clusters that cross vertices
-#physics.producers.linecluster.ClusterCrawlerAlg.FindStarVertices:   	true # Find vertices with a star topology
-#physics.producers.linecluster.ClusterCrawlerAlg.HitErrFac:           	0.2 # hit time error for fitting = fHitErrFac * (hit width)
-#physics.producers.linecluster.ClusterCrawlerAlg.HitMinAmp:             2 # ignore hits with PH < this value
-#physics.producers.linecluster.ClusterCrawlerAlg.ClProjErrFac:          3 # cluster projection error factor
-#physics.producers.linecluster.ClusterCrawlerAlg.AllowNoHitWire:        1 # Allow skipping N wires w no hits (if poor purity)
-#physics.producers.linecluster.ClusterCrawlerAlg.Vertex2DCut:        	10 # Max chisq cut for attaching a cluster to a vtx
-#physics.producers.linecluster.ClusterCrawlerAlg.Vertex3DCut:           5 # 2D vtx -> 3D vtx matching cut (chisq)
-#physics.producers.linecluster.ClusterCrawlerAlg.FindHammerClusters: 	true # look for hammer type clusters
-#physics.producers.linecluster.ClusterCrawlerAlg.RefineVertexClusters: 	false # (not ready)
-#physics.producers.linecluster.ClusterCrawlerAlg.FindVLAClusters: 	false # find Very Large Angle clusters (not ready)
-#physics.producers.linecluster.ClusterCrawlerAlg.DebugPlane:          	-1  # print info only in this plane
-#physics.producers.linecluster.ClusterCrawlerAlg.DebugWire:            	0  # set to the Begin Wire and Hit of a cluster to print
-#physics.producers.linecluster.ClusterCrawlerAlg.DebugHit:             	0  # out detailed information while crawling
+physics.producers.linecluster.ClusterCrawlerAlg.NumPass:              	3  # number of passes through the hit list. 0 = no cluster reco
+physics.producers.linecluster.ClusterCrawlerAlg.MaxHitsFit: 		[ 960,  8, 4] # number of hits fitted to a line   !!CHANGED!!
+physics.producers.linecluster.ClusterCrawlerAlg.MinHits:    		[ 20,  8, 3] # minimum size of a cluster	  !!CHANGED!!
+physics.producers.linecluster.ClusterCrawlerAlg.NHitsAve:   		[ 20,  8, 2] # number of hits to find the average charge and width at the end of the cluster. NHitsAve should be 1 or 2
+physics.producers.linecluster.ClusterCrawlerAlg.ChgCut:    		[ .8, .8, .8] # max fractional hit charge difference for adding hits
+physics.producers.linecluster.ClusterCrawlerAlg.ChiCut:    		[ 4, 8, 10] # stop adding hits to clusters if ChiCut is reached
+physics.producers.linecluster.ClusterCrawlerAlg.MaxWirSkip:   		[25, 8, 0] # max number of wires to skip without adding a hit
+physics.producers.linecluster.ClusterCrawlerAlg.MinWirAfterSkip: 	[2, 2, 1] # min reqd number of consecutive wires with a hit after a skip
+physics.producers.linecluster.ClusterCrawlerAlg.KinkChiRat: 		[1.2, 1.2, 0.] # Max consecutive chisq increase for the last 3 hits on the cluster 0. = no kink check when following
+physics.producers.linecluster.ClusterCrawlerAlg.KinkAngCut: 		[0.4, 0.4, 1.5] # kink angle cut (radians) used to follow and merge
+physics.producers.linecluster.ClusterCrawlerAlg.DoMerge:   		[false, true, true] # run cluster merging code?
+physics.producers.linecluster.ClusterCrawlerAlg.TimeDelta: 		[ 8, 8, 20] # max time difference for cluster merging
+physics.producers.linecluster.ClusterCrawlerAlg.MergeChgCut: 		[0.8, 0.8, 0.8] # max charge ratio for cluster merging
+physics.producers.linecluster.ClusterCrawlerAlg.FindVertices: 		[true, true, true]  # make 2D vertices after clustering?
+physics.producers.linecluster.ClusterCrawlerAlg.LACrawl:     		[true, true, true]  # crawl Large Angle clusters?
+  physics.producers.linecluster.ClusterCrawlerAlg.LAClusAngleCut: 	60 # Large cluster angle cut (0 < 90 degrees). <0 to turn off
+  physics.producers.linecluster.ClusterCrawlerAlg.LAClusMaxHitsFit: 	4 #
+  physics.producers.linecluster.ClusterCrawlerAlg.MinHitFrac: 		0.6 # Drop clusters having < (#hits/#wires)
+  physics.producers.linecluster.ClusterCrawlerAlg.MinAmp: 		[5, 5, 5] # Min hit signal amplitude for merging
+  physics.producers.linecluster.ClusterCrawlerAlg.ChgNearWindow:  	40 # #of ticks for summing charge near a cluster
+  physics.producers.linecluster.ClusterCrawlerAlg.ChgNearCut: 		1.5 # Cluster end is shower-like if (nearby chg)/(cls chg)> cut
+physics.producers.linecluster.ClusterCrawlerAlg.HitMergeChiCut: 	-1 # Merge cluster hit-multiplets if the separation chisq is < cut. Set < 0 for no merging !!CHANGED!!
+physics.producers.linecluster.ClusterCrawlerAlg.MergeAllHits:  		false # merge all hits before reconstructing clusters
+physics.producers.linecluster.ClusterCrawlerAlg.MergeOverlapAngCut:  	0.1 # Set <= 0 to turn off overlapping cluster merging
+physics.producers.linecluster.ClusterCrawlerAlg.ChkClusterDS:       	true # Check reconstruction at DS end of clusters?
+physics.producers.linecluster.ClusterCrawlerAlg.KillGarbageClusters: 	0.1 # Kill ghost clusters, set to 0 to turn off
+physics.producers.linecluster.ClusterCrawlerAlg.VtxClusterSplit:    	true # Split clusters that cross vertices
+physics.producers.linecluster.ClusterCrawlerAlg.FindStarVertices:   	true # Find vertices with a star topology
+physics.producers.linecluster.ClusterCrawlerAlg.HitErrFac:           	0.2 # hit time error for fitting = fHitErrFac * (hit width)
+physics.producers.linecluster.ClusterCrawlerAlg.HitMinAmp:             2 # ignore hits with PH < this value
+physics.producers.linecluster.ClusterCrawlerAlg.ClProjErrFac:          3 # cluster projection error factor
+physics.producers.linecluster.ClusterCrawlerAlg.AllowNoHitWire:        1 # Allow skipping N wires w no hits (if poor purity)
+physics.producers.linecluster.ClusterCrawlerAlg.Vertex2DCut:        	10 # Max chisq cut for attaching a cluster to a vtx
+physics.producers.linecluster.ClusterCrawlerAlg.Vertex3DCut:           5 # 2D vtx -> 3D vtx matching cut (chisq)
+physics.producers.linecluster.ClusterCrawlerAlg.FindHammerClusters: 	true # look for hammer type clusters
+physics.producers.linecluster.ClusterCrawlerAlg.RefineVertexClusters: 	false # (not ready)
+physics.producers.linecluster.ClusterCrawlerAlg.FindVLAClusters: 	false # find Very Large Angle clusters (not ready)
+physics.producers.linecluster.ClusterCrawlerAlg.DebugPlane:          	-1  # print info only in this plane
+physics.producers.linecluster.ClusterCrawlerAlg.DebugWire:            	0  # set to the Begin Wire and Hit of a cluster to print
+physics.producers.linecluster.ClusterCrawlerAlg.DebugHit:             	0  # out detailed information while crawling
 
 
 
 
 ###pmtrack configuration###
 
-#physics.producers.pmtrack.WireModuleLabel:        		"caldata"   # deconvoluted adc is also used for tracks validation
-#physics.producers.pmtrack.HitModuleLabel:      			"dprawhit"
-#physics.producers.pmtrack.ClusterModuleLabel:  			"linecluster"
-#physics.producers.pmtrack.EmClusterModuleLabel:   		""          # EM-like clusters, will be excluded from tracking if provided
-#physics.producers.pmtrack.SaveOnlyBranchingVtx:   		false       # use true to save only vertices interconnecting many tracks, otherwise. vertex is added to the front of each track
-#physics.producers.pmtrack.SavePmaNodes:           		false       # save track nodes (only for algorithm development purposes)
+physics.producers.pmtrack.WireModuleLabel:        		"caldata"   # deconvoluted adc is also used for tracks validation
+physics.producers.pmtrack.HitModuleLabel:      			"linecluster"
+physics.producers.pmtrack.ClusterModuleLabel:  			"linecluster"
+physics.producers.pmtrack.EmClusterModuleLabel:   		""          # EM-like clusters, will be excluded from tracking if provided
+physics.producers.pmtrack.SaveOnlyBranchingVtx:   		false       # use true to save only vertices interconnecting many tracks, otherwise. vertex is added to the front of each track
+physics.producers.pmtrack.SavePmaNodes:           		false       # save track nodes (only for algorithm development purposes)
 
 
 
-#physics.producers.pmtrack.ProjectionMatchingAlg:  			@local::standard_projectionmatchingalg
-#physics.producers.pmtrack.ProjectionMatchingAlg.OptimizationEps:        0.01    # relative change of the obj.fn which stops optimization after adding a node
-#physics.producers.pmtrack.ProjectionMatchingAlg.FineTuningEps:          0.0001  # relative change of the obj.fn which stops fine-tuning of optimized track
-#physics.producers.pmtrack.ProjectionMatchingAlg.TrkValidationDist2D:    1.0     # max. distance [cm] used in the track validation in the "third" plane
-#physics.producers.pmtrack.ProjectionMatchingAlg.HitTestingDist2D:       0.5     # max. distance [cm] used in testing compatibility of hits with the track
-#physics.producers.pmtrack.ProjectionMatchingAlg.MinTwoViewFraction:     0.4     # min. fraction of track length covered with hits from many 2D views intertwinted with each other
-#physics.producers.pmtrack.ProjectionMatchingAlg.NodeMargin3D:           3.0     # margin in [cm] around TPC for allowed track node positions
-#physics.producers.pmtrack.ProjectionMatchingAlg.HitWeightZ:             1.0     # weights used for hits in U, V, Z planes:
-#physics.producers.pmtrack.ProjectionMatchingAlg.HitWeightV:             1.0     #    - use lower values for planes where hit position is less reliable (e.g. due to S/N)
-#physics.producers.pmtrack.ProjectionMatchingAlg.HitWeightU:             1.0     #    - relative ratios matter, sum does not need to be 1.0
+physics.producers.pmtrack.ProjectionMatchingAlg:  			@local::standard_projectionmatchingalg
+physics.producers.pmtrack.ProjectionMatchingAlg.OptimizationEps:        0.01    # relative change of the obj.fn which stops optimization after adding a node
+physics.producers.pmtrack.ProjectionMatchingAlg.FineTuningEps:          0.0001  # relative change of the obj.fn which stops fine-tuning of optimized track
+physics.producers.pmtrack.ProjectionMatchingAlg.TrkValidationDist2D:    1.0     # max. distance [cm] used in the track validation in the "third" plane
+physics.producers.pmtrack.ProjectionMatchingAlg.HitTestingDist2D:       0.5     # max. distance [cm] used in testing compatibility of hits with the track
+physics.producers.pmtrack.ProjectionMatchingAlg.MinTwoViewFraction:     0.4     # min. fraction of track length covered with hits from many 2D views intertwinted with each other
+physics.producers.pmtrack.ProjectionMatchingAlg.NodeMargin3D:           3.0     # margin in [cm] around TPC for allowed track node positions
+physics.producers.pmtrack.ProjectionMatchingAlg.HitWeightZ:             1.0     # weights used for hits in U, V, Z planes:
+physics.producers.pmtrack.ProjectionMatchingAlg.HitWeightV:             1.0     #    - use lower values for planes where hit position is less reliable (e.g. due to S/N)
+physics.producers.pmtrack.ProjectionMatchingAlg.HitWeightU:             1.0     #    - relative ratios matter, sum does not need to be 1.0
 
 
-#physics.producers.pmtrack.PMAlgTracking:          			@local::standard_pmalgtracker
-#physics.producers.pmtrack.PMAlgTracking.MinSeedSize1stPass:     	20      # min. cluster size used to start building a track in the 1st pass
-#physics.producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:     	4       # ..and in the 2nd pass: differentiate to speed up finding long tracks
+physics.producers.pmtrack.PMAlgTracking:          			@local::standard_pmalgtracker
+physics.producers.pmtrack.PMAlgTracking.MinSeedSize1stPass:     	20      # min. cluster size used to start building a track in the 1st pass
+physics.producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:     	4       # ..and in the 2nd pass: differentiate to speed up finding long tracks
                                   						# w/o checking large number of possibilities, then use as small size
                                   						# as reasonnable for used clustering algorithm to complete the search
                                   						# in the second pass
-#physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:     	0.0     # CNN output threshold for track-like recognition; ClusterModuleLabel
+physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:     	0.0     # CNN output threshold for track-like recognition; ClusterModuleLabel
                                   						# needs to be associated to CNN outputs in case of threshold > 0; will
                                   						# exclude obvious EM from tracking and tag clean electron tracks as PDG=11
                                   						#
@@ -254,25 +254,25 @@ physics.producers.pmtrack.PMAlgTracking.MergeWithinTPC:         	false   # merge
 physics.producers.pmtrack.PMAlgTracking.MergeTransverseShift:   	2.0     #    - max. transverse displacement [cm] between tracks
 physics.producers.pmtrack.PMAlgTracking.MergeAngle:             	2.0     #    - max. angle [degree] between tracks (nearest segments)
                                   						#
-#physics.producers.pmtrack.PMAlgTracking.StitchBetweenTPCs:      	false   # stitch between TPCs; finds tracks best matching by angle, with limits:
-#physics.producers.pmtrack.PMAlgTracking.StitchDistToWall:       	3.0     #    - max. track endpoint distance [cm] to TPC boundary
-#physics.producers.pmtrack.PMAlgTracking.StitchTransverseShift:  	3.0     #    - max. transverse displacement [cm] between tracks
-#physics.producers.pmtrack.PMAlgTracking.StitchAngle:           	10.0    #    - max. angle [degree] between tracks (nearest segments)
+physics.producers.pmtrack.PMAlgTracking.StitchBetweenTPCs:      	false   # stitch between TPCs; finds tracks best matching by angle, with limits:
+physics.producers.pmtrack.PMAlgTracking.StitchDistToWall:       	3.0     #    - max. track endpoint distance [cm] to TPC boundary
+physics.producers.pmtrack.PMAlgTracking.StitchTransverseShift:  	3.0     #    - max. transverse displacement [cm] between tracks
+physics.producers.pmtrack.PMAlgTracking.StitchAngle:           	10.0    #    - max. angle [degree] between tracks (nearest segments)
                                   						#
-#physics.producers.pmtrack.PMAlgTracking.MatchT0inAPACrossing:   	false   # match T0 of APA-crossing tracks using PMAlgStitcher
-#physics.producers.pmtrack.PMAlgTracking.MatchT0inCPACrossing:   	false   # match T0 of CPA-crossing tracks using PMAlgStitcher
+physics.producers.pmtrack.PMAlgTracking.MatchT0inAPACrossing:   	false   # match T0 of APA-crossing tracks using PMAlgStitcher
+physics.producers.pmtrack.PMAlgTracking.MatchT0inCPACrossing:   	false   # match T0 of CPA-crossing tracks using PMAlgStitcher
 
-#physics.producers.pmtrack.PMAlgTracking.Validation:             	"hits"  # "hits":   uses hits to validate track
+physics.producers.pmtrack.PMAlgTracking.Validation:             	"hits"  # "hits":   uses hits to validate track
                                   						# "adc":   uses adc image to validate tracks
                                   						# "calib": uses hits to validate tracks and produce histograms to find adc thresholds
                                   						#          which should be used in "adc" mode
-#physics.producers.pmtrack.PMAlgTracking.AdcValidationThr:       	[1.0, 1.0, 1.0]    # threshold for not-empty pixel in the ADC image used for the track validation, per plane
-#physics.producers.pmtrack.PMAlgTracking.AdcImageAlg:            	@local::standard_dataprovideralg
-#physics.producers.pmtrack.PMAlgTracking.AdcImageAlg.CalibrateLifetime:  false
-#physics.producers.pmtrack.PMAlgTracking.AdcImageAlg.CalibrateAmpl:  	false
+physics.producers.pmtrack.PMAlgTracking.AdcValidationThr:       	[1.0, 1.0, 1.0]    # threshold for not-empty pixel in the ADC image used for the track validation, per plane
+physics.producers.pmtrack.PMAlgTracking.AdcImageAlg:            	@local::standard_dataprovideralg
+physics.producers.pmtrack.PMAlgTracking.AdcImageAlg.CalibrateLifetime:  false
+physics.producers.pmtrack.PMAlgTracking.AdcImageAlg.CalibrateAmpl:  	false
 
-#physics.producers.pmtrack.PMAlgCosmicTagging:     @local::standard_pmalgtagger
-#physics.producers.pmtrack.PMAlgVertexing:         @local::standard_pmavertexalg
+physics.producers.pmtrack.PMAlgCosmicTagging:     @local::standard_pmalgtagger
+physics.producers.pmtrack.PMAlgVertexing:         @local::standard_pmavertexalg
 physics.producers.pmtrack.PMAlgStitching:         @local::standard_pmastitchalg
 
 
