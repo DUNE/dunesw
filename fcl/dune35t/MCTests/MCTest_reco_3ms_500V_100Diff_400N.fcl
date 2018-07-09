@@ -3,6 +3,9 @@
 services.DetectorPropertiesService.Electronlifetime: 3000
 services.DetectorPropertiesService.Efield: [ 0.5, 0.782, 1.734 ]
 
-physics.producers.gaushit.MinSig: [ 20, 20, 20 ] # [ 5, 5, 10 ]
+#physics.producers.gaushit.MinSig: [ 20, 20, 20 ] # [ 5, 5, 10 ]
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 20.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 20.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 20.0
 physics.producers.fasthit.MinSigCol: 50
 physics.producers.fasthit.MinSigInd: 50

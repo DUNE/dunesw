@@ -46,39 +46,44 @@ outputs: {
 services.DetPedestalService: @local::dunedp_fixedpeds
 
 # DetSim flags.
-physics.producers.daq.NoiseOn:     true
-physics.producers.daq.PedestalOn:  true
-physics.producers.daq.DistortOn:   false
-physics.producers.daq.SuppressOn:  false #false when noise on!
+physics.producers.daq.NoiseOn:     	 true
+physics.producers.daq.PedestalOn:  	 true
+physics.producers.daq.DistortOn:   	 false
+physics.producers.daq.SuppressOn:  	 false #false when noise on
+physics.producers.daq.KeepEmptyChannels: true
 
 # DetSim services.
-#services.SimChannelExtractService: @local::scxgeneric
-services.ChannelNoiseService:      @local::chnoiseold
-services.PedestalAdditionService:  @local::padprovided
-services.AdcDistortService:        @local::stuckbits
-#services.AdcSuppressService:       @local::zslegacy
-services.AdcSuppressService:       @local::zsonline
-#services.AdcCompressService:       @local::cmpblock
-services.AdcCompressService:       @local::cmpreplace
+services.PedestalAdditionService:        @local::padprovided
 
-# Disable bad channels.
-#services.IChannelStatusService.BadChannels: [ ]
+services.DetPedestalService: @local::dunedp_fixedpeds
+services.DetPedestalService.FixedDetPedestal.PedMeanErrY: 0
+services.DetPedestalService.FixedDetPedestal.PedMeanErrZ: 0
+services.DetPedestalService.FixedDetPedestal.PedMeanY: 10
+services.DetPedestalService.FixedDetPedestal.PedMeanZ: 10
+services.DetPedestalService.FixedDetPedestal.PedRmsErrY: 0
+services.DetPedestalService.FixedDetPedestal.PedRmsErrZ: 0
+services.DetPedestalService.FixedDetPedestal.PedRmsY: 0
+services.DetPedestalService.FixedDetPedestal.PedRmsZ: 0
 
-# tune to have moderate noise level
-services.ChannelNoiseService: {
-  service_provider: ExponentialChannelNoiseService
-  NoiseNormU:   0.0
-  NoiseNormV:   0.0
-  NoiseNormZ:   0.0
-  NoiseWidthU: 150.0
-  NoiseWidthV: 150.0
-  NoiseWidthZ: 150.0
-  LowCutoffU:    0.0
-  LowCutoffV:    0.0
-  LowCutoffZ:    0.0
- WhiteNoiseU:   2.4
- WhiteNoiseV:   2.4
- WhiteNoiseZ:   2.4
- NoiseArrayPoints: 1000
-  OldNoiseIndex: false
+services.AdcDistortService:              @local::stuckbits
+services.AdcSuppressService:             @local::zsonline
+services.AdcCompressService:             @local::cmpreplace
+
+services.SimChannelExtractService.DPGainPerView: 2
+
+
+#===================New noise module ===========================================
+#Configure realistic noise service for DP detectors based on the 311 data
+#NB: Hardcoded unrotated geometry:
+
+services.ChannelNoiseService:{
+service_provider: DPhaseRealisticNoiseService
+NoiseModel:    "$MRB_SOURCE/dunetpc/dune/DetSim/NoiseModels/729-0_fft_mirror.root"    #path to the noise model root file
+RandomizeX:    15. #0.002
+RandomizeY:    15. #0.002
+Smooth:        1000
+SetFirst0:     false
+SetBaseline:   false   #if true sum baseline to real noise model
+NoiseArrayPoints: 1000
+OldNoiseIndex: false   #From ExponentialChannelNoiseService. Keep false
 }
