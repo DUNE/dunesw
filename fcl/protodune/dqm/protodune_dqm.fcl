@@ -19,7 +19,8 @@ MaxSignal:   50
 services.RawDigitPrepService.AdcChannelToolNames: [
   @sequence::services.RawDigitPrepService.AdcChannelToolNames,
   "dqmRawAdcPlotter",
-  "dqmPreparedAdcPlotter"
+  "dqmPreparedAdcPlotter",
+  "preparedAdcDetectorPlotColl"
 ]
 
 tools.dqmRawAdcPlotter: @local::tools.rawAdcPlotter
