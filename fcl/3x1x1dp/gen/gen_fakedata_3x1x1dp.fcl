@@ -46,6 +46,8 @@ outputs:
  }
 }
 
-physics.producers.generator.P0:             10
-physics.producers.generator.SigmaP:         5
-physics.producers.generator.FileName:       "/eos/user/a/ascarpel/selectedTrack/run840to842_subrun0to117_50cm_selected_tracks.txt"
+physics.producers.generator.EventsToProcess: 10
+physics.producers.generator.StartEvent:      0
+physics.producers.generator.PDG:             13
+physics.producers.generator.TrackFile:       "/eos/user/a/amedcalf/fake_data/tracks.txt"
+physics.producers.generator.HistFile:        "/eos/user/a/amedcalf/fake_data/corsika_hist.root"
