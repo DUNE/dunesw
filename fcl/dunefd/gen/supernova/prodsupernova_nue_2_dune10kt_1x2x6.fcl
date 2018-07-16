@@ -32,7 +32,7 @@ physics:
  
   producers:
   {
-    generator: @local::dunefd_1x2x6_supernova
+    generator: @local::dune10kt_1x2x6_supernova
     rns:       { module_type: "RandomNumberSaver" }
   }
  

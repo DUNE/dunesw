@@ -1,6 +1,6 @@
 #include "services_dune.fcl"
 #include "marley_dune.fcl"
-#include "radiological_gen_dune.fcl"
+#include "dune_radiological_model.fcl"
 
 process_name: MARLEYGen
 
@@ -34,7 +34,7 @@ physics:
   producers:
   {
     marley:    @local::dune_marley_nue_spectrum
-    radiogen:  @local::dunefd_1x2x6_ar39
+    radiogen:  @local::dune10kt_1x2x6_39ar
     rns:       { module_type: "RandomNumberSaver" }
   }
  
