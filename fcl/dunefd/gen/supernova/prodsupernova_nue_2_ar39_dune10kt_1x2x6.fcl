@@ -1,6 +1,6 @@
 #include "services_dune.fcl"
 #include "supernova_dune.fcl"
-#include "radiological_gen_dune.fcl"
+#include "dune_radiological_model.fcl"
 
 process_name: SupernovaGen
 
@@ -33,8 +33,8 @@ physics:
  
   producers:
   {
-    generator: @local::dunefd_1x2x6_supernova
-    radiogen:  @local::dunefd_1x2x6_ar39
+    generator: @local::dune10kt_1x2x6_supernova
+    radiogen:  @local::dune10kt_1x2x6_39ar
     rns:       { module_type: "RandomNumberSaver" }
   }
  
