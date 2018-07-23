@@ -12,23 +12,24 @@ physics.reco: ["caldata"]
 process_name: "dqm"
 
 LogLevel:     2
-FirstTick: 3000
-LastTick:  5000
+tools.tickRanges.plotTicks.begin: 3000
+tools.tickRanges.plotTicks.end:   5000
 MaxSignal:   50
 
-services.RawDigitPrepService.DisplayTools: ["dqmRawAdcPlotter", "dqmPreparedAdcPlotter"]
+services.RawDigitPrepService.AdcChannelToolNames: [
+  @sequence::services.RawDigitPrepService.AdcChannelToolNames,
+  "dqmRawAdcPlotter",
+  "dqmPreparedAdcPlotter",
+  "preparedAdcDetectorPlotColl"
+]
 
 tools.dqmRawAdcPlotter: @local::tools.rawAdcPlotter
 tools.dqmPreparedAdcPlotter: @local::tools.preparedAdcPlotter
 
 tools.dqmRawAdcPlotter.LogLevel:  @local::LogLevel
-tools.dqmRawAdcPlotter.FirstTick: @local::FirstTick
-tools.dqmRawAdcPlotter.LastTick:  @local::LastTick
 tools.dqmRawAdcPlotter.MaxSignal: @local::MaxSignal
 tools.dqmRawAdcPlotter.PlotFileName: "adcraw_run%0RUN%_evt%0EVENT%_ch%0CHAN1%-%0CHAN2%.png"
 
 tools.dqmPreparedAdcPlotter.LogLevel:  @local::LogLevel
-tools.dqmPreparedAdcPlotter.FirstTick: @local::FirstTick
-tools.dqmPreparedAdcPlotter.LastTick:  @local::LastTick
 tools.dqmPreparedAdcPlotter.MaxSignal: @local::MaxSignal 
 tools.dqmPreparedAdcPlotter.PlotFileName: "adcprep_run%0RUN%_evt%0EVENT%_ch%0CHAN1%-%0CHAN2%.png"

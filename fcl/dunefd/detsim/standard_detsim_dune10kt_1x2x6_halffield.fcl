@@ -1,0 +1,5 @@
+#include "standard_detsim_dune10kt.fcl"
+process_name: Detsim
+services.Geometry: @local::dune10kt_1x2x6_geo
+services.DetectorPropertiesService.Efield: [0.25, 0.333, 0.4]
+services.SignalShapingServiceDUNE.FieldResponseFname: "dune_response_250vpercm.root"

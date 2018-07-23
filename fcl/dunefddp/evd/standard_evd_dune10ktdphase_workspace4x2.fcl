@@ -1,12 +1,12 @@
 #include "evd_dune.fcl"
 process_name: EVD
 
-services.Geometry: @local::dphase3x1x1_geo
-services.RawDrawingOptions.TotalTicks: 1667
+services.Geometry: @local::dunedphase10kt_workspace4x2_geo
+services.RawDrawingOptions.TotalTicks: 20000
 services.DetectorPropertiesService.Efield:	[0.5, 4.0, 0.0]
 services.DetectorClocksService.ClockSpeedTPC: 2.5
-services.DetectorPropertiesService.NumberTimeSamples: 1667
-services.DetectorPropertiesService.ReadOutWindowSize: 1667
+services.DetectorPropertiesService.NumberTimeSamples: 20000
+services.DetectorPropertiesService.ReadOutWindowSize: 20000
 services.RecoDrawingOptions.HitModuleLabels: ["dprawhit"]
 services.RecoDrawingOptions.ClusterModuleLabels: ["trajcluster"]
 services.RecoDrawingOptions.TrackModuleLabels: ["pmtrack"]

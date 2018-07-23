@@ -5,3 +5,4 @@ gain: 25.0
 shaping: 2.0
 pulserAmplitude: 2
 pulserSource: 1
+pulserPeriod: 497
