@@ -46,7 +46,7 @@ add_subdirectory(SpaceChargeServices)
 add_subdirectory(SupernovaAna)
 add_subdirectory(DataOverlay)
 add_subdirectory(DAQSimAna)
-#add_subdirectory(3x1x1dp)
+add_subdirectory(3x1x1dp)
 add_subdirectory(CVN)
 add_subdirectory(BeamData)
 
