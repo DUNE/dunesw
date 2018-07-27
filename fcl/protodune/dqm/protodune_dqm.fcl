@@ -18,6 +18,10 @@ MaxSignal:   50
 
 services.RawDigitPrepService.AdcChannelToolNames: [
   @sequence::services.RawDigitPrepService.AdcChannelToolNames,
+  "adcPedestalFit",      # This is (re) running the pedestal finder. Not needed if done earlier.
+  "pdtps_adcChannelPedestalPlotter",
+  "pdtps_adcChannelPedestalRmsPlotter",
+  "pdtps_adcChannelPedestalPeakBinExcessPlotter",
   "dqmRawAdcPlotter",
   "dqmPreparedAdcPlotter",
   "preparedAdcDetectorPlotColl"
