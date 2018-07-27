@@ -74,7 +74,7 @@ outputs:
 #Corresponds to beam window at center of left TPC
 
 # Specific to the GEANT H4 Beam simulation by Nikos and paths at CERN
-physics.producers.generator.TreeName: "NTuples/GoodParticle"
+physics.producers.generator.GoodParticleTreeName: "NTuples/GoodParticle"
 physics.producers.generator.AllParticlesTreeName: "Detector/NP04front"
 physics.producers.generator.StartEvent: 0
 # Set the beam position and direction to fire the particles in the desired way
