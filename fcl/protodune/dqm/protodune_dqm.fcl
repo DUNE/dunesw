@@ -17,7 +17,7 @@
 
 LogLevel:     2
 tools.tickRanges.plotTicks.begin: 3000
-tools.tickRanges.plotTicks.end:   5000
+tools.tickRanges.plotTicks.end:   4000
 MaxSignal:   50
 
 services.RawDigitPrepService.AdcChannelToolNames: [
@@ -28,8 +28,11 @@ services.RawDigitPrepService.AdcChannelToolNames: [
   "pdtps_adcChannelPedestalRmsPlotter",
   "pdtps_adcChannelPedestalOrfPlotter",
   "pdtps_adcChannelPedestalPeakBinExcessPlotter",
-  "dqmRawAdcPlotter",
-  "dqmPreparedAdcPlotter",
+  "pdcht_channelTickPlotAll",
+  "pdcht_channelTickPlotApas",
+  "pdcht_channelTickPlotZplanes",
+  "pdcht_channelTickPlotCplanes",
+  "pdcht_channelTickPlotIplanes",
   "preparedAdcDetectorPlotColl"
 ]
 
