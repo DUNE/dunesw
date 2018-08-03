@@ -28,11 +28,11 @@ services.RawDigitPrepService.AdcChannelToolNames: [
   "pdtps_adcChannelPedestalRmsPlotter",
   "pdtps_adcChannelPedestalOrfPlotter",
   "pdtps_adcChannelPedestalPeakBinExcessPlotter",
-  "pdcht_channelTickPlotAll",
-  "pdcht_channelTickPlotApas",
-  "pdcht_channelTickPlotZplanes",
-  "pdcht_channelTickPlotCplanes",
-  "pdcht_channelTickPlotIplanes",
+  "pdcht_All",
+  "pdcht_Apas",
+  "pdcht_Zplanes",
+  "pdcht_Cplanes",
+  "pdcht_Iplanes",
   "preparedAdcDetectorPlotColl"
 ]
 
