@@ -1,0 +1,52 @@
+#include "services_dune.fcl"
+#include "neutimport.fcl" 
+
+process_name: SinglesGen
+
+services:
+{
+  TFileService: { fileName: "single_hist_dune.root" }
+  TimeTracker:       {}
+  MemoryTracker:         { } # default is one
+  RandomNumberGenerator: {} #ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::dunefddphase_simulation_services
+}
+services.Geometry: @local::dunedphase10kt_workspace4x2_geo
+
+source:
+{
+  module_type: EmptyEvent
+  timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
+  maxEvents:   -1          # Number of events to create
+  firstRun:    1           # Run number to use for this file
+  firstEvent:  1           # number of first event in the file
+}
+
+physics:
+{
+ producers:
+ {
+   generator: @local::standard_neutimport
+   rns:       { module_type: "RandomNumberSaver" }
+ }
+ simulate: [ rns, generator ]
+ stream1:  [ out1 ]
+ trigger_paths: [simulate]
+ end_paths:     [stream1]
+}
+
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "ndecay_gen_dunedphase10kt_workspace4x2.root"
+   dataTier:    "generated"
+   compressionLevel: 1
+ }
+}
+
+physics.producers.generator.P0:             10
+physics.producers.generator.SigmaP:         5
+physics.producers.generator.FileName:       "/afs/cern.ch/work/c/chalt/LArSoft/NEUT_ptoe+pi0_RooTracker.root"

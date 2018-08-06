@@ -1,0 +1,95 @@
+#include "services_dune.fcl"
+#include "largeantmodules_dune.fcl"
+#include "photpropservices_dune.fcl"
+
+process_name: G4
+
+services:
+{
+  TFileService: { fileName: "g4_hist.root" }
+  TimeTracker:       {}
+  MemoryTracker:         { } # default is one
+  RandomNumberGenerator: {} #ART native random number generator
+  message:      @local::standard_info
+  @table::dunedphase3x1x1_simulation_services
+
+  DetectorHolder: {}
+  ActionHolder: {}
+  PhysicsListHolder: {} 
+  PhysicsList: { 
+    PhysicsListName: "FTFP_BERT"
+    DumpList: false	
+    enableCerenkov: false
+    enableScintillation: true
+    ScintillationByParticleType: false
+    enableAbsorption: false   
+    enableRayleigh: false     
+    enableMieHG: false       
+    enableBoundary: false    
+    enableWLS: false
+  }
+  LArG4Detector : 
+  {
+    category: "world"
+    gdmlFileName_ : "3x1x1dphase_nowires.gdml"
+  }
+
+  MCTruthEventAction: {service_type: "MCTruthEventActionService"}
+  ParticleListAction:{service_type: "ParticleListActionService"}
+}
+
+services.PhotonVisibilityService.ParametrisedTimePropagation: false // this is still not supported in the new code
+
+source:
+{
+  module_type: RootInput
+  maxEvents:  -1        # Number of events to create
+}
+
+physics:
+{
+
+ producers:
+ {
+   larg4Main: { module_type: "larg4Main"
+               enableVisualization: false
+               macroPath: ".:./macros"
+               visMacro: "vis.mac"
+              }
+
+   elecDrift:  { module_type:            "SimDriftElectrons"
+		 SimulationLabel:        "larg4Main:LArG4DetectorServicevolTPCActive"
+		 StoreDriftedElectronClusters: true
+              }
+
+   photonProp:  { module_type:      "PhotonLibraryPropagation"
+		  DoSlowComponent:  false
+		  RiseTimeFast:     6
+		  RiseTimeSlow:     1300
+	 	  EDepModuleLabels: ["larg4Main:LArG4DetectorServicevolTPCActive"] }
+   photonPropS2:{ module_type:      "PhotonLibraryPropagationS2"
+		  Gain: 300
+	 	  DriftEModuleLabel: "elecDrift"
+		}
+
+   rns:       { module_type: "RandomNumberSaver" }
+ }
+
+ simulate: [  rns, larg4Main, elecDrift, photonProp, photonPropS2 ] 
+ stream1:  [ out1 ]
+
+ trigger_paths: [simulate] 
+ end_paths:     [stream1]  
+}
+
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_g4.root"
+   dataTier:    "simulated"
+   compressionLevel: 1
+ }
+}
+

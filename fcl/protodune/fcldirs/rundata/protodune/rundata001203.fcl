@@ -3,4 +3,6 @@ cryostat: coldbox
 apas: [5]
 gain: 25.0
 shaping: 2.0
-pulserAmplitude: 10
+pulserAmplitude: 7
+pulserSource: 1
+pulserPeriod: 497

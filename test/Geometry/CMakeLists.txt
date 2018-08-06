@@ -29,17 +29,17 @@ cet_test(geometry_dune35t HANDBUILT
   TEST_ARGS --rethrow-all --config ./test_geometry_dune35t.fcl
 )
 
-cet_test(geometry_dunedphase10kt HANDBUILT
-  DATAFILES test_geometry_dunedphase10kt.fcl
-  TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_geometry_dunedphase10kt.fcl
-)
+#cet_test(geometry_dunedphase10kt HANDBUILT
+#  DATAFILES test_geometry_dunedphase10kt.fcl
+#  TEST_EXEC lar
+#  TEST_ARGS --rethrow-all --config ./test_geometry_dunedphase10kt.fcl
+#)
 
-cet_test(geometry_dunedphase10kt_workspace HANDBUILT
-  DATAFILES test_geometry_dunedphase10kt_workspace.fcl
-  TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_geometry_dunedphase10kt_workspace.fcl
-)
+#cet_test(geometry_dunedphase10kt_workspace HANDBUILT
+#  DATAFILES test_geometry_dunedphase10kt_workspace.fcl
+#  TEST_EXEC lar
+#  TEST_ARGS --rethrow-all --config ./test_geometry_dunedphase10kt_workspace.fcl
+#)
 
 
 cet_test(geometry_iterator_loop_dunefd HANDBUILT
@@ -63,7 +63,7 @@ simple_plugin ( GeometryTest35 "module"
 		     art_Persistency_Provenance canvas
 		     art_Utilities canvas
                      ${MF_MESSAGELOGGER}
-                     ${MF_UTILITIES}
+                     
                      ${FHICLCPP}
                      cetlib cetlib_except
                      ${ROOT_BASIC_LIB_LIST}
@@ -84,7 +84,7 @@ cet_test(geometry_crmchannelmapping_test
             GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
-            ${MF_UTILITIES}
+            
             ${FHICLCPP}
             cetlib cetlib_except
   USE_BOOST_UNIT

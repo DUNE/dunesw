@@ -15,11 +15,13 @@ services:
   @table::dunefddphase_simulation_services
 }
 
+services.Geometry: @local::dunedphase10kt_workspace4x2_geo
+
 #source is now a root file
 source:
 {
   module_type: RootInput
-  maxEvents:  10        # Number of events to create
+  maxEvents: -1        # Number of events to create
 }
 
 # Define and configure some modules to do work on each event.
@@ -64,19 +66,17 @@ outputs:
  }
 }
 
-services.Geometry: @local::dunedphase10kt_workspace_geo
 services.LArG4Parameters.MinNumberOfElCluster: 20
-
 services.PhotonVisibilityService: @local::dune10kt_workspace_photonvisibilityservice
 services.LArG4Parameters.UseCustomPhysics: true
-services.LArG4Parameters.EnabledPhysics: [ "Em",
-                                           "FastOptical",
-                                           "SynchrotronAndGN",
-                                           "Ion",
-                                           "Hadron",
-                                           "Decay",
-                                           "HadronElastic",
-                                           "Stopping",
-                                           "NeutronTrackingCut" ]
-
-
+services.LArG4Parameters.EnabledPhysics: [
+         "Em",
+         "FastOptical",
+         "SynchrotronAndGN",
+         "Ion",
+         "Hadron",
+         "Decay",
+         "HadronElastic",
+         "Stopping"
+      ]
+services.LArG4Parameters.KeepEMShowerDaughters: true
