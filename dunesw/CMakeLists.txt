@@ -49,6 +49,8 @@ add_subdirectory(DAQSimAna)
 add_subdirectory(3x1x1dp)
 add_subdirectory(CVN)
 add_subdirectory(BeamData)
+add_subdirectory(Calib)
+add_subdirectory(CalibServices)
 
 # Respect the order specified in lar_build, which is:
 #
