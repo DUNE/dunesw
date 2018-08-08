@@ -48,8 +48,8 @@ dunefd_disp:
  ScanOptions:              @local::dunefd_scanopt
  LArG4Parameters:          @local::dunefd_largeantparameters
  LArVoxelCalculator:       @local::dunefd_larvoxelcalculator
-# InfoTransfer: 		   @local::dunefd_infotransfer
- DetectorClocksService:              @local::dunefd_detectorclocks # defined in detectorclocks_dune.fcl
+ DetectorClocksService:    @local::dunefd_detectorclocks # defined in detectorclocks_dune.fcl
+ SpaceChargeService:       @local::standard_spacecharge
 }
 dunefd_disp.DetPedestalService: @local::dune_fixedpeds
 dunefd_disp.DetPedestalService.FixedDetPedestal.PedMeanU: 1800

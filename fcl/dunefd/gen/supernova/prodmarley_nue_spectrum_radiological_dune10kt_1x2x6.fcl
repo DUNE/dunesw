@@ -1,6 +1,6 @@
 #include "services_dune.fcl"
 #include "marley_dune.fcl"
-#include "radiological_gen_dune_full.fcl"
+#include "dune_radiological_model.fcl"
 
 process_name: MARLEYGen
 
@@ -28,10 +28,10 @@ physics:
   producers:
   {
     marley:      @local::dune_marley_nue_spectrum
-    ar39Gen:     @local::dune10kt_1x2x6_39ar
+    generator:     @local::dune10kt_1x2x6_39ar
     ar42Gen:     @local::dune10kt_1x2x6_42ar
     apaGen:      @local::dune10kt_1x2x6_APA      #Co60 in APA frame
-    cNeutronGen: @local::dune10kt_1x2x6_fc       #Originally use for K40 in Field Cage. Now repurposed  for Neutrons from concrete.
+    cNeutronGen: @local::dune10kt_1x2x6_neutron       #Originally use for K40 in Field Cage. Now repurposed  for Neutrons from concrete.
     cpaGen:      @local::dune10kt_1x2x6_CPA      #K40 from CPA
     kr85Gen:     @local::dune10kt_1x2x6_85kr     #Kr in LAr
     rn222Gen:    @local::dune10kt_1x2x6_222rn    #Rn in LAr
@@ -39,7 +39,7 @@ physics:
     rns:       { module_type: "RandomNumberSaver" }
   }
  
-  simulate:      [ rns, marley, ar39Gen, ar42Gen, apaGen, cNeutronGen, cpaGen, kr85Gen, rn222Gen, po210Gen ]
+  simulate:      [ rns, marley, generator, ar42Gen, apaGen, cNeutronGen, cpaGen, kr85Gen, rn222Gen, po210Gen ]
   stream1:       [ out1 ]
   trigger_paths: [ simulate ] 
   end_paths:     [ stream1 ]  

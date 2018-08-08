@@ -125,7 +125,9 @@ physics.producers.dprawhit.GroupMinADC:       		-1    # minimum ADC count betwee
 physics.producers.dprawhit.DoMergePeaks:      		true 	# true: merge two peaks of the same group into one before fitting
 physics.producers.dprawhit.MergeADCSumThreshold:  	0.05   	# merge two peaks if (ADC sum of the smaller peak) < MergeADCSumThreshold*(ADC sum of the bigger peak) AND
 physics.producers.dprawhit.MergeMaxADCThreshold:  	0.2   	# merge two peaks if (height of the smaller peak) < MergeMaxADCThreshold*(height of the bigger peak) OR
-physics.producers.dprawhit.MinRelativePeakHeight:	0.05	# merge two peaks if (relative peak height of the smaller peak) < MinRelativePeakHeight*(peak height of the smaller peak)
+physics.producers.dprawhit.MinRelativePeakHeightLeft:	0.1	# merge two peaks if (relative peak height of the smaller peak) < MinRelativePeakHeight*(peak height of the smaller peak)
+physics.producers.dprawhit.MinRelativePeakHeightRight:	0.1	# merge two peaks if (relative peak height of the smaller peak) < MinRelativePeakHeight*(peak height of the smaller peak)
+physics.producers.dprawhit.MergeMaxADCLimit:	25	# merge two peaks only if (peak height of either peak) <= MergeMaxADCLimit
 
 #filterings grouped and merged peaks
 physics.producers.dprawhit.MinADCSum:             	10.0  	# threshold for ADC sum (in ADC*ticks). Groups of peaks with smaller values are neither fitted nor stored.
