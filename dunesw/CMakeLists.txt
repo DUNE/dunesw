@@ -52,6 +52,8 @@ add_subdirectory(3x1x1dp)
 add_subdirectory(CVN)
 add_subdirectory(BeamData)
 
+add_subdirectory(RegCVN)
+
 # Respect the order specified in lar_build, which is:
 #
 #     "SoftRelTools",
