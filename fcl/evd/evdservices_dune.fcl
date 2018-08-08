@@ -21,7 +21,7 @@ dunefd_recodrawingopt.ClusterModuleLabels:     ["fuzzy"]
 dunefd_recodrawingopt.DrawClusters:            0
 dunefd_simdrawingopt:                         @local::standard_simdrawingopt 
 dunefd_simdrawingopt.ShowMCTruthText:         false
-dunefd_simdrawingopt.ShowMCTruthVectors:      false
+dunefd_simdrawingopt.ShowMCTruthVectors:      0
 dunefd_simdrawingopt.ShowMCTruthTrajectories: false
 dunefd_analysisdrawingopt:               @local::standard_analysisdrawingopt
 dunefd_analysisdrawingopt.CalorimetryModuleLabels: ["pmtrackcalodc"]
