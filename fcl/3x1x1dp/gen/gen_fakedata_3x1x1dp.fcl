@@ -1,0 +1,53 @@
+#include "services_dune.fcl"
+#include "CORSIKAGendp.fcl"
+
+process_name: SinglesGen
+
+services:
+{
+  TFileService: { fileName: "single_hist_dune.root" }
+  TimeTracker:       {}
+  MemoryTracker:         { } # default is one
+  RandomNumberGenerator: {} #ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::dunedphase3x1x1_simulation_services
+}
+
+source:
+{
+  module_type: EmptyEvent
+  timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
+  maxEvents:   -1          # Number of events to create
+  firstRun:    1           # Run number to use for this file
+  firstEvent:  1           # number of first event in the file
+}
+
+physics:
+{
+ producers:
+ {
+   generator: @local::standard_311_fake_data
+   rns:       { module_type: "RandomNumberSaver" }
+ }
+ simulate: [ rns, generator ]
+ stream1:  [ out1 ]
+ trigger_paths: [simulate]
+ end_paths:     [stream1]
+}
+
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "single_gen_3x1x1dp.root"
+   dataTier:    "generated"
+   compressionLevel: 1
+ }
+}
+
+physics.producers.generator.EventsToProcess: 10
+physics.producers.generator.StartEvent:      0
+physics.producers.generator.PDG:             13
+physics.producers.generator.TrackFile:       "/eos/user/a/amedcalf/fake_data/tracks.txt"
+physics.producers.generator.HistFile:        "/eos/user/a/amedcalf/fake_data/corsika_hist.root"

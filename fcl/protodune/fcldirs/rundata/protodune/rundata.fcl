@@ -5,3 +5,4 @@ shaping: 2.0
 leakage: 500
 hvfrac: 0.0
 pulserAmplitude: 0
+pulserPeriod: 497
