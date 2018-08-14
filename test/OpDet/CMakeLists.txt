@@ -23,27 +23,27 @@
 # crash with a SEGFAULT on Mac OS,
 # they will be executed only on SLF for now
 if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-   cet_test(optical_sim_dune35t HANDBUILT
-     DATAFILES test_optical_sim_dune35t.fcl
-     TEST_EXEC lar
-     TEST_ARGS --rethrow-all --config ./test_optical_sim_dune35t.fcl 
-   )
+#   cet_test(optical_sim_dune35t HANDBUILT
+#     DATAFILES test_optical_sim_dune35t.fcl
+#     TEST_EXEC lar
+#     TEST_ARGS --rethrow-all --config ./test_optical_sim_dune35t.fcl 
+#   )
 
-   cet_test(optical_digi_dune35t HANDBUILT
-     DATAFILES test_optical_digi_dune35t.fcl
-     TEST_EXEC lar
-     TEST_ARGS --rethrow-all --config ./test_optical_digi_dune35t.fcl 
-   )
+#   cet_test(optical_digi_dune35t HANDBUILT
+#     DATAFILES test_optical_digi_dune35t.fcl
+#     TEST_EXEC lar
+#     TEST_ARGS --rethrow-all --config ./test_optical_digi_dune35t.fcl 
+#   )
 
-   cet_test(optical_reco_dune35t HANDBUILT
-     DATAFILES test_optical_reco_dune35t.fcl
-     TEST_EXEC lar
-     TEST_ARGS --rethrow-all --config ./test_optical_reco_dune35t.fcl 
-   )
+#   cet_test(optical_reco_dune35t HANDBUILT
+#     DATAFILES test_optical_reco_dune35t.fcl
+#     TEST_EXEC lar
+#     TEST_ARGS --rethrow-all --config ./test_optical_reco_dune35t.fcl 
+#   )
 
-   cet_test(build_oplib_dune35t HANDBUILT
-     DATAFILES test_build_oplib_dune35t.fcl
-     TEST_EXEC lar
-     TEST_ARGS --rethrow-all --config ./test_build_oplib_dune35t.fcl 
-   )
+#   cet_test(build_oplib_dune35t HANDBUILT
+#     DATAFILES test_build_oplib_dune35t.fcl
+#     TEST_EXEC lar
+#     TEST_ARGS --rethrow-all --config ./test_build_oplib_dune35t.fcl 
+#   )
 endif()
