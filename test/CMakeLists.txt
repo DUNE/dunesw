@@ -28,11 +28,11 @@ if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
      TEST_EXEC lar
      TEST_ARGS --rethrow-all --config ./test_donothing_dune35t.fcl
    )
-   cet_test(donothing_simul_dune35t HANDBUILT
-     DATAFILES test_donothing_simul_dune35t.fcl
-     TEST_EXEC lar
-     TEST_ARGS --rethrow-all --config ./test_donothing_simul_dune35t.fcl
-   )
+#   cet_test(donothing_simul_dune35t HANDBUILT
+#     DATAFILES test_donothing_simul_dune35t.fcl
+#     TEST_EXEC lar
+#     TEST_ARGS --rethrow-all --config ./test_donothing_simul_dune35t.fcl
+#   )
 endif()
 
 cet_test(donothing_dunefd HANDBUILT

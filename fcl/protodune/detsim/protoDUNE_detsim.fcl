@@ -1,6 +1,7 @@
 #include "services_dune.fcl"
 #include "detsimmodules_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
+#include "CRT.fcl"
 
 #include "tools_dune.fcl"
 
@@ -30,10 +31,11 @@ physics:
  {
    daq:            @local::dune_detsim
    opdigi:         @local::protodune_opdigi
+   crt:            @local::CRTSim_standard
    rns:            { module_type: "RandomNumberSaver" }
  }
  
- simulate: [ rns, daq, opdigi]
+ simulate: [ rns, daq, opdigi, crt]
  
  stream1:  [ out1 ]
 
