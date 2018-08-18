@@ -62,7 +62,7 @@ lbne_raw_data 	v1_04_26
 dune_pardata	v01_34_00
 genie_xsec      v2_12_10
 genie_phyopt    v2_12_10
-cetbuildtools	v7_03_03	-	only_for_build
+cetbuildtools	v7_04_00	-	only_for_build
 dune_raw_data   v1_17_13
 caffe           v1_0k           -       optional
 end_product_list
