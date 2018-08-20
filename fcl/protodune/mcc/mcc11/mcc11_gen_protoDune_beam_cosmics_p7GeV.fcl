@@ -1,0 +1,13 @@
+#include "mcc11_gen_protoDune_beam_cosmics.fcl"
+
+# Specific .fcl for the +7 GeV/c momentum setting
+
+services.TFileService.fileName: "gen_protoDune_beam_p7GeV_cosmics_hist.root"
+source.maxEvents: 1000000
+outputs.out1.fileName: "gen_protoDune_beam_p7GeV_cosmics.root"
+
+
+physics.producers.generator.FileName: "/pnfs/dune/persistent/dunepro/beam_data/simulation/mcc10/H4_v34b_80000_7GeV_-27.7_10M.root"
+physics.producers.generator.Intensity: 1.0e6
+#physics.producers.generator.Intensity: 0.133e6 # Intensity required to give us a good particle rate of ~25 Hz
+
