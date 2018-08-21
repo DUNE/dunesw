@@ -1,7 +1,7 @@
 #include "services_dune.fcl"
 #include "caldata_dune.fcl"
 #include "hitfindermodules_dune.fcl"
-#include "SpacePointSolver.fcl"
+#include "SpacePointSolver_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
@@ -57,7 +57,7 @@ physics:
   gaushit:            @local::dunefd_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
 # space point solver
-  reco3d:             @local::standard_spacepointsolver
+  reco3d:             @local::protodunespmc_spacepointsolver
 # actual disambiguation
   hitfd:              @local::dunefd_hitfinderfd
   hitpdune:           @local::pdune_disambigfromsp
