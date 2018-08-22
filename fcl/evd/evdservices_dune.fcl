@@ -21,7 +21,7 @@ dunefd_recodrawingopt.ClusterModuleLabels:     ["fuzzy"]
 dunefd_recodrawingopt.DrawClusters:            0
 dunefd_simdrawingopt:                         @local::standard_simdrawingopt 
 dunefd_simdrawingopt.ShowMCTruthText:         false
-dunefd_simdrawingopt.ShowMCTruthVectors:      false
+dunefd_simdrawingopt.ShowMCTruthVectors:      0
 dunefd_simdrawingopt.ShowMCTruthTrajectories: false
 dunefd_analysisdrawingopt:               @local::standard_analysisdrawingopt
 dunefd_analysisdrawingopt.CalorimetryModuleLabels: ["pmtrackcalodc"]
@@ -48,8 +48,8 @@ dunefd_disp:
  ScanOptions:              @local::dunefd_scanopt
  LArG4Parameters:          @local::dunefd_largeantparameters
  LArVoxelCalculator:       @local::dunefd_larvoxelcalculator
-# InfoTransfer: 		   @local::dunefd_infotransfer
- DetectorClocksService:              @local::dunefd_detectorclocks # defined in detectorclocks_dune.fcl
+ DetectorClocksService:    @local::dunefd_detectorclocks # defined in detectorclocks_dune.fcl
+ SpaceChargeService:       @local::standard_spacecharge
 }
 dunefd_disp.DetPedestalService: @local::dune_fixedpeds
 dunefd_disp.DetPedestalService.FixedDetPedestal.PedMeanU: 1800

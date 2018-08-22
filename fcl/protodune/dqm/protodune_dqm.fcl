@@ -5,22 +5,35 @@
 #
 # Run protodune reco only through data prep and create plots for DQM.
 
-#include "protoDUNE_reco_noise.fcl"
+# User is now expected to provide a top-level fcl file
+# that creates ore reads in RawDigits and calls a module
+# (most likely DataPrepModule) that runs the RawDigitPrepService.
 
-physics.reco: ["caldata"]
+##include "protoDUNE_reco_noise.fcl"
 
-process_name: "dqm"
+#physics.reco: ["caldata"]
+
+#process_name: "dqm"
 
 LogLevel:     2
 tools.tickRanges.plotTicks.begin: 3000
-tools.tickRanges.plotTicks.end:   5000
+tools.tickRanges.plotTicks.end:   4000
 MaxSignal:   50
 
 services.RawDigitPrepService.AdcChannelToolNames: [
-  @sequence::services.RawDigitPrepService.AdcChannelToolNames,
-  "dqmRawAdcPlotter",
-  "dqmPreparedAdcPlotter",
-  "preparedAdcDetectorPlotColl"
+  #@sequence::services.RawDigitPrepService.AdcChannelToolNames,
+  "digitReader",
+  "adcPedestalFit",      # This is (re) running the pedestal finder. Not needed if done earlier.
+  "pdtps_adcChannelPedestalPlotter",
+  "pdtps_adcChannelPedestalRmsPlotter",
+  "pdtps_adcChannelPedestalOrfPlotter",
+  "pdtps_adcChannelPedestalPeakBinExcessPlotter",
+  "pdcht_All",
+  "pdcht_Apas",
+  "pdcht_Zplanes",
+  "pdcht_Cplanes",
+  "pdcht_Iplanes",
+  "rawAdcDetectorPlotColl"
 ]
 
 tools.dqmRawAdcPlotter: @local::tools.rawAdcPlotter
