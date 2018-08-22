@@ -1,0 +1,14 @@
+# mcreco_protodune_dqm.fcl
+
+# David Adams
+# August 2018
+#
+# Run protodune reco only through data prep and create plots for DQM.
+
+#include "protoDUNE_reco_noise.fcl"
+
+physics.reco: ["caldata"]
+
+process_name: "dqm"
+
+#include "protodune_dqm.fcl"

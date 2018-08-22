@@ -1,0 +1,13 @@
+#include "calorimetry_pdune.fcl"
+
+BEGIN_PROLOG
+
+protodunespmc_calibrationdedx :
+{
+    module_type:             CalibrationdEdXPDSP
+    TrackModuleLabel:        "pandoraTrack"
+    CalorimetryModuleLabel:  "pandoracalo"
+    CaloAlg:                 @local::pdune_sp_calorimetryalgmcc10mc
+}
+
+END_PROLOG
