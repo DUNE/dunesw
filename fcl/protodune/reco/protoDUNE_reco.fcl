@@ -54,7 +54,7 @@ physics:
 # convert raw::RawDigit to recob::wire
   caldata:            @local::producer_adcprep
 # actual hit finder
-  gaushit:            @local::dunefd_gaushitfinder
+  gaushit:            @local::protodunespmc_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
 # space point solver
   reco3d:             @local::protodunespmc_spacepointsolver
