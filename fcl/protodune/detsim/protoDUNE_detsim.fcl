@@ -62,7 +62,7 @@ services.DetPedestalService: @local::dune_fixedpeds
 physics.producers.daq.NoiseOn:     true
 physics.producers.daq.PedestalOn:  true
 physics.producers.daq.DistortOn:   false
-physics.producers.daq.SuppressOn:  true
+physics.producers.daq.SuppressOn:  false
 
 # DetSim services.
 services.SimChannelExtractService: @local::scxgeneric
