@@ -52,6 +52,6 @@ outputs:
    fileName:    "MUSUN_gen_dunefd_filtered.root"
    dataTier:    "generated"
    compressionLevel: 1
-   # SelectEvents: [fpath]
+   SelectEvents: [fpath]
  }
 }
