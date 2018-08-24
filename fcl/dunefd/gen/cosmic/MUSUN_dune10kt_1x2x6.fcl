@@ -1,0 +1,115 @@
+BEGIN_PROLOG
+
+ # No experiment specific configurations because MUSUN is detector agnostic
+
+standard_MUSUN_1x2x6:
+{
+ module_type:           "MUSUN"
+
+ PDG:                    -13        # PdG codes of particles to make
+ ChargeRatio:            1.38       # Ratio of particle/anti-particle
+                                    # For one particle type set equal to 0.
+                                    
+ # Directory where ROOT pdf file is. If not using one of the standard configurations 
+ # you will !!NEED!! to change this to your own directory!!!  
+ InputDir:               "/dune/data/users/warburton/MUSUN/"
+ InputFile1:             "muint-dune4850-mr-new.dat" # Table of muon intensities for theta and phi
+ InputFile2:             "musp-dune4850-mr-new.dat"  # Binary file of energies for theta and depths
+ InputFile3:             "depth-dune4850-mr-new.dat" # Table of slant depths for theta and phi
+
+ CavernAngle:            7          # Angle of the detector from the East to South.
+ RockDensity:            2.70       # Default rock density is 2.70 g cm-3. If this is
+ 			 	    # changed then the three input files need to be 
+				    # remade. If there is a desire for this contact
+				    # Vitaly Kudryavtsev at V.Kudryavtsev@shef.ac.uk
+
+ Emin:                   1.   	    # Minimum Kinetic Energy GeV
+ Emax:                   1000000.   # Maximum Kinetic Energy GeV
+ 
+ Thetamin:               0.         # Minimum angle, must be more than or equal to 0. 
+ Thetamax:               90.        # Maximum angle, must be less than or equal to 90	
+
+ Phimin:                 0.         # Minimum angle, must be more than or equal to 0. 
+ Phimax:                 360.       # Maximum angle, must be less than or equal to 360
+	
+ # You have to change all these dimensions if you change the size of the
+ # parallelepiped. The dimensions are given in cm.
+ # Ideally want the surface on which the muons are sampled to be extended by 5 m
+ # in all directions into rock, except top (y) where extension is 7m.
+ # Using /dune/app/users/talion/PrintDetBounds.C and specifiying which GDML file is
+ # desired, the co-ordinates of detector centre in the world volume and the extent
+ # of rock from detector are written out.
+ # Macro is also in dunetpc/dune/Geometry/gdml/PrintDetBounds.C
+
+ # (PAR 2018-08-07) This is the output for dune10kt_v3_1x2x6_nowires.gdml:
+
+ # Units: cm
+ # Coordinates:            x makes a RHS   y is vertical   z is beam direction
+ # World Dimensions:       x = 7219.32     y = 7817.7      z = 8306.48
+ # Det Dimensions:         x = 1219.32     y = 1817.7      z = 2306.48
+ # Det Center:             x = 0           y = 120.75      z = 570.294
+ #
+ # Detector Enclosure Boundaries (everything outside is rock):
+ #         x: -609.662     to      609.662
+ #         y: -788.099     to      1029.6
+ #         z: -582.946     to      1723.53
+ #
+ # Amount of rock on each side:
+ #         -x: 3000
+ #         +x: 3000
+ #         -y: 3120.75
+ #         +y: 2879.25
+ #         -z: 3570.29
+ #         +z: 2429.71
+
+ igflag:                 1         # If want muons sampled from parallelepiped, not a sphere.
+ Xmin:                  -1077.     # Minimum X position cm
+ Xmax:                   1077.     # Maximum X position cm
+ Ymin:                  -1088.     # Minimum Y position cm
+ Ymax:                   1630.     # Maximum Y position cm
+ Zmin:                  -1083.     # Minimum Z position cm
+ Zmax:                   2239.     # Maximum Z position cm
+
+
+ # Below co-ordinates are for dune10kt_v1_nowires.gdml, output is given too...
+ # Units: cm
+ # Coordinates:  	x makes a RHS 	y is vertical 	z is beam direction
+ # World Dimensions: 	x = 9554.03	y = 9417.7	z = 14321.9
+ # Det Dimensions: 	x = 1954.03	y = 1817.7	z = 6721.89
+ # Det Center: 		x = 0		y = 120.75	z = 2778
+ #
+ # Detector Enclosure Boundaries (everything outside is rock):
+ #	x: -977.014	to	977.014
+ #	y: -788.099	to	1029.6
+ #	z: -582.946	to	6138.94
+ #
+ # Amount of rock on each side:
+ #	-x: 3800
+ #	+x: 3800
+ #	-y: 3920.75
+ #	+y: 3679.25
+ #	-z: 6578
+ #	+z: 1022 
+
+# igflag:                 1         # If want muons sampled from parallelepiped, not a sphere.
+# Xmin:                   -1477.    # Minumum X position cm
+# Xmax:                   1477.     # Maximum X position cm
+# Ymin:                   -1288.    # Minumum Y position cm
+# Ymax:                   1730.     # Maximum Y position cm
+# Zmin:                   -1083.    # Minumum Z position cm
+# Zmax:                   6639.     # Maximum Z position cm
+
+#   Vitaly's Fortran code for LBNE uses these positions. 
+# Xmin:                   -1500.    # Minumum X position cm
+# Xmax:                   1500.     # Maximum X position cm
+# Ymin:                   -1400.    # Minumum Y position cm
+# Ymax:                   1600.     # Maximum Y position cm
+# Zmin:                   -3500.    # Minumum Z position cm
+# Zmax:                   3500.     # Maximum Z position cm
+ 
+ T0:                     0.         # starting time
+ SigmaT:                 0.         # variation in the starting time
+ TDist:                  0          # 0 - uniform, 1 - gaussian 
+}
+
+END_PROLOG
