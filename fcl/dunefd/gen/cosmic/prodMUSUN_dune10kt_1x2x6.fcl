@@ -1,0 +1,6 @@
+#include "MUSUN_dune10kt_1x2x6.fcl"
+#include "prodMUSUN_dune10kt.fcl"
+
+services.Geometry: @local::dune10kt_1x2x6_geo
+physics.producers.generator: @local::standard_MUSUN_1x2x6
+output1.out1.fileName: "MUSUN_gen_dunefd_1x2x6.root"
