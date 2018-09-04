@@ -1,0 +1,9 @@
+#include "protoDUNE_g4.fcl"
+
+services.DetectorPropertiesService.Electronlifetime: 3000
+services.SpaceCharge.EnableSimEfieldSCE: true
+services.SpaceCharge.EnableSimSpatialSCE: true
+services.SpaceCharge.EnableSimulationSCE: true
+
+services.SpaceCharge.RepresentationType: Voxelized
+services.SpaceCharge.InputFilename: "SpaceChargeProtoDUNE/dispOutput_ProtoDUNESP_withFlowNegX_E500.root"
