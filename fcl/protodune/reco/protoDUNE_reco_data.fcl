@@ -9,9 +9,10 @@ physics.reco: [
 
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 
-services.DetectorPropertiesService.ReadOutWindowSize: 10000
-services.DetectorPropertiesService.NumberTimeSamples: 10000
-
-services.RawDigitPrepService.DoPedestalAdjustment: true
-services.PedestalEvaluationService:   @local::adcped_median
-services.AdcRoiBuildingService:       @local::adcroi_keepall
+services.RawDigitPrepService.AdcChannelToolNames: [
+    "digitReader",
+    "adcPedestalFit",
+    "adcSampleFiller",
+    "adcVintageDeconvoluter",
+    "adcThresholdSignalFinder"
+]
