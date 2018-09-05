@@ -33,7 +33,8 @@ services.RawDigitPrepService.AdcChannelToolNames: [
   "pdcht_Zplanes",
   "pdcht_Cplanes",
   "pdcht_Iplanes",
-  "rawAdcDetectorPlotColl"
+  "rawAdcDetectorPlotColl",
+  "pd_evtview"
 ]
 
 tools.dqmRawAdcPlotter: @local::tools.rawAdcPlotter
