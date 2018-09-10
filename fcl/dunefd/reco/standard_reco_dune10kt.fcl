@@ -273,7 +273,6 @@ physics.producers.pmtrajfittcpid.TrackModuleLabel:        "pmtrajfittc"
 
 
 physics.producers.linecluster.HitFinderModuleLabel:     "hitfd"
-physics.producers.trajcluster.TrajClusterAlg.HitFinderModuleLabel:   "hitfd"
 
 physics.producers.calo.TrackModuleLabel:                "costrk"
 physics.producers.calo.SpacePointModuleLabel:           "costrk"

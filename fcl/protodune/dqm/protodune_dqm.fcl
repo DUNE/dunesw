@@ -3,37 +3,30 @@
 # David Adams
 # May 2018
 #
-# Run protodune reco only through data prep and create plots for DQM.
+# Dataprep tool configuration for protoDUNE DQM.
 
-#include "protoDUNE_reco_noise.fcl"
+# User is now expected to provide a top-level fcl file
+# that creates or reads in RawDigits and calls a module
+# (most likely DataPrepModule) that runs the RawDigitPrepService.
+#
+# The tools write many large files for each event and so this
+# is typically run with a small number of events.
 
-physics.reco: ["caldata"]
-
-process_name: "dqm"
-
-LogLevel:     2
 tools.tickRanges.plotTicks.begin: 3000
-tools.tickRanges.plotTicks.end:   5000
-MaxSignal:   50
+tools.tickRanges.plotTicks.end:   4000
 
 services.RawDigitPrepService.AdcChannelToolNames: [
-  @sequence::services.RawDigitPrepService.AdcChannelToolNames,
-  "adcPedestalFit",      # This is (re) running the pedestal finder. Not needed if done earlier.
+  "digitReader",
+  "adcPedestalFit", 
   "pdtps_adcChannelPedestalPlotter",
   "pdtps_adcChannelPedestalRmsPlotter",
+  "pdtps_adcChannelPedestalOrfPlotter",
   "pdtps_adcChannelPedestalPeakBinExcessPlotter",
-  "dqmRawAdcPlotter",
-  "dqmPreparedAdcPlotter",
-  "preparedAdcDetectorPlotColl"
+  "pdcht_All",
+  "pdcht_Apas",
+  "pdcht_Zplanes",
+  "pdcht_Cplanes",
+  "pdcht_Iplanes",
+  "rawAdcDetectorPlotColl",
+  "pd_evtview"
 ]
-
-tools.dqmRawAdcPlotter: @local::tools.rawAdcPlotter
-tools.dqmPreparedAdcPlotter: @local::tools.preparedAdcPlotter
-
-tools.dqmRawAdcPlotter.LogLevel:  @local::LogLevel
-tools.dqmRawAdcPlotter.MaxSignal: @local::MaxSignal
-tools.dqmRawAdcPlotter.PlotFileName: "adcraw_run%0RUN%_evt%0EVENT%_ch%0CHAN1%-%0CHAN2%.png"
-
-tools.dqmPreparedAdcPlotter.LogLevel:  @local::LogLevel
-tools.dqmPreparedAdcPlotter.MaxSignal: @local::MaxSignal 
-tools.dqmPreparedAdcPlotter.PlotFileName: "adcprep_run%0RUN%_evt%0EVENT%_ch%0CHAN1%-%0CHAN2%.png"
