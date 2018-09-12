@@ -3,9 +3,9 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 
-parent dunetpc v07_02_00
+parent dunetpc v07_05_00_01
 
-defaultqual e15
+defaultqual e17
 
 # These optional lines define where headers, libraries, and executables go and should
 # be used only if your product does not conform to the defaults.
@@ -55,15 +55,15 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft         v07_02_00
+larsoft         v07_05_00
 artdaq_core	v3_02_04
-duneutil        v07_00_01	-	optional
+duneutil        v07_05_00	-	optional
 lbne_raw_data 	v1_04_26
-dune_pardata	v01_34_00
+dune_pardata	v01_36_00
 genie_xsec      v2_12_10        -       optional
 genie_phyopt    v2_12_10
 cetbuildtools	v7_04_00	-	only_for_build
-dune_raw_data   v1_17_13
+dune_raw_data   v1_17_16
 caffe           v1_0k           -       optional
 end_product_list
 
@@ -75,9 +75,6 @@ qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	dune_pardata    genie_xse
 c2:debug	c2:debug	c2:debug	c2:s70:debug     c2:nu:s70:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:debug  	c2:nu:s70:debug
 c2:opt		c2:opt		c2:opt		c2:s70:opt	 c2:nu:s70:prof		-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:prof   	c2:nu:s70:prof
 c2:prof		c2:prof		c2:prof		c2:s70:prof	 c2:nu:s70:prof		-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:prof   	c2:nu:s70:prof
-e15:debug	e15:debug	e15:debug	e15:s70:debug    e15:nu:s70:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e15:debug  	e15:nu:s70:debug
-e15:opt		e15:opt		e15:opt		e15:s70:opt	 e15:nu:s70:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e15:prof   	e15:nu:s70:prof
-e15:prof	e15:prof	e15:prof	e15:s70:prof	 e15:nu:s70:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e15:prof   	e15:nu:s70:prof
 e17:debug	e17:debug	e17:debug	e17:s70:debug    e17:nu:s70:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:debug  	e17:nu:s70:debug
 e17:opt		e17:opt		e17:opt		e17:s70:opt	 e17:nu:s70:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:prof   	e17:nu:s70:prof
 e17:prof	e17:prof	e17:prof	e17:s70:prof	 e17:nu:s70:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:prof   	e17:nu:s70:prof
