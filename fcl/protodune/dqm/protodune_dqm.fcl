@@ -22,6 +22,8 @@ services.RawDigitPrepService.AdcChannelToolNames: [
   "pdtps_adcChannelPedestalNoisePlotter",
   "pdtps_adcChannelPedestalOrfPlotter",
   "pdtps_adcChannelPedestalPeakBinExcessPlotter",
+  "pdtps_adcChannelPedestalRawRmsPlotter",
+  "pdtps_adcChannelPedestalRawTailPlotter",
   "pdcht_All",
   "pdcht_Apas",
   "pdcht_Zplanes",
