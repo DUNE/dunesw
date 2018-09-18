@@ -59,7 +59,7 @@ larsoft         v07_06_00
 artdaq_core	v3_04_01
 duneutil        v07_06_00	-	optional
 lbne_raw_data 	v1_04_27
-dune_pardata	v01_36_00
+dune_pardata	v01_37_00
 genie_xsec      v2_12_10        -       optional
 genie_phyopt    v2_12_10
 cetbuildtools	v7_04_00	-	only_for_build
