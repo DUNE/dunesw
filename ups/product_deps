@@ -65,19 +65,21 @@ genie_phyopt    v2_12_10
 cetbuildtools	v7_04_00	-	only_for_build
 dune_raw_data   v1_17_17
 caffe           v1_0k           -       optional
+nusystematics   v00_01_01
+systematicstools v00_01_01
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
-qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     caffe          dune_raw_data	        notes
-c2:debug	c2:debug	c2:debug	c2:s70:debug     c2:nu:s70:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:debug  	c2:nu:s70:debug
-c2:opt		c2:opt		c2:opt		c2:s70:opt	 c2:nu:s70:prof		-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:prof   	c2:nu:s70:prof
-c2:prof		c2:prof		c2:prof		c2:s70:prof	 c2:nu:s70:prof		-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:prof   	c2:nu:s70:prof
-e17:debug	e17:debug	e17:debug	e17:s70:debug    e17:nu:s70:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:debug  	e17:nu:s70:debug
-e17:opt		e17:opt		e17:opt		e17:s70:opt	 e17:nu:s70:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:prof   	e17:nu:s70:prof
-e17:prof	e17:prof	e17:prof	e17:s70:prof	 e17:nu:s70:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:prof   	e17:nu:s70:prof
+qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     caffe          dune_raw_data	        nusystematics       systematicstools      notes
+c2:debug	c2:debug	c2:debug	c2:s70:debug     c2:nu:s70:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:debug  	c2:nu:s70:debug         c2:debug            c2:debug
+c2:opt		c2:opt		c2:opt		c2:s70:opt	 c2:nu:s70:prof		-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:prof   	c2:nu:s70:prof          c2:prof             c2:prof
+c2:prof		c2:prof		c2:prof		c2:s70:prof	 c2:nu:s70:prof		-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:prof   	c2:nu:s70:prof          c2:prof             c2:prof
+e17:debug	e17:debug	e17:debug	e17:s70:debug    e17:nu:s70:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:debug  	e17:nu:s70:debug        e17:debug           e17:debug
+e17:opt		e17:opt		e17:opt		e17:s70:opt	 e17:nu:s70:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:prof   	e17:nu:s70:prof         e17:prof            e17:prof
+e17:prof	e17:prof	e17:prof	e17:s70:prof	 e17:nu:s70:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:prof   	e17:nu:s70:prof         e17:prof            e17:prof
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
