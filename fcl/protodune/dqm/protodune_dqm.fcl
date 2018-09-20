@@ -17,11 +17,13 @@ tools.tickRanges.plotTicks.end:   4000
 
 services.RawDigitPrepService.AdcChannelToolNames: [
   "digitReader",
-  "adcPedestalFit", 
+  "pd_adcPedestalFit", 
   "pdtps_adcChannelPedestalPlotter",
-  "pdtps_adcChannelPedestalRmsPlotter",
+  "pdtps_adcChannelPedestalNoisePlotter",
   "pdtps_adcChannelPedestalOrfPlotter",
   "pdtps_adcChannelPedestalPeakBinExcessPlotter",
+  "pdtps_adcChannelPedestalRawRmsPlotter",
+  "pdtps_adcChannelPedestalRawTailPlotter",
   "pdcht_All",
   "pdcht_Apas",
   "pdcht_Zplanes",

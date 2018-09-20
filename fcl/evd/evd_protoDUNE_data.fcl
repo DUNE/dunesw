@@ -4,7 +4,9 @@ services.DetPedestalService.FixedDetPedestal.PedMeanZ:  900
 services.DetPedestalService.FixedDetPedestal.PedMeanV:  2200
 services.DetPedestalService.FixedDetPedestal.PedMeanU:  2200
 services.RawDrawingOptions.RawDataLabel: "tpcrawdecoder:daq"
-services.ColorDrawingOptions.RawQHigh: [200]
-services.ColorDrawingOptions.RawQLow:  [-200]
+services.ColorDrawingOptions.RawQHigh: [100]
+services.ColorDrawingOptions.RawQLow:  [-50]
 services.DetectorPropertiesService.NumberTimeSamples: 10000
 services.DetectorPropertiesService.ReadOutWindowSize: 10000
+services.RawDrawingOptions.PedestalOption: 1
+services.RawDrawingOptions.MinimumSignal: -50.0

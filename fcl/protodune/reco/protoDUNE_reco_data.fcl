@@ -11,7 +11,7 @@ physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 
 services.RawDigitPrepService.AdcChannelToolNames: [
     "digitReader",
-    "adcPedestalFit",
+    "pd_adcPedestalFit",
     "adcSampleFiller",
     "adcVintageDeconvoluter",
     "adcThresholdSignalFinder"
