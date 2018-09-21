@@ -53,6 +53,7 @@ add_subdirectory(CVN)
 add_subdirectory(BeamData)
 add_subdirectory(Calib)
 add_subdirectory(CalibServices)
+add_subdirectory(CAFMaker)
 
 add_subdirectory(RegCVN)
 

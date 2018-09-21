@@ -3,9 +3,11 @@
 #include "CAFMaker.fcl"
 #include "CVNMapper.fcl"
 #include "CVNEvaluator.fcl"
+#include "RegCVNMapper.fcl"
+#include "RegCVNEvaluator.fcl"
 #include "energyreco.fcl"
 
-process_name: Cafana
+process_name: Cafana2
 
 services:
 {
@@ -38,7 +40,8 @@ physics:
    energyreconumu: @local::dunefd_nuenergyreco
    cvnmap: @local::standard_cvnmapper
    cvneval: @local::standard_cvnevaluator
-
+   regcvnmap:      @local::standard_regcvnmapper
+   regcvneval:     @local::standard_regcvnevaluator
  }
 
  analyzers:
