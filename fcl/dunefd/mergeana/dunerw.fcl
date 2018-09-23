@@ -1,0 +1,719 @@
+BEGIN_PROLOG
+
+generated_systematic_provider_configuration: {
+    GENIEReWeight_DUNE_TDR_Splines: {
+        AGKYpT1pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: AGKYpT1pi
+            systParamId: 33
+        }
+        AGKYxF1pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: AGKYxF1pi
+            systParamId: 32
+        }
+        AhtBY: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: AhtBY
+            systParamId: 28
+        }
+        BhtBY: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: BhtBY
+            systParamId: 29
+        }
+        CV1uBY: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: CV1uBY
+            systParamId: 30
+        }
+        CV2uBY: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: CV2uBY
+            systParamId: 31
+        }
+        EtaNCEL: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: EtaNCEL
+            systParamId: 2
+        }
+        MaCCQE: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: MaCCQE
+            systParamId: 0
+        }
+        MaCCRES: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: MaCCRES
+            systParamId: 3
+        }
+        MaCOHpi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: MaCOHpi
+            systParamId: 26
+        }
+        MaNCEL: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: MaNCEL
+            systParamId: 1
+        }
+        MaNCRES: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: MaNCRES
+            systParamId: 5
+        }
+        MvCCRES: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: MvCCRES
+            systParamId: 4
+        }
+        MvNCRES: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: MvNCRES
+            systParamId: 6
+        }
+        NonRESBGvbarnCC1pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvbarnCC1pi
+            systParamId: 19
+        }
+        NonRESBGvbarnCC2pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvbarnCC2pi
+            systParamId: 20
+        }
+        NonRESBGvbarnNC1pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvbarnNC1pi
+            systParamId: 21
+        }
+        NonRESBGvbarnNC2pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvbarnNC2pi
+            systParamId: 22
+        }
+        NonRESBGvbarpCC1pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvbarpCC1pi
+            systParamId: 15
+        }
+        NonRESBGvbarpCC2pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvbarpCC2pi
+            systParamId: 16
+        }
+        NonRESBGvbarpNC1pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvbarpNC1pi
+            systParamId: 17
+        }
+        NonRESBGvbarpNC2pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvbarpNC2pi
+            systParamId: 18
+        }
+        NonRESBGvnCC1pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvnCC1pi
+            systParamId: 11
+        }
+        NonRESBGvnCC2pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvnCC2pi
+            systParamId: 12
+        }
+        NonRESBGvnNC1pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvnNC1pi
+            systParamId: 13
+        }
+        NonRESBGvnNC2pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvnNC2pi
+            systParamId: 14
+        }
+        NonRESBGvpCC1pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvpCC1pi
+            systParamId: 7
+        }
+        NonRESBGvpCC2pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvpCC2pi
+            systParamId: 8
+        }
+        NonRESBGvpNC1pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvpNC1pi
+            systParamId: 9
+        }
+        NonRESBGvpNC2pi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: NonRESBGvpNC2pi
+            systParamId: 10
+        }
+        R0COHpi: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: R0COHpi
+            systParamId: 27
+        }
+        RDecBR1eta: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: RDecBR1eta
+            systParamId: 24
+        }
+        RDecBR1gamma: {
+            isSplineable: true
+            paramVariations: [
+                -3,
+                -2.5,
+                -2,
+                -1.5,
+                -1,
+                -0.5,
+                0,
+                0.5,
+                1,
+                1.5,
+                2,
+                2.5,
+                3
+            ]
+            prettyName: RDecBR1gamma
+            systParamId: 23
+        }
+        Theta_Delta2Npi: {
+            paramVariations: [
+                0,
+                1
+            ]
+            prettyName: Theta_Delta2Npi
+            systParamId: 25
+        }
+        instance_name: DUNE_TDR_Splines
+        parameter_headers: [
+            MaCCQE,
+            MaNCEL,
+            EtaNCEL,
+            MaCCRES,
+            MvCCRES,
+            MaNCRES,
+            MvNCRES,
+            NonRESBGvpCC1pi,
+            NonRESBGvpCC2pi,
+            NonRESBGvpNC1pi,
+            NonRESBGvpNC2pi,
+            NonRESBGvnCC1pi,
+            NonRESBGvnCC2pi,
+            NonRESBGvnNC1pi,
+            NonRESBGvnNC2pi,
+            NonRESBGvbarpCC1pi,
+            NonRESBGvbarpCC2pi,
+            NonRESBGvbarpNC1pi,
+            NonRESBGvbarpNC2pi,
+            NonRESBGvbarnCC1pi,
+            NonRESBGvbarnCC2pi,
+            NonRESBGvbarnNC1pi,
+            NonRESBGvbarnNC2pi,
+            RDecBR1gamma,
+            RDecBR1eta,
+            Theta_Delta2Npi,
+            MaCOHpi,
+            R0COHpi
+        ]
+        tool_options: {
+            CCRESIsShapeOnly: false
+            DISBYIsShapeOnly: false
+            MaCCQEIsShapeOnly: false
+            NCRESIsShapeOnly: false
+            fill_valid_tree: false
+            ignore_parameter_dependence: true
+        }
+        tool_type: GENIEReWeight
+    }
+    syst_providers: [
+        GENIEReWeight_DUNE_TDR_Splines
+    ]
+}
+
+END_PROLOG

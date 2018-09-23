@@ -37,7 +37,7 @@ services:
     DoWires: true
     AdcChannelToolNames: [
       "digitReader",
-      "adcPedestalFit",
+      "pd_adcPedestalFit",
       "adcSampleFiller",
       "adcVintageDeconvoluter",
       "adcDuneSignalFinder"
