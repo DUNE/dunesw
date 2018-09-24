@@ -12,5 +12,6 @@
 
 services.RawDigitPrepService.AdcChannelToolNames: [
   "digitReader",
-  "pd_evtview"
+  "pd_evtviewNfemb",
+  "pd_tpsviewNfemb"
 ]

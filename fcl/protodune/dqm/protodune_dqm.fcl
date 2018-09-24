@@ -30,5 +30,5 @@ services.RawDigitPrepService.AdcChannelToolNames: [
   "pdcht_Cplanes",
   "pdcht_Iplanes",
   "rawAdcDetectorPlotColl",
-  "pd_evtview"
+  "pd_evtviewNfemb"
 ]
