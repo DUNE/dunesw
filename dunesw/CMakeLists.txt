@@ -47,14 +47,15 @@ add_subdirectory(SpaceCharge)
 add_subdirectory(SpaceChargeServices)
 add_subdirectory(SupernovaAna)
 add_subdirectory(DataOverlay)
-add_subdirectory(DAQSimAna)
+#add_subdirectory(DAQSimAna)
 add_subdirectory(3x1x1dp)
 add_subdirectory(CVN)
 add_subdirectory(BeamData)
 add_subdirectory(Calib)
 add_subdirectory(CalibServices)
+add_subdirectory(CAFMaker)
 
-#add_subdirectory(RegCVN)
+add_subdirectory(RegCVN)
 
 # Respect the order specified in lar_build, which is:
 #

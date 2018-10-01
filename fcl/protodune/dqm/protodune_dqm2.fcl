@@ -1,0 +1,17 @@
+# protodune_dqm2.fcl
+#
+# David Adams
+# September 2018
+#
+# Dataprep tool configuration for protoDUNE DQM processing
+# of many events.
+
+# User is expected to provide a top-level fcl file
+# that creates or reads in RawDigits and calls a module
+# (most likely DataPrepModule) that runs the RawDigitPrepService.
+
+services.RawDigitPrepService.AdcChannelToolNames: [
+  "digitReader",
+  "pd_evtviewNfemb",
+  "pd_tpsviewNfemb"
+]

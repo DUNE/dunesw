@@ -1,0 +1,130 @@
+#include "services_dune.fcl"
+#include "RawDecoder.fcl"
+#include "TPCMonitor.fcl"
+#include "SSPMonitor.fcl"
+#include "PDSPNearlineHeader.fcl"
+
+#include "caldata_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "SpacePointSolver.fcl"
+#include "cluster_dune.fcl"
+#include "lifetime.fcl"
+#include "PDSPHitMonitor.fcl"
+#include "SaveSpacePoints.fcl"
+#include "tools_dune.fcl"
+
+process_name: PurityMonitor
+
+services:
+{
+  TimeTracker:       {}
+  RandomNumberGenerator: {} 
+  message:              @local::dune_message_services_prod_debug
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::protodune_reco_services
+  ExptGeoHelperInterface:       @local::dune_geometry_helper
+  Geometry:                     @local::protodune_geo
+  DetectorClocksService:        @local::dunefd_detectorclocks # will change to protodune
+  DetectorPropertiesService:    @local::protodune_detproperties
+  LArPropertiesService:         @local::dunefd_properties
+  DatabaseUtil:                 @local::dunefd_database
+  ChannelStatusService:         @local::dunefd_channel_status
+  PdspChannelMapService:        @local::pdspchannelmap
+  TFileService: { fileName: "rawtpcmonitor.root" }
+  RawDigitPrepService: {
+    service_provider: ToolBasedRawDigitPrepService
+    LogLevel: 3
+    DoWires: true
+    AdcChannelToolNames: [
+      "digitReader",
+      "pd_adcPedestalFit",
+      "adcSampleFiller",
+      "adcVintageDeconvoluter",
+      "adcDuneSignalFinder"
+    ]
+  }
+
+}
+
+services.DetectorPropertiesService.NumberTimeSamples: 6000
+services.DetectorPropertiesService.ReadOutWindowSize: 6000
+
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents: -1
+  fileNames: ["input_file.root"]
+}
+
+outputs: {}
+
+physics:
+{
+  producers:
+  {
+    tpcrawdecoder:      @local::pdsp_tpc_raw_decoder
+    timingrawdecoder:   @local::timing_raw_decoder
+    ssprawdecoder:      @local::ssp_raw_decoder
+    caldata:            @local::producer_adcprep
+    gaushit:            @local::dunefd_gaushitfinder
+    reco3d:             @local::standard_spacepointsolver
+    hitpdune:           @local::pdune_disambigfromsp
+    tjcosmic:           @local::standard_trajcluster
+  }
+
+  analyzers:
+  {
+    lifetime:           @local::proto_lifetime
+  }
+
+  produce: [ tpcrawdecoder, ssprawdecoder, timingrawdecoder ]
+  reco: [ caldata, gaushit, tjcosmic ]
+  analysis: [ lifetime ]
+  trigger_paths : [ produce, reco ]
+  end_paths: [ analysis ]
+}
+
+services.AdcWireBuildingService.SaveChanPedRMS: true
+
+physics.producers.tjcosmic.TrajClusterAlg.HitFinderModuleLabel:  "gaushit"
+physics.producers.tjcosmic.TrajClusterAlg.Mode:   2 # only reconstruct in the collection plane
+physics.producers.tjcosmic.TrajClusterAlg.MinPtsFit: [50]     # Min number of points in the trajectory fit required on each pass
+physics.producers.tjcosmic.TrajClusterAlg.MinPts:    [100]     # Min number of points in the trajectory required on each pass
+physics.producers.tjcosmic.TrajClusterAlg.MaxAngleCode: [2]  # Max angle range code allowed on each pass
+physics.producers.tjcosmic.TrajClusterAlg.MinMCSMom: [50]   # Minimum MCSMom for each pass
+physics.producers.tjcosmic.TrajClusterAlg.MaxVertexTrajSep: [6] # Max separation for attaching trajectories to 3D vertices (WSE units)
+physics.producers.tjcosmic.TrajClusterAlg.MaxChi: 20               # Max Chi/DOF for accepting a trajectory fit (long muons)
+physics.producers.tjcosmic.TrajClusterAlg.HitErrFac: 0.5          # hit time error for fitting = fHitErrFac * (hit RMS)
+physics.producers.tjcosmic.TrajClusterAlg.AngleRanges: [ 10, 30, 75, 90]
+physics.producers.tjcosmic.TrajClusterAlg.KinkCuts: [ 0.5, 1.5, 5]
+physics.producers.tjcosmic.TrajClusterAlg.ChgCuts: [ 5, 0.2, 0.3]
+physics.producers.tjcosmic.TrajClusterAlg.MaxWireSkipNoSignal:   5
+physics.producers.tjcosmic.TrajClusterAlg.MultHitSep:   5
+physics.producers.tjcosmic.TrajClusterAlg.JTMaxHitSep:   0 # turn off FindJunkTraj
+physics.producers.tjcosmic.TrajClusterAlg.DeltaRayTag:   [ -1, 0, 0]
+physics.producers.tjcosmic.TrajClusterAlg.Vertex3DChiCut: 0
+physics.producers.tjcosmic.TrajClusterAlg.Vertex2DCuts: [ -1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+physics.producers.tjcosmic.TrajClusterAlg.MuonTag:  [ -1, 0, 0, 0]
+physics.producers.tjcosmic.TrajClusterAlg.Match3DCuts:  [ -1, 0, 0, 0]
+physics.producers.tjcosmic.TrajClusterAlg.MatchTruth:  [ -2, 0, 0.5, 10]
+
+
+physics.producers.tjcosmic.TrajClusterAlg.DebugTPC:       -9
+physics.producers.tjcosmic.TrajClusterAlg.DebugPlane:     -2
+physics.producers.tjcosmic.TrajClusterAlg.DebugWire:      24
+physics.producers.tjcosmic.TrajClusterAlg.DebugTick:    5053
+physics.producers.tjcosmic.TrajClusterAlg.DebugWorkID:     0
+
+physics.analyzers.lifetime.ClusterModuleLabel: "tjcosmic"
+physics.analyzers.lifetime.ChgCuts: [ 0.5, 1.3 ]
+physics.analyzers.lifetime.ChiCut:      3
+physics.analyzers.lifetime.DebugCluster:    -1
+
+physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+
+##########
+##### For MC
+###physics.producers.caldata.DigitLabel: "daq"
+###physics.trigger_paths: [ reco]
+##########
