@@ -1,0 +1,118 @@
+#include "services_dune.fcl"
+#include "RawDecoder.fcl"
+#include "TPCMonitor.fcl"
+#include "SSPMonitor.fcl"
+#include "caldata_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "SpacePointSolver.fcl"
+#include "cluster_dune.fcl"
+#include "pandoramodules_dune.fcl"
+#include "ploteventdetails.fcl"
+#include "tools_dune.fcl"
+#include "protodune_tools_dune.fcl"
+
+process_name: HitMonitor
+
+services:
+{
+  TimeTracker:       {}
+  RandomNumberGenerator: {} 
+  message:              @local::dune_message_services_prod_debug
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::protodune_data_services
+                        @table::protodune_reco_services
+  ExptGeoHelperInterface:       @local::dune_geometry_helper
+  Geometry:                     @local::protodune_geo
+  DetectorClocksService:        @local::protodune_detectorclocks # will change to protodune
+  DetectorPropertiesService:    @local::protodune_detproperties
+  LArPropertiesService:         @local::dunefd_properties
+  DatabaseUtil:                 @local::dunefd_database
+  ChannelStatusService:         @local::dunefd_channel_status
+  PdspChannelMapService: {
+    FileName:         "protoDUNETPCChannelMap_RCE_v4.txt"
+    FELIXFileName:    "protoDUNETPCChannelMap_FELIX_v4.txt"
+    SSPFileName:      "protoDUNESSPChannelMap_v1.txt"
+    LogLevel:         1
+  }
+  TFileService: { fileName: "rawtpcmonitor.root" }
+  RawDigitPrepService: {
+    service_provider: ToolBasedRawDigitPrepService
+    LogLevel: 3
+    DoWires: true
+    AdcChannelToolNames: [
+      "digitReader",
+      "pd_adcPedestalFit",
+      "adcSampleFiller",
+      "adcVintageDeconvoluter",
+      "adcThresholdSignalFinder"
+    ]
+  }
+}
+
+services.DetectorPropertiesService.NumberTimeSamples: 6000
+services.DetectorPropertiesService.ReadOutWindowSize: 6000
+services.DetectorPropertiesService.Efield: [ 0.5, 0.77894737, 1.7263158 ]
+
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents: -1
+  fileNames: ["input_file.root"]
+}
+
+outputs: {
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_reco.root"
+   dataTier:    "full-reconstructed"
+   compressionLevel: 1
+ }
+}
+
+physics:
+{
+  producers:
+  {
+    tpcrawdecoder:      @local::pdsp_tpc_raw_decoder
+    timingrawdecoder:   @local::timing_raw_decoder
+    ssprawdecoder:      @local::ssp_raw_decoder
+    caldata:            @local::producer_adcprep
+    gaushit:            @local::dunefd_gaushitfinder
+    reco3d:             @local::standard_spacepointsolver
+    hitpdune:           @local::pdune_disambigfromsp
+    linecluster:        @local::dune35t_linecluster
+    pandora:            @local::protodune_pandora
+    pandoraTrack:       @local::dune_pandoraTrackCreation
+    pandoraShower:      @local::dune_pandoraShowerCreation
+  }
+
+  analyzers:
+  {
+    eventDetails:       @local::proto_ploteventdetails
+  }
+
+  produce: [ tpcrawdecoder, ssprawdecoder, timingrawdecoder ]
+  reco: [ caldata, gaushit, reco3d, hitpdune, linecluster, pandora, pandoraTrack, pandoraShower ]
+  analysis: [ eventDetails ]
+  trigger_paths : [ produce, reco ]
+  mainout: [out1]
+  end_paths: [ analysis,mainout ]
+}
+
+physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 10.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 10.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 3.0
+
+# Get rid of low frequency noise
+services.SignalShapingServiceDUNE.IndUFilter: "(x>0.01)*gaus"
+services.SignalShapingServiceDUNE.IndVFilter: "(x>0.01)*gaus"
+
+#Pandora configurations
+physics.producers.pandora.HitFinderModuleLabel:             "linecluster"
+physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
+physics.producers.pandoraShower.PFParticleLabel:            "pandora"
+
