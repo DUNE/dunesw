@@ -29,6 +29,7 @@ services:
   message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodune_reco_services
+  ChannelStatusService: @local::pdsp_channel_status
 }
 
 services.Geometry.SortingParameters.ChannelsPerOpDet: 12
