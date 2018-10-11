@@ -22,27 +22,6 @@ services:
   OpDigiProperties: @local::dunefddphase_OpDigiProperties
 }
 
-services.Geometry.GDML: "dunedphase10kt_v2.gdml"
-services.Geometry.ROOT: "dunedphase10kt_v2.gdml"
-services.LArG4Parameters.UseCustomPhysics: true
-services.LArG4Parameters.UseLitePhotons: true
-services.LArG4Parameters.EnabledPhysics: [ "Em",
-                                           "FastOptical",
-                                           "SynchrotronAndGN",
-                                           "Ion",
-                                           "Hadron",
-                                           "Decay",
-                                           "HadronElastic",
-                                           "Stopping",
-                                           "NeutronTrackingCut" ]
-
-services.LArG4Parameters.NoElectronPropagation: true
-services.LArG4Parameters.NoPhotonPropagation: false
-services.LArG4Parameters.FillSimEnergyDeposits: true
-services.LArG4Parameters.UseLitePhotons: true
-
-services.DetectorClocksService.ClockSpeedOptical: 250
-
 # Start each new event with an empty event.
 source:
 {
@@ -60,11 +39,6 @@ physics:
   {
     rns:       { module_type: "RandomNumberSaver" }
     opdigi: @local::dunefddphase_opdigi
-  }
-
-  analyzers:
-  {
-	opdigiana: @local::dunefddphase_opdigiana 
   }
 	 
   simulate:      [ rns, opdigi]
@@ -96,14 +70,3 @@ outputs:
 
 
 services.LArG4Parameters.MinNumberOfElCluster: 20
-services.OpDetResponseInterface.QuantumEfficiency: 0.1
-services.LArPropertiesService.ScintPreScale: 1
-
-services.DetectorClocksService.ClockSpeedOptical: 250
-
-services.PhotonVisibilityService.LibraryFile: "lib_FD_300_000_16_16_81.root"
-services.PhotonVisibilityService.ParametrisedTimePropagation: false
-services.PhotonVisibilityService.ParametrisedTimePropagationNParameters: 0
-
-
-
