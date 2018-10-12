@@ -12,7 +12,7 @@ services:
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefddphase_simulation_services
 }
-services.Geometry: @local::dunedphase10kt_workspace4x2_geo
+services.Geometry: @local::dunedphase10kt_driftY_workspace_geo
 
 source:
 {
@@ -47,6 +47,4 @@ outputs:
  }
 }
 
-physics.producers.generator.P0:             10
-physics.producers.generator.SigmaP:         5
-physics.producers.generator.FileName:       "/afs/cern.ch/work/c/chalt/LArSoft/NEUT_ptoe+pi0_RooTracker.root"
+physics.producers.generator.FileName:       "/eos/user/c/chalt/NucleonDecay/ProtonToPositronAndPi0/NEUT/NEUT_ptoe+pi0_RooTracker.root"
