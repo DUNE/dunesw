@@ -12,7 +12,7 @@
 #include <iostream>
 #include "dune/ArtSupport/ArtServiceHelper.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
-#include "art/Framework/Core/EngineCreator.h"
+#include "art/Framework/Core/detail/EngineCreator.h"
 #include "CLHEP/Random/RandomEngine.h"
 
 using std::string;
@@ -55,7 +55,8 @@ int test_RandomNumberGenerator(string gname) {
 
   cout << myname << line << endl;
   cout << myname << "Fetch random engine from service." << endl;
-  CLHEP::HepRandomEngine& ran = pransrv->getEngine();
+  CLHEP::HepRandomEngine& ran = pransrv->getEngine(art::ScheduleID::first(),
+                                                   moduleDescription().moduleLabel());
   assert( &ran0 == &ran );
 
   cout << myname << "Generate randoms." << endl;

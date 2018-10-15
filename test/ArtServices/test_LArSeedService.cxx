@@ -12,7 +12,7 @@
 #include <iostream>
 #include "dune/ArtSupport/ArtServiceHelper.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
-#include "art/Framework/Core/EngineCreator.h"
+#include "art/Framework/Core/detail/EngineCreator.h"
 #include "CLHEP/Random/RandomEngine.h"
 
 using std::string;
