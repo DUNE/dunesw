@@ -67,7 +67,7 @@ physics:
 # event feature labeling
   emtrkmichelid:      @local::protodune_emtrkmichelid
 # reconstruction using disambiguated hits
-  linecluster:        @local::dune35t_linecluster
+  linecluster:        @local::protodunespmc_linecluster
   calo:               @local::dune35t_calomc
   pandora:            @local::protodune_pandora
   pandoraTrack:       @local::dune_pandoraTrackCreation
