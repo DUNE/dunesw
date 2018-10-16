@@ -47,4 +47,10 @@ outputs:
  }
 }
 
-physics.producers.generator.FileName:       "/eos/user/c/chalt/NucleonDecay/ProtonToPositronAndPi0/NEUT/NEUT_ptoe+pi0_RooTracker.root"
+physics.producers.generator.LogLevel:		0
+physics.producers.generator.StartEvent:		0
+physics.producers.generator.NumberOfEvents:	100
+physics.producers.generator.StartPositionX:	0.
+physics.producers.generator.StartPositionY:	0.
+physics.producers.generator.StartPositionZ:	150.
+physics.producers.generator.FileName:		"/eos/user/c/chalt/NucleonDecay/ProtonToKaonToMuon/v0/LArSoft/FullSimulation/rootracker_K+_antinu_300k.root"
