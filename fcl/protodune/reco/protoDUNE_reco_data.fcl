@@ -2,6 +2,13 @@
 
 process_name: Reco
 
+# Define PD reco modules for split input
+physics.producers.ophitInternal:   @local::protodune_ophit_data_internal
+physics.producers.ophitExternal:   @local::protodune_ophit_data_external
+physics.producers.opflashInternal: @local::protodune_opflash_data_internal
+physics.producers.opflashExternal: @local::protodune_opflash_data_external
+
+
 physics.reco: [
     #TPC wire signals      
     caldata,
@@ -20,7 +27,9 @@ physics.reco: [
     # PMA track reconstruction
     pmtrack,
     # PMA calorimetry and PID
-    pmtrackcalo, pmtrackpid
+    pmtrackcalo, pmtrackpid,
+    # Photon detector reco modules
+    ophitInternal, ophitExternal, opflashInternal, opflashExternal
 ]
 
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
