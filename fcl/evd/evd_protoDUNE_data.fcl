@@ -10,3 +10,4 @@ services.DetectorPropertiesService.NumberTimeSamples: 10000
 services.DetectorPropertiesService.ReadOutWindowSize: 10000
 services.RawDrawingOptions.PedestalOption: 1
 services.RawDrawingOptions.MinimumSignal: 5.0
+services.ChannelStatusService: @local::pdsp_channel_status
