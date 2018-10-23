@@ -1,12 +1,10 @@
 #include "evd_protoDUNE_noped.fcl"
 
-services.DetPedestalService.FixedDetPedestal.PedMeanZ:  900
-services.DetPedestalService.FixedDetPedestal.PedMeanV:  2200
-services.DetPedestalService.FixedDetPedestal.PedMeanU:  2200
-services.RawDrawingOptions.RawDataLabel: "tpcrawdecoder:daq"
 services.ColorDrawingOptions.RawQHigh: [100]
 services.ColorDrawingOptions.RawQLow:  [-50]
-services.DetectorPropertiesService.NumberTimeSamples: 10000
-services.DetectorPropertiesService.ReadOutWindowSize: 10000
+services.RawDrawingOptions.RawDataLabel: "tpcrawdecoder:daq"
 services.RawDrawingOptions.PedestalOption: 1
-services.RawDrawingOptions.MinimumSignal: -50.0
+services.RawDrawingOptions.MinimumSignal: 5.0
+services.RecoDrawingOptions.TrackModuleLabels:          ["pandoraTrack"]
+services.RecoDrawingOptions.VertexModuleLabels:         ["pandora"]
+services.ChannelStatusService: @local::pdsp_channel_status

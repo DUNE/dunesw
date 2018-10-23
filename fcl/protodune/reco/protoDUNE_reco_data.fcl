@@ -55,3 +55,5 @@ physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 3.0
 services.SignalShapingServiceDUNE.IndUFilter: "(x>0.01)*gaus"
 services.SignalShapingServiceDUNE.IndVFilter: "(x>0.01)*gaus"
 
+# Use channel service for data
+services.ChannelStatusService: @local::pdsp_channel_status
