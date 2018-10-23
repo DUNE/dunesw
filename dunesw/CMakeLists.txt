@@ -11,7 +11,7 @@ add_subdirectory(Utilities)
 add_subdirectory(Simulation)
 add_subdirectory(LArG4)
 add_subdirectory(PhotonPropagation)
-add_subdirectory(OpticalDetector)  
+add_subdirectory(OpticalDetector)
 add_subdirectory(DetSim)
 add_subdirectory(DetectorVariations)
 add_subdirectory(EventGenerator)
@@ -88,7 +88,7 @@ add_subdirectory(RegCVN)
 #     "larreco_EventFinder",
 #     "larsim_TriggerAlgo",
 #     "larana_OpticalDetector",
-#     "larreco_Calorimetry", 
+#     "larreco_Calorimetry",
 #     "larreco_ShowerFinder",
 #     "lareventdisplay_EventDisplay",
 #     "larana_ParticleIdentification",
