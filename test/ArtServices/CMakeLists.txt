@@ -1,5 +1,3 @@
-# art_extensions/test/services/CMakeLists.txt
-
 cet_test(test_TFileService SOURCES test_TFileService.cxx
   LIBRARIES
     dune_ArtSupport

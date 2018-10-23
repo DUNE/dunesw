@@ -55,8 +55,7 @@ int test_RandomNumberGenerator(string gname) {
 
   cout << myname << line << endl;
   cout << myname << "Fetch random engine from service." << endl;
-  CLHEP::HepRandomEngine& ran = pransrv->getEngine(art::ScheduleID::first(),
-                                                   moduleDescription().moduleLabel());
+  CLHEP::HepRandomEngine& ran = pransrv->getEngine();
   assert( &ran0 == &ran );
 
   cout << myname << "Generate randoms." << endl;
