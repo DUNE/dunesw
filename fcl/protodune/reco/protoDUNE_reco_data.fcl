@@ -35,11 +35,13 @@ physics.reco: [
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 
 services.RawDigitPrepService.AdcChannelToolNames: [
-    "digitReader",
-    "pd_adcPedestalFit",
-    "adcSampleFiller",
-    "adcVintageDeconvoluter",
-    "adcThresholdSignalFinder"
+    "digitReader",                # Read RawDigit
+    "pd_adcPedestalFit",          # Find pedestal
+    "adcSampleFiller",            # Subtract pedestal, trivial calibration
+    "pdsp_sticky_codes_ped",      # Flag sticky codes
+    "pdsp_adcMitigate",           # Mitigate sticky codes
+    "adcVintageDeconvoluter",     # Deconvolute
+    "adcThresholdSignalFinder"    # Build ROIs
 ]
 
 # Tell PMA not to expect the CNN output
