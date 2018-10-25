@@ -28,6 +28,8 @@ table_fragment_begin
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/scripts)
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/gdml)
     pathPrepend(FW_SEARCH_PATH, ${DUNE_PARDATA_DIR}/FieldResponse)
+    # Add StashCache to the FW_SEARCH_PATH
+    pathPrepend(FW_SEARCH_PATH, /cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/)
     pathPrepend(FHICL_FILE_PATH, .:./job)
 #    envSet(DBIWSPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
 #    envSet(DBIWSURL, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
@@ -55,9 +57,9 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v07_07_03
+larsoft          v07_08_00
 artdaq_core	 v3_04_01
-duneutil         v07_07_03	-	optional
+duneutil         v07_08_00	-	optional
 lbne_raw_data 	 v1_04_27
 dune_pardata	 v01_39_00
 genie_xsec       v2_12_10        -       optional
@@ -65,7 +67,7 @@ genie_phyopt     v2_12_10
 cetbuildtools	 v7_04_00	-	only_for_build
 dune_raw_data    v1_17_22
 caffe            v1_0k           -       optional
-nusystematics    v00_01_01
+nusystematics    v00_01_02
 systematicstools v00_01_01
 end_product_list
 
