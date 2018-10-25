@@ -28,6 +28,8 @@ table_fragment_begin
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/scripts)
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/gdml)
     pathPrepend(FW_SEARCH_PATH, ${DUNE_PARDATA_DIR}/FieldResponse)
+    # Add StashCache to the FW_SEARCH_PATH
+    pathPrepend(FW_SEARCH_PATH, /cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/)
     pathPrepend(FHICL_FILE_PATH, .:./job)
 #    envSet(DBIWSPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
 #    envSet(DBIWSURL, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
