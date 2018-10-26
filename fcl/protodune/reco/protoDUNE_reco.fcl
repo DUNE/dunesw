@@ -14,6 +14,7 @@
 #include "opticaldetectormodules_dune.fcl"
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
+#include "ProtoDUNETriggerFilter.fcl"
 
 #include "protodune_tools_dune.fcl"
 
@@ -29,7 +30,7 @@ services:
   message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodune_reco_services
-  ChannelStatusService: @local::pdsp_channel_status
+#  ChannelStatusService: @local::pdsp_channel_status
 }
 
 services.Geometry.SortingParameters.ChannelsPerOpDet: 12
@@ -45,89 +46,91 @@ source:
 # Define and configure some modules to do work on each event.
 # First modules are defined; they are scheduled later.
 # Modules are grouped by type.
-physics:
-{
+physics: {
 
- producers:
- {
-# random number saver
-  rns:                 { module_type: RandomNumberSaver }
-# convert raw::RawDigit to recob::wire
-  caldata:            @local::producer_adcprep
-# actual hit finder
-  gaushit:            @local::protodunespmc_gaushitfinder
-  fasthit:            @local::dunefd_fasthitfinder
-# space point solver
-  reco3d:             @local::protodunespmc_spacepointsolver
-# actual disambiguation
-  hitfd:              @local::dunefd_hitfinderfd
-  hitpdune:           @local::pdune_disambigfromsp
-# 3d dbscan
-  dbcluster:          @local::protodunespmc_dbcluster3d
-# event feature labeling
-  emtrkmichelid:      @local::protodune_emtrkmichelid
-# reconstruction using disambiguated hits
-  linecluster:        @local::protodunespmc_linecluster
-  calo:               @local::dune35t_calomc
-  pandora:            @local::protodune_pandora
-  pandoraTrack:       @local::dune_pandoraTrackCreation
-  pandoraShower:      @local::dune_pandoraShowerCreation
-  pandoracalo:        @local::dune10kt_calomc
-  pandorapid:         @local::standard_chi2pid
-  pandoracali:        @local::protodunespmc_calibrationdedx
-  pandoracalipid:     @local::standard_chi2pid  
-  pmtrack:            @local::dunefd_pmalgtrackmaker
-  pmtrackcalo:        @local::dune10kt_calomc
-  pmtrackpid:         @local::standard_chi2pid
-  pmtrackcali:        @local::protodunespmc_calibrationdedx
-  pmtrackcalipid:     @local::standard_chi2pid  
-  pmtrajfit:          @local::dunefd_pmalgtrajfitter
-  pmtrajfitcalo:      @local::dune10kt_calomc
-  pmtrajfitpid:       @local::standard_chi2pid
-# photon detector reconstruction
-  ophit:              @local::protodune_ophit 
-  opflash:            @local::protodune_opflash
- }
+  filters: {
+    trigfilter:  @local::pdsp_trigfilter_all
+  }
 
- #define the producer and filter modules for this path, order matters, 
- #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, 
-         #optical hits and flashes
-         ophit, opflash,
-         #TPC wire signals      
-         caldata,
-         #hit reconstruction
-         gaushit, #fasthit, 
-         #space point solver
-         reco3d,
-         #real disambiguation
-         hitpdune,
-         # 3d dbcluster
-         #dbcluster,
-         #cluster reco
-         linecluster,
-         #feature labeling
-         emtrkmichelid,
-         #pandora
-         pandora, pandoraTrack, pandoraShower,
-         pandoracalo, pandorapid, pandoracali, pandoracalipid,
-         #pmatrack
-         pmtrack, pmtrackcalo, pmtrackpid, pmtrackcali, pmtrackcalipid
-         #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
-         #shower reconstruction
-         #blurredcluster, emshower, emshower3d, mergeemshower3d
-         ]
+  producers: {
+    # random number saver
+    rns:                 { module_type: RandomNumberSaver }
+    # convert raw::RawDigit to recob::wire
+    caldata:            @local::producer_adcprep
+    # actual hit finder
+    gaushit:            @local::protodunespmc_gaushitfinder
+    fasthit:            @local::dunefd_fasthitfinder
+    # space point solver
+    reco3d:             @local::protodunespmc_spacepointsolver
+    # actual disambiguation
+    hitfd:              @local::dunefd_hitfinderfd
+    hitpdune:           @local::pdune_disambigfromsp
+    # 3d dbscan
+    dbcluster:          @local::protodunespmc_dbcluster3d
+    # event feature labeling
+    emtrkmichelid:      @local::protodune_emtrkmichelid
+    # reconstruction using disambiguated hits
+    linecluster:        @local::protodunespmc_linecluster
+    calo:               @local::dune35t_calomc
+    pandora:            @local::protodune_pandora
+    pandoraTrack:       @local::dune_pandoraTrackCreation
+    pandoraShower:      @local::dune_pandoraShowerCreation
+    pandoracalo:        @local::dune10kt_calomc
+    pandorapid:         @local::standard_chi2pid
+    pandoracali:        @local::protodunespmc_calibrationdedx
+    pandoracalipid:     @local::standard_chi2pid  
+    pmtrack:            @local::dunefd_pmalgtrackmaker
+    pmtrackcalo:        @local::dune10kt_calomc
+    pmtrackpid:         @local::standard_chi2pid
+    pmtrackcali:        @local::protodunespmc_calibrationdedx
+    pmtrackcalipid:     @local::standard_chi2pid  
+    pmtrajfit:          @local::dunefd_pmalgtrajfitter
+    pmtrajfitcalo:      @local::dune10kt_calomc
+    pmtrajfitpid:       @local::standard_chi2pid
+#   photon detector reconstruction
+    ophit:              @local::protodune_ophit 
+    opflash:            @local::protodune_opflash
+  }
 
- #define the output stream, there could be more than one if using filters 
- stream1:  [ out1 ]
+  #define the producer and filter modules for this path, order matters, 
+  #filters reject all following items.  see lines starting physics.producers below
+  reco: [ rns, 
+          #optical hits and flashes
+          ophit, opflash,
+          #TPC wire signals      
+          caldata,
+          #hit reconstruction
+          gaushit, #fasthit, 
+          #space point solver
+          reco3d,
+          #real disambiguation
+          hitpdune,
+          # 3d dbcluster
+          #dbcluster,
+          #cluster reco
+          linecluster,
+          #feature labeling
+          emtrkmichelid,
+          #pandora
+          pandora, pandoraTrack, pandoraShower,
+          pandoracalo, pandorapid, pandoracali, pandoracalipid,
+          #pmatrack
+          pmtrack, pmtrackcalo, pmtrackpid, pmtrackcali, pmtrackcalipid
+          #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
+          #shower reconstruction
+          #blurredcluster, emshower, emshower3d, mergeemshower3d
+        ]
+ 
+  #define the output stream, there could be more than one if using filters 
+  stream1:  [ out1 ]
 
- #trigger_paths is a keyword and contains the paths that modify the art::event, 
- #ie filters and producers
- trigger_paths: [reco] 
+  #trigger_paths is a keyword and contains the paths that modify the art::event, 
+  #ie filters and producers
+  trigger_paths: [reco] 
 
- #end_paths is a keyword and contains the paths that do not modify the art::Event, 
- #ie analyzers and output streams.  these all run simultaneously
- end_paths:     [stream1]  
+  #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+  #ie analyzers and output streams.  these all run simultaneously
+  end_paths:     [stream1]  
 }
 
 #block to define where the output goes.  if you defined a filter in the physics

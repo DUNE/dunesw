@@ -1,0 +1,46 @@
+# protodune_dqm_apa3zbeam.fcl
+
+# David Adams
+# May 2018
+#
+# Dataprep tool configuration for protoDUNE DQM
+# to generate plots of the APA where the beam enters.
+#
+# User is now expected to provide a top-level fcl file
+# that creates or reads in RawDigits and calls a module
+# (most likely DataPrepModule) that runs the RawDigitPrepService.
+#
+# The tools writes one plot for each event and is typically run
+# with a large number of events so usrs can scan though them.
+
+services.RawDigitPrepService.AdcChannelToolNames: [
+  "digitReader",
+  "pd_adcPedestalFit",         
+  "adcSampleFiller",
+  "pdsp_sticky_codes_ped",
+  "pdsp_adcMitigate",
+  "pdcht_Apa3z"
+]
+
+# Display prepared data (0) rather than raw-ped (1).
+tools.pdcht_Apa3z.DataType: 0
+
+# Switch display range to something approprioate for signal
+tools.pdcht_Apa3z.MaxSignal: 400
+
+# Redefine plot name and title.
+tools.pdcht_Apa3z.HistName: "hadcmit_%CRNAME%_run%0RUN%_evt%0EVENT%"
+tools.pdcht_Apa3z.HistTitle: "Mitigated ADC for run %RUN% event %EVENT% %CRLABEL% (%CRLABEL2%: %CRLABEL1%) Trigger %TRIG%"
+
+# Speed thing up by only processing the required channels.
+physics.producers.dataprep.KeepChannelBegin: 2080
+physics.producers.dataprep.KeepChannelEnd:   2560
+
+# Tick range for 160 kV
+#tools.tickRanges.plotTicks.begin: 4500
+#tools.tickRanges.plotTicks.end:   5500
+
+# Tick range for 140 kV
+#tools.tickRanges.plotTicks.begin: 4800
+#tools.tickRanges.plotTicks.end:   5800
+

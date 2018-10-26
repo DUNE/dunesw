@@ -35,11 +35,14 @@ physics.reco: [
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 
 services.RawDigitPrepService.AdcChannelToolNames: [
-    "digitReader",
-    "pd_adcPedestalFit",
-    "adcSampleFiller",
-    "adcVintageDeconvoluter",
-    "adcThresholdSignalFinder"
+    "digitReader",                # Read RawDigit
+    "pd_adcPedestalFit",          # Find pedestal
+    "adcSampleFiller",            # Subtract pedestal, trivial calibration
+    "pdsp_sticky_codes_ped",      # Flag sticky codes
+    "pdsp_adcMitigate",           # Mitigate sticky codes
+    "pdsp_timingMitigate",        # Mitigate FEMB302 timing
+    "adcVintageDeconvoluter",     # Deconvolute
+    "adcThresholdSignalFinder"    # Build ROIs
 ]
 
 # Tell PMA not to expect the CNN output
@@ -55,3 +58,5 @@ physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 3.0
 services.SignalShapingServiceDUNE.IndUFilter: "(x>0.01)*gaus"
 services.SignalShapingServiceDUNE.IndVFilter: "(x>0.01)*gaus"
 
+# Use channel service for data
+services.ChannelStatusService: @local::pdsp_channel_status
