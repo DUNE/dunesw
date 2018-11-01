@@ -60,3 +60,6 @@ services.SignalShapingServiceDUNE.IndVFilter: "(x>0.01)*gaus"
 
 # Use channel service for data
 services.ChannelStatusService: @local::pdsp_channel_status
+
+# Use channel map service for data
+services.PdspChannelMapService:        @local::pdspchannelmap
