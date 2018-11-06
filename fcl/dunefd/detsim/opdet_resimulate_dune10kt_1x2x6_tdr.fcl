@@ -8,7 +8,7 @@
 #include "opticaldetectormodules_dune.fcl"
 #include "opticaldetectorservices_dune.fcl"
 #include "FlashMatchAna.fcl"
-
+#include "SNAna.fcl"
 
 process_name: OpticalResim
 
@@ -18,6 +18,7 @@ services:
   TFileService: { fileName: "dune1x2x6_optical_tutorial_resimulate_hist.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {} #ART native random number generator
+  #FileCatalogMetadata:   @local::art_file_catalog_mc
   message:      @local::standard_info
   @table::dunefd_simulation_services
 }
@@ -109,6 +110,18 @@ physics:
       flashmatchSNR45cm0100Hz3snrNonRefl:  @local::marley_flashmatchana
       flashmatchSNR45cm0100Hz4snrNonRefl:  @local::marley_flashmatchana
       flashmatchSNR45cm0100Hz7snrNonRefl:  @local::marley_flashmatchana
+      snanaDEF45cm0100Hz5snrNonRefl:       @local::standard_snana
+      snanaEFF15cm0100Hz5snrNonRefl:       @local::standard_snana
+      snanaEFF30cm0100Hz5snrNonRefl:       @local::standard_snana
+      snanaEFF60cm0100Hz5snrNonRefl:       @local::standard_snana
+      snanaNSE45cm0010Hz5snrNonRefl:       @local::standard_snana
+      snanaNSE45cm0300Hz5snrNonRefl:       @local::standard_snana
+      snanaNSE45cm1000Hz5snrNonRefl:       @local::standard_snana
+      snanaREF45cm0100Hz5snrOptRefl:       @local::standard_snana
+      snanaREF45cm0100Hz5snrPesRefl:       @local::standard_snana
+      snanaSNR45cm0100Hz3snrNonRefl:       @local::standard_snana
+      snanaSNR45cm0100Hz4snrNonRefl:       @local::standard_snana
+      snanaSNR45cm0100Hz7snrNonRefl:       @local::standard_snana
 
    }
 
@@ -125,18 +138,18 @@ physics:
    simPathSNR45cm0100Hz3snrNonRefl: [ opdigiSNR45cm0100Hz3snrNonRefl, ophitSNR45cm0100Hz3snrNonRefl, opflashSNR45cm0100Hz3snrNonRefl]
    simPathSNR45cm0100Hz4snrNonRefl: [ opdigiSNR45cm0100Hz4snrNonRefl, ophitSNR45cm0100Hz4snrNonRefl, opflashSNR45cm0100Hz4snrNonRefl]
    simPathSNR45cm0100Hz7snrNonRefl: [ opdigiSNR45cm0100Hz7snrNonRefl, ophitSNR45cm0100Hz7snrNonRefl, opflashSNR45cm0100Hz7snrNonRefl]
-   anaPathDEF45cm0100Hz5snrNonRefl: [ flashmatchDEF45cm0100Hz5snrNonRefl ]
-   anaPathEFF15cm0100Hz5snrNonRefl: [ flashmatchEFF15cm0100Hz5snrNonRefl ]
-   anaPathEFF30cm0100Hz5snrNonRefl: [ flashmatchEFF30cm0100Hz5snrNonRefl ]
-   anaPathEFF60cm0100Hz5snrNonRefl: [ flashmatchEFF60cm0100Hz5snrNonRefl ]
-   anaPathNSE45cm0010Hz5snrNonRefl: [ flashmatchNSE45cm0010Hz5snrNonRefl ]
-   anaPathNSE45cm0300Hz5snrNonRefl: [ flashmatchNSE45cm0300Hz5snrNonRefl ]
-   anaPathNSE45cm1000Hz5snrNonRefl: [ flashmatchNSE45cm1000Hz5snrNonRefl ]
-   anaPathREF45cm0100Hz5snrOptRefl: [ flashmatchREF45cm0100Hz5snrOptRefl ]
-   anaPathREF45cm0100Hz5snrPesRefl: [ flashmatchREF45cm0100Hz5snrPesRefl ]
-   anaPathSNR45cm0100Hz3snrNonRefl: [ flashmatchSNR45cm0100Hz3snrNonRefl ]
-   anaPathSNR45cm0100Hz4snrNonRefl: [ flashmatchSNR45cm0100Hz4snrNonRefl ]
-   anaPathSNR45cm0100Hz7snrNonRefl: [ flashmatchSNR45cm0100Hz7snrNonRefl ]
+   anaPathDEF45cm0100Hz5snrNonRefl: [ flashmatchDEF45cm0100Hz5snrNonRefl, snanaDEF45cm0100Hz5snrNonRefl ]
+   anaPathEFF15cm0100Hz5snrNonRefl: [ flashmatchEFF15cm0100Hz5snrNonRefl, snanaEFF15cm0100Hz5snrNonRefl ]
+   anaPathEFF30cm0100Hz5snrNonRefl: [ flashmatchEFF30cm0100Hz5snrNonRefl, snanaEFF30cm0100Hz5snrNonRefl ]
+   anaPathEFF60cm0100Hz5snrNonRefl: [ flashmatchEFF60cm0100Hz5snrNonRefl, snanaEFF60cm0100Hz5snrNonRefl ]
+   anaPathNSE45cm0010Hz5snrNonRefl: [ flashmatchNSE45cm0010Hz5snrNonRefl, snanaNSE45cm0010Hz5snrNonRefl ]
+   anaPathNSE45cm0300Hz5snrNonRefl: [ flashmatchNSE45cm0300Hz5snrNonRefl, snanaNSE45cm0300Hz5snrNonRefl ]
+   anaPathNSE45cm1000Hz5snrNonRefl: [ flashmatchNSE45cm1000Hz5snrNonRefl, snanaNSE45cm1000Hz5snrNonRefl ]
+   anaPathREF45cm0100Hz5snrOptRefl: [ flashmatchREF45cm0100Hz5snrOptRefl, snanaREF45cm0100Hz5snrOptRefl ]
+   anaPathREF45cm0100Hz5snrPesRefl: [ flashmatchREF45cm0100Hz5snrPesRefl, snanaREF45cm0100Hz5snrPesRefl ]
+   anaPathSNR45cm0100Hz3snrNonRefl: [ flashmatchSNR45cm0100Hz3snrNonRefl, snanaSNR45cm0100Hz3snrNonRefl ]
+   anaPathSNR45cm0100Hz4snrNonRefl: [ flashmatchSNR45cm0100Hz4snrNonRefl, snanaSNR45cm0100Hz4snrNonRefl ]
+   anaPathSNR45cm0100Hz7snrNonRefl: [ flashmatchSNR45cm0100Hz7snrNonRefl, snanaSNR45cm0100Hz7snrNonRefl ]
    stream1:  [ out1 ]
 
    trigger_paths: [simPathDEF45cm0100Hz5snrNonRefl, simPathEFF15cm0100Hz5snrNonRefl, simPathEFF30cm0100Hz5snrNonRefl, simPathEFF60cm0100Hz5snrNonRefl, simPathNSE45cm0010Hz5snrNonRefl, simPathNSE45cm0300Hz5snrNonRefl, simPathNSE45cm1000Hz5snrNonRefl, simPathREF45cm0100Hz5snrOptRefl, simPathREF45cm0100Hz5snrPesRefl, simPathSNR45cm0100Hz3snrNonRefl, simPathSNR45cm0100Hz4snrNonRefl, simPathSNR45cm0100Hz7snrNonRefl]
@@ -151,6 +164,7 @@ physics.producers.opflashDEF45cm0100Hz5snrNonRefl.InputModule:           ophitDE
 physics.analyzers.flashmatchDEF45cm0100Hz5snrNonRefl.OpDetWaveformLabel: opdigiDEF45cm0100Hz5snrNonRefl
 physics.analyzers.flashmatchDEF45cm0100Hz5snrNonRefl.OpHitModuleLabel:   ophitDEF45cm0100Hz5snrNonRefl
 physics.analyzers.flashmatchDEF45cm0100Hz5snrNonRefl.OpFlashModuleLabel: opflashDEF45cm0100Hz5snrNonRefl
+physics.analyzers.snanaDEF45cm0100Hz5snrNonRefl.OpHitModuleLabel:        ophitDEF45cm0100Hz5snrNonRefl
 
 ## Configs for EFF15cm0100Hz5snrNonRefl
 physics.producers.opdigiEFF15cm0100Hz5snrNonRefl.QEOverride:             0.010630
@@ -161,6 +175,7 @@ physics.producers.opflashEFF15cm0100Hz5snrNonRefl.InputModule:           ophitEF
 physics.analyzers.flashmatchEFF15cm0100Hz5snrNonRefl.OpDetWaveformLabel: opdigiEFF15cm0100Hz5snrNonRefl
 physics.analyzers.flashmatchEFF15cm0100Hz5snrNonRefl.OpHitModuleLabel:   ophitEFF15cm0100Hz5snrNonRefl
 physics.analyzers.flashmatchEFF15cm0100Hz5snrNonRefl.OpFlashModuleLabel: opflashEFF15cm0100Hz5snrNonRefl
+physics.analyzers.snanaEFF15cm0100Hz5snrNonRefl.OpHitModuleLabel:        ophitEFF15cm0100Hz5snrNonRefl
 
 ## Configs for EFF30cm0100Hz5snrNonRefl
 physics.producers.opdigiEFF30cm0100Hz5snrNonRefl.QEOverride:             0.021259
@@ -171,6 +186,7 @@ physics.producers.opflashEFF30cm0100Hz5snrNonRefl.InputModule:           ophitEF
 physics.analyzers.flashmatchEFF30cm0100Hz5snrNonRefl.OpDetWaveformLabel: opdigiEFF30cm0100Hz5snrNonRefl
 physics.analyzers.flashmatchEFF30cm0100Hz5snrNonRefl.OpHitModuleLabel:   ophitEFF30cm0100Hz5snrNonRefl
 physics.analyzers.flashmatchEFF30cm0100Hz5snrNonRefl.OpFlashModuleLabel: opflashEFF30cm0100Hz5snrNonRefl
+physics.analyzers.snanaEFF30cm0100Hz5snrNonRefl.OpHitModuleLabel:        ophitEFF30cm0100Hz5snrNonRefl
 
 ## Configs for EFF60cm0100Hz5snrNonRefl
 physics.producers.opdigiEFF60cm0100Hz5snrNonRefl.QEOverride:             0.042519
@@ -181,6 +197,7 @@ physics.producers.opflashEFF60cm0100Hz5snrNonRefl.InputModule:           ophitEF
 physics.analyzers.flashmatchEFF60cm0100Hz5snrNonRefl.OpDetWaveformLabel: opdigiEFF60cm0100Hz5snrNonRefl
 physics.analyzers.flashmatchEFF60cm0100Hz5snrNonRefl.OpHitModuleLabel:   ophitEFF60cm0100Hz5snrNonRefl
 physics.analyzers.flashmatchEFF60cm0100Hz5snrNonRefl.OpFlashModuleLabel: opflashEFF60cm0100Hz5snrNonRefl
+physics.analyzers.snanaEFF60cm0100Hz5snrNonRefl.OpHitModuleLabel:        ophitEFF60cm0100Hz5snrNonRefl
 
 ## Configs for NSE45cm0010Hz5snrNonRefl
 physics.producers.opdigiNSE45cm0010Hz5snrNonRefl.QEOverride:             0.031889
@@ -191,6 +208,7 @@ physics.producers.opflashNSE45cm0010Hz5snrNonRefl.InputModule:           ophitNS
 physics.analyzers.flashmatchNSE45cm0010Hz5snrNonRefl.OpDetWaveformLabel: opdigiNSE45cm0010Hz5snrNonRefl
 physics.analyzers.flashmatchNSE45cm0010Hz5snrNonRefl.OpHitModuleLabel:   ophitNSE45cm0010Hz5snrNonRefl
 physics.analyzers.flashmatchNSE45cm0010Hz5snrNonRefl.OpFlashModuleLabel: opflashNSE45cm0010Hz5snrNonRefl
+physics.analyzers.snanaNSE45cm0010Hz5snrNonRefl.OpHitModuleLabel:        ophitNSE45cm0010Hz5snrNonRefl
 
 ## Configs for NSE45cm0300Hz5snrNonRefl
 physics.producers.opdigiNSE45cm0300Hz5snrNonRefl.QEOverride:             0.031889
@@ -201,6 +219,7 @@ physics.producers.opflashNSE45cm0300Hz5snrNonRefl.InputModule:           ophitNS
 physics.analyzers.flashmatchNSE45cm0300Hz5snrNonRefl.OpDetWaveformLabel: opdigiNSE45cm0300Hz5snrNonRefl
 physics.analyzers.flashmatchNSE45cm0300Hz5snrNonRefl.OpHitModuleLabel:   ophitNSE45cm0300Hz5snrNonRefl
 physics.analyzers.flashmatchNSE45cm0300Hz5snrNonRefl.OpFlashModuleLabel: opflashNSE45cm0300Hz5snrNonRefl
+physics.analyzers.snanaNSE45cm0300Hz5snrNonRefl.OpHitModuleLabel:        ophitNSE45cm0300Hz5snrNonRefl
 
 ## Configs for NSE45cm1000Hz5snrNonRefl
 physics.producers.opdigiNSE45cm1000Hz5snrNonRefl.QEOverride:             0.031889
@@ -211,6 +230,7 @@ physics.producers.opflashNSE45cm1000Hz5snrNonRefl.InputModule:           ophitNS
 physics.analyzers.flashmatchNSE45cm1000Hz5snrNonRefl.OpDetWaveformLabel: opdigiNSE45cm1000Hz5snrNonRefl
 physics.analyzers.flashmatchNSE45cm1000Hz5snrNonRefl.OpHitModuleLabel:   ophitNSE45cm1000Hz5snrNonRefl
 physics.analyzers.flashmatchNSE45cm1000Hz5snrNonRefl.OpFlashModuleLabel: opflashNSE45cm1000Hz5snrNonRefl
+physics.analyzers.snanaNSE45cm1000Hz5snrNonRefl.OpHitModuleLabel:        ophitNSE45cm1000Hz5snrNonRefl
 
 ## Configs for REF45cm0100Hz5snrOptRefl
 physics.producers.opdigiREF45cm0100Hz5snrOptRefl.QEOverride:             0.031889
@@ -222,6 +242,7 @@ physics.producers.opflashREF45cm0100Hz5snrOptRefl.InputModule:           ophitRE
 physics.analyzers.flashmatchREF45cm0100Hz5snrOptRefl.OpDetWaveformLabel: opdigiREF45cm0100Hz5snrOptRefl
 physics.analyzers.flashmatchREF45cm0100Hz5snrOptRefl.OpHitModuleLabel:   ophitREF45cm0100Hz5snrOptRefl
 physics.analyzers.flashmatchREF45cm0100Hz5snrOptRefl.OpFlashModuleLabel: opflashREF45cm0100Hz5snrOptRefl
+physics.analyzers.snanaREF45cm0100Hz5snrOptRefl.OpHitModuleLabel:        ophitREF45cm0100Hz5snrOptRefl
 
 ## Configs for REF45cm0100Hz5snrPesRefl
 physics.producers.opdigiREF45cm0100Hz5snrPesRefl.QEOverride:             0.015590
@@ -233,6 +254,7 @@ physics.producers.opflashREF45cm0100Hz5snrPesRefl.InputModule:           ophitRE
 physics.analyzers.flashmatchREF45cm0100Hz5snrPesRefl.OpDetWaveformLabel: opdigiREF45cm0100Hz5snrPesRefl
 physics.analyzers.flashmatchREF45cm0100Hz5snrPesRefl.OpHitModuleLabel:   ophitREF45cm0100Hz5snrPesRefl
 physics.analyzers.flashmatchREF45cm0100Hz5snrPesRefl.OpFlashModuleLabel: opflashREF45cm0100Hz5snrPesRefl
+physics.analyzers.snanaREF45cm0100Hz5snrPesRefl.OpHitModuleLabel:        ophitREF45cm0100Hz5snrPesRefl
 
 ## Configs for SNR45cm0100Hz3snrNonRefl
 physics.producers.opdigiSNR45cm0100Hz3snrNonRefl.QEOverride:             0.031889
@@ -243,6 +265,7 @@ physics.producers.opflashSNR45cm0100Hz3snrNonRefl.InputModule:           ophitSN
 physics.analyzers.flashmatchSNR45cm0100Hz3snrNonRefl.OpDetWaveformLabel: opdigiSNR45cm0100Hz3snrNonRefl
 physics.analyzers.flashmatchSNR45cm0100Hz3snrNonRefl.OpHitModuleLabel:   ophitSNR45cm0100Hz3snrNonRefl
 physics.analyzers.flashmatchSNR45cm0100Hz3snrNonRefl.OpFlashModuleLabel: opflashSNR45cm0100Hz3snrNonRefl
+physics.analyzers.snanaSNR45cm0100Hz3snrNonRefl.OpHitModuleLabel:        ophitSNR45cm0100Hz3snrNonRefl
 
 ## Configs for SNR45cm0100Hz4snrNonRefl
 physics.producers.opdigiSNR45cm0100Hz4snrNonRefl.QEOverride:             0.031889
@@ -253,6 +276,7 @@ physics.producers.opflashSNR45cm0100Hz4snrNonRefl.InputModule:           ophitSN
 physics.analyzers.flashmatchSNR45cm0100Hz4snrNonRefl.OpDetWaveformLabel: opdigiSNR45cm0100Hz4snrNonRefl
 physics.analyzers.flashmatchSNR45cm0100Hz4snrNonRefl.OpHitModuleLabel:   ophitSNR45cm0100Hz4snrNonRefl
 physics.analyzers.flashmatchSNR45cm0100Hz4snrNonRefl.OpFlashModuleLabel: opflashSNR45cm0100Hz4snrNonRefl
+physics.analyzers.snanaSNR45cm0100Hz4snrNonRefl.OpHitModuleLabel:        ophitSNR45cm0100Hz4snrNonRefl
 
 ## Configs for SNR45cm0100Hz7snrNonRefl
 physics.producers.opdigiSNR45cm0100Hz7snrNonRefl.QEOverride:             0.031889
@@ -263,4 +287,5 @@ physics.producers.opflashSNR45cm0100Hz7snrNonRefl.InputModule:           ophitSN
 physics.analyzers.flashmatchSNR45cm0100Hz7snrNonRefl.OpDetWaveformLabel: opdigiSNR45cm0100Hz7snrNonRefl
 physics.analyzers.flashmatchSNR45cm0100Hz7snrNonRefl.OpHitModuleLabel:   ophitSNR45cm0100Hz7snrNonRefl
 physics.analyzers.flashmatchSNR45cm0100Hz7snrNonRefl.OpFlashModuleLabel: opflashSNR45cm0100Hz7snrNonRefl
+physics.analyzers.snanaSNR45cm0100Hz7snrNonRefl.OpHitModuleLabel:        ophitSNR45cm0100Hz7snrNonRefl
 
