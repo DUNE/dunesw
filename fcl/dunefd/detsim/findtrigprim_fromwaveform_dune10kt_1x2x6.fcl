@@ -1,0 +1,7 @@
+#include "findtrigprim_dune10kt_1x2x6.fcl"
+
+process_name: PrimSim
+
+physics.producers.simwire.UseRawDigitInput: true
+physics.producers.simwire.RawDigitInputLabel: "daq"
+output1.out1.fileName: "%ifb_trigprim_fromwaveform.root"
