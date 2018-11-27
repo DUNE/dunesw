@@ -16,12 +16,8 @@
 #include "opticaldetectormodules_dune.fcl"
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
+#include "ProtoDUNETriggerFilter.fcl"
 #include "protodune_tools_dune.fcl"
-
-##include "PdspChannelMapService.fcl"
-##include "protoDUNE_reco.fcl"  
-##include "SaveSpacePoints.fcl"                                                                               
-
 
 process_name: DecoderandReco
 
@@ -35,7 +31,7 @@ services:
     @table::protodune_rawdecoding_services
     FileCatalogMetadata:  @local::art_file_catalog_data
                           @table::protodune_reco_services
-                          @table::protodune_data_services
+ #                         @table::protodune_data_services
 ###    ExptGeoHelperInterface:       @local::dune_geometry_helper
 ###    Geometry:                     @local::protodune_geo
 ###    DetectorClocksService:        @local::protodune_detectorclocks
@@ -61,8 +57,9 @@ services:
                              "dunemeta.dune_data.is_fake_data", "dunemeta.dune_data.accouple",
                              "dunemeta.dune_data.calibpulsemode", "dunemeta.dune_data.febaselinehigh",
                              "dunemeta.dune_data.fegain", "dunemeta.dune_data.feleak10x",
-                             "dunemeta.dune_data.feleakhigh", "dunemeta.dune_data.feshapingtime", "events" ]
-        applicationVersion: "v07_07_03_01"
+                             "dunemeta.dune_data.feleakhigh", "dunemeta.dune_data.feshapingtime", "events",
+                             "data_quality.online_good_run_list" ]
+        applicationVersion: "v07_08_00_04"
         fileType: "detector"
         runType: "protodune-sp"
 
@@ -92,6 +89,12 @@ services:
 
 physics:
 {
+    
+    filters: 
+    {
+        trigfilter:  @local::pdsp_trigfilter_all
+    }
+
     producers:
     {
 
@@ -181,11 +184,14 @@ source:
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 
 services.RawDigitPrepService.AdcChannelToolNames: [
-    "digitReader",
-    "adcPedestalFit",
-    "adcSampleFiller",
-    "adcVintageDeconvoluter",
-    "adcThresholdSignalFinder"
+    "digitReader",                # Read RawDigit
+    "pd_adcPedestalFit",          # Find pedestal
+    "adcSampleFiller",            # Subtract pedestal, trivial calibration
+    "pdsp_sticky_codes_ped",      # Flag sticky codes
+    "pdsp_adcMitigate",           # Mitigate sticky codes
+    "pdsp_timingMitigate",        # Mitigate FEMB302 timing
+    "adcVintageDeconvoluter",     # Deconvolute
+    "adcThresholdSignalFinder"    # Build ROIs
 ]
 
 # Define PD reco modules for split input
