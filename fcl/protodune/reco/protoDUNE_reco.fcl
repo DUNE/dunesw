@@ -208,3 +208,6 @@ physics.producers.pandoracalipid.TrackModuleLabel:              "pandoraTrack"
 #Optical detector configuration
 physics.producers.ophit.InputModule:                        "opdigi"
 physics.producers.opflash.InputModule:                      "ophit"
+
+# Use channel map service for data
+services.PdspChannelMapService:        @local::pdspchannelmap
