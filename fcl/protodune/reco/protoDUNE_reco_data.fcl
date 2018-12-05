@@ -64,3 +64,8 @@ services.ChannelStatusService: @local::pdsp_channel_status
 
 # Use channel map service for data
 services.PdspChannelMapService:        @local::pdspchannelmap
+
+# Make sure we can use cryostat-side APA hits
+services.ChannelGroupService.ApaRops: []
+physics.producers.hitpdune.ExcludeTPCs: []
+
