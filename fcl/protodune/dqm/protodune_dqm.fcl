@@ -12,8 +12,10 @@
 # The tools write many large files for each event and so this
 # is typically run with a small number of events.
 
-tools.tickRanges.plotTicks.begin: 3000
-tools.tickRanges.plotTicks.end:   4000
+# Uncomment and set these values to change the tick range in the
+# channel-tick plots.
+#tools.tickRanges.plotTicks.begin: 3000
+#tools.tickRanges.plotTicks.end:   4000
 
 services.RawDigitPrepService.AdcChannelToolNames: [
   "digitReader",

@@ -48,6 +48,7 @@ physics:
  #ie analyzers and output streams.  these all run simultaneously
  end_paths:     [stream1,ana]  
 # end_paths:     [stream1]  
+# end_paths:     [ana]
 }
 
 #block to define where the output goes.  if you defined a filter in the physics
