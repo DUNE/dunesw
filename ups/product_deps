@@ -31,7 +31,7 @@ table_fragment_begin
     # Add StashCache to the FW_SEARCH_PATH
     pathPrepend(FW_SEARCH_PATH, /cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/)
     pathPrepend(FHICL_FILE_PATH, .:./job)
-    # Add     
+    # WireCellData
     envSet(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
 #    envSet(DBIWSPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
 #    envSet(DBIWSURL, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
