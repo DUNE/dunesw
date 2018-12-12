@@ -11,7 +11,7 @@
 #include <string>
 #include <iostream>
 #include "art/Framework/Services/Registry/ServiceHandle.h"
-#include "art/Framework/Core/EngineCreator.h"
+#include "art/Framework/Core/detail/EngineCreator.h"
 #include "CLHEP/Random/RandomEngine.h"
 #include "dune/ArtSupport/ArtServiceHelper.h"
 
@@ -29,21 +29,7 @@ int test_DetectorClocksService(string gname) {
   string line = "-----------------------------";
   string scfg;
 
-  cout << myname << line << endl;
-  cout << myname << "Fetch art service helper." << endl;
-  ArtServiceHelper& ash = ArtServiceHelper::instance();
-  scfg = "prodsingle_dune35t.fcl";
-  bool isFile = true;
-
-  cout << myname << line << endl;
-  cout << myname << "Add the DetectorClocksService service." << endl;
-  cout << myname << "Configuration: " << scfg << endl;
-  assert( ash.addService("DetectorClocksService", scfg, isFile) == 0 );
-
-  cout << myname << line << endl;
-  cout << myname << "Load the services." << endl;
-  assert( ash.loadServices() == 1 );
-  ash.print();
+  ArtServiceHelper::load_services("prodsingle_dune35t.fcl", ArtServiceHelper::FileOnPath);
 
   cout << myname << line << endl;
   cout << myname << "Get DetectorClocksService service." << endl;
@@ -54,11 +40,6 @@ int test_DetectorClocksService(string gname) {
   cout << myname << "Use DetectorClocksService service." << endl;
   cout << "   TriggerTime: " << pclksrv->TriggerTime() << endl;
   cout << "  BeamGateTime: " << pclksrv->BeamGateTime() << endl;
-
-  // Close services.
-  cout << myname << line << endl;
-  cout << myname << "Close services." << endl;
-  ArtServiceHelper::close();
 
   cout << myname << line << endl;
   cout << "Done." << endl;
