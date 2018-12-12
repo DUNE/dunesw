@@ -3,7 +3,7 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 
-parent dunetpc v07_13_00
+parent dunetpc v07_13_01
 
 defaultqual e17
 
@@ -31,6 +31,8 @@ table_fragment_begin
     # Add StashCache to the FW_SEARCH_PATH
     pathPrepend(FW_SEARCH_PATH, /cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/)
     pathPrepend(FHICL_FILE_PATH, .:./job)
+    # WireCellData
+    envSet(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
 #    envSet(DBIWSPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
 #    envSet(DBIWSURL, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
 #    envSet(DBIWSURLINT, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
@@ -57,9 +59,9 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v07_13_00
+larsoft          v07_13_01
 artdaq_core	 v3_04_01
-duneutil         v07_12_00	-	optional
+duneutil         v07_13_01	-	optional
 lbne_raw_data 	 v1_04_27
 dune_pardata	 v01_41_00
 genie_xsec       v2_12_10        -       optional
