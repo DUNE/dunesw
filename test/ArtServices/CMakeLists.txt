@@ -1,25 +1,7 @@
-# art_extensions/test/services/CMakeLists.txt
-
-cet_test(test_TFileService SOURCES test_TFileService.cxx
-  LIBRARIES
-    dune_ArtSupport
-    art_Framework_Services_Optional_TFileService_service
-    ${ART_FRAMEWORK_SERVICES_OPTIONAL}
-    ${ROOT_BASIC_LIB_LIST}
-)
-
 cet_test(test_Geometry SOURCES test_Geometry.cxx
   LIBRARIES
     dune_ArtSupport
     larcorealg_Geometry
-    ${ROOT_BASIC_LIB_LIST}
-)
-
-cet_test(test_RandomNumberGenerator SOURCES test_RandomNumberGenerator.cxx
-  LIBRARIES
-    art_Framework_Services_Optional_RandomNumberGenerator_service
-    dune_ArtSupport
-    ${ART_FRAMEWORK_CORE}
     ${ROOT_BASIC_LIB_LIST}
 )
 
