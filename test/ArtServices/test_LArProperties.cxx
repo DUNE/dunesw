@@ -12,7 +12,7 @@
 #include <iostream>
 #include "dune/ArtSupport/ArtServiceHelper.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
-#include "art/Framework/Core/EngineCreator.h"
+#include "art/Framework/Core/detail/EngineCreator.h"
 #include "CLHEP/Random/RandomEngine.h"
 
 using std::string;
@@ -29,25 +29,8 @@ int test_LArPropertiesStandard(string gname) {
   abort();
 #endif
   string line = "-----------------------------";
-  string scfg;
 
-  cout << myname << line << endl;
-  cout << myname << "Fetch art service helper." << endl;
-  ArtServiceHelper& ash = ArtServiceHelper::instance();
-
-  cout << myname << line << endl;
-  cout << myname << "Add the LArPropertiesService service." << endl;
-  scfg = "prodsingle_dune35t.fcl";
-  cout << myname << "Configuration: " << scfg << endl;
-  assert( ash.addService("LArPropertiesService", scfg, true) == 0 );
-
-  cout << myname << line << endl;
-  cout << myname << "Print the services." << endl;
-  ash.print();
-
-  cout << myname << line << endl;
-  cout << myname << "Load the services." << endl;
-  assert( ash.loadServices() == 1 );
+  ArtServiceHelper::load_services("prodsingle_dune35t.fcl", ArtServiceHelper::FileOnPath);
 
   cout << myname << line << endl;
   cout << myname << "Get LArPropertiesServiceStandard service." << endl;
@@ -57,10 +40,6 @@ int test_LArPropertiesStandard(string gname) {
   cout << myname << "Use LArPropertiesStandard." << endl;
   cout << myname << "     Atomic number: " << plarsrv->AtomicNumber() << endl;
   cout << myname << "  Radiation length: " << plarsrv->RadiationLength() << endl;
-
-  cout << myname << line << endl;
-  cout << myname << "Close services." << endl;
-  ArtServiceHelper::close();
 
   cout << myname << line << endl;
   cout << "Done." << endl;
