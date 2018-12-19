@@ -56,8 +56,7 @@ add_subdirectory(CalibServices)
 add_subdirectory(CAFMaker)
 
 add_subdirectory(RegCVN)
-add_subdirectory(SlowControls)
-add_subdirectory(SlowControlsServices)
+
 
 # Respect the order specified in lar_build, which is:
 #
