@@ -32,7 +32,8 @@ table_fragment_begin
     pathPrepend(FW_SEARCH_PATH, /cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/)
     pathPrepend(FHICL_FILE_PATH, .:./job)
     # WireCellData
-    envSet(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
+    envSet(WIRECELL_PATH, ${UPS_PROD_DIR}/wire-cell-cfg)
+    pathPrepend(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
 #    envSet(DBIWSPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
 #    envSet(DBIWSURL, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
 #    envSet(DBIWSURLINT, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
