@@ -92,5 +92,5 @@ services.PhotonVisibilityService.XMax: 50
 services.PhotonVisibilityService.XMin: -50
 services.PhotonVisibilityService.YMax: 50
 services.PhotonVisibilityService.YMin: -50
-services.PhotonVisibilityService.ZMax: 294
-services.PhotonVisibilityService.ZMin: -6
+services.PhotonVisibilityService.ZMax: 300
+services.PhotonVisibilityService.ZMin: 0
