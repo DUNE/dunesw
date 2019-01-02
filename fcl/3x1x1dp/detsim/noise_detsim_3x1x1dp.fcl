@@ -74,16 +74,64 @@ services.SimChannelExtractService.DPGainPerView: 2
 
 #===================New noise module ===========================================
 #Configure realistic noise service for DP detectors based on the 311 data
-#NB: Hardcoded unrotated geometry:
 
 services.ChannelNoiseService:{
-service_provider: DPhaseRealisticNoiseService
-NoiseModel:    "$MRB_SOURCE/dunetpc/dune/DetSim/NoiseModels/729-0_fft_mirror.root"    #path to the noise model root file
-RandomizeX:    15. #0.002
-RandomizeY:    15. #0.002
-Smooth:        1000
-SetFirst0:     false
-SetBaseline:   false   #if true sum baseline to real noise model
-NoiseArrayPoints: 1000
-OldNoiseIndex: false   #From ExponentialChannelNoiseService. Keep false
-}
+
+	#Inchoerent noise only
+	#service_provider: DPhaseRealisticNoiseService
+	#NoiseModel:    "$MRB_SOURCE/dunetpc/dune/DetSim/NoiseModels/729-0_fft_mirror.root"    #path to the noise model root file
+	#RandomizeX:    15. #0.002
+	#RandomizeY:    15. #0.002
+	#Smooth:        1000
+	#SetFirst0:     false
+	#SetBaseline:   false   #if true sum baseline to real noise model
+	#NoiseArrayPoints: 1000
+	#OldNoiseIndex: false   #From ExponentialChannelNoiseService. Keep false
+	
+	#Coherent noise
+ervices.ChannelNoiseService:{
+  	service_provider: DPhaseCoherentNoiseService
+  	NoiseModel:       "$MRB_SOURCE/dunetpc/dune/DetSim/NoiseModels/729-0-mirror-fft.root"
+  	AmplitudeCut:     0               #select frequencies above this threshold
+  	Normalization:    1025            #amplitude normalizations
+ 	 Randomize:        [ 1, 1 ]        #rms amplitude [rms view , rms view 1]
+  	PhaseShift:       [ -1, 1 ]       #phase shift per group of channels in radiants
+  	ChannelGroup:     [ 0,            #list here the first channel of every significant correlation pattern group
+                      32,
+                      64,
+                      96,
+                      128,
+                      160,
+                      192,
+                      224,
+                      256,
+                      288,
+                      320,
+                      352,
+                      384,
+                      416,
+                      448,
+                      480,
+                      512,
+                      544,
+                      576,
+                      608,
+                      640,
+                      672,
+                      704,
+                      736,
+                      768,
+                      800,
+                      832,
+                      864,
+                      896,
+                      928,
+                      960,
+                      1120,   #corr pattern over the full lem (by empirical observation of 729)
+                      1280 ]  #corr pattern over the full lem (by empirical observation of 729)
+  	InchoerentNoise:  [ 0.7, 1.1, 0.7, 1.1 ]      #rms and sigma of a small incohrent noise ( or very high frequency ) [ #mean view 0, rms view 0, mean view 1, rms view 1 ]. [] means no noise simulated
+  	NumberOfPhases:   1000            #number of noise mask (channel vs time) to produce
+ 	 LogLevel:         0                 #Verbosity level
+}	
+
+}	

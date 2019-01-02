@@ -6,4 +6,4 @@ services.SpaceCharge.EnableSimSpatialSCE: true
 services.SpaceCharge.EnableSimulationSCE: true
 
 services.SpaceCharge.RepresentationType: Voxelized
-services.SpaceCharge.InputFilename: "dispOutput_ProtoDUNESP_withFlowNegX_E500.root"
+services.SpaceCharge.InputFilename: "SpaceChargeProtoDUNE/dispOutput_ProtoDUNESP_withFlowNegX_E500.root"

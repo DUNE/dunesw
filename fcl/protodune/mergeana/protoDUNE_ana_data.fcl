@@ -1,0 +1,6 @@
+#include "protoDUNE_ana_hist.fcl"
+
+process_name: Mergeana
+
+physics.ana: [ analysistree ]
+physics.analyzers.analysistree: @local::protodune_analysistree_data

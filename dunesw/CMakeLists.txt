@@ -11,7 +11,7 @@ add_subdirectory(Utilities)
 add_subdirectory(Simulation)
 add_subdirectory(LArG4)
 add_subdirectory(PhotonPropagation)
-add_subdirectory(OpticalDetector)  
+add_subdirectory(OpticalDetector)
 add_subdirectory(DetSim)
 add_subdirectory(DetectorVariations)
 add_subdirectory(EventGenerator)
@@ -51,6 +51,11 @@ add_subdirectory(DAQSimAna)
 add_subdirectory(3x1x1dp)
 add_subdirectory(CVN)
 add_subdirectory(BeamData)
+add_subdirectory(Calib)
+add_subdirectory(CalibServices)
+add_subdirectory(CAFMaker)
+add_subdirectory(RegCVN)
+add_subdirectory(Iceberg)
 
 # Respect the order specified in lar_build, which is:
 #
@@ -83,7 +88,7 @@ add_subdirectory(BeamData)
 #     "larreco_EventFinder",
 #     "larsim_TriggerAlgo",
 #     "larana_OpticalDetector",
-#     "larreco_Calorimetry", 
+#     "larreco_Calorimetry",
 #     "larreco_ShowerFinder",
 #     "lareventdisplay_EventDisplay",
 #     "larana_ParticleIdentification",

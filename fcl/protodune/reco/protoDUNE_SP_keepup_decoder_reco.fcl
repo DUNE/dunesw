@@ -1,0 +1,109 @@
+#include "protoDUNE_reco_data_Dec2018.fcl"
+#include "ProtoDUNETriggerFilter.fcl"
+
+#include "protodune_tools_dune.fcl"
+
+process_name: DecoderandReco
+
+services:
+{
+    #message:              @local::dune_message_services_prod_debug
+
+    TimeTracker:       {}
+    MemoryTracker:     {}
+    RandomNumberGenerator: {} 
+    FileCatalogMetadata:  @local::art_file_catalog_data
+                          @table::protodune_rawdecoding_services
+                          @table::protodune_data_reco_services
+    message:              @local::dune_message_services_prod_debug
+    FileCatalogMetadata: {
+#        campaign: "beam_prep"
+        metadataFromInput: [ "dunemeta.data_stream", "dunemeta.dune_data.daqconfigname", 
+                             "dunemeta.dune_data.detector_config", "dunemeta.dune_data.inconsistent_hw_config",
+                             "dunemeta.dune_data.is_fake_data", "dunemeta.dune_data.accouple",
+                             "dunemeta.dune_data.calibpulsemode", "dunemeta.dune_data.febaselinehigh",
+                             "dunemeta.dune_data.fegain", "dunemeta.dune_data.feleak10x",
+                             "dunemeta.dune_data.feleakhigh", "dunemeta.dune_data.feshapingtime", "events",
+                             "data_quality.online_good_run_list" ]
+        applicationVersion: "v07_08_00_04"
+        fileType: "detector"
+        runType: "protodune-sp"
+
+   }
+    
+  TFileService: { 
+      closeFileFast: true  # default
+      fileName: "hist_%ifb_decoder_reco.root"
+      tmpDir: "<parent-path-of-filename>"  # default
+  }
+
+#  PdspChannelMapService: {
+##      FileName:         "protoDUNETPCChannelMap_v3.txt"
+#      FileName:         "protoDUNETPCChannelMap_RCE_v4.txt"
+#      FELIXFileName:    "protoDUNETPCChannelMap_FELIX_v4.txt"
+#      SSPFileName:      "protoDUNESSPChannelMap_v1.txt"
+#
+#      LogLevel:         1
+#  }
+#    @table::protodune_services
+
+  IFBeam:            {}
+}
+
+
+#services.message.destinations.LogStandardOut.threshold: "INFO"
+
+physics:
+{
+    
+    filters: 
+    {
+        trigfilter:  @local::pdsp_trigfilter_all
+    }
+
+    producers:
+    {
+        @table::protoDUNE_rawdecoding_producers
+        @table::protoDUNE_reco_data_producers
+    }
+
+    #Create path to run module
+    decode: [ @sequence::protoDUNE_rawdecoding,
+              @sequence::protoDUNE_reco_data
+          ]
+
+    output: [ out1 ]
+    trigger_paths : [ decode ]
+#    ana: [ beamana ]
+    end_paths: [ output ]
+}
+
+#services: {
+#}
+
+outputs:
+{
+    out1:
+        {
+        compressionLevel: 1
+        module_type: RootOutput
+        fileName: "%ifb_reco.root"
+        dataTier:    "full-reconstructed"
+#        outputCommands: [ "drop *", "keep raw::RawDigitrecob*_*_*_*", "keep recob::*_*_*_*" ]
+#       outputCommands: [ "keep *", "drop artdaq::Fragments_*_*TPC_*", "drop artdaq::Fragments_*_*FELIX_*", "drop raw::RawDigitrecob*_*_*_*" ]
+       outputCommands: [ "keep *", "drop artdaq::Fragments_*_*TPC_*", "drop artdaq::Fragments_*_*FELIX_*" ]
+  #      fileProperties: {
+  #          maxInputFiles: 1
+  #          }
+        }
+    }
+
+source:
+{
+    module_type: RootInput
+    fileNames: [ "/afs/cern.ch/user/s/sergiand/workspace/artdaq_devel/pdune_r1000077_sr01_20170629T181646_1_0.root" ]
+    maxEvents : -1
+}
+
+#<friendly-type>_<module-label>_<instance-name>_<process-name>
+
