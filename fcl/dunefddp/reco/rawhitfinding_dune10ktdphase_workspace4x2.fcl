@@ -1,0 +1,174 @@
+#include "services_dune.fcl"
+#include "caldata_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "cluster_dune.fcl"
+#include "imagepatternalgs.fcl"
+#include "trackfindermodules_dune.fcl"
+#include "pandoramodules_dune.fcl"
+#include "calorimetry_dune10kt.fcl"
+#include "mctrutht0matching.fcl"
+#include "t0reco.fcl"
+#include "particleid.fcl"
+#include "showerfindermodules_dune.fcl"
+# #include "stitcherdp.fcl"
+
+#include "tools_dune.fcl"
+
+process_name: RecoTrack
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "hist.root" }
+  TimeTracker:       {}
+  MemoryTracker:     {}
+  RandomNumberGenerator: {} #ART native random number generator
+  message:              @local::standard_info
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::dunefddphase_reco_services
+}
+
+services.Geometry: @local::dunedphase10kt_workspace4x2_geo
+services.message.destinations.infomsg.threshold: "DEBUG"
+
+
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents: -1
+  fileNames: ["detsim.root"]
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics:
+{
+
+ producers:
+ {
+  rns:                { module_type: RandomNumberSaver }
+  caldata:            @local::producer_adcprep
+  dprawhit:             @local::dunefddphase_dprawhitfinder
+ }
+
+ #define the producer and filter modules for this path, order matters,
+ #filters reject all following items.  see lines starting physics.producers below
+ reco: [ rns, caldata, dprawhit ]
+ #reco: [ trackstitch ]
+
+	analyzers:
+	{
+	}
+
+	analyzeIt:  [ ]
+
+ #define the output stream, there could be more than one if using filters
+ stream1:  [ out1 ]
+
+ #trigger_paths is a keyword and contains the paths that modify the art::event,
+ #ie filters and producers
+ trigger_paths: [reco]
+
+ #end_paths is a keyword and contains the paths that do not modify the art::Event,
+ #ie analyzers and output streams.  these all run simultaneously
+ end_paths:     [stream1]
+}
+
+#block to define where the output goes.  if you defined a filter in the physics
+#block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
+#entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_reco.root"
+   dataTier:    "full-reconstructed"
+   compressionLevel: 1
+ }
+}
+
+
+################################################################################
+## Noise
+################################################################################
+
+services.RawDigitPrepService.DoNoiseRemoval: 		false
+services.RawDigitPrepService.DoDeconvolution: 		false
+services.RawDigitPrepService.DoEarlySignalFinding: 	false
+services.RawDigitPrepService.DoMitigation: 		false
+services.RawDigitPrepService.SkipBad: 			false
+services.RawDigitPrepService.SkipNoisy: 		false
+services.RawDigitPrepService.DoROI: 			true
+
+physics.producers.caldata.DoGroups: false
+physics.producers.caldata.LogLevel: 1
+
+################################################################################
+## ROI
+################################################################################
+
+services.AdcRoiBuildingService.NSigmaStart:   		0.75   # only pulses with ADC >= NSigmaStart*8 are considered for hit finding. This reduces fake noise hits.
+services.AdcRoiBuildingService.NSigmaEnd:     		0.75   # only pulses with ADC >= NSigmaStart*8 are considered for hit finding. This reduces fake noise hits.
+
+################################################################################
+# Hit finder configuration
+################################################################################
+
+physics.producers.dprawhit.LogLevel:       	  0    	                           # Log level
+physics.producers.dprawhit.NumBinsToAverage:     	0	                               # 0 or 1 = no averaging.
+physics.producers.dprawhit.ChargeNorm: 			        1	                             # Normalization for fit integral. Should be set to 1.
+physics.producers.dprawhit.WidthNormalization:    	2.335 	                       # standard width of the fitted hit is the FWHM of the fitted function (full width at half maximum).
+								                                                                 # This width is divied by 'WidthNormalization' and saved to the recob::Hit.
+								                                                                 # standard value is chosen to be 2.335 = 2*sqrt(2*ln(2)), which is the relation between FWHM and standard deviation for the Gaussian distribution
+#finding peaks
+physics.producers.dprawhit.MinSig:            		  4 	                           # peak threshold for peak finding (in ADC). Peaks with lower amplitudes are neither fitted nor stored.
+physics.producers.dprawhit.TicksToStopPeakFinder:   5   	                         # when walking along waveform to find start and end points of a peak, stop when current tick is followed by minimum "TicksToStopPeakFinder" ticks
+                                                                                 # with equal or higher ADC counts (=inflection point). Stop anyway if ADC count of a tick is <= 0.
+#grouping peaks
+physics.producers.dprawhit.GroupMaxDistance:      	2    	                        # maximum distance (in ticks) between two peaks to be grouped.
+physics.producers.dprawhit.GroupMinADC:       	   	10                            # minimum ADC count between two peaks to be grouped.
+
+#merging peaks
+physics.producers.dprawhit.DoMergePeaks:      		  false                          # true: merge two peaks of the same group into one before fitting
+physics.producers.dprawhit.MergeADCSumThreshold:  	0.1   	                      # merge two peaks if (ADC sum of the smaller peak) < MergeADCSumThreshold*(ADC sum of the bigger peak) AND
+physics.producers.dprawhit.MergeMaxADCThreshold:  	0.1 	                        # merge two peaks if (height of the smaller peak) < MergeMaxADCThreshold*(height of the bigger peak) OR
+physics.producers.dprawhit.MinRelativePeakHeightLeft:  0.1                        # merge two peaks if (relative peak height of the smaller left peak) < MinRelativePeakHeightLeft*(peak height of the smaller peak)
+physics.producers.dprawhit.MinRelativePeakHeightRight: 0.1                        # merge two peaks if (relative peak height of the smaller right peak) < MinRelativePeakHeightRight*(peak height of the smaller peak)
+
+#filterings grouped and merged peaks
+physics.producers.dprawhit.MinADCSum:             	5 	                         # threshold for ADC sum (in ADC*ticks). Groups of peaks with smaller values are neither fitted nor stored.
+physics.producers.dprawhit.MinWidth:          		  10     	                     # threshold for width (in ticks). Groups of peaks with smaller values are neither fitted nor stored.
+physics.producers.dprawhit.MinADCSumOverWidth:    	2   	                       # threshold for ADC sum over width (in ADC*ticks/ticks). Groups of peaks with smaller values are neither fitted nor stored.
+
+#splitting up long groups of peaks and calculate hit paramter directly from waveform (no fit).
+physics.producers.dprawhit.MaxMultiHit:       		10     	                       # maximum number of peaks in a group for the group to be fitted. If more, split the group in equally spaced hits without fitting.
+								                                                               # When refitting, maximum number of peaks in group can be up to 3x number of peaks before re-fitting.
+physics.producers.dprawhit.MaxFluctuations:		 500	                             # If the sum of fluctuations in all peaks is > MaxFluctuations, split the group in equally spaced hits without fitting.
+physics.producers.dprawhit.MaxGroupLength:     500	                             # Maximum length of group of peaks for the group to be fitted, in ticks. If more, split the group in equally spaced hits without fitting.
+
+physics.producers.dprawhit.LongPulseWidth:       	200                            # max widths for hits in long pulse trains
+physics.producers.dprawhit.LongMaxHits:         	10                              # max number hits in long pulse trains
+
+#fitting groups of peaks
+physics.producers.dprawhit.SameShape:			          true                         # if true: fits within same group are forced to have identical shape
+physics.producers.dprawhit.MinTau:        		      0.1  	                     # minimum value of the rising and falling time constants of the fit, in microseconds.
+physics.producers.dprawhit.MaxTau:        		      10    	                     # maximum value of the rising and falling time constants of the fit, in microseconds.
+physics.producers.dprawhit.FitPeakMeanRange:      	2     	                     # range in that the fitter can move the mean of the fit function w.r.t. the peak.
+
+#refitting fitted groups of peaks peaks
+physics.producers.dprawhit.TryNplus1Fits:         	true                          # true: will try to re-fit poorly modeled groups of peaks (chi2PerNDF>Chi2NDFRetry) while adding (an) additional peak(s).
+physics.producers.dprawhit.Chi2NDFRetry:     		     20	                          # for single peaks: if the first fit returns a Chi2/NDF greater than this, try to re-fit.
+physics.producers.dprawhit.Chi2NDFRetryFactorMultiHits: 1                         # for groups of peaks (2 or more): if the first fit returns a Chi2/NDF greater than Chi2NDFRetryFactorMultiHits*Chi2NDFRetry, try to re-fit.
+
+#filtering (re)fitted groups of peaks. groups of peaks with a higher chi2/ndf are split up.
+physics.producers.dprawhit.Chi2NDFMax:              	100  	                    # for single peaks: maximum chi square / NDF allowed for a fit to be stored as recob::Hits. Otherwise, handle peak as long pulse train.
+physics.producers.dprawhit.Chi2NDFMaxFactorMultiHits: 	100	                       # for groups of peaks (2 or more): maximum chi square / NDF allowed for a fit to be stored as recob::Hit. Otherwise, handle group as long pulse train.
+
+#filtering (re)fitted groups of peaks. groups of peaks with a higher chi2/ndf are split up.
+ApplyCalorimetryCorrection:     false    #renormalize hit charge for lifetime and gainper view ( should reduce variations and make clustering easier  )
+GainPerView:                    10      #for a single view
+Lifetime:                       3000    #in us
+T0:                             0       #run t0

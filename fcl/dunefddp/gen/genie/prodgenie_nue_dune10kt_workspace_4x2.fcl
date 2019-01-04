@@ -1,0 +1,18 @@
+#include "prodgenie_nu_dune10kt_dphase.fcl"
+
+process_name: GenieGen
+
+outputs.out1.fileName: "prodgenie_nue_dune10kt_4x2_gen.root"
+#physics.producers.generator: @local::dune_fd_genie_nu_simple_flux_1x2x6_window
+
+physics.producers.generator.MixerConfig:     "map 12:16 -12:-16 14:12 -14:-12" #swap electron neutrinos with muon neutrinos
+physics.producers.generator.DefinedVtxHistRange:   true
+physics.producers.generator.VtxPosHistRange: [-900., 900, -500, 500., -200, 1400]
+physics.producers.generator.FiducialCut:     " "
+physics.producers.generator.FluxCopyMethod:     "DIRECT"
+physics.producers.generator.FluxType:		"simple_flux"
+physics.producers.generator.FluxFiles:		["*.root"]
+physics.producers.generator.FluxSearchPaths:    "/pnfs/dune/persistent/users/dbrailsf/flux/dune10kt_dphase_workspace4x2/gsimple/v2_8_6d/opt_03/neutrino/"
+
+services.Geometry: @local::dunedphase10kt_workspace4x2_geo
+source.firstRun: 20000002
