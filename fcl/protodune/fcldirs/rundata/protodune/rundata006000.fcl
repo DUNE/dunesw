@@ -1,0 +1,9 @@
+run: 6000
+cryostat: protodune
+apas: [1, 2, 3, 4, 5, 6]
+gain: 14.0
+shaping: 2.0
+hvfrac: 0.0
+pulserAmplitude: 21
+pulserSource: 1
+pulserPeriod: 497
