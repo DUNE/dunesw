@@ -56,6 +56,8 @@ add_subdirectory(CalibServices)
 add_subdirectory(CAFMaker)
 add_subdirectory(RegCVN)
 add_subdirectory(Iceberg)
+add_subdirectory(DUNEWireCell)
+
 
 # Respect the order specified in lar_build, which is:
 #

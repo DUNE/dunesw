@@ -87,11 +87,12 @@ outputs:
         {
         compressionLevel: 1
         module_type: RootOutput
+        saveMemoryObjectThreshold: 10485760
         fileName: "%ifb_reco.root"
         dataTier:    "full-reconstructed"
 #        outputCommands: [ "drop *", "keep raw::RawDigitrecob*_*_*_*", "keep recob::*_*_*_*" ]
-#       outputCommands: [ "keep *", "drop artdaq::Fragments_*_*TPC_*", "drop artdaq::Fragments_*_*FELIX_*", "drop raw::RawDigitrecob*_*_*_*" ]
-       outputCommands: [ "keep *", "drop artdaq::Fragments_*_*TPC_*", "drop artdaq::Fragments_*_*FELIX_*" ]
+       outputCommands: [ "keep *", "drop artdaq::Fragments_*_*TPC_*", "drop artdaq::Fragments_*_*FELIX_*", "drop raw::RawDigit*_*_*_*", "drop *_caldata_*_*", "drop *_wclsdatasp_*_*" ]
+#       outputCommands: [ "keep *", "drop artdaq::Fragments_*_*TPC_*", "drop artdaq::Fragments_*_*FELIX_*" ]
   #      fileProperties: {
   #          maxInputFiles: 1
   #          }
@@ -101,6 +102,7 @@ outputs:
 source:
 {
     module_type: RootInput
+    saveMemoryObjectThreshold: 10485760
     fileNames: [ "/afs/cern.ch/user/s/sergiand/workspace/artdaq_devel/pdune_r1000077_sr01_20170629T181646_1_0.root" ]
     maxEvents : -1
 }
