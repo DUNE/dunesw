@@ -24,7 +24,7 @@ services:
                              "dunemeta.dune_data.calibpulsemode", "dunemeta.dune_data.febaselinehigh",
                              "dunemeta.dune_data.fegain", "dunemeta.dune_data.feleak10x",
                              "dunemeta.dune_data.feleakhigh", "dunemeta.dune_data.feshapingtime", "events",
-                             "data_quality.online_good_run_list" ]
+                             "data_quality.online_good_run_list", "detector.hv_value" ]
         applicationVersion: "v07_08_00_04"
         fileType: "detector"
         runType: "protodune-sp"
