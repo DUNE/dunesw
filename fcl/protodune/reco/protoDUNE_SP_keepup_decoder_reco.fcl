@@ -15,7 +15,7 @@ services:
     FileCatalogMetadata:  @local::art_file_catalog_data
                           @table::protodune_rawdecoding_services
                           @table::protodune_data_reco_services
-    message:              @local::dune_message_services_prod_debug
+    message:              @local::dune_message_services_prod
     FileCatalogMetadata: {
 #        campaign: "beam_prep"
         metadataFromInput: [ "dunemeta.data_stream", "dunemeta.dune_data.daqconfigname", 
