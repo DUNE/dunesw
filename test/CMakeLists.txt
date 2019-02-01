@@ -8,7 +8,7 @@ add_subdirectory(daqinput35t)
 add_subdirectory(EventGenerator)
 add_subdirectory(Geometry)
 add_subdirectory(ci)
-add_subdirectory(OpDet)
+#add_subdirectory(OpDet)
 
 add_subdirectory(ArtServices)
 
@@ -23,18 +23,18 @@ add_subdirectory(ArtServices)
 # crash with a SEGFAULT on Mac OS,
 # they will be executed only on SLF for now
 
-if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-   cet_test(donothing_dune35t HANDBUILT
-     DATAFILES test_donothing_dune35t.fcl
-     TEST_EXEC lar
-     TEST_ARGS --rethrow-all --config ./test_donothing_dune35t.fcl
-   )
-   cet_test(donothing_simul_dune35t HANDBUILT
-     DATAFILES test_donothing_simul_dune35t.fcl
-     TEST_EXEC lar
-     TEST_ARGS --rethrow-all --config ./test_donothing_simul_dune35t.fcl
-   )
-endif()
+#if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+#   cet_test(donothing_dune35t HANDBUILT
+#     DATAFILES test_donothing_dune35t.fcl
+#     TEST_EXEC lar
+#     TEST_ARGS --rethrow-all --config ./test_donothing_dune35t.fcl
+#   )
+#   cet_test(donothing_simul_dune35t HANDBUILT
+#     DATAFILES test_donothing_simul_dune35t.fcl
+#     TEST_EXEC lar
+#     TEST_ARGS --rethrow-all --config ./test_donothing_simul_dune35t.fcl
+#   )
+#endif()
 
 cet_test(donothing_dunefd HANDBUILT
   DATAFILES test_donothing_dunefd.fcl
