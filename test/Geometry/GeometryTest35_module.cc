@@ -86,9 +86,9 @@ namespace geo{
 
     try{
 
-      LOG_DEBUG("GeometryTest35") << "test AuxDets...";
+      MF_LOG_DEBUG("GeometryTest35") << "test AuxDets...";
       this->testAuxDet();
-      LOG_DEBUG("GeometryTest35") << "complete.";
+      MF_LOG_DEBUG("GeometryTest35") << "complete.";
 
     }
     catch (cet::exception &e) {
