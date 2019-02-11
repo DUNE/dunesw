@@ -13,3 +13,8 @@ install(
   DESTINATION ${dunetpc_fcl_dir}
   FILES_MATCHING PATTERN *.fcl
 )
+install(
+  DIRECTORY calib
+  DESTINATION ${dunetpc_fcl_dir}
+  FILES_MATCHING PATTERN *.fcl
+)

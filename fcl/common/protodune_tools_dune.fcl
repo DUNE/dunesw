@@ -9,4 +9,5 @@
 #include "dunecommon_tools.fcl"
 #include "protodune_dataprep_tools.fcl"
 #include "stickycodes_pdsp.fcl"
+#include "calibs_pdsp.fcl"
 
