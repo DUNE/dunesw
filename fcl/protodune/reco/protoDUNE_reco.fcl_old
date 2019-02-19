@@ -78,20 +78,8 @@ physics: {
     pandoracalo:        @local::dune10kt_calomc
     pandorapid:         @local::standard_chi2pid
     pandoracali:        @local::protodunespmc_calibrationdedx
-    pandoracalipid:     @local::standard_chi2pid 
-    pandoracaloSCE:     @local::dune10kt_calomc
-    pandorapidSCE:      @local::standard_chi2pid
-    pandoracaliSCE:     @local::protodunespmc_calibrationdedx
-    pandoracalipidSCE:  @local::standard_chi2pid   
-    pandoracalodE:     @local::dune10kt_calomc
-    pandorapiddE:      @local::standard_chi2pid
-    pandoracalidE:     @local::protodunespmc_calibrationdedx
-    pandoracalipiddE:  @local::standard_chi2pid   
-    pandoracalodx:     @local::dune10kt_calomc
-    pandorapiddx:      @local::standard_chi2pid
-    pandoracalidx:     @local::protodunespmc_calibrationdedx
-    pandoracalipiddx:  @local::standard_chi2pid   
-    pmtrack:         @local::dunefd_pmalgtrackmaker
+    pandoracalipid:     @local::standard_chi2pid  
+    pmtrack:            @local::dunefd_pmalgtrackmaker
     pmtrackcalo:        @local::dune10kt_calomc
     pmtrackpid:         @local::standard_chi2pid
     pmtrackcali:        @local::protodunespmc_calibrationdedx
@@ -126,9 +114,6 @@ physics: {
           #pandora
           pandora, pandoraTrack, pandoraShower,
           pandoracalo, pandorapid, pandoracali, pandoracalipid,
-          pandoracaloSCE, pandorapidSCE, pandoracaliSCE, pandoracalipidSCE,
-          pandoracalodE, pandorapiddE, pandoracalidE, pandoracalipiddE,
-          pandoracalodx, pandorapiddx, pandoracalidx, pandoracalipiddx,
           #pmatrack
           pmtrack, pmtrackcalo, pmtrackpid, pmtrackcali, pmtrackcalipid
           #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
@@ -163,8 +148,6 @@ outputs:
 }
 
 ### Here, we overwrite ALL module labels with the ones defined above.
-services.DetectorPropertiesService.Electronlifetime: 3000
-
 physics.producers.linecluster.HitFinderModuleLabel:    "hitpdune"
 
 physics.producers.pmtrack.HitModuleLabel:                         "linecluster"
@@ -221,45 +204,6 @@ physics.producers.pandoracali.CalorimetryModuleLabel:           "pandoracalo"
 physics.producers.pandoracali.TrackModuleLabel:                 "pandoraTrack"
 physics.producers.pandoracalipid.CalorimetryModuleLabel:        "pandoracali"
 physics.producers.pandoracalipid.TrackModuleLabel:              "pandoraTrack"
-
-physics.producers.pandoracaloSCE.TrackModuleLabel:             "pandoraTrack"
-physics.producers.pandoracaloSCE.SpacePointModuleLabel:        "pandora"
-physics.producers.pandoracaloSCE.T0ModuleLabel:                ""
-physics.producers.pandoracaloSCE.MakeTree:                     false
-physics.producers.pandoracaloSCE.CorrectSCE:                     true
-physics.producers.pandorapidSCE.CalorimetryModuleLabel:        "pandoracaloSCE"
-physics.producers.pandorapidSCE.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracaliSCE.CalorimetryModuleLabel:           "pandoracaloSCE"
-physics.producers.pandoracaliSCE.TrackModuleLabel:                 "pandoraTrack"
-physics.producers.pandoracalipidSCE.CalorimetryModuleLabel:        "pandoracaliSCE"
-physics.producers.pandoracalipidSCE.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracaliSCE.CorrectSCE:              true
-
-physics.producers.pandoracalodE.TrackModuleLabel:             "pandoraTrack"
-physics.producers.pandoracalodE.SpacePointModuleLabel:        "pandora"
-physics.producers.pandoracalodE.T0ModuleLabel:                ""
-physics.producers.pandoracalodE.MakeTree:                     false
-physics.producers.pandoracalodE.CorrectSCE:                     false
-physics.producers.pandorapiddE.CalorimetryModuleLabel:        "pandoracaloSCE"
-physics.producers.pandorapiddE.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracalidE.CalorimetryModuleLabel:           "pandoracaloSCE"
-physics.producers.pandoracalidE.TrackModuleLabel:                 "pandoraTrack"
-physics.producers.pandoracalipiddE.CalorimetryModuleLabel:        "pandoracaliSCE"
-physics.producers.pandoracalipiddE.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracalidE.CorrectSCE:              true
-
-physics.producers.pandoracalodx.TrackModuleLabel:             "pandoraTrack"
-physics.producers.pandoracalodx.SpacePointModuleLabel:        "pandora"
-physics.producers.pandoracalodx.T0ModuleLabel:                ""
-physics.producers.pandoracalodx.MakeTree:                     false
-physics.producers.pandoracalodx.CorrectSCE:                     true
-physics.producers.pandorapiddx.CalorimetryModuleLabel:        "pandoracaloSCE"
-physics.producers.pandorapiddx.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracalidx.CalorimetryModuleLabel:           "pandoracaloSCE"
-physics.producers.pandoracalidx.TrackModuleLabel:                 "pandoraTrack"
-physics.producers.pandoracalipiddx.CalorimetryModuleLabel:        "pandoracaliSCE"
-physics.producers.pandoracalipiddx.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracalidx.CorrectSCE:              false
 
 #Optical detector configuration
 physics.producers.ophit.InputModule:                        "opdigi"

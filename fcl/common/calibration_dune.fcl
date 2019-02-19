@@ -8,6 +8,10 @@ protodunespmc_calibrationdedx :
     TrackModuleLabel:        "pandoraTrack"
     CalorimetryModuleLabel:  "pandoracalo"
     CaloAlg:                 @local::pdune_sp_calorimetryalgmcc10mc
+    #default modified boxmodel parameters for MC
+    ModBoxA:				 0.930
+    ModBoxB:				 0.212
+    CorrectSCE:              false
 }
 
 END_PROLOG
