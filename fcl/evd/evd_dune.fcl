@@ -6,6 +6,7 @@ services:
 {
   message:      @local::evd_message
                 @table::dune10kt_disp
+  IFDH:         {}
 }
 
 # Define the services

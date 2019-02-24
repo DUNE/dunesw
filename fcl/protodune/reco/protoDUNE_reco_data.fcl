@@ -14,6 +14,7 @@ services:
   message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_data
                         @table::protodune_data_reco_services
+  IFDH:               {}
 }
 
 #source is now a root file
