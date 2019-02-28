@@ -48,6 +48,7 @@ services:
 #    @table::protodune_services
 
   IFBeam:            {}
+  IFDH:              {}
 }
 
 
