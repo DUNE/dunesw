@@ -41,7 +41,7 @@ protoDUNE_reco_data_producers:
     # Hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
     # Space point finder
-    reco3d:             @local::protodunespmc_spacepointsolver
+    reco3d:             @local::protodunespdata_spacepointsolver
     # Hit disambiguation
     hitpdune:           @local::pdune_disambigfromsp
     # CNN track/shower ID
