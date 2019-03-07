@@ -19,6 +19,7 @@ dunefd_recodrawingopt.WireModuleLabels:        [""]
 dunefd_recodrawingopt.HitModuleLabels:         ["apahit"]
 dunefd_recodrawingopt.ClusterModuleLabels:     ["fuzzy"]
 dunefd_recodrawingopt.DrawClusters:            0
+dunefd_recodrawingopt.DrawAllWireIDs:          false
 dunefd_simdrawingopt:                         @local::standard_simdrawingopt 
 dunefd_simdrawingopt.ShowMCTruthText:         false
 dunefd_simdrawingopt.ShowMCTruthVectors:      0
