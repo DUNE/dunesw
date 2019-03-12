@@ -6,4 +6,8 @@ protodunespmc_spacepointsolver: @local::standard_spacepointsolver
 protodunespmc_spacepointsolver.WireIntersectThreshold: 0.3
 protodunespmc_spacepointsolver.WireIntersectThresholdDriftDir: 0.4
 
+protodunespdata_spacepointsolver: @local::standard_spacepointsolver
+protodunespdata_spacepointsolver.WireIntersectThreshold: 0.3
+protodunespdata_spacepointsolver.WireIntersectThresholdDriftDir: 0.3
+
 END_PROLOG
