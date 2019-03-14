@@ -28,16 +28,16 @@ physics:
   {
     #ar39Gen:     @local::dune10kt_1x2x6_39ar
     ar42Gen:     @local::dune10kt_1x2x6_42ar
-    apaGen:      @local::dune10kt_1x2x6_APA      #Co60 in APA frame
+    #apaGen:      @local::dune10kt_1x2x6_APA      #Co60 in APA frame
     cNeutronGen: @local::dune10kt_1x2x6_neutron      #Originally use for K40 in Field Cage. Now repurposed  for Neutrons from concrete.
     #cpaGen:      @local::dune10kt_1x2x6_CPA      #K40 from CPA
     #kr85Gen:     @local::dune10kt_1x2x6_85kr     #Kr in LAr
-    #rn222Gen:    @local::dune10kt_1x2x6_222rn    #Rn in LAr
+    rn222Gen:    @local::dune10kt_1x2x6_222rn    #Rn in LAr
     #po210Gen:    @local::dune10kt_1x2x6_210po
     rns:       { module_type: "RandomNumberSaver" }
   }
  
-  simulate:      [ rns, ar42Gen, apaGen, cNeutronGen ]
+  simulate:      [ rns, ar42Gen, rn222Gen, cNeutronGen ]
   stream1:       [ out1 ]
   trigger_paths: [ simulate ] 
   end_paths:     [ stream1 ]  
