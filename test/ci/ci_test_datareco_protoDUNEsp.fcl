@@ -1,0 +1,4 @@
+#include "protoDUNE_SP_keepup_decoder_reco.fcl"
+
+services.NuRandomService.policy: "preDefinedSeed"
+services.NuRandomService.baseSeed: 1234
