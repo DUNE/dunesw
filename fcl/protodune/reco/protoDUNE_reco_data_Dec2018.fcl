@@ -137,7 +137,7 @@ protoDUNE_reco_data_producers.pmtrackpid.CalorimetryModuleLabel:  "pmtrackcalo"
 protoDUNE_reco_data_producers.pmtrackpid.TrackModuleLabel:        "pmtrack"
 
 #Pandora configurations
-protoDUNE_reco_data_producers.pandora.HitFinderModuleLabel:             "linecluster"
+protoDUNE_reco_data_producers.pandora.HitFinderModuleLabel:             "hitpdune"
 protoDUNE_reco_data_producers.pandoraTrack.PFParticleLabel:             "pandora"
 protoDUNE_reco_data_producers.pandoraShower.PFParticleLabel:            "pandora"
 
