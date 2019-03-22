@@ -12,7 +12,6 @@ services:
   RandomNumberGenerator: {}
   MemoryTracker:         { } # default is one
   message:      @local::dune_message_services_prod
-  FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefd_simulation_services
 }
 
