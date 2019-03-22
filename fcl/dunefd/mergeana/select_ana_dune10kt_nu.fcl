@@ -3,8 +3,8 @@
 #include "CAFMaker.fcl"
 #include "CVNMapper.fcl"
 #include "CVNEvaluator.fcl"
-#include "RegCVNMapper.fcl"
-#include "RegCVNEvaluator.fcl"
+#include "RegCNNMapper.fcl"
+#include "RegCNNEvaluator.fcl"
 #include "energyreco.fcl"
 
 process_name: Cafana2
@@ -40,8 +40,8 @@ physics:
    energyreconumu: @local::dunefd_nuenergyreco
    cvnmap: @local::standard_cvnmapper
    cvneval: @local::standard_cvnevaluator
-   regcvnmap:      @local::standard_regcvnmapper
-   regcvneval:     @local::standard_regcvnevaluator
+   regcnnmap:      @local::standard_regcnnmapper
+   regcnneval:     @local::standard_regcnnevaluator
  }
 
  analyzers:
@@ -54,7 +54,7 @@ physics:
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- prod: [mvaselectnue, energyreconue, mvaselectnumu, energyreconumu, cvnmap, cvneval]
+ prod: [mvaselectnue, energyreconue, mvaselectnumu, energyreconumu, cvnmap, cvneval, regcnnmap, regcnneval]
  caf:  [ cafmaker]
  trigger_paths: [prod] 
 

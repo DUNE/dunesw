@@ -54,7 +54,7 @@ add_subdirectory(BeamData)
 add_subdirectory(Calib)
 add_subdirectory(CalibServices)
 add_subdirectory(CAFMaker)
-add_subdirectory(RegCVN)
+add_subdirectory(RegCNN)
 add_subdirectory(Iceberg)
 add_subdirectory(DUNEWireCell)
 
