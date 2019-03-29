@@ -1,0 +1,87 @@
+#include "protoDUNE_reco_data_Dec2018.fcl"
+#include "ProtoDUNETriggerFilter.fcl"
+
+#include "protodune_tools_dune.fcl"
+
+process_name: Reco
+
+services:
+{
+  TimeTracker:       {}
+  MemoryTracker:     {}
+  TFileService:      { fileName: "reco_protoDUNE_hist.root" }
+  RandomNumberGenerator: {} #ART native random number generator
+  message:              @local::dune_message_services_prod_debug
+  FileCatalogMetadata:  @local::art_file_catalog_data
+                        @table::protodune_data_reco_services
+  IFDH:               {}
+}
+
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents: 30000
+  fileNames: ["detsim_single_protoDUNE.root"]
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics: {
+
+  filters: {
+    trigfilter:  @local::pdsp_trigfilter_all
+  }
+
+  producers: {
+    @table::protoDUNE_reco_data_producers
+  }
+
+  #define the producer and filter modules for this path, order matters, 
+  #filters reject all following items.  see lines starting physics.producers below
+  reco: [ @sequence::protoDUNE_reco_data ]
+ 
+  #define the output stream, there could be more than one if using filters 
+  stream1:  [ out1 ]
+
+  #trigger_paths is a keyword and contains the paths that modify the art::event, 
+  #ie filters and producers
+  trigger_paths: [reco] 
+
+  #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+  #ie analyzers and output streams.  these all run simultaneously
+  end_paths:     [stream1]  
+}
+
+#block to define where the output goes.  if you defined a filter in the physics
+#block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
+#entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_reco.root"
+   dataTier:    "full-reconstructed"
+   compressionLevel: 1
+ }
+}
+
+#Add "pdspNoiseRemoval" to DataPrep tool chain.
+services.RawDigitPrepService.AdcChannelToolNames: [
+    "digitReader",                # Read RawDigit
+    "pd_adcPedestalFit",          # Find pedestal
+    "adcSampleFiller",            # Subtract pedestal, trivial calibration
+    "pdsp_sticky_codes_ped",      # Flag sticky codes
+    "pdsp_adcMitigate",           # Mitigate sticky codes
+    "pdsp_timingMitigate",        # Mitigate FEMB302 timing
+    "adcCorrectUndershoot",       # correct undershoot
+    "pdsp_noiseRemoval",          # Remove high frequency noise and coherent noise
+    "adcKeepAllSignalFinder"      # Keep all signal (no ROIs)
+]
+
+# Remove coherent noise and high frequency noise
+tools.pdsp_noiseRemoval.RemoveHighFrequency: true
+tools.pdsp_noiseRemoval.RemoveCoherent: true
+tools.pdsp_noiseRemoval.CutoffFrequency: 350 #kHz
