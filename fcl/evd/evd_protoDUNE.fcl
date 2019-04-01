@@ -3,3 +3,5 @@
 services.DetPedestalService.FixedDetPedestal.PedMeanZ:  500
 services.DetPedestalService.FixedDetPedestal.PedMeanV:  1800
 services.DetPedestalService.FixedDetPedestal.PedMeanU:  1800
+services.RecoDrawingOptions.TrackModuleLabels:          ["pandoraTrack"]
+services.RecoDrawingOptions.VertexModuleLabels:         ["pandora"]
