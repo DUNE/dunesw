@@ -73,6 +73,7 @@ physics: {
     linecluster:        @local::protodunespmc_linecluster
     calo:               @local::dune35t_calomc
     pandora:            @local::protodune_pandora
+    pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
     pandoracalo:        @local::dune10kt_calomc
@@ -124,7 +125,7 @@ physics: {
           #feature labeling
           emtrkmichelid,
           #pandora
-          pandora, pandoraTrack, pandoraShower,
+          pandora, pandoraWriter, pandoraTrack, pandoraShower,
           pandoracalo, pandorapid, pandoracali, pandoracalipid,
           pandoracaloSCE, pandorapidSCE, pandoracaliSCE, pandoracalipidSCE,
           pandoracalodE, pandorapiddE, pandoracalidE, pandoracalipiddE,
@@ -208,6 +209,8 @@ physics.producers.calo.SpacePointModuleLabel:          "costrk"
 
 #Pandora configurations
 physics.producers.pandora.HitFinderModuleLabel:             "linecluster"
+physics.producers.pandoraWriter.HitFinderModuleLabel:       "linecluster"
+physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
 physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"
 
