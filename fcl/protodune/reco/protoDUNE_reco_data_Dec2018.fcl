@@ -50,6 +50,7 @@ protoDUNE_reco_data_producers:
     linecluster:        @local::protodunespmc_linecluster
     # Pandora and its track and shower building
     pandora:            @local::protodune_pandora
+    pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
     # Calorimetry and PID for pandora
@@ -85,6 +86,7 @@ protoDUNE_reco_data: [ caldata,
 #                       emtrkmichelid,
                        linecluster,
                        pandora,
+                       pandoraWriter,
                        pandoraTrack,
                        pandoraShower,
                        pandoracalo,
@@ -138,6 +140,7 @@ protoDUNE_reco_data_producers.pmtrackpid.TrackModuleLabel:        "pmtrack"
 
 #Pandora configurations
 protoDUNE_reco_data_producers.pandora.HitFinderModuleLabel:             "hitpdune"
+protoDUNE_reco_data_producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
 protoDUNE_reco_data_producers.pandoraTrack.PFParticleLabel:             "pandora"
 protoDUNE_reco_data_producers.pandoraShower.PFParticleLabel:            "pandora"
 
