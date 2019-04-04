@@ -84,4 +84,4 @@ services.RawDigitPrepService.AdcChannelToolNames: [
 # Remove coherent noise and high frequency noise
 tools.pdsp_noiseRemoval.RemoveHighFrequency: true
 tools.pdsp_noiseRemoval.RemoveCoherent: true
-tools.pdsp_noiseRemoval.CutoffFrequency: 350 #kHz
+tools.pdsp_noiseRemoval.CutoffFrequency: 600 #kHz
