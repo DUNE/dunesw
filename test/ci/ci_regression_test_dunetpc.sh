@@ -179,7 +179,8 @@ function data_production
             local counter=0
             local expcode_exitcode=20
             until [[ ${expcode_exitcode} -ne 20 || ${counter} -gt 5 ]]; do
-                ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} ${EXTRA_OPTIONS} ${OUTPUT_STREAM:+-o "$OUTPUT_STREAM"} --config ${FHiCL_FILE} ${INPUT_FILE}
+                /usr/bin/time ${EXECUTABLE_NAME} --rethrow-all -n ${NEVENTS} ${EXTRA_OPTIONS} ${OUTPUT_STREAM:+-o "$OUTPUT_STREAM"} --config ${FHiCL_FILE} ${INPUT_FILE}
+                (>&2 echo "TIME SIGNATURE" )
                 expcode_exitcode=$?
                 if [[ ${expcode_exitcode} -eq 20 ]]; then
                     let $((counter++))
