@@ -52,7 +52,7 @@ function initialize
     do
       case "x$1" in
       x-h|x--help)                 usage;                                                       exit;;
-      x--executable)               EXECUTABLE_NAME="${2}";                                      shift; shift;;
+      x--executable)               EXECUTABLE_NAME="${2//,/ }";                                      shift; shift;;
       x--nevents)                  NEVENTS="${2}";                                              shift; shift;;
       x--stage)                    STAGE="${2}";                                                shift; shift;;
       x--fhicl)                    FHiCL_FILE="${2}";                                           shift; shift;;
