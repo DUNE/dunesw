@@ -118,7 +118,6 @@ physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
 
 physics.producers.pmtrajfit.HitModuleLabel:           "linecluster"
 physics.producers.pmtrajfit.PfpModuleLabel:           "pandora"
-physics.producers.pmtrajfit.TrackingSkipPdg:          [0]
 
 physics.producers.blurredcluster.HitsModuleLabel: "linecluster"
 physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"
