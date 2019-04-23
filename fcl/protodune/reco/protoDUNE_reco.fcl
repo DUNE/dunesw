@@ -208,8 +208,8 @@ physics.producers.calo.SpacePointModuleLabel:          "costrk"
 #physics.producers.kalmanhit.ClusterModuleLabel:        "fuzzy"
 
 #Pandora configurations
-physics.producers.pandora.HitFinderModuleLabel:             "linecluster"
-physics.producers.pandoraWriter.HitFinderModuleLabel:       "linecluster"
+physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
+physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
 physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
 physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"
