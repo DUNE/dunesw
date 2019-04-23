@@ -20,5 +20,8 @@ protodune_emtrkmichelid.HitModuleLabel:               "linecluster"
 protodune_emtrkmichelid.ClusterModuleLabel:           "linecluster"
 protodune_emtrkmichelid.Views:                        []
 
+protodunespdata_emtrkmichelid:                        @local::protodune_emtrkmichelid
+protodunespdata_emtrkmichelid.WireLabel:              "digitwire"
+
 END_PROLOG
 
