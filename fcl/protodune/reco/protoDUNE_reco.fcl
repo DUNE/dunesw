@@ -159,7 +159,8 @@ outputs:
    module_type: RootOutput
    fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
-   compressionLevel: 1
+   outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
+   #compressionLevel: 1
  }
 }
 
