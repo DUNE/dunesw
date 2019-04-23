@@ -60,18 +60,18 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v08_15_01
-artdaq_core	 v3_04_10
-duneutil         v08_15_01	-	optional
-lbne_raw_data 	 v1_04_31
+larsoft          v08_16_00
+artdaq_core	 v3_04_14
+duneutil         v08_16_00	-	optional
+lbne_raw_data 	 v1_04_33
 dune_pardata	 v01_45_00
 genie_xsec       v2_12_10       -       optional
 genie_phyopt     v2_12_10
 cetbuildtools	 v7_11_00	-	only_for_build
-dune_raw_data    v1_17_30
-caffe            v1_0k          -       optional
-nusystematics    v00_02_10
-systematicstools v00_02_03
+dune_raw_data    v1_17_32
+caffe            DISCONTINUED   -       optional
+nusystematics    v00_03_01
+systematicstools v00_03_01
 dune_oslibs      v1_0_0         -       optional
 end_product_list
 
@@ -80,12 +80,12 @@ end_product_list
 # Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     caffe          dune_raw_data	        nusystematics       systematicstools    dune_oslibs  notes
-c2:debug	c2:debug	c2:debug	c2:s78:debug     c2:nu:s78:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:debug  	c2:nu:s78:debug         c2:debug            c2:debug             -nq-
-c2:opt		c2:opt		c2:opt		c2:s78:opt	 c2:nu:s78:prof		-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:prof   	c2:nu:s78:prof          c2:prof             c2:prof              -nq-
-c2:prof		c2:prof		c2:prof		c2:s78:prof	 c2:nu:s78:prof		-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:prof   	c2:nu:s78:prof          c2:prof             c2:prof              -nq-
-e17:debug	e17:debug	e17:debug	e17:s78:debug    e17:nu:s78:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:debug  	e17:nu:s78:debug        e17:debug           e17:debug            -nq-
-e17:opt		e17:opt		e17:opt		e17:s78:opt	 e17:nu:s78:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:prof   	e17:nu:s78:prof         e17:prof            e17:prof             -nq-
-e17:prof	e17:prof	e17:prof	e17:s78:prof	 e17:nu:s78:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:prof   	e17:nu:s78:prof         e17:prof            e17:prof             -nq-
+c2:debug	c2:debug	c2:debug	c2:s82:debug     c2:nu:s82:debug	-nq-    DefaultPlusMECWithNC  dkcharmtau       c2:debug  	c2:nu:s82:debug         c2:debug            c2:debug             -nq-
+c2:opt		c2:opt		c2:opt		c2:s82:opt	 c2:nu:s82:prof		-nq-    DefaultPlusMECWithNC  dkcharmtau       c2:prof   	c2:nu:s82:prof          c2:prof             c2:prof              -nq-
+c2:prof		c2:prof		c2:prof		c2:s82:prof	 c2:nu:s82:prof		-nq-    DefaultPlusMECWithNC  dkcharmtau       c2:prof   	c2:nu:s82:prof          c2:prof             c2:prof              -nq-
+e17:debug	e17:debug	e17:debug	e17:s82:debug    e17:nu:s82:debug	-nq-    DefaultPlusMECWithNC  dkcharmtau       e17:debug  	e17:nu:s82:debug        e17:debug           e17:debug            -nq-
+e17:opt		e17:opt		e17:opt		e17:s82:opt	 e17:nu:s82:prof	-nq-    DefaultPlusMECWithNC  dkcharmtau       e17:prof   	e17:nu:s82:prof         e17:prof            e17:prof             -nq-
+e17:prof	e17:prof	e17:prof	e17:s82:prof	 e17:nu:s82:prof	-nq-    DefaultPlusMECWithNC  dkcharmtau       e17:prof   	e17:nu:s82:prof         e17:prof            e17:prof             -nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
