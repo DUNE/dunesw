@@ -211,7 +211,7 @@ physics.producers.pmtracktc.MinSeedSize2ndPass:         2
 physics.producers.pmtrackpfpdc.HitModuleLabel:             "lineclusterdc"
 physics.producers.pmtrackpfpdc.ClusterModuleLabel:         "pandoradc"
 physics.producers.pmtrackpfpdc.CluMatchingAlg:             3
-physics.producers.pmtrackpfpdc.TrackingSkipPdg:            [0]
+#physics.producers.pmtrackpfpdc.TrackingSkipPdg:            [0] #deprecated
 physics.producers.pmtrackpfpdc.RunVertexing:               true
 physics.producers.pmtrackpfpdc.FlipToBeam:                 true
 physics.producers.pmtrackpfpdc.MakePFPs:                   true
@@ -219,7 +219,7 @@ physics.producers.pmtrackpfpdc.MakePFPs:                   true
 physics.producers.pmtrackpfp.HitModuleLabel:               "linecluster"
 physics.producers.pmtrackpfp.ClusterModuleLabel:           "pandora"
 physics.producers.pmtrackpfp.CluMatchingAlg:               3
-physics.producers.pmtrackpfp.TrackingSkipPdg:              [0]
+#physics.producers.pmtrackpfp.TrackingSkipPdg:              [0] #deprecated
 physics.producers.pmtrackpfp.RunVertexing:                 true
 physics.producers.pmtrackpfp.FlipToBeam:                   true
 physics.producers.pmtrackpfp.MakePFPs:                     true
