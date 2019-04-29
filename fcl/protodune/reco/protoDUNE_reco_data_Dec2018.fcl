@@ -45,7 +45,7 @@ protoDUNE_reco_data_producers:
     # Hit disambiguation
     hitpdune:           @local::pdune_disambigfromsp
     # CNN track/shower ID
-    emtrkmichelid:      @local::protodune_emtrkmichelid
+    emtrkmichelid:      @local::protodunespdata_emtrkmichelid
     # Clustering
     linecluster:        @local::protodunespmc_linecluster
     # Pandora and its track and shower building
@@ -83,8 +83,8 @@ protoDUNE_reco_data: [ caldata,
                        gaushit,
                        reco3d,
                        hitpdune,
-#                       emtrkmichelid,
                        linecluster,
+                       emtrkmichelid,
                        pandora,
                        pandoraWriter,
                        pandoraTrack,

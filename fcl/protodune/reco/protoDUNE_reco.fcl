@@ -39,7 +39,8 @@ services.Geometry.SortingParameters.ChannelsPerOpDet: 12
 source:
 {
   module_type: RootInput
-  maxEvents: 30000
+  maxEvents: -1
+  saveMemoryObjectThreshold: 10485760
   fileNames: ["detsim_single_protoDUNE.root"]
 }
 
@@ -159,6 +160,7 @@ outputs:
    module_type: RootOutput
    fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
+   outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
    compressionLevel: 1
  }
 }
@@ -208,8 +210,8 @@ physics.producers.calo.SpacePointModuleLabel:          "costrk"
 #physics.producers.kalmanhit.ClusterModuleLabel:        "fuzzy"
 
 #Pandora configurations
-physics.producers.pandora.HitFinderModuleLabel:             "linecluster"
-physics.producers.pandoraWriter.HitFinderModuleLabel:       "linecluster"
+physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
+physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
 physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
 physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"

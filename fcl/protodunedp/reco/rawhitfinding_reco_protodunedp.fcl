@@ -147,7 +147,6 @@ physics.producers.pmtrack.ClusterModuleLabel:         "trajcluster"
 
 physics.producers.pmtrajfit.HitModuleLabel:           "trajcluster"
 physics.producers.pmtrajfit.PfpModuleLabel:           "pandora"
-physics.producers.pmtrajfit.TrackingSkipPdg:          [0]
 
 physics.producers.blurredcluster.HitsModuleLabel: "trajcluster"
 physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"
