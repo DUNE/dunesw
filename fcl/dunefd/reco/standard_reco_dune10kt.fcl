@@ -59,7 +59,7 @@ physics:
 #  dcheatcc:           @local::dune35t_disambigcheat
 # reconstruction using gaushit and disambiguration cheater
   lineclusterdc:      @local::dunefd_linecluster
-  trajclusterdc:          @local::dunefdmc_trajcluster
+#  trajclusterdc:          @local::dunefdmc_trajcluster
 #  costrkdc:           @local::dunefd_cosmictracker
   calodc:             @local::dune35t_calomc
   pandoradc:          @local::dunefd_pandora
@@ -175,7 +175,7 @@ outputs:
 ### Here, we overwrite ALL module labels with the ones defined above.
 physics.producers.fasthitdc.ChanHitLabel:               "fasthit"
 physics.producers.lineclusterdc.HitFinderModuleLabel:   "dcheat"
-physics.producers.trajclusterdc.TrajClusterAlg.HitFinderModuleLabel:   "dcheat"
+#physics.producers.trajclusterdc.TrajClusterAlg.HitFinderModuleLabel:   "dcheat"
 
 physics.producers.calodc.TrackModuleLabel:              "costrkdc"
 physics.producers.calodc.SpacePointModuleLabel:         "costrkdc"
