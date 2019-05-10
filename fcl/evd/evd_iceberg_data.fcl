@@ -18,7 +18,7 @@ services.DetectorClockService:      @local::protodune_detectorclocks
 
 services.ColorDrawingOptions.RawQHigh: [100]
 services.ColorDrawingOptions.RawQLow:  [-50]
-services.RawDrawingOptions.RawDataLabel: "tpcrawdecoder:daq"
+services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
 services.RawDrawingOptions.PedestalOption: 1
 services.RawDrawingOptions.MinimumSignal: 5.0
 services.RecoDrawingOptions.TrackModuleLabels:          ["pandoraTrack"]

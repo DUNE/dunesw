@@ -10,7 +10,7 @@ services: {
 
 includedServices: @erase
 
-#services.RawDrawingOptions.RawDataLabel: "SplitterInput:TPC"
+#services.RawDrawingOptions.RawDataLabels: ["SplitterInput:TPC"]
 # Change vertical scale to 15000 ticks
 services.RawDrawingOptions.DrawRawDataOrCalibWires:       1
 services.RawDrawingOptions.TotalTicks:               15000
