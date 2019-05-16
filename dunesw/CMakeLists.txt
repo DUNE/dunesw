@@ -58,7 +58,6 @@ add_subdirectory(RegCNN)
 add_subdirectory(Iceberg)
 add_subdirectory(DUNEWireCell)
 
-
 # Respect the order specified in lar_build, which is:
 #
 #     "SoftRelTools",
