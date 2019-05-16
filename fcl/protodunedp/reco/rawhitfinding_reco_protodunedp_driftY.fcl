@@ -26,7 +26,7 @@ services:
                         @table::dunefddphase_reco_services
 }
 
-services.Geometry: @local::protodunedphase_rot_geo
+services.Geometry: @local::protodunedphase_driftY_geo
 services.DetectorPropertiesService: @local::protodunedphase_detproperties
 services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us
 
@@ -147,7 +147,6 @@ physics.producers.pmtrack.ClusterModuleLabel:         "trajcluster"
 
 physics.producers.pmtrajfit.HitModuleLabel:           "trajcluster"
 physics.producers.pmtrajfit.PfpModuleLabel:           "pandora"
-physics.producers.pmtrajfit.TrackingSkipPdg:          [0]
 
 physics.producers.blurredcluster.HitsModuleLabel: "trajcluster"
 physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"

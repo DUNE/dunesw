@@ -6,11 +6,16 @@ services.RawDrawingOptions.TPC:                       1 # here is the beam
 services.RawDrawingOptions.TotalTicks:                6000
 services.RecoDrawingOptions.DrawOpFlashes:            0
 services.RecoDrawingOptions.DrawSpacePoints:          1
+services.RecoDrawingOptions.DrawShowers:              1
 services.RecoDrawingOptions.SpacePointModuleLabels:   "[reco3d]"
-services.RecoDrawingOptions.HitModuleLabels:          "[linecluster]"
-services.RecoDrawingOptions.ClusterModuleLabels:      "[linecluster]"
-services.RecoDrawingOptions.TrackModuleLabels:        "[pmtrack]"
-services.RecoDrawingOptions.VertexModuleLabels:       "[pmtrack]"
+services.RecoDrawingOptions.HitModuleLabels:          "[hitpdune]"
+services.RecoDrawingOptions.ClusterModuleLabels:      "[pandora]"
+services.RecoDrawingOptions.TrackModuleLabels:          ["pandoraTrack"]
+services.RecoDrawingOptions.VertexModuleLabels:         ["pandora"]
+services.RecoDrawingOptions.ShowerModuleLabels:          ["pandoraShower"]
+services.AnalysisDrawingOptions.CalorimetryModuleLabels: ["pandoracalo"]
+services.AnalysisDrawingOptions.ParticleIDModuleLabels: ["pandorapid"]
+
 services.DetectorPropertiesService: @local::protodune_detproperties
 services.DetectorClockService:      @local::protodune_detectorclocks
 #services.DetectorPropertiesService.NumberTimeSamples: 8000

@@ -9,7 +9,7 @@
 #include "t0reco.fcl"
 #include "particleid.fcl"
 #include "showerfindermodules_dune.fcl"
-#include "tools_dune.fcl"
+
 process_name: Reco
 
 services:
@@ -23,9 +23,7 @@ services:
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefddphase_reco_services
 }
-
-services.Geometry: @local::protodunedphase_rot_geo
-services.DetectorPropertiesService: @local::protodunedphase_detproperties
+# services.RawDigitPrepService.DoDeconvolution: false
 
 # services.message.destinations.LogStandardOut.threshold: "INFO"
 
@@ -42,12 +40,14 @@ source:
 # Modules are grouped by type.
 physics:
 {
+
  producers:
  {
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
   caldata:            @local::dunefddphase_calwire
+  # caldata:            @local::producer_adcprep
 # actual hit finder and recconstruction
   gaushit:            @local::dunefddphase_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
@@ -101,10 +101,9 @@ outputs:
 
 physics.producers.caldata.SigThrFact: 0.2
 
+# physics.producers.caldata.DoGroups: false
 
 #PMAlg configuration
-
-physics.producers.linecluster.HitFinderModuleLabel:	"gaushit"
 
 physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
 physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
@@ -118,7 +117,6 @@ physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
 
 physics.producers.pmtrajfit.HitModuleLabel:           "linecluster"
 physics.producers.pmtrajfit.PfpModuleLabel:           "pandora"
-physics.producers.pmtrajfit.TrackingSkipPdg:          [0]
 
 physics.producers.blurredcluster.HitsModuleLabel: "linecluster"
 physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"
@@ -136,3 +134,5 @@ physics.producers.emshower.TrackModuleLabel: "pmtrack"
 #Pandora configurations
 
 #Optical detector configuration
+
+

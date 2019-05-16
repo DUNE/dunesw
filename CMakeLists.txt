@@ -39,9 +39,9 @@ set_install_root()
 cet_set_compiler_flags(DIAGS CAUTIOUS
   WERROR
   NO_UNDEFINED
-  ALLOW_DEPRECATIONS
-  EXTRA_FLAGS -pedantic -Wno-unused-local-typedefs  -O0
+  EXTRA_FLAGS -pedantic -Wno-unused-local-typedefs
 )
+add_definitions(-DGENIE_PRE_R3)
 
 cet_report_compiler_flags()
 
@@ -58,12 +58,13 @@ find_ups_product( larreco v1_00_00 )
 find_ups_product( larana v1_00_00 )
 find_ups_product( nutools v1_00_00 )
 find_ups_product( art v1_09_00 )
+find_ups_product(art_root_io)
 find_ups_product( clhep v2_1_3_0 )
 find_ups_product( messagefacility v1_10_00 )
 find_ups_product( cetbuildtools v3_10_00 )
 find_ups_product( postgresql v9_1_5 )
-find_ups_product( lbne_raw_data v0_00_02 )
-find_ups_product( dune_raw_data v1_10_00 )
+find_ups_product( lbne_raw_data )
+find_ups_product( dune_raw_data )
 find_ups_product( dunepdsprce v0_0_3 )
 find_ups_product( artdaq_core v01_03_6 )
 find_ups_product( ifdh_art )
