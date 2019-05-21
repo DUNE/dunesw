@@ -3,4 +3,6 @@
 services.DetectorPropertiesService.Electronlifetime: 3000
 services.SpaceCharge.EnableSimEfieldSCE: true
 services.SpaceCharge.EnableSimSpatialSCE: true
-services.SpaceCharge.EnableSimulationSCE: true
+
+services.SpaceCharge.RepresentationType: Parametric
+services.SpaceCharge.InputFilename: "SpaceChargeProtoDUNE/SCEoffsets_ProtoDUNESP_E500.root"
