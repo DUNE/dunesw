@@ -16,6 +16,7 @@
 #include "particleid.fcl"
 #include "opticaldetectormodules_dune.fcl"
 #include "showerfindermodules_dune.fcl"
+#include "OpSlicer.fcl"
 
 BEGIN_PROLOG
 
@@ -65,6 +66,8 @@ protoDUNE_reco_data_producers:
     ophitExternal:      @local::protodune_ophit_data_external
     opflashInternal:    @local::protodune_opflash_data_internal
     opflashExternal:    @local::protodune_opflash_data_external
+    opslicerInternal:   @local::protodune_opslicer_data_internal
+    opslicerExternal:   @local::protodune_opslicer_data_external
 }
 
 ### Below are a list of convenient sequences that can be used for production/typical users. ###
@@ -97,7 +100,9 @@ protoDUNE_reco_data: [ caldata,
                        ophitInternal,
                        ophitExternal,
                        opflashInternal,
-                       opflashExternal
+                       opflashExternal,
+                       opslicerInternal,
+                       opslicerExternal
                      ]
 
 protoDUNE_reco_data_producers.caldata.DigitLabel: "tpcrawdecoder:daq"

@@ -15,6 +15,7 @@
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 #include "ProtoDUNETriggerFilter.fcl"
+#include "OpSlicer.fcl"
 
 #include "protodune_tools_dune.fcl"
 
@@ -104,13 +105,14 @@ physics: {
 #   photon detector reconstruction
     ophit:              @local::protodune_ophit 
     opflash:            @local::protodune_opflash
+    opslicer:           @local::protodune_opslicer
   }
 
   #define the producer and filter modules for this path, order matters, 
   #filters reject all following items.  see lines starting physics.producers below
   reco: [ rns, 
           #optical hits and flashes
-          ophit, opflash,
+          ophit, opflash, opslicer,
           #TPC wire signals      
           caldata,
           #hit reconstruction
@@ -269,6 +271,7 @@ physics.producers.pandoracalidx.CorrectSCE:              false
 #Optical detector configuration
 physics.producers.ophit.InputModule:                        "opdigi"
 physics.producers.opflash.InputModule:                      "ophit"
+physics.producers.opslicer.OpHitModuleLabel:                "ophit"
 
 # Use channel map service for data
 services.PdspChannelMapService:        @local::pdspchannelmap
