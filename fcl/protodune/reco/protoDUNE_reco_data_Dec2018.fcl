@@ -124,8 +124,8 @@ protoDUNE_reco_data_producers.hitpdune.ExcludeTPCs: []
 protoDUNE_reco_data_producers.linecluster.HitFinderModuleLabel:    "hitpdune"
 
 protoDUNE_reco_data_producers.pmtrack.HitModuleLabel:                         "linecluster"
-#protoDUNE_reco_data_producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
-#protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.TrackLikeThreshold:       0.63
+protoDUNE_reco_data_producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
+protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.TrackLikeThreshold:       0.63
 protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:       3
 protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.Validation:               "adc"
 protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.AdcValidationThr:         [0.8, 0.8, 1.0]
