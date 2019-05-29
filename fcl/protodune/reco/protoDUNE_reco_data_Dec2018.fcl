@@ -56,6 +56,13 @@ protoDUNE_reco_data_producers:
     # Calorimetry and PID for pandora
     pandoracalo:        @local::dune10kt_calomc
     pandorapid:         @local::standard_chi2pid
+    pandoracali:		@local::protodunespmc_calibrationdedx
+    pandoracalipid:		@local::standard_chi2pid 
+    # Calorimetry and PID for pandora with space charge
+    pandoracaloSCE:		@local::dune10kt_calomc
+    pandorapidSCE:		@local::standard_chi2pid
+    pandoracaliSCE:		@local::protodunespmc_calibrationdedx
+    pandoracalipidSCE:	@local::standard_chi2pid 
     # PMA track reconstruction
     pmtrack:            @local::dunefd_pmalgtrackmaker
     pmtrackcalo:        @local::dune10kt_calomc
@@ -91,6 +98,12 @@ protoDUNE_reco_data: [ caldata,
                        pandoraShower,
                        pandoracalo,
                        pandorapid,
+                       pandoracali,
+                       pandoracalipid,
+                       pandoracaloSCE,
+                       pandorapidSCE,
+                       pandoracaliSCE,
+                       pandoracalipidSCE,
                        pmtrack,
                        pmtrackcalo,
                        pmtrackpid,
@@ -150,5 +163,25 @@ protoDUNE_reco_data_producers.pandoracalo.T0ModuleLabel:                ""
 protoDUNE_reco_data_producers.pandoracalo.MakeTree:                     false
 protoDUNE_reco_data_producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
 protoDUNE_reco_data_producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
+
+protoDUNE_reco_data_producers.pandoracali.CalorimetryModuleLabel:       "pandoracalo"
+protoDUNE_reco_data_producers.pandoracali.TrackModuleLabel:             "pandoraTrack"
+protoDUNE_reco_data_producers.pandoracalipid.CalorimetryModuleLabel:    "pandoracali"
+protoDUNE_reco_data_producers.pandoracalipid.TrackModuleLabel:          "pandoraTrack"
+
+protoDUNE_reco_data_producers.pandoracaloSCE.TrackModuleLabel:             "pandoraTrack"
+protoDUNE_reco_data_producers.pandoracaloSCE.SpacePointModuleLabel:        "pandora"
+protoDUNE_reco_data_producers.pandoracaloSCE.CorrectSCE:				   true
+protoDUNE_reco_data_producers.pandoracaloSCE.T0ModuleLabel:                ""
+protoDUNE_reco_data_producers.pandoracaloSCE.MakeTree:                     false
+protoDUNE_reco_data_producers.pandorapidSCE.CalorimetryModuleLabel:        "pandoracaloSCE"
+protoDUNE_reco_data_producers.pandorapidSCE.TrackModuleLabel:              "pandoraTrack"
+
+protoDUNE_reco_data_producers.pandoracaliSCE.CalorimetryModuleLabel:       "pandoracaloSCE"
+protoDUNE_reco_data_producers.pandoracaliSCE.TrackModuleLabel:             "pandoraTrack"
+protoDUNE_reco_data_producers.pandoracaliSCE.CorrectSCE:				   true
+protoDUNE_reco_data_producers.pandoracalipidSCE.CalorimetryModuleLabel:    "pandoracaliSCE"
+protoDUNE_reco_data_producers.pandoracalipidSCE.TrackModuleLabel:          "pandoraTrack"
+
 
 END_PROLOG
