@@ -158,7 +158,7 @@ outputs:
 }
 
 ### Here, we overwrite ALL module labels with the ones defined above.
-services.DetectorPropertiesService.Electronlifetime: 3000
+services.DetectorPropertiesService.Electronlifetime: 12000
 
 physics.producers.linecluster.HitFinderModuleLabel:    "hitpdune"
 

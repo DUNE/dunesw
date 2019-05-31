@@ -1,7 +1,7 @@
 protoDUNE_reco.fcl: Basic reco fcl file for MC
-protoDUNE_reco_3ms.fcl: Uses basic MC reco fcl and adds a 3ms lifetime
-protoDUNE_reco_3ms_sce.fcl: Uses basic MC reco fcl and adds a 3ms lifetime and space charge calibration using simulated maps
-protoDUNE_reco_3ms_sce_datadriven.fcl **Recommended default for MC** Uses basic MC reco fcl and adds a 3ms lifetime and space charge calibration using the data driven maps
+protoDUNE_reco_12ms.fcl: Uses basic MC reco fcl and adds a 12ms lifetime
+protoDUNE_reco_12ms_sce.fcl: Uses basic MC reco fcl and adds a 12ms lifetime and space charge calibration using simulated maps
+protoDUNE_reco_12ms_sce_datadriven.fcl **Recommended default for MC** Uses basic MC reco fcl and adds a 12ms lifetime and space charge calibration using the data driven maps
 
 protoDUNE_reco_data.fcl: **Recommended default for data** Basic reco fcl file for data. Includes data driven space charge calibrations
 protoDUNE_reco_data_Dec2018.fcl: Required included file for protoDUNE_reco_data.fcl
