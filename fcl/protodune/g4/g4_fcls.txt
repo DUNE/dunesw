@@ -1,6 +1,6 @@
 protoDUNE_g4.fcl: Basic g4 fcl file for MC
 protoDUNE_g4_3ms.fcl: Uses basic MC g4 fcl and adds a 3ms lifetime
 protoDUNE_g4_3ms_sce.fcl: Uses basic MC g4 fcl and adds a 3ms lifetime and space charge disortions using the old/outdated parametric method
-protoDUNE_g4_3ms_sce_datadriven.fcl: Uses basic MC g4 fcl and adds a 3ms lifetime and space charge disortions using the data driven map
+protoDUNE_g4_3ms_sce_datadriven.fcl: **Recommended default ** Uses basic MC g4 fcl and adds a 3ms lifetime and space charge disortions using the data driven map
 protoDUNE_g4_3ms_sce_voxel.fcl: Uses basic MC g4 fcl and adds a 3ms lifetime and space charge disortions using the simulated map without fluid flow
 protoDUNE_g4_3ms_sce_voxel_fluidFlow.fcl Uses basic MC g4 fcl and adds a 3ms lifetime and space charge disortions using the simulated map with fluid flow
