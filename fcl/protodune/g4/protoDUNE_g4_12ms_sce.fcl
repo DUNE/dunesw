@@ -1,0 +1,8 @@
+#include "protoDUNE_g4.fcl"
+
+services.DetectorPropertiesService.Electronlifetime: 12000
+services.SpaceCharge.EnableSimEfieldSCE: true
+services.SpaceCharge.EnableSimSpatialSCE: true
+
+services.SpaceCharge.RepresentationType: Parametric
+services.SpaceCharge.InputFilename: "SpaceChargeProtoDUNE/SCEoffsets_ProtoDUNESP_E500.root"
