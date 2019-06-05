@@ -15,6 +15,7 @@
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 #include "ProtoDUNETriggerFilter.fcl"
+#include "OpSlicer.fcl"
 
 #include "protodune_tools_dune.fcl"
 
@@ -85,14 +86,6 @@ physics: {
     pandorapidSCE:      @local::standard_chi2pid
     pandoracaliSCE:     @local::protodunespmc_calibrationdedx
     pandoracalipidSCE:  @local::standard_chi2pid   
-    pandoracalodE:     @local::dune10kt_calomc
-    pandorapiddE:      @local::standard_chi2pid
-    pandoracalidE:     @local::protodunespmc_calibrationdedx
-    pandoracalipiddE:  @local::standard_chi2pid   
-    pandoracalodx:     @local::dune10kt_calomc
-    pandorapiddx:      @local::standard_chi2pid
-    pandoracalidx:     @local::protodunespmc_calibrationdedx
-    pandoracalipiddx:  @local::standard_chi2pid   
     pmtrack:         @local::dunefd_pmalgtrackmaker
     pmtrackcalo:        @local::dune10kt_calomc
     pmtrackpid:         @local::standard_chi2pid
@@ -104,13 +97,14 @@ physics: {
 #   photon detector reconstruction
     ophit:              @local::protodune_ophit 
     opflash:            @local::protodune_opflash
+    opslicer:           @local::protodune_opslicer
   }
 
   #define the producer and filter modules for this path, order matters, 
   #filters reject all following items.  see lines starting physics.producers below
   reco: [ rns, 
           #optical hits and flashes
-          ophit, opflash,
+          ophit, opflash, opslicer,
           #TPC wire signals      
           caldata,
           #hit reconstruction
@@ -129,8 +123,6 @@ physics: {
           pandora, pandoraWriter, pandoraTrack, pandoraShower,
           pandoracalo, pandorapid, pandoracali, pandoracalipid,
           pandoracaloSCE, pandorapidSCE, pandoracaliSCE, pandoracalipidSCE,
-          pandoracalodE, pandorapiddE, pandoracalidE, pandoracalipiddE,
-          pandoracalodx, pandorapiddx, pandoracalidx, pandoracalipiddx,
           #pmatrack
           pmtrack, pmtrackcalo, pmtrackpid, pmtrackcali, pmtrackcalipid
           #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
@@ -166,7 +158,7 @@ outputs:
 }
 
 ### Here, we overwrite ALL module labels with the ones defined above.
-services.DetectorPropertiesService.Electronlifetime: 3000
+services.DetectorPropertiesService.Electronlifetime: 12000
 
 physics.producers.linecluster.HitFinderModuleLabel:    "hitpdune"
 
@@ -240,35 +232,10 @@ physics.producers.pandoracalipidSCE.CalorimetryModuleLabel:        "pandoracaliS
 physics.producers.pandoracalipidSCE.TrackModuleLabel:              "pandoraTrack"
 physics.producers.pandoracaliSCE.CorrectSCE:              true
 
-physics.producers.pandoracalodE.TrackModuleLabel:             "pandoraTrack"
-physics.producers.pandoracalodE.SpacePointModuleLabel:        "pandora"
-physics.producers.pandoracalodE.T0ModuleLabel:                ""
-physics.producers.pandoracalodE.MakeTree:                     false
-physics.producers.pandoracalodE.CorrectSCE:                     false
-physics.producers.pandorapiddE.CalorimetryModuleLabel:        "pandoracaloSCE"
-physics.producers.pandorapiddE.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracalidE.CalorimetryModuleLabel:           "pandoracaloSCE"
-physics.producers.pandoracalidE.TrackModuleLabel:                 "pandoraTrack"
-physics.producers.pandoracalipiddE.CalorimetryModuleLabel:        "pandoracaliSCE"
-physics.producers.pandoracalipiddE.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracalidE.CorrectSCE:              true
-
-physics.producers.pandoracalodx.TrackModuleLabel:             "pandoraTrack"
-physics.producers.pandoracalodx.SpacePointModuleLabel:        "pandora"
-physics.producers.pandoracalodx.T0ModuleLabel:                ""
-physics.producers.pandoracalodx.MakeTree:                     false
-physics.producers.pandoracalodx.CorrectSCE:                     true
-physics.producers.pandorapiddx.CalorimetryModuleLabel:        "pandoracaloSCE"
-physics.producers.pandorapiddx.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracalidx.CalorimetryModuleLabel:           "pandoracaloSCE"
-physics.producers.pandoracalidx.TrackModuleLabel:                 "pandoraTrack"
-physics.producers.pandoracalipiddx.CalorimetryModuleLabel:        "pandoracaliSCE"
-physics.producers.pandoracalipiddx.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracalidx.CorrectSCE:              false
-
 #Optical detector configuration
 physics.producers.ophit.InputModule:                        "opdigi"
 physics.producers.opflash.InputModule:                      "ophit"
+physics.producers.opslicer.OpHitModuleLabel:                "ophit"
 
 # Use channel map service for data
 services.PdspChannelMapService:        @local::pdspchannelmap
