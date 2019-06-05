@@ -74,7 +74,7 @@ add_subdirectory(DUNEWireCell)
 #     "larsim_Simulation nutools_ParticleNavigation lardataobj_Simulation",
 #     "larsim_MCCheater",
 #     "larreco_Calorimetry",
-#     "lardata_RecoObjects larreco_Deprecated",
+#     "lardata_RecoObjects",
 #     "larreco_RecoAlg",
 #     "larsim_LArG4",
 #     "larsim_PhotonPropagation",
