@@ -117,12 +117,12 @@ physics: {
           #dbcluster,
           #cluster reco
           linecluster,
-          #feature labeling
-          emtrkmichelid,
           #pandora
           pandora, pandoraWriter, pandoraTrack, pandoraShower,
           pandoracalo, pandorapid, pandoracali, pandoracalipid,
           pandoracaloSCE, pandorapidSCE, pandoracaliSCE, pandoracalipidSCE,
+          #feature labeling
+          emtrkmichelid,
           #pmatrack
           pmtrack, pmtrackcalo, pmtrackpid, pmtrackcali, pmtrackcalipid
           #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
