@@ -116,15 +116,15 @@ physics: {
           # 3d dbcluster
           #dbcluster,
           #cluster reco
-          linecluster,
+          #linecluster,
           #pandora
           pandora, pandoraWriter, pandoraTrack, pandoraShower,
           pandoracalo, pandorapid, pandoracali, pandoracalipid,
           pandoracaloSCE, pandorapidSCE, pandoracaliSCE, pandoracalipidSCE,
           #feature labeling
-          emtrkmichelid,
+          emtrkmichelid
           #pmatrack
-          pmtrack, pmtrackcalo, pmtrackpid, pmtrackcali, pmtrackcalipid
+          #pmtrack, pmtrackcalo, pmtrackpid, pmtrackcali, pmtrackcalipid
           #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
           #shower reconstruction
           #blurredcluster, emshower, emshower3d, mergeemshower3d
