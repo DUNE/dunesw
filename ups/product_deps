@@ -61,7 +61,7 @@ table_fragment_end
 
 product          version
 larsoft          v08_21_00
-artdaq_core	 v3_04_15
+artdaq_core	 v3_04_17
 duneutil         v08_20_00	-	optional
 lbne_raw_data 	 v1_04_34
 dune_pardata	 v01_47_00
@@ -70,8 +70,8 @@ genie_phyopt     v2_12_10
 cetbuildtools	 v7_12_01	-	only_for_build
 dune_raw_data    v1_17_33
 #caffe            DISCONTINUED   -       optional
-nusystematics    v00_03_03
-systematicstools v00_03_02
+nusystematics    v00_04_00
+systematicstools v00_03_03
 dune_oslibs      v1_0_0         -       optional
 end_product_list
 
@@ -80,12 +80,12 @@ end_product_list
 # Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     dune_raw_data	        nusystematics       systematicstools    dune_oslibs  notes
-c2:debug	c2:debug	c2:debug	c2:s83:debug     c2:nu:s83:debug	-nq-    DefaultPlusMECWithNC  dkcharmtau       c2:nu:s83:debug         c2:debug            c2:debug             -nq-
-c2:opt		c2:opt		c2:opt		c2:s83:opt	 c2:nu:s83:prof		-nq-    DefaultPlusMECWithNC  dkcharmtau       c2:nu:s83:prof          c2:prof             c2:prof              -nq-
-c2:prof		c2:prof		c2:prof		c2:s83:prof	 c2:nu:s83:prof		-nq-    DefaultPlusMECWithNC  dkcharmtau       c2:nu:s83:prof          c2:prof             c2:prof              -nq-
-e17:debug	e17:debug	e17:debug	e17:s83:debug    e17:nu:s83:debug	-nq-    DefaultPlusMECWithNC  dkcharmtau       e17:nu:s83:debug        e17:debug           e17:debug            -nq-
-e17:opt		e17:opt		e17:opt		e17:s83:opt	 e17:nu:s83:prof	-nq-    DefaultPlusMECWithNC  dkcharmtau       e17:nu:s83:prof         e17:prof            e17:prof             -nq-
-e17:prof	e17:prof	e17:prof	e17:s83:prof	 e17:nu:s83:prof	-nq-    DefaultPlusMECWithNC  dkcharmtau       e17:nu:s83:prof         e17:prof            e17:prof             -nq-
+c2:debug	c2:debug	c2:debug	c2:s84:debug     c2:nu:s84:debug	-nq-    DefaultPlusMECWithNC  dkcharmtau       c2:nu:s84:debug         c2:debug            c2:debug             -nq-
+c2:opt		c2:opt		c2:opt		c2:s84:opt	 c2:nu:s84:prof		-nq-    DefaultPlusMECWithNC  dkcharmtau       c2:nu:s84:prof          c2:prof             c2:prof              -nq-
+c2:prof		c2:prof		c2:prof		c2:s84:prof	 c2:nu:s84:prof		-nq-    DefaultPlusMECWithNC  dkcharmtau       c2:nu:s84:prof          c2:prof             c2:prof              -nq-
+e17:debug	e17:debug	e17:debug	e17:s84:debug    e17:nu:s84:debug	-nq-    DefaultPlusMECWithNC  dkcharmtau       e17:nu:s84:debug        e17:debug           e17:debug            -nq-
+e17:opt		e17:opt		e17:opt		e17:s84:opt	 e17:nu:s84:prof	-nq-    DefaultPlusMECWithNC  dkcharmtau       e17:nu:s84:prof         e17:prof            e17:prof             -nq-
+e17:prof	e17:prof	e17:prof	e17:s84:prof	 e17:nu:s84:prof	-nq-    DefaultPlusMECWithNC  dkcharmtau       e17:nu:s84:prof         e17:prof            e17:prof             -nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
