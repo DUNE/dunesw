@@ -93,8 +93,7 @@ protoDUNE_reco_data: [ caldata,
                        gaushit,
                        reco3d,
                        hitpdune,
-                       linecluster,
-                       emtrkmichelid,
+#                       linecluster,
                        pandora,
                        pandoraWriter,
                        pandoraTrack,
@@ -107,9 +106,10 @@ protoDUNE_reco_data: [ caldata,
                        pandorapidSCE,
                        pandoracaliSCE,
                        pandoracalipidSCE,
-                       pmtrack,
-                       pmtrackcalo,
-                       pmtrackpid,
+                       emtrkmichelid,
+#                       pmtrack,
+#                       pmtrackcalo,
+#                       pmtrackpid,
                        ophitInternal,
                        ophitExternal,
                        opflashInternal,
@@ -137,6 +137,7 @@ protoDUNE_reco_data_producers.hitpdune.ExcludeTPCs: []
 protoDUNE_reco_data_producers.linecluster.HitFinderModuleLabel:    "hitpdune"
 
 protoDUNE_reco_data_producers.pmtrack.HitModuleLabel:                         "linecluster"
+protoDUNE_reco_data_producers.pmtrack.WireModuleLabel:                        "digitwire"
 protoDUNE_reco_data_producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
 protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.TrackLikeThreshold:       0.63
 protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:       3

@@ -6,7 +6,7 @@
 // This test demonstrates how to configure and use the LArSoft SeedService
 // service outside the art framework.
 
-#include "nutools/RandomUtils/NuRandomService.h"
+#include "nurandom/RandomUtils/NuRandomService.h"
 
 #include <string>
 #include <iostream>
