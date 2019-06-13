@@ -18,3 +18,8 @@ install(
   DESTINATION ${dunetpc_fcl_dir}
   FILES_MATCHING PATTERN *.fcl
 )
+install(
+  DIRECTORY pedestal
+  DESTINATION ${dunetpc_fcl_dir}
+  FILES_MATCHING PATTERN *.fcl
+)
