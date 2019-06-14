@@ -10,4 +10,5 @@
 #include "protodune_dataprep_tools.fcl"
 #include "stickycodes_pdsp.fcl"
 #include "calibs_pdsp.fcl"
+#include "peds_pdsp.fcl"
 
