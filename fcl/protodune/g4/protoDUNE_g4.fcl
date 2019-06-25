@@ -69,3 +69,4 @@ outputs:
 }
 
 physics.producers.largeant.ChargeRecoveryMargin: 2.5 # cm
+services.NuRandomService.policy: "perEvent"
