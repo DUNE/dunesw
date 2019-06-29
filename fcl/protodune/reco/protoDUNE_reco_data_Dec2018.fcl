@@ -75,6 +75,8 @@ protoDUNE_reco_data_producers:
     opflashExternal:    @local::protodune_opflash_data_external
     opslicerInternal:   @local::protodune_opslicer_data_internal
     opslicerExternal:   @local::protodune_opslicer_data_external
+    crtreco: @local::TwoCRTMatching_producerData
+     crttag: @local::SingleCRTMatching_producerData
 }
 
 ### Below are a list of convenient sequences that can be used for production/typical users. ###
@@ -115,7 +117,8 @@ protoDUNE_reco_data: [ caldata,
                        opflashInternal,
                        opflashExternal,
                        opslicerInternal,
-                       opslicerExternal
+                       opslicerExternal,
+	               crttag,crtreco
                      ]
 
 protoDUNE_reco_data_producers.caldata.DigitLabel: "tpcrawdecoder:daq"
