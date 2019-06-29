@@ -17,7 +17,7 @@
 #include "opticaldetectormodules_dune.fcl"
 #include "showerfindermodules_dune.fcl"
 #include "OpSlicer.fcl"
-
+#include "CRT.fcl"
 BEGIN_PROLOG
 
 protoDUNE_rawdecoding_producers:
