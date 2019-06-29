@@ -124,7 +124,7 @@ physics: {
           pandoracalo, pandorapid, pandoracali, pandoracalipid,
           pandoracaloSCE, pandorapidSCE, pandoracaliSCE, pandoracalipidSCE,
           #feature labeling
-          emtrkmichelid
+          emtrkmichelid,
           #pmatrack
           #pmtrack, pmtrackcalo, pmtrackpid, pmtrackcali, pmtrackcalipid
           #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
