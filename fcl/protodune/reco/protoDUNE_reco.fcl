@@ -16,7 +16,7 @@
 #include "emshower3d.fcl"
 #include "ProtoDUNETriggerFilter.fcl"
 #include "OpSlicer.fcl"
-
+#include "CRT.fcl"
 #include "protodune_tools_dune.fcl"
 
 process_name: Reco
@@ -98,6 +98,8 @@ physics: {
     ophit:              @local::protodune_ophit 
     opflash:            @local::protodune_opflash
     opslicer:           @local::protodune_opslicer
+    crtreco: @local::TwoCRTMatching_producer
+     crttag: @local::SingleCRTMatching_producer
   }
 
   #define the producer and filter modules for this path, order matters, 
@@ -122,12 +124,13 @@ physics: {
           pandoracalo, pandorapid, pandoracali, pandoracalipid,
           pandoracaloSCE, pandorapidSCE, pandoracaliSCE, pandoracalipidSCE,
           #feature labeling
-          emtrkmichelid
+          emtrkmichelid,
           #pmatrack
           #pmtrack, pmtrackcalo, pmtrackpid, pmtrackcali, pmtrackcalipid
           #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
           #shower reconstruction
           #blurredcluster, emshower, emshower3d, mergeemshower3d
+	   crttag,crtreco
         ]
  
   #define the output stream, there could be more than one if using filters 
