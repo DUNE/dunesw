@@ -1,0 +1,4 @@
+#include "protoDUNE_reco.fcl"
+
+services.DetectorPropertiesService.Electronlifetime: 35000
+
