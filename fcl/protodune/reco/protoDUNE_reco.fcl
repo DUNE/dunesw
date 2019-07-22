@@ -18,6 +18,7 @@
 #include "OpSlicer.fcl"
 #include "CRT.fcl"
 #include "protodune_tools_dune.fcl"
+#include "T0RecoAnodePiercers.fcl"
 
 process_name: Reco
 
@@ -102,6 +103,8 @@ physics: {
     opslicer:           @local::protodune_opslicer
     crtreco: @local::TwoCRTMatching_producer
      crttag: @local::SingleCRTMatching_producer
+#	Anode piercing tracks t0 reconstruction
+	anodepiercerst0:	@local::T0RecoAnodePiercers
   }
 
   #define the producer and filter modules for this path, order matters, 
@@ -133,7 +136,8 @@ physics: {
           #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
           #shower reconstruction
           #blurredcluster, emshower, emshower3d, mergeemshower3d
-	   crttag,crtreco
+	   	  crttag,crtreco,
+		  anodepiercerst0
         ]
  
   #define the output stream, there could be more than one if using filters 
@@ -242,6 +246,8 @@ physics.producers.pandoraShowercaloSCE.CorrectSCE:        true
 physics.producers.ophit.InputModule:                        "opdigi"
 physics.producers.opflash.InputModule:                      "ophit"
 physics.producers.opslicer.OpHitModuleLabel:                "ophit"
+
+physics.producers.anodepiercerst0.MC: 					true
 
 # Use channel map service for data
 services.PdspChannelMapService:        @local::pdspchannelmap

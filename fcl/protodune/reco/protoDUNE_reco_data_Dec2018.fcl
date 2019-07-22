@@ -18,6 +18,8 @@
 #include "showerfindermodules_dune.fcl"
 #include "OpSlicer.fcl"
 #include "CRT.fcl"
+#include "T0RecoAnodePiercers.fcl"
+
 BEGIN_PROLOG
 
 protoDUNE_rawdecoding_producers:
@@ -78,7 +80,8 @@ protoDUNE_reco_data_producers:
     opslicerInternal:   @local::protodune_opslicer_data_internal
     opslicerExternal:   @local::protodune_opslicer_data_external
     crtreco: @local::TwoCRTMatching_producerData
-     crttag: @local::SingleCRTMatching_producerData
+    crttag: @local::SingleCRTMatching_producerData
+	anodepiercerst0: 	@local::T0RecoAnodePiercers
 }
 
 ### Below are a list of convenient sequences that can be used for production/typical users. ###
@@ -122,7 +125,8 @@ protoDUNE_reco_data: [ caldata,
                        opflashExternal,
                        opslicerInternal,
                        opslicerExternal,
-	               crttag,crtreco
+	               	   crttag,crtreco,
+					   anodepiercerst0
                      ]
 
 protoDUNE_reco_data_producers.caldata.DigitLabel: "tpcrawdecoder:daq"
@@ -197,4 +201,7 @@ protoDUNE_reco_data_producers.pandoracalipidSCE.CalorimetryModuleLabel:    "pand
 protoDUNE_reco_data_producers.pandoracalipidSCE.TrackModuleLabel:          "pandoraTrack"
 
 protoDUNE_reco_data_producers.pandoraShowercaloSCE.CorrectSCE:				   true
+
+protoDUNE_reco_data_producers.anodepiercerst0.MC:							false
+
 END_PROLOG
