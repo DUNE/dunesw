@@ -1,0 +1,19 @@
+#include "calorimetry.fcl"
+
+BEGIN_PROLOG
+
+dune10kt_calorimetryalgdata:	@local::standard_calorimetryalgdata
+dune10kt_calorimetryalgmc:	@local::standard_calorimetryalgmc
+
+dune10kt_calorimetryalgmc.CalAmpConstants:  [ 0.9033e-3, 1.0287e-3, 0.8800e-3 ]
+dune10kt_calorimetryalgmc.CalAreaConstants: [ 4.833e-3, 4.815e-3, 4.966e-3 ]
+
+dune10kt_calodata:                       @local::standard_calodata
+dune10kt_calodata.CaloAlg:               @local::dune10kt_calorimetryalgdata
+dune10kt_calodata.CaloAlg.CaloUseModBox: true
+
+dune10kt_calomc:                         @local::standard_calomc
+dune10kt_calomc.CaloAlg:                 @local::dune10kt_calorimetryalgmc
+dune10kt_calomc.CaloAlg.CaloUseModBox:   true
+
+END_PROLOG
