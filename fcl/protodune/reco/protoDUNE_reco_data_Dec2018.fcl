@@ -202,6 +202,4 @@ protoDUNE_reco_data_producers.pandoracalipidSCE.TrackModuleLabel:          "pand
 
 protoDUNE_reco_data_producers.pandoraShowercaloSCE.CorrectSCE:				   true
 
-protoDUNE_reco_data_producers.anodepiercerst0.MC:							false
-
 END_PROLOG
