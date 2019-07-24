@@ -71,7 +71,7 @@ add_subdirectory(DUNEWireCell)
 #     "lardataobj_OpticalDetectorData",
 #     "lardataobj_AnalysisBase",
 #     "lardata_Utilities",
-#     "larsim_Simulation nutools_ParticleNavigation lardataobj_Simulation",
+#     "larsim_Simulation nug4_ParticleNavigation lardataobj_Simulation",
 #     "larsim_MCCheater",
 #     "larreco_Calorimetry",
 #     "lardata_RecoObjects",
