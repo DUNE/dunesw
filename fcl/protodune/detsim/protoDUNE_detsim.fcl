@@ -10,8 +10,8 @@ process_name: Detsim
 services:
 {
   TFileService: { fileName: "detsim_single_protoDUNE_hist.root" }
-  TimeTracker:       {}
-  MemoryTracker:     { }
+  TimeTracker:       @local::dune_time_tracker
+  MemoryTracker:     @local::dune_memory_tracker
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
   @table::protodune_simulation_services

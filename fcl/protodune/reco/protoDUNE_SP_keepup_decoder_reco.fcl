@@ -8,9 +8,8 @@ process_name: DecoderandReco
 services:
 {
     #message:              @local::dune_message_services_prod_debug
-
-    TimeTracker:       {}
-    MemoryTracker:     {}
+    TimeTracker:       @local::dune_time_tracker
+    MemoryTracker:     @local::dune_memory_tracker
     RandomNumberGenerator: {} 
     FileCatalogMetadata:  @local::art_file_catalog_data
                           @table::protodune_rawdecoding_services
