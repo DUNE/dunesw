@@ -28,8 +28,8 @@ IF (NOT CETBUILDTOOLS_VERSION)
 ENDIF()
 
 set(CMAKE_MODULE_PATH $ENV{CANVAS_ROOT_IO_DIR}/Modules
-		      $ENV{CETBUILDTOOLS_DIR}/Modules
-		      ${CMAKE_MODULE_PATH})
+                      $ENV{CETBUILDTOOLS_DIR}/Modules
+                      ${CMAKE_MODULE_PATH})
 
 include(CetCMakeEnv)
 cet_cmake_env()
@@ -57,6 +57,9 @@ find_ups_product( pandora )
 find_ups_product( larreco v1_00_00 )
 find_ups_product( larana v1_00_00 )
 find_ups_product( nutools v1_00_00 )
+find_ups_product( nug4 )
+find_ups_product( nugen v1_00_00 )
+find_ups_product( nurandom v1_00_00 )
 find_ups_product( art v1_09_00 )
 find_ups_product(art_root_io)
 find_ups_product( clhep v2_1_3_0 )
@@ -77,6 +80,13 @@ if(DEFINED ENV{CAFFE_LIB} )
 endif()
 if(DEFINED ENV{LAPACK_LIB} )
   find_ups_product( lapack )
+endif()
+if(DEFINED ENV{TENSORFLOW_DIR})
+  # find tensorflow library
+  find_ups_product( protobuf )
+  find_ups_product( tensorflow )
+  cet_find_library(TENSORFLOW NAMES tensorflow-core PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
+  cet_find_library(PROTOBUF NAMES protobuf PATHS ENV PROTOBUF_LIB NO_DEFAULT_PATH )
 endif()
 
 # macros for dictionary and simple_plugin

@@ -8,9 +8,8 @@ process_name: DecoderandReco
 services:
 {
     #message:              @local::dune_message_services_prod_debug
-
-    TimeTracker:       {}
-    MemoryTracker:     {}
+    TimeTracker:       @local::dune_time_tracker
+    MemoryTracker:     @local::dune_memory_tracker
     RandomNumberGenerator: {} 
     FileCatalogMetadata:  @local::art_file_catalog_data
                           @table::protodune_rawdecoding_services
@@ -107,6 +106,11 @@ source:
     fileNames: [ "/afs/cern.ch/user/s/sergiand/workspace/artdaq_devel/pdune_r1000077_sr01_20170629T181646_1_0.root" ]
     maxEvents : -1
 }
+
+services.SpaceCharge.CalibrationInputFilename: "SpaceChargeProtoDUNE/SCE_DataDriven_180kV_v2.root"
+services.SpaceCharge.RepresentationType: "Voxelized_TH3"
+services.SpaceCharge.EnableCalEfieldSCE: true
+services.SpaceCharge.EnableCalSpatialSCE: true
 
 #<friendly-type>_<module-label>_<instance-name>_<process-name>
 

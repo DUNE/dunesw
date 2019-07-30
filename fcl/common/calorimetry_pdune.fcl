@@ -1,0 +1,53 @@
+#include "calorimetry.fcl"
+#include "ShowerCalorimetry.fcl"
+
+BEGIN_PROLOG
+
+# Single-Phase parameters (initially copied from FD)
+
+pdune_sp_calorimetryalgdata: @local::standard_calorimetryalgdata
+pdune_sp_calorimetryalgmc:	 @local::standard_calorimetryalgmc
+
+pdune_sp_calorimetryalgmc.CalAmpConstants:  [ 0.9033e-3, 1.0287e-3, 0.8800e-3 ]
+pdune_sp_calorimetryalgmc.CalAreaConstants: [ 4.833e-3, 4.815e-3, 4.966e-3 ]
+
+pdune_sp_calodata:                       @local::standard_calodata
+pdune_sp_calodata.CaloAlg:               @local::pdune_sp_calorimetryalgmc
+pdune_sp_calodata.CaloAlg.CaloUseModBox: true
+
+pdune_sp_calomc:                         @local::standard_calomc
+pdune_sp_calomc.CaloAlg:                 @local::pdune_sp_calorimetryalgmc
+pdune_sp_calomc.CaloAlg.CaloUseModBox:   true
+
+pdune_sp_calorimetryalgmcc10mc:          @local::standard_calorimetryalgmc
+# pdune_sp_calorimetryalgmcc10mc.CalAreaConstants:  [ 0.4911, 0.4911, 0.4911 ]
+pdune_sp_calorimetryalgmcc10mc.CalAreaConstants: [ 4.833e-3, 4.815e-3, 4.966e-3 ]
+pdune_sp_calorimetryalgmcc10mc.CaloDoLifeTimeCorrection: false
+
+pdune_sp_showercalodata:                 @local::shower_calorimetry
+pdune_sp_showercalodata.CalorimetryAlg:  @local::pdune_sp_calorimetryalgmc
+
+pdune_sp_showercalomc:                   @local::shower_calorimetry
+pdune_sp_showercalomc.CalorimetryAlg:    @local::pdune_sp_calorimetryalgmc
+
+# Double-Phase 6x6x6 parameters (***BLINDLY*** copied from SP above, changing to 2 planes and same constants!)
+
+pdune_dp_calorimetryalgdata: @local::standard_calorimetryalgdata
+pdune_dp_calorimetryalgmc:	 @local::standard_calorimetryalgmc
+
+pdune_dp_calorimetryalgmc.CalAmpConstants:  [ 0.8800e-3, 0.8800e-3 ]
+pdune_dp_calorimetryalgmc.CalAreaConstants: [ 4.966e-3, 4.966e-3 ]
+
+pdune_dp_calodata:                       @local::standard_calodata
+pdune_dp_calodata.CaloAlg:               @local::pdune_sp_calorimetryalgdata
+pdune_dp_calodata.CaloAlg.CaloUseModBox: true
+
+pdune_dp_calomc:                         @local::standard_calomc
+pdune_dp_calomc.CaloAlg:                 @local::pdune_sp_calorimetryalgmc
+pdune_dp_calomc.CaloAlg.CaloUseModBox:   true
+
+
+# DP 3x1x1 not added: we should discuss
+
+
+END_PROLOG
