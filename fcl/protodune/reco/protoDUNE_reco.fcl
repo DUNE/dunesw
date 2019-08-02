@@ -18,6 +18,7 @@
 #include "OpSlicer.fcl"
 #include "CRT.fcl"
 #include "T0RecoAnodePiercers.fcl"
+#include "numberofhitsfilter.fcl"
 #include "protodune_tools_dune.fcl"
 
 process_name: Reco
@@ -53,6 +54,7 @@ physics: {
 
   filters: {
     trigfilter:  @local::pdsp_trigfilter_all
+    nhitsfilter: @local::standard_numberofhitsfilter
   }
 
   producers: {
@@ -120,6 +122,8 @@ physics: {
           reco3d,
           #real disambiguation
           hitpdune,
+          # filter out events with too many hits for timely reconstruction
+          nhitsfilter,
           # 3d dbcluster
           #dbcluster,
           #cluster reco
