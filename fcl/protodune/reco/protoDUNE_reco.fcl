@@ -118,12 +118,12 @@ physics: {
           caldata,
           #hit reconstruction
           gaushit, #fasthit, 
+          # filter out events with too many hits for timely reconstruction
+          nhitsfilter,
           #space point solver
           reco3d,
           #real disambiguation
           hitpdune,
-          # filter out events with too many hits for timely reconstruction
-          nhitsfilter,
           # 3d dbcluster
           #dbcluster,
           #cluster reco
