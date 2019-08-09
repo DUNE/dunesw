@@ -59,6 +59,7 @@ physics:
     filters: 
     {
         trigfilter:  @local::pdsp_trigfilter_all
+        @table::protoDUNE_reco_data_filters
     }
 
     producers:
