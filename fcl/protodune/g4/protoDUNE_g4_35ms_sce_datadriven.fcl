@@ -6,4 +6,4 @@ services.SpaceCharge.EnableSimSpatialSCE: true
 services.SpaceCharge.EnableSimulationSCE: true
 
 services.SpaceCharge.RepresentationType: Voxelized_TH3
-services.SpaceCharge.InputFilename: "SpaceChargeProtoDUNE/SCE_DataDriven_180kV_v2.root"
+services.SpaceCharge.InputFilename: "SpaceChargeProtoDUNE/SCE_DataDriven_180kV_v3.root"
