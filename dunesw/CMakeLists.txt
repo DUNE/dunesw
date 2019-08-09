@@ -57,7 +57,7 @@ add_subdirectory(CAFMaker)
 add_subdirectory(RegCNN)
 add_subdirectory(Iceberg)
 add_subdirectory(DUNEWireCell)
-
+add_subdirectory(APAIO)
 
 # Respect the order specified in lar_build, which is:
 #
