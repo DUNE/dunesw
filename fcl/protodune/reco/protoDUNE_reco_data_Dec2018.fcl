@@ -19,6 +19,7 @@
 #include "OpSlicer.fcl"
 #include "CRT.fcl"
 #include "T0RecoAnodePiercers.fcl"
+#include "numberofhitsfilter.fcl"
 
 BEGIN_PROLOG
 
@@ -84,6 +85,11 @@ protoDUNE_reco_data_producers:
 	anodepiercerst0: 	@local::T0RecoAnodePiercers
 }
 
+protoDUNE_reco_data_filters:
+{
+  nhitsfilter: @local::standard_numberofhitsfilter
+}
+
 ### Below are a list of convenient sequences that can be used for production/typical users. ###
 
 protoDUNE_rawdecoding: [ timingrawdecoder,
@@ -98,6 +104,7 @@ protoDUNE_reco_data: [ caldata,
                        wclsdatasp,
                        digitwire,
                        gaushit,
+                       nhitsfilter,
                        reco3d,
                        hitpdune,
 #                       linecluster,
