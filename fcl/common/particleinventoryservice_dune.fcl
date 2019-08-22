@@ -1,0 +1,10 @@
+#include "particleinventoryservice.fcl"
+
+BEGIN_PROLOG
+
+dune35t_particleinventoryservice:    @local::standard_particleinventoryservice
+dunefd_particleinventoryservice:     @local::standard_particleinventoryservice
+dune35t_particleinventoryservice.ParticleInventory.EveIdCalculator: "EveIdCalculator"
+dunefd_particleinventoryservice.ParticleInventory.EveIdCalculator: "EveIdCalculator"
+
+END_PROLOG
