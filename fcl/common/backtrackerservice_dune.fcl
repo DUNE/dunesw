@@ -1,0 +1,8 @@
+#include "backtrackerservice.fcl"
+
+BEGIN_PROLOG
+
+dune35t_backtrackerservice:    @local::standard_backtrackerservice
+dunefd_backtrackerservice:     @local::standard_backtrackerservice
+
+END_PROLOG
