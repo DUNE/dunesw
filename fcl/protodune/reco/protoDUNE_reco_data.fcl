@@ -7,8 +7,8 @@ process_name: Reco
 
 services:
 {
-  TimeTracker:       {}
-  MemoryTracker:     {}
+  TimeTracker:       @local::dune_time_tracker
+  MemoryTracker:     @local::dune_memory_tracker
   TFileService:      { fileName: "reco_protoDUNE_hist.root" }
   RandomNumberGenerator: {} #ART native random number generator
   message:              @local::dune_message_services_prod_debug
@@ -68,7 +68,7 @@ outputs:
  }
 }
 
-services.SpaceCharge.CalibrationInputFilename: "SpaceChargeProtoDUNE/SCE_DataDriven_180kV_v2.root"
+services.SpaceCharge.CalibrationInputFilename: "SpaceChargeProtoDUNE/SCE_DataDriven_180kV_v3.root"
 services.SpaceCharge.RepresentationType: "Voxelized_TH3"
 services.SpaceCharge.EnableCalEfieldSCE: true
 services.SpaceCharge.EnableCalSpatialSCE: true

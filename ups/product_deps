@@ -3,7 +3,7 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 
-parent dunetpc v08_24_00
+parent dunetpc v08_29_00
 
 defaultqual e17
 
@@ -60,17 +60,17 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v08_24_00
+larsoft          v08_29_00
 artdaq_core	 v3_04_20
-duneutil         v08_24_00	-	optional
+duneutil         v08_29_00	-	optional
 lbne_raw_data 	 v1_04_36
 dune_pardata	 v01_52_00
-genie_xsec       v2_12_10       -       optional
-genie_phyopt     v2_12_10
+genie_xsec       v3_00_04a       -       optional
+genie_phyopt     v3_00_04
 cetbuildtools	 v7_12_01	-	only_for_build
 dune_raw_data    v1_17_35
 #caffe            DISCONTINUED   -       optional
-nusystematics    v00_04_01
+nusystematics    v00_05_01
 systematicstools v00_03_04
 dune_oslibs      v1_0_0         -       optional
 end_product_list
@@ -80,12 +80,14 @@ end_product_list
 # Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     dune_raw_data	        nusystematics       systematicstools    dune_oslibs  notes
-c2:debug	c2:debug	c2:debug	c2:s86:debug     c2:nu:s86:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:nu:s86:debug         c2:debug            c2:debug             -nq-
-c2:opt		c2:opt		c2:opt		c2:s86:opt	 c2:nu:s86:prof		-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:nu:s86:prof          c2:prof             c2:prof              -nq-
-c2:prof		c2:prof		c2:prof		c2:s86:prof	 c2:nu:s86:prof		-nq-    DefaultPlusValenciaMEC  dkcharmtau       c2:nu:s86:prof          c2:prof             c2:prof              -nq-
-e17:debug	e17:debug	e17:debug	e17:s86:debug    e17:nu:s86:debug	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:nu:s86:debug        e17:debug           e17:debug            -nq-
-e17:opt		e17:opt		e17:opt		e17:s86:opt	 e17:nu:s86:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:nu:s86:prof         e17:prof            e17:prof             -nq-
-e17:prof	e17:prof	e17:prof	e17:s86:prof	 e17:nu:s86:prof	-nq-    DefaultPlusValenciaMEC  dkcharmtau       e17:nu:s86:prof         e17:prof            e17:prof             -nq-
+c2:py3:debug	c2:py3:debug	c2:py3:debug	c2:py3:s86:debug     c2:py3:nu:s86:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       c2:py3:nu:s86:debug         c2:py3:debug            c2:py3:debug             -nq-
+c2:py3:prof	c2:py3:prof		c2:py3:prof		c2:py3:s86:prof	 c2:py3:nu:s86:prof		-nq-    G1810a0211a:k250:e1000  dkcharmtau       c2:py3:nu:s86:prof          c2:py3:prof             c2:py3:prof              -nq-
+e17:py3:debug	e17:py3:debug	e17:py3:debug	e17:py3:s86:debug    e17:py3:nu:s86:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e17:py3:nu:s86:debug        e17:py3:debug           e17:py3:debug            -nq-
+e17:py3:prof	e17:py3:prof	e17:py3:prof	e17:py3:s86:prof	 e17:py3:nu:s86:prof	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e17:py3:nu:s86:prof         e17:py3:prof            e17:py3:prof             -nq-
+c2:debug	c2:debug	c2:debug	c2:s86:debug     c2:nu:s86:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       c2:nu:s86:debug         c2:debug            c2:debug             -nq-
+c2:prof		c2:prof		c2:prof		c2:s86:prof	 c2:nu:s86:prof		-nq-    G1810a0211a:k250:e1000  dkcharmtau       c2:nu:s86:prof          c2:prof             c2:prof              -nq-
+e17:debug	e17:debug	e17:debug	e17:s86:debug    e17:nu:s86:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e17:nu:s86:debug        e17:debug           e17:debug            -nq-
+e17:prof	e17:prof	e17:prof	e17:s86:prof	 e17:nu:s86:prof	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e17:nu:s86:prof         e17:prof            e17:prof             -nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:

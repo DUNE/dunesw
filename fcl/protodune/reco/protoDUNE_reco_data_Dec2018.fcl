@@ -10,7 +10,7 @@
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl" 
 #include "pandoramodules_dune.fcl"
-#include "calorimetry_dune10kt.fcl"
+#include "calorimetry_pdune.fcl"
 #include "calibration_dune.fcl"
 #include "featurelabelingmodules.fcl"
 #include "particleid.fcl"
@@ -18,6 +18,9 @@
 #include "showerfindermodules_dune.fcl"
 #include "OpSlicer.fcl"
 #include "CRT.fcl"
+#include "T0RecoAnodePiercers.fcl"
+#include "numberofhitsfilter.fcl"
+
 BEGIN_PROLOG
 
 protoDUNE_rawdecoding_producers:
@@ -55,18 +58,20 @@ protoDUNE_reco_data_producers:
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
     # Calorimetry and PID for pandora
-    pandoracalo:        @local::dune10kt_calomc
+    pandoracalo:        @local::pdune_sp_calomc
     pandorapid:         @local::standard_chi2pid
     pandoracali:		@local::protodunespmc_calibrationdedx
-    pandoracalipid:		@local::standard_chi2pid 
+    pandoracalipid:		@local::standard_chi2pid
+    pandoraShowercalo:  @local::pdune_sp_showercalodata
     # Calorimetry and PID for pandora with space charge
-    pandoracaloSCE:		@local::dune10kt_calomc
+    pandoracaloSCE:		@local::pdune_sp_calomc
     pandorapidSCE:		@local::standard_chi2pid
     pandoracaliSCE:		@local::protodunespmc_calibrationdedx
-    pandoracalipidSCE:	@local::standard_chi2pid 
+    pandoracalipidSCE:	        @local::standard_chi2pid 
+    pandoraShowercaloSCE:       @local::pdune_sp_showercalodata
     # PMA track reconstruction
     pmtrack:            @local::dunefd_pmalgtrackmaker
-    pmtrackcalo:        @local::dune10kt_calomc
+    pmtrackcalo:        @local::pdune_sp_calomc
     pmtrackpid:         @local::standard_chi2pid
     # Photon detector reco modules
     ophitInternal:      @local::protodune_ophit_data_internal
@@ -76,7 +81,13 @@ protoDUNE_reco_data_producers:
     opslicerInternal:   @local::protodune_opslicer_data_internal
     opslicerExternal:   @local::protodune_opslicer_data_external
     crtreco: @local::TwoCRTMatching_producerData
-     crttag: @local::SingleCRTMatching_producerData
+    crttag: @local::SingleCRTMatching_producerData
+	anodepiercerst0: 	@local::T0RecoAnodePiercers
+}
+
+protoDUNE_reco_data_filters:
+{
+  nhitsfilter: @local::standard_numberofhitsfilter
 }
 
 ### Below are a list of convenient sequences that can be used for production/typical users. ###
@@ -93,6 +104,7 @@ protoDUNE_reco_data: [ caldata,
                        wclsdatasp,
                        digitwire,
                        gaushit,
+                       nhitsfilter,
                        reco3d,
                        hitpdune,
 #                       linecluster,
@@ -102,12 +114,14 @@ protoDUNE_reco_data: [ caldata,
                        pandoraShower,
                        pandoracalo,
                        pandorapid,
-                       pandoracali,
-                       pandoracalipid,
+#                       pandoracali,
+#                       pandoracalipid,
                        pandoracaloSCE,
                        pandorapidSCE,
-                       pandoracaliSCE,
-                       pandoracalipidSCE,
+#                       pandoracaliSCE,
+#                       pandoracalipidSCE,
+                       pandoraShowercalo,
+                       pandoraShowercaloSCE,
                        emtrkmichelid,
 #                       pmtrack,
 #                       pmtrackcalo,
@@ -118,7 +132,8 @@ protoDUNE_reco_data: [ caldata,
                        opflashExternal,
                        opslicerInternal,
                        opslicerExternal,
-	               crttag,crtreco
+	               	   crttag,crtreco,
+					   anodepiercerst0
                      ]
 
 protoDUNE_reco_data_producers.caldata.DigitLabel: "tpcrawdecoder:daq"
@@ -192,5 +207,6 @@ protoDUNE_reco_data_producers.pandoracaliSCE.CorrectSCE:				   true
 protoDUNE_reco_data_producers.pandoracalipidSCE.CalorimetryModuleLabel:    "pandoracaliSCE"
 protoDUNE_reco_data_producers.pandoracalipidSCE.TrackModuleLabel:          "pandoraTrack"
 
+protoDUNE_reco_data_producers.pandoraShowercaloSCE.CorrectSCE:				   true
 
 END_PROLOG

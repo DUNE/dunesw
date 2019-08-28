@@ -1,0 +1,26 @@
+#include "calorimetry.fcl"
+
+BEGIN_PROLOG
+
+dune35t_calorimetryalgdata:	@local::standard_calorimetryalgdata
+dune35t_calorimetryalgmc:	@local::standard_calorimetryalgmc
+
+### Consts at 250 V cm-1
+#dune35t_calorimetryalgmc.CalAmpConstants:  [ 0.9033e-3, 1.0287e-3, 0.8800e-3 ]
+#dune35t_calorimetryalgmc.CalAreaConstants: [ 5.1822e-3, 5.2682e-3, 5.3962e-3 ]
+
+### Consts at 500 V cm-1
+dune35t_calorimetryalgmc.CalAmpConstants:  [ 6.522e-4, 7.427e-4, 7.822e-4 ]
+dune35t_calorimetryalgmc.CalAreaConstants: [ 3.742e-3, 3.804e-3, 4.796e-3 ]
+
+dune35t_calodata:                        @local::standard_calodata
+dune35t_calodata.CaloAlg:                @local::dune35t_calorimetryalgdata
+dune35t_calodata.T0ModuleLabel:          "mctrutht0"
+dune35t_calodata.CaloAlg.CaloUseModBox:   true
+
+dune35t_calomc:                        @local::standard_calomc
+dune35t_calomc.CaloAlg:	               @local::dune35t_calorimetryalgmc
+dune35t_calomc.T0ModuleLabel:          "mctrutht0"
+dune35t_calomc.CaloAlg.CaloUseModBox:  true
+
+END_PROLOG

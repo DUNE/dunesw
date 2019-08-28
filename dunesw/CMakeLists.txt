@@ -57,7 +57,7 @@ add_subdirectory(CAFMaker)
 add_subdirectory(RegCNN)
 add_subdirectory(Iceberg)
 add_subdirectory(DUNEWireCell)
-
+add_subdirectory(APAIO)
 
 # Respect the order specified in lar_build, which is:
 #
@@ -71,7 +71,7 @@ add_subdirectory(DUNEWireCell)
 #     "lardataobj_OpticalDetectorData",
 #     "lardataobj_AnalysisBase",
 #     "lardata_Utilities",
-#     "larsim_Simulation nutools_ParticleNavigation lardataobj_Simulation",
+#     "larsim_Simulation nug4_ParticleNavigation lardataobj_Simulation",
 #     "larsim_MCCheater",
 #     "larreco_Calorimetry",
 #     "lardata_RecoObjects",

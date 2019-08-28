@@ -1,11 +1,12 @@
-#include "services_dune.fcl"
+//#include "services_dune.fcl"
+#include "services_refactored_pdune.fcl"
 #include "caldata_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
-#include "calorimetry_pdune.fcl"
+#include "calorimetry_dune10kt.fcl"
 #include "calibration_dune.fcl"
 #include "featurelabelingmodules.fcl"
 #include "particleid.fcl"
@@ -16,9 +17,7 @@
 #include "emshower3d.fcl"
 #include "ProtoDUNETriggerFilter.fcl"
 #include "OpSlicer.fcl"
-#include "CRT.fcl"
-#include "T0RecoAnodePiercers.fcl"
-#include "numberofhitsfilter.fcl"
+
 #include "protodune_tools_dune.fcl"
 
 process_name: Reco
@@ -27,16 +26,18 @@ services:
 {
   # Load the service that manages root files for histograms.
   TFileService: { fileName: "reco_protoDUNE_hist.root" }
-  TimeTracker:       @local::dune_time_tracker
-  MemoryTracker:     @local::dune_memory_tracker
+  TimeTracker:       {}
+  MemoryTracker:     {}
   RandomNumberGenerator: {} #ART native random number generator
-  message:              @local::dune_message_services_prod
+  message:              @local::dune_message_services_prod_debug
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodune_reco_services
 #  ChannelStatusService: @local::pdsp_channel_status
 }
 
 services.Geometry.SortingParameters.ChannelsPerOpDet: 12
+services.BackTrackerService.BackTracker.G4ModuleLabel: "elecDrift" 
+#BackTrackerModuleLabel
 
 #source is now a root file
 source:
@@ -54,7 +55,6 @@ physics: {
 
   filters: {
     trigfilter:  @local::pdsp_trigfilter_all
-    nhitsfilter: @local::standard_numberofhitsfilter
   }
 
   producers: {
@@ -81,45 +81,45 @@ physics: {
     pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
-    pandoracalo:        @local::pdune_sp_calomc
+    pandoracalo:        @local::dune10kt_calomc
     pandorapid:         @local::standard_chi2pid
     pandoracali:        @local::protodunespmc_calibrationdedx
     pandoracalipid:     @local::standard_chi2pid 
-    pandoracaloSCE:     @local::pdune_sp_calomc
+    pandoracaloSCE:     @local::dune10kt_calomc
     pandorapidSCE:      @local::standard_chi2pid
-    pandoraShowercalo:  @local::pdune_sp_showercalomc
-    pandoraShowercaloSCE:       @local::pdune_sp_showercalomc
     pandoracaliSCE:     @local::protodunespmc_calibrationdedx
     pandoracalipidSCE:  @local::standard_chi2pid   
+#    pandoracalodE:     @local::dune10kt_calomc
+#    pandorapiddE:      @local::standard_chi2pid
+#    pandoracalidE:     @local::protodunespmc_calibrationdedx
+#    pandoracalipiddE:  @local::standard_chi2pid   
+#    pandoracalodx:     @local::dune10kt_calomc
+#    pandorapiddx:      @local::standard_chi2pid
+#    pandoracalidx:     @local::protodunespmc_calibrationdedx
+#    pandoracalipiddx:  @local::standard_chi2pid   
     pmtrack:         @local::dunefd_pmalgtrackmaker
-    pmtrackcalo:        @local::pdune_sp_calomc
+    pmtrackcalo:        @local::dune10kt_calomc
     pmtrackpid:         @local::standard_chi2pid
     pmtrackcali:        @local::protodunespmc_calibrationdedx
     pmtrackcalipid:     @local::standard_chi2pid  
     pmtrajfit:          @local::dunefd_pmalgtrajfitter
-    pmtrajfitcalo:      @local::pdune_sp_calomc
+    pmtrajfitcalo:      @local::dune10kt_calomc
     pmtrajfitpid:       @local::standard_chi2pid
 #   photon detector reconstruction
-    ophit:              @local::protodune_ophit 
-    opflash:            @local::protodune_opflash
-    opslicer:           @local::protodune_opslicer
-    crtreco: @local::TwoCRTMatching_producer
-     crttag: @local::SingleCRTMatching_producer
-#	Anode piercing tracks t0 reconstruction
-	anodepiercerst0:	@local::T0RecoAnodePiercers
+#    ophit:              @local::protodune_ophit 
+#    opflash:            @local::protodune_opflash
+#    opslicer:           @local::protodune_opslicer
   }
 
   #define the producer and filter modules for this path, order matters, 
   #filters reject all following items.  see lines starting physics.producers below
   reco: [ rns, 
           #optical hits and flashes
-          ophit, opflash, opslicer,
+          ##ophit, opflash, opslicer,
           #TPC wire signals      
           caldata,
           #hit reconstruction
           gaushit, #fasthit, 
-          # filter out events with too many hits for timely reconstruction
-          nhitsfilter,
           #space point solver
           reco3d,
           #real disambiguation
@@ -127,21 +127,20 @@ physics: {
           # 3d dbcluster
           #dbcluster,
           #cluster reco
-          #linecluster,
+          linecluster,
           #pandora
           pandora, pandoraWriter, pandoraTrack, pandoraShower,
-          pandoracalo, pandorapid, #pandoracali, pandoracalipid,
-          pandoracaloSCE, pandorapidSCE, #pandoracaliSCE, pandoracalipidSCE,
-          pandoraShowercalo, pandoraShowercaloSCE,
+          pandoracalo, pandorapid, pandoracali, pandoracalipid,
+          pandoracaloSCE, pandorapidSCE, pandoracaliSCE, pandoracalipidSCE,
           #feature labeling
-          emtrkmichelid,
+          emtrkmichelid
+          #pandoracalodE, pandorapiddE, pandoracalidE, pandoracalipiddE,
+          #pandoracalodx, pandorapiddx, pandoracalidx, pandoracalipiddx,
           #pmatrack
           #pmtrack, pmtrackcalo, pmtrackpid, pmtrackcali, pmtrackcalipid
           #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
           #shower reconstruction
           #blurredcluster, emshower, emshower3d, mergeemshower3d
-	   	  crttag,crtreco,
-		  anodepiercerst0
         ]
  
   #define the output stream, there could be more than one if using filters 
@@ -166,7 +165,8 @@ outputs:
    module_type: RootOutput
    fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
-   outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
+   #outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
+   outputCommands: [ "keep *", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
    compressionLevel: 1
  }
 }
@@ -217,6 +217,9 @@ physics.producers.calo.SpacePointModuleLabel:          "costrk"
 
 #Pandora configurations
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
+physics.producers.pandora.GeantModuleLabel:                 "elecDrift"
+physics.producers.pandoraWriter.GeantModuleLabel:           "elecDrift"
+
 physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
 physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
 physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
@@ -245,11 +248,36 @@ physics.producers.pandoracaliSCE.TrackModuleLabel:                 "pandoraTrack
 physics.producers.pandoracalipidSCE.CalorimetryModuleLabel:        "pandoracaliSCE"
 physics.producers.pandoracalipidSCE.TrackModuleLabel:              "pandoraTrack"
 physics.producers.pandoracaliSCE.CorrectSCE:              true
-physics.producers.pandoraShowercaloSCE.CorrectSCE:        true
-#Optical detector configuration
-physics.producers.ophit.InputModule:                        "opdigi"
-physics.producers.opflash.InputModule:                      "ophit"
-physics.producers.opslicer.OpHitModuleLabel:                "ophit"
+
+##Optical detector configuration
+#physics.producers.ophit.InputModule:                        "opdigi"
+#physics.producers.opflash.InputModule:                      "ophit"
+#physics.producers.opslicer.OpHitModuleLabel:                "ophit"
+
+#physics.producers.pandoracalodE.TrackModuleLabel:             "pandoraTrack"
+#physics.producers.pandoracalodE.SpacePointModuleLabel:        "pandora"
+#physics.producers.pandoracalodE.T0ModuleLabel:                ""
+#physics.producers.pandoracalodE.MakeTree:                     false
+#physics.producers.pandoracalodE.CorrectSCE:                     false
+#physics.producers.pandorapiddE.CalorimetryModuleLabel:        "pandoracaloSCE"
+#physics.producers.pandorapiddE.TrackModuleLabel:              "pandoraTrack"
+#physics.producers.pandoracalidE.CalorimetryModuleLabel:           "pandoracaloSCE"
+#physics.producers.pandoracalidE.TrackModuleLabel:                 "pandoraTrack"
+#physics.producers.pandoracalipiddE.CalorimetryModuleLabel:        "pandoracaliSCE"
+#physics.producers.pandoracalipiddE.TrackModuleLabel:              "pandoraTrack"
+#physics.producers.pandoracalidE.CorrectSCE:              true
+#
+#physics.producers.pandoracalodx.TrackModuleLabel:             "pandoraTrack"
+#physics.producers.pandoracalodx.SpacePointModuleLabel:        "pandora"
+#physics.producers.pandoracalodx.T0ModuleLabel:                ""
+#physics.producers.pandoracalodx.MakeTree:                     false
+#physics.producers.pandorapiddx.CalorimetryModuleLabel:        "pandoracaloSCE"
+#physics.producers.pandorapiddx.TrackModuleLabel:              "pandoraTrack"
+#physics.producers.pandoracalidx.CalorimetryModuleLabel:           "pandoracaloSCE"
+#physics.producers.pandoracalidx.TrackModuleLabel:                 "pandoraTrack"
+#physics.producers.pandoracalipiddx.CalorimetryModuleLabel:        "pandoracaliSCE"
+#physics.producers.pandoracalipiddx.TrackModuleLabel:              "pandoraTrack"
+#physics.producers.pandoracalidx.CorrectSCE:              false
 
 # Use channel map service for data
 services.PdspChannelMapService:        @local::pdspchannelmap
