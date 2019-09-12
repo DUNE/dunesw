@@ -70,8 +70,8 @@ genie_phyopt     v3_00_04
 cetbuildtools	 v7_12_01	-	only_for_build
 dune_raw_data    v1_17_35
 #caffe            DISCONTINUED   -       optional
-nusystematics    v00_05_03
-systematicstools v00_03_04
+nusystematics    v00_06_00
+systematicstools v00_04_00
 dune_oslibs      v1_0_0         -       optional
 end_product_list
 
