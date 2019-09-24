@@ -89,6 +89,8 @@ if(DEFINED ENV{TENSORFLOW_DIR})
   cet_find_library(TENSORFLOW NAMES tensorflow-core PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
   cet_find_library(PROTOBUF NAMES protobuf PATHS ENV PROTOBUF_LIB NO_DEFAULT_PATH )
 endif()
+# artdaq_core Utility library
+cet_find_library( ARTDAQ-CORE_UTILITIES NAMES artdaq-core_Utilities PATHS ENV ARTDAQ_CORE_LIB )
 
 # macros for dictionary and simple_plugin
 include(ArtDictionary)
