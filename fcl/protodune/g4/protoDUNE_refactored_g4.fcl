@@ -65,11 +65,15 @@ physics:
     rns: {
       module_type: "RandomNumberSaver"
     }
-    elecDrift:  { module_type:        "SimDriftElectrons"
-   	 SimulationLabel:        "largeant:LArG4DetectorServicevolTPCActive"
-   	 StoreDriftedElectronClusters: false #high memory consumption
-    }
-    
+    # elecDrift:  { module_type:        "SimDriftElectrons"
+    #      SimulationLabel:        "largeant:LArG4DetectorServicevolTPCActive"
+    #      StoreDriftedElectronClusters: false #high memory consumption
+    # }
+    ionization: {
+      module_type: "larsim/ElectronDrift/ShiftEdepSCE"
+      EDepTag: "largeant:LArG4DetectorServicevolTPCActive"
+      MakeAnaTree: false
+    }  
   }
 
   analyzers: {
@@ -92,7 +96,7 @@ physics:
 
  simulate: [  largeant,
               rns,
-              elecDrift ] 
+              ionization ] 
 
  stream1: [ out1 ]
 
