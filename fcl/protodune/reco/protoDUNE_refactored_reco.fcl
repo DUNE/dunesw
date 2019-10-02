@@ -1,6 +1,7 @@
 //#include "services_dune.fcl"
 #include "services_refactored_pdune.fcl"
 #include "caldata_dune.fcl"
+#include "wirecell_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
 #include "cluster_dune.fcl"
@@ -43,7 +44,7 @@ services.Geometry.ROOT: "protodune_v7.gdml"
 
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant" 
-services.BackTrackerService.BackTracker.SimChannelModuleLabel: "elecDrift" 
+services.BackTrackerService.BackTracker.SimChannelModuleLabel: "simpleSC" 
 
 #source is now a root file
 source:
@@ -61,7 +62,7 @@ physics: {
 
   filters: {
     trigfilter:  @local::pdsp_trigfilter_all
-    #nhitsfilter: @local::standard_numberofhitsfilter
+    nhitsfilter: @local::standard_numberofhitsfilter
   }
 
   producers: {
@@ -69,6 +70,9 @@ physics: {
     rns:                 { module_type: RandomNumberSaver }
     # convert raw::RawDigit to recob::wire
     caldata:            @local::producer_adcprep
+    # WireCell
+    wclsdatasp:         @local::protodunespdata_wctsp
+    digitwire:          @local::protodunespdata_digitwire
     # actual hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
     fasthit:            @local::dunefd_fasthitfinder
@@ -123,10 +127,12 @@ physics: {
           ##ophit, opflash, opslicer,
           #TPC wire signals      
           caldata,
+          wclsdatasp,
+          digitwire,
           #hit reconstruction
           gaushit, #fasthit, 
           # filter out events with too many hits for timely reconstruction
-          ##nhitsfilter,
+          nhitsfilter,
           #space point solver
           reco3d,
           #real disambiguation
@@ -186,6 +192,8 @@ outputs:
 
 ### Here, we overwrite ALL module labels with the ones defined above.
 services.DetectorPropertiesService.Electronlifetime: 35000
+
+physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 
 physics.producers.linecluster.HitFinderModuleLabel:    "hitpdune"
 
