@@ -44,7 +44,7 @@ services.Geometry.ROOT: "protodune_v7.gdml"
 
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant" 
-services.BackTrackerService.BackTracker.SimChannelModuleLabel: "simpleSC" 
+services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC" 
 
 #source is now a root file
 source:
@@ -69,9 +69,10 @@ physics: {
     # random number saver
     rns:                 { module_type: RandomNumberSaver }
     # convert raw::RawDigit to recob::wire
-    caldata:            @local::producer_adcprep
+    # caldata:            @local::producer_adcprep
     # WireCell
-    wclsdatasp:         @local::protodunespdata_wctsp
+    # wclsdatasp:         @local::protodunespdata_wctsp
+    wclsdatanfsp:         @local::protodunespdata_nfsp
     digitwire:          @local::protodunespdata_digitwire
     # actual hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
@@ -120,14 +121,15 @@ physics: {
 #	anodepiercerst0:	@local::T0RecoAnodePiercers
   }
 
+
   #define the producer and filter modules for this path, order matters, 
   #filters reject all following items.  see lines starting physics.producers below
   reco: [ rns, 
           #optical hits and flashes
           ##ophit, opflash, opslicer,
           #TPC wire signals      
-          caldata,
-          wclsdatasp,
+          # caldata,
+          wclsdatanfsp,
           digitwire,
           #hit reconstruction
           gaushit, #fasthit, 
@@ -193,11 +195,17 @@ outputs:
 ### Here, we overwrite ALL module labels with the ones defined above.
 services.DetectorPropertiesService.Electronlifetime: 35000
 
-physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+# physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+physics.producers.digitwire.inSigTag: "wclsdatanfsp:gauss:"
+
+physics.producers.gaushit.CalDataModuleLabel: "digitwire"
 
 physics.producers.linecluster.HitFinderModuleLabel:    "hitpdune"
 
+physics.producers.emtrkmichelid.WireLabel: "digitwire"
+
 physics.producers.pmtrack.HitModuleLabel:                         "linecluster"
+physics.producers.pmtrack.WireModuleLabel:                        "digitwire"
 physics.producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
 physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:       0.63
 physics.producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:       3
@@ -238,8 +246,8 @@ physics.producers.calo.SpacePointModuleLabel:          "costrk"
 
 #Pandora configurations
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
-physics.producers.pandora.GeantModuleLabel:                 "elecDrift"
-physics.producers.pandoraWriter.GeantModuleLabel:           "elecDrift"
+physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
+physics.producers.pandoraWriter.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
 
 physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
 physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
