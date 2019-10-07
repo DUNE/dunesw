@@ -1,4 +1,5 @@
 #include "services_refactored_pdune.fcl"
+#include "services_dune.fcl"
 //#include "largeantmodules_dune.fcl"
 //#include "photpropservices_dune.fcl"
 //#include "opticaldetectormodules_dune.fcl"
@@ -39,7 +40,9 @@ services:
   ParticleListAction:{service_type:  "ParticleListActionService"}
 }
 
-#services.PhotonVisibilityService.ParametrisedTimePropagation: false // this is still not supported in the new code
+services.PhotonVisibilityService:                              @local::protodunev4_photonvisibilityservice
+services.LArG4Parameters.UseLitePhotons:                       true
+
 services.Geometry.GDML: "protodune_v7.gdml"
 services.Geometry.ROOT: "protodune_v7.gdml"
 
@@ -65,15 +68,32 @@ physics:
     rns: {
       module_type: "RandomNumberSaver"
     }
-    # elecDrift:  { module_type:        "SimDriftElectrons"
-    #      SimulationLabel:        "largeant:LArG4DetectorServicevolTPCActive"
-    #      StoreDriftedElectronClusters: false #high memory consumption
-    # }
+
+    IonAndScint:
+    {
+        module_type:           "IonAndScint"
+        SimulationLabel:         "largeant:LArG4DetectorServicevolTPCActive"
+        ISCalcAlg:               "NEST"
+//        ISCalcAlg:               "Separate"
+    }
+
+    PDFastSim:
+    {
+       module_type:             "PDFastSimPVS"
+//       module_type:             "PDFastSimPAR"
+       SimulationLabel:          "IonAndScint:NEST"
+//       SimulationLabel:          "IonAndScint:Seperate"
+       DoSlowComponent:          "true"
+       RiseTimeFast:             0.0
+       RiseTimeSlow:             0.0
+    }
+
     ionization: {
       module_type: "larsim/ElectronDrift/ShiftEdepSCE"
-      EDepTag: "largeant:LArG4DetectorServicevolTPCActive"
+      EDepTag: "IonAndScint:NEST"
       MakeAnaTree: false
     }  
+
   }
 
   analyzers: {
@@ -92,13 +112,34 @@ physics:
     SimDriftedElectronClusterAna: { module_type: SimDriftedElectronClusterAna
   	  EDepModuleLabel:        "elecDrift"
     }		   
+
+    ISCalcAna:
+    {
+        module_type:             ISCalcAna
+        SimulationLabel:         "IonAndScint:NEST"
+//       SimulationLabel:         "IonAndScint:Seperate"
+    }
+    
+    SimPh:
+    {
+        module_type:             "SimPhotonCounter"
+        Verbosity:               1
+        InputModule:             "PDFastSimPVS:pvs" 
+        MakeAllPhotonsTree:      true
+        MakeDetectedPhotonsTree: true
+        MakeOpDetsTree:          true
+        MakeOpDetEventsTree:     true
+    }
+
 }
 
  simulate: [  largeant,
               rns,
+              IonAndScint,
+              PDFastSim,
               ionization ] 
 
- stream1: [ out1 ]
+ stream1: [ out1, ISCalcAna, SimPh ]
 
 # stream1:  [  out1,
 #              CheckSimEnergyDeposit,
