@@ -1,0 +1,15 @@
+# apa7_tools_dune.fcl
+
+# David Adams
+# October 2019
+#
+# Collect all tool definitions for APA 7 in the coldbox.
+
+#include "detsimtools_dune.fcl"
+#include "dunecommon_tools.fcl"
+#include "pdsp_decoder.fcl"
+#include "protodune_dataprep_tools.fcl"
+##include "stickycodes_apa7warm.fcl"
+##include "calibs_pdsp.fcl"
+##include "peds_pdsp.fcl"
+##include "badevents_pdsp.fcl"
