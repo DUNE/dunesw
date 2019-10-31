@@ -15,6 +15,8 @@ services:
                         @table::dunefd_simulation_services
 }
 
+### Use the 1x2x6 geometry ###
+services.Geometry: @local::dune10kt_1x2x6_geo
 
 #source is now a root file
 source:

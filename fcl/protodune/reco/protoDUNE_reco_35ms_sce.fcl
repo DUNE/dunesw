@@ -1,0 +1,8 @@
+#include "protoDUNE_reco.fcl"
+
+services.DetectorPropertiesService.Electronlifetime: 35000
+
+services.SpaceCharge.CalibrationInputFilename: "SpaceChargeProtoDUNE/dispOutput_ProtoDUNESP_E500.root"
+services.SpaceCharge.RepresentationType: "Voxelized"
+services.SpaceCharge.EnableCalEfieldSCE: true
+services.SpaceCharge.EnableCalSpatialSCE: true

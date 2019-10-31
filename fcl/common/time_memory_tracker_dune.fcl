@@ -1,0 +1,19 @@
+BEGIN_PROLOG
+
+dune_time_tracker: { 
+  printSummary : true
+  dbOutput     : {
+    filename   :  "time.db"
+    overwrite  :  true
+  }
+}
+
+dune_memory_tracker: {
+  includeMallocInfo : true
+  dbOutput     : {
+    filename   :  "mem.db"
+    overwrite  :  true
+  }
+}
+
+END_PROLOG

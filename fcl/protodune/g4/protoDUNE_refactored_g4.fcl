@@ -1,0 +1,170 @@
+#include "services_refactored_pdune.fcl"
+#include "services_dune.fcl"
+//#include "largeantmodules_dune.fcl"
+//#include "photpropservices_dune.fcl"
+//#include "opticaldetectormodules_dune.fcl"
+
+process_name: G4
+
+services:
+{
+  TFileService: { fileName: "g4_protoDUNE_hist.root" }
+  TimeTracker:       {}
+  MemoryTracker:     {} # default is one
+  RandomNumberGenerator: {} #ART native random number generator
+  message:      @local::standard_info
+  @table::protodune_simulation_services
+
+  DetectorHolder: {}
+  ActionHolder: {}
+  PhysicsListHolder: {} 
+  PhysicsList: { 
+    PhysicsListName: "QGSP_BERT"
+    DumpList: true
+    enableCerenkov: false
+    enableScintillation: true
+    ScintillationByParticleType: false
+    enableAbsorption: false   
+    enableRayleigh: false     
+    enableMieHG: false       
+    enableBoundary: false    
+    enableWLS: false
+  }
+  LArG4Detector : 
+  {
+    category: "world"
+    gdmlFileName_ : "protodune_v7_refactored_nowires.gdml"
+  }
+
+  MCTruthEventAction: {service_type: "MCTruthEventActionService"}
+  ParticleListAction:{service_type:  "ParticleListActionService"}
+}
+
+services.PhotonVisibilityService:                              @local::protodunev4_photonvisibilityservice
+services.LArG4Parameters.UseLitePhotons:                       true
+
+services.Geometry.GDML: "protodune_v7.gdml"
+services.Geometry.ROOT: "protodune_v7.gdml"
+
+source:
+{
+  module_type: RootInput
+  maxEvents:  30000 
+  fileNames: ["gen_protoDUNE.root"]
+}
+
+physics:
+{
+
+  producers:
+  {
+
+    #retain largeant name for compatibility
+    largeant: { module_type: "larg4Main"
+                enableVisualization: false
+                macroPath: ".:./macros"
+                visMacro: "vis.mac"
+    }
+    rns: {
+      module_type: "RandomNumberSaver"
+    }
+
+    IonAndScint:
+    {
+        module_type:           "IonAndScint"
+        SimulationLabel:         "largeant:LArG4DetectorServicevolTPCActive"
+        ISCalcAlg:               "NEST"
+//        ISCalcAlg:               "Separate"
+    }
+
+    PDFastSim:
+    {
+       module_type:             "PDFastSimPVS"
+//       module_type:             "PDFastSimPAR"
+       SimulationLabel:          "IonAndScint:NEST"
+//       SimulationLabel:          "IonAndScint:Seperate"
+       DoSlowComponent:          "true"
+       RiseTimeFast:             0.0
+       RiseTimeSlow:             0.0
+    }
+
+    ionization: {
+      module_type: "larsim/ElectronDrift/ShiftEdepSCE"
+      EDepTag: "IonAndScint:NEST"
+      MakeAnaTree: false
+    }  
+
+  }
+
+  analyzers: {
+    CheckSimEnergyDeposit: {   module_type: CheckSimEnergyDeposit
+      hist_dir: "HistoDir" 
+    }
+    CheckMCParticle: {   module_type: CheckMCParticle
+      hist_dir: "HistoDir2" 
+    }
+    CheckAuxDetHit: {   module_type: CheckAuxDetHit
+      hist_dir: "HistoDir3" 
+    }
+    ISCalculationAna: {             module_type: ISCalculationAna
+   	  EDepModuleLabel:        "largeant:LArG4DetectorServicevolTPCActive"
+    }
+    SimDriftedElectronClusterAna: { module_type: SimDriftedElectronClusterAna
+  	  EDepModuleLabel:        "elecDrift"
+    }		   
+
+    ISCalcAna:
+    {
+        module_type:             ISCalcAna
+        SimulationLabel:         "IonAndScint:NEST"
+//       SimulationLabel:         "IonAndScint:Seperate"
+    }
+    
+    SimPh:
+    {
+        module_type:             "SimPhotonCounter"
+        Verbosity:               1
+        InputModule:             "PDFastSimPVS:pvs" 
+        MakeAllPhotonsTree:      true
+        MakeDetectedPhotonsTree: true
+        MakeOpDetsTree:          true
+        MakeOpDetEventsTree:     true
+    }
+
+}
+
+ simulate: [  largeant,
+              rns,
+              IonAndScint,
+              PDFastSim,
+              ionization ] 
+
+ stream1: [ out1, ISCalcAna, SimPh ]
+
+# stream1:  [  out1,
+#              CheckSimEnergyDeposit,
+#              CheckMCParticle,
+#              CheckAuxDetHit,
+#              ISCalculationAna,
+#              SimDriftedElectronClusterAna  ]
+
+ trigger_paths: [  simulate ] 
+ end_paths:     [  stream1  ]  
+
+}
+
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_g4.root"
+   dataTier:    "simulated"
+   outputCommands: [ "keep *" ]
+   compressionLevel: 1 #zlib argument (0-9) 
+   basketSize: 8192 #[Byte] buffer size at 8k
+   splitLevel: 0 #reduces number of buffers
+   treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
+ }
+}
+
