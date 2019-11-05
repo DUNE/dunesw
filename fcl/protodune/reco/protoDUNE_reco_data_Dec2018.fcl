@@ -102,7 +102,7 @@ protoDUNE_rawdecoding: [ timingrawdecoder,
 
 protoDUNE_reco_data: [ caldata,
                        wclsdatasp,
-                       digitwire,
+#                       digitwire,
                        gaushit,
                        nhitsfilter,
                        reco3d,
@@ -143,7 +143,9 @@ protoDUNE_reco_data_producers.pmtrack.ClusterModuleLabel: "linecluster"
 protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.TrackLikeThreshold: 0.0
 
 # Basic noise mitigation
-protoDUNE_reco_data_producers.gaushit.CalDataModuleLabel: "digitwire"
+#protoDUNE_reco_data_producers.gaushit.CalDataModuleLabel: "digitwire"
+protoDUNE_reco_data_producers.gaushit.CalDataModuleLabel: "wclsdatasp:gauss"
+#protoDUNE_reco_data_producers.gaushit.MakeRawDigitAssns:  false
 protoDUNE_reco_data_producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 3.0
 protoDUNE_reco_data_producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 3.0
 protoDUNE_reco_data_producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 3.0
