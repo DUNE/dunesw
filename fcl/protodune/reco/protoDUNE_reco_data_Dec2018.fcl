@@ -38,7 +38,7 @@ protoDUNE_reco_data_producers:
 {
     ### Reconstruction Chain
     # TPC wire signals
-    caldata:            @local::producer_adcprep
+    caldata:            @local::producer_adcprep_byapa
     # WireCell
     wclsdatasp:         @local::protodunespdata_wctsp
     digitwire:          @local::protodunespdata_digitwire
@@ -99,6 +99,15 @@ protoDUNE_rawdecoding: [ timingrawdecoder,
                          ctbrawdecoder,
                          beamevent
                        ]
+
+#TPC decoding is now done in dataprep
+protoDUNE_notpcdecoding: [ timingrawdecoder,
+                           ssprawdecoder,
+                           #tpcrawdecoder,
+                           crtrawdecoder,
+                           ctbrawdecoder,
+                           beamevent
+                         ]
 
 protoDUNE_reco_data: [ caldata,
                        wclsdatasp,
