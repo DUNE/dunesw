@@ -69,7 +69,7 @@ physics:
     }
 
     #Create path to run module
-    decode: [ @sequence::protoDUNE_rawdecoding,
+    decode: [ @sequence::protoDUNE_notpcdecoding,
               @sequence::protoDUNE_reco_data
           ]
 
@@ -92,7 +92,7 @@ outputs:
         fileName: "%ifb_reco.root"
         dataTier:    "full-reconstructed"
 #        outputCommands: [ "drop *", "keep raw::RawDigitrecob*_*_*_*", "keep recob::*_*_*_*" ]
-        outputCommands: [ "keep *", "drop artdaq::Fragments_*_*TPC_*", "drop artdaq::Fragments_*_*FELIX_*", "drop raw::RawDigit*_*_*_*", "drop *_caldata_*_*", "drop *_wclsdatasp_*_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
+        outputCommands: [ "keep *", "drop artdaq::Fragments_*_*TPC_*", "drop artdaq::Fragments_*_*FELIX_*", "drop raw::RawDigit*_*_*_*", "drop recob::Wires_caldata_dataprep_*", "drop *_wclsdatasp_wiener_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
 #       outputCommands: [ "keep *", "drop artdaq::Fragments_*_*TPC_*", "drop artdaq::Fragments_*_*FELIX_*" ]
   #      fileProperties: {
   #          maxInputFiles: 1
