@@ -22,7 +22,7 @@ protodune_emtrkmichelid.ClusterModuleLabel:           "pandora"
 protodune_emtrkmichelid.Views:                        []
 
 protodunespdata_emtrkmichelid:                        @local::protodune_emtrkmichelid
-protodunespdata_emtrkmichelid.WireLabel:              "digitwire"
+protodunespdata_emtrkmichelid.WireLabel:              "wclsdatasp:gauss"
 
 END_PROLOG
 
