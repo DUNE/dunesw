@@ -112,13 +112,13 @@ physics: {
     pmtrajfitcalo:      @local::pdune_sp_calomc
     pmtrajfitpid:       @local::standard_chi2pid
 #   photon detector reconstruction
-#    ophit:              @local::protodune_ophit 
-#    opflash:            @local::protodune_opflash
-#    opslicer:           @local::protodune_opslicer
+    ophit:              @local::protodune_ophit 
+    opflash:            @local::protodune_opflash
+    opslicer:           @local::protodune_opslicer
 #    crtreco: @local::TwoCRTMatching_producer
 #     crttag: @local::SingleCRTMatching_producer
 #	Anode piercing tracks t0 reconstruction
-#	anodepiercerst0:	@local::T0RecoAnodePiercers
+    anodepiercerst0:	@local::T0RecoAnodePiercers
   }
 
 
@@ -126,7 +126,7 @@ physics: {
   #filters reject all following items.  see lines starting physics.producers below
   reco: [ rns, 
           #optical hits and flashes
-          ##ophit, opflash, opslicer,
+          ophit, opflash, opslicer,
           #TPC wire signals      
           # caldata,
           wclsdatanfsp,
@@ -149,7 +149,7 @@ physics: {
           pandoracaloSCE, pandorapidSCE, #pandoracaliSCE, pandoracalipidSCE,
           pandoraShowercalo, pandoraShowercaloSCE,
           #feature labeling
-          emtrkmichelid
+          emtrkmichelid,
           #pandoracalodE, pandorapiddE, pandoracalidE, pandoracalipiddE,
           #pandoracalodx, pandorapiddx, pandoracalidx, pandoracalipiddx,
           #pmatrack
@@ -158,7 +158,7 @@ physics: {
           #shower reconstruction
           #blurredcluster, emshower, emshower3d, mergeemshower3d
 	   	    #crttag,crtreco,
-		      #anodepiercerst0
+          anodepiercerst0
         ]
  
   #define the output stream, there could be more than one if using filters 
@@ -279,9 +279,9 @@ physics.producers.pandoracalipidSCE.TrackModuleLabel:              "pandoraTrack
 physics.producers.pandoracaliSCE.CorrectSCE:              true
 physics.producers.pandoraShowercaloSCE.CorrectSCE:        true
 ##Optical detector configuration
-#physics.producers.ophit.InputModule:                        "opdigi"
-#physics.producers.opflash.InputModule:                      "ophit"
-#physics.producers.opslicer.OpHitModuleLabel:                "ophit"
+physics.producers.ophit.InputModule:                        "opdigi"
+physics.producers.opflash.InputModule:                      "ophit"
+physics.producers.opslicer.OpHitModuleLabel:                "ophit"
 
 # Use channel map service for data
 services.PdspChannelMapService:        @local::pdspchannelmap
