@@ -4,6 +4,8 @@
 //#include "photpropservices_dune.fcl"
 //#include "opticaldetectormodules_dune.fcl"
 
+#include "scintillationtime_tool.fcl"
+
 process_name: G4
 
 services:
@@ -73,26 +75,24 @@ physics:
     {
         module_type:           "IonAndScint"
         SimulationLabel:         "largeant:LArG4DetectorServicevolTPCActive"
-        ISCalcAlg:               "NEST"
-//        ISCalcAlg:               "Separate"
+        // ISCalcAlg:               "NEST"
+        ISCalcAlg:               "Separate"
     }
 
     PDFastSim:
     {
        module_type:             "PDFastSimPVS"
-//       module_type:             "PDFastSimPAR"
-       SimulationLabel:          "IonAndScint:NEST"
-//       SimulationLabel:          "IonAndScint:Seperate"
-       DoSlowComponent:          "true"
-       RiseTimeFast:             0.0
-       RiseTimeSlow:             0.0
+       // module_type:             "PDFastSimPAR"
+       SimulationLabel:          "IonAndScint"
+       DoSlowComponent:          true
+       ScintTimeTool:            @local::ScintTimeLAr
     }
 
-    ionization: {
-      module_type: "larsim/ElectronDrift/ShiftEdepSCE"
-      EDepTag: "IonAndScint:NEST"
-      MakeAnaTree: false
-    }  
+    # ionization: {
+    #   module_type: "larsim/ElectronDrift/ShiftEdepSCE"
+    #   EDepTag: "largeant:LArG4DetectorServicevolTPCActive"
+    #   MakeAnaTree: false
+    # }  
 
   }
 
@@ -116,14 +116,15 @@ physics:
     ISCalcAna:
     {
         module_type:             ISCalcAna
-        SimulationLabel:         "IonAndScint:NEST"
-//       SimulationLabel:         "IonAndScint:Seperate"
+        SimulationLabel:         "largeant:LArG4DetectorServicevolTPCActive"
+        // ISCalcAlg:               "NEST"
+        ISCalcAlg:               "Separate"
     }
     
     SimPh:
     {
         module_type:             "SimPhotonCounter"
-        Verbosity:               1
+        Verbosity:               5
         InputModule:             "PDFastSimPVS:pvs" 
         MakeAllPhotonsTree:      true
         MakeDetectedPhotonsTree: true
@@ -136,8 +137,8 @@ physics:
  simulate: [  largeant,
               rns,
               IonAndScint,
-              PDFastSim,
-              ionization ] 
+              PDFastSim ] #,
+              # ionization ] 
 
  stream1: [ out1, ISCalcAna, SimPh ]
 
