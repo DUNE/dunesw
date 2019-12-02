@@ -21,19 +21,20 @@ defaultqual e17
 fcldir  product_dir job
 gdmldir product_dir gdml
 fwdir  product_dir config_data
+wpdir product_dir wire-cell-cfg
 
 # table fragment to set FW_SEARCH_PATH needed
 # to find gdml files:
 table_fragment_begin
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/scripts)
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/gdml)
-    pathPrepend(FW_SEARCH_PATH, ${DUNE_PARDATA_DIR}/FieldResponse)
+    #pathPrepend(FW_SEARCH_PATH, ${DUNE_PARDATA_DIR}/FieldResponse)
     # Add StashCache to the FW_SEARCH_PATH
     pathPrepend(FW_SEARCH_PATH, /cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/)
     pathPrepend(FHICL_FILE_PATH, .:./job)
     # WireCellData
-    envSet(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
-    pathPrepend(WIRECELL_PATH, ${UPS_PROD_DIR}/wire-cell-cfg)
+    #envSet(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
+    #pathPrepend(WIRECELL_PATH, ${UPS_PROD_DIR}/wire-cell-cfg)
 #    envSet(DBIWSPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
 #    envSet(DBIWSURL, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
 #    envSet(DBIWSURLINT, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
