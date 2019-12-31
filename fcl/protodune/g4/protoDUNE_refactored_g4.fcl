@@ -181,8 +181,8 @@ outputs:
    module_type: RootOutput
    fileName:    "%ifb_g4.root"
    dataTier:    "simulated"
-   outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_*_*_*"]
-   #outputCommands: [ "keep *" ]
+   #outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_*_*_*"]
+   outputCommands: [ "keep *" ]
    fastCloning: false #will fail if the split level is not the same as for the gen stage, so turn it off
    compressionLevel: 1 #zlib argument (0-9) 
    basketSize: 8192 #[Byte] buffer size at 8k
