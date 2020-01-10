@@ -57,7 +57,7 @@ services:
   MCTruthEventAction: {service_type: "MCTruthEventActionService"}
   ParticleListAction: {service_type:  "ParticleListActionService"
                        EnergyCut: 1e-5 # Kinetic Energy cut in [MeV]
-                       keepEMShowerDaughters: false
+                       keepEMShowerDaughters: true
                        storeTrajectories: true
                       }
 }

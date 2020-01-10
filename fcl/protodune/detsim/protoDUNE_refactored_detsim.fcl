@@ -2,7 +2,7 @@
 //#include "services_dune.fcl"
 #include "detsimmodules_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
-//#include "CRT.fcl"
+#include "CRT.fcl"
 
 #include "tools_dune.fcl"
 
@@ -63,7 +63,7 @@ physics:
    }
 
    opdigi:         @local::protodune_opdigi
-   #crt:            @local::CRTSim_standard
+   crt:            @local::CRTSimRefac_standard
    rns:            { module_type: "RandomNumberSaver" }
  }
  
@@ -71,8 +71,8 @@ physics:
  simulate: [ rns, 
              # TPC simulation
              tpcrawdecoder,
-             # OpDet simulation
-             opdigi ]
+             # OpDet and CRT simulation
+             opdigi, crt] 
  
  stream1:  [ out1 ]
 
