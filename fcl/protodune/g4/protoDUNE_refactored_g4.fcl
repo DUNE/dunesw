@@ -108,66 +108,50 @@ physics:
        ScintTimeTool:          @local::ScintTimeLAr
     }
 
-    # ionization: {
-    #   module_type: "larsim/ElectronDrift/ShiftEdepSCE"
-    #   EDepTag: "largeant:LArG4DetectorServicevolTPCActive"
-    #   MakeAnaTree: false
-    # }  
-
   }
 
   analyzers: {
-    CheckSimEnergyDeposit: {   module_type: CheckSimEnergyDeposit
-      hist_dir: "HistoDir" 
-    }
-    CheckMCParticle: {   module_type: CheckMCParticle
-      hist_dir: "HistoDir2" 
-    }
-    CheckAuxDetHit: {   module_type: CheckAuxDetHit
-      hist_dir: "HistoDir3" 
-    }
-    ISCalculationAna: {             module_type: ISCalculationAna
-   	  EDepModuleLabel:        "largeant:LArG4DetectorServicevolTPCActive"
-    }
-    SimDriftedElectronClusterAna: { module_type: SimDriftedElectronClusterAna
-  	  EDepModuleLabel:        "elecDrift"
-    }		   
+    # CheckSimEnergyDeposit: {   module_type: CheckSimEnergyDeposit
+    #   hist_dir: "HistoDir" 
+    # }
+    # CheckMCParticle: {   module_type: CheckMCParticle
+    #   hist_dir: "HistoDir2" 
+    # }
+    # CheckAuxDetHit: {   module_type: CheckAuxDetHit
+    #   hist_dir: "HistoDir3" 
+    # }
+    # ISCalculationAna: {             module_type: ISCalculationAna
+    #       EDepModuleLabel:        "largeant:LArG4DetectorServicevolTPCActive"
+    # }
+    # SimDriftedElectronClusterAna: { module_type: SimDriftedElectronClusterAna
+    #       EDepModuleLabel:        "elecDrift"
+    # }		   
 
-    ISCalcAna:
-    {
-        module_type:             ISCalcAna
-        SimulationLabel:         "largeant:LArG4DetectorServicevolTPCActive"
-        // ISCalcAlg:               "NEST"
-        ISCalcAlg:               "Separate"
-    }
-    
-    SimPh:
-    {
-        module_type:             "SimPhotonCounter"
-        Verbosity:               5
-        InputModule:             "PDFastSimPVS:pvs" 
-        MakeAllPhotonsTree:      true
-        MakeDetectedPhotonsTree: true
-        MakeOpDetsTree:          true
-        MakeOpDetEventsTree:     true
-    }
+    # ISCalcAna:
+    # {
+    #     module_type:             ISCalcAna
+    #     SimulationLabel:         "largeant:LArG4DetectorServicevolTPCActive"
+    #     // ISCalcAlg:               "NEST"
+    #     ISCalcAlg:               "Separate"
+    # }
+    # 
+    # SimPh:
+    # {
+    #     module_type:             "SimPhotonCounter"
+    #     Verbosity:               5
+    #     InputModule:             "PDFastSimPVS:pvs" 
+    #     MakeAllPhotonsTree:      true
+    #     MakeDetectedPhotonsTree: true
+    #     MakeOpDetsTree:          true
+    #     MakeOpDetEventsTree:     true
+    # }
 
-}
+  }
 
- simulate: [  largeant,
-              rns,
-              IonAndScint,
-              PDFastSim ] #,
-              # ionization ] 
+ simulate: [  rns, largeant, IonAndScint, PDFastSim ]
 
- stream1: [ out1, ISCalcAna, SimPh ]
+ stream1: [ out1 ]
 
-# stream1:  [  out1,
-#              CheckSimEnergyDeposit,
-#              CheckMCParticle,
-#              CheckAuxDetHit,
-#              ISCalculationAna,
-#              SimDriftedElectronClusterAna  ]
 
  trigger_paths: [  simulate ] 
  end_paths:     [  stream1  ]  
