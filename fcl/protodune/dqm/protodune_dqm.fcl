@@ -34,3 +34,8 @@ services.RawDigitPrepService.AdcChannelToolNames: [
   "rawAdcDetectorPlotColl",
   "pd_evtviewNfemb"
 ]
+
+# Remove bad channels in detector display.
+tools.rawAdcDetectorPlotColl.SkipBadChannels: true
+tools.rawAdcDetectorPlotColl.Title: "Cleaned raw ADC collection view"
+
