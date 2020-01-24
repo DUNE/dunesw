@@ -63,13 +63,13 @@ table_fragment_end
 product          version
 larsoft          v08_41_00
 artdaq_core	 v3_05_09
-duneutil         v08_39_00	-	optional
-lbne_raw_data 	 v1_04_43
+duneutil         v08_41_00	-	optional
+lbne_raw_data 	 v1_04_44
 dune_pardata	 v01_54_01
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04
 cetbuildtools	 v7_14_00	-	only_for_build
-dune_raw_data    v1_17_43
+dune_raw_data    v1_17_44
 #caffe            DISCONTINUED   -       optional
 nusystematics    v00_09_00
 systematicstools v00_06_00
@@ -80,15 +80,15 @@ end_product_list
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
-qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     dune_raw_data	        nusystematics       systematicstools    dune_oslibs  notes
-c7:py2:debug	c7:py2:debug	c7:py2:debug	c7:py2:s94:debug     c7:py2:nu:s94:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s94:debug         c7:py2:debug            c7:py2:debug             -nq-
-c7:py2:prof	c7:py2:prof		c7:py2:prof		c7:py2:s94:prof	 c7:py2:nu:s94:prof		-nq-    G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s94:prof          c7:py2:prof             c7:py2:prof              -nq-
-c7:debug	c7:debug	c7:debug	c7:s94:debug     c7:nu:s94:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s94:debug         c7:debug            c7:debug             -nq-
-c7:prof		c7:prof		c7:prof		c7:s94:prof	 c7:nu:s94:prof		-nq-    G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s94:prof          c7:prof             c7:prof              -nq-
-e19:py2:debug	e19:py2:debug	e19:py2:debug	e19:py2:s94:debug    e19:py2:nu:s94:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s94:debug        e19:py2:debug           e19:py2:debug            -nq-
-e19:py2:prof	e19:py2:prof	e19:py2:prof	e19:py2:s94:prof	 e19:py2:nu:s94:prof	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s94:prof         e19:py2:prof            e19:py2:prof             -nq-
-e19:debug	e19:debug	e19:debug	e19:s94:debug    e19:nu:s94:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s94:debug        e19:debug           e19:debug            -nq-
-e19:prof	e19:prof	e19:prof	e19:s94:prof	 e19:nu:s94:prof	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s94:prof         e19:prof            e19:prof             -nq-
+qualifier	larsoft		duneutil	artdaq_core	   lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     dune_raw_data	        nusystematics       systematicstools    dune_oslibs  notes
+c7:py2:debug	c7:py2:debug	c7:py2:debug	c7:py2:s94:debug   c7:nu:s94:debug	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s94:debug    	c7:py2:debug        c7:py2:debug        -nq-
+c7:py2:prof	c7:py2:prof	c7:py2:prof	c7:py2:s94:prof	   c7:nu:s94:prof	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s94:prof     	c7:py2:prof         c7:py2:prof         -nq-
+c7:debug	c7:debug	c7:debug	c7:s94:debug       c7:nu:s94:debug	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s94:debug        c7:debug            c7:debug            -nq-
+c7:prof		c7:prof		c7:prof		c7:s94:prof	   c7:nu:s94:prof	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s94:prof         c7:prof             c7:prof             -nq-
+e19:py2:debug	e19:py2:debug	e19:py2:debug	e19:py2:s94:debug  e19:nu:s94:debug	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s94:debug   	e19:py2:debug       e19:py2:debug       -nq-
+e19:py2:prof	e19:py2:prof	e19:py2:prof	e19:py2:s94:prof   e19:nu:s94:prof	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s94:prof    	e19:py2:prof        e19:py2:prof        -nq-
+e19:debug	e19:debug	e19:debug	e19:s94:debug      e19:nu:s94:debug	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s94:debug       e19:debug           e19:debug           -nq-
+e19:prof	e19:prof	e19:prof	e19:s94:prof	   e19:nu:s94:prof	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s94:prof        e19:prof            e19:prof            -nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
