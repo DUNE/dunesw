@@ -115,8 +115,8 @@ physics: {
     ophit:              @local::protodune_ophit 
     opflash:            @local::protodune_opflash
     opslicer:           @local::protodune_opslicer
-#    crtreco: @local::TwoCRTMatching_producer
-#     crttag: @local::SingleCRTMatching_producer
+    crtreco: @local::TwoCRTMatching_producer
+     crttag: @local::SingleCRTMatching_producer
 #	Anode piercing tracks t0 reconstruction
     anodepiercerst0:	@local::T0RecoAnodePiercers
   }
@@ -157,7 +157,7 @@ physics: {
           #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
           #shower reconstruction
           #blurredcluster, emshower, emshower3d, mergeemshower3d
-	   	    #crttag,crtreco,
+	   	    crttag,crtreco,
           anodepiercerst0
         ]
  
