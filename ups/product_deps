@@ -3,9 +3,9 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 
-parent dunetpc v08_33_00_02
+parent dunetpc v08_41_00
 
-defaultqual e17
+defaultqual e19
 
 # These optional lines define where headers, libraries, and executables go and should
 # be used only if your product does not conform to the defaults.
@@ -21,19 +21,20 @@ defaultqual e17
 fcldir  product_dir job
 gdmldir product_dir gdml
 fwdir  product_dir config_data
+wpdir product_dir wire-cell-cfg
 
 # table fragment to set FW_SEARCH_PATH needed
 # to find gdml files:
 table_fragment_begin
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/scripts)
     pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/gdml)
-    pathPrepend(FW_SEARCH_PATH, ${DUNE_PARDATA_DIR}/FieldResponse)
+    #pathPrepend(FW_SEARCH_PATH, ${DUNE_PARDATA_DIR}/FieldResponse)
     # Add StashCache to the FW_SEARCH_PATH
     pathPrepend(FW_SEARCH_PATH, /cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/)
     pathPrepend(FHICL_FILE_PATH, .:./job)
     # WireCellData
-    envSet(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
-    pathPrepend(WIRECELL_PATH, ${UPS_PROD_DIR}/wire-cell-cfg)
+    #envSet(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
+    #pathPrepend(WIRECELL_PATH, ${UPS_PROD_DIR}/wire-cell-cfg)
 #    envSet(DBIWSPWDFILE, /dune/experts/path/to/proddbpwd/for/writes)
 #    envSet(DBIWSURL, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
 #    envSet(DBIWSURLINT, http://dbdata0vm.fnal.gov:8116/LBNE35tCon/app/)
@@ -60,18 +61,18 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v08_34_00
-artdaq_core	 v3_05_06
-duneutil         v08_34_00	-	optional
-lbne_raw_data 	 v1_04_40
-dune_pardata	 v01_52_00
+larsoft          v08_41_00
+artdaq_core	 v3_05_09
+duneutil         v08_41_00	-	optional
+lbne_raw_data 	 v1_04_45
+dune_pardata	 v01_54_01
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04
-cetbuildtools	 v7_13_02	-	only_for_build
-dune_raw_data    v1_17_39
+cetbuildtools	 v7_14_00	-	only_for_build
+dune_raw_data    v1_17_45
 #caffe            DISCONTINUED   -       optional
-nusystematics    v00_06_03
-systematicstools v00_04_02
+nusystematics    v00_09_00
+systematicstools v00_06_00
 dune_oslibs      v1_0_0         -       optional
 end_product_list
 
@@ -79,15 +80,15 @@ end_product_list
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
-qualifier	larsoft		duneutil	artdaq_core	 lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     dune_raw_data	        nusystematics       systematicstools    dune_oslibs  notes
-c2:py3:debug	c2:py3:debug	c2:py3:debug	c2:py3:s92:debug     c2:py3:nu:s92:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       c2:py3:nu:s92:debug         c2:py3:debug            c2:py3:debug             -nq-
-c2:py3:prof	c2:py3:prof		c2:py3:prof		c2:py3:s92:prof	 c2:py3:nu:s92:prof		-nq-    G1810a0211a:k250:e1000  dkcharmtau       c2:py3:nu:s92:prof          c2:py3:prof             c2:py3:prof              -nq-
-e17:py3:debug	e17:py3:debug	e17:py3:debug	e17:py3:s92:debug    e17:py3:nu:s92:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e17:py3:nu:s92:debug        e17:py3:debug           e17:py3:debug            -nq-
-e17:py3:prof	e17:py3:prof	e17:py3:prof	e17:py3:s92:prof	 e17:py3:nu:s92:prof	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e17:py3:nu:s92:prof         e17:py3:prof            e17:py3:prof             -nq-
-c2:debug	c2:debug	c2:debug	c2:s92:debug     c2:nu:s92:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       c2:nu:s92:debug         c2:debug            c2:debug             -nq-
-c2:prof		c2:prof		c2:prof		c2:s92:prof	 c2:nu:s92:prof		-nq-    G1810a0211a:k250:e1000  dkcharmtau       c2:nu:s92:prof          c2:prof             c2:prof              -nq-
-e17:debug	e17:debug	e17:debug	e17:s92:debug    e17:nu:s92:debug	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e17:nu:s92:debug        e17:debug           e17:debug            -nq-
-e17:prof	e17:prof	e17:prof	e17:s92:prof	 e17:nu:s92:prof	-nq-    G1810a0211a:k250:e1000  dkcharmtau       e17:nu:s92:prof         e17:prof            e17:prof             -nq-
+qualifier	larsoft		duneutil	artdaq_core	   lbne_raw_data	dune_pardata    genie_xsec              genie_phyopt     dune_raw_data	        nusystematics       systematicstools    dune_oslibs  notes
+c7:py2:debug	c7:py2:debug	c7:py2:debug	c7:py2:s94:debug   c7:py2:nu:s94:debug	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s94:debug    c7:py2:debug        c7:py2:debug        -nq-
+c7:py2:prof	c7:py2:prof	c7:py2:prof	c7:py2:s94:prof	   c7:py2:nu:s94:prof	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s94:prof     c7:py2:prof         c7:py2:prof         -nq-
+c7:debug	c7:debug	c7:debug	c7:s94:debug       c7:nu:s94:debug	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s94:debug        c7:debug            c7:debug            -nq-
+c7:prof		c7:prof		c7:prof		c7:s94:prof	   c7:nu:s94:prof	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s94:prof         c7:prof             c7:prof             -nq-
+e19:py2:debug	e19:py2:debug	e19:py2:debug	e19:py2:s94:debug  e19:py2:nu:s94:debug	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s94:debug   e19:py2:debug       e19:py2:debug       -nq-
+e19:py2:prof	e19:py2:prof	e19:py2:prof	e19:py2:s94:prof   e19:py2:nu:s94:prof	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s94:prof    e19:py2:prof        e19:py2:prof        -nq-
+e19:debug	e19:debug	e19:debug	e19:s94:debug      e19:nu:s94:debug	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s94:debug       e19:debug           e19:debug           -nq-
+e19:prof	e19:prof	e19:prof	e19:s94:prof	   e19:nu:s94:prof	-nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s94:prof        e19:prof            e19:prof            -nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:

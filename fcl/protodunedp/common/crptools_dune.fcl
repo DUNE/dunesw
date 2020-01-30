@@ -1,0 +1,16 @@
+# crptools_dune.fcl
+# Vyacheslav Galymov
+# November 2019
+
+# Tools for CRP gain calculation.
+#
+
+tools.lemEfficiency: {
+  tool_type: FclFileFloatArray
+  LogLevel: 1
+  Label: "lem_eff_29102019"
+  DefaultValue: 0.0
+  FileNames: [
+      "crp/protodunedp/lem_efficiency_v29102019.fcl"
+      ]
+}

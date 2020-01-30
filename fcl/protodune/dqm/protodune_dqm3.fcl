@@ -1,0 +1,27 @@
+# protodune_dqm3.fcl
+
+# David Adams
+# November 2019
+#
+# Dataprep tool configuration for protoDUNE DQM with
+# many events to look at channnel performance.
+#
+# User is now expected to provide a top-level fcl file
+# that creates or reads in RawDigits and calls a module
+# (most likely DataPrepModule) that runs the RawDigitPrepService.
+
+services.RawDigitPrepService.AdcChannelToolNames: [
+  "digitReader",
+  "pdsp_sticky_codes_ped",   # Flag sticky codes so they can be excluded in pedestal fit
+  "pd_adcPedestalFit", 
+  "pdmtps_adcChannelPedestalPlotter",
+  "pdmtps_adcChannelPedestalNoisePlotter",
+  "pdmtps_adcChannelPedestalOrfPlotter",
+  "pdmtps_adcChannelPedestalPeakBinExcessPlotter",
+  "pdmtps_adcChannelPedestalRawRmsPlotter",
+  "pdmtps_adcChannelPedestalRawTailPlotter",
+  "pd_evtviewNfemb"
+]
+
+# Set low min ADC RMS so dead channels are clearly visible.
+tools.pd_adcPedestalFit.FitRmsMin: 1.0

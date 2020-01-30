@@ -8,3 +8,4 @@
 #include "dunecommon_tools.fcl"
 #include "dataprep_tools.fcl"
 #include "detsimtools_dune.fcl"
+#include "crptools_dune.fcl"
