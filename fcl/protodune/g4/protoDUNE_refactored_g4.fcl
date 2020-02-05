@@ -51,7 +51,7 @@ services:
     category      : "world"
     gdmlFileName_ : "protodune_v7_refactored_nowires.gdml"
     volumeNames   : ["volTPCActive", "volTPCActiveOuter"] # list of volumes for which the stepLimit should be set
-    stepLimits    : [0.9525, 0.9525] # corresponding stepLimits in mm for the volumes in the volumeNames list
+    stepLimits    : [0.3, 0.3] # corresponding stepLimits in mm for the volumes in the volumeNames list
   }
 
   MCTruthEventAction: {service_type: "MCTruthEventActionService"}
