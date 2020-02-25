@@ -1,25 +1,26 @@
 #include "evd_dune.fcl"
 services.Geometry: @local::iceberg_geo
 
-services.RawDrawingOptions.TPC:                       1 # here is the beam
+services.RawDrawingOptions.TPC:                       1 
 
-services.RawDrawingOptions.TotalTicks:                6000
+services.RawDrawingOptions.TotalTicks:                2000
 services.RecoDrawingOptions.DrawOpFlashes:            0
 services.RecoDrawingOptions.DrawSpacePoints:          1
 services.RecoDrawingOptions.SpacePointModuleLabels:   "[reco3d]"
-services.RecoDrawingOptions.HitModuleLabels:          "[linecluster]"
+#services.RecoDrawingOptions.HitModuleLabels:          "[linecluster]"
+services.RecoDrawingOptions.HitModuleLabels: [linecluster]
+services.RecoDrawingOptions.WireModuleLabels: ["caldata:dataprep"]
 services.RecoDrawingOptions.ClusterModuleLabels:      "[linecluster]"
 services.RecoDrawingOptions.TrackModuleLabels:        "[pmtrack]"
 services.RecoDrawingOptions.VertexModuleLabels:       "[pmtrack]"
 services.DetectorPropertiesService: @local::protodune_detproperties
 services.DetectorClockService:      @local::protodune_detectorclocks
-#services.DetectorPropertiesService.NumberTimeSamples: 10000
-#services.DetectorPropertiesService.ReadOutWindowSize: 10000
+services.DetectorPropertiesService.NumberTimeSamples: 2000
+services.DetectorPropertiesService.ReadOutWindowSize: 2000
 
 services.ColorDrawingOptions.RawQHigh: [100]
 services.ColorDrawingOptions.RawQLow:  [-50]
 services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
 services.RawDrawingOptions.PedestalOption: 1
 services.RawDrawingOptions.MinimumSignal: 5.0
-services.RecoDrawingOptions.TrackModuleLabels:          ["pandoraTrack"]
-services.RecoDrawingOptions.VertexModuleLabels:         ["pandora"]
+
