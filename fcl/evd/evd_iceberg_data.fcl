@@ -1,5 +1,9 @@
+#include "iceberg_bad_and_noisy_channels.fcl"
 #include "evd_dune.fcl"
 services.Geometry: @local::iceberg_geo
+
+services.ChannelStatusService.BadChannels: @local::iceberg_bad_channels
+services.ChannelStatusService.NoisyChannels: @local::iceberg_noisy_channels
 
 services.RawDrawingOptions.TPC:                       1 
 
