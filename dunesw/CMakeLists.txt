@@ -77,7 +77,7 @@ add_subdirectory(ProductFilters)
 #     "larreco_Calorimetry",
 #     "lardata_RecoObjects",
 #     "larreco_RecoAlg",
-#     "larsim_LArG4",
+#     "larsim_LegacyLArG4",
 #     "larsim_PhotonPropagation",
 #     "larsim_DetSim",
 #     "larsim_EventGenerator",
