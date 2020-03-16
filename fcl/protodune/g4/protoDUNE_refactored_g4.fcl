@@ -1,7 +1,10 @@
 #include "services_refactored_pdune.fcl"
+#include "services_dune.fcl"
 //#include "largeantmodules_dune.fcl"
 //#include "photpropservices_dune.fcl"
 //#include "opticaldetectormodules_dune.fcl"
+
+#include "scintillationtime_tool.fcl"
 
 process_name: G4
 
@@ -16,39 +19,63 @@ services:
 
   DetectorHolder: {}
   ActionHolder: {}
-  PhysicsListHolder: {} 
-  PhysicsList: { 
+  PhysicsListHolder: {}
+  PhysicsList: {
     PhysicsListName: "QGSP_BERT"
     DumpList: true
+    enableNeutronLimit: false
+    NeutronTimeLimit: 0.0
+    NeutronKinELimit: 0.0
+    enableStepLimit: true
+    enableOptical: false
     enableCerenkov: false
-    enableScintillation: true
+    CerenkovStackPhotons: false
+    CerenkovMaxNumPhotons: 100
+    CerenkovMaxBetaChange: 10.0
+    enableScintillation: false
+    ScintillationStackPhotons: false
     ScintillationByParticleType: false
-    enableAbsorption: false   
-    enableRayleigh: false     
-    enableMieHG: false       
-    enableBoundary: false    
+    ScintillationTrackInfo: false
+    ScintillationTrackSecondariesFirst: false
+    enableAbsorption: false
+    enableRayleigh: false
+    enableMieHG: false
+    enableBoundary: false
     enableWLS: false
+    BoundaryInvokeSD: false
+    Verbosity: 1
+    WLSProfile: delta
   }
   LArG4Detector : 
   {
-    category: "world"
-    gdmlFileName_ : "protodune_v5_refactored_nowires.gdml"
-    #gdmlFileName_ : "protodune_v5_refactored.gdml"
+    category      : "world"
+    gdmlFileName_ : "protodune_v7_refactored_nowires.gdml"
+    volumeNames   : ["volTPCActive", "volTPCActiveOuter"] # list of volumes for which the stepLimit should be set
+    stepLimits    : [0.3, 0.3] # corresponding stepLimits in mm for the volumes in the volumeNames list
   }
 
   MCTruthEventAction: {service_type: "MCTruthEventActionService"}
-  ParticleListAction:{service_type:  "ParticleListActionService"}
+  ParticleListAction: {service_type:  "ParticleListActionService"
+                       EnergyCut: 1e-5 # Kinetic Energy cut in [MeV]
+                       keepEMShowerDaughters: true
+                       storeTrajectories: true
+                       keepGenTrajectories: ["generator"] # list of generator labels for which we want to store
+                      }                                   # trajectory points. The protodune beam label is simply
+                                                          # "generator"
 }
+## -- NuRandomService:
+services.NuRandomService.policy: "perEvent"
 
-#services.PhotonVisibilityService.ParametrisedTimePropagation: false // this is still not supported in the new code
-#services.Geometry.GDML: "protodune_v5_refactored.gdml"
-#services.Geometry.ROOT: "protodune_v5_refactored.gdml"
-services.LArG4Parameters.SkipWireSignalInTPCs: [0,3,4,7,8,11]
+services.PhotonVisibilityService:               @local::protodunev4_photonvisibilityservice
+services.LArG4Parameters.UseLitePhotons:        true
+
+services.Geometry.GDML: "protodune_v7.gdml"
+services.Geometry.ROOT: "protodune_v7.gdml"
 
 source:
 {
   module_type: RootInput
-  maxEvents:  30000 
+  maxEvents:  30000
   fileNames: ["gen_protoDUNE.root"]
 }
 
@@ -67,41 +94,67 @@ physics:
     rns: {
       module_type: "RandomNumberSaver"
     }
-    elecDrift:  { module_type:        "SimDriftElectrons"
-   	 SimulationLabel:        "largeant:LArG4DetectorServicevolTPCActive"
-   	 StoreDriftedElectronClusters: true
+
+    IonAndScint:
+    {
+        module_type:           "IonAndScint"
+        Instances:             "LArG4DetectorServicevolTPCActive;LArG4DetectorServicevolTPCActiveOuter" # separated by semicolon
+        ISCalcAlg:             "Separate" #"NEST"
     }
-    
+
+    PDFastSim:
+    {
+       module_type:            "PDFastSimPVS"
+       #module_type:            "PDFastSimPAR"
+       SimulationLabel:        "IonAndScint"
+       DoSlowComponent:        true
+       ScintTimeTool:          @local::ScintTimeLAr
+    }
+
   }
 
   analyzers: {
-    CheckSimEnergyDeposit: {   module_type: CheckSimEnergyDeposit
-      hist_dir: "HistoDir" 
-    }
-    CheckMCParticle: {   module_type: CheckMCParticle
-      hist_dir: "HistoDir2" 
-    }
-    CheckAuxDetHit: {   module_type: CheckAuxDetHit
-      hist_dir: "HistoDir3" 
-    }
-    ISCalculationAna: {             module_type: ISCalculationAna
-   	  EDepModuleLabel:        "largeant:LArG4DetectorServicevolTPCActive"
-    }
-    SimDriftedElectronClusterAna: { module_type: SimDriftedElectronClusterAna
-  	  EDepModuleLabel:        "elecDrift"
-    }		   
-}
+    # CheckSimEnergyDeposit: {   module_type: CheckSimEnergyDeposit
+    #   hist_dir: "HistoDir" 
+    # }
+    # CheckMCParticle: {   module_type: CheckMCParticle
+    #   hist_dir: "HistoDir2" 
+    # }
+    # CheckAuxDetHit: {   module_type: CheckAuxDetHit
+    #   hist_dir: "HistoDir3" 
+    # }
+    # ISCalculationAna: {             module_type: ISCalculationAna
+    #       EDepModuleLabel:        "largeant:LArG4DetectorServicevolTPCActive"
+    # }
+    # SimDriftedElectronClusterAna: { module_type: SimDriftedElectronClusterAna
+    #       EDepModuleLabel:        "elecDrift"
+    # }		   
 
- simulate: [  largeant,
-              rns,
-              elecDrift ] 
+    # ISCalcAna:
+    # {
+    #     module_type:             ISCalcAna
+    #     SimulationLabel:         "largeant:LArG4DetectorServicevolTPCActive"
+    #     // ISCalcAlg:               "NEST"
+    #     ISCalcAlg:               "Separate"
+    # }
+    # 
+    # SimPh:
+    # {
+    #     module_type:             "SimPhotonCounter"
+    #     Verbosity:               5
+    #     InputModule:             "PDFastSimPVS:pvs" 
+    #     MakeAllPhotonsTree:      true
+    #     MakeDetectedPhotonsTree: true
+    #     MakeOpDetsTree:          true
+    #     MakeOpDetEventsTree:     true
+    # }
 
- stream1:  [  out1,
-              CheckSimEnergyDeposit,
-              CheckMCParticle,
-              CheckAuxDetHit,
-              ISCalculationAna,
-              SimDriftedElectronClusterAna  ]
+  }
+
+ simulate: [  rns, largeant, IonAndScint, PDFastSim ]
+
+ stream1: [ out1 ]
+
 
  trigger_paths: [  simulate ] 
  end_paths:     [  stream1  ]  
@@ -115,7 +168,13 @@ outputs:
    module_type: RootOutput
    fileName:    "%ifb_g4.root"
    dataTier:    "simulated"
-   compressionLevel: 1
+   # outputCommands: [ "keep *" ]
+   outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_G4"]
+   fastCloning: false #will fail if the split level is not the same as for the gen stage, so turn it off
+   compressionLevel: 1 #zlib argument (0-9) 
+   basketSize: 8192 #[Byte] buffer size at 8k
+   splitLevel: 0 #reduces number of buffers
+   treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
  }
 }
 

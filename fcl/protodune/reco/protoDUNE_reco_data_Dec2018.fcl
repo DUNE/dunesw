@@ -38,7 +38,7 @@ protoDUNE_reco_data_producers:
 {
     ### Reconstruction Chain
     # TPC wire signals
-    caldata:            @local::producer_adcprep
+    caldata:            @local::producer_adcprep_byapa
     # WireCell
     wclsdatasp:         @local::protodunespdata_wctsp
     digitwire:          @local::protodunespdata_digitwire
@@ -83,6 +83,20 @@ protoDUNE_reco_data_producers:
     crtreco: @local::TwoCRTMatching_producerData
     crttag: @local::SingleCRTMatching_producerData
 	anodepiercerst0: 	@local::T0RecoAnodePiercers
+
+   ##Producers for forcing pandora to create track or shower objects 
+   ##for each PFParticle
+   pandora2Track:         @local::dune_pandoraTrackCreation
+   pandora2calo:          @local::pdune_sp_calomc
+   pandora2caloSCE:       @local::pdune_sp_calomc
+   pandora2pid:           @local::standard_chi2pid
+   pandoracalipidSCE:     @local::standard_chi2pid   
+
+   pandora2Shower:        @local::dune_pandoraShowerCreation 
+   pandora2Showercalo:     @local::pdune_sp_showercalomc
+   pandora2ShowercaloSCE:  @local::pdune_sp_showercalomc
+
+
 }
 
 protoDUNE_reco_data_filters:
@@ -100,9 +114,18 @@ protoDUNE_rawdecoding: [ timingrawdecoder,
                          beamevent
                        ]
 
+#TPC decoding is now done in dataprep
+protoDUNE_notpcdecoding: [ timingrawdecoder,
+                           ssprawdecoder,
+                           #tpcrawdecoder,
+                           crtrawdecoder,
+                           ctbrawdecoder,
+                           beamevent
+                         ]
+
 protoDUNE_reco_data: [ caldata,
                        wclsdatasp,
-                       digitwire,
+#                       digitwire,
                        gaushit,
                        nhitsfilter,
                        reco3d,
@@ -133,7 +156,9 @@ protoDUNE_reco_data: [ caldata,
                        opslicerInternal,
                        opslicerExternal,
 	               	   crttag,crtreco,
-					   anodepiercerst0
+					   anodepiercerst0,
+                       pandora2Track, pandora2calo, pandora2caloSCE, pandora2pid,
+                       pandora2Shower, pandora2Showercalo, pandora2ShowercaloSCE
                      ]
 
 protoDUNE_reco_data_producers.caldata.DigitLabel: "tpcrawdecoder:daq"
@@ -143,7 +168,9 @@ protoDUNE_reco_data_producers.pmtrack.ClusterModuleLabel: "linecluster"
 protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.TrackLikeThreshold: 0.0
 
 # Basic noise mitigation
-protoDUNE_reco_data_producers.gaushit.CalDataModuleLabel: "digitwire"
+#protoDUNE_reco_data_producers.gaushit.CalDataModuleLabel: "digitwire"
+protoDUNE_reco_data_producers.gaushit.CalDataModuleLabel: "wclsdatasp:gauss"
+#protoDUNE_reco_data_producers.gaushit.MakeRawDigitAssns:  false
 protoDUNE_reco_data_producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 3.0
 protoDUNE_reco_data_producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 3.0
 protoDUNE_reco_data_producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 3.0
@@ -208,5 +235,36 @@ protoDUNE_reco_data_producers.pandoracalipidSCE.CalorimetryModuleLabel:    "pand
 protoDUNE_reco_data_producers.pandoracalipidSCE.TrackModuleLabel:          "pandoraTrack"
 
 protoDUNE_reco_data_producers.pandoraShowercaloSCE.CorrectSCE:				   true
+
+
+#Forcing Pandora to create either all tracks or all showers on each PFParticle object
+protoDUNE_reco_data_producers.pandora2Track.PFParticleLabel:             "pandora"
+protoDUNE_reco_data_producers.pandora2Track.UseAllParticles:             true
+####The above line forces pandora to fit a track to all PFParticles
+
+protoDUNE_reco_data_producers.pandora2calo.TrackModuleLabel:             "pandora2Track"
+protoDUNE_reco_data_producers.pandora2calo.SpacePointModuleLabel:        "pandora"
+protoDUNE_reco_data_producers.pandora2calo.T0ModuleLabel:                ""
+protoDUNE_reco_data_producers.pandora2calo.MakeTree:                     false
+protoDUNE_reco_data_producers.pandora2calo.CorrectSCE:                   false 
+
+protoDUNE_reco_data_producers.pandora2caloSCE.TrackModuleLabel:             "pandora2Track"
+protoDUNE_reco_data_producers.pandora2caloSCE.SpacePointModuleLabel:        "pandora"
+protoDUNE_reco_data_producers.pandora2caloSCE.T0ModuleLabel:                ""
+protoDUNE_reco_data_producers.pandora2caloSCE.MakeTree:                     false
+protoDUNE_reco_data_producers.pandora2caloSCE.CorrectSCE:                   true 
+
+protoDUNE_reco_data_producers.pandora2pid.CalorimetryModuleLabel:        "pandora2calo"
+protoDUNE_reco_data_producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
+
+protoDUNE_reco_data_producers.pandora2pid.CalorimetryModuleLabel:        "pandora2caloSCE"
+protoDUNE_reco_data_producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
+
+
+protoDUNE_reco_data_producers.pandora2Shower.PFParticleLabel:       "pandora"
+protoDUNE_reco_data_producers.pandora2Shower.UseAllParticles:       true
+protoDUNE_reco_data_producers.pandora2Showercalo.ShowerTag:         "pandora2Shower"
+protoDUNE_reco_data_producers.pandora2ShowercaloSCE.ShowerTag:       "pandora2Shower"
+protoDUNE_reco_data_producers.pandora2ShowercaloSCE.CorrectSCE:     true
 
 END_PROLOG

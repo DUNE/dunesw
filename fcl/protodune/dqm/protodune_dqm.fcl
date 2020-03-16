@@ -26,7 +26,7 @@ services.RawDigitPrepService.AdcChannelToolNames: [
   "pdtps_adcChannelPedestalPeakBinExcessPlotter",
   "pdtps_adcChannelPedestalRawRmsPlotter",
   "pdtps_adcChannelPedestalRawTailPlotter",
-  "pdcht_All",
+  #  Broken in by-APA processing "pdcht_All",
   "pdcht_Apas",
   "pdcht_Zplanes",
   "pdcht_Cplanes",
@@ -34,3 +34,8 @@ services.RawDigitPrepService.AdcChannelToolNames: [
   "rawAdcDetectorPlotColl",
   "pd_evtviewNfemb"
 ]
+
+# Remove bad channels in detector display.
+tools.rawAdcDetectorPlotColl.SkipBadChannels: true
+tools.rawAdcDetectorPlotColl.Title: "Cleaned raw ADC collection view"
+

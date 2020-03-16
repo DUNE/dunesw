@@ -1,0 +1,34 @@
+# protodune_dqm.fcl
+
+# David Adams
+# May 2018
+#
+# Dataprep tool configuration for protoDUNE DQM.
+
+# User is now expected to provide a top-level fcl file
+# that creates or reads in RawDigits and calls a module
+# (most likely DataPrepModule) that runs the RawDigitPrepService.
+#
+# The tools write many large files for each event and so this
+# is typically run with a small number of events.
+
+# Uncomment and set these values to change the tick range in the
+# channel-tick plots.
+#tools.tickRanges.plotTicks.begin: 3000
+#tools.tickRanges.plotTicks.end:   4000
+
+services.RawDigitPrepService.AdcChannelToolNames: [
+  "digitReader",
+  "pd_adcPedestalFit", 
+  "pdtps_adcChannelPedestalPlotter",
+  "pdtps_adcChannelPedestalNoisePlotter",
+  "pdtps_adcChannelPedestalOrfPlotter",
+  "pdtps_adcChannelPedestalPeakBinExcessPlotter",
+  "pdtps_adcChannelPedestalRawRmsPlotter",
+  "pdtps_adcChannelPedestalRawTailPlotter",
+  "pdcht_Apas",
+  "pdcht_Zplanes",
+  "pdcht_Cplanes",
+  "pdcht_Iplanes",
+  "pd_evtviewNfemb"
+]

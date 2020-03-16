@@ -1,12 +1,13 @@
 //#include "services_dune.fcl"
 #include "services_refactored_pdune.fcl"
 #include "caldata_dune.fcl"
+#include "wirecell_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
-#include "calorimetry_dune10kt.fcl"
+#include "calorimetry_pdune.fcl"
 #include "calibration_dune.fcl"
 #include "featurelabelingmodules.fcl"
 #include "particleid.fcl"
@@ -17,7 +18,9 @@
 #include "emshower3d.fcl"
 #include "ProtoDUNETriggerFilter.fcl"
 #include "OpSlicer.fcl"
-
+#include "CRT.fcl"
+#include "T0RecoAnodePiercers.fcl"
+#include "numberofhitsfilter.fcl"
 #include "protodune_tools_dune.fcl"
 
 process_name: Reco
@@ -26,18 +29,22 @@ services:
 {
   # Load the service that manages root files for histograms.
   TFileService: { fileName: "reco_protoDUNE_hist.root" }
-  TimeTracker:       {}
-  MemoryTracker:     {}
+  TimeTracker:       @local::dune_time_tracker
+  MemoryTracker:     @local::dune_memory_tracker
   RandomNumberGenerator: {} #ART native random number generator
-  message:              @local::dune_message_services_prod_debug
+  message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodune_reco_services
 #  ChannelStatusService: @local::pdsp_channel_status
 }
 
 services.Geometry.SortingParameters.ChannelsPerOpDet: 12
-services.BackTrackerService.BackTracker.G4ModuleLabel: "elecDrift" 
-#BackTrackerModuleLabel
+services.Geometry.GDML: "protodune_v7.gdml"
+services.Geometry.ROOT: "protodune_v7.gdml"
+
+#BackTracker Module labels
+services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant" 
+services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC" 
 
 #source is now a root file
 source:
@@ -55,13 +62,18 @@ physics: {
 
   filters: {
     trigfilter:  @local::pdsp_trigfilter_all
+    nhitsfilter: @local::standard_numberofhitsfilter
   }
 
   producers: {
     # random number saver
     rns:                 { module_type: RandomNumberSaver }
     # convert raw::RawDigit to recob::wire
-    caldata:            @local::producer_adcprep
+    # caldata:            @local::producer_adcprep
+    # WireCell
+    # wclsdatasp:         @local::protodunespdata_wctsp
+    wclsdatanfsp:         @local::protodunespdata_nfsp
+    digitwire:          @local::protodunespdata_digitwire
     # actual hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
     fasthit:            @local::dunefd_fasthitfinder
@@ -81,45 +93,48 @@ physics: {
     pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
-    pandoracalo:        @local::dune10kt_calomc
+    pandoracalo:        @local::pdune_sp_calomc
     pandorapid:         @local::standard_chi2pid
     pandoracali:        @local::protodunespmc_calibrationdedx
     pandoracalipid:     @local::standard_chi2pid 
-    pandoracaloSCE:     @local::dune10kt_calomc
+    pandoracaloSCE:     @local::pdune_sp_calomc
     pandorapidSCE:      @local::standard_chi2pid
+    pandoraShowercalo:  @local::pdune_sp_showercalomc
+    pandoraShowercaloSCE:       @local::pdune_sp_showercalomc
     pandoracaliSCE:     @local::protodunespmc_calibrationdedx
     pandoracalipidSCE:  @local::standard_chi2pid   
-#    pandoracalodE:     @local::dune10kt_calomc
-#    pandorapiddE:      @local::standard_chi2pid
-#    pandoracalidE:     @local::protodunespmc_calibrationdedx
-#    pandoracalipiddE:  @local::standard_chi2pid   
-#    pandoracalodx:     @local::dune10kt_calomc
-#    pandorapiddx:      @local::standard_chi2pid
-#    pandoracalidx:     @local::protodunespmc_calibrationdedx
-#    pandoracalipiddx:  @local::standard_chi2pid   
-    pmtrack:         @local::dunefd_pmalgtrackmaker
-    pmtrackcalo:        @local::dune10kt_calomc
+    pmtrack:            @local::dunefd_pmalgtrackmaker
+    pmtrackcalo:        @local::pdune_sp_calomc
     pmtrackpid:         @local::standard_chi2pid
     pmtrackcali:        @local::protodunespmc_calibrationdedx
     pmtrackcalipid:     @local::standard_chi2pid  
     pmtrajfit:          @local::dunefd_pmalgtrajfitter
-    pmtrajfitcalo:      @local::dune10kt_calomc
+    pmtrajfitcalo:      @local::pdune_sp_calomc
     pmtrajfitpid:       @local::standard_chi2pid
 #   photon detector reconstruction
-#    ophit:              @local::protodune_ophit 
-#    opflash:            @local::protodune_opflash
-#    opslicer:           @local::protodune_opslicer
+    ophit:              @local::protodune_ophit 
+    opflash:            @local::protodune_opflash
+    opslicer:           @local::protodune_opslicer
+    crtreco: @local::TwoCRTMatching_producer
+     crttag: @local::SingleCRTMatching_producer
+#	Anode piercing tracks t0 reconstruction
+    anodepiercerst0:	@local::T0RecoAnodePiercers
   }
+
 
   #define the producer and filter modules for this path, order matters, 
   #filters reject all following items.  see lines starting physics.producers below
   reco: [ rns, 
           #optical hits and flashes
-          ##ophit, opflash, opslicer,
+          ophit, opflash, opslicer,
           #TPC wire signals      
-          caldata,
+          # caldata,
+          wclsdatanfsp,
+          digitwire,
           #hit reconstruction
           gaushit, #fasthit, 
+          # filter out events with too many hits for timely reconstruction
+          nhitsfilter,
           #space point solver
           reco3d,
           #real disambiguation
@@ -127,13 +142,14 @@ physics: {
           # 3d dbcluster
           #dbcluster,
           #cluster reco
-          linecluster,
+          #linecluster,
           #pandora
           pandora, pandoraWriter, pandoraTrack, pandoraShower,
-          pandoracalo, pandorapid, pandoracali, pandoracalipid,
-          pandoracaloSCE, pandorapidSCE, pandoracaliSCE, pandoracalipidSCE,
+          pandoracalo, pandorapid, #pandoracali, pandoracalipid,
+          pandoracaloSCE, pandorapidSCE, #pandoracaliSCE, pandoracalipidSCE,
+          pandoraShowercalo, pandoraShowercaloSCE,
           #feature labeling
-          emtrkmichelid
+          emtrkmichelid,
           #pandoracalodE, pandorapiddE, pandoracalidE, pandoracalipiddE,
           #pandoracalodx, pandorapiddx, pandoracalidx, pandoracalipiddx,
           #pmatrack
@@ -141,6 +157,8 @@ physics: {
           #pmtrajfit, pmtrajfitcalo, pmtrajfitpid
           #shower reconstruction
           #blurredcluster, emshower, emshower3d, mergeemshower3d
+	   	    crttag,crtreco,
+          anodepiercerst0
         ]
  
   #define the output stream, there could be more than one if using filters 
@@ -167,16 +185,27 @@ outputs:
    dataTier:    "full-reconstructed"
    #outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
    outputCommands: [ "keep *", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
-   compressionLevel: 1
+   compressionLevel: 1 #zlib argument (0-9) 
+   basketSize: 8192 #[Byte] buffer size at 8k
+   splitLevel: 0 #reduces number of buffers
+   treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
  }
 }
 
 ### Here, we overwrite ALL module labels with the ones defined above.
 services.DetectorPropertiesService.Electronlifetime: 35000
 
+# physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+physics.producers.digitwire.inSigTag: "wclsdatanfsp:gauss:"
+
+physics.producers.gaushit.CalDataModuleLabel: "digitwire"
+
 physics.producers.linecluster.HitFinderModuleLabel:    "hitpdune"
 
+physics.producers.emtrkmichelid.WireLabel: "digitwire"
+
 physics.producers.pmtrack.HitModuleLabel:                         "linecluster"
+physics.producers.pmtrack.WireModuleLabel:                        "digitwire"
 physics.producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
 physics.producers.pmtrack.PMAlgTracking.TrackLikeThreshold:       0.63
 physics.producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:       3
@@ -217,8 +246,8 @@ physics.producers.calo.SpacePointModuleLabel:          "costrk"
 
 #Pandora configurations
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
-physics.producers.pandora.GeantModuleLabel:                 "elecDrift"
-physics.producers.pandoraWriter.GeantModuleLabel:           "elecDrift"
+physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
+physics.producers.pandoraWriter.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
 
 physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
 physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
@@ -248,36 +277,11 @@ physics.producers.pandoracaliSCE.TrackModuleLabel:                 "pandoraTrack
 physics.producers.pandoracalipidSCE.CalorimetryModuleLabel:        "pandoracaliSCE"
 physics.producers.pandoracalipidSCE.TrackModuleLabel:              "pandoraTrack"
 physics.producers.pandoracaliSCE.CorrectSCE:              true
-
+physics.producers.pandoraShowercaloSCE.CorrectSCE:        true
 ##Optical detector configuration
-#physics.producers.ophit.InputModule:                        "opdigi"
-#physics.producers.opflash.InputModule:                      "ophit"
-#physics.producers.opslicer.OpHitModuleLabel:                "ophit"
-
-#physics.producers.pandoracalodE.TrackModuleLabel:             "pandoraTrack"
-#physics.producers.pandoracalodE.SpacePointModuleLabel:        "pandora"
-#physics.producers.pandoracalodE.T0ModuleLabel:                ""
-#physics.producers.pandoracalodE.MakeTree:                     false
-#physics.producers.pandoracalodE.CorrectSCE:                     false
-#physics.producers.pandorapiddE.CalorimetryModuleLabel:        "pandoracaloSCE"
-#physics.producers.pandorapiddE.TrackModuleLabel:              "pandoraTrack"
-#physics.producers.pandoracalidE.CalorimetryModuleLabel:           "pandoracaloSCE"
-#physics.producers.pandoracalidE.TrackModuleLabel:                 "pandoraTrack"
-#physics.producers.pandoracalipiddE.CalorimetryModuleLabel:        "pandoracaliSCE"
-#physics.producers.pandoracalipiddE.TrackModuleLabel:              "pandoraTrack"
-#physics.producers.pandoracalidE.CorrectSCE:              true
-#
-#physics.producers.pandoracalodx.TrackModuleLabel:             "pandoraTrack"
-#physics.producers.pandoracalodx.SpacePointModuleLabel:        "pandora"
-#physics.producers.pandoracalodx.T0ModuleLabel:                ""
-#physics.producers.pandoracalodx.MakeTree:                     false
-#physics.producers.pandorapiddx.CalorimetryModuleLabel:        "pandoracaloSCE"
-#physics.producers.pandorapiddx.TrackModuleLabel:              "pandoraTrack"
-#physics.producers.pandoracalidx.CalorimetryModuleLabel:           "pandoracaloSCE"
-#physics.producers.pandoracalidx.TrackModuleLabel:                 "pandoraTrack"
-#physics.producers.pandoracalipiddx.CalorimetryModuleLabel:        "pandoracaliSCE"
-#physics.producers.pandoracalipiddx.TrackModuleLabel:              "pandoraTrack"
-#physics.producers.pandoracalidx.CorrectSCE:              false
+physics.producers.ophit.InputModule:                        "opdigi"
+physics.producers.opflash.InputModule:                      "ophit"
+physics.producers.opslicer.OpHitModuleLabel:                "ophit"
 
 # Use channel map service for data
 services.PdspChannelMapService:        @local::pdspchannelmap

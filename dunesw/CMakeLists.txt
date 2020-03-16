@@ -1,5 +1,6 @@
 set( IFDH_ART_DIR $ENV{IFDH_ART_DIR} )
 
+add_subdirectory(DuneExample)
 add_subdirectory(DuneObj)
 add_subdirectory(DuneObjDumpers)
 add_subdirectory(ArtSupport)
@@ -27,7 +28,6 @@ add_subdirectory(HitFinderDUNE)
 add_subdirectory(TrackFinderDUNE)
 add_subdirectory(DUNEPandora)
 add_subdirectory(CTree)
-add_subdirectory(T0Reco)
 add_subdirectory(SimFilter)
 add_subdirectory(FDSensOpt)
 add_subdirectory(Gaps)
@@ -58,6 +58,7 @@ add_subdirectory(RegCNN)
 add_subdirectory(Iceberg)
 add_subdirectory(DUNEWireCell)
 add_subdirectory(APAIO)
+add_subdirectory(ProductFilters)
 
 # Respect the order specified in lar_build, which is:
 #
@@ -76,7 +77,7 @@ add_subdirectory(APAIO)
 #     "larreco_Calorimetry",
 #     "lardata_RecoObjects",
 #     "larreco_RecoAlg",
-#     "larsim_LArG4",
+#     "larsim_LegacyLArG4",
 #     "larsim_PhotonPropagation",
 #     "larsim_DetSim",
 #     "larsim_EventGenerator",
