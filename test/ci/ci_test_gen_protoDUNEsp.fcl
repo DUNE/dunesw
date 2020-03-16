@@ -1,4 +1,4 @@
-#include "gen_protoDune_pion_2GeV_mono.fcl"
+#include "mcc12_gen_protoDune_beam_cosmics_p1GeV.fcl"
 
 services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
