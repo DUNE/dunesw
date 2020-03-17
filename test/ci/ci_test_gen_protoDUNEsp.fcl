@@ -2,7 +2,13 @@
 
 services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
-services.NuRandomService.generator: 1234
+services.NuRandomService.generator.protoDUNEBeam: 1234
+services.NuRandomService.ar39: 1234
+services.NuRandomService.ar42: 1234
+services.NuRandomService.kr85: 1234
+services.NuRandomService.rn222: 1234
+services.NuRandomService.cosmicgenerator.gen: 1234
+services.NuRandomService.cosmicgenerator.pois: 1234
 
 services.RandomNumberGenerator.restoreFrom: "GenRandomSeeds_Ref_protoDUNE.dat"
 services.RandomNumberGenerator.saveTo: "GenRandomSeeds.dat"
