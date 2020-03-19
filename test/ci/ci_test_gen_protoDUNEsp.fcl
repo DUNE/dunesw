@@ -12,3 +12,12 @@ services.NuRandomService.cosmicgenerator.pois: 1234
 
 services.RandomNumberGenerator.restoreFrom: "GenRandomSeeds_Ref_protoDUNE.dat"
 services.RandomNumberGenerator.saveTo: "GenRandomSeeds.dat"
+
+# Override CORSIKA flux file path to be able to access them without a proxy
+physics.producers.cosmicgenerator.ShowerInputFiles: [
+    "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard/p_showers_*db",
+    "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard/He_showers_*db",
+    "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard/N_showers_*db",
+    "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard/Mg_showers_*db",
+    "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard/Fe_showers_*db"
+         ]
