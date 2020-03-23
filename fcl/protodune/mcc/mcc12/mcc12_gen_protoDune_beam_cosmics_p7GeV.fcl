@@ -8,6 +8,13 @@ outputs.out1.fileName: "gen_protoDune_beam_p7GeV_cosmics.root"
 
 
 physics.producers.generator.FileName: "/pnfs/dune/persistent/dunepro/beam_data/simulation/mcc10/H4_v34b_80000_7GeV_-27.7_10M.root"
+
+# For testing
+#physics.producers.generator.FileName: "/pnfs/dune/persistent/dunepro/beam_data/simulation/mcc10/H4_v34b_7GeV_-27.7_10M_1.root"
+#physics.producers.generator.SaveRecoTree: true
+
+physics.producers.generator.NominalP: 7.
+
 physics.producers.generator.Intensity: 1.0e6
 #physics.producers.generator.Intensity: 0.133e6 # Intensity required to give us a good particle rate of ~25 Hz
 

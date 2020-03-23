@@ -96,8 +96,22 @@ physics.producers.generator.BeamPhiShift: -0.0761654
 physics.producers.generator.RotateXZ: 0.0
 physics.producers.generator.RotateYZ: 0.0 
 # Rotations for the final beam monitors and background particles
-physics.producers.generator.RotateMonitorsXZ: -10.3 # [Degrees]
-physics.producers.generator.RotateMonitorsYZ: 11.7  # [Degrees]
+#physics.producers.generator.RotateMonitorsXZ: -10.3 # [Degrees]
+#physics.producers.generator.RotateMonitorsYZ: 11.7  # [Degrees]
+# Jake Calcutt: Replacing these with angles for opposite order rotations
+physics.producers.generator.RotateMonitorsXZ: -10.51372 # [Degrees]
+physics.producers.generator.RotateMonitorsYZ: 11.50886  # [Degrees]
+
+# Jake Calcutt: Extra parameters for beam interface info
+#physics.producers.generator.L1: 1.98
+#physics.producers.generator.L2: 1.69472
+#physics.producers.generator.L3: 2.11666
+#physics.producers.generator.BeamBend: .12003
+#
+#physics.producers.generator.LMag: 2.1645
+#physics.producers.generator.NominalP: 1.
+#physics.producers.generator.B: 1.294817
+
 
 # Overlay info
 physics.producers.generator.ReadoutWindow: 4.0
