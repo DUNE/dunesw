@@ -84,9 +84,14 @@ physics.producers.generator.AllParticlesTreeName: "Detector/NP04front" # Backgro
 physics.producers.generator.StartEvent: 0
 # Set the beam position and direction to fire the particles in the desired way
 #physics.producers.generator.BeamX: 7.966 # In cm, taken from protoDUNE_gensingle.fcl
-physics.producers.generator.BeamX: 5.55 # In cm, based on studies of the beam pipe position
-physics.producers.generator.BeamY: 460.84 
-physics.producers.generator.BeamZ: -191.60
+#physics.producers.generator.BeamX: 5.55 # In cm, based on studies of the beam pipe position
+#physics.producers.generator.BeamY: 460.84 
+#physics.producers.generator.BeamZ: -191.60
+physics.producers.generator.BeamX: 8.905247 # In cm
+physics.producers.generator.BeamY: 461.749224 
+physics.producers.generator.BeamZ: -196.11
+physics.producers.generator.BeamThetaShift: 0.0114276
+physics.producers.generator.BeamPhiShift: -0.0761654
 # Specific rotations for the good particles
 physics.producers.generator.RotateXZ: 0.0
 physics.producers.generator.RotateYZ: 0.0 
