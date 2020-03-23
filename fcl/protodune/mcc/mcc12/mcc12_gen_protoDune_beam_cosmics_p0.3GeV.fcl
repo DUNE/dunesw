@@ -2,14 +2,14 @@
 
 # Specific .fcl for the +300 MeV/c momentum setting
 
-services.TFileService.fileName: "gen_protoDune_beam_p300MeV_cosmics_hist.root"
+services.TFileService.fileName: "gen_protoDune_beam_p0.3GeV_cosmics_hist.root"
 source.maxEvents: 1000000
-outputs.out1.fileName: "gen_protoDune_beam_p300MeV_cosmics.root"
+outputs.out1.fileName: "gen_protoDune_beam_p0.3GeV_cosmics.root"
 
 
-### File to be replaced
-physics.producers.generator.FileName: "/pnfs/dune/persistent/dunepro/beam_data/simulation/mcc10/H4_v34b_80000_1GeV_-27.7_10M.root"
+physics.producers.generator.FileName: "/pnfs/dune/persistent/dunepro/beam_data/simulation/G4beamlineVersion3.06/v34b_0.3GeV_G4beamlineVersion3.06/H4_v34b_0.3GeV_-27.7_10M_1.root"
 
+# For testing
 #physics.producers.generator.SaveRecoTree: true
 
 physics.producers.generator.NominalP: .300

@@ -7,10 +7,9 @@ source.maxEvents: 1000000
 outputs.out1.fileName: "gen_protoDune_beam_p7GeV_cosmics.root"
 
 
-physics.producers.generator.FileName: "/pnfs/dune/persistent/dunepro/beam_data/simulation/mcc10/H4_v34b_80000_7GeV_-27.7_10M.root"
+physics.producers.generator.FileName: "/pnfs/dune/persistent/dunepro/beam_data/simulation/G4beamlineVersion3.06/v34b_7GeV_G4beamlineVersion3.06/H4_v34b_7GeV_-27.7_10M_1.root"
 
 # For testing
-#physics.producers.generator.FileName: "/pnfs/dune/persistent/dunepro/beam_data/simulation/mcc10/H4_v34b_7GeV_-27.7_10M_1.root"
 #physics.producers.generator.SaveRecoTree: true
 
 physics.producers.generator.NominalP: 7.
