@@ -21,3 +21,6 @@ physics.producers.cosmicgenerator.ShowerInputFiles: [
     "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard/Mg_showers_*db",
     "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard/Fe_showers_*db"
          ]
+
+# Override beam file path to be able to access it without a proxy
+physics.producers.generator.FileName: "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/ContinuousIntegration/protoDUNEsp/gen/H4_v34b_1GeV_-27.7_10M_1.root"
