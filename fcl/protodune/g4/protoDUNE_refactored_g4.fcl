@@ -66,11 +66,11 @@ services:
 ## -- NuRandomService:
 services.NuRandomService.policy: "perEvent"
 
-services.PhotonVisibilityService:               @local::protodunev4_photonvisibilityservice
-services.LArG4Parameters.UseLitePhotons:        true
+#services.PhotonVisibilityService:               @local::protodunev4_photonvisibilityservice
+#services.LArG4Parameters.UseLitePhotons:        true
 
-services.Geometry.GDML: "protodune_v7.gdml"
-services.Geometry.ROOT: "protodune_v7.gdml"
+#services.Geometry.GDML: "protodune_v7.gdml"
+#services.Geometry.ROOT: "protodune_v7.gdml"
 
 source:
 {
