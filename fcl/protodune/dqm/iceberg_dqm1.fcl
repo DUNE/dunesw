@@ -1,7 +1,7 @@
-# iceberg_dqm.fcl
+# iceberg_dqm1.fcl
 
 # David Adams
-# Marach 2020
+# April 2020
 #
 # Dataprep tool configuration for Iceberg DQM.
 
@@ -19,6 +19,6 @@ services.RawDigitPrepService.AdcChannelToolNames: [
   "ibmet_adcChannelPedestalRawTailPlotter",
   #"ibcht_Apas",
   "ibcht_Xplanes",
-  "ibcht_Iplanes",
-  "pd_evtviewNfemb"
+  "ibcht_Iplanes"
+  #, "pd_evtviewNfemb"
 ]
