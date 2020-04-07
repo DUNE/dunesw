@@ -9,6 +9,7 @@
 #include "detsimtools_dune.fcl"
 #include "dunecommon_tools.fcl"
 #include "pdsp_decoder.fcl"
+#include "protodune_dataprep_tools.fcl"
 #include "iceberg_dataprep_tools.fcl"
 tools.channelRanges: @local::tools.channelRangesIceberg
 tools.channelGroups: @local::tools.channelGroupsIceberg
