@@ -59,6 +59,16 @@ physics:
          // Make available parameters via Jsonnet's std.extVar()
          params: {
          }
+         structs: {
+           // Longitudinal diffusion constant [cm2/s]
+           DL: 4.0
+           // Transverse diffusion constant [cm2/s]
+           DT: 8.8
+           // Electron lifetime [ms]
+           lifetime: 35.0
+           // Electron drift speed, assumes a certain applied E-field [mm/us]
+           driftSpeed: 1.565
+         }
       }
    }
 

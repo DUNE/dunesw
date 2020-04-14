@@ -1,0 +1,7 @@
+#include "protoDUNE_refactored_detsim.fcl"
+
+// Longitudinal diffusion constant [cm2/s]
+physics.producers.tpcrawdecoder.wcls_main.structs.DL: 0.0
+
+// Transverse diffusion constant [cm2/s]
+physics.producers.tpcrawdecoder.wcls_main.structs.DT: 0.0
