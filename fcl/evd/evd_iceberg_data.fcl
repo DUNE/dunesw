@@ -1,4 +1,4 @@
-#include "iceberg_bad_and_noisy_channels.fcl"
+#include "channelstatus_iceberg.fcl"
 #include "evd_dune.fcl"
 services.Geometry: @local::iceberg_geo
 
