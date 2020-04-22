@@ -36,6 +36,7 @@ services:
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodune_reco_services
 #  ChannelStatusService: @local::pdsp_channel_status
+  IFDH: {}
 }
 
 services.Geometry.SortingParameters.ChannelsPerOpDet: 12
@@ -45,6 +46,9 @@ services.Geometry.ROOT: "protodune_v7.gdml"
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant" 
 services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC" 
+services.DetectorPropertiesService:    @local::protodunesp_detproperties
+services.DetectorPropertiesService.GetHVDriftfromSamweb: false
+services.DetectorPropertiesService.GetReadOutWindowSizefromSamweb: false
 
 #source is now a root file
 source:
