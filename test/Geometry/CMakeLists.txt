@@ -23,12 +23,6 @@ cet_test(geometry_dunefd HANDBUILT
   TEST_ARGS --rethrow-all --config ./test_geometry_dunefd.fcl
 )
 
-cet_test(geometry_dune35t HANDBUILT
-  DATAFILES test_geometry_dune35t.fcl
-  TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./test_geometry_dune35t.fcl
-)
-
 #cet_test(geometry_dunedphase10kt HANDBUILT
 #  DATAFILES test_geometry_dunedphase10kt.fcl
 #  TEST_EXEC lar
@@ -47,30 +41,6 @@ cet_test(geometry_iterator_loop_dunefd HANDBUILT
   TEST_EXEC lar
   TEST_ARGS --rethrow-all --config ./test_geometry_iterator_loop_dunefd.fcl
 )
-
-
-simple_plugin ( GeometryTest35 "module"
-                     larcorealg_Geometry
-                     larcore_Geometry_Geometry_service
-		     ${ART_FRAMEWORK_CORE}
-   		     ${ART_FRAMEWORK_PRINCIPAL}
-		     ${ART_FRAMEWORK_SERVICES_REGISTRY}
-		     ${ART_FRAMEWORK_SERVICES_BASIC}
-		     ${ART_ROOT_IO_TFILE_SUPPORT} ${ROOT_CORE}
-		     ${ART_ROOT_IO_TFILESERVICE_SERVICE}
-             	     ${ART_FRAMEWORK_SERVICES_OPTIONAL_RANDOMNUMBERGENERATOR_SERVICE}
-		     art_Persistency_Common canvas
-		     art_Persistency_Provenance canvas
-		     art_Utilities canvas
-                     ${MF_MESSAGELOGGER}
-                     
-                     ${FHICLCPP}
-                     cetlib cetlib_except
-                     ${ROOT_BASIC_LIB_LIST}
-		     ${ROOT_GEOM}
-
-               BASENAME_ONLY
-          )
 
 
 #
@@ -92,13 +62,6 @@ cet_test(geometry_crmchannelmapping_test
   TEST_ARGS -- ./test_geometry_dunedphase10kt.fcl
 )
 
-
-# This is not really a test, but it dumps channel mapping on a file
-cet_test(dump_channel_map_dune35t_test HANDBUILT
-  DATAFILES dump_dune35t_channelmap.fcl
-  TEST_EXEC lar
-  TEST_ARGS --rethrow-all --config ./dump_dune35t_channelmap.fcl
-)
 
 cet_test(dump_channel_map_dunefd_test HANDBUILT
   DATAFILES dump_dunefd_channelmap.fcl

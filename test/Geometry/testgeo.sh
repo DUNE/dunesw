@@ -10,7 +10,7 @@
 # Copied from larcore/Geometry/test/testgeo.csh .
 #
 
-DEFAULT_GEOMETRIES=( 'dunefd' 'dune35t' )
+DEFAULT_GEOMETRIES=( 'dunefd' )
 INCLUDE_FILES=( 'geometry_dune.fcl' )
 
 
