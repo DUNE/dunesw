@@ -7,3 +7,4 @@ services.ChannelStatusService: @local::pdsp_channel_status
 services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
 #services.RawDrawingOptions.PedestalOption: 1
 services.RecoDrawingOptions.WireModuleLabels: ["caldata", "digitwire", "wclsdatanfsp:gauss"]
+services.DetectorPropertiesService: @local::protodunesp_detproperties
