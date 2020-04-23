@@ -5,7 +5,6 @@
 #include "services_dune.fcl"
 #include "channelstatus_dune.fcl"
 #include "pedestals_dune.fcl"
-#include "channelmap_35t.fcl"
 
 BEGIN_PROLOG
 
@@ -93,20 +92,20 @@ dune10kt_45deg_1x2x6_disp.Geometry:   @local::dune10kt_45deg_1x2x6_geo
 # For now, treat 35t like FD,
 # except of course Geometry
 # MW: 3/1/16 and channel map
-dune35t_disp:              @local::dunefd_disp
-dune35t_disp.DetPedestalService: @local::dune_fixedpeds
-dune35t_disp.DetectorPropertiesService: @local::dune35t_detproperties
-dune35t_disp.Geometry:     @local::dune35t_geo
-dune35t_disp.ChannelStatusService: @local::dune35t_channel_status_dla
-dune35t_disp.ChannelMapService: @local::channelmap35t
-dune35t_disp.DetectorClocksService:  @local::dune35t_detectorclocks # defined in detectorclocks_dune.fcl
-dune35t_disp.RawDrawingOptions.TotalTicks:               5200
-dune35t_disp.RawDrawingOptions.MinimumSignal:            10
-dune35t_disp.RawDrawingOptions.UncompressWithPed:        true
-
-
-dune35t_disp_data: @local::dune35t_disp
-dune35t_disp_data.DetPedestalService:  @local::dune_dbpeds 
+#dune35t_disp:              @local::dunefd_disp
+#dune35t_disp.DetPedestalService: @local::dune_fixedpeds
+#dune35t_disp.DetectorPropertiesService: @local::dune35t_detproperties
+#dune35t_disp.Geometry:     @local::dune35t_geo
+#dune35t_disp.ChannelStatusService: @local::dune35t_channel_status_dla
+#dune35t_disp.ChannelMapService: @local::channelmap35t
+#dune35t_disp.DetectorClocksService:  @local::dune35t_detectorclocks # defined in detectorclocks_dune.fcl
+#dune35t_disp.RawDrawingOptions.TotalTicks:               5200
+#dune35t_disp.RawDrawingOptions.MinimumSignal:            10
+#dune35t_disp.RawDrawingOptions.UncompressWithPed:        true
+#
+#
+#dune35t_disp_data: @local::dune35t_disp
+#dune35t_disp_data.DetPedestalService:  @local::dune_dbpeds 
 
 dune10kt_disp:             @local::dunefd_disp
 dune10kt_disp.Geometry:    @local::dune10kt_geo 
