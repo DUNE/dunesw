@@ -8,3 +8,5 @@ services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
 #services.RawDrawingOptions.PedestalOption: 1
 services.RecoDrawingOptions.WireModuleLabels: ["caldata", "digitwire", "wclsdatanfsp:gauss"]
 services.DetectorPropertiesService: @local::protodunesp_detproperties
+services.DetectorPropertiesService.GetHVDriftfromSamweb: false
+services.DetectorPropertiesService.GetReadOutWindowSizefromSamweb: false
