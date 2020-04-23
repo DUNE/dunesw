@@ -1,0 +1,4 @@
+#include "standard_g4_protodunedp_driftY.fcl"
+
+services.LArPropertiesService.ScintYield: 40000
+
