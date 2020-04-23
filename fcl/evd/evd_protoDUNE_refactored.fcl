@@ -1,0 +1,9 @@
+#include "evd_protoDUNE_noped.fcl"
+
+services.DetPedestalService.FixedDetPedestal.PedMeanZ:  900
+services.DetPedestalService.FixedDetPedestal.PedMeanV:  2350
+services.DetPedestalService.FixedDetPedestal.PedMeanU:  2350
+services.ChannelStatusService: @local::pdsp_channel_status
+services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
+#services.RawDrawingOptions.PedestalOption: 1
+services.RecoDrawingOptions.WireModuleLabels: ["caldata", "digitwire", "wclsdatanfsp:gauss"]
