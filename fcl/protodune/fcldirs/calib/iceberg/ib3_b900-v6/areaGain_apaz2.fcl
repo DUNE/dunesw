@@ -30,5 +30,5 @@ Values: [
   0.0257543, 0.0264971, 0.0252281, 0.0251443, 0.0247732, 0.0261547, 0.0236773, 0.0252005, 0.0241429, 0.0268633,
   0.0238775, 0.0252036, 0.0232799, 0.0267833, 0.0231379, 0.0250206, 0.0233537, 0.0253128, 0.0215261, 0.0250045
 ]
-# 28-apr-2020: Channels 1225 and 1231 are not (yet) flagged bad but have bad calibrations. The gains
+# 28-apr-2020: Channels 1225 and 1231 are flagged bad and have bad calibrations. The gains
 # for those are estimated from the neighboring ASIC channels.
