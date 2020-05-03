@@ -4,19 +4,22 @@ services.Geometry: @local::iceberg_geo
 
 services.ChannelStatusService.BadChannels: @local::iceberg_bad_channels
 services.ChannelStatusService.NoisyChannels: @local::iceberg_noisy_channels
-
 services.RawDrawingOptions.TPC:                       1 
 
 services.RawDrawingOptions.TotalTicks:                2000
 services.RecoDrawingOptions.DrawOpFlashes:            0
 services.RecoDrawingOptions.DrawSpacePoints:          1
-services.RecoDrawingOptions.SpacePointModuleLabels:   "[reco3d]"
+services.RecoDrawingOptions.DrawClusters:          4
+services.RecoDrawingOptions.SpacePointModuleLabels:   [reco3d]
 #services.RecoDrawingOptions.HitModuleLabels:          "[linecluster]"
-services.RecoDrawingOptions.HitModuleLabels: [linecluster]
-services.RecoDrawingOptions.WireModuleLabels: ["caldata:dataprep"]
-services.RecoDrawingOptions.ClusterModuleLabels:      "[linecluster]"
-services.RecoDrawingOptions.TrackModuleLabels:        "[pmtrack]"
-services.RecoDrawingOptions.VertexModuleLabels:       "[pmtrack]"
+#services.RecoDrawingOptions.WireModuleLabels: ["caldata:dataprep"]
+services.RecoDrawingOptions.WireModuleLabels: ["wclsdatasp:gauss"]
+#services.RecoDrawingOptions.HitModuleLabels: [linecluster]
+#services.RecoDrawingOptions.ClusterModuleLabels:      [linecluster]
+services.RecoDrawingOptions.HitModuleLabels: [trajcluster]
+services.RecoDrawingOptions.ClusterModuleLabels:      [trajcluster]
+services.RecoDrawingOptions.TrackModuleLabels:        [pmtrack]
+services.RecoDrawingOptions.VertexModuleLabels:       [pmtrack]
 services.DetectorPropertiesService: @local::protodune_detproperties
 services.DetectorClockService:      @local::protodune_detectorclocks
 services.DetectorPropertiesService.NumberTimeSamples: 2000
