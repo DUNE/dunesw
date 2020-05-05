@@ -32,14 +32,13 @@ int test_DetectorPropertiesService(string gname) {
 
   cout << myname << line << endl;
   cout << myname << "Get DetectorPropertiesService service." << endl;
-  //art::ServiceHandle<detinfo::DetectorPropertiesService> pdetsrv;
-  const detinfo::DetectorProperties* pdetsrv =
-    art::ServiceHandle<detinfo::DetectorPropertiesService>()->provider();
+  auto const clockData = art::ServiceHandle<detinfo::DetectorClocksService const>()->DataForJob();
+  auto const detProp = art::ServiceHandle<detinfo::DetectorPropertiesService const>()->DataForJob(clockData);
 
   cout << myname << line << endl;
   cout << myname << "Use DetectorProperties service." << endl;
-  cout << myname << "    SamplingRate: " << pdetsrv->SamplingRate() << endl;
-  cout << myname << "  ElectronsToADC: " << pdetsrv->ElectronsToADC() << endl;
+  cout << myname << "    SamplingRate: " << sampling_rate(clockData) << endl;
+  cout << myname << "  ElectronsToADC: " << detProp.ElectronsToADC() << endl;
 
   cout << myname << line << endl;
   cout << "Done." << endl;
