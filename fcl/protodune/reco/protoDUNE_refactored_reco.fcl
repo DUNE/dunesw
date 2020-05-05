@@ -206,9 +206,9 @@ outputs:
    outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop *_wclsdatanfsp_wiener_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
    #outputCommands: [ "keep *", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
    compressionLevel: 1 #zlib argument (0-9) 
-   basketSize: 8192 #[Byte] buffer size at 8k
-   splitLevel: 0 #reduces number of buffers
-   treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
+   #basketSize: 8192 #[Byte] buffer size at 8k
+   #splitLevel: 0 #reduces number of buffers
+   #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
  }
 }
 
