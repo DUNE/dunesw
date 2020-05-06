@@ -1,6 +1,27 @@
+############### Legacy ###############
+
 protoDUNE_g4.fcl: Basic g4 fcl file for MC
 protoDUNE_g4_12ms.fcl: Uses basic MC g4 fcl and adds a 12ms lifetime
 protoDUNE_g4_12ms_sce.fcl: Uses basic MC g4 fcl and adds a 12ms lifetime and space charge disortions using the old/outdated parametric method
 protoDUNE_g4_12ms_sce_datadriven.fcl: **Recommended default ** Uses basic MC g4 fcl and adds a 12ms lifetime and space charge disortions using the data driven map
 protoDUNE_g4_12ms_sce_voxel.fcl: Uses basic MC g4 fcl and adds a 12ms lifetime and space charge disortions using the simulated map without fluid flow
 protoDUNE_g4_12ms_sce_voxel_fluidFlow.fcl Uses basic MC g4 fcl and adds a 12ms lifetime and space charge disortions using the simulated map with fluid flow
+
+
+############# Refactored #############
+
+protoDUNE_refactored_g4.fcl: Basic g4 fcl file that uses the refactored simulation. This is equivalent to the protoDUNE_g4.fcl file in the Legacy framework (above).
+protoDUNE_refactored_g4_sce_datadriven.fcl: Uses basic refactored g4 fcl and runs the SpaceCharge service to apply corrections based on the simulated map without fluid flow
+
+
+########## Refactored Split ##########
+
+  The refactored split flow divides the former G4 stage simulation into two parts : G4Stage1 and G4Stage2.
+  The flow is split in order to reduce the memory usage and is intended to be a temporary solution.
+
+G4Stage1:
+protoDUNE_refactored_g4_stage1.fcl: Basic g4 stage1 fcll that runs and configures the refactored Geant4 simulation. ** Must be run before any stage2 fcl **
+
+G4Stage2:
+protoDUNE_refactored_g4_stage2.fcl: Basic stage2 fcl. This loads the output of stage1 to run the IonAndScint and PDFastsim producer modules.
+protoDUNE_refactored_g4_stage2_sce_datadriven.fcl: ** Prod. 3 default **. Uses the basic stage2 fcl and runs the SpaceCharge service to apply corrections based on the simulated map without fluid flow inside the IonAndScint module.

@@ -6,7 +6,7 @@
 
 #include "scintillationtime_tool.fcl"
 
-process_name: PostG4
+process_name: G4Stage2
 
 services:
 {
@@ -32,7 +32,7 @@ source:
 {
   module_type: RootInput
   maxEvents:  30000
-  fileNames: ["g4_protoDUNE.root"]
+  fileNames: ["g4_stage1_protoDUNE.root"]
 }
 
 physics:
@@ -107,9 +107,9 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "%ifb_g4_optical.root"
+   fileName:    "%ifb_g4_stage2.root"
    dataTier:    "simulated"
-   outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_G4"]
+   outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_*"]
    fastCloning: true #will fail if the split level is not the same as for the gen stage, so turn it off
    compressionLevel: 1 #zlib argument (0-9) 
    #basketSize: 8192 #[Byte] buffer size at 8k

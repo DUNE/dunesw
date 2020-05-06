@@ -6,7 +6,7 @@
 
 #include "scintillationtime_tool.fcl"
 
-process_name: G4
+process_name: G4Stage1
 
 services:
 {
@@ -108,21 +108,22 @@ physics:
       module_type: "RandomNumberSaver"
     }
 
-    IonAndScint:
-    {
-        module_type:           "IonAndScint"
-        Instances:             "LArG4DetectorServicevolTPCActive;LArG4DetectorServicevolTPCActiveOuter" # separated by semicolon
-        ISCalcAlg:             "Separate" #"NEST"
-    }
+    # -- for now these two services will run in g4 stage2
+    #IonAndScint:
+    #{
+    #    module_type:           "IonAndScint"
+    #    Instances:             "LArG4DetectorServicevolTPCActive;LArG4DetectorServicevolTPCActiveOuter" # separated by semicolon
+    #    ISCalcAlg:             "Separate" #"NEST"
+    #}
 
-    PDFastSim:
-    {
-       module_type:            "PDFastSimPVS"
-       #module_type:            "PDFastSimPAR"
-       SimulationLabel:        "IonAndScint"
-       DoSlowComponent:        true
-       ScintTimeTool:          @local::ScintTimeLAr
-    }
+    #PDFastSim:
+    #{
+    #   module_type:            "PDFastSimPVS"
+    #   #module_type:            "PDFastSimPAR"
+    #   SimulationLabel:        "IonAndScint"
+    #   DoSlowComponent:        true
+    #   ScintTimeTool:          @local::ScintTimeLAr
+    #}
 
   }
 
@@ -164,7 +165,8 @@ physics:
 
   }
 
- simulate: [  rns, largeant, IonAndScint, PDFastSim ]
+ #simulate: [  rns, largeant, IonAndScint, PDFastSim ]
+ simulate: [  rns, largeant ]
 
  stream1: [ out1 ]
 
@@ -179,10 +181,10 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "%ifb_g4.root"
+   fileName:    "%ifb_g4_stage1.root"
    dataTier:    "simulated"
-   #outputCommands: [ "keep *" ]
-   outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_G4"]
+   outputCommands: [ "keep *" ]
+   #outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_G4"]
    #fastCloning: false #will fail if the split level is not the same as for the gen stage, so turn it off
    compressionLevel: 1 #zlib argument (0-9) 
    #basketSize: 8192 #[Byte] buffer size at 8k
