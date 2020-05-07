@@ -98,10 +98,11 @@ outputs:
    module_type: RootOutput
    fileName:    "%ifb_detsim.root"
    dataTier:    "detector-simulated"
-   compressionLevel: 1 #zlib argument (0-9) 
-   basketSize: 8192 #[Byte] buffer size at 2k
-   splitLevel: 0 #reduces number of buffers
-   treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
+   compressionLevel: 1 #zlib argument (0-9)
+   fastCloning: true
+   #basketSize: 8192 #[Byte] buffer size at 2k
+   #splitLevel: 0 #reduces number of buffers
+   #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
    outputCommands : [
      "keep *", "drop sim::SimEnergyDeposit*_*_*_*"
    ]
