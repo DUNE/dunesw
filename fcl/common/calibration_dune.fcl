@@ -19,16 +19,16 @@ protodunespdata_calibrationdedx :
     module_type:             CalibrationdEdXPDSP
     TrackModuleLabel:        "pandoraTrack"
     CalorimetryModuleLabel:  "pandoracalo"
-    CaloAlg:                 @local::pdune_sp_calorimetryalgmcc10mc
+    CaloAlg:                 @local::pdune_sp_calorimetryalgdata
     #default modified boxmodel parameters for MC
-    ModBoxA:				 0.930
-    ModBoxB:				 0.212
-    CorrectSCE:              false
+    ModBoxA:		     0.930
+    ModBoxB:		     0.212
+    CorrectSCE:              true
     ApplyNormCorrection:     false
     ApplyXCorrection:        false
     ApplyYZCorrection:       false
     ApplyLifetimeCorrection: true
-    Lifetime:                10400 #us
+    Lifetime:                10400      #us
 }
 
 END_PROLOG
