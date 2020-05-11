@@ -7,7 +7,7 @@ services.NuRandomService.PDFastSim.photon: 1234
 services.NuRandomService.PDFastSim.scinttime: 1234
 services.NuRandomService.largeant: 1234
 
-services.RandomNumberGenerator.restoreFrom: "G4RandomSeeds_stage1_Ref_protoDUNE.dat"
-services.RandomNumberGenerator.saveTo: "G4RandomSeeds_stage1.dat"
+#services.RandomNumberGenerator.restoreFrom: "G4RandomSeeds_stage1_Ref_protoDUNE.dat"
+#services.RandomNumberGenerator.saveTo: "G4RandomSeeds_stage1.dat"
 
 #outputs.out1.fastCloning: false
