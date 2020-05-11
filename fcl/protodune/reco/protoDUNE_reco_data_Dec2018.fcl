@@ -41,7 +41,6 @@ protoDUNE_reco_data_producers:
     caldata:            @local::producer_adcprep_byapa
     # WireCell
     wclsdatasp:         @local::protodunespdata_wctsp
-    digitwire:          @local::protodunespdata_digitwire
     # Hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
     # Space point finder
@@ -50,8 +49,6 @@ protoDUNE_reco_data_producers:
     hitpdune:           @local::pdune_disambigfromsp
     # CNN track/shower ID
     emtrkmichelid:      @local::protodunespdata_emtrkmichelid
-    # Clustering
-    linecluster:        @local::protodunespmc_linecluster
     # Pandora and its track and shower building
     pandora:            @local::protodune_pandora
     pandoraWriter:      @local::dune_pandorawriter
@@ -115,12 +112,10 @@ protoDUNE_notpcdecoding: [ timingrawdecoder,
 
 protoDUNE_reco_data: [ caldata,
                        wclsdatasp,
-#                       digitwire,
                        gaushit,
                        nhitsfilter,
                        reco3d,
                        hitpdune,
-#                       linecluster,
                        pandora,
                        pandoraWriter,
                        pandoraTrack,
@@ -131,16 +126,14 @@ protoDUNE_reco_data: [ caldata,
                        pandoracalipid,
                        pandoraShowercalo,
                        emtrkmichelid,
-#                       pmtrack,
-#                       pmtrackcalo,
-#                       pmtrackpid,
                        ophitInternal,
                        ophitExternal,
                        opflashInternal,
                        opflashExternal,
                        opslicerInternal,
                        opslicerExternal,
-                       crttag,crtreco,
+                       crttag,
+		       crtreco,
                        anodepiercerst0,
                        pandora2Track, 
                        pandora2calo, 
@@ -151,40 +144,10 @@ protoDUNE_reco_data: [ caldata,
 
 protoDUNE_reco_data_producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 
-# Tell PMA not to expect the CNN output
-protoDUNE_reco_data_producers.pmtrack.ClusterModuleLabel: "linecluster"
-protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.TrackLikeThreshold: 0.0
-
-# Basic noise mitigation
-#protoDUNE_reco_data_producers.gaushit.CalDataModuleLabel: "digitwire"
 protoDUNE_reco_data_producers.gaushit.CalDataModuleLabel: "wclsdatasp:gauss"
 
 # Make sure we can use cryostat-side APA hits
 protoDUNE_reco_data_producers.hitpdune.ExcludeTPCs: []
-
-### Here, we overwrite ALL module labels with the ones defined above.
-protoDUNE_reco_data_producers.linecluster.HitFinderModuleLabel:    "hitpdune"
-
-protoDUNE_reco_data_producers.pmtrack.HitModuleLabel:                         "linecluster"
-protoDUNE_reco_data_producers.pmtrack.WireModuleLabel:                        "digitwire"
-protoDUNE_reco_data_producers.pmtrack.ClusterModuleLabel:                     "emtrkmichelid:emtrkmichel"
-protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.TrackLikeThreshold:       0.63
-protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:       3
-protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.Validation:               "adc"
-protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.AdcValidationThr:         [0.8, 0.8, 1.0]
-protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.RunVertexing:             true
-protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.FlipToBeam:               true
-protoDUNE_reco_data_producers.pmtrack.PMAlgTracking.MatchT0inCPACrossing:     true
-protoDUNE_reco_data_producers.pmtrack.PMAlgCosmicTagging.TagOutOfDriftTracks: true
-protoDUNE_reco_data_producers.pmtrack.PMAlgCosmicTagging.TagFullHeightTracks: true
-protoDUNE_reco_data_producers.pmtrack.PMAlgCosmicTagging.TagNonBeamT0Tracks:  true
-
-protoDUNE_reco_data_producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
-protoDUNE_reco_data_producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
-protoDUNE_reco_data_producers.pmtrackcalo.T0ModuleLabel:            ""
-protoDUNE_reco_data_producers.pmtrackcalo.MakeTree:                 false
-protoDUNE_reco_data_producers.pmtrackpid.CalorimetryModuleLabel:  "pmtrackcalo"
-protoDUNE_reco_data_producers.pmtrackpid.TrackModuleLabel:        "pmtrack"
 
 #Pandora configurations
 protoDUNE_reco_data_producers.pandora.HitFinderModuleLabel:             "hitpdune"
@@ -195,8 +158,6 @@ protoDUNE_reco_data_producers.pandoraShower.PFParticleLabel:            "pandora
 protoDUNE_reco_data_producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
 protoDUNE_reco_data_producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
 
-protoDUNE_reco_data_producers.pandoracali.CalorimetryModuleLabel:       "pandoracalo"
-protoDUNE_reco_data_producers.pandoracali.TrackModuleLabel:             "pandoraTrack"
 protoDUNE_reco_data_producers.pandoracalipid.CalorimetryModuleLabel:    "pandoracali"
 protoDUNE_reco_data_producers.pandoracalipid.TrackModuleLabel:          "pandoraTrack"
 
