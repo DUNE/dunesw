@@ -3,7 +3,7 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 
-parent dunetpc v08_50_02
+parent dunetpc v08_51_00
 
 defaultqual e19
 
@@ -61,17 +61,17 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v08_50_02
-artdaq_core	 v3_05_13
-duneutil         v08_50_02	-	optional
-dune_pardata	 v01_54_01
+larsoft          v08_51_00
+artdaq_core	 v3_05_15
+duneutil         v08_51_00	-	optional
+dune_pardata	 v01_55_00
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04
 cetbuildtools	 v7_15_01	-	only_for_build
-dune_raw_data    v1_17_50
+dune_raw_data    v1_17_51
 #caffe            DISCONTINUED   -       optional
-nusystematics    v00_10_01
-systematicstools v00_07_00
+nusystematics    v00_10_02
+systematicstools v00_07_01
 dune_oslibs      v1_0_0         -       optional
 end_product_list
 
@@ -80,14 +80,14 @@ end_product_list
 # Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
 qualifier	larsoft		duneutil	artdaq_core	   dune_pardata    genie_xsec              genie_phyopt     dune_raw_data	        nusystematics       systematicstools    dune_oslibs  notes
-c7:py2:debug	c7:py2:debug	c7:py2:debug	c7:py2:s96:debug   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s96:debug    c7:py2:debug        c7:py2:debug        -nq-
-c7:py2:prof	c7:py2:prof	c7:py2:prof	c7:py2:s96:prof	   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s96:prof     c7:py2:prof         c7:py2:prof         -nq-
-c7:debug	c7:debug	c7:debug	c7:s96:debug       -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s96:debug        c7:debug            c7:debug            -nq-
-c7:prof		c7:prof		c7:prof		c7:s96:prof	   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s96:prof         c7:prof             c7:prof             -nq-
-e19:py2:debug	e19:py2:debug	e19:py2:debug	e19:py2:s96:debug  -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s96:debug   e19:py2:debug       e19:py2:debug       -nq-
-e19:py2:prof	e19:py2:prof	e19:py2:prof	e19:py2:s96:prof   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s96:prof    e19:py2:prof        e19:py2:prof        -nq-
-e19:debug	e19:debug	e19:debug	e19:s96:debug      -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s96:debug       e19:debug           e19:debug           -nq-
-e19:prof	e19:prof	e19:prof	e19:s96:prof	   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s96:prof        e19:prof            e19:prof            -nq-
+c7:py2:debug	c7:py2:debug	c7:py2:debug	c7:py2:s97:debug   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s97:debug    c7:py2:debug        c7:py2:debug        -nq-
+c7:py2:prof	c7:py2:prof	c7:py2:prof	c7:py2:s97:prof	   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s97:prof     c7:py2:prof         c7:py2:prof         -nq-
+c7:debug	c7:debug	c7:debug	c7:s97:debug       -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s97:debug        c7:debug            c7:debug            -nq-
+c7:prof		c7:prof		c7:prof		c7:s97:prof	   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s97:prof         c7:prof             c7:prof             -nq-
+e19:py2:debug	e19:py2:debug	e19:py2:debug	e19:py2:s97:debug  -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s97:debug   e19:py2:debug       e19:py2:debug       -nq-
+e19:py2:prof	e19:py2:prof	e19:py2:prof	e19:py2:s97:prof   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s97:prof    e19:py2:prof        e19:py2:prof        -nq-
+e19:debug	e19:debug	e19:debug	e19:s97:debug      -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s97:debug       e19:debug           e19:debug           -nq-
+e19:prof	e19:prof	e19:prof	e19:s97:prof	   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s97:prof        e19:prof            e19:prof            -nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
