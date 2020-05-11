@@ -51,6 +51,8 @@ add_subdirectory(Iceberg)
 add_subdirectory(DUNEWireCell)
 add_subdirectory(APAIO)
 add_subdirectory(ProductFilters)
+add_subdirectory(AnaUtils)
+add_subdirectory(TrackPID)
 
 # Respect the order specified in lar_build, which is:
 #
