@@ -52,7 +52,9 @@ add_subdirectory(DUNEWireCell)
 add_subdirectory(APAIO)
 add_subdirectory(ProductFilters)
 add_subdirectory(AnaUtils)
-add_subdirectory(TrackPID)
+if( DEFINED ENV{TENSORFLOW_DIR} )
+  add_subdirectory(TrackPID)
+endif ()
 
 # Respect the order specified in lar_build, which is:
 #
