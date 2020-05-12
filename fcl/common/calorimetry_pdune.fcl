@@ -20,6 +20,7 @@ pdune_sp_calodata.CaloAlg:               @local::pdune_sp_calorimetryalgdata
 pdune_sp_calodata.CaloAlg.CaloUseModBox: true
 pdune_sp_calodata.TrackModuleLabel:      "pandoraTrack"
 pdune_sp_calodata.SpacePointModuleLabel: "pandora"
+pdune_sp_calodata.CorrectSCE:            true
 pdune_sp_calodata.T0ModuleLabel:         ""
 pdune_sp_calodata.MakeTree:              false
 
