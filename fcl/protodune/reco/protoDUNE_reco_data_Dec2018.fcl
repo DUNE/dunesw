@@ -60,10 +60,6 @@ protoDUNE_reco_data_producers:
     pandoracali:	@local::protodunespdata_calibrationdedx
     pandoracalipid:	@local::standard_chi2pid
     pandoraShowercalo:  @local::pdune_sp_showercalodata
-    # PMA track reconstruction
-    pmtrack:            @local::dunefd_pmalgtrackmaker
-    pmtrackcalo:        @local::pdune_sp_calomc
-    pmtrackpid:         @local::standard_chi2pid
     # Photon detector reco modules
     ophitInternal:      @local::protodune_ophit_data_internal
     ophitExternal:      @local::protodune_ophit_data_external

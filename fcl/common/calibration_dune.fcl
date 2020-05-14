@@ -16,8 +16,9 @@ protodunespdata_calibrationdedx :
     ApplyXCorrection:        false
     ApplyYZCorrection:       false
     ApplyLifetimeCorrection: true
-    Lifetime:                10400      #us run 5759
+    #Lifetime:                10400      #us run 5759
     #Lifetime:                12300      #us run 5770
+    Lifetime:                61000      #us run 5841
 }
 
 protodunespmcsce_calibrationdedx:     @local::protodunespdata_calibrationdedx
