@@ -116,9 +116,6 @@ services.SpaceCharge.EnableCalSpatialSCE: true
 services.LifetimeCalibService.IsMC: false
 services.LifetimeCalibService.LifetimeDBTag: "v1.0"
 
-# lifetime
-physics.producers.pandoracali.UseLifetimeFromDatebase: true # false: lifetime from DetectorProperties
-
 
 #<friendly-type>_<module-label>_<instance-name>_<process-name>
 
