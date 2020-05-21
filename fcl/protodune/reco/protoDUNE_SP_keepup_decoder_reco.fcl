@@ -50,7 +50,6 @@ services:
   IFDH:              {}
 }
 
-
 #services.message.destinations.LogStandardOut.threshold: "INFO"
 
 physics:
@@ -112,6 +111,14 @@ services.SpaceCharge.CalibrationInputFilename: "SpaceChargeProtoDUNE/SCE_DataDri
 services.SpaceCharge.RepresentationType: "Voxelized_TH3"
 services.SpaceCharge.EnableCalEfieldSCE: true
 services.SpaceCharge.EnableCalSpatialSCE: true
+
+# lifetime database
+services.LifetimeCalibService.IsMC: false
+services.LifetimeCalibService.LifetimeDBTag: "v1.0"
+
+# lifetime
+physics.producers.pandoracali.UseLifetimeFromDatebase: true # false: lifetime from DetectorProperties
+
 
 #<friendly-type>_<module-label>_<instance-name>_<process-name>
 
