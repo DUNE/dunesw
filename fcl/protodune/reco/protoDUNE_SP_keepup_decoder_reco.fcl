@@ -114,6 +114,7 @@ services.SpaceCharge.EnableCalSpatialSCE: true
 
 # lifetime database
 services.LifetimeCalibService.IsMC: false
+services.LifetimeCalibService.UseCondbLifetime: true
 services.LifetimeCalibService.LifetimeDBTag: "v1.0"
 
 
