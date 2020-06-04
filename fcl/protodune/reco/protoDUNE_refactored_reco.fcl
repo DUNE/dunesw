@@ -107,6 +107,8 @@ physics: {
     pandora2calo:          @local::pdune_sp_alltrackcalomcnosce
     pandora2calonosce:     @local::pdune_sp_alltrackcalomcnosce
     pandora2pid:           @local::standard_chi2pid
+    pandora2cali:          @local::protodunespmcnosce_calibrationdedx
+    pandora2calipid:       @local::standard_chi2pid
 
     pandora2Shower:        @local::dune_pandoraShowerCreation
     pandora2Showercalo:    @local::pdune_sp_allshowercalomcnosce
@@ -144,6 +146,8 @@ reco: [ ophit,
         pandora2calo,
         pandora2calonosce,
         pandora2pid,
+        pandora2cali,
+        pandora2calipid,
         pandora2Shower,
         pandora2Showercalo,
         pandora2Showercalonosce
@@ -213,5 +217,11 @@ physics.producers.pandora2Track.UseAllParticles:             true
 physics.producers.pandora2pid.CalorimetryModuleLabel:        "pandora2calo"
 physics.producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
 
-physics.producers.pandora2Shower.PFParticleLabel:       "pandora"
-physics.producers.pandora2Shower.UseAllParticles:       true
+physics.producers.pandora2cali.TrackModuleLabel:             "pandora2Track"
+physics.producers.pandora2cali.CalorimetryModuleLabel:       "pandora2calo"
+
+physics.producers.pandora2calipid.CalorimetryModuleLabel:    "pandora2cali"
+physics.producers.pandora2calipid.TrackModuleLabel:          "pandora2Track"
+
+physics.producers.pandora2Shower.PFParticleLabel:            "pandora"
+physics.producers.pandora2Shower.UseAllParticles:            true

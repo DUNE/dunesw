@@ -79,6 +79,8 @@ protoDUNE_reco_data_producers:
     pandora2calo:          @local::pdune_sp_alltrackcalodata
     pandora2calonosce:     @local::pdune_sp_alltrackcalodatanosce
     pandora2pid:           @local::standard_chi2pid
+    pandora2cali:	   @local::protodunespdata_calibrationdedx
+    pandora2calipid:	   @local::standard_chi2pid
     
     pandora2Shower:        @local::dune_pandoraShowerCreation 
     pandora2Showercalo:    @local::pdune_sp_allshowercalodata
@@ -141,6 +143,8 @@ protoDUNE_reco_data: [ caldata,
                        pandora2calo, 
                        pandora2calonosce, 
                        pandora2pid,
+                       pandora2cali,
+                       pandora2calipid,
                        pandora2Shower, 
                        pandora2Showercalo,
                        pandora2Showercalonosce
@@ -172,6 +176,12 @@ protoDUNE_reco_data_producers.pandora2Track.UseAllParticles:             true
 
 protoDUNE_reco_data_producers.pandora2pid.CalorimetryModuleLabel:        "pandora2calo"
 protoDUNE_reco_data_producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
+
+protoDUNE_reco_data_producers.pandora2cali.TrackModuleLabel:             "pandora2Track"
+protoDUNE_reco_data_producers.pandora2cali.CalorimetryModuleLabel:       "pandora2calo"
+
+protoDUNE_reco_data_producers.pandora2calipid.CalorimetryModuleLabel:    "pandora2cali"
+protoDUNE_reco_data_producers.pandora2calipid.TrackModuleLabel:          "pandora2Track"
 
 protoDUNE_reco_data_producers.pandora2Shower.PFParticleLabel:       "pandora"
 protoDUNE_reco_data_producers.pandora2Shower.UseAllParticles:       true
