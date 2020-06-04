@@ -56,10 +56,12 @@ protoDUNE_reco_data_producers:
     pandoraShower:      @local::dune_pandoraShowerCreation
     # Calorimetry and PID for pandora
     pandoracalo:        @local::pdune_sp_calodata
+    pandoracalonosce:   @local::pdune_sp_calodatanosce
     pandorapid:         @local::standard_chi2pid
     pandoracali:	@local::protodunespdata_calibrationdedx
     pandoracalipid:	@local::standard_chi2pid
     pandoraShowercalo:  @local::pdune_sp_showercalodata
+    pandoraShowercalonosce:  @local::pdune_sp_showercalodatanosce
     # Photon detector reco modules
     ophitInternal:      @local::protodune_ophit_data_internal
     ophitExternal:      @local::protodune_ophit_data_external
@@ -75,10 +77,12 @@ protoDUNE_reco_data_producers:
     ##for each PFParticle
     pandora2Track:         @local::dune_pandoraTrackCreation
     pandora2calo:          @local::pdune_sp_alltrackcalodata
+    pandora2calonosce:     @local::pdune_sp_alltrackcalodatanosce
     pandora2pid:           @local::standard_chi2pid
     
     pandora2Shower:        @local::dune_pandoraShowerCreation 
     pandora2Showercalo:    @local::pdune_sp_allshowercalodata
+    pandora2Showercalonosce:    @local::pdune_sp_allshowercalodatanosce
     
 }
 
@@ -117,10 +121,12 @@ protoDUNE_reco_data: [ caldata,
                        pandoraTrack,
                        pandoraShower,
                        pandoracalo,
+                       pandoracalonosce,
                        pandorapid,
                        pandoracali,
                        pandoracalipid,
                        pandoraShowercalo,
+                       pandoraShowercalonosce,
                        emtrkmichelid,
                        ophitInternal,
                        ophitExternal,
@@ -129,13 +135,15 @@ protoDUNE_reco_data: [ caldata,
                        opslicerInternal,
                        opslicerExternal,
                        crttag,
-		       crtreco,
+                       crtreco,
                        anodepiercerst0,
                        pandora2Track, 
                        pandora2calo, 
+                       pandora2calonosce, 
                        pandora2pid,
                        pandora2Shower, 
-                       pandora2Showercalo
+                       pandora2Showercalo,
+                       pandora2Showercalonosce
                      ]
 
 protoDUNE_reco_data_producers.caldata.DigitLabel: "tpcrawdecoder:daq"

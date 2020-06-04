@@ -86,10 +86,12 @@ physics: {
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
     pandoracalo:        @local::pdune_sp_calomcnosce
+    pandoracalonosce:   @local::pdune_sp_calomcnosce
     pandorapid:         @local::standard_chi2pid
     pandoracali:        @local::protodunespmcnosce_calibrationdedx
     pandoracalipid:     @local::standard_chi2pid
     pandoraShowercalo:  @local::pdune_sp_showercalomcnosce
+    pandoraShowercalonosce:  @local::pdune_sp_showercalomcnosce
 #   photon detector reconstruction
     ophit:              @local::protodune_ophit
     opflash:            @local::protodune_opflash
@@ -103,43 +105,49 @@ physics: {
     ##for each PFParticle
     pandora2Track:         @local::dune_pandoraTrackCreation
     pandora2calo:          @local::pdune_sp_alltrackcalomcnosce
+    pandora2calonosce:     @local::pdune_sp_alltrackcalomcnosce
     pandora2pid:           @local::standard_chi2pid
 
     pandora2Shower:        @local::dune_pandoraShowerCreation
     pandora2Showercalo:    @local::pdune_sp_allshowercalomcnosce
+    pandora2Showercalonosce:    @local::pdune_sp_allshowercalomcnosce
 
   }
 
 
   #define the producer and filter modules for this path, order matters,
-  #filters reject all following items.  see lines starting physics.producers below
-  reco: [ ophit,
-  	  opflash,
-	  opslicer,
-          wclsdatanfsp,
-          gaushit,
-          nhitsfilter,
-          reco3d,
-          hitpdune,
-          pandora,
-	  pandoraWriter,
-	  pandoraTrack,
-	  pandoraShower,
-          pandoracalo,
-	  pandorapid,
-	  pandoracali,
-	  pandoracalipid,
-          pandoraShowercalo,
-          emtrkmichelid,
-	  crttag,
-	  crtreco,
-          anodepiercerst0,
-          pandora2Track,
-	  pandora2calo,
-	  pandora2pid,
-          pandora2Shower,
-	  pandora2Showercalo
-        ]
+#filters reject all following items.  see lines starting physics.producers below
+reco: [ ophit,
+        opflash,
+        opslicer,
+        wclsdatanfsp,
+        gaushit,
+        nhitsfilter,
+        reco3d,
+        hitpdune,
+        pandora,
+        pandoraWriter,
+        pandoraTrack,
+        pandoraShower,
+        pandoracalo,
+        pandoracalonosce,
+        pandorapid,
+        pandoracali,
+        pandoracalipid,
+        pandoraShowercalo,
+        pandoraShowercalonosce,
+        emtrkmichelid,
+        crttag,
+        crtreco,
+        anodepiercerst0,
+        pandora2Track,
+        pandora2calo,
+        pandora2calonosce,
+        pandora2pid,
+        pandora2Shower,
+        pandora2Showercalo,
+        pandora2Showercalonosce
+          ]
 
   #define the output stream, there could be more than one if using filters
   stream1:  [ out1 ]
