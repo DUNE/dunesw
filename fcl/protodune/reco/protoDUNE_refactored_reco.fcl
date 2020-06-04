@@ -213,8 +213,5 @@ physics.producers.pandora2Track.UseAllParticles:             true
 physics.producers.pandora2pid.CalorimetryModuleLabel:        "pandora2calo"
 physics.producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
 
-physics.producers.pandora2pid.CalorimetryModuleLabel:        "pandora2caloSCE"
-physics.producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
-
 physics.producers.pandora2Shower.PFParticleLabel:       "pandora"
 physics.producers.pandora2Shower.UseAllParticles:       true
