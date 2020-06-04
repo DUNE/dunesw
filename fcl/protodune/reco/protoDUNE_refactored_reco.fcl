@@ -47,9 +47,9 @@ services.Geometry.ROOT: "protodune_v7.gdml"
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
 services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC"
 services.DetectorPropertiesService:    @local::protodunesp_detproperties
-services.DetectorPropertiesService.GetHVDriftfromSamweb: false
+services.DetectorPropertiesService.GetHVDriftfromSamweb:           false
 services.DetectorPropertiesService.GetReadOutWindowSizefromSamweb: false
-
+services.DetectorPropertiesService.UseRunDependentTemperature:     false
 #source is now a root file
 source:
 {
