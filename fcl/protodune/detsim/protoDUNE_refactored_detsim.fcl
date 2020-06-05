@@ -1,5 +1,5 @@
 #include "services_refactored_pdune.fcl"
-//#include "services_dune.fcl"
+##include "services_dune.fcl"
 #include "detsimmodules_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
 #include "CRT.fcl"
@@ -43,12 +43,12 @@ physics:
 
          plugins: ["WireCellPgraph", "WireCellGen","WireCellSio","WireCellLarsoft"]
 
-         // needs to be found via your WIRECELL_PATH 
+         # needs to be found via your WIRECELL_PATH 
          configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
 
 
-         // Contract note: these exact "type:name" must be used to identify
-         // the configuration data structures for these components in the Jsonnet.
+         # Contract note: these exact "type:name" must be used to identify
+         # the configuration data structures for these components in the Jsonnet.
 
          inputers: ["wclsSimDepoSource:"]
          outputers: [
@@ -56,17 +56,17 @@ physics:
             "wclsFrameSaver:simdigits"
          ]
 
-         // Make available parameters via Jsonnet's std.extVar()
+         # Make available parameters via Jsonnet's std.extVar()
          params: {
          }
          structs: {
-           // Longitudinal diffusion constant [cm2/s]
+           # Longitudinal diffusion constant [cm2/s]
            DL: 4.0
-           // Transverse diffusion constant [cm2/s]
+           # Transverse diffusion constant [cm2/s]
            DT: 8.8
-           // Electron lifetime [ms]
-           lifetime: 35.0
-           // Electron drift speed, assumes a certain applied E-field [mm/us]
+           # Electron lifetime [ms]
+           lifetime: 10.4
+           # Electron drift speed, assumes a certain applied E-field [mm/us]
            driftSpeed: 1.565
          }
       }

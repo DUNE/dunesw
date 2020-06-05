@@ -2,33 +2,29 @@
 
 BEGIN_PROLOG
 
-protodunespmc_calibrationdedx :
-{
-    module_type:             CalibrationdEdXPDSP
-    TrackModuleLabel:        "pandoraTrack"
-    CalorimetryModuleLabel:  "pandoracalo"
-    CaloAlg:                 @local::pdune_sp_calorimetryalgmcc10mc
-    #default modified boxmodel parameters for MC
-    ModBoxA:				 0.930
-    ModBoxB:				 0.212
-    CorrectSCE:              false
-}
-
 protodunespdata_calibrationdedx :
 {
     module_type:             CalibrationdEdXPDSP
     TrackModuleLabel:        "pandoraTrack"
     CalorimetryModuleLabel:  "pandoracalo"
-    CaloAlg:                 @local::pdune_sp_calorimetryalgmcc10mc
+    CaloAlg:                 @local::pdune_sp_calorimetryalgdata
     #default modified boxmodel parameters for MC
-    ModBoxA:				 0.930
-    ModBoxB:				 0.212
-    CorrectSCE:              false
+    ModBoxA:		     0.930
+    ModBoxB:		     0.212
+    CorrectSCE:              true
     ApplyNormCorrection:     false
     ApplyXCorrection:        false
     ApplyYZCorrection:       false
     ApplyLifetimeCorrection: true
-    Lifetime:                10400 #us
+    UseLifetimeFromDatebase: true  # false: lifetime from DetectorProperties
 }
+
+protodunespmcsce_calibrationdedx:     @local::protodunespdata_calibrationdedx
+protodunespmcsce_calibrationdedx.CaloAlg:    @local::pdune_sp_calorimetryalgmc
+protodunespmcsce_calibrationdedx.UseLifetimeFromDatebase: false
+
+protodunespmcnosce_calibrationdedx:   @local::protodunespmcsce_calibrationdedx
+protodunespmcnosce_calibrationdedx.CorrectSCE: false
+protodunespmcnosce_calibrationdedx.UseLifetimeFromDatebase: false
 
 END_PROLOG

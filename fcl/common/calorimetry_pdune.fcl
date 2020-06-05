@@ -5,30 +5,77 @@ BEGIN_PROLOG
 
 # Single-Phase parameters (initially copied from FD)
 
-pdune_sp_calorimetryalgdata: @local::standard_calorimetryalgdata
-pdune_sp_calorimetryalgmc:	 @local::standard_calorimetryalgmc
+pdune_sp_calorimetryalgdata:             @local::standard_calorimetryalgdata
+pdune_sp_calorimetryalgdata.CalAreaConstants:  [ 5e-3, 5e-3, 5e-3 ]
+pdune_sp_calorimetryalgdata.CaloDoLifeTimeCorrection: false
+pdune_sp_calorimetryalgdata.CaloUseModBox: true
 
-pdune_sp_calorimetryalgmc.CalAmpConstants:  [ 0.9033e-3, 1.0287e-3, 0.8800e-3 ]
-pdune_sp_calorimetryalgmc.CalAreaConstants: [ 4.833e-3, 4.815e-3, 4.966e-3 ]
+pdune_sp_calorimetryalgmc:	         @local::standard_calorimetryalgmc
+pdune_sp_calorimetryalgmc.CaloDoLifeTimeCorrection: false
+pdune_sp_calorimetryalgmc.CalAreaConstants: [ 5e-3, 5e-3, 5e-3 ]
+pdune_sp_calorimetryalgmc.CaloUseModBox: true
 
 pdune_sp_calodata:                       @local::standard_calodata
-pdune_sp_calodata.CaloAlg:               @local::pdune_sp_calorimetryalgmc
+pdune_sp_calodata.CaloAlg:               @local::pdune_sp_calorimetryalgdata
 pdune_sp_calodata.CaloAlg.CaloUseModBox: true
+pdune_sp_calodata.TrackModuleLabel:      "pandoraTrack"
+pdune_sp_calodata.SpacePointModuleLabel: "pandora"
+pdune_sp_calodata.CorrectSCE:            true
+pdune_sp_calodata.T0ModuleLabel:         ""
+pdune_sp_calodata.MakeTree:              false
 
-pdune_sp_calomc:                         @local::standard_calomc
-pdune_sp_calomc.CaloAlg:                 @local::pdune_sp_calorimetryalgmc
-pdune_sp_calomc.CaloAlg.CaloUseModBox:   true
+pdune_sp_calodatanosce:                  @local::pdune_sp_calodata
+pdune_sp_calodatanosce.CorrectSCE:       false
 
-pdune_sp_calorimetryalgmcc10mc:          @local::standard_calorimetryalgmc
-# pdune_sp_calorimetryalgmcc10mc.CalAreaConstants:  [ 0.4911, 0.4911, 0.4911 ]
-pdune_sp_calorimetryalgmcc10mc.CalAreaConstants: [ 4.833e-3, 4.815e-3, 4.966e-3 ]
-pdune_sp_calorimetryalgmcc10mc.CaloDoLifeTimeCorrection: false
+pdune_sp_calomcsce:                      @local::pdune_sp_calodata
+pdune_sp_calomcsce.CaloAlg:              @local::pdune_sp_calorimetryalgmc
+
+pdune_sp_calomcnosce:                    @local::pdune_sp_calomcsce
+pdune_sp_calomcnosce.CorrectSCE:         false
+
+pdune_sp_alltrackcalodata:               @local::pdune_sp_calodata
+pdune_sp_alltrackcalodata.TrackModuleLabel: "pandora2Track"
+pdune_sp_alltrackcalodata.SpacePointModuleLabel: "pandora"
+pdune_sp_alltrackcalodata.T0ModuleLabel: ""
+pdune_sp_alltrackcalodata.MakeTree:      false
+pdune_sp_alltrackcalodata.CorrectSCE:    true
+pdune_sp_alltrackcalodata.CaloAlg:       @local::pdune_sp_calorimetryalgdata
+
+pdune_sp_alltrackcalodatanosce:          @local::pdune_sp_alltrackcalodata
+pdune_sp_alltrackcalodatanosce.CorrectSCE:    false
+
+pdune_sp_alltrackcalomcsce:              @local::pdune_sp_alltrackcalodata
+pdune_sp_alltrackcalomcsce.CaloAlg:      @local::pdune_sp_calorimetryalgmc
+
+pdune_sp_alltrackcalomcnosce:            @local::pdune_sp_alltrackcalomcsce
+pdune_sp_alltrackcalomcnosce.CorrectSCE: false
 
 pdune_sp_showercalodata:                 @local::shower_calorimetry
-pdune_sp_showercalodata.CalorimetryAlg:  @local::pdune_sp_calorimetryalgmc
+pdune_sp_showercalodata.CalorimetryAlg:  @local::pdune_sp_calorimetryalgdata
+pdune_sp_showercalodata.ShowerTag:       "pandoraShower"
+pdune_sp_showercalodata.CorrectSCE:      true
 
-pdune_sp_showercalomc:                   @local::shower_calorimetry
-pdune_sp_showercalomc.CalorimetryAlg:    @local::pdune_sp_calorimetryalgmc
+pdune_sp_showercalodatanosce:            @local::pdune_sp_showercalodata
+pdune_sp_showercalodatanosce.CorrectSCE: false
+
+pdune_sp_showercalomcsce:                @local::pdune_sp_showercalodata
+pdune_sp_showercalomcsce.CaloAlg:        @local::pdune_sp_calorimetryalgmc
+
+pdune_sp_showercalomcnosce:              @local::pdune_sp_showercalomcsce
+pdune_sp_showercalomcnosce.CorrectSCE:   false
+
+pdune_sp_allshowercalodata:              @local::pdune_sp_showercalodata
+pdune_sp_allshowercalodata.ShowerTag:    "pandora2Shower"
+pdune_sp_allshowercalodata.CalorimetryAlg:  @local::pdune_sp_calorimetryalgdata
+
+pdune_sp_allshowercalodatanosce:         @local::pdune_sp_allshowercalodata
+pdune_sp_allshowercalodatanosce.CorrectSCE:   false
+
+pdune_sp_allshowercalomcsce:             @local::pdune_sp_allshowercalodata
+pdune_sp_allshowercalomcsce.CaloAlg:     @local::pdune_sp_calorimetryalgmc
+
+pdune_sp_allshowercalomcnosce:           @local::pdune_sp_allshowercalomcsce
+pdune_sp_allshowercalomcnosce.CorrectSCE:   false
 
 # Double-Phase 6x6x6 parameters (***BLINDLY*** copied from SP above, changing to 2 planes and same constants!)
 
