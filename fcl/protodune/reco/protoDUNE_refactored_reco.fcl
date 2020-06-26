@@ -121,7 +121,7 @@ physics: {
 #filters reject all following items.  see lines starting physics.producers below
 reco: [ ophit,
         opflash,
-        opslicer,
+        #opslicer,
         wclsdatanfsp,
         gaushit,
         nhitsfilter,
