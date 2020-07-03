@@ -61,7 +61,7 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v08_55_02
+larsoft          v08_56_00
 artdaq_core	 v3_05_15
 duneutil         v08_55_02	-	optional
 dune_pardata	 v01_58_00
@@ -70,7 +70,7 @@ genie_phyopt     v3_00_04
 cetbuildtools	 v7_15_01	-	only_for_build
 dune_raw_data    v1_17_52
 #caffe            DISCONTINUED   -       optional
-nusystematics    v00_10_03
+nusystematics    v00_10_05
 systematicstools v00_07_01
 dune_oslibs      v1_0_0         -       optional
 hep_hpc          v0_12_01
