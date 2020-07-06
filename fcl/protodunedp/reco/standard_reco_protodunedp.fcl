@@ -9,7 +9,9 @@
 #include "t0reco.fcl"
 #include "particleid.fcl"
 #include "showerfindermodules_dune.fcl"
+#include "channelstatus_pddp.fcl"
 #include "tools_dune.fcl"
+
 process_name: Reco
 
 services:
@@ -24,8 +26,10 @@ services:
                         @table::protodunedphase_reco_services
 }
 
-
 # services.message.destinations.LogStandardOut.threshold: "INFO"
+services.CrpGainService:					@local::protodunedphase_crpgain
+services.ChannelStatusService:         				@local::pddp_channel_status_lemblind
+services.Geometry:						@local::protodunedphase_geo
 
 #source is now a root file
 source:
@@ -49,20 +53,15 @@ physics:
 # actual hit finder and recconstruction
   gaushit:            @local::dunefddphase_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
-  linecluster:        @local::dunefd_linecluster
   calo:               @local::dune10kt_calomc
-  pandora:            @local::dunefd_pandora
-  pmtrack:            @local::dunefd_pmalgtrackmaker
-  pmtrajfit:	      @local::dunefd_pmalgtrajfitter
-  pmtrackcalo:        @local::dune10kt_calomc
-  pmtrackpid:         @local::standard_chi2pid
-  blurredcluster:     @local::dune10kt_blurredcluster
-  emshower:           @local::dune10kt_emshower
+  pandora:            @local::protodune_dp_pandora
+  pandoraTrack:       @local::dune_pandoraTrackCreation
+  pandoraShower:      @local::dune_pandoraShowerCreation
  }
 
  #define the producer and filter modules for this path, order matters, 
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, caldata, fasthit, gaushit, linecluster, pmtrack, pmtrackcalo, pmtrackpid, blurredcluster, emshower ]
+ reco: [ rns, caldata, gaushit, pandora, pandoraTrack, pandoraShower ]
 
 	analyzers:
 	{
@@ -104,32 +103,24 @@ physics.producers.caldata.SigThrFact: 0.2
 
 physics.producers.linecluster.HitFinderModuleLabel:	"gaushit"
 
-physics.producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
-physics.producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
-physics.producers.pmtrackcalo.T0ModuleLabel:            ""
-physics.producers.pmtrackcalo.CaloAlg.CalAreaConstants: [ 4.966e-2, 4.966e-2 ]
-physics.producers.pmtrackpid.CalorimetryModuleLabel:  "pmtrackcalo"
-physics.producers.pmtrackpid.TrackModuleLabel:        "pmtrack"
-
-physics.producers.pmtrack.HitModuleLabel:             "linecluster"
-physics.producers.pmtrack.ClusterModuleLabel:         "linecluster"
-
-physics.producers.pmtrajfit.HitModuleLabel:           "linecluster"
-physics.producers.pmtrajfit.PfpModuleLabel:           "pandora"
-
-physics.producers.blurredcluster.HitsModuleLabel: "linecluster"
-physics.producers.blurredcluster.TrackModuleLabel: "pmtrack"
-physics.producers.blurredcluster.CreateDebugPDF:  false
-physics.producers.blurredcluster.MergeClusters:   false
-physics.producers.blurredcluster.GlobalTPCRecon:  true
-physics.producers.blurredcluster.ShowerReconOnly: false
-physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
-
-physics.producers.emshower.ClusterModuleLabel: "blurredcluster"
-physics.producers.emshower.HitsModuleLabel: "linecluster"
-physics.producers.emshower.TrackModuleLabel: "pmtrack"
-
-
-#Pandora configurations
-
-#Optical detector configuration
+################################################################################
+# Pandora
+################################################################################
+physics.producers.pandora.ConfigFile: "PandoraSettings_Master_ProtoDUNE_DP.xml"
+physics.producers.pandora.EnableLineGaps: true
+physics.producers.pandora.EnableMCParticles: true
+physics.producers.pandora.EnableProduction: true
+physics.producers.pandora.GeantModuleLabel: "largeant"
+physics.producers.pandora.HitFinderModuleLabel: "gaushit"
+physics.producers.pandora.PrintOverallRecoStatus: false
+physics.producers.pandora.ShouldPerformSliceId: false
+physics.producers.pandora.ShouldRunAllHitsCosmicReco: true
+physics.producers.pandora.ShouldRunCosmicHitRemoval: false
+physics.producers.pandora.ShouldRunCosmicRecoOption: true
+physics.producers.pandora.ShouldRunNeutrinoRecoOption: false
+physics.producers.pandora.ShouldRunSlicing: true
+physics.producers.pandora.ShouldRunStitching: false
+physics.producers.pandora.UseGlobalCoordinates: false
+physics.producers.pandora.UseHitWidths: true
+physics.producers.pandoraTrack.PFParticleLabel:         "pandora"
+physics.producers.pandoraShower.PFParticleLabel:        "pandora"
