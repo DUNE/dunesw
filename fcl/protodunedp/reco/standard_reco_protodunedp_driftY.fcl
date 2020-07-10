@@ -24,6 +24,8 @@ services:
                         @table::dunefddphase_reco_services
 }
 
+services.CrpGainService:					@local::protodunedphase_crpgain
+services.ChannelStatusService:         				@local::pddp_channel_status_lemblind
 services.Geometry: @local::protodunedphase_driftY_geo
 services.DetectorPropertiesService: @local::protodunedphase_detproperties
 
