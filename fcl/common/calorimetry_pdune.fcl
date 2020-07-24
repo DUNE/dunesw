@@ -77,24 +77,26 @@ pdune_sp_allshowercalomcsce.CaloAlg:     @local::pdune_sp_calorimetryalgmc
 pdune_sp_allshowercalomcnosce:           @local::pdune_sp_allshowercalomcsce
 pdune_sp_allshowercalomcnosce.CorrectSCE:   false
 
-# Double-Phase 6x6x6 parameters (***BLINDLY*** copied from SP above, changing to 2 planes and same constants!)
+# Dual-Phase parameters
 
-pdune_dp_calorimetryalgdata: @local::standard_calorimetryalgdata
-pdune_dp_calorimetryalgmc:	 @local::standard_calorimetryalgmc
+pdune_dp_calorimetryalgdata:             @local::standard_calorimetryalgdata
+pdune_dp_calorimetryalgdata.CalAreaConstants:  [ 14.275E-3, 14.275E-3 ]
+pdune_dp_calorimetryalgdata.CaloDoLifeTimeCorrection: false
+pdune_dp_calorimetryalgdata.CaloUseModBox: true
 
-pdune_dp_calorimetryalgmc.CalAmpConstants:  [ 0.8800e-3, 0.8800e-3 ]
-pdune_dp_calorimetryalgmc.CalAreaConstants: [ 4.966e-3, 4.966e-3 ]
+pdune_dp_calorimetryalgmc:	         @local::standard_calorimetryalgmc
+pdune_dp_calorimetryalgmc.CaloDoLifeTimeCorrection: false
+pdune_dp_calorimetryalgmc.CalAreaConstants: [ 14.275E-3, 14.275E-3 ]
+pdune_dp_calorimetryalgmc.CaloUseModBox: true
 
 pdune_dp_calodata:                       @local::standard_calodata
-pdune_dp_calodata.CaloAlg:               @local::pdune_sp_calorimetryalgdata
+pdune_dp_calodata.CaloAlg:               @local::pdune_dp_calorimetryalgdata
 pdune_dp_calodata.CaloAlg.CaloUseModBox: true
-
-pdune_dp_calomc:                         @local::standard_calomc
-pdune_dp_calomc.CaloAlg:                 @local::pdune_sp_calorimetryalgmc
-pdune_dp_calomc.CaloAlg.CaloUseModBox:   true
-
-
-# DP 3x1x1 not added: we should discuss
+pdune_dp_calodata.TrackModuleLabel:      "pandoraTrack"
+pdune_dp_calodata.SpacePointModuleLabel: "pandora"
+pdune_dp_calodata.CorrectSCE:            false
+pdune_dp_calodata.T0ModuleLabel:         ""
+pdune_dp_calodata.MakeTree:              false
 
 
 END_PROLOG
