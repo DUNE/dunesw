@@ -75,11 +75,11 @@ physics.producers.generator.RandomXZShift:       2000     #amount to randomly sh
 physics.producers.generator.ProjectToHeight:     856  #height to which particles are projected in cm
 
 physics.producers.generator.ShowerInputFiles:     [
-                                                    "/pnfs/larsoft/persistent/physics/cosmics/CERN/CORSIKA/standard/p_showers_*",
-                                                   "/pnfs/larsoft/persistent/physics/cosmics/CERN/CORSIKA/standard/He_showers_*",
-                                                   "/pnfs/larsoft/persistent/physics/cosmics/CERN/CORSIKA/standard//N_showers_*",
-                                                   "/pnfs/larsoft/persistent/physics/cosmics/CERN/CORSIKA/standard//Mg_showers_*",
-                                                   "/pnfs/larsoft/persistent/physics/cosmics/CERN/CORSIKA/standard//Fe_showers_*"
+                                                    "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard/p_showers_*",
+                                                   "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard/He_showers_*",
+                                                   "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard//N_showers_*",
+                                                   "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard//Mg_showers_*",
+                                                   "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Cosmics/CERN/CORSIKA/standard//Fe_showers_*"
                                                ] #list of sqlite dbs with corsika showers
 
 
