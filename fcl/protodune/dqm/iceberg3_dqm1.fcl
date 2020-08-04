@@ -1,4 +1,4 @@
-# iceberg4_dqm1.fcl
+# iceberg_dqm1.fcl
 
 # David Adams
 # April 2020
@@ -10,7 +10,7 @@ tools.tickRanges.plotTicks.end:   2000
 
 services.RawDigitPrepService.AdcChannelToolNames: [
   "digitReader",
-  "ib4_adcPedestalFit", 
+  "ib_adcPedestalFit", 
   "ibmet_adcChannelPedestalPlotter",
   "ibmet_adcChannelPedestalNoisePlotter",
   "ibmet_adcChannelPedestalOrfPlotter",
@@ -22,6 +22,3 @@ services.RawDigitPrepService.AdcChannelToolNames: [
   "ibcht_Iplanes"
   #, "pd_evtviewNfemb"
 ]
-
-tools.ibcht_Xplanes.MaxSignal: 20
-tools.ibcht_Iplanes.MaxSignal: 20
