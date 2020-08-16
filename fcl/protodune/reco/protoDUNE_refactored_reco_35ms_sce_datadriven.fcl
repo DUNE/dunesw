@@ -8,6 +8,6 @@ physics.producers.pandoracali:           @local::protodunespmcsce_calibrationded
 
 services.DetectorPropertiesService.Electronlifetime: 35000
 services.SpaceCharge.CalibrationInputFilename: "SpaceChargeProtoDUNE/SCE_DataDriven_180kV_v3.root"
-services.SpaceCharge.RepresentationType: "Voxelized_TH3"
+services.SpaceCharge.RepresentationType: "Splines_TH3"
 services.SpaceCharge.EnableCalEfieldSCE: true
 services.SpaceCharge.EnableCalSpatialSCE: true
