@@ -3,7 +3,7 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 
-parent dunetpc v08_53_00
+parent dunetpc v08_62_00
 
 defaultqual e19
 
@@ -48,11 +48,11 @@ table_fragment_begin
     envSet(DBIQEURL, http://dbdata0vm.fnal.gov:9090/QE/dune)
     envSet(DBIUSER, pdunesp_reader)
     envSet(DBIHOST, ifdbprod.fnal.gov)
-    envSet(DBIWSURL, http://dbdata0vm.fnal.gov:9090/dune_con_prod/app/)
+    envSet(DBIWSURL, https://dbdata0vm.fnal.gov:9443/dune_con_prod/app/)
     envSet(DBINAME, pdunesp_prod)
-    envSet(DBIWSURLPUT, http://dbdata0vm.fnal.gov:9090/dune_con_prod/app/)
+    envSet(DBIWSURLPUT, https://dbdata0vm.fnal.gov:9443/dune_con_prod/app/)
     envSet(DBIPORT, 5451)
-    envSet(DBIWSURLINT, http://dbdata0vm.fnal.gov:9090/dune_con_prod/app/)
+    envSet(DBIWSURLINT, https://dbdata0vm.fnal.gov:9443/dune_con_prod/app/)
 table_fragment_end
 
 
@@ -61,33 +61,34 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v08_54_00
+larsoft          v09_00_00_rc1
 artdaq_core	 v3_05_15
-duneutil         v08_51_00	-	optional
-dune_pardata	 v01_56_00
+duneutil         v08_60_00	-	optional
+dune_pardata	 v01_58_00
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04
 cetbuildtools	 v7_15_01	-	only_for_build
 dune_raw_data    v1_17_52
 #caffe            DISCONTINUED   -       optional
-nusystematics    v00_10_03
+nusystematics    v00_10_05
 systematicstools v00_07_01
 dune_oslibs      v1_0_0         -       optional
+hep_hpc          v0_12_01
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
-qualifier	larsoft		duneutil	artdaq_core	   dune_pardata    genie_xsec              genie_phyopt     dune_raw_data	        nusystematics       systematicstools    dune_oslibs  notes
-c7:py2:debug	c7:py2:debug	c7:py2:debug	c7:py2:s97:debug   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s97:debug    c7:py2:debug        c7:py2:debug        -nq-
-c7:py2:prof	c7:py2:prof	c7:py2:prof	c7:py2:s97:prof	   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s97:prof     c7:py2:prof         c7:py2:prof         -nq-
-c7:debug	c7:debug	c7:debug	c7:s97:debug       -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s97:debug        c7:debug            c7:debug            -nq-
-c7:prof		c7:prof		c7:prof		c7:s97:prof	   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s97:prof         c7:prof             c7:prof             -nq-
-e19:py2:debug	e19:py2:debug	e19:py2:debug	e19:py2:s97:debug  -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s97:debug   e19:py2:debug       e19:py2:debug       -nq-
-e19:py2:prof	e19:py2:prof	e19:py2:prof	e19:py2:s97:prof   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s97:prof    e19:py2:prof        e19:py2:prof        -nq-
-e19:debug	e19:debug	e19:debug	e19:s97:debug      -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s97:debug       e19:debug           e19:debug           -nq-
-e19:prof	e19:prof	e19:prof	e19:s97:prof	   -nq-    	G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s97:prof        e19:prof            e19:prof            -nq-
+qualifier	larsoft		duneutil	artdaq_core	   dune_pardata    genie_xsec              genie_phyopt     dune_raw_data          nusystematics       systematicstools    dune_oslibs   hep_hpc   notes
+c7:py2:debug	c7:py2:debug	c7:py2:debug	c7:py2:s97:debug   -nq-            G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s97:debug    c7:py2:debug        c7:py2:debug        -nq-          c7
+c7:py2:prof	c7:py2:prof	c7:py2:prof	c7:py2:s97:prof	   -nq-            G1810a0211a:k250:e1000  dkcharmtau       c7:py2:nu:s97:prof     c7:py2:prof         c7:py2:prof         -nq-          c7
+c7:debug	c7:debug	c7:debug	c7:s97:debug       -nq-            G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s97:debug        c7:debug            c7:debug            -nq-          c7
+c7:prof		c7:prof		c7:prof		c7:s97:prof	   -nq-            G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s97:prof         c7:prof             c7:prof             -nq-          c7
+e19:py2:debug	e19:py2:debug	e19:py2:debug	e19:py2:s97:debug  -nq-            G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s97:debug   e19:py2:debug       e19:py2:debug       -nq-          e19
+e19:py2:prof	e19:py2:prof	e19:py2:prof	e19:py2:s97:prof   -nq-            G1810a0211a:k250:e1000  dkcharmtau       e19:py2:nu:s97:prof    e19:py2:prof        e19:py2:prof        -nq-          e19
+e19:debug	e19:debug	e19:debug	e19:s97:debug      -nq-            G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s97:debug       e19:debug           e19:debug           -nq-          e19
+e19:prof	e19:prof	e19:prof	e19:s97:prof	   -nq-            G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s97:prof        e19:prof            e19:prof            -nq-          e19
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:

@@ -1,7 +1,12 @@
 #include "protoDUNE_refactored_reco.fcl"
 
-services.DetectorPropertiesService.Electronlifetime: 35000
+physics.producers.pandoracalo:           @local::pdune_sp_calomcsce
+physics.producers.pandoraShowercalo:     @local::pdune_sp_showercalomcsce
+physics.producers.pandora2calo:          @local::pdune_sp_alltrackcalomcsce
+physics.producers.pandora2Showercalo:    @local::pdune_sp_allshowercalomcsce
+physics.producers.pandoracali:           @local::protodunespmcsce_calibrationdedx
 
+services.DetectorPropertiesService.Electronlifetime: 35000
 services.SpaceCharge.CalibrationInputFilename: "SpaceChargeProtoDUNE/SCE_DataDriven_180kV_v3.root"
 services.SpaceCharge.RepresentationType: "Voxelized_TH3"
 services.SpaceCharge.EnableCalEfieldSCE: true

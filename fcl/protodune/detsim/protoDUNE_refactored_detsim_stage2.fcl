@@ -1,12 +1,12 @@
 #include "services_refactored_pdune.fcl"
-##include "services_dune.fcl"
-#include "detsimmodules_dune.fcl"
+//#include "services_dune.fcl"
+//#include "detsimmodules_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
 #include "CRT.fcl"
 
 #include "tools_dune.fcl"
 
-process_name: Detsim
+process_name: DetsimStage2
 
 services:
 {
@@ -35,54 +35,49 @@ physics:
  {
    # daq:            @local::dune_detsim
 
-   tpcrawdecoder : {
-      module_type : WireCellToolkit
-      wcls_main: {
-         tool_type: WCLS
-         apps: ["Pgrapher"]
+   # tpcrawdecoder : {
+   #    module_type : WireCellToolkit
+   #    wcls_main: {
+   #       tool_type: WCLS
+   #       apps: ["Pgrapher"]
 
-         plugins: ["WireCellPgraph", "WireCellGen","WireCellSio","WireCellLarsoft"]
+   #       plugins: ["WireCellPgraph", "WireCellGen","WireCellSio","WireCellLarsoft"]
 
-         # needs to be found via your WIRECELL_PATH 
-         configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
+   #       // needs to be found via your WIRECELL_PATH 
+   #       configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
 
 
-         # Contract note: these exact "type:name" must be used to identify
-         # the configuration data structures for these components in the Jsonnet.
+   #       // Contract note: these exact "type:name" must be used to identify
+   #       // the configuration data structures for these components in the Jsonnet.
 
-         inputers: ["wclsSimDepoSource:"]
-         outputers: [
-            "wclsSimChannelSink:postdrift",
-            "wclsFrameSaver:simdigits"
-         ]
+   #       inputers: ["wclsSimDepoSource:"]
+   #       outputers: [
+   #          "wclsSimChannelSink:postdrift",
+   #          "wclsFrameSaver:simdigits"
+   #       ]
 
-         # Make available parameters via Jsonnet's std.extVar()
-         params: {
-         }
-         structs: {
-           # Longitudinal diffusion constant [cm2/s]
-           DL: 4.0
-           # Transverse diffusion constant [cm2/s]
-           DT: 8.8
-           # Electron lifetime [ms]
-           lifetime: 10.4
-           # Electron drift speed, assumes a certain applied E-field [mm/us]
-           driftSpeed: 1.565
-         }
-      }
-   }
+   #       // Make available parameters via Jsonnet's std.extVar()
+   #       params: {
+   #       }
+   #       structs: {
+   #         // Longitudinal diffusion constant [cm2/s]
+   #         DL: 4.0
+   #         // Transverse diffusion constant [cm2/s]
+   #         DT: 8.8
+   #         // Electron lifetime [ms]
+   #         lifetime: 35.0
+   #         // Electron drift speed, assumes a certain applied E-field [mm/us]
+   #         driftSpeed: 1.565
+   #       }
+   #    }
+   # }
 
    opdigi:         @local::protodune_opdigi
    crt:            @local::CRTSimRefac_standard
    rns:            { module_type: "RandomNumberSaver" }
  }
  
- #simulate: [ rns, daq, opdigi, crt]
- simulate: [ rns, 
-             # TPC simulation
-             tpcrawdecoder,
-             # OpDet and CRT simulation
-             opdigi, crt] 
+ simulate: [ rns, opdigi, crt]
  
  stream1:  [ out1 ]
 
@@ -96,7 +91,7 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "%ifb_detsim.root"
+   fileName:    "%ifb_detsim_stage2.root"
    dataTier:    "detector-simulated"
    compressionLevel: 1 #zlib argument (0-9)
    fastCloning: true
@@ -110,7 +105,7 @@ outputs:
 }
 
 # Use fixed values instead of DB for pedestals.
-services.DetPedestalService: @local::dune_fixedpeds
+# services.DetPedestalService: @local::dune_fixedpeds
 
 # DetSim flags.
 # physics.producers.daq.NoiseOn:     true
@@ -122,12 +117,12 @@ services.DetPedestalService: @local::dune_fixedpeds
 physics.producers.opdigi.InputModule: "PDFastSim"
 
 # DetSim services.
-services.SimChannelExtractService: @local::scxgeneric
-services.ChannelNoiseService:      @local::chnoiseold
-services.PedestalAdditionService:  @local::padprovided
-services.AdcDistortService:        @local::stuckbits
-services.AdcSuppressService:       @local::zslegacy
-services.AdcCompressService:       @local::cmpblock
+# services.SimChannelExtractService: @local::scxgeneric
+# services.ChannelNoiseService:      @local::chnoiseold
+# services.PedestalAdditionService:  @local::padprovided
+# services.AdcDistortService:        @local::stuckbits
+# services.AdcSuppressService:       @local::zslegacy
+# services.AdcCompressService:       @local::cmpblock
 
 # Labels
 # physics.producers.daq.SimChannelLabel: "elecDrift" 

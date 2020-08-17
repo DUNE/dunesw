@@ -1,7 +1,7 @@
 #include "prodgenie_nue_dune10kt_1x2x6.fcl"
 
-physics.producers.generator.FluxCopyMethod: "DIRECT"
-physics.producers.generator.FluxSearchPaths: "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/TaskForce_Flux/opt_03/neutrino/gsimple/far/nominal/"
+#physics.producers.generator.FluxCopyMethod: "DIRECT"
+#physics.producers.generator.FluxSearchPaths: "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/TaskForce_Flux/opt_03/neutrino/gsimple/far/nominal/"
 physics.producers.generator.MaxFluxFileMB: 20
 
 services.NuRandomService.policy: "preDefinedSeed"

@@ -1,10 +1,4 @@
 #include "services_refactored_pdune.fcl"
-#include "services_dune.fcl"
-//#include "largeantmodules_dune.fcl"
-//#include "photpropservices_dune.fcl"
-//#include "opticaldetectormodules_dune.fcl"
-
-#include "scintillationtime_tool.fcl"
 
 process_name: G4Stage1
 
@@ -15,7 +9,6 @@ services:
   MemoryTracker:     {} # default is one
   RandomNumberGenerator: {} #ART native random number generator
   message:      @local::standard_info
-  @table::protodune_simulation_services
 
   DetectorHolder: {}
   ActionHolder: {}
@@ -62,28 +55,28 @@ services:
                        keepGenTrajectories: ["generator"] # list of generator labels for which we want to store
                                                           # trajectory points. The protodune beam label is simply
                                                           # "generator"
-                       keepOnlyPrimaryFullTrajectories : false # (defaults to false in larg4) If set to true, only
-                                                          # the particles with MCTruth process == "primary" and
-                                                          # their descendants will have the full set of trajetory
-                                                          # points stored. Particles descending from primaries with
-                                                          # MCTruth process != "primary" will not have a full set
-                                                          # of trajectory points stored -- only their start and
-                                                          # end points. This filter only applies to the generator
-                                                          # labels listed in the keepGenTrajectories. E.g, for the
-                                                          # beam generator, no "primaryBackground" particles or their
-                                                          # descendants would have a full set of traj. points. if
-                                                          # this is set to true.
+                       keepOnlyPrimaryFullTrajectories : false  # (defaults to false in larg4) If set to true, only
+                                                                # the particles with MCTruth process == "primary" and
+                                                                # their descendants will have the full set of trajetory
+                                                                # points stored. Particles descending from primaries with
+                                                                # MCTruth process != "primary" will not have a full set
+                                                                # of trajectory points stored -- only their start and
+                                                                # end points. This filter only applies to the generator
+                                                                # labels listed in the keepGenTrajectories. E.g, for the
+                                                                # beam generator, no "primaryBackground" particles or their
+                                                                # descendants would have a full set of traj. points. if
+                                                                # this is set to true.
+                       SparsifyTrajectories: true # call SparsifyTrajectory() method on MCParticles with full trajectories
+                                                  # being stored. This helps reduce memory usage in the root output stage
+                                                  # if there are many trajectory points.
                                       
                       }
+
+  NuRandomService: {
+     endOfJobSummary: true
+     policy: "perEvent"
+  }
 }
-## -- NuRandomService:
-services.NuRandomService.policy: "perEvent"
-
-#services.PhotonVisibilityService:               @local::protodunev4_photonvisibilityservice
-#services.LArG4Parameters.UseLitePhotons:        true
-
-#services.Geometry.GDML: "protodune_v7.gdml"
-#services.Geometry.ROOT: "protodune_v7.gdml"
 
 source:
 {
@@ -104,27 +97,9 @@ physics:
                 macroPath: ".:./macros"
                 visMacro: "vis.mac"
     }
-    rns: {
-      module_type: "RandomNumberSaver"
-    }
-
-    # -- for now these two services will run in g4 stage2
-    #IonAndScint:
-    #{
-    #    module_type:           "IonAndScint"
-    #    Instances:             "LArG4DetectorServicevolTPCActive;LArG4DetectorServicevolTPCActiveOuter" # separated by semicolon
-    #    ISCalcAlg:             "Separate" #"NEST"
+    #rns: {
+    #  module_type: "RandomNumberSaver"
     #}
-
-    #PDFastSim:
-    #{
-    #   module_type:            "PDFastSimPVS"
-    #   #module_type:            "PDFastSimPAR"
-    #   SimulationLabel:        "IonAndScint"
-    #   DoSlowComponent:        true
-    #   ScintTimeTool:          @local::ScintTimeLAr
-    #}
-
   }
 
   analyzers: {
@@ -137,36 +112,10 @@ physics:
     # CheckAuxDetHit: {   module_type: CheckAuxDetHit
     #   hist_dir: "HistoDir3" 
     # }
-    # ISCalculationAna: {             module_type: ISCalculationAna
-    #       EDepModuleLabel:        "largeant:LArG4DetectorServicevolTPCActive"
-    # }
-    # SimDriftedElectronClusterAna: { module_type: SimDriftedElectronClusterAna
-    #       EDepModuleLabel:        "elecDrift"
-    # }		   
-
-    # ISCalcAna:
-    # {
-    #     module_type:             ISCalcAna
-    #     SimulationLabel:         "largeant:LArG4DetectorServicevolTPCActive"
-    #     // ISCalcAlg:               "NEST"
-    #     ISCalcAlg:               "Separate"
-    # }
-    # 
-    # SimPh:
-    # {
-    #     module_type:             "SimPhotonCounter"
-    #     Verbosity:               5
-    #     InputModule:             "PDFastSimPVS:pvs" 
-    #     MakeAllPhotonsTree:      true
-    #     MakeDetectedPhotonsTree: true
-    #     MakeOpDetsTree:          true
-    #     MakeOpDetEventsTree:     true
-    # }
-
   }
 
- #simulate: [  rns, largeant, IonAndScint, PDFastSim ]
- simulate: [  rns, largeant ]
+ #simulate: [  rns, largeant ]
+ simulate: [ largeant ]
 
  stream1: [ out1 ]
 
