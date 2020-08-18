@@ -1,0 +1,5 @@
+#include "channelstatus_iceberg_cots.fcl"
+#include "evd_iceberg_data.fcl"
+
+services.ChannelStatusService.BadChannels: @local::iceberg_bad_channels_cots
+services.ChannelStatusService.NoisyChannels: @local::iceberg_noisy_channels_cots
