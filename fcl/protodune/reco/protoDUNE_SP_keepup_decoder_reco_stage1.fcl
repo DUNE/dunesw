@@ -1,12 +1,11 @@
-## same as protoDUNE_SP_keepup_decoder_reco_stage1.fcl, no yz,x,t correction; *calinoxyzt<->*cali; *calipidnoxyzt<->*calipid
-## this fcl is kept; we use two stage recos once we have calibration done:  protoDUNE_SP_keepup_decoder_reco_stage1.fcl and protoDUNE_SP_keepup_decoder_reco_stage2.fcl
-##
-#include "protoDUNE_reco_data_Dec2018.fcl"
+## protoDUNE reco data stage 1: with sce, liftime correction; no yz,x,t correction
+
+#include "protoDUNE_reco_data_prolog.fcl"
 #include "ProtoDUNETriggerFilter.fcl"
 
 #include "protodune_tools_dune.fcl"
 
-process_name: DecoderandReco
+process_name: DecoderandReco1
 
 services:
 {
@@ -35,7 +34,7 @@ services:
     
   TFileService: { 
       closeFileFast: true  # default
-      fileName: "hist_%ifb_decoder_reco.root"
+      fileName: "hist_%ifb_decoder_reco1.root"
       tmpDir: "<parent-path-of-filename>"  # default
   }
 
@@ -67,12 +66,12 @@ physics:
     producers:
     {
         @table::protoDUNE_rawdecoding_producers
-        @table::protoDUNE_reco_data_producers
+        @table::protoDUNE_reco_data_stage1_producers
     }
 
     #Create path to run module
     decode: [ @sequence::protoDUNE_notpcdecoding,
-              @sequence::protoDUNE_reco_data
+              @sequence::protoDUNE_reco_data_stage1
           ]
 
     output: [ out1 ]
@@ -91,7 +90,7 @@ outputs:
         compressionLevel: 1
         module_type: RootOutput
         saveMemoryObjectThreshold: 10485760
-        fileName: "%ifb_reco.root"
+        fileName: "%ifb_reco1.root"
         dataTier:    "full-reconstructed"
 #        outputCommands: [ "drop *", "keep raw::RawDigitrecob*_*_*_*", "keep recob::*_*_*_*" ]
         outputCommands: [ "keep *", "drop artdaq::Fragments_*_*TPC_*", "drop artdaq::Fragments_*_*FELIX_*", "drop raw::RawDigit*_*_*_*", "drop recob::Wires_caldata_dataprep_*", "drop *_wclsdatasp_wiener_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
@@ -118,7 +117,7 @@ services.SpaceCharge.EnableCalSpatialSCE: true
 # lifetime database
 services.LifetimeCalibService.IsMC: false
 services.LifetimeCalibService.UseCondbLifetime: true
-services.LifetimeCalibService.LifetimeDBTag: "v1.0"
+services.LifetimeCalibService.LifetimeDBTag: "v1.1"
 
 
 #<friendly-type>_<module-label>_<instance-name>_<process-name>
