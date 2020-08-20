@@ -33,13 +33,12 @@ int test_DetectorClocksService(string gname) {
 
   cout << myname << line << endl;
   cout << myname << "Get DetectorClocksService service." << endl;
-  const detinfo::DetectorClocks* pclksrv =
-    art::ServiceHandle<detinfo::DetectorClocksService>()->provider();
+  auto const clockData = art::ServiceHandle<detinfo::DetectorClocksService const>()->DataForJob();
 
   cout << myname << line << endl;
   cout << myname << "Use DetectorClocksService service." << endl;
-  cout << "   TriggerTime: " << pclksrv->TriggerTime() << endl;
-  cout << "  BeamGateTime: " << pclksrv->BeamGateTime() << endl;
+  cout << "   TriggerTime: " << clockData.TriggerTime() << endl;
+  cout << "  BeamGateTime: " << clockData.BeamGateTime() << endl;
 
   cout << myname << line << endl;
   cout << "Done." << endl;
