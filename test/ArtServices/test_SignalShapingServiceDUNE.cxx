@@ -15,6 +15,7 @@
 #include "dune/ArtSupport/ArtServiceHelper.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "lardata/Utilities/LArFFT.h"
+#include "lardata/DetectorInfoServices/DetectorClocksService.h"
 #include "larcore/Geometry/Geometry.h"
 #include "TH1.h"
 
@@ -97,7 +98,8 @@ int test_SignalShapingServiceDUNE() {
   cout << myname << "Deconvolute." << endl;
   vector<float> decon(xformSize);;
   for ( unsigned int i=0; i<raw.size(); ++i ) decon[i] = raw[i];
-  psss->Deconvolute(chan, decon);
+  auto const clockData = art::ServiceHandle<detinfo::DetectorClocksService const>()->DataForJob();
+  psss->Deconvolute(clockData, chan, decon);
   cout << "      Raw     Decon" << endl;
   for ( int unsigned i=0; i<raw.size(); ++i ) {
     cout << setw(10) << raw[i] << setw(10) << decon[i] << endl;
