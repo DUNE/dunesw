@@ -6,7 +6,7 @@ services.DetPedestalService.FixedDetPedestal.PedMeanU:  2350
 services.ChannelStatusService: @local::pdsp_channel_status
 services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
 #services.RawDrawingOptions.PedestalOption: 1
-services.RecoDrawingOptions.WireModuleLabels: ["caldata", "digitwire", "wclsdatasp:gauss", "caldata:dataprep"]
+services.RecoDrawingOptions.WireModuleLabels: ["caldata", "digitwire", "wclsdatasp:gauss", "wclsdatanfsp:gauss", "caldata:dataprep"]
 services.DetectorPropertiesService: @local::protodunesp_detproperties
 services.DetectorPropertiesService.GetHVDriftfromSamweb: false
 services.DetectorPropertiesService.GetReadOutWindowSizefromSamweb: false
