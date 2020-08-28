@@ -1,0 +1,18 @@
+## protoDUNE reco mc stage 1: with sce, with lifetime, no yz, x, t correction
+
+#include "protoDUNE_refactored_reco_stage1.fcl"
+
+physics.producers.pandoracalo:           @local::pdune_sp_calomcsce
+physics.producers.pandoraShowercalo:     @local::pdune_sp_showercalomcsce
+physics.producers.pandora2calo:          @local::pdune_sp_alltrackcalomcsce
+physics.producers.pandora2Showercalo:    @local::pdune_sp_allshowercalomcsce
+physics.producers.pandoracalinoxyzt:     @local::protodunespmcsce_calibrationdedx
+physics.producers.pandora2calinoxyzt:    @local::protodunespmcsce_calibrationdedx
+physics.producers.pandora2calinoxyzt.CalorimetryModuleLabel:    "pandora2calo" 
+physics.producers.pandora2calinoxyzt.TrackModuleLabel:          "pandora2Track" 
+
+
+services.DetectorPropertiesService.Electronlifetime: 35000
+
+services.SpaceCharge.EnableCalEfieldSCE: true
+services.SpaceCharge.EnableCalSpatialSCE: true

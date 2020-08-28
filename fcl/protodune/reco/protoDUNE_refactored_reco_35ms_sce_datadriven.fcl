@@ -1,3 +1,6 @@
+## same as protoDUNE_refactored_reco_35ms_sce_datadriven_stage1.fcl, with sce; with lifetime correction, no yz, x, t correction; *calinoxyzt<->*cali; *calipidnoxyzt<->*calipid
+## this fcl is currently kept; we use two stage recos once we have calibration done: protoDUNE_refactored_reco_35ms_sce_datadriven_stage1.fcl and protoDUNE_refactored_reco_35ms_sce_datadriven_stage2.fcl
+
 #include "protoDUNE_refactored_reco.fcl"
 
 physics.producers.pandoracalo:           @local::pdune_sp_calomcsce

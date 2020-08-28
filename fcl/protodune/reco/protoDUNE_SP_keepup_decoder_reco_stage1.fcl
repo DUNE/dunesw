@@ -5,7 +5,7 @@
 
 #include "protodune_tools_dune.fcl"
 
-process_name: DecoderandReco1
+process_name: Reco1
 
 services:
 {

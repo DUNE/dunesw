@@ -1,0 +1,196 @@
+## protoDUNE reco on mc prolog
+## divide reco into two stages according to calibration:
+##   a) stage 1 with calibration with/without sce, lifetime
+##      i) protoDUNE_refactored_reco_stage1.fcl (no sce, no lifetime)
+##      ii) protoDUNE_refactored_reco_35ms_sce_datadriven_stage1.fcl (with sce, with lifetime)
+##   b) stage 2 with calibration yz, x, t
+##      i) protoDUNE_refactored_reco_stage2.fcl (no sce, no lifetime)
+##      ii) protoDUNE_refactored_reco_35ms_sce_datadriven_stage2.fcl (with sce, with lifetime)
+
+#include "caldata_dune.fcl"
+#include "wirecell_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "SpacePointSolver_dune.fcl"
+#include "cluster_dune.fcl"
+#include "trackfindermodules_dune.fcl"
+#include "pandoramodules_dune.fcl"
+#include "calorimetry_pdune.fcl"
+#include "calibration_dune.fcl"
+#include "featurelabelingmodules.fcl"
+#include "particleid.fcl"
+#include "mctrutht0matching.fcl"
+#include "t0reco.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "showerfindermodules_dune.fcl"
+#include "emshower3d.fcl"
+#include "OpSlicer.fcl"
+#include "CRT.fcl"
+#include "T0RecoAnodePiercers.fcl"
+
+BEGIN_PROLOG
+
+protoDUNE_reco_mc_stage1_producers:
+{
+    ## TPC wire signals
+    caldata:            @local::producer_adcprep_notool
+    # WireCell 
+    wclsdatasp:         @local::protodunespdata_wctsp
+    # Hit finder
+    gaushit:            @local::protodunespmc_gaushitfinder
+    # space point solver
+    reco3d:             @local::protodunespmc_spacepointsolver
+    # actual disambiguation
+    hitpdune:           @local::pdune_disambigfromsp
+    # event feature labeling
+    emtrkmichelid:      @local::protodune_emtrkmichelid
+  
+    # reconstruction using disambiguated hits
+    pandora:            @local::protodune_pandora
+    pandoraWriter:      @local::dune_pandorawriter
+    pandoraTrack:       @local::dune_pandoraTrackCreation
+    pandoraShower:      @local::dune_pandoraShowerCreation
+    # Calorimetry and PID for pandora
+    pandoracalo:        @local::pdune_sp_calomcnosce
+    pandoracalonosce:   @local::pdune_sp_calomcnosce
+    pandorapid:         @local::standard_chi2pid
+    pandoracalinoxyzt:  @local::protodunespmcnosce_calibrationdedx
+    #pandoracalinoxyzt:  @local::protodunespmcsce_calibrationdedx
+    pandoracalipidnoxyzt:     @local::standard_chi2pid
+    pandoraShowercalo:  @local::pdune_sp_showercalomcnosce
+    pandoraShowercalonosce:  @local::pdune_sp_showercalomcnosce
+  
+    # photon detector reconstruction
+    ophit:              @local::protodune_ophit
+    opflash:            @local::protodune_opflash
+    opslicer:           @local::protodune_opslicer
+    crtreco: @local::TwoCRTMatching_producer
+    crttag: @local::SingleCRTMatching_producer
+    # Anode piercing tracks t0 reconstruction
+    anodepiercerst0:  @local::T0RecoAnodePiercers
+  
+    # Producers for forcing pandora to create track or shower objects for each PFParticle
+    pandora2Track:         @local::dune_pandoraTrackCreation
+    pandora2calo:          @local::pdune_sp_alltrackcalomcnosce
+    pandora2calonosce:     @local::pdune_sp_alltrackcalomcnosce
+    pandora2pid:           @local::standard_chi2pid
+    pandora2calinoxyzt:    @local::protodunespmcnosce_calibrationdedx
+    #pandora2calinoxyzt:    @local::protodunespmcsce_calibrationdedx
+    pandora2calipidnoxyzt: @local::standard_chi2pid
+  
+    pandora2Shower:        @local::dune_pandoraShowerCreation
+    pandora2Showercalo:    @local::pdune_sp_allshowercalomcnosce
+    pandora2Showercalonosce:    @local::pdune_sp_allshowercalomcnosce
+}
+
+protoDUNE_reco_mc_stage2_producers:
+{
+    pandoracali:  @local::protodunespmcnosce_calibrationdedx
+    pandoracalipid: @local::standard_chi2pid
+    pandora2cali:    @local::protodunespmcnosce_calibrationdedx
+    pandora2calipid:     @local::standard_chi2pid
+}
+
+protoDUNE_reco_mc_stage1: [ ophit,
+                            opflash,
+                            opslicer,
+                            caldata,
+                            wclsdatasp,
+                            gaushit,
+                            nhitsfilter,
+                            reco3d,
+                            hitpdune,
+                            pandora,
+                            pandoraWriter,
+                            pandoraTrack,
+                            pandoraShower,
+                            pandoracalo,
+                            pandoracalonosce,
+                            pandorapid,
+                            pandoracalinoxyzt,
+                            pandoracalipidnoxyzt,
+                            pandoraShowercalo,
+                            pandoraShowercalonosce,
+                            emtrkmichelid,
+                            crttag,
+                            crtreco,
+                            anodepiercerst0,
+                            pandora2Track,
+                            pandora2calo,
+                            pandora2calonosce,
+                            pandora2pid,
+                            pandora2calinoxyzt,
+                            pandora2calipidnoxyzt,
+                            pandora2Shower,
+                            pandora2Showercalo,
+                            pandora2Showercalonosce
+                          ]
+
+
+protoDUNE_reco_mc_stage2: [ pandoracali,
+                            pandoracalipid,
+                            pandora2cali,
+                            pandora2calipid
+                          ]
+
+
+protoDUNE_reco_mc_stage1_producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+protoDUNE_reco_mc_stage1_producers.caldata.WireName: "dataprep"
+
+protoDUNE_reco_mc_stage1_producers.gaushit.CalDataModuleLabel: "wclsdatasp:gauss"
+
+protoDUNE_reco_mc_stage1_producers.pandora.HitFinderModuleLabel:       "hitpdune"
+protoDUNE_reco_mc_stage1_producers.pandora.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
+
+protoDUNE_reco_mc_stage1_producers.pandoraWriter.GeantModuleLabel:     "tpcrawdecoder:simpleSC"
+protoDUNE_reco_mc_stage1_producers.pandoraWriter.HitFinderModuleLabel:  "hitpdune"
+protoDUNE_reco_mc_stage1_producers.pandoraWriter.GeneratorModuleLabel:  "generator"
+
+protoDUNE_reco_mc_stage1_producers.pandoraTrack.PFParticleLabel:         "pandora"
+protoDUNE_reco_mc_stage1_producers.pandoraShower.PFParticleLabel:        "pandora"
+
+protoDUNE_reco_mc_stage1_producers.pandorapid.CalorimetryModuleLabel:    "pandoracalo"
+protoDUNE_reco_mc_stage1_producers.pandorapid.TrackModuleLabel:          "pandoraTrack"
+
+protoDUNE_reco_mc_stage1_producers.pandoracalipidnoxyzt.CalorimetryModuleLabel:   "pandoracalinoxyzt"
+protoDUNE_reco_mc_stage1_producers.pandoracalipidnoxyzt.TrackModuleLabel:         "pandoraTrack"
+
+protoDUNE_reco_mc_stage1_producers.ophit.InputModule:             "opdigi"
+protoDUNE_reco_mc_stage1_producers.opflash.InputModule:           "ophit"
+protoDUNE_reco_mc_stage1_producers.opslicer.OpHitModuleLabel:     "ophit"
+
+# Forcing Pandora to create either all tracks or all showers on each PFParticle object
+protoDUNE_reco_mc_stage1_producers.pandora2Track.PFParticleLabel:             "pandora"
+protoDUNE_reco_mc_stage1_producers.pandora2Track.UseAllParticles:             true
+
+protoDUNE_reco_mc_stage1_producers.pandora2pid.CalorimetryModuleLabel:      "pandora2calo"
+protoDUNE_reco_mc_stage1_producers.pandora2pid.TrackModuleLabel:            "pandora2Track"
+
+protoDUNE_reco_mc_stage1_producers.pandora2calinoxyzt.TrackModuleLabel:         "pandora2Track"
+protoDUNE_reco_mc_stage1_producers.pandora2calinoxyzt.CalorimetryModuleLabel:   "pandora2calo"
+
+protoDUNE_reco_mc_stage1_producers.pandora2calipidnoxyzt.CalorimetryModuleLabel:  "pandora2calinoxyzt"
+protoDUNE_reco_mc_stage1_producers.pandora2calipidnoxyzt.TrackModuleLabel:        "pandora2Track"
+protoDUNE_reco_mc_stage1_producers.pandora2Shower.PFParticleLabel:            "pandora"
+protoDUNE_reco_mc_stage1_producers.pandora2Shower.UseAllParticles:            true
+
+protoDUNE_reco_mc_stage2_producers.pandoracali.CalorimetryModuleLabel:     "pandoracalinoxyzt"
+protoDUNE_reco_mc_stage2_producers.pandoracali.TrackModuleLabel:           "pandoraTrack"
+protoDUNE_reco_mc_stage2_producers.pandoracali.ApplyLifetimeCorrection:    false
+protoDUNE_reco_mc_stage2_producers.pandoracali.ApplyYZCorrection:          true
+protoDUNE_reco_mc_stage2_producers.pandoracali.ApplyXCorrection:           true
+protoDUNE_reco_mc_stage2_producers.pandoracali.ApplyNormCorrection:        true
+
+protoDUNE_reco_mc_stage2_producers.pandoracalipid.CalorimetryModuleLabel:  "pandoracali"
+protoDUNE_reco_mc_stage2_producers.pandoracalipid.TrackModuleLabel:        "pandoraTrack"
+
+protoDUNE_reco_mc_stage2_producers.pandora2cali.TrackModuleLabel:          "pandora2Track"
+protoDUNE_reco_mc_stage2_producers.pandora2cali.CalorimetryModuleLabel:    "pandora2calinoxyzt"
+protoDUNE_reco_mc_stage2_producers.pandora2cali.ApplyLifetimeCorrection:   false
+protoDUNE_reco_mc_stage2_producers.pandora2cali.ApplyYZCorrection:         true
+protoDUNE_reco_mc_stage2_producers.pandora2cali.ApplyXCorrection:          true
+protoDUNE_reco_mc_stage2_producers.pandora2cali.ApplyNormCorrection:       true
+
+protoDUNE_reco_mc_stage2_producers.pandora2calipid.CalorimetryModuleLabel:    "pandora2cali"
+protoDUNE_reco_mc_stage2_producers.pandora2calipid.TrackModuleLabel:          "pandora2Track"
+
+END_PROLOG

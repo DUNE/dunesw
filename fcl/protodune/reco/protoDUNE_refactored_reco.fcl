@@ -1,3 +1,6 @@
+## same as protoDUNE_refactored_reco_stage1.fcl, no sce; no lifetime correction; no yz, x, t correction; *calinoxyzt<->*cali; *calipidnoxyzt<->*calipid
+## this fcl is currently kept; we use two stage recos once we have calibration done: protoDUNE_refactored_reco_stage1.fcl and protoDUNE_refactored_reco_stage2.fcl
+
 ##include "services_dune.fcl"
 #include "services_refactored_pdune.fcl"
 #include "caldata_dune.fcl"

@@ -33,7 +33,7 @@ services:
     
   TFileService: { 
       closeFileFast: true  # default
-      fileName: "hist_%ifb_decoder_reco2.root"
+      fileName: "hist_%ifb_reco2.root"
       tmpDir: "<parent-path-of-filename>"  # default
   }
 
