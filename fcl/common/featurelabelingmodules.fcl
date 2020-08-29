@@ -19,11 +19,11 @@ protodune_emtrkmichelid.PointIdAlg.DownscaleFn:       "mean"
 protodune_emtrkmichelid.PointIdAlg.DownscaleFullView: false
 protodune_emtrkmichelid.HitModuleLabel:               "hitpdune"
 protodune_emtrkmichelid.ClusterModuleLabel:           "pandora"
-protodune_emtrkmichelid.WireLabel:                    "wclsdatanfsp:gauss"
+protodune_emtrkmichelid.WireLabel:                    "wclsdatasp:gauss"
 protodune_emtrkmichelid.Views:                        []
 
 protodunespdata_emtrkmichelid:                        @local::protodune_emtrkmichelid
-protodunespdata_emtrkmichelid.WireLabel:              "wclsdatasp:gauss"
+#protodunespdata_emtrkmichelid.WireLabel:              "wclsdatasp:gauss"
 
 END_PROLOG
 

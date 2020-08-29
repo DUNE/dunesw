@@ -1,4 +1,7 @@
-//#include "services_dune.fcl"
+## same as protoDUNE_refactored_reco_stage1.fcl, no sce; no lifetime correction; no yz, x, t correction; *calinoxyzt<->*cali; *calipidnoxyzt<->*calipid
+## this fcl is currently kept; we use two stage recos once we have calibration done: protoDUNE_refactored_reco_stage1.fcl and protoDUNE_refactored_reco_stage2.fcl
+
+##include "services_dune.fcl"
 #include "services_refactored_pdune.fcl"
 #include "caldata_dune.fcl"
 #include "wirecell_dune.fcl"
@@ -50,6 +53,9 @@ services.DetectorPropertiesService:    @local::protodunesp_detproperties
 services.DetectorPropertiesService.GetHVDriftfromSamweb:           false
 services.DetectorPropertiesService.GetReadOutWindowSizefromSamweb: false
 services.DetectorPropertiesService.UseRunDependentTemperature:     false
+
+services.RawDigitPrepService.AdcChannelToolNames: @local::pdsim_dataprep_tools_wirecell
+
 #source is now a root file
 source:
 {
@@ -70,8 +76,10 @@ physics: {
   }
 
   producers: {
-    # convert raw::RawDigit to recob::wire
-    wclsdatanfsp:         @local::protodunespdata_nfsp
+    # TPC wire signals
+    caldata:            @local::producer_adcprep_notool          
+    # WireCell 
+    wclsdatasp:         @local::protodunespdata_wctsp
     # Hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
     # space point solver
@@ -122,7 +130,8 @@ physics: {
 reco: [ ophit,
         opflash,
         opslicer,
-        wclsdatanfsp,
+        caldata,
+        wclsdatasp,
         gaushit,
         nhitsfilter,
         reco3d,
@@ -175,7 +184,7 @@ outputs:
    module_type: RootOutput
    fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
-   outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop *_wclsdatanfsp_wiener_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
+   outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wires_caldata_dataprep_*", "drop *_wclsdatasp_wiener_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
    #outputCommands: [ "keep *", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
    compressionLevel: 1 #zlib argument (0-9)
    fastCloning: true
@@ -185,7 +194,10 @@ outputs:
  }
 }
 
-physics.producers.gaushit.CalDataModuleLabel: "wclsdatanfsp:gauss"
+physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq" 
+physics.producers.caldata.WireName: "dataprep" 
+
+physics.producers.gaushit.CalDataModuleLabel: "wclsdatasp:gauss"
 
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
 physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
