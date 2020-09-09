@@ -1,0 +1,168 @@
+#include "services_dune.fcl"
+#include "largeantmodules_dune.fcl"
+#include "photpropservices_dune.fcl"
+#include "scintillationtime_tool.fcl"
+#include "services_refactored_pdune.fcl"
+
+process_name: G4
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "g4_hist.root" }
+  TimeTracker:       {}
+  MemoryTracker:         { } # default is one
+  RandomNumberGenerator: {} #ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+  @table::dunefd_simulation_services
+
+  DetectorHolder: {}
+  ActionHolder: {}
+  PhysicsListHolder: {}
+
+  PhysicsList: {
+    PhysicsListName: "QGSP_BERT"
+    DumpList: true
+    enableNeutronLimit: false
+    NeutronTimeLimit: 0.0
+    NeutronKinELimit: 0.0
+    enableStepLimit: true
+    enableOptical: false
+    enableCerenkov: false
+    CerenkovStackPhotons: false
+    CerenkovMaxNumPhotons: 100
+    CerenkovMaxBetaChange: 10.0
+    enableScintillation: false
+    ScintillationStackPhotons: false
+    ScintillationByParticleType: false
+    ScintillationTrackInfo: false
+    ScintillationTrackSecondariesFirst: false
+    enableAbsorption: false
+    enableRayleigh: false
+    enableMieHG: false
+    enableBoundary: false
+    enableWLS: false
+    BoundaryInvokeSD: false
+    Verbosity: 1
+    WLSProfile: delta
+
+}
+
+ LArG4Detector :
+  {
+    category      : "world"
+    gdmlFileName_ : "dune10kt_v4_refactored_1x2x6.gdml"          
+    volumeNames   : ["volTPCActiveInner", "volTPCActiveOuter"] # list of volumes for which the stepLimit should be set
+    stepLimits    : [0.4, 0.4] # corresponding stepLimits in mm for the volumes in the volumeNames list
+  }
+
+  MCTruthEventAction: {service_type: "MCTruthEventActionService"}
+  ParticleListAction: {service_type:  "ParticleListActionService"
+                       EnergyCut: 1e-5 # Kinetic Energy cut in [MeV]
+                       keepEMShowerDaughters: true
+                       storeTrajectories: true
+                       keepGenTrajectories: ["generator"] # list of generator labels for which we want to store
+                                                          # trajectory points. The protodune beam label is simply
+                                                          # "generator"
+                       keepOnlyPrimaryFullTrajectories : false  # (defaults to false in larg4) If set to true, only
+                                                                # the particles with MCTruth process == "primary" and
+                                                                # their descendants will have the full set of trajetory
+                                                                # points stored. Particles descending from primaries with
+                                                                # MCTruth process != "primary" will not have a full set
+                                                                # of trajectory points stored -- only their start and
+                                                                # end points. This filter only applies to the generator
+                                                                # labels listed in the keepGenTrajectories. E.g, for the
+                                                                # beam generator, no "primaryBackground" particles or their
+                                                                # descendants would have a full set of traj. points. if
+                                                                # this is set to true.
+                       SparsifyTrajectories: true # call SparsifyTrajectory() method on MCParticles with full trajectories
+                                                  # being stored. This helps reduce memory usage in the root output stage
+                                                  # if there are many trajectory points.
+
+                      }
+
+  NuRandomService: {
+     endOfJobSummary: true
+     policy: "perEvent"
+  }
+}
+
+
+#services.LArG4Parameters.UseModBoxRecomb:          true
+
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents:  10        # Number of events to create
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics:
+{
+
+ producers:
+ {
+   #largeant:  @local::dunefd_largeant
+   largeant:      
+   {
+        module_type:            "larg4Main"
+        enableVisualization:     false
+        macroPath:               ".:./macros"
+        visMacro:                "vis.mac"
+   }
+
+   rns:       { module_type: "RandomNumberSaver" }
+
+   IonAndScint:
+   {
+	 module_type:           "IonAndScint"
+         Instances:             "LArG4DetectorServicevolTPCInner;LArG4DetectorServicevolTPCPlaneVInner;LArG4DetectorServicevolTPCActiveOuter;LArG4DetectorServicevolTPCPlaneUInner;LArG4DetectorServicevolTPCPlaneZInner;LArG4DetectorServicevolTPCActiveInner" # separated by semicolon 
+         #Instances:             "LArG4DetectorServicevolTPCActive;LArG4DetectorServicevolTPCActiveOuter" # separated by semicolon
+         #ISCalcAlg:             "Separate" ###"NEST" #"Correlated"
+         ISCalcAlg:             "Correlated"
+   }	 
+
+    PDFastSim:
+    {
+       #module_type:            "PDFastSimPVS"
+       module_type:           "PDFastSimPAR"
+       SimulationLabel:        "IonAndScint"
+       DoSlowComponent:        true
+       ScintTimeTool:          @local::ScintTimeLAr
+    }
+ }
+
+ #define the producer and filter modules for this path, order matters, 
+ #filters reject all following items.  see lines starting physics.producers below
+ simulate: [ rns, largeant, IonAndScint, PDFastSim ]
+ 
+ #define the output stream, there could be more than one if using filters 
+ stream1:  [ out1 ]
+
+ #trigger_paths is a keyword and contains the paths that modify the art::event, 
+ #ie filters and producers
+ trigger_paths: [simulate] 
+
+ #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+ #ie analyzers and output streams.  these all run simultaneously
+ end_paths:     [stream1]  
+}
+
+#block to define where the output goes.  if you defined a filter in the physics
+#block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
+#entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_g4.root"
+   dataTier:    "simulated"
+   compressionLevel: 1
+ }
+}
+
+
