@@ -60,7 +60,7 @@ physics:
 
   # TPC reconstruction
   # convert raw::RawDigit to recob::wire
-   wclsdatanfsp::        @local::dune10kt_1x2x6_data_nfsp
+   wclsdatanfsp:        @local::dune10kt_1x2x6_data_nfsp
 #    wclsdatanfsp:         @local::protodunespdata_nfsp
 #  caldata:            @local::producer_adcprep
 #  gaushit:            @local::dunefd_gaushitfinder
