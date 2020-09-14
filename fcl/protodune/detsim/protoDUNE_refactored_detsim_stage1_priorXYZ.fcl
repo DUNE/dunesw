@@ -1,0 +1,3 @@
+#include "protoDUNE_refactored_detsim_stage1.fcl"
+
+physics.producers.tpcrawdecoder.wcls_main.configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel-priorSCE.jsonnet"]
