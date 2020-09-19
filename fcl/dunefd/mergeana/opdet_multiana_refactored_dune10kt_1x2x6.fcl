@@ -39,7 +39,7 @@ physics:
 
    #anapath: [ @sequence::pd_ana_path ]
 
-anapath: [
+   anapath: [
                     flashmatchDEF35QENonRefl1PE, slicematchDEF35QENonRefl1PE,
                     flashmatchEFF15QENonRefl1PE, slicematchEFF15QENonRefl1PE,
                     flashmatchEFF25QENonRefl1PE, slicematchEFF25QENonRefl1PE,
@@ -48,15 +48,8 @@ anapath: [
                     flashmatchREF35QEPesRefl1PE, slicematchREF35QEPesRefl1PE,
                     flashmatchTHR35QENonRefl2PE, slicematchTHR35QENonRefl2PE,
                     flashmatchTHR35QENonRefl3PE, slicematchTHR35QENonRefl3PE
-                ]
+            ]
    end_paths:     [ anapath ]
 }
 
-physics.analyzers.slicematchTHR35QENonRefl3PE.OpFlashModuleLabel: opslicerTHR35QENonRefl3PE
-physics.analyzers.slicematchTHR35QENonRefl2PE.OpFlashModuleLabel: opslicerTHR35QENonRefl2PE
-physics.analyzers.slicematchREF35QEPesRefl1PE.OpFlashModuleLabel: opslicerREF35QEPesRefl1PE
-physics.analyzers.slicematchREF35QEOptRefl1PE.OpFlashModuleLabel: opslicerREF35QEOptRefl1PE
-physics.analyzers.slicematchEFF45QENonRefl1PE.OpFlashModuleLabel: opslicerEFF45QENonRefl1PE
-physics.analyzers.slicematchEFF25QENonRefl1PE.OpFlashModuleLabel: opslicerEFF25QENonRefl1PE
-physics.analyzers.slicematchEFF15QENonRefl1PE.OpFlashModuleLabel: opslicerEFF15QENonRefl1PE
-physics.analyzers.slicematchDEF35QENonRefl1PE.OpFlashModuleLabel: opslicerDEF35QENonRefl1PE
+
