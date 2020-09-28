@@ -6,13 +6,13 @@ BEGIN_PROLOG
 # Single-Phase parameters (initially copied from FD)
 
 pdune_sp_calorimetryalgdata:             @local::standard_calorimetryalgdata
-pdune_sp_calorimetryalgdata.CalAreaConstants:  [ 5e-3, 5e-3, 5e-3 ]
+pdune_sp_calorimetryalgdata.CalAreaConstants:  [ 1e-3, 1e-3, 1e-3 ]
 pdune_sp_calorimetryalgdata.CaloDoLifeTimeCorrection: false
 pdune_sp_calorimetryalgdata.CaloUseModBox: true
 
 pdune_sp_calorimetryalgmc:	         @local::standard_calorimetryalgmc
 pdune_sp_calorimetryalgmc.CaloDoLifeTimeCorrection: false
-pdune_sp_calorimetryalgmc.CalAreaConstants: [ 5e-3, 5e-3, 5e-3 ]
+pdune_sp_calorimetryalgmc.CalAreaConstants: [ 1e-3, 1e-3, 1e-3 ]
 pdune_sp_calorimetryalgmc.CaloUseModBox: true
 
 pdune_sp_calodata:                       @local::standard_calodata
