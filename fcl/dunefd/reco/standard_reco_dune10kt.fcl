@@ -62,7 +62,7 @@ physics:
 #  trajclusterdc:          @local::dunefdmc_trajcluster
 #  costrkdc:           @local::dunefd_cosmictracker
   calodc:             @local::dune35t_calomc
-  pandoradc:          @local::dunefd_pandora
+  pandoradc:          @local::dunefd_pandora_cosmic
   pandoraTrackdc:     @local::dune_pandoraTrackCreation
   pandoraShowerdc:    @local::dune_pandoraShowerCreation
   pandoracalodc:      @local::dune10kt_calomc
@@ -83,7 +83,7 @@ physics:
   linecluster:        @local::dune35t_linecluster
   trajcluster:          @local::dunefdmc_trajcluster
   calo:               @local::dune35t_calomc
-  pandora:            @local::dunefd_pandora
+  pandora:            @local::dunefd_pandora_cosmic
   pandoraTrack:       @local::dune_pandoraTrackCreation
   pandoraShower:      @local::dune_pandoraShowerCreation
   pandoracalo:        @local::dune10kt_calomc
@@ -103,8 +103,8 @@ physics:
   pmtrajfittccalo:         @local::dune10kt_calomc
   pmtrajfittcpid:          @local::standard_chi2pid
 # photon detector reconstruction
-  ophit:              @local::dune35t_ophit 
-  opflash:            @local::dune35t_opflash 
+  ophit:              @local::dune35t_ophit
+  opflash:            @local::dune35t_opflash
   trkshowersplit:     @local::standard_trackshowerhits
   trkshowersplitdc:   @local::standard_trackshowerhits
   blurredclusterdc:      @local::dune10kt_blurredcluster
@@ -118,16 +118,16 @@ physics:
   mergeemshower3d:       @local::dune10kt_mergeemshower3d
  }
 
- #define the producer and filter modules for this path, order matters, 
+ #define the producer and filter modules for this path, order matters,
  #filters reject all following items.  see lines starting physics.producers below
- reco: [ rns, 
+ reco: [ rns,
          #optical hits and flashes
          ophit, opflash,
-         #TPC wire signals      
+         #TPC wire signals
          caldata,
-         #hit reco 
+         #hit reco
          fasthit,
-         gaushit, 
+         gaushit,
          #disambiguation
          hitfd,
          #cluster reco
@@ -146,16 +146,16 @@ physics:
          blurredcluster, emtrkmichelid, emshower#, emshower3d, mergeemshower3d
          ]
 
- #define the output stream, there could be more than one if using filters 
+ #define the output stream, there could be more than one if using filters
  stream1:  [ out1 ]
 
- #trigger_paths is a keyword and contains the paths that modify the art::event, 
+ #trigger_paths is a keyword and contains the paths that modify the art::event,
  #ie filters and producers
- trigger_paths: [reco] 
+ trigger_paths: [reco]
 
- #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+ #end_paths is a keyword and contains the paths that do not modify the art::Event,
  #ie analyzers and output streams.  these all run simultaneously
- end_paths:     [stream1]  
+ end_paths:     [stream1]
 }
 
 #block to define where the output goes.  if you defined a filter in the physics
