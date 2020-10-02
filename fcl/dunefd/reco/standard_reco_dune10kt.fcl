@@ -62,7 +62,7 @@ physics:
 #  trajclusterdc:          @local::dunefdmc_trajcluster
 #  costrkdc:           @local::dunefd_cosmictracker
   calodc:             @local::dune35t_calomc
-  pandoradc:          @local::dunefd_pandora_cosmic
+  pandoradc:          @local::dunefd_pandora
   pandoraTrackdc:     @local::dune_pandoraTrackCreation
   pandoraShowerdc:    @local::dune_pandoraShowerCreation
   pandoracalodc:      @local::dune10kt_calomc
@@ -83,7 +83,7 @@ physics:
   linecluster:        @local::dune35t_linecluster
   trajcluster:          @local::dunefdmc_trajcluster
   calo:               @local::dune35t_calomc
-  pandora:            @local::dunefd_pandora_cosmic
+  pandora:            @local::dunefd_pandora
   pandoraTrack:       @local::dune_pandoraTrackCreation
   pandoraShower:      @local::dune_pandoraShowerCreation
   pandoracalo:        @local::dune10kt_calomc
