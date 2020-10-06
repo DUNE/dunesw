@@ -64,7 +64,7 @@ product          version
 larsoft          v09_05_00
 artdaq_core	 v3_06_01
 duneutil         v09_03_00	-	optional
-dune_pardata	 v01_63_00
+dune_pardata	 v01_64_00
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04
 cetbuildtools	 v7_15_01	-	only_for_build
