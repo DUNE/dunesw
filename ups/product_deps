@@ -32,6 +32,7 @@ table_fragment_begin
     # Add StashCache to the FW_SEARCH_PATH
     pathPrepend(FW_SEARCH_PATH, /cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/)
     pathPrepend(FHICL_FILE_PATH, .:./job)
+    pathPrepend(PYTHONPATH, ${DUNETPC_FQ_DIR}/bin)
     # WireCellData
     #envSet(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
     #pathPrepend(WIRECELL_PATH, ${UPS_PROD_DIR}/wire-cell-cfg)
@@ -64,7 +65,7 @@ product          version
 larsoft          v09_07_00
 artdaq_core	 v3_06_01
 duneutil         v09_07_00	-	optional
-dune_pardata	 v01_64_01
+dune_pardata	 v01_65_00
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04
 cetbuildtools	 v7_15_01	-	only_for_build
