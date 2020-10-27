@@ -46,6 +46,7 @@ services:
       "adcVintageDeconvoluter",
       "adcThresholdSignalFinder"
     ]
+    CallgrindToolNames: []
   }
 }
 
