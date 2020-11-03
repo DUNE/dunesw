@@ -87,6 +87,6 @@ physics.producers.generator.NominalP: "6" ## Determines how things are set up on
                                           ## Options are "0.5" "1" "2" "3" "6" "7" (all strings)
 physics.producers.generator.UseDataDrivenPrimary: true 
 
-## Specific .fcl for the +1 GeV/c momentum setting
+## Specific .fcl for the +6 GeV/c momentum setting
 services.TFileService.fileName: "gen_protoDune_beam_p6GeV_cosmics_datadriven_hist.root"
 outputs.out1.fileName: "gen_protoDune_beam_p6GeV_cosmics_datadriven.root"
