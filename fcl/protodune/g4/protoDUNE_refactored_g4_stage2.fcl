@@ -118,3 +118,5 @@ outputs:
  }
 }
 
+physics.producers.IonAndScint.SavePriorSCE: true
+

@@ -44,7 +44,8 @@ physics:
          plugins: ["WireCellPgraph", "WireCellGen","WireCellSio","WireCellLarsoft"]
 
          # needs to be found via your WIRECELL_PATH 
-         configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
+         # configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
+         configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel-priorSCE.jsonnet"]
 
 
          # Contract note: these exact "type:name" must be used to identify
