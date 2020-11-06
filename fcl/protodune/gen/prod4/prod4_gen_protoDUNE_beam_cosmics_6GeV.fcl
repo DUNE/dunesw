@@ -86,7 +86,7 @@ physics.producers.generator.StartEvent: 0
 ## This block controls the datadriven primary generator. 
 physics.producers.generator.UseDataDrivenPrimary: false 
 
-## Specific .fcl for the +1 GeV/c momentum setting
+## Specific .fcl for the +6 GeV/c momentum setting
 services.TFileService.fileName: "gen_protoDune_beam_p6GeV_cosmics_hist.root"
 source.maxEvents: 10
 outputs.out1.fileName: "gen_protoDune_beam_p6GeV_cosmics.root"

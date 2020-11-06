@@ -122,7 +122,7 @@ physics:
     {
        module_type:            "PDFastSimPVS"
        #module_type:            "PDFastSimPAR"
-       SimulationLabel:        "IonAndScint"
+       SimulationLabel:        "IonAndScint:priorSCE"
        DoSlowComponent:        true
        ScintTimeTool:          @local::ScintTimeLAr
     }
@@ -194,3 +194,4 @@ outputs:
  }
 }
 
+physics.producers.IonAndScint.SavePriorSCE: true

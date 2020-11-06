@@ -56,7 +56,7 @@ physics:
     {
        module_type:            "PDFastSimPVS"
        #module_type:            "PDFastSimPAR"
-       SimulationLabel:        "IonAndScint"
+       SimulationLabel:        "IonAndScint:priorSCE"
        DoSlowComponent:        true
        ScintTimeTool:          @local::ScintTimeLAr
     }
@@ -117,4 +117,6 @@ outputs:
    #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
  }
 }
+
+physics.producers.IonAndScint.SavePriorSCE: true
 

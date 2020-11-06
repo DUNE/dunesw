@@ -79,15 +79,15 @@ outputs:
 # Specific to the GEANT H4 Beam simulation by Nikos and paths at CERN
 physics.producers.generator.GoodParticleTreeName: "NTuples/GoodParticle"
 physics.producers.generator.AllParticlesTreeName: "Detector/NP04front" # Background particles should fire from here
-physics.producers.generator.FileName: "/pnfs/dune/persistent/dunepro/beam_data/simulation/G4beamlineVersion3.06/v34b_0.5GeV_G4beamlineVersion3.06/H4_v34b_0.5GeV_-27.7_10M_1.root"
+physics.producers.generator.FileName: "/pnfs/dune/persistent/dunepro/beam_data/simulation/G4beamlineVersion3.06/v34b_7GeV_G4beamlineVersion3.06/H4_v34b_7GeV_-27.7_10M_1.root"
 physics.producers.generator.StartEvent: 0
 
 
 ## This block controls the datadriven primary generator. 
 physics.producers.generator.UseDataDrivenPrimary: false 
 
-## Specific .fcl for the +0.5 GeV/c momentum setting
-services.TFileService.fileName: "gen_protoDune_beam_p0.5GeV_cosmics_hist.root"
+## Specific .fcl for the +7 GeV/c momentum setting
+services.TFileService.fileName: "gen_protoDune_beam_p7GeV_cosmics_hist.root"
 source.maxEvents: 10
-outputs.out1.fileName: "gen_protoDune_beam_p0.5GeV_cosmics.root"
+outputs.out1.fileName: "gen_protoDune_beam_p7GeV_cosmics.root"
 
