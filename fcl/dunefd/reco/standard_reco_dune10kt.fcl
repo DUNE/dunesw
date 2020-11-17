@@ -86,6 +86,7 @@ physics:
   pandora:            @local::dunefd_pandora
   pandoraTrack:       @local::dune_pandoraTrackCreation
   pandoraShower:      @local::dune_pandoraShowerCreation
+  pandoraShowerLegacy:  @local::dune_pandoraLegacyShowerCreation
   pandoracalo:        @local::dune10kt_calomc
   pandorapid:        @local::standard_chi2pid
   pmtrack:             @local::dunefd_pmalgtrackmaker
@@ -135,7 +136,7 @@ physics:
          #track shower split
          trkshowersplit,
          #pandora
-         pandora, pandoraTrack, pandoraShower,
+         pandora, pandoraTrack, pandoraShower, pandoraShowerLegacy,
          pandoracalo, pandorapid,
          #pmatrack
          pmtrack, pmtrackcalo, pmtrackpid,
@@ -294,6 +295,7 @@ physics.producers.pandorapiddc.TrackModuleLabel:        "pandoraTrackdc"
 physics.producers.pandora.HitFinderModuleLabel:         "linecluster"
 physics.producers.pandoraTrack.PFParticleLabel:         "pandora"
 physics.producers.pandoraShower.PFParticleLabel:        "pandora"
+physics.producers.pandoraShowerLegacy.PFParticleLabel:  "pandora"
 
 physics.producers.pandoracalo.TrackModuleLabel:         "pandoraTrack"
 physics.producers.pandoracalo.SpacePointModuleLabel:    "pandora"
