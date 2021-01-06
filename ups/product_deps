@@ -69,7 +69,7 @@ dune_pardata	 v01_66_00
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04
 cetbuildtools	 v7_15_01	-	only_for_build
-dune_raw_data    v1_17_57
+dune_raw_data    v1_17_58
 #caffe            DISCONTINUED   -       optional
 nusystematics    v00_10_08
 systematicstools v00_07_01
