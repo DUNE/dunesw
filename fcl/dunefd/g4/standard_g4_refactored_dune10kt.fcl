@@ -78,6 +78,7 @@ services:
                        SparsifyTrajectories: true # call SparsifyTrajectory() method on MCParticles with full trajectories
                                                   # being stored. This helps reduce memory usage in the root output stage
                                                   # if there are many trajectory points.
+                       SparsifyMargin: 0.015      # required when SparsifyTrajectories is set to true
 
                       }
 
