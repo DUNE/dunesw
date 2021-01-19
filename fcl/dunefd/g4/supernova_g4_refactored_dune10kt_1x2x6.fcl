@@ -2,24 +2,6 @@
 
 process_name: SupernovaG4
 
-#services.Geometry: @local::dune10kt_1x2x6_geo
-
-services.Geometry.GDML: "dune10kt_v4_refactored_1x2x6.gdml"
-services.Geometry.Name: "dune10kt_v4_refactored_1x2x6"
-services.Geometry.ROOT:	"dune10kt_v4_refactored_1x2x6.gdml"
-
-services.PhotonVisibilityService: @local::dune10kt_1x2x6_photonvisibilityservice
-
-services.LArG4Parameters.UseCustomPhysics: true
-services.LArG4Parameters.EnabledPhysics: [ "LowEnergyEm",
-                                           "FastOptical",
-                                           "SynchrotronAndGN",
-                                           "Ion",
-                                           "NeutronHP",
-                                           "Decay",
-                                           "HadronElastic",
-                                           "Stopping" ]
-
-services.LArG4Parameters.ParticleKineticEnergyCut: 1.0e-5 # GeV
-services.LArG4Parameters.StoreTrajectories: true
-services.LArG4Parameters.KeepEMShowerDaughters: true
+services.Geometry:      @local::dune10kt_1x2x6_v4_refactored_geo
+services.LArG4Detector: @local::dune10kt_1x2x6_v4_larg4detector
+services.PhysicsList:   @local::dune_physics_list_supernova
