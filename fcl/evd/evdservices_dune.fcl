@@ -34,6 +34,7 @@ dunefd_evd:                                   @local::standard_evd
 dunefd_disp:
 {
  ExptGeoHelperInterface:   @local::dune_geometry_helper
+ GeometryConfigurationWriter: {}
  Geometry:                 @local::dune10kt_workspace_geo 
  LArPropertiesService:            @local::dunefd_properties
  DetectorPropertiesService:       @local::dunefd_detproperties
