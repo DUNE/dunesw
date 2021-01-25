@@ -15,21 +15,14 @@
 # It sets up all of the larsoft ups products (lardata, larsim, larreco, etc.)
 # ======================================================================
 
+cmake_minimum_required (VERSION 3.12...3.18 FATAL_ERROR)
 
-# use cmake 2.8 or later
-cmake_minimum_required (VERSION 2.8)
-
-project(dunetpc)
+project(dunetpc LANGUAGES CXX)
 
 # cetbuildtools contains our cmake modules
-SET ( CETBUILDTOOLS_VERSION $ENV{CETBUILDTOOLS_VERSION} )
-IF (NOT CETBUILDTOOLS_VERSION)
-    MESSAGE (FATAL_ERROR "ERROR: setup cetbuildtools to get the cmake modules")
-ENDIF()
+find_package(cetbuildtools REQUIRED)
 
-set(CMAKE_MODULE_PATH $ENV{CANVAS_ROOT_IO_DIR}/Modules
-                      $ENV{CETBUILDTOOLS_DIR}/Modules
-                      ${CMAKE_MODULE_PATH})
+list(APPEND CMAKE_MODULE_PATH $ENV{CANVAS_ROOT_IO_DIR}/Modules)
 
 include(CetCMakeEnv)
 cet_cmake_env()
@@ -66,7 +59,6 @@ find_ups_product( art v1_09_00 )
 find_ups_product(art_root_io)
 find_ups_product( clhep v2_1_3_0 )
 find_ups_product( messagefacility v1_10_00 )
-find_ups_product( cetbuildtools v3_10_00 )
 find_ups_product( postgresql v9_1_5 )
 find_ups_product( dune_raw_data )
 find_ups_product( dunepdsprce v0_0_3 )
