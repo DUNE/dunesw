@@ -64,7 +64,7 @@ physics:
   calodc:             @local::dune35t_calomc
   pandoradc:          @local::dunefd_pandora
   pandoraTrackdc:     @local::dune_pandoraTrackCreation
-  pandoraShowerdc:    @local::dune_pandoraShowerCreation
+  pandoraShowerdc:    @local::dune_pandoraModularShowerCreation
   pandoracalodc:      @local::dune10kt_calomc
   pandorapiddc:       @local::standard_chi2pid
   pmtrackdc:           @local::dunefd_pmalgtrackmaker
@@ -85,8 +85,8 @@ physics:
   calo:               @local::dune35t_calomc
   pandora:            @local::dunefd_pandora
   pandoraTrack:       @local::dune_pandoraTrackCreation
-  pandoraShower:      @local::dune_pandoraShowerCreation
-  #pandoraShowerLegacy:  @local::dune_pandoraLegacyShowerCreation #The old pandoraShower (before pandoraModularShower)
+  pandoraShower:      @local::dune_pandoraModularShowerCreation
+  #pandoraShowerLegacy:  @local::dune_pandoraShowerCreation #The old pandoraShower (before pandoraModularShower)
   pandoracalo:        @local::dune10kt_calomc
   pandorapid:        @local::standard_chi2pid
   pmtrack:             @local::dunefd_pmalgtrackmaker
