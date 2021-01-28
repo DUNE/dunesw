@@ -17,7 +17,7 @@
 #tools.tickRanges.plotTicks.begin: 3000
 #tools.tickRanges.plotTicks.end:   4000
 
-services.RawDigitPrepService.AdcChannelToolNames: [
+services.RawDigitPrepService.ToolNames: [
   "digitReader",
   "pd_adcPedestalFit", 
   "pdtps_adcChannelPedestalPlotter",

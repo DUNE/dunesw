@@ -36,7 +36,7 @@ services:
     service_provider: ToolBasedRawDigitPrepService
     LogLevel: 3
     DoWires: true
-    AdcChannelToolNames: [
+    ToolNames: [
       "digitReader",
       "pd_adcPedestalFit",
       "adcSampleFiller",

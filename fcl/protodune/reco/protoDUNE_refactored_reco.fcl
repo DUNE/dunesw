@@ -54,7 +54,7 @@ services.DetectorPropertiesService.GetHVDriftfromSamweb:           false
 services.DetectorPropertiesService.GetReadOutWindowSizefromSamweb: false
 services.DetectorPropertiesService.UseRunDependentTemperature:     false
 
-services.RawDigitPrepService.AdcChannelToolNames: @local::pdsim_dataprep_tools_wirecell
+services.RawDigitPrepService.ToolNames: @local::pdsim_dataprep_tools_wirecell
 
 #source is now a root file
 source:
