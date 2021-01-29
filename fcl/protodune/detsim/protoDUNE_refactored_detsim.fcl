@@ -69,7 +69,7 @@ physics:
       }
    }
 
-   opdigi:         @local::protodune_opdigi
+   opdigi:         @local::protodune_opdigi_refactor
    crt:            @local::CRTSimRefac_standard
    rns:            { module_type: "RandomNumberSaver" }
  }
