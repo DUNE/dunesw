@@ -15,9 +15,6 @@ services:
   @table::protodune_minimal_simulation_services # no particleInventory services etc.
 }
 
-services.Geometry.GDML: "protodune_v7.gdml"
-services.Geometry.ROOT: "protodune_v7.gdml"
-
 source:
 {
   module_type: RootInput
@@ -59,28 +56,3 @@ outputs:
   }
 }
 
-# Use fixed values instead of DB for pedestals.
-# services.DetPedestalService: @local::dune_fixedpeds
-
-# DetSim flags.
-# physics.producers.daq.NoiseOn:     true
-# physics.producers.daq.PedestalOn:  true
-# physics.producers.daq.DistortOn:   false
-# physics.producers.daq.SuppressOn:  false
-
-# OpDetDigitizer label
-# physics.producers.opdigi.InputModule: "PDFastSim"
-
-# DetSim services.
-# services.SimChannelExtractService: @local::scxgeneric
-# services.ChannelNoiseService:      @local::chnoiseold
-# services.PedestalAdditionService:  @local::padprovided
-# services.AdcDistortService:        @local::stuckbits
-# services.AdcSuppressService:       @local::zslegacy
-# services.AdcCompressService:       @local::cmpblock
-
-# Labels
-# physics.producers.daq.SimChannelLabel: "elecDrift" 
-
-# Disable bad channels.
-#services.IChannelStatusService.BadChannels: [ ]
