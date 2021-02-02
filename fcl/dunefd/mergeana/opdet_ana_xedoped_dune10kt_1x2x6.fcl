@@ -1,0 +1,52 @@
+#include "services_refactored_pdune.fcl"
+#include "FlashMatchAna.fcl"
+
+process_name: OpDetAna
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "ana_hist.root" }
+  TimeTracker:       {}
+  RandomNumberGenerator: {}
+  MemoryTracker:         { } # default is one
+  message:      @local::dune_message_services_prod
+  @table::dunefd_refactored_services
+}
+
+### Use the 1x2x6 geometry ###
+services.Geometry: @local::dune10kt_1x2x6_geo
+
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents:   -1
+}
+
+
+physics:
+{
+   analyzers:
+   {
+      flashmatchAnaAr:   @local::standard_flashmatchana
+      flashmatchAnaXe:   @local::standard_flashmatchana
+      flashmatchAnaBoth: @local::standard_flashmatchana
+   }
+
+   anapath: [ flashmatchAnaAr, flashmatchAnaXe, flashmatchAnaBoth ]
+   end_paths:     [ anapath ]
+}
+
+physics.analyzers.flashmatchAnaAr.OpDetWaveformLabel:   opdigiAr
+physics.analyzers.flashmatchAnaAr.OpHitModuleLabel:     ophitAr
+physics.analyzers.flashmatchAnaAr.OpFlashModuleLabel:   opflashAr
+
+physics.analyzers.flashmatchAnaXe.OpDetWaveformLabel:   opdigiXe
+physics.analyzers.flashmatchAnaXe.OpHitModuleLabel:     ophitXe
+physics.analyzers.flashmatchAnaXe.OpFlashModuleLabel:   opflashXe
+
+physics.analyzers.flashmatchAnaBoth.OpDetWaveformLabel: opdigiBoth
+physics.analyzers.flashmatchAnaBoth.OpHitModuleLabel:   ophitBoth
+physics.analyzers.flashmatchAnaBoth.OpFlashModuleLabel: opflashBoth
+

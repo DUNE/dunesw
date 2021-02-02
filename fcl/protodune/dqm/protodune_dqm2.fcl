@@ -10,7 +10,7 @@
 # that creates or reads in RawDigits and calls a module
 # (most likely DataPrepModule) that runs the RawDigitPrepService.
 
-services.RawDigitPrepService.AdcChannelToolNames: [
+services.RawDigitPrepService.ToolNames: [
   "digitReader",
   "pd_evtviewNfemb",
   "pd_evtviewNfembByTps"

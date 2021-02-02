@@ -8,7 +8,7 @@
 tools.tickRanges.plotTicks.begin:    0
 tools.tickRanges.plotTicks.end:   2000
 
-services.RawDigitPrepService.AdcChannelToolNames: [
+services.RawDigitPrepService.ToolNames: [
   "digitReader",
   "ib_adcPedestalFit", 
   "ibmet_adcChannelPedestalPlotter",
