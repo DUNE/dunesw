@@ -62,7 +62,7 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v09_20_00_rc1
+larsoft          v09_16_00
 artdaq_core	 v3_06_09
 duneutil         v09_14_00_01	-	optional
 dune_pardata	 v01_66_00
