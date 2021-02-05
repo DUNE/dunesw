@@ -1,21 +1,13 @@
-# opdet_multireco_dune10kt_1x2x6
+# opdet_reco_xedoped_dune10kt_1x2x6
 
 # Alex Himmel
-# March 2019
+# January 2020
 #
-# Job fhicl for running multiple variants of the photon detector reconstruction simulatneously
-# Runs a limited amount of TPC reconstruction as well
+# Job fhicl for running reco Ar, Xe and both 
 
 #include "services_refactored_pdune.fcl"
-#include "services_dune.fcl"
-#include "hitfindermodules_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
-#include "OpDetMultisim.fcl"
-#include "wirecell_dune.fcl"
-//#include "protodune_tools_dune.fcl"
-
 #include "tools_dune.fcl"
-
 
 process_name: Reco
 
@@ -28,7 +20,7 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::dunefd_reco_services
+  @table::dunefd_refactored_reco_services
 }
 
 ### Use the 1x2x6 geometry ###
@@ -38,7 +30,7 @@ services.Geometry: @local::dune10kt_1x2x6_geo
 source:
 {
   module_type: RootInput
-  maxEvents:  10        # Number of events to create
+  maxEvents:   -1        # Number of events to create
   saveMemoryObjectThreshold: 0
   inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco" ]
 }
@@ -56,22 +48,20 @@ physics:
 
   # TPC reconstruction
   # convert raw::RawDigit to recob::wire
-   wclsdatanfsp:        @local::dune10kt_1x2x6_data_nfsp
-#    wclsdatanfsp:         @local::protodunespdata_nfsp
-#  caldata:            @local::producer_adcprep
-#  gaushit:            @local::dunefd_gaushitfinder
-# Hit finder
-    gaushit:            @local::protodunespmc_gaushitfinder
-#  hitfd:              @local::dunefd_hitfinderfd
+  #wclsdatanfsp:        @local::dune10kt_1x2x6_data_nfsp
+  # Hit finder
+  #gaushit:            @local::protodunespmc_gaushitfinder
 
-  # PD reconstruction
-  @table::pd_reco_modules
+  # PDS reconstruction
+  ophitAr:     @local::dunefd_ophit
+  ophitXe:     @local::dunefd_ophit
+  ophitBoth:   @local::dunefd_ophit
+  opflashAr:   @local::dunefd_opflash
+  opflashXe:   @local::dunefd_opflash
+  opflashBoth: @local::dunefd_opflash
  }
 
- #define the producer and filter modules for this path, order matters, 
- #filters reject all following items.  see lines starting physics.producers below
-# reco: [ rns, caldata, gaushit, hitfd, @sequence::pd_reco_path ]
- reco: [ rns, wclsdatanfsp, gaushit, @sequence::pd_reco_path ]
+ reco: [ rns, ophitAr, ophitXe, ophitBoth, opflashAr, opflashXe, opflashBoth ]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -84,6 +74,15 @@ physics:
  #ie analyzers and output streams.  these all run simultaneously
  end_paths:     [stream1]  
 }
+
+physics.producers.ophitAr.InputModule:      opdigiAr
+physics.producers.ophitXe.InputModule:      opdigiXe
+physics.producers.ophitBoth.InputModule:    opdigiBoth
+
+physics.producers.opflashAr.InputModule:    ophitAr
+physics.producers.opflashXe.InputModule:    ophitXe
+physics.producers.opflashBoth.InputModule: ophitBoth
+
 
 #block to define where the output goes.  if you defined a filter in the physics
 #block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
@@ -100,4 +99,4 @@ outputs:
  }
 }
 
-physics.producers.gaushit.CalDataModuleLabel: "wclsdatanfsp:gauss"
+#physics.producers.gaushit.CalDataModuleLabel: "wclsdatanfsp:gauss"

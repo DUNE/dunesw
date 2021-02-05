@@ -21,6 +21,9 @@ services:
   NuRandomService:       @local::dune_prod_seedservice
 }
 
+services.Geometry:      @local::dune10kt_1x2x6_v4_refactored_geo
+services.LArG4Detector: @local::dune10kt_1x2x6_v4_larg4detector
+
 
 #services.LArG4Parameters.UseModBoxRecomb:          true
 
@@ -41,13 +44,14 @@ physics:
   {
      largeant:    @local::dunefd_larg4
      IonAndScint: @local::dunefd_ionandscint
-     PDFastSim:   @local::dunefd_pdfastsim
+     PDFastSimAr: @local::dunefd_pdfastsim_par_ar_refl
+     PDFastSimXe: @local::dunefd_pdfastsim_par_xe_refl
      rns:         { module_type: "RandomNumberSaver" }
   }
 
   #define the producer and filter modules for this path, order matters, 
   #filters reject all following items.  see lines starting physics.producers below
-  simulate: [ rns, largeant, IonAndScint, PDFastSim ]
+  simulate: [ rns, largeant, IonAndScint, PDFastSimAr, PDFastSimXe ]
  
   #define the output stream, there could be more than one if using filters 
   stream1:  [ out1 ]
