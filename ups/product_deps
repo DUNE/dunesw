@@ -64,12 +64,12 @@ table_fragment_end
 product          version
 larsoft          v09_16_00
 artdaq_core	 v3_06_09
-duneutil         v09_14_00_01	-	optional
+duneutil         v09_15_00	-	optional
 dune_pardata	 v01_66_00
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04
 cetbuildtools	 v7_17_01	-	only_for_build
-dune_raw_data    v1_17_58
+dune_raw_data    v1_17_59
 #caffe            DISCONTINUED   -       optional
 nusystematics    v00_11_02
 systematicstools v00_08_01
