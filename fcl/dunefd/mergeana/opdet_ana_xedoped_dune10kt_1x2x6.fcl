@@ -6,7 +6,7 @@ process_name: OpDetAna
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "ana_hist.root" }
+  TFileService: { fileName: "flashmatch_%ifb.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {}
   MemoryTracker:         { } # default is one
@@ -29,24 +29,24 @@ physics:
 {
    analyzers:
    {
-      flashmatchAnaAr:   @local::standard_flashmatchana
-      flashmatchAnaXe:   @local::standard_flashmatchana
-      flashmatchAnaBoth: @local::standard_flashmatchana
+      flashmatchAnaArOnly:   @local::standard_flashmatchana
+      flashmatchAnaXeOnly:   @local::standard_flashmatchana
+      flashmatchAna10ppm: @local::standard_flashmatchana
    }
 
-   anapath: [ flashmatchAnaAr, flashmatchAnaXe, flashmatchAnaBoth ]
+   anapath: [ flashmatchAnaArOnly, flashmatchAnaXeOnly, flashmatchAna10ppm ]
    end_paths:     [ anapath ]
 }
 
-physics.analyzers.flashmatchAnaAr.OpDetWaveformLabel:   opdigiAr
-physics.analyzers.flashmatchAnaAr.OpHitModuleLabel:     ophitAr
-physics.analyzers.flashmatchAnaAr.OpFlashModuleLabel:   opflashAr
+physics.analyzers.flashmatchAnaArOnly.OpDetWaveformLabel:   opdigiArOnly
+physics.analyzers.flashmatchAnaArOnly.OpHitModuleLabel:     ophitArOnly
+physics.analyzers.flashmatchAnaArOnly.OpFlashModuleLabel:   opflashArOnly
 
-physics.analyzers.flashmatchAnaXe.OpDetWaveformLabel:   opdigiXe
-physics.analyzers.flashmatchAnaXe.OpHitModuleLabel:     ophitXe
-physics.analyzers.flashmatchAnaXe.OpFlashModuleLabel:   opflashXe
+physics.analyzers.flashmatchAnaXeOnly.OpDetWaveformLabel:   opdigiXeOnly
+physics.analyzers.flashmatchAnaXeOnly.OpHitModuleLabel:     ophitXeOnly
+physics.analyzers.flashmatchAnaXeOnly.OpFlashModuleLabel:   opflashXeOnly
 
-physics.analyzers.flashmatchAnaBoth.OpDetWaveformLabel: opdigiBoth
-physics.analyzers.flashmatchAnaBoth.OpHitModuleLabel:   ophitBoth
-physics.analyzers.flashmatchAnaBoth.OpFlashModuleLabel: opflashBoth
+physics.analyzers.flashmatchAna10ppm.OpDetWaveformLabel: opdigi10ppm
+physics.analyzers.flashmatchAna10ppm.OpHitModuleLabel:   ophit10ppm
+physics.analyzers.flashmatchAna10ppm.OpFlashModuleLabel: opflash10ppm
 
