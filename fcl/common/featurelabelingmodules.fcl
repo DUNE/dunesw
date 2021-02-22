@@ -16,7 +16,7 @@ protodune_emtrkmichelid.PointIdAlg.PatchSizeW:        48
 protodune_emtrkmichelid.PointIdAlg.PatchSizeD:        48
 protodune_emtrkmichelid.PointIdAlg.DriftWindow:       6
 protodune_emtrkmichelid.PointIdAlg.DownscaleFn:       "mean"
-protodune_emtrkmichelid.PointIdAlg.DownscaleFullView: false
+protodune_emtrkmichelid.PointIdAlg.DownscaleFullView: true
 protodune_emtrkmichelid.PointIdAlg.AdcMin: -10 # This was previously -50
 protodune_emtrkmichelid.PointIdAlg.AdcMax: 30  # This was previously 150
 protodune_emtrkmichelid.HitModuleLabel:               "hitpdune"
