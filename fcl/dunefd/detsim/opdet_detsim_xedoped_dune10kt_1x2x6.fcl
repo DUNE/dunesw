@@ -1,14 +1,8 @@
 
 #include "services_refactored_pdune.fcl"
-#include "singles_dune.fcl"
-#include "largeantmodules_dune.fcl"
-#include "detsimmodules_dune.fcl"
-#include "mccheatermodules.fcl"
-#include "photpropservices_dune.fcl"
-#include "opticaldetectormodules_dune.fcl"
-#include "opticaldetectorservices_dune.fcl"
-#include "FlashMatchAna.fcl"
-#include "SNAna.fcl"
+#include "SIPMOpSensorSim.fcl"
+#include "WaveformDigitizerSim.fcl"
+
 
 process_name: OpticalDetsim
 
@@ -54,28 +48,30 @@ physics:
    # Run both detector simulation and reconstruction
    producers:
    {
-      opdigiAr:   @local::dunefd_opdigi_threegang
-      opdigiXe:   @local::dunefd_opdigi_threegang
-      opdigiBoth: @local::dunefd_opdigi_threegang
+      sipmArOnly:    @local::xarapuca_ar
+      sipmXeOnly:    @local::xarapuca_xetuned_xe10ppm
+      sipmAr10ppm:   @local::xarapuca_ar_xe10ppm
+      sipmXe10ppm:   @local::xarapuca_xe_xe10ppm
+
+      opdigiArOnly:  @local::standard_daphne
+      opdigiXeOnly:  @local::standard_daphne
+      opdigi10ppm:   @local::standard_daphne
    }
 
-   simPath:       [ opdigiAr, opdigiXe, opdigiBoth ]
-   stream1:       [ out1 ]
+   ArOnlyPath: [ sipmArOnly, opdigiArOnly ]
+   XeOnlyPath: [ sipmXeOnly, opdigiXeOnly ]
+   BothPath:   [ sipmAr10ppm, sipmXe10ppm, opdigi10ppm ]
+   trigger_paths: [ ArOnlyPath, XeOnlyPath, BothPath ]
 
-   trigger_paths: [ simPath ]
+   stream1:       [ out1 ]
    end_paths:     [ stream1 ]
 }
 
-# 3.5% efficiency, Arbitrarily assumes half Ar, half Xe
-physics.producers.opdigiAr.QEOverride:     0.035
-physics.producers.opdigiXe.QEOverride:     0.035
-physics.producers.opdigiBoth.QEOverride:   0.0175 
+physics.producers.sipmArOnly.InputTag:  "PDFastSimAr"
+physics.producers.sipmXeOnly.InputTag:  "PDFastSimXe" #Default, but set anyway for clarity
+physics.producers.sipmAr10ppm.InputTag: "PDFastSimAr"
+physics.producers.sipmXe10ppm.InputTag: "PDFastSimXe" #Default, but set anyway for clarity
 
-# No reflections for now
-physics.producers.opdigiAr.fRefQEOverride:     0
-physics.producers.opdigiXe.fRefQEOverride:     0
-physics.producers.opdigiBoth.fRefQEOverride:   0 
-
-physics.producers.opdigiAr.InputModules:   [PDFastSimAr]
-physics.producers.opdigiXe.InputModules:   [PDFastSimXe]
-physics.producers.opdigiBoth.InputModules: [PDFastSimAr, PDFastSimXe]
+physics.producers.opdigiArOnly.InputTags:   [sipmArOnly]
+physics.producers.opdigiXeOnly.InputTags:   [sipmXeOnly]
+physics.producers.opdigi10ppm.InputTags:    [sipmAr10ppm, sipmXe10ppm]

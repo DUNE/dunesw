@@ -26,7 +26,7 @@ services.Geometry:      @local::dunevd10kt_1x6x6_geo
 source:
 {
   module_type: RootInput
-  maxEvents:  10        # Number of events to create
+  maxEvents:  -1        # Number of events to create
 }
 
 # Define and configure some modules to do work on each event.

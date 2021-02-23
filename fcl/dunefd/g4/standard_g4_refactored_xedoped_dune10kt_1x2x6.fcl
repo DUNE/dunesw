@@ -31,7 +31,7 @@ services.LArG4Detector: @local::dune10kt_1x2x6_v4_larg4detector
 source:
 {
   module_type: RootInput
-  maxEvents:  10        # Number of events to create
+  maxEvents:  -1        # Number of events to create
 }
 
 # Define and configure some modules to do work on each event.

@@ -3,7 +3,7 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 
-parent dunetpc v09_16_01
+parent dunetpc v09_17_00
 
 defaultqual e19
 
@@ -62,7 +62,7 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v09_16_01
+larsoft          v09_17_00
 artdaq_core	 v3_06_09
 duneutil         v09_16_01	-	optional
 dune_pardata	 v01_67_00

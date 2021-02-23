@@ -53,15 +53,15 @@ physics:
   #gaushit:            @local::protodunespmc_gaushitfinder
 
   # PDS reconstruction
-  ophitAr:     @local::dunefd_ophit
-  ophitXe:     @local::dunefd_ophit
-  ophitBoth:   @local::dunefd_ophit
-  opflashAr:   @local::dunefd_opflash
-  opflashXe:   @local::dunefd_opflash
-  opflashBoth: @local::dunefd_opflash
+  ophitArOnly:     @local::dunefd_ophit
+  ophitXeOnly:     @local::dunefd_ophit
+  ophit10ppm:      @local::dunefd_ophit
+  opflashArOnly:   @local::dunefd_opflash
+  opflashXeOnly:   @local::dunefd_opflash
+  opflash10ppm:    @local::dunefd_opflash
  }
 
- reco: [ rns, ophitAr, ophitXe, ophitBoth, opflashAr, opflashXe, opflashBoth ]
+ reco: [ rns, ophitArOnly, ophitXeOnly, ophit10ppm, opflashArOnly, opflashXeOnly, opflash10ppm ]
 
  #define the output stream, there could be more than one if using filters 
  stream1:  [ out1 ]
@@ -75,13 +75,13 @@ physics:
  end_paths:     [stream1]  
 }
 
-physics.producers.ophitAr.InputModule:      opdigiAr
-physics.producers.ophitXe.InputModule:      opdigiXe
-physics.producers.ophitBoth.InputModule:    opdigiBoth
+physics.producers.ophitArOnly.InputModule:      opdigiArOnly
+physics.producers.ophitXeOnly.InputModule:      opdigiXeOnly
+physics.producers.ophit10ppm.InputModule:       opdigi10ppm
 
-physics.producers.opflashAr.InputModule:    ophitAr
-physics.producers.opflashXe.InputModule:    ophitXe
-physics.producers.opflashBoth.InputModule: ophitBoth
+physics.producers.opflashArOnly.InputModule:    ophitArOnly
+physics.producers.opflashXeOnly.InputModule:    ophitXeOnly
+physics.producers.opflash10ppm.InputModule:     ophit10ppm
 
 
 #block to define where the output goes.  if you defined a filter in the physics
