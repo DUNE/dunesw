@@ -1,0 +1,30 @@
+# iceberg5_dqm1.fcl
+
+# David Adams
+# February 2021
+#
+# Dataprep tool configuration for Iceberg 5 DQM.
+
+tools.tickRanges.plotTicks.begin:    0
+tools.tickRanges.plotTicks.end:   2000
+
+services.RawDigitPrepService.ToolNames: [
+  "digitReader",
+  "ib5_adcPedestalFit", 
+  "ibmet_adcChannelPedestalPlotter",
+  "ibmet_adcChannelPedestalNoisePlotter",
+  "ibmet_adcChannelPedestalOrfPlotter",
+  "ibmet_adcChannelPedestalPeakBinExcessPlotter",
+  "ibmet_adcChannelPedestalRawRmsPlotter",
+  "ibmet_adcChannelPedestalRawTailPlotter",
+  #"ibcht_Apas",
+  "ibcht_Xplanes",
+  "ibcht_Iplanes"
+  #, "pd_evtviewNfemb"
+]
+
+tools.ibmet_adcChannelPedestalPlotter.MetricMax: 16400
+tools.ibmet_adcChannelPedestalNoisePlotter.MetricMax: 12.0
+tools.ibmet_adcChannelPedestalRawRmsPlotter.MetricMax: 160
+tools.ibcht_Xplanes.MaxSignal: 40
+tools.ibcht_Iplanes.MaxSignal: 40
