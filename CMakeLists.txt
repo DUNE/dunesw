@@ -32,7 +32,8 @@ set_install_root()
 cet_set_compiler_flags(DIAGS CAUTIOUS
   WERROR
   NO_UNDEFINED
-  EXTRA_FLAGS -pedantic -Wno-unused-local-typedefs
+#  EXTRA_FLAGS -pedantic -Wno-unused-local-typedefs
+  EXTRA_FLAGS -Wno-unused-local-typedefs
 )
 ##add_definitions(-DGENIE_PRE_R3)
 
@@ -80,7 +81,14 @@ if(( DEFINED ENV{TENSORFLOW_DIR} ) AND ( DEFINED ENV{TRTIS_CLIENTS_DIR} ))
   find_ups_product( tensorflow )
   find_ups_product( trtis_clients )
   find_ups_product( larrecodnn v1_00_00 )
-  cet_find_library(TENSORFLOW NAMES tensorflow-core PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
+  if("$ENV{TENSORFLOW_VERSION}" STREQUAL "v2_3_1")
+    cet_find_library(TENSORFLOW_CC NAMES tensorflow_cc PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
+    cet_find_library(TENSORFLOW_FRAMEWORK NAMES tensorflow_framework PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
+    set(TENSORFLOW ${TENSORFLOW_CC} ${TENSORFLOW_FRAMEWORK})
+  else()
+    cet_find_library(TENSORFLOW NAMES tensorflow-core PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
+  endif()
+  message(${TENSORFLOW})
   cet_find_library(PROTOBUF NAMES protobuf PATHS ENV PROTOBUF_LIB NO_DEFAULT_PATH )
 endif()
 # artdaq_core Utility library
