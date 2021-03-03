@@ -7,6 +7,6 @@ tools.adcsim_noisy.Noise:5
 
 services.Geometry: @local::dune10kt_1x2x6_geo
 
-services.PdspChannelMapService: pdspchannelmap
-services.ChannelNoiseService: protodunelikenoise
+services.PdspChannelMapService: @local::pdspchannelmap
+services.ChannelNoiseService:   @local::protodunelikenoise
 
