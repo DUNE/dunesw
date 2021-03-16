@@ -1,0 +1,17 @@
+# iceberg5a_dqm1.fcl
+
+# David Adams
+# March 2021
+#
+# Dataprep tool configuration for Iceberg 5a DQM.
+
+#include "iceberg5_dqm1.fcl"
+
+# Set pedestal fitter.
+tools.ib5_adcPedestalFit: @local::tools.ib5a_adcPedestalFit
+tools.ib5_adcPedestalFit.FitRmsMin: 0.2   # Make low-RMS easy to see
+
+tools.ibmet_adcChannelPedestalNoisePlotter.MetricMax: 12.0
+tools.ibmet_adcChannelPedestalRawRmsPlotter.MetricMax: 160
+tools.ibcht_Xplanes.MaxSignal: 40
+tools.ibcht_Iplanes.MaxSignal: 40
