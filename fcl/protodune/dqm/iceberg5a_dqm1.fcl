@@ -5,7 +5,7 @@
 #
 # Dataprep tool configuration for Iceberg 5a DQM.
 
-#include "iceberg5_dqm1.fcl"
+#include "iceberg5b_dqm1.fcl"
 
 # Set pedestal fitter.
 tools.ib5_adcPedestalFit: @local::tools.ib5a_adcPedestalFit
