@@ -1,0 +1,17 @@
+#include "standard_detsim_dune10kt.fcl"
+
+process_name: NoZSDetsim
+
+services.Geometry: @local::dune10kt_3mmpitch_1x2x6_geo
+
+services.SignalShapingServiceDUNE.FieldResponseFname: "dune35t_response_v1.0_3mm.root"
+services.SignalShapingServiceDUNE.FieldBins: 1000
+services.SignalShapingServiceDUNE.InputFieldRespSamplingPeriod: 20.
+services.SignalShapingServiceDUNE.FieldResponseTOffset: [-13.9e3, -13.9e3, -13.9e3]
+services.SignalShapingServiceDUNE.ASICGainInMVPerFC: [28, 28, 28]
+
+physics.producers.daq.ZeroThreshold: 12
+physics.producers.daq.SuppressOn: false
+
+services.AdcSuppressService: @local::zsnone
+services.AdcCompressService: @local::cmpreplace
