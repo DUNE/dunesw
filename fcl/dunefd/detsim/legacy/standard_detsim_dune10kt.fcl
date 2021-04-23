@@ -1,32 +1,25 @@
-# standard_detsim_dune10kt.fcl 
+# standard_detsim_dune10kt.fcl
 
-# Dom Brailsford (based on Alex Himmel's multidetsim)
+# David Adams
+# April 2016
 #
-#
-# Job fhicl for running multiple variants of the photon detector simulation simulatneously
-# Runs a single variant of TPC detsim as well
+# Top level FCL for production of 35-ton simulated data.
 
-#include "wirecell_dune.fcl"
 #include "services_dune.fcl"
 #include "detsimmodules_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
-#include "OpDetMultisim.fcl"
 
 #include "tools_dune.fcl"
 
 process_name: detsim
 
-
-services:
-{
-   TFileService: { fileName: "%ifb_detsim_hist.root" }
-   TimeTracker:       {}
-   MemoryTracker:         { } # default is one
-   RandomNumberGenerator: {} #ART native random number generator
-   FileCatalogMetadata:  @local::art_file_catalog_mc
-   @table::dunefd_simulation_services
-   message:              @local::dune_message_services_prod
-}
+services: @local::dunefd_simulation_services
+services.TFileService: { fileName: "detsim_hist.root" }
+services.TimeTracker:       {}
+services.MemoryTracker:         { } # default is one
+services.RandomNumberGenerator: {} #ART native random number generator
+services.FileCatalogMetadata:  @local::art_file_catalog_mc
+services.NuRandomService:       @local::random_NuRandomService  # seedservice.fcl
 
 #source is now a root file
 source: {
@@ -39,14 +32,11 @@ source: {
 # Modules are grouped by type.
 physics: {
  producers: {
-#   daq:            @local::dune_detsim
-
-   tpcrawdecoder: @local::tpcrawdecoder_dunefd_horizdrift
-   @table::pd_detsim_modules
+   daq:            @local::dune_detsim
+   opdigi:         @local::dune35t_opdigi
    rns:            { module_type: "RandomNumberSaver" }
  }
-# simulate: [ rns, daq, @sequence::pd_detsim_path ]
- simulate: [ rns, tpcrawdecoder, @sequence::pd_detsim_path ]
+ simulate: [ rns, daq, opdigi ]
  stream1:  [ out1 ]
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
@@ -81,11 +71,3 @@ services.AdcCompressService:       @local::cmpblock
 # Disable bad channels.
 #services.IChannelStatusService.BadChannels: [ ]
 
-### Supernova detsim noise levels ###
-### What value do I want for the Noise Level?
-services.ChannelNoiseService.NoiseNormU:  5.75
-services.ChannelNoiseService.NoiseNormV:  5.75
-services.ChannelNoiseService.NoiseNormZ:  4.5
-
-#configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
-#=> configs: ["pgrapher/experiment/dune10kt-1x2x6/wcls-sim-drift-simchannel.jsonnet"]
