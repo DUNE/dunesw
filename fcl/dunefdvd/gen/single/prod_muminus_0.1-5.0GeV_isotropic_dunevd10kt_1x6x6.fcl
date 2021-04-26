@@ -1,8 +1,8 @@
-#include "prodsingle_common_dunefd.fcl"
+#include "prodsingle_common_dunefdvd10kt.fcl"
 
 process_name: SinglesGen
 
-outputs.out1.fileName: "prod_muminus_0.1-5.0GeV_isotropic_dune10kt_1x2x6_gen.root"
+outputs.out1.fileName: "prod_muminus_0.1-5.0GeV_isotropic_dune10ktvd_1x6x6_gen.root"
 
 services:
 {
