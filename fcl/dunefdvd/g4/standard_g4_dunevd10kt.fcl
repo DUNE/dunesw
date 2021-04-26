@@ -2,7 +2,6 @@
 #include "IonAndScint_dune.fcl"
 #include "PDFastSim_dune.fcl"
 #include "services_dune.fcl"
-#include "services_refactored_pdune.fcl"
 
 process_name: G4
 
@@ -16,11 +15,7 @@ services:
   FileCatalogMetadata:   @local::art_file_catalog_mc
 
   @table::dunefdvd_simulation_services
-  @table::dunevd10kt_1x6x6_larg4_services
-
-  NuRandomService:       @local::dune_prod_seedservice
 }
-services.Geometry:      @local::dunevd10kt_1x6x6_geo
 
 #source is now a root file
 source:
