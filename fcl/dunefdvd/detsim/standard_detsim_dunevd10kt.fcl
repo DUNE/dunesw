@@ -39,7 +39,7 @@ physics: {
  producers: {
 #   daq:            @local::dune_detsim
 
-   tpcrawdecoder: @local::tpcrawdecoder_dunefd_vertdrift
+   tpcrawdecoder: @local::tpcrawdecoder_dunefd_vertdrift_2view
    rns:            { module_type: "RandomNumberSaver" }
  }
 # simulate: [ rns, daq, @sequence::pd_detsim_path ]
