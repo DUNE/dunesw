@@ -33,7 +33,7 @@ physics:
   producers:
   {
      largeant:    @local::dunefd_larg4
-     #IonAndScint: @local::dunefd_ionandscint
+     IonAndScint: @local::dunefd_ionandscint
      #PDFastSimAr: @local::dunefd_pdfastsim_par_ar_refl
      #PDFastSimXe: @local::dunefd_pdfastsim_par_xe_refl
      rns:         { module_type: "RandomNumberSaver" }
@@ -41,7 +41,7 @@ physics:
 
   #define the producer and filter modules for this path, order matters, 
   #filters reject all following items.  see lines starting physics.producers below
-  simulate: [ rns, largeant ]#, IonAndScint, PDFastSimAr, PDFastSimXe ]
+  simulate: [ rns, largeant , IonAndScint] #, PDFastSimAr, PDFastSimXe ]
  
   #define the output stream, there could be more than one if using filters 
   stream1:  [ out1 ]
