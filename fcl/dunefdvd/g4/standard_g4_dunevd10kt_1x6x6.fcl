@@ -5,4 +5,3 @@ services: {
   @table::dunefdvd_1x6x6_simulation_services
 }
 
-physics.producers.IonAndScint.Instances: "LArG4DetectorServicevolTPCInner;LArG4DetectorServicevolTPCPlaneVInner;LArG4DetectorServicevolTPCActiveOuter;LArG4DetectorServicevolTPCPlaneUInner;LArG4DetectorServicevolTPCPlaneZInner;LArG4DetectorServicevolTPCActiveInner;LArG4DetectorServicevolTPCActive"
