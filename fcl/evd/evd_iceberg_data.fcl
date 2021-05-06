@@ -12,8 +12,8 @@ services.RecoDrawingOptions.DrawSpacePoints:          1
 services.RecoDrawingOptions.DrawClusters:          4
 services.RecoDrawingOptions.SpacePointModuleLabels:   [reco3d]
 #services.RecoDrawingOptions.HitModuleLabels:          "[linecluster]"
-#services.RecoDrawingOptions.WireModuleLabels: ["caldata:dataprep"]
-services.RecoDrawingOptions.WireModuleLabels: ["wclsdatasp:gauss"]
+services.RecoDrawingOptions.WireModuleLabels: ["caldata:dataprep"]
+#services.RecoDrawingOptions.WireModuleLabels: ["wclsdatasp:gauss"]
 services.RecoDrawingOptions.HitModuleLabels: [linecluster]
 services.RecoDrawingOptions.ClusterModuleLabels:      [linecluster]
 #services.RecoDrawingOptions.HitModuleLabels: [trajcluster]
@@ -27,7 +27,8 @@ services.DetectorPropertiesService.ReadOutWindowSize: 2000
 
 services.ColorDrawingOptions.RawQHigh: [100]
 services.ColorDrawingOptions.RawQLow:  [-50]
-services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
+#services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
+services.RawDrawingOptions.RawDataLabels: ["caldata:dataprep"]
 services.RawDrawingOptions.PedestalOption: 1
 services.RawDrawingOptions.MinimumSignal: 5.0
 
