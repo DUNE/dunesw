@@ -1,0 +1,22 @@
+#include "protoDUNE_SP_keepup_decoder_reco_stage2.fcl"
+
+process_name: Reco2
+
+physics.filters:{
+    @table::protoDUNE_reco_data_filters
+}
+
+physics.producers: {
+    @table::protoDUNE_reco_data_stage1_producers
+    @table::protoDUNE_reco_data_stage2_producers
+}
+
+physics.decode: [nhitsfilter,
+                 emtrkmichelid,
+                 pandoracali,
+                 pandoracalipid,
+                 pandora2cali,
+                 pandora2calipid
+]
+
+outputs.out1.outputCommands: [ "keep *", "drop *_emtrkmichelid_*_Reco1" ]
