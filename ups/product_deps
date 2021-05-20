@@ -5,7 +5,7 @@
 
 parent dunetpc v09_22_03
 
-defaultqual e19
+defaultqual e20
 
 # These optional lines define where headers, libraries, and executables go and should
 # be used only if your product does not conform to the defaults.
@@ -62,9 +62,9 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v09_22_03
+larsoft          v09_23_00
 artdaq_core	 v3_06_09
-duneutil         v09_22_02	-	optional
+duneutil         v09_23_00	-	optional
 dune_pardata	 v01_71_00
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04
