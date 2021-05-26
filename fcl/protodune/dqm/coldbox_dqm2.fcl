@@ -15,6 +15,5 @@
 
 services.RawDigitPrepService.ToolNames: [
   "digitReader",
-  "pd_evtviewNfemb",
-  "pd_evtviewNfembByTps"
+  "apa_evtviewNfemb"
 ]
