@@ -18,7 +18,7 @@ process_name: detsim
 
 services:
 {
-   @table::dunefd_simulation_services
+   @table::dunefd_simulation_services_legacy
    TFileService: { fileName: "%ifb_detsim_hist.root" }
    TimeTracker:       {}
    MemoryTracker:         { } # default is one

@@ -20,7 +20,7 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   #FileCatalogMetadata:   @local::art_file_catalog_mc
   message:      @local::standard_info
-  @table::dunefd_simulation_services
+  @table::dunefd_simulation_services_legacy
 }
 
 # DUNE FD 1x2x6 workspace geometry
