@@ -1,4 +1,4 @@
-#include "prodsingle_common_dunefd.fcl"
+#include "prodsingle_common_dunefd_legacy.fcl"
 
 process_name: SinglesGen
 
