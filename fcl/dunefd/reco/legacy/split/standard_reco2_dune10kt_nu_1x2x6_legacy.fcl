@@ -1,4 +1,4 @@
-#include "standard_reco2_dune10kt_1x2x6.fcl"
+#include "standard_reco2_dune10kt_1x2x6_legacy.fcl"
 process_name: Reco2
 
 physics.producers.blurredclusterdc.ShowerReconOnly: true
