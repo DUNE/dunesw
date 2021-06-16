@@ -1,4 +1,4 @@
-#include "standard_g4_dune10kt.fcl"
+#include "standard_g4_dune10kt_legacy.fcl"
 
 process_name: SupernovaG4
 
