@@ -7,3 +7,30 @@ services.NuRandomService.baseSeed: 1234
 #services.RandomNumberGenerator.saveTo: "RecoRandomSeeds.dat"
 
 #outputs.out1.fastCloning: false
+
+
+physics.reco: [ rns,
+         #optical hits and flashes
+         ophit, opflash,
+         #TPC wire signals
+         caldata,
+         #hit reco
+         fasthit,
+         gaushit,
+         #disambiguation
+         hitfd,
+         #cluster reco
+         linecluster, trajcluster,
+         #track shower split
+         trkshowersplit,
+         #pandora
+         pandora, pandoraTrack, pandoraShower, #pandoraShowerLegacy,
+         pandoracalo, pandorapid,
+         #pmatrack
+         pmtrack, pmtrackcalo, pmtrackpid,
+         pmtrajfit, pmtrajfitcalo, pmtrajfitpid,
+         pmtracktc, pmtracktccalo, pmtracktcpid,
+         pmtrajfittc, pmtrajfittccalo, pmtrajfittcpid,
+         #shower reconstruction
+         blurredcluster#, emtrkmichelid, emshower#, emshower3d, mergeemshower3d
+         ]
