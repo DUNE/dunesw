@@ -54,7 +54,9 @@ cet_test(geometry_crmchannelmapping_test
             GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
-            
+            ${ART_FRAMEWORK_SERVICES_REGISTRY}
+            art_Utilities canvas
+            ${ROOT_BASIC_LIB_LIST}
             ${FHICLCPP}
             cetlib cetlib_except
   USE_BOOST_UNIT
