@@ -58,7 +58,7 @@ physics:
   rns:                 { module_type: RandomNumberSaver }
 # convert raw::RawDigit to recob::wire
   #caldata:            @local::producer_adcprep
-  wclsdatanfsp:        @local::dune10kt_1x2x6_data_nfsp
+  wclsmcnfsp:        @local::dune10kt_mc_nfsp
 # actual hit finder
   gaushit:            @local::dunefd_gaushitfinder
   fasthit:            @local::dunefd_fasthitfinder
@@ -135,7 +135,7 @@ physics:
          @sequence::pd_reco_path,
          #TPC wire signals
          #caldata,
-         wclsdatanfsp,
+         wclsmcnfsp,
          #hit reco
 #         fasthit,
          gaushit,
@@ -184,7 +184,7 @@ outputs:
  }
 }
 ### Here, we overwrite ALL module labels with the ones defined above.
-physics.producers.gaushit.CalDataModuleLabel: "wclsdatanfsp:gauss"
+physics.producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
 physics.producers.fasthitdc.ChanHitLabel:               "fasthit"
 physics.producers.lineclusterdc.HitFinderModuleLabel:   "dcheat"
 #physics.producers.trajclusterdc.TrajClusterAlg.HitFinderModuleLabel:   "dcheat"
@@ -203,7 +203,7 @@ physics.producers.pmtrackdc.PMAlgTracking.MinSeedSize2ndPass:  2
 physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:     false
 physics.producers.pmtrackdc.PMAlgTracking.AutoFlip_dQdx: true
 
-physics.producers.pmtrack.WireModuleLabel:              "wclsdatanfsp:gauss"
+physics.producers.pmtrack.WireModuleLabel:              "wclsmcnfsp:gauss"
 physics.producers.pmtrack.HitModuleLabel:               "linecluster"
 physics.producers.pmtrack.ClusterModuleLabel:           "linecluster"
 physics.producers.pmtrack.EmClusterModuleLabel:         "trkshowersplit"
@@ -222,7 +222,7 @@ physics.producers.pmtracktcdc.PMAlgTracking.MinSeedSize2ndPass:  2
 physics.producers.pmtracktcdc.PMAlgTracking.FlipToBeam:     false
 physics.producers.pmtracktcdc.PMAlgTracking.AutoFlip_dQdx: true
 
-physics.producers.pmtracktc.WireModuleLabel:            "wclsdatanfsp:gauss"
+physics.producers.pmtracktc.WireModuleLabel:            "wclsmcnfsp:gauss"
 physics.producers.pmtracktc.HitModuleLabel:               "trajcluster"
 physics.producers.pmtracktc.ClusterModuleLabel:           "trajcluster"
 physics.producers.pmtracktc.PMAlgTracking.RunVertexing:   true
@@ -352,7 +352,7 @@ physics.producers.blurredcluster.GlobalTPCRecon:  true
 physics.producers.blurredcluster.ShowerReconOnly: false
 physics.producers.blurredcluster.VertexModuleLabel: "linecluster"
 
-physics.producers.emtrkmichelid.WireLabel: "wclsdatanfsp:gauss"
+physics.producers.emtrkmichelid.WireLabel: "wclsmcnfsp:gauss"
 physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet"
 physics.producers.emtrkmichelid.PointIdAlg.NNetOutputs:     ["track", "em", "michel", "none"]
 physics.producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
