@@ -2,7 +2,7 @@
 #include "IonAndScint_dune.fcl"
 #include "PDFastSim_dune.fcl"
 #include "services_dune.fcl"
-#include "services_refactored_pdune.fcl"
+##include "services_refactored_pdune.fcl"
 
 process_name: G4
 
@@ -15,14 +15,14 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:   @local::art_file_catalog_mc
 
-  @table::dunefd_simulation_services
-  @table::dunefd_larg4_services
+  @table::dunefd_1x2x6_simulation_services
+#@table::dunefd_larg4_services
 
   NuRandomService:       @local::dune_prod_seedservice
 }
 
-services.Geometry:      @local::dune10kt_1x2x6_v4_refactored_geo
-services.LArG4Detector: @local::dune10kt_1x2x6_v4_larg4detector
+#services.Geometry:      @local::dune10kt_1x2x6_v4_refactored_geo
+#services.LArG4Detector: @local::dune10kt_1x2x6_v4_larg4detector
 
 
 #services.LArG4Parameters.UseModBoxRecomb:          true
