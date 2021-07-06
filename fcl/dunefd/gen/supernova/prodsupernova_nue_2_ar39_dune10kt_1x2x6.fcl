@@ -68,7 +68,12 @@ outputs:
   }
 }
 
-services.Geometry: @local::dune10kt_1x2x6_geo
+services:
+{
+    @table::services
+    @table::dunefd_1x2x6_services
+}
+
 physics.producers.generator.GeneratorAlg.NumberOfNeutrinos: 2
 
 physics.producers.radiogen.T0: [ -2246000.0 ]
