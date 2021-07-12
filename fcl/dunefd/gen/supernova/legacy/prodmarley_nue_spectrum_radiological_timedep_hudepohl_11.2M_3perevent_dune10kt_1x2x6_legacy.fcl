@@ -1,0 +1,3 @@
+#include "prodmarley_nue_spectrum_radiological_timedep_hudepohl_11.2M_dune10kt_1x2x6_legacy.fcl"
+
+physics.producers.marley.nu_per_event: 3
