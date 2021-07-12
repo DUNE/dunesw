@@ -17,6 +17,7 @@ protodunespdata_calibrationdedx :
     ApplyYZCorrection:       false
     ApplyLifetimeCorrection: true
     UseLifetimeFromDatabase: true  # false: lifetime from DetectorProperties
+    ReferencedQdx:           [65.75, 63.5, 59.29] #60 ke/cm for muons
 }
 
 protodunespmcsce_calibrationdedx:     @local::protodunespdata_calibrationdedx
