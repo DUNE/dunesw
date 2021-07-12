@@ -1,0 +1,4 @@
+#include "standard_reco_dune10kt.fcl"
+
+physics.producers.pandora: @local::dunefd_pandora_cosmic
+physics.producers.pandoradc: @local::dunefd_pandora_cosmic

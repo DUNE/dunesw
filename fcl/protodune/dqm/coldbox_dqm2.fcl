@@ -1,0 +1,19 @@
+# coldbox_dqm2.fcl
+
+# David Adams
+# May 2021
+#
+# Dataprep tool configuration for protoDUNE DQM.
+
+# User is now expected to provide a top-level fcl file
+# that creates or reads in RawDigits and calls a module
+# (most likely DataPrepModule) that runs the RawDigitPrepService.
+#
+# User is expected to provide a top-level fcl file
+# that creates or reads in RawDigits and calls a module
+# (e.g. DataPrepModule) that runs the RawDigitPrepService.
+
+services.RawDigitPrepService.ToolNames: [
+  "digitReader",
+  "apa_evtviewNfemb"
+]
