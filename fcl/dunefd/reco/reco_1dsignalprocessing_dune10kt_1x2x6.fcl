@@ -1,0 +1,41 @@
+#include "standard_reco_dune10kt_1x2x6.fcl"
+
+physics.producers:
+{
+    @table::physics.producers
+    caldata:            @local::producer_adcprep
+}
+
+
+physics.reco: 
+[ 
+     rns,
+     #optical hits and flashes
+     @sequence::pd_reco_path,
+     #TPC wire signals
+     caldata,
+     #hit reco
+     gaushit,
+     #disambiguation
+     spsolve,
+     hitfd,
+     #cluster reco
+     linecluster, trajcluster,
+     #track shower split
+     trkshowersplit,
+     #pandora
+     pandora, pandoraTrack, pandoraShower, #pandoraShowerLegacy,
+     pandoracalo, pandorapid,
+     #pmatrack
+     pmtrack, pmtrackcalo, pmtrackpid,
+     pmtrajfit, pmtrajfitcalo, pmtrajfitpid,
+     pmtracktc, pmtracktccalo, pmtracktcpid,
+     pmtrajfittc, pmtrajfittccalo, pmtrajfittcpid,
+     #shower reconstruction
+     blurredcluster, emtrkmichelid, emshower
+]
+
+physics.producers.gaushit.CalDataModuleLabel: "caldata"
+physics.producers.pmtrack.WireModuleLabel:    "caldata"
+physics.producers.pmtracktc.WireModuleLabel:  "caldata"
+physics.producers.emtrkmichelid.WireLabel:    "caldata"

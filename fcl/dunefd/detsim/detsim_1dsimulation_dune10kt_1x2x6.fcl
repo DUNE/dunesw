@@ -1,21 +1,20 @@
 #include "standard_detsim_dune10kt_1x2x6.fcl"
 
-physics.producers.daq1d:            @local::dune_detsim
-physics.producers.opdigi:         @local::dune35t_opdigi
+physics.producers.daq:            @local::dune_detsim
 physics.producers.rns:            { module_type: "RandomNumberSaver" }
 
-physics.simulate: [ rns, daq1d, tpcrawdecoder,  opdigi ]
+physics.simulate: [ rns, daq,  @sequence::pd_detsim_path ]
 physics.trigger_paths: [ simulate ]
 
 # Use fixed values instead of DB for pedestals.
 services.DetPedestalService: @local::dune_fixedpeds
 
 # DetSim flags.
-physics.producers.daq1d.NoiseOn:     true
-physics.producers.daq1d.PedestalOn:  true
-physics.producers.daq1d.DistortOn:   false
-physics.producers.daq1d.SuppressOn:  true
-physics.producers.daq1d.SimChannelLabel: "elecDrift"
+physics.producers.daq.NoiseOn:     true
+physics.producers.daq.PedestalOn:  true
+physics.producers.daq.DistortOn:   false
+physics.producers.daq.SuppressOn:  true
+physics.producers.daq.SimChannelLabel: "elecDrift"
 
 # DetSim services.
 services.SimChannelExtractService: @local::scxgeneric
