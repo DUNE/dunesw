@@ -21,6 +21,7 @@
 #include "imagepatternalgs.fcl"
 #include "OpDetMultisim.fcl"
 #include "wirecell_dune.fcl"
+#include "SpacePointSolver_dune.fcl"
 
 #include "tools_dune.fcl"
 
@@ -88,7 +89,9 @@ physics:
   pmtracktcpiddc:        @local::standard_chi2pid
 
 # actual disambiguation
-  hitfd:             @local::dunefd_hitfinderfd
+  spsolve:           @local::dunefd_horizdrift_spacepointsolver
+  hitfd:             @local::dunefd_disambigfromsp
+#hitfd:             @local::dunefd_hitfinderfd
 # reconstruction using disambiguated hits
   linecluster:        @local::dune35t_linecluster
   trajcluster:          @local::dunefdmc_trajcluster
@@ -140,6 +143,7 @@ physics:
 #         fasthit,
          gaushit,
          #disambiguation
+         spsolve,
          hitfd,
          #cluster reco
          linecluster, trajcluster,
