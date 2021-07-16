@@ -34,7 +34,8 @@ physics.reco:
      #shower reconstruction
      blurredcluster, emtrkmichelid, emshower,
      #cvn
-     cvnmap, cvneva
+     cvnmap, cvneva,
+     energyrecnumu, energyrecnue, energyrecnc
 ]
 
 physics.producers.gaushit.CalDataModuleLabel: "caldata"

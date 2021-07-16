@@ -23,6 +23,7 @@
 #include "wirecell_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
 #include "cvn_dune.fcl"
+#include "energyreco.fcl"
 
 #include "tools_dune.fcl"
 
@@ -131,6 +132,10 @@ physics:
   #cvn
   cvnmap:                @local::dunefd_horizdrift_cvnmapper
   cvneva:                @local::dunefd_horizdrift_cvnevaluator
+  #neutrino energy reco
+  energyrecnumu:         @local::dunefd_nuenergyreco_pandora_numu
+  energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
+  energyrecnc:           @local::dunefd_nuenergyreco_pandora_nc
   # photon detector reconstruction
   @table::pd_reco_modules
  }
@@ -165,7 +170,9 @@ physics:
          blurredcluster, emtrkmichelid, emshower,
          #, emshower3d, mergeemshower3d
          #cvn
-         cvnmap, cvneva
+         cvnmap, cvneva,
+         #energy reco
+         energyrecnumu, energyrecnue, energyrecnc
          ]
 
  #define the output stream, there could be more than one if using filters
