@@ -22,6 +22,7 @@
 #include "OpDetMultisim.fcl"
 #include "wirecell_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
+#include "cvn_dune.fcl"
 
 #include "tools_dune.fcl"
 
@@ -127,6 +128,9 @@ physics:
   emshower:              @local::dune10kt_emshower
   emshower3d:            @local::dune10kt_emshower3d
   mergeemshower3d:       @local::dune10kt_mergeemshower3d
+  #cvn
+  cvnmap:                @local::dunefd_horizdrift_cvnmapper
+  cvneva:                @local::dunefd_horizdrift_cvnevaluator
   # photon detector reconstruction
   @table::pd_reco_modules
  }
@@ -158,7 +162,10 @@ physics:
          pmtracktc, pmtracktccalo, pmtracktcpid,
          pmtrajfittc, pmtrajfittccalo, pmtrajfittcpid,
          #shower reconstruction
-         blurredcluster, emtrkmichelid, emshower#, emshower3d, mergeemshower3d
+         blurredcluster, emtrkmichelid, emshower,
+         #, emshower3d, mergeemshower3d
+         #cvn
+         cvnmap, cvneva
          ]
 
  #define the output stream, there could be more than one if using filters

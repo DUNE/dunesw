@@ -32,7 +32,9 @@ physics.reco:
      pmtracktc, pmtracktccalo, pmtracktcpid,
      pmtrajfittc, pmtrajfittccalo, pmtrajfittcpid,
      #shower reconstruction
-     blurredcluster, emtrkmichelid, emshower
+     blurredcluster, emtrkmichelid, emshower,
+     #cvn
+     cvnmap, cvneva
 ]
 
 physics.producers.gaushit.CalDataModuleLabel: "caldata"
