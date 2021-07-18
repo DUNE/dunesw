@@ -62,7 +62,7 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v09_26_00
+larsoft          v09_26_01
 artdaq_core	 v3_06_13
 duneutil         v09_26_00	-	optional
 dune_pardata	 v01_73_00
@@ -76,20 +76,19 @@ systematicstools v00_08_02
 dune_oslibs      v1_0_0         -       optional
 hep_hpc          v0_14_01
 valgrind         v3_16_1
-libtorch         v1_6_0b
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 # e15  - with gcc 6.4.0 and -std=c++14
-qualifier       larsoft         duneutil        artdaq_core        dune_pardata    genie_xsec              genie_phyopt     dune_raw_data          nusystematics       systematicstools    dune_oslibs   hep_hpc   valgrind   libtorch notes
-c7:debug        c7:debug        c7:debug        c7:s110:debug       -nq-            G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s110:debug        c7:debug            c7:debug            -nq-          c7:debug   -nq-     c7
-c7:prof         c7:prof         c7:prof         c7:s110:prof        -nq-            G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s110:prof         c7:prof             c7:prof             -nq-          c7:prof    -nq-     c7
-e20:debug       e20:debug       e20:debug       e20:s110:debug      -nq-            G1810a0211a:k250:e1000  dkcharmtau       e20:nu:s110:debug       e20:debug           e20:debug           -nq-          e20:debug  -nq-     e20
-e20:prof        e20:prof        e20:prof        e20:s110:prof       -nq-            G1810a0211a:k250:e1000  dkcharmtau       e20:nu:s110:prof        e20:prof            e20:prof            -nq-          e20:prof   -nq-     e20
-e19:debug       e19:debug       e19:debug       e19:s106:debug      -nq-            G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s106:debug       e19:debug           e19:debug           -nq-          e19:debug  -nq-     e19
-e19:prof        e19:prof        e19:prof        e19:s106:prof       -nq-            G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s106:prof        e19:prof            e19:prof            -nq-          e19:prof   -nq-     e19
+qualifier       larsoft         duneutil        artdaq_core        dune_pardata    genie_xsec              genie_phyopt     dune_raw_data          nusystematics       systematicstools    dune_oslibs   hep_hpc   valgrind    notes
+c7:debug        c7:debug        c7:debug        c7:s110:debug       -nq-            G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s110:debug        c7:debug            c7:debug            -nq-          c7:debug   -nq-
+c7:prof         c7:prof         c7:prof         c7:s110:prof        -nq-            G1810a0211a:k250:e1000  dkcharmtau       c7:nu:s110:prof         c7:prof             c7:prof             -nq-          c7:prof    -nq-
+e20:debug       e20:debug       e20:debug       e20:s110:debug      -nq-            G1810a0211a:k250:e1000  dkcharmtau       e20:nu:s110:debug       e20:debug           e20:debug           -nq-          e20:debug  -nq-
+e20:prof        e20:prof        e20:prof        e20:s110:prof       -nq-            G1810a0211a:k250:e1000  dkcharmtau       e20:nu:s110:prof        e20:prof            e20:prof            -nq-          e20:prof   -nq-
+e19:debug       e19:debug       e19:debug       e19:s106:debug      -nq-            G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s106:debug       e19:debug           e19:debug           -nq-          e19:debug  -nq-
+e19:prof        e19:prof        e19:prof        e19:s106:prof       -nq-            G1810a0211a:k250:e1000  dkcharmtau       e19:nu:s106:prof        e19:prof            e19:prof            -nq-          e19:prof   -nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
