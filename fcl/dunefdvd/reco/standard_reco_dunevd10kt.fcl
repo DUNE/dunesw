@@ -7,8 +7,10 @@
 
 #include "wirecell_dune.fcl"
 #include "services_dune.fcl"
+#include "hitfindermodules_dune.fcl"
 
-process_name: reco
+
+process_name: Reco
 
 
 services:
@@ -35,13 +37,16 @@ physics: {
  producers: {
    wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_data_nfsp
    rns:            { module_type: "RandomNumberSaver" }
+   # actual hit finder
+   gaushit:            @local::dunevdfd_gaushitfinder
  }
-# simulate: [ rns, daq, @sequence::pd_detsim_path ]
- simulate: [ rns,
-             wclsdatanfsp
-           ]
+
+ reco: [ rns,
+         wclsdatanfsp,
+	 gaushit
+       ]
  stream1:  [ out1 ]
- trigger_paths: [simulate] 
+ trigger_paths: [reco] 
  end_paths:     [stream1]  
 }
 
@@ -53,3 +58,6 @@ outputs: {
    compressionLevel: 1
  }
 }
+
+### Here, we overwrite ALL module labels with the ones defined above.
+physics.producers.gaushit.CalDataModuleLabel: "wclsdatanfsp:gauss"
