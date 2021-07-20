@@ -4,39 +4,10 @@ physics.producers:
 {
     @table::physics.producers
     caldata:            @local::producer_adcprep
+    wclsmcnfsp:         @erase
 }
 
-
-physics.reco: 
-[ 
-     rns,
-     #optical hits and flashes
-     @sequence::pd_reco_path,
-     #TPC wire signals
-     caldata,
-     #hit reco
-     gaushit,
-     #disambiguation
-     spsolve,
-     hitfd,
-     #cluster reco
-     linecluster, trajcluster,
-     #track shower split
-     trkshowersplit,
-     #pandora
-     pandora, pandoraTrack, pandoraShower, #pandoraShowerLegacy,
-     pandoracalo, pandorapid,
-     #pmatrack
-     pmtrack, pmtrackcalo, pmtrackpid,
-     pmtrajfit, pmtrajfitcalo, pmtrajfitpid,
-     pmtracktc, pmtracktccalo, pmtracktcpid,
-     pmtrajfittc, pmtrajfittccalo, pmtrajfittcpid,
-     #shower reconstruction
-     blurredcluster, emtrkmichelid, emshower,
-     #cvn
-     cvnmap, cvneva,
-     energyrecnumu, energyrecnue, energyrecnc
-]
+physics.reco[0]: caldata #This is an awful way of changing the running producer from wirecell to caldata.  Erasing the wirecell producer above should give some defence against changing the wrong element (the job will crash if we change the wrong element)
 
 physics.producers.gaushit.CalDataModuleLabel: "caldata"
 physics.producers.pmtrack.WireModuleLabel:    "caldata"
