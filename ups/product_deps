@@ -54,6 +54,9 @@ table_fragment_begin
     envSet(DBIWSURLPUT, https://dbdata0vm.fnal.gov:9443/dune_con_prod/app/)
     envSet(DBIPORT, 5451)
     envSet(DBIWSURLINT, https://dbdata0vm.fnal.gov:9443/dune_con_prod/app/)
+    #dk2nu flux windows
+    envSet(GNUMIFLUXXML, ${DUNETPC_DIR}/dk2nuconfigs/GDk2Nu.xml)
+    envSet(GDK2NUFLUXXML,${DUNETPC_DIR}/dk2nuconfigs/GDk2Nu.xml)
 table_fragment_end
 
 
