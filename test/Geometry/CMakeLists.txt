@@ -51,7 +51,6 @@ cet_test(geometry_iterator_loop_dunefd HANDBUILT
 cet_test(geometry_crmchannelmapping_test
   SOURCES geometry_crmchannelmapping_test.cxx
   LIBRARIES larcorealg_Geometry
-            GeometryTestLib
             dune_Geometry
             ${MF_MESSAGELOGGER}
             ${ART_FRAMEWORK_SERVICES_REGISTRY}
