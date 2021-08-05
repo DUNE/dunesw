@@ -22,7 +22,8 @@ project(dunetpc LANGUAGES CXX)
 # cetbuildtools contains our cmake modules
 find_package(cetbuildtools REQUIRED)
 
-list(APPEND CMAKE_MODULE_PATH $ENV{CANVAS_ROOT_IO_DIR}/Modules)
+# Make target names shorter (dune::X vs dunetpc::dune_X).
+set(dunetpc_NAMESPACE dune)
 
 include(CetCMakeEnv)
 cet_cmake_env()
