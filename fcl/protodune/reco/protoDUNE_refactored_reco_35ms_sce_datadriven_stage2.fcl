@@ -8,7 +8,7 @@ physics.producers.pandoracali.TrackModuleLabel:           "pandoraTrack"
 physics.producers.pandoracali.ApplyLifetimeCorrection:    false
 physics.producers.pandoracali.ApplyYZCorrection:          true
 physics.producers.pandoracali.ApplyXCorrection:           true
-physics.producers.pandoracali.ApplyNormCorrection:        true
+physics.producers.pandoracali.ApplyNormCorrection:        false
 
 physics.producers.pandora2cali:          @local::protodunespmcsce_calibrationdedx
 physics.producers.pandora2cali.TrackModuleLabel:          "pandora2Track"
@@ -16,7 +16,7 @@ physics.producers.pandora2cali.CalorimetryModuleLabel:    "pandora2calinoxyzt"
 physics.producers.pandora2cali.ApplyLifetimeCorrection:   false
 physics.producers.pandora2cali.ApplyYZCorrection:         true
 physics.producers.pandora2cali.ApplyXCorrection:          true
-physics.producers.pandora2cali.ApplyNormCorrection:       true
+physics.producers.pandora2cali.ApplyNormCorrection:       false
 
 services.DetectorPropertiesService.Electronlifetime: 35000
 
