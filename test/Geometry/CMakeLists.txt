@@ -52,11 +52,11 @@ cet_test(geometry_crmchannelmapping_test
   SOURCES geometry_crmchannelmapping_test.cxx
   LIBRARIES larcorealg_Geometry
             dune_Geometry
-            ${MF_MESSAGELOGGER}
-            ${ART_FRAMEWORK_SERVICES_REGISTRY}
+            messagefacility::MF_MessageLogger
+            ART_FRAMEWORK_SERVICES_REGISTRY
             art_Utilities canvas
-            ${ROOT_BASIC_LIB_LIST}
-            ${FHICLCPP}
+            ROOT_BASIC_LIB_LIST
+            FHICLCPP
             cetlib cetlib_except
   USE_BOOST_UNIT
   DATAFILES test_geometry_dunedphase10kt.fcl
