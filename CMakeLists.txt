@@ -28,6 +28,9 @@ set(dunetpc_NAMESPACE dune)
 include(CetCMakeEnv)
 cet_cmake_env()
 
+# Find our own CMake modules, and tell everyone else where to find them.
+cet_cmake_module_directories(Modules)
+
 set_install_root()
 
 cet_set_compiler_flags(DIAGS CAUTIOUS
@@ -106,13 +109,19 @@ endif()
 # artdaq_core Utility library
 cet_find_library( ARTDAQ-CORE_UTILITIES NAMES artdaq-core_Utilities PATHS ENV ARTDAQ_CORE_LIB )
 
+# Define an export set for tool support to enable simpler per-tool build
+# call.
+cet_register_export_set(SET_NAME PluginTypes NAMESPACE art_plugin_types)
+
 # macros for dictionary and simple_plugin
 include(ArtDictionary)
 include(ArtMake)
 include(BuildPlugins)
-
+include(DuneToolTypes)
 # ADD SOURCE CODE SUBDIRECTORIES HERE
 add_subdirectory(dune)
+# CMake Modules
+add_subdirectory(Modules)
 # release database
 add_subdirectory(releaseDB)
 # subdirectory for test code
