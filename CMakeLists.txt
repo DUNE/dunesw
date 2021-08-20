@@ -29,7 +29,7 @@ include(CetCMakeEnv)
 cet_cmake_env()
 
 # Find our own CMake modules, and tell everyone else where to find them.
-cet_cmake_module_directories(Modules)
+cet_cmake_module_directories(Modules BINARY)
 
 set_install_root()
 
@@ -117,15 +117,15 @@ cet_register_export_set(SET_NAME PluginTypes NAMESPACE art_plugin_types)
 include(ArtDictionary)
 include(ArtMake)
 include(BuildPlugins)
-include(DuneToolTypes)
+
 # ADD SOURCE CODE SUBDIRECTORIES HERE
 add_subdirectory(dune)
-# CMake Modules
-add_subdirectory(Modules)
 # release database
 add_subdirectory(releaseDB)
 # subdirectory for test code
 add_subdirectory(test)
+# CMake Modules
+add_subdirectory(Modules)
 # ups - table and config files
 add_subdirectory(ups)
 # subdirectory for fcl files
