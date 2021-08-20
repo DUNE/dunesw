@@ -1,4 +1,3 @@
-
 # geometry test on DUNE geometries
 
 #
@@ -53,6 +52,7 @@ cet_test(geometry_crmchannelmapping_test
   LIBRARIES larcorealg_Geometry
             dune_Geometry
             messagefacility::MF_MessageLogger
+            larcorealg::GeometryTestLib
             ART_FRAMEWORK_SERVICES_REGISTRY
             art_Utilities canvas
             ROOT_BASIC_LIB_LIST
@@ -81,4 +81,3 @@ cet_test(dump_channel_map_dunedphase10kt_workspace_test HANDBUILT
   TEST_EXEC lar
   TEST_ARGS --rethrow-all --config ./dump_dunedphase10kt_workspace_channelmap.fcl
 )
-
