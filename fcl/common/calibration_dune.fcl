@@ -7,6 +7,7 @@ protodunespdata_calibrationdedx :
     module_type:             CalibrationdEdXPDSP
     TrackModuleLabel:        "pandoraTrack"
     CalorimetryModuleLabel:  "pandoracalo"
+    HitModuleLabel:          "hitpdune"
     CaloAlg:                 @local::pdune_sp_calorimetryalgdata
     #default modified boxmodel parameters for MC
     ModBoxA:		     0.930
