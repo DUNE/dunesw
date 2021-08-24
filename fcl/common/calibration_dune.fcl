@@ -7,6 +7,7 @@ protodunespdata_calibrationdedx :
     module_type:             CalibrationdEdXPDSP
     TrackModuleLabel:        "pandoraTrack"
     CalorimetryModuleLabel:  "pandoracalo"
+    HitModuleLabel:          "hitpdune"
     CaloAlg:                 @local::pdune_sp_calorimetryalgdata
     #default modified boxmodel parameters for MC
     ModBoxA:		     0.930
@@ -23,9 +24,11 @@ protodunespdata_calibrationdedx :
 protodunespmcsce_calibrationdedx:     @local::protodunespdata_calibrationdedx
 protodunespmcsce_calibrationdedx.CaloAlg:    @local::pdune_sp_calorimetryalgmc
 protodunespmcsce_calibrationdedx.UseLifetimeFromDatabase: false
+protodunespmcsce_calibrationdedx.ReferencedQdx: [0, 0, 0] # do not use reference dQdx for MC
 
 protodunespmcnosce_calibrationdedx:   @local::protodunespmcsce_calibrationdedx
 protodunespmcnosce_calibrationdedx.CorrectSCE: false
 protodunespmcnosce_calibrationdedx.UseLifetimeFromDatabase: false
+protodunespmcnosce_calibrationdedx.ReferencedQdx: [0, 0, 0] # do not use reference dQdx for MC
 
 END_PROLOG

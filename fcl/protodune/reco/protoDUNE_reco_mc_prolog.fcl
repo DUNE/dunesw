@@ -178,7 +178,7 @@ protoDUNE_reco_mc_stage2_producers.pandoracali.TrackModuleLabel:           "pand
 protoDUNE_reco_mc_stage2_producers.pandoracali.ApplyLifetimeCorrection:    false
 protoDUNE_reco_mc_stage2_producers.pandoracali.ApplyYZCorrection:          true
 protoDUNE_reco_mc_stage2_producers.pandoracali.ApplyXCorrection:           true
-protoDUNE_reco_mc_stage2_producers.pandoracali.ApplyNormCorrection:        true
+protoDUNE_reco_mc_stage2_producers.pandoracali.ApplyNormCorrection:        false
 
 protoDUNE_reco_mc_stage2_producers.pandoracalipid.CalorimetryModuleLabel:  "pandoracali"
 protoDUNE_reco_mc_stage2_producers.pandoracalipid.TrackModuleLabel:        "pandoraTrack"
@@ -188,7 +188,7 @@ protoDUNE_reco_mc_stage2_producers.pandora2cali.CalorimetryModuleLabel:    "pand
 protoDUNE_reco_mc_stage2_producers.pandora2cali.ApplyLifetimeCorrection:   false
 protoDUNE_reco_mc_stage2_producers.pandora2cali.ApplyYZCorrection:         true
 protoDUNE_reco_mc_stage2_producers.pandora2cali.ApplyXCorrection:          true
-protoDUNE_reco_mc_stage2_producers.pandora2cali.ApplyNormCorrection:       true
+protoDUNE_reco_mc_stage2_producers.pandora2cali.ApplyNormCorrection:       false
 
 protoDUNE_reco_mc_stage2_producers.pandora2calipid.CalorimetryModuleLabel:    "pandora2cali"
 protoDUNE_reco_mc_stage2_producers.pandora2calipid.TrackModuleLabel:          "pandora2Track"
