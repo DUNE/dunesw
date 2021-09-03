@@ -4,7 +4,8 @@
 #
 #
 # Job fcl for running the VD reconstruction
-
+#
+#include "pandoramodules_dune.fcl"
 #include "wirecell_dune.fcl"
 #include "services_dune.fcl"
 #include "hitfindermodules_dune.fcl"
