@@ -10,7 +10,7 @@ services:
   #MemoryTracker:         { ignoreTotal: 1 } # default is one
   RandomNumberGenerator: {}                 # ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::dunefddphase_services
+                        @table::dunefddphase_services_legacy
 }
 
 source:
