@@ -17,7 +17,7 @@ services:
   TimeTracker:       {}
   RandomNumberGenerator: {}
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::dunedphase3x1x1_reco_services
+  @table::dunedphase3x1x1_reco_services_legacy
 }
 
 source:
