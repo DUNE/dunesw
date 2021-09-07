@@ -13,7 +13,7 @@
 
 process_name: detsim
 
-services: @local::dune35t_detsim_services
+services: @local::dune35t_detsim_services_legacy
 services.TFileService: { fileName: "detsim_hist.root" }
 services.TimeTracker:       {}
 MemoryTracker:     {}

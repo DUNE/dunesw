@@ -12,7 +12,7 @@ services:
   MemoryTracker:         { } # default is one
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::dune35t_g4_services
+  @table::dune35t_g4_services_legacy
 }
 #services.LArG4Parameters.UseModBoxRecomb:          true
 services.PhotonVisibilityService:      @local::dune35t_photonvisibilityservice

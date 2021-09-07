@@ -41,7 +41,7 @@ int test_SignalShapingServiceDUNE() {
   TH1::AddDirectory(kFALSE);
 
   string const config{"#include \"services_dune.fcl\"\n"
-                      "services: { @table::dune35t_services }"};
+                      "services: { @table::dune35t_services_legacy }"};
   ArtServiceHelper::load_services(config);
 
   cout << myname << line << endl;
