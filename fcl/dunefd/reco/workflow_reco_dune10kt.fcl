@@ -23,6 +23,8 @@ dunefd_horizdrift_producers:
 {
 # random number saver
   rns:                 { module_type: RandomNumberSaver }
+  # data preparation and, optionally, 1D signal processing
+  caldata:            @local::producer_adcprep_notool
   # convert raw::RawDigit to recob::wire
   wclsmcnfsp:        @local::dune10kt_mc_nfsp
   # actual hit finder
@@ -161,6 +163,8 @@ dunefd_horizdrift_workflow_reco:
 ]
 
 ### Here, we overwrite ALL module labels with the ones defined above.
+physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+
 dunefd_horizdrift_producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
 
 
