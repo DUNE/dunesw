@@ -1,0 +1,23 @@
+#include "evd_dune.fcl"
+process_name: EVD
+
+includedServices: @local::services
+
+services: {
+    @table::includedServices
+    @table::dunevd10kt_1x6x6_3view_30deg_disp
+}
+
+# includedServices: @erase
+
+services.DetPedestalService.FixedDetPedestal.PedMeanU: 1840
+services.DetPedestalService.FixedDetPedestal.PedMeanV: 1840
+services.DetPedestalService.FixedDetPedestal.PedMeanZ: 410
+
+services.RawDrawingOptions.TotalTicks: 500
+services.RawDrawingOptions.StartTick: 4000
+services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
+
+services.RecoDrawingOptions.WireModuleLabels: ["wlcsdatanfsp:gauss"]
+services.RecoDrawingOptions.HitModuleLabels: ["gaushit"]
+services.RecoDrawingOptions.DrawOpFlashes: 0
