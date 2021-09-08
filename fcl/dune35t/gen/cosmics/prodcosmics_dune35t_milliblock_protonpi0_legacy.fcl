@@ -1,4 +1,4 @@
-#include "prodcosmics_dune35t_milliblock.fcl"
+#include "prodcosmics_dune35t_milliblock_legacy.fcl"
 
 process_name: CosmicsGen
 

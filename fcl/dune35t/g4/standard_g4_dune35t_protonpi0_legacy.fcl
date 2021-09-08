@@ -1,5 +1,5 @@
 #include "larg4particlefilter_dune.fcl"
-#include "standard_g4_dune35t.fcl"
+#include "standard_g4_dune35t_legacy.fcl"
 
 process_name: G4
 
