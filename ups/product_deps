@@ -75,7 +75,7 @@ nusystematics    v00_11_07
 systematicstools v00_08_02
 dune_oslibs      v1_0_0         -       optional
 hep_hpc          v0_14_01
-valgrind         v3_17_0
+valgrind         v3_16_1
 end_product_list
 
 
