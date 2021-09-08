@@ -1,4 +1,4 @@
-# standard_detsim_dune35t.fcl
+# standard_detsim_dune35t_legacy.fcl
 
 # David Adams
 # April 2016
@@ -13,7 +13,7 @@
 
 process_name: detsim
 
-services: @local::dune35t_detsim_services
+services: @local::dune35t_detsim_services_legacy
 services.TFileService: { fileName: "detsim_hist.root" }
 services.TimeTracker:       {}
 MemoryTracker:     {}

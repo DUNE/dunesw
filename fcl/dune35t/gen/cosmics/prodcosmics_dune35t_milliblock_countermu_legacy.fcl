@@ -1,5 +1,5 @@
 #include "gen_ewcounterpair.fcl"
-#include "prodcosmics_dune35t_onewindow.fcl"
+#include "prodcosmics_dune35t_onewindow_legacy.fcl"
 
 process_name: CosmicsGen
 

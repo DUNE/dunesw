@@ -15,7 +15,7 @@ services:
   TimeTracker:       {}
   RandomNumberGenerator: {}
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::dune35t_simulation_services
+  @table::dune35t_simulation_services_legacy
 }
 #services.PhotonVisibilityService:      @local::dune35t_photonvisibilityservice
 #source is now a root file
@@ -46,7 +46,7 @@ physics:
 
  #end_paths is a keyword and contains the paths that do not modify the art::Event, 
  #ie analyzers and output streams.  these all run simultaneously
- end_paths:     [stream1,ana]  
+ end_paths:     [ana]  
 # end_paths:     [stream1]  
 }
 
@@ -61,9 +61,24 @@ outputs:
    fileName:    "%ifb_%tc_merged.root"
    dataTier:    "full-reconstructed"
    compressionLevel: 1
-   fastCloning: false
  }
 }
 
 ### Here, we overwrite ALL module Labels with the ones defined above.
 
+physics.analyzers.analysistree.HitsModuleLabel:          "linecluster"
+physics.analyzers.analysistree.TrackModuleLabel:         ["pmtrack"]
+physics.analyzers.analysistree.VertexModuleLabel:        ["pmtrack","linecluster"]
+physics.analyzers.analysistree.CalorimetryModuleLabel:   ["pmtrackcalo"]
+physics.analyzers.analysistree.ParticleIDModuleLabel:    [""]
+physics.analyzers.analysistree.MVAPIDTrackModuleLabel:   [""]
+physics.analyzers.analysistree.MVAPIDShowerModuleLabel:  [""]
+physics.analyzers.analysistree.FlashT0FinderLabel:       [""]
+physics.analyzers.analysistree.MCT0FinderLabel:          [""]
+physics.analyzers.analysistree.CosmicTaggerAssocLabel:      [ "" ] # Not used in 35 ton
+physics.analyzers.analysistree.ContainmentTaggerAssocLabel: [ "" ] # Not used in 35 ton
+physics.analyzers.analysistree.FlashMatchAssocLabel:        [ "" ] # Not used in 35 ton
+physics.analyzers.analysistree.SaveShowerInfo:  false
+physics.analyzers.analysistree.SaveCryInfo:     false
+physics.analyzers.analysistree.SaveGeantInfo:   false
+physics.analyzers.analysistree.ExternalCounterModuleLabel: "SplitterInput:TRIGGER"

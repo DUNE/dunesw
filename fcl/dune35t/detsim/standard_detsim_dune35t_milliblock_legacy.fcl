@@ -1,4 +1,4 @@
-#include "standard_detsim_dune35t.fcl"
+#include "standard_detsim_dune35t_legacy.fcl"
 
 includedServices: @local::services
 

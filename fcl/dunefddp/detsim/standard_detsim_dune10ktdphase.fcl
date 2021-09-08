@@ -5,7 +5,7 @@
 
 process_name: Detsim
 
-services: @local::dunefddphase_simulation_services
+services: @local::dunefddphase_simulation_services_legacy
 services.TFileService: { fileName: "detsim_hist.root" }
 services.TimeTracker:       {}
 services.MemoryTracker:         { } # default is one

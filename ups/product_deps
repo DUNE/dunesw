@@ -3,7 +3,7 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 
-parent dunetpc v09_26_01
+parent dunetpc v09_28_02
 
 defaultqual e20
 
@@ -65,9 +65,9 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v09_27_00
+larsoft          v09_28_04
 artdaq_core	 v3_06_13
-duneutil         v09_26_00	-	optional
+duneutil         v09_28_02	-	optional
 dune_pardata	 v01_73_00
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04
@@ -78,7 +78,7 @@ nusystematics    v00_11_07
 systematicstools v00_08_02
 dune_oslibs      v1_0_0         -       optional
 hep_hpc          v0_14_01
-valgrind         v3_16_1
+valgrind         v3_17_0
 end_product_list
 
 
