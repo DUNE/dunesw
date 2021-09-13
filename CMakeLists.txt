@@ -48,6 +48,9 @@ find_ups_boost( ) # Needs to be first to cover for a missing transitive
 find_ups_geant4( )
 find_ups_root( )
 
+find_ups_product( eigen )
+include_directories( $ENV{EIGEN_INC} )
+
 find_ups_product( art v3_09_00 )
 find_ups_product( art_root_io )
 find_ups_product( artdaq_core v01_03_6 )
@@ -85,7 +88,6 @@ find_ups_product( nutools v1_00_00 )
 find_ups_product( pandora )
 find_ups_product( postgresql v9_1_5 )
 find_ups_product( systematicstools v00_01_01 )
-find_ups_product( eigen )
 if(DEFINED ENV{LAPACK_LIB} )
   find_ups_product( lapack )
 endif()
@@ -95,17 +97,14 @@ if(( DEFINED ENV{TENSORFLOW_DIR} ) AND ( DEFINED ENV{TRITON_DIR} ))
   find_ups_product( tensorflow )
   find_ups_product( triton )
   find_ups_product( larrecodnn v1_00_00 )
-  if("$ENV{TENSORFLOW_VERSION}" STREQUAL "v2_3_1")
-    cet_find_library(TENSORFLOW_CC NAMES tensorflow_cc PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
-    cet_find_library(TENSORFLOW_FRAMEWORK NAMES tensorflow_framework PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
-    set(TENSORFLOW ${TENSORFLOW_CC} ${TENSORFLOW_FRAMEWORK})
-  else()
-    cet_find_library(TENSORFLOW NAMES tensorflow-core PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
-  endif()
+  cet_find_library(TENSORFLOW_CC NAMES tensorflow_cc PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
+  cet_find_library(TENSORFLOW_FRAMEWORK NAMES tensorflow_framework PATHS ENV TENSORFLOW_LIB NO_DEFAULT_PATH )
+  set(TENSORFLOW ${TENSORFLOW_CC} ${TENSORFLOW_FRAMEWORK})
   cet_find_library(PROTOBUF NAMES protobuf PATHS ENV PROTOBUF_LIB NO_DEFAULT_PATH )
 endif()
 # artdaq_core Utility library
 cet_find_library( ARTDAQ-CORE_UTILITIES NAMES artdaq-core_Utilities PATHS ENV ARTDAQ_CORE_LIB )
+
 
 # Define an export set for tool support to enable simpler per-tool build
 # call.
