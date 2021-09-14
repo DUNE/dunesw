@@ -1,0 +1,13 @@
+#include "detsim_dune10kt_wirecell_refactored.fcl"
+
+services: 
+{
+    @table::services
+    @table::dunefd_1x2x6_simulation_services_refactored
+}
+
+physics.producers: 
+{
+    @table::physics.producers
+    tpcrawdecoder: @local::tpcrawdecoder_dunefd_horizdrift_1x2x6
+}

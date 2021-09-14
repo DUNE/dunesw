@@ -1,0 +1,26 @@
+#include "detsim_dune10kt_1x2x6_wirecell_refactored.fcl"
+
+physics.producers.daq:            @local::dune_detsim
+physics.producers.rns:            { module_type: "RandomNumberSaver" }
+
+physics.simulate: [ rns, daq,  @sequence::pd_detsim_path ]
+physics.trigger_paths: [ simulate ]
+
+# Use fixed values instead of DB for pedestals.
+services.DetPedestalService: @local::dune_fixedpeds
+
+# DetSim flags.
+physics.producers.daq.NoiseOn:     true
+physics.producers.daq.PedestalOn:  true
+physics.producers.daq.DistortOn:   false
+physics.producers.daq.SuppressOn:  true
+physics.producers.daq.SimChannelLabel: "elecDrift"
+
+# DetSim services.
+services.SimChannelExtractService: @local::scxgeneric
+services.ChannelNoiseService:      @local::chnoiseold
+services.PedestalAdditionService:  @local::padprovided
+services.AdcDistortService:        @local::stuckbits
+services.AdcSuppressService:       @local::zslegacy
+services.AdcCompressService:       @local::cmpblock
+
