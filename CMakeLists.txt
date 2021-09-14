@@ -31,8 +31,6 @@ cet_cmake_env()
 # Find our own CMake modules, and tell everyone else where to find them.
 cet_cmake_module_directories(Modules BINARY)
 
-set_install_root()
-
 cet_set_compiler_flags(DIAGS CAUTIOUS
   WERROR
   NO_UNDEFINED
