@@ -8,7 +8,7 @@ physics.producers.generator: @local::dune_fd_genie_nu_simple_flux_1x2x6_window
 services:
 {
     @table::services
-    @table::dunefd_1x2x6_simulation_services
+    @table::dunefd_1x2x6_services
 }
 
 source.firstRun: 20000001
