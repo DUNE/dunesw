@@ -1,4 +1,4 @@
-#include "prodcosmics_dune35t_onewindow_legacy.fcl"
+#include "prodcosmics_dune35t_onewindow.fcl"
 
 process_name: CosmicsGen
 source.firstRun: 10000002
