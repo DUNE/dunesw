@@ -36,8 +36,8 @@ physics:
  producers:{
    mvaselectnue:   @local::dunefd_mvaselect
    mvaselectnumu:  @local::dunefd_mvaselect
-   energyreconue:  @local::dunefd_nuenergyreco
-   energyreconumu: @local::dunefd_nuenergyreco
+   energyreconue:  @local::dunefd_nuenergyreco_pmtrack
+   energyreconumu: @local::dunefd_nuenergyreco_pmtrack
    cvnmap: @local::standard_cvnmapper
    cvneval: @local::standard_cvnevaluator
    regcnnmap:      @local::standard_regcnnmapper
