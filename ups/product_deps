@@ -68,7 +68,7 @@ duneutil		v09_28_02_01	-	optional
 dune_pardata		v01_73_00
 genie_xsec		v3_00_04a	-	optional
 genie_phyopt		v3_00_04
-cetbuildtools		v8_15_01	-	only_for_build
+cetbuildtools		v8_16_00	-	only_for_build
 dune_raw_data		v1_19_02
 nusystematics		v01_00_02
 systematicstools	v01_00_03
