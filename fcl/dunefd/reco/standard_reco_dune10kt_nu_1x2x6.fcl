@@ -1,0 +1,16 @@
+#include "standard_reco_dune10kt_1x2x6.fcl"
+process_name: Reco
+
+physics.producers.blurredclusterdc.ShowerReconOnly: true
+physics.producers.blurredcluster.ShowerReconOnly: true
+physics.producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/pdune_em-trk-michel_clean_on_neutrinos_iter100_aw.nnet"
+physics.producers.emtrkmichelid.PointIdAlg.NNetOutputs:     ["track", "em", "michel", "none"]
+physics.producers.pmtrack.PMAlgTracking.FlipToBeam:     true
+physics.producers.pmtrack.PMAlgTracking.AutoFlip_dQdx:  false
+physics.producers.pmtrackdc.PMAlgTracking.FlipToBeam:     true
+physics.producers.pmtrackdc.PMAlgTracking.AutoFlip_dQdx:  false
+physics.producers.pandoracalo.Flip_dQdx: false
+physics.producers.pmtrackcalo.Flip_dQdx: false
+physics.producers.pmtrajfitcalo.Flip_dQdx: false
+physics.producers.pmtracktccalo.Flip_dQdx: false
+physics.producers.pmtrajfittccalo.Flip_dQdx: false
