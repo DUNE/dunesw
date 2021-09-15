@@ -25,7 +25,7 @@ find_package(cetbuildtools REQUIRED)
 # Make target names shorter (dune::X vs dunetpc::dune_X).
 set(dunetpc_NAMESPACE dune)
 
-# Set default script installation subdirectory.
+# Project variable defaults (_INIT) and overrides.
 set(${PROJECT_NAME}_SCRIPTS_DIR_INIT scripts)
 
 include(CetCMakeEnv)
