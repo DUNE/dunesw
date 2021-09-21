@@ -1,0 +1,7 @@
+#include "standard_ana_dune10kt_legacy.fcl"
+
+process_name: Mergeana
+
+#outputs: {}
+#physics.stream1: []
+physics.end_paths: [ana]

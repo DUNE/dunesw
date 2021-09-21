@@ -1,0 +1,77 @@
+
+#include "services_refactored_pdune.fcl"
+#include "SIPMOpSensorSim.fcl"
+#include "WaveformDigitizerSim.fcl"
+
+
+process_name: OpticalDetsim
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "/dev/null" }
+  TimeTracker:       {}
+  RandomNumberGenerator: {} #ART native random number generator
+  #FileCatalogMetadata:   @local::art_file_catalog_mc
+  message:      @local::standard_info
+  @table::dunefd_refactored_simulation_services
+}
+
+# DUNE FD 1x2x6 workspace geometry
+services.Geometry:                @local::dune10kt_1x2x6_geo
+
+
+source:
+{
+  module_type: RootInput
+  maxEvents:  -1        # Run over all events
+  #specify from command line with -s or --source
+   
+}
+
+
+outputs:
+{
+   out1:
+   {
+      module_type: RootOutput
+      fileName:    "%ifb_pddetsim.root"
+      #default file name, can override from command line with -o or --output
+   }
+}
+
+
+
+physics:
+{
+
+   # Run both detector simulation and reconstruction
+   producers:
+   {
+      sipmArOnly:    @local::xarapuca_ar
+      sipmXeOnly:    @local::xarapuca_xetuned_xe10ppm
+      sipmAr10ppm:   @local::xarapuca_ar_xe10ppm
+      sipmXe10ppm:   @local::xarapuca_xe_xe10ppm
+
+      opdigiArOnly:  @local::standard_daphne
+      opdigiXeOnly:  @local::standard_daphne
+      opdigi10ppm:   @local::standard_daphne
+   }
+
+   ArOnlyPath: [ sipmArOnly, opdigiArOnly ]
+   XeOnlyPath: [ sipmXeOnly, opdigiXeOnly ]
+   BothPath:   [ sipmAr10ppm, sipmXe10ppm, opdigi10ppm ]
+   trigger_paths: [ ArOnlyPath, XeOnlyPath, BothPath ]
+
+   stream1:       [ out1 ]
+   end_paths:     [ stream1 ]
+}
+
+physics.producers.sipmArOnly.InputTag:  "PDFastSimAr"
+physics.producers.sipmXeOnly.InputTag:  "PDFastSimXe" #Default, but set anyway for clarity
+physics.producers.sipmAr10ppm.InputTag: "PDFastSimAr"
+physics.producers.sipmXe10ppm.InputTag: "PDFastSimXe" #Default, but set anyway for clarity
+
+physics.producers.opdigiArOnly.InputTags:   [sipmArOnly]
+physics.producers.opdigiXeOnly.InputTags:   [sipmXeOnly]
+physics.producers.opdigi10ppm.InputTags:    [sipmAr10ppm, sipmXe10ppm]

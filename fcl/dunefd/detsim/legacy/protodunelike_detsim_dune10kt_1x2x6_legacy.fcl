@@ -1,0 +1,12 @@
+#include "standard_detsim_dune10kt_legacy.fcl"
+process_name: Detsim
+physics.producers.daq.SuppressOn:  false
+
+physics.producers.daq.AdcSimulator: "adcsim_noisy"
+tools.adcsim_noisy.Noise:5
+
+services.Geometry: @local::dune10kt_1x2x6_geo
+
+services.PdspChannelMapService: @local::pdspchannelmap
+services.ChannelNoiseService:   @local::protodunelikenoise
+

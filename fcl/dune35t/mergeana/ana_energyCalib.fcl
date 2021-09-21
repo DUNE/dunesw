@@ -10,7 +10,7 @@ services:
   RandomNumberGenerator: {}
   MemoryTracker:         { } # default is one
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::dune35t_services
+  @table::dune35t_services_legacy
 }
 
 source:

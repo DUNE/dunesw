@@ -1,7 +1,0 @@
-#include "standard_g4_refactored_dune10kt.fcl"
-
-process_name: SupernovaG4
-
-services.Geometry:      @local::dune10kt_1x2x6_v4_refactored_geo
-services.LArG4Detector: @local::dune10kt_1x2x6_v4_larg4detector
-services.PhysicsList:   @local::dune_physics_list_supernova

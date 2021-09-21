@@ -1,0 +1,11 @@
+#include "prodbackground_radiological_dune10kt_1x2x6_legacy.fcl"
+
+// Original numbers come from radiological_gen_dune_full.fcl
+physics.producers.ar39Gen.BqPercc: [ 0.00704 ]
+physics.producers.ar42Gen.BqPercc: [ 6.419e-7 ]
+physics.producers.apaGen.BqPercc: [ 0.00041 ]
+physics.producers.cNeutronGen.BqPercc: [ 3.8e-5, 3.8e-5, 3.8e-5, 3.8e-5 ]
+physics.producers.cpaGen.BqPercc: [ 0.0136 ]
+physics.producers.kr85Gen.BqPercc: [ 0.0008 ]
+physics.producers.rn222Gen.BqPercc: [ 0.00028 ]
+physics.producers.po210Gen.BqPercc: [ 2.5e-5 ]

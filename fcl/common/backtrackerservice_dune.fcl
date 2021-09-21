@@ -3,7 +3,10 @@
 BEGIN_PROLOG
 
 dune35t_backtrackerservice:    @local::standard_backtrackerservice
-dunefd_backtrackerservice:     @local::standard_backtrackerservice
+
+dunefd_backtrackerservice_legacy:     @local::standard_backtrackerservice
+dunefd_backtrackerservice:            @local::dunefd_backtrackerservice_legacy
+dunefd_backtrackerservice.BackTracker.SimChannelModuleLabel: "elecDrift"
 
 pdsp_backtrackerservice:       @local::standard_backtrackerservice
 pdsp_backtrackerservice.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC"

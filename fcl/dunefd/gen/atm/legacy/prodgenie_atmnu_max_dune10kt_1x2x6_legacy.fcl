@@ -1,0 +1,15 @@
+#include "prodgenie_atmnu_max_dune10kt_legacy.fcl"
+
+process_name: GenieGen
+
+outputs.out1.fileName: "prodgenie_atmnu_max_dune10kt_1x2x6_gen.root"
+
+services.Geometry: @local::dune10kt_1x2x6_geo
+
+# reduce the flux window to increase generation efficiency;
+# see `genie_dune.fcl` (or, better, GENIE manual) for explanations
+physics.producers.generator.Rl: 20 # meters
+physics.producers.generator.Rt: 20 # meters
+
+source.firstRun: 20000063
+

@@ -12,7 +12,6 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefd_simulation_services
-  Geometry:     @local::dune10kt_geo
 }
 
 #Start each new event with an empty event.

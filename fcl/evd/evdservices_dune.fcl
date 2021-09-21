@@ -111,4 +111,18 @@ dune10kt_45deg_1x2x6_disp.Geometry:   @local::dune10kt_45deg_1x2x6_geo
 dune10kt_disp:             @local::dunefd_disp
 dune10kt_disp.Geometry:    @local::dune10kt_geo 
 
+dunevd10kt_disp:             @local::dunefd_disp
+dunevd10kt_disp.Geometry:    @local::dunevd10kt_geo 
+dunevd10kt_disp.DetectorPropertiesService:    @local::dunefdvd_detproperties 
+dunevd10kt_disp.DetectorClocksService:    @local::dunefdvd_detectorclocks 
+
+dunevd10kt_1x6x6_disp:             @local::dunevd10kt_disp
+dunevd10kt_1x6x6_disp.Geometry:    @local::dunevd10kt_1x6x6_geo 
+
+dunevd10kt_1x6x6_3view_disp:             @local::dunevd10kt_disp
+dunevd10kt_1x6x6_3view_disp.Geometry:    @local::dunevd10kt_1x6x6_3view_geo 
+
+dunevd10kt_1x6x6_3view_30deg_disp:             @local::dunevd10kt_disp
+dunevd10kt_1x6x6_3view_30deg_disp.Geometry:    @local::dunevd10kt_1x6x6_3view_30deg_geo 
+
 END_PROLOG

@@ -5,7 +5,7 @@
 
 process_name: G4
 
-services: @local::protodunedphase_simulation_services
+services: @local::protodunedphase_simulation_services_legacy
 
 # Load the service that manages root files for histograms.
 services.TFileService: { fileName: "cosmics_corsika_rotation_hist.root" }

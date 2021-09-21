@@ -1,0 +1,272 @@
+#include "hitfindermodules_dune.fcl"
+#include "cluster_dune.fcl"
+#include "trackfindermodules_dune.fcl"
+#include "pandoramodules_dune.fcl"
+#include "calorimetry_dune10kt.fcl"
+#include "particleid.fcl"
+#include "mctrutht0matching.fcl"
+#include "t0reco.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "trackshowerhits.fcl"
+#include "showerfindermodules_dune.fcl"
+#include "emshower3d.fcl"
+#include "imagepatternalgs.fcl"
+#include "OpDetMultisim.fcl"
+#include "wirecell_dune.fcl"
+#include "SpacePointSolver_dune.fcl"
+#include "cvn_dune.fcl"
+#include "energyreco.fcl"
+
+BEGIN_PROLOG
+
+dunefd_horizdrift_producers:
+{
+# random number saver
+  rns:                 { module_type: RandomNumberSaver }
+  # data preparation and, optionally, 1D signal processing
+  caldata:            @local::producer_adcprep_notool
+  # convert raw::RawDigit to recob::wire
+  wclsmcnfsp:        @local::dune10kt_mc_nfsp
+  # actual hit finder
+  gaushit:            @local::dunefd_gaushitfinder
+
+  # actual disambiguation
+  spsolve:           @local::dunefd_horizdrift_spacepointsolver
+  hitfd:             @local::dunefd_disambigfromsp
+  # 2D clustering
+  linecluster:        @local::dune35t_linecluster
+  trajcluster:          @local::dunefdmc_trajcluster
+  # Pandora
+  pandora:            @local::dunefd_pandora
+  pandoraTrack:       @local::dune_pandoraTrackCreation
+  pandoraShower:      @local::dune_pandoraModularShowerCreation
+  pandoracalo:        @local::dune10kt_calomc
+  pandorapid:        @local::standard_chi2pid
+  # pmtrack
+  pmtrack:             @local::dunefd_pmalgtrackmaker
+  pmtrackcalo:         @local::dune10kt_calomc
+  pmtrackpid:          @local::standard_chi2pid
+  pmtrajfit:          @local::dunefd_pmalgtrajfitter
+  pmtrajfitcalo:      @local::dune10kt_calomc
+  pmtrajfitpid:       @local::standard_chi2pid
+  # PMA using trajcluster clusters
+  pmtracktc:             @local::dunefd_pmalgtrackmaker
+  pmtracktccalo:         @local::dune10kt_calomc
+  pmtracktcpid:          @local::standard_chi2pid
+  # PMA using trajclustter pfparticles
+  pmtrajfittc:             @local::dunefd_pmalgtrajfitter
+  pmtrajfittccalo:         @local::dune10kt_calomc
+  pmtrajfittcpid:          @local::standard_chi2pid
+  trkshowersplit:          @local::standard_trackshowerhits
+  # shower reco using pma
+  blurredcluster:          @local::dune10kt_blurredcluster
+  emshower:                @local::dune10kt_emshower
+  emtrkmichelid:           @local::standard_emtrackmichelid
+  #cvn
+  cvnmap:                @local::dunefd_horizdrift_cvnmapper
+  cvneva:                @local::dunefd_horizdrift_cvnevaluator
+  #neutrino energy reco
+  energyrecnumu:         @local::dunefd_nuenergyreco_pandora_numu
+  energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
+  energyrecnc:           @local::dunefd_nuenergyreco_pandora_nc
+  # photon detector reconstruction
+  @table::pd_reco_modules
+
+}
+
+dunefd_horizdrift_lowlevelreco: 
+[ 
+    wclsmcnfsp,
+    gaushit
+]
+
+dunefd_horizdrift_hitdisambiguation:
+[
+    spsolve,
+    hitfd
+]
+
+dunefd_horizdrift_2dclustering:
+[
+    linecluster,
+    trajcluster
+]
+
+dunefd_horizdrift_pandora:
+[
+    pandora,
+    pandoraTrack,
+    pandoraShower,
+    pandoracalo,
+    pandorapid
+]
+
+dunefd_horizdrift_pmtrack:
+[
+    trkshowersplit,
+    pmtrack,
+    pmtrackcalo,
+    pmtrackpid,
+    pmtrajfit,
+    pmtrajfitcalo,
+    pmtrajfitpid
+]
+
+dunefd_horizdrift_pmtrack_trajcluster:
+[
+    pmtracktc,
+    pmtracktccalo,
+    pmtracktcpid
+]
+
+dunefd_horizdrift_pmtrack_trajcluster_pfp:
+[
+    pmtrajfittc,
+    pmtrajfittccalo,
+    pmtrajfittcpid
+]
+
+dunefd_horizdrift_pmtrack_showers:
+[
+    blurredcluster,
+    emtrkmichelid,
+    emshower
+]
+
+dunefd_horizdrift_cvn:
+[
+    cvnmap,
+    cvneva
+]
+
+dunefd_horizdrift_nuenergy:
+[
+    energyrecnumu,
+    energyrecnue,
+    energyrecnc
+]
+
+dunefd_horizdrift_workflow_reco: 
+[ 
+    @sequence::dunefd_horizdrift_lowlevelreco,
+    @sequence::dunefd_horizdrift_hitdisambiguation,
+    @sequence::dunefd_horizdrift_2dclustering,
+    @sequence::dunefd_horizdrift_pandora,
+    @sequence::dunefd_horizdrift_pmtrack,
+    @sequence::dunefd_horizdrift_pmtrack_trajcluster,
+    @sequence::dunefd_horizdrift_pmtrack_trajcluster_pfp,
+    @sequence::dunefd_horizdrift_pmtrack_showers,
+    @sequence::dunefd_horizdrift_cvn,
+    @sequence::dunefd_horizdrift_nuenergy,
+    @sequence::pd_reco_path,
+    rns
+]
+
+### Here, we overwrite ALL module labels with the ones defined above.
+physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+
+dunefd_horizdrift_producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
+
+
+dunefd_horizdrift_producers.trkshowersplit.HitModuleLabel:        "linecluster"
+
+dunefd_horizdrift_producers.pmtrack.WireModuleLabel:              "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.pmtrack.HitModuleLabel:               "linecluster"
+dunefd_horizdrift_producers.pmtrack.ClusterModuleLabel:           "linecluster"
+dunefd_horizdrift_producers.pmtrack.EmClusterModuleLabel:         "trkshowersplit"
+dunefd_horizdrift_producers.pmtrack.PMAlgTracking.RunVertexing:   true
+dunefd_horizdrift_producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:  2
+dunefd_horizdrift_producers.pmtrack.PMAlgTracking.FlipToBeam:     false
+dunefd_horizdrift_producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: true
+
+dunefd_horizdrift_producers.pmtracktc.WireModuleLabel:            "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.pmtracktc.HitModuleLabel:               "trajcluster"
+dunefd_horizdrift_producers.pmtracktc.ClusterModuleLabel:           "trajcluster"
+dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.RunVertexing:   true
+dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.MinSeedSize2ndPass:  2
+dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.FlipToBeam:     false
+dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx:  true
+
+dunefd_horizdrift_producers.pmtrajfittc.HitModuleLabel:             "trajcluster"
+dunefd_horizdrift_producers.pmtrajfittc.PfpModuleLabel:             "trajcluster"
+dunefd_horizdrift_producers.pmtrajfittc.PMAlgFitting.RunVertexing:   true
+
+dunefd_horizdrift_producers.pmtrajfit.HitModuleLabel:             "linecluster"
+dunefd_horizdrift_producers.pmtrajfit.PfpModuleLabel:             "pandora"
+
+dunefd_horizdrift_producers.pmtrackcalo.TrackModuleLabel:         "pmtrack"
+dunefd_horizdrift_producers.pmtrackcalo.SpacePointModuleLabel:    "pmtrack"
+dunefd_horizdrift_producers.pmtrackcalo.T0ModuleLabel:            ""
+dunefd_horizdrift_producers.pmtrackcalo.MakeTree:                 false
+
+dunefd_horizdrift_producers.pmtrajfitcalo.TrackModuleLabel:         "pmtrajfit"
+dunefd_horizdrift_producers.pmtrajfitcalo.SpacePointModuleLabel:    "pmtrajfit"
+dunefd_horizdrift_producers.pmtrajfitcalo.T0ModuleLabel:            ""
+dunefd_horizdrift_producers.pmtrajfitcalo.MakeTree:                 false
+
+dunefd_horizdrift_producers.pmtracktccalo.TrackModuleLabel:         "pmtracktc"
+dunefd_horizdrift_producers.pmtracktccalo.SpacePointModuleLabel:    "pmtracktc"
+dunefd_horizdrift_producers.pmtracktccalo.T0ModuleLabel:            ""
+dunefd_horizdrift_producers.pmtracktccalo.MakeTree:                 false
+
+
+dunefd_horizdrift_producers.pmtrackpid.CalorimetryModuleLabel:  "pmtrackcalo"
+dunefd_horizdrift_producers.pmtrackpid.TrackModuleLabel:        "pmtrack"
+dunefd_horizdrift_producers.pmtrajfitpid.CalorimetryModuleLabel:  "pmtrajfitcalo"
+dunefd_horizdrift_producers.pmtrajfitpid.TrackModuleLabel:        "pmtrajfit"
+dunefd_horizdrift_producers.pmtracktcpid.CalorimetryModuleLabel:  "pmtracktccalo"
+dunefd_horizdrift_producers.pmtracktcpid.TrackModuleLabel:        "pmtracktc"
+
+dunefd_horizdrift_producers.pmtrajfittccalo.TrackModuleLabel:         "pmtrajfittc"
+dunefd_horizdrift_producers.pmtrajfittccalo.SpacePointModuleLabel:    "pmtrajfittc"
+dunefd_horizdrift_producers.pmtrajfittccalo.T0ModuleLabel:            ""
+dunefd_horizdrift_producers.pmtrajfittccalo.MakeTree:                 false
+dunefd_horizdrift_producers.pmtrajfittcpid.CalorimetryModuleLabel:  "pmtrajfittccalo"
+dunefd_horizdrift_producers.pmtrajfittcpid.TrackModuleLabel:        "pmtrajfittc"
+
+
+dunefd_horizdrift_producers.linecluster.HitFinderModuleLabel:     "hitfd"
+
+#Pandora configurations
+dunefd_horizdrift_producers.pandora.HitFinderModuleLabel:         "linecluster"
+dunefd_horizdrift_producers.pandoraTrack.PFParticleLabel:         "pandora"
+dunefd_horizdrift_producers.pandoraShower.PFParticleLabel:        "pandora"
+
+dunefd_horizdrift_producers.pandoracalo.TrackModuleLabel:         "pandoraTrack"
+dunefd_horizdrift_producers.pandoracalo.SpacePointModuleLabel:    "pandora"
+dunefd_horizdrift_producers.pandoracalo.T0ModuleLabel:            ""
+dunefd_horizdrift_producers.pandoracalo.MakeTree:                 false
+dunefd_horizdrift_producers.pandorapid.CalorimetryModuleLabel:    "pandoracalo"
+dunefd_horizdrift_producers.pandorapid.TrackModuleLabel:          "pandoraTrack"
+
+#shower configuration
+dunefd_horizdrift_producers.blurredcluster.HitsModuleLabel: "linecluster"
+dunefd_horizdrift_producers.blurredcluster.TrackModuleLabel: "pmtrack"
+dunefd_horizdrift_producers.blurredcluster.CreateDebugPDF:  false
+dunefd_horizdrift_producers.blurredcluster.MergeClusters:   false
+dunefd_horizdrift_producers.blurredcluster.GlobalTPCRecon:  true
+dunefd_horizdrift_producers.blurredcluster.ShowerReconOnly: false
+dunefd_horizdrift_producers.blurredcluster.VertexModuleLabel: "linecluster"
+
+dunefd_horizdrift_producers.emtrkmichelid.WireLabel: "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet"
+dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.NNetOutputs:     ["track", "em", "michel", "none"]
+dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
+dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
+dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
+dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.DownscaleFn:     "mean"
+dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.DownscaleFullView: false
+dunefd_horizdrift_producers.emtrkmichelid.HitModuleLabel:             "linecluster"
+dunefd_horizdrift_producers.emtrkmichelid.ClusterModuleLabel:         "linecluster"
+dunefd_horizdrift_producers.emtrkmichelid.Views:                      []
+
+dunefd_horizdrift_producers.emshower.ClusterModuleLabel:    "pandora"
+dunefd_horizdrift_producers.emshower.HitsModuleLabel:       "linecluster"
+dunefd_horizdrift_producers.emshower.PFParticleModuleLabel: "pandora"
+dunefd_horizdrift_producers.emshower.TrackModuleLabel:      "pandoraTrack"
+dunefd_horizdrift_producers.emshower.CNNEMModuleLabel:      "emtrkmichelid:emtrkmichel"
+dunefd_horizdrift_producers.emshower.UseCNNtoIDEMPFP:       true
+dunefd_horizdrift_producers.emshower.UseCNNtoIDEMHit:       false
+dunefd_horizdrift_producers.emshower.MinTrackLikeScore:     0.1
+
+END_PROLOG

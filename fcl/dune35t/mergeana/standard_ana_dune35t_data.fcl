@@ -15,7 +15,7 @@ services:
   TimeTracker:       {}
   RandomNumberGenerator: {}
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::dune35t_simulation_services
+  @table::dune35t_simulation_services_legacy
 }
 #services.PhotonVisibilityService:      @local::dune35t_photonvisibilityservice
 #source is now a root file

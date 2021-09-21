@@ -16,7 +16,7 @@ services:
   TFileService: { fileName: "test_optical_digi_dune35t_hist.root" }
   TimeTracker:       {}
   RandomNumberGenerator: {} #ART native random number generator
-                @table::dune35t_simulation_services
+                @table::dune35t_simulation_services_legacy
   message:      @local::standard_info
 }
 

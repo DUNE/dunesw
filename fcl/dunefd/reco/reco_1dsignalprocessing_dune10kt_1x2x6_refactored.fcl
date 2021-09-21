@@ -1,0 +1,18 @@
+#include "standard_reco_dune10kt_1x2x6.fcl"
+
+physics.producers:
+{
+    @table::physics.producers
+    caldata:            @local::producer_adcprep
+    wclsmcnfsp:         @erase
+}
+
+physics.reco[0]: caldata #This is an awful way of changing the running producer from wirecell to caldata.  Erasing the wirecell producer above should give some defence against changing the wrong element (the job will crash if we change the wrong element)
+
+physics.producers.gaushit.CalDataModuleLabel: "caldata"
+physics.producers.pmtrack.WireModuleLabel:    "caldata"
+physics.producers.pmtracktc.WireModuleLabel:  "caldata"
+physics.producers.emtrkmichelid.WireLabel:    "caldata"
+physics.producers.energyrecnumu.WireLabel:    "caldata"
+physics.producers.energyrecnue.WireLabel:     "caldata"
+physics.producers.energyrecnc.WireLabel:      "caldata"

@@ -1,0 +1,20 @@
+#include "prodgenie_common_dunefd_legacy.fcl"
+
+process_name: GenieGen
+
+
+# remove some services that were configured but are useless in generation:
+services.ChannelGroupService:      @erase
+services.ChannelStatusService:     @erase
+services.DatabaseUtil:             @erase
+services.ParticleInventoryService: @erase
+services.BackTrackerService:       @erase
+services.PhotonBackTrackerService: @erase
+services.LArFFT:                   @erase
+services.SignalShapingServiceDUNE: @erase
+services.SpaceCharge:              @erase
+
+
+outputs.out1.fileName: "prodgenie_atmnu_min_dune10kt_gen.root"
+
+physics.producers.generator: @local::dune_fd_genie_atmo_min_flux

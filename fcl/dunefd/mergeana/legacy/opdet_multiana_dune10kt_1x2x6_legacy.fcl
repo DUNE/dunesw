@@ -1,0 +1,39 @@
+#include "services_dune.fcl"
+
+#include "OpDetMultisim.fcl"
+
+process_name: Mergeana
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "ana_hist.root" }
+  TimeTracker:       {}
+  RandomNumberGenerator: {}
+  MemoryTracker:         { } # default is one
+  message:      @local::dune_message_services_prod
+                        @table::dunefd_simulation_services_legacy
+}
+
+### Use the 1x2x6 geometry ###
+services.Geometry: @local::dune10kt_1x2x6_geo
+
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents:  10        # Number of events to create
+}
+
+
+physics:
+{
+   analyzers:
+   {
+      @table::pd_ana_modules
+   }
+
+   anapath: [ @sequence::pd_ana_path ]
+   end_paths:     [ anapath ]
+}
+

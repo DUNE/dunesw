@@ -3,7 +3,7 @@
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 
-parent dunetpc v09_29_00
+parent dunetpc v09_30_00
 
 defaultqual e20
 
@@ -44,6 +44,9 @@ table_fragment_begin
     envSet(DBIWSURLPUT, https://dbdata0vm.fnal.gov:9443/dune_con_prod/app/)
     envSet(DBIPORT, 5451)
     envSet(DBIWSURLINT, https://dbdata0vm.fnal.gov:9443/dune_con_prod/app/)
+    #dk2nu flux windows
+    envSet(GNUMIFLUXXML, ${DUNETPC_DIR}/dk2nuconfigs/GDk2Nu.xml)
+    envSet(GDK2NUFLUXXML,${DUNETPC_DIR}/dk2nuconfigs/GDk2Nu.xml)
 table_fragment_end
 
 
@@ -52,9 +55,9 @@ table_fragment_end
 # Add the dependent product and version
 
 product          version
-larsoft          v09_29_00
+larsoft          v09_30_00
 artdaq_core	 v3_06_13
-duneutil         v09_28_02	-	optional
+duneutil         v09_29_00	-	optional
 dune_pardata	 v01_74_00
 genie_xsec       v3_00_04a       -       optional
 genie_phyopt     v3_00_04

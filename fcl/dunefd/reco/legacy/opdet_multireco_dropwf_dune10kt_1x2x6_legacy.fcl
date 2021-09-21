@@ -1,0 +1,4 @@
+#include "opdet_multireco_dune10kt_1x2x6_legacy.fcl"
+
+outputs.out1.outputCommands: ["keep *", "drop raw::OpDetWaveforms_*_*_*", "drop raw::RawDigits_*_*_*" ]
+
