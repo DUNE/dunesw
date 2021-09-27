@@ -10,7 +10,7 @@
 # Install all fcl files in rundata in the rundata directory of the product fcl area.
 install(
   DIRECTORY crp
-  DESTINATION ${dunetpc_fcl_dir}
+  DESTINATION ${dunetpc_FHICL_DIR}
   FILES_MATCHING PATTERN *.fcl
 )
 

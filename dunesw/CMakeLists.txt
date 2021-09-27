@@ -5,6 +5,7 @@ add_subdirectory(DuneObj)
 add_subdirectory(DuneObjDumpers)
 add_subdirectory(ArtSupport)
 add_subdirectory(DuneInterface)
+include(dune::ToolTypes) # Enable simpler building of tools.
 add_subdirectory(DuneServiceAccess)
 add_subdirectory(DuneCommon)
 add_subdirectory(Geometry)
