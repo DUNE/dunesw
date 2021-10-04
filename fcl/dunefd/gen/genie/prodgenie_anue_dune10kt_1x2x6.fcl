@@ -9,7 +9,7 @@ physics.producers.generator.MixerConfig:     "map 12:16 -12:-16 14:12 -14:-12" #
 services:
 {
     @table::services
-    @table::dunefd_1x2x6_simulation_services
+    @table::dunefd_1x2x6_services
 }
 
 source.firstRun: 20000005

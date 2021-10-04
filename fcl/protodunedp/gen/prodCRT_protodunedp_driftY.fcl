@@ -14,7 +14,7 @@ services:
   TimeTracker:       {}
   RandomNumberGenerator: {} #ART native random number generator
   message:      @local::standard_info
-  @table::protodunedphase_driftY_simulation_services
+  @table::protodunedphase_driftY_simulation_services_legacy
 }
 source:
 {

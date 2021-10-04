@@ -1,13 +1,1 @@
-#include "standard_detsim_dune10kt.fcl"
-
-services: 
-{
-    @table::services
-    @table::dunefd_1x2x6_simulation_services
-}
-
-physics.producers: 
-{
-    @table::physics.producers
-    tpcrawdecoder: @local::tpcrawdecoder_dunefd_horizdrift_1x2x6
-}
+#include "standard_detsim_dune10kt_1x2x6_legacy.fcl"

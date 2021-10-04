@@ -1,0 +1,5 @@
+#include "prodgenie_nu_dunevd10kt_1x6x6.fcl"
+
+physics.producers.generator.MixerConfig:     "map 12:14 -12:-14 14:16 -14:-16"
+
+outputs.out1.fileName: "prodgenie_nu_numu2nutau_nue2numu_dunevd10kt_1x6x6_gen.root"
