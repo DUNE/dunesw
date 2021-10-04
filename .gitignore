@@ -3,4 +3,12 @@
 *.backup
 *.log
 *.root
-#*
+/* cmake stuff  */
+*.cpp
+*.check_cache
+*.out
+*.cmake
+*.c
+*.txt
+*.swo
+*.bin
