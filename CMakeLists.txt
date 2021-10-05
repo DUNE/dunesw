@@ -17,7 +17,7 @@
 
 cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 
-project(dunetpc VERSION 09.31.00 LANGUAGES CXX)
+project(dunetpc VERSION 09.32.00 LANGUAGES CXX)
 
 # cetbuildtools contains our cmake modules
 find_package(cetbuildtools REQUIRED)
