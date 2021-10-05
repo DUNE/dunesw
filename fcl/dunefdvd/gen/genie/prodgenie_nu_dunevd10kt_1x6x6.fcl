@@ -12,3 +12,7 @@ source.firstRun: 20000001
 outputs.out1.fileName: "prodgenie_nu_dunevd10kt_1x6x6_gen.root"
 
 physics.producers.generator: @local::dunefdvd_1x6x6_genie_lbnf_dk2nu
+# physics.producers.generator.GXMLPATH: "/dune/app/users/bnayak/larsoft_dev/localProducts_larsoft_v09_26_00_e20_prof/dunetpc/v09_25_00/dk2nuconfigs"
+#
+# physics.producers.generator.EventGeneratorList: "CCinclMEC"
+
