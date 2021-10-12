@@ -65,6 +65,7 @@ dunefd_horizdrift_producers:
   #cvn
   cvnmap:                @local::dunefd_horizdrift_cvnmapper
   cvneva:                @local::dunefd_horizdrift_cvnevaluator
+  cvnevaagain:                @local::dunefd_horizdrift_cvnevaluator
   #neutrino energy reco
   energyrecnumu:         @local::dunefd_nuenergyreco_pandora_numu
   energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
@@ -129,14 +130,15 @@ dunefd_horizdrift_pmtrack_trajcluster_pfp:
 dunefd_horizdrift_pmtrack_showers:
 [
     blurredcluster,
-    emtrkmichelid,
+#emtrkmichelid,
     emshower
 ]
 
 dunefd_horizdrift_cvn:
 [
     cvnmap,
-    cvneva
+    cvneva,
+    cvnevaagain
 ]
 
 dunefd_horizdrift_nuenergy:
