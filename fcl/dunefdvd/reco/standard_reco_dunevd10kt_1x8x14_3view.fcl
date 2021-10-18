@@ -1,11 +1,84 @@
-#include "standard_reco_dunevd10kt.fcl"
+# standard_reco_dunevd10kt.fcl 
 
-services: {
-    @table::services
-    @table::dunefdvd_1x8x14_3view_simulation_services
+# Dom Brailsford
+#
+#
+# Job fcl for running the VD reconstruction
+# L. Paulucci: Modified on 13Oct 2021 to include optical reco (opHit and OpFlash)
+#
+#include "pandoramodules_dune.fcl"
+#include "wirecell_dune.fcl"
+#include "services_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "tools_dune.fcl"
+
+
+process_name: Reco
+
+
+services:
+{
+   TFileService: { fileName: "%ifb_reco_hist.root" }
+   TimeTracker:       {}
+   MemoryTracker:         { } # default is one
+   RandomNumberGenerator: {} #ART native random number generator
+   FileCatalogMetadata:  @local::art_file_catalog_mc
+   @table::dunefdvd_simulation_services
+   @table::dunefdvd_1x8x14_3view_simulation_services
+   message:              @local::dune_message_services_prod
 }
 
-physics.producers:{
-    @table::physics.producers
-    wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_1x6x6_3view_data_nfsp
+#source is now a root file
+source: {
+  module_type: RootInput
+  maxEvents:  10        # Number of events to create
 }
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics: {
+ producers: {
+   wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_1x6x6_3view_data_nfsp
+   rns:            { module_type: "RandomNumberSaver" }
+   # actual hit finder
+   gaushit:            @local::dunevdfd_gaushitfinder
+   # PDS reconstruction
+   ophitArOnly:     @local::dunefd_ophit
+   ophitXeOnly:     @local::dunefd_ophit
+   ophit10ppm:      @local::dunefd_ophit
+   opflashArOnly:   @local::dunefd_opflash
+   opflashXeOnly:   @local::dunefd_opflash
+   opflash10ppm:    @local::dunefd_opflash
+ }
+
+ reco: [ rns,
+         wclsdatanfsp,
+	 gaushit,
+         ophit10ppm, opflash10ppm
+       ]
+ stream1:  [ out1 ]
+ trigger_paths: [reco] 
+ end_paths:     [stream1]  
+}
+
+physics.producers.ophitArOnly.InputModule:      opdigiArOnly
+physics.producers.ophitXeOnly.InputModule:      opdigiXeOnly
+physics.producers.ophit10ppm.InputModule:       opdigi10ppm
+
+physics.producers.opflashArOnly.InputModule:    ophitArOnly
+physics.producers.opflashXeOnly.InputModule:    ophitXeOnly
+physics.producers.opflash10ppm.InputModule:     ophit10ppm
+
+outputs: {
+ out1: {
+   module_type: RootOutput
+   fileName:    "%ifb_reco.root"
+   dataTier:    "reconstructed"
+   compressionLevel: 1
+ }
+}
+
+### Here, we overwrite ALL module labels with the ones defined above.
+physics.producers.gaushit.CalDataModuleLabel: "wclsdatanfsp:gauss"

@@ -3,7 +3,7 @@
 services: 
 {
     @table::services
-    @table::dunefd_1x2x6_reco_services
+    @table::dunefd_1x2x6_reco_services_refactored
 }
 
 physics.producers:
