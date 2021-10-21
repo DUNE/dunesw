@@ -68,15 +68,18 @@ systematicstools	v01_00_03
 dune_oslibs		v1_0_0		-	optional
 hep_hpc			v0_14_01
 valgrind		v3_17_0
+dunedetdataformats      v3_0_0
+dunedaqdataformats      v3_0_0
+
 end_product_list
 
 # We now define allowed qualifiers and the corresponding qualifiers for the dependencies.
 # Make a table by adding columns before "notes".
-qualifier	larsoft		duneutil	artdaq_core	dune_pardata	genie_xsec		genie_phyopt	dune_raw_data		nusystematics	systematicstools	dune_oslibs	hep_hpc		valgrind notes
-c7:debug	c7:debug	c7:debug	c7:s112:debug	-nq-		G1810a0211a:k250:e1000	dkcharmtau	c7:nu:s112:debug	c7:debug	c7:debug		-nq-		c7:debug	-nq-
-c7:prof		c7:prof		c7:prof		c7:s112:prof	-nq-		G1810a0211a:k250:e1000	dkcharmtau	c7:nu:s112:prof		c7:prof		c7:prof			-nq-		c7:prof		-nq-
-e20:debug	e20:debug	e20:debug	e20:s112:debug	-nq-		G1810a0211a:k250:e1000	dkcharmtau	e20:nu:s112:debug	e20:debug	e20:debug		-nq-		e20:debug	-nq-
-e20:prof	e20:prof	e20:prof	e20:s112:prof	-nq-		G1810a0211a:k250:e1000	dkcharmtau	e20:nu:s112:prof	e20:prof	e20:prof		-nq-		e20:prof	-nq-
+qualifier	larsoft		duneutil	artdaq_core	dune_pardata	genie_xsec		genie_phyopt	dune_raw_data		nusystematics	systematicstools	dune_oslibs	hep_hpc		valgrind        dunedetdataformats      dunedaqdataformats notes
+c7:debug	c7:debug	c7:debug	c7:s112:debug	-nq-		G1810a0211a:k250:e1000	dkcharmtau	c7:nu:s112:debug	c7:debug	c7:debug		-nq-		c7:debug	-nq-            -nq-                    -nq-
+c7:prof		c7:prof		c7:prof		c7:s112:prof	-nq-		G1810a0211a:k250:e1000	dkcharmtau	c7:nu:s112:prof		c7:prof		c7:prof			-nq-		c7:prof		-nq-            -nq-                    -nq-
+e20:debug	e20:debug	e20:debug	e20:s112:debug	-nq-		G1810a0211a:k250:e1000	dkcharmtau	e20:nu:s112:debug	e20:debug	e20:debug		-nq-		e20:debug	-nq-            -nq-                    -nq-
+e20:prof	e20:prof	e20:prof	e20:s112:prof	-nq-		G1810a0211a:k250:e1000	dkcharmtau	e20:nu:s112:prof	e20:prof	e20:prof		-nq-		e20:prof	-nq-            -nq-                    -nq-
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
