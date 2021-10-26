@@ -68,7 +68,7 @@ systematicstools	v01_00_03
 dune_oslibs		v1_0_0		-	optional
 hep_hpc			v0_14_01
 valgrind		v3_17_0
-dunedetdataformats      v3_0_0
+dunedetdataformats      v3_0_1
 dunedaqdataformats      v3_0_0
 
 end_product_list
