@@ -10,5 +10,7 @@
 *.cmake
 *.c
 *.txt
+!*CMakeLists.txt
 *.swo
 *.bin
+*.db
