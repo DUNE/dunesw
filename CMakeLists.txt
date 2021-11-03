@@ -62,8 +62,11 @@ find_ups_product( cetlib )
 find_ups_product( clhep v2_1_3_0 )
 find_ups_product( dune_raw_data )
 find_ups_product( dunepdsprce v0_0_3 )
+find_ups_product( dunedetdataformats )
+find_ups_product( dunedaqdataformats )
 find_ups_product( fhiclcpp )
 find_ups_product( genie )
+find_ups_product( hdf5 v1_12_0b )
 find_ups_product( hep_concurrency )
 find_ups_product( ifdh_art )
 find_ups_product( ifdhc )
@@ -109,6 +112,14 @@ if(( DEFINED ENV{TENSORFLOW_DIR} ) AND ( DEFINED ENV{TRITON_DIR} ))
 endif()
 # artdaq_core Utility library
 cet_find_library( ARTDAQ-CORE_UTILITIES NAMES artdaq-core_Utilities PATHS ENV ARTDAQ_CORE_LIB )
+
+string(TOUPPER ${CMAKE_BUILD_TYPE} BTYPE_UC )
+if( ${BTYPE_UC} MATCHES "DEBUG" )
+ find_library( LIBHDF5 NAMES hdf5_debug PATHS ENV HDF5_LIB NO_DEFAULT_PATH)
+else()
+ find_library( LIBHDF5 NAMES hdf5 PATHS ENV HDF5_LIB NO_DEFAULT_PATH)
+endif()
+include_directories(${HDF5_INCLUDE_DIRS})
 
 
 # Define an export set for tool support to enable simpler per-tool build
