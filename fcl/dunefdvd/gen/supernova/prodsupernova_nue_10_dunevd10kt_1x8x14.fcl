@@ -1,0 +1,14 @@
+#include "prodsupernova_nue_2_dunevd10kt_1x8x14.fcl"
+
+process_name: SupernovaGen
+
+outputs.out1.fileName: "prodsupernova_nue_10_dunevd10kt_1x8x14_gen.root"
+
+services:
+{
+    @table::services
+    @table::dunefdvd_1x8x14_3view_simulation_services
+}
+
+physics.producers.generator.GeneratorAlg.NumberOfNeutrinos: 10
+source.firstRun: 20000046
