@@ -1,0 +1,80 @@
+# workflow_detsim_dunevd10kt.fcl 
+
+# Dom Brailsford
+#
+# Configuration fcl defining the various detsim paths
+#include "wirecell_dune.fcl"
+#include "detsimmodules_dune.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "SIPMOpSensorSim.fcl"
+#include "WaveformDigitizerSim.fcl"
+
+BEGIN_PROLOG
+
+dunefd_vertdrift_producers: 
+{
+   rns:            { module_type: "RandomNumberSaver" }
+   tpcrawdecoder: @local::tpcrawdecoder_dunefd_vertdrift_2view
+   # for light signal 
+   sipmArOnly:    @local::xarapuca_ar
+   sipmXeOnly:    @local::xarapuca_xetuned_xe10ppm
+   sipmAr10ppm:   @local::xarapuca_ar_xe10ppm
+   sipmXe10ppm:   @local::xarapuca_xe_xe10ppm
+   opdigiArOnly:  @local::standard_daphne
+   opdigiXeOnly:  @local::standard_daphne
+   opdigi10ppm:   @local::standard_daphne
+}
+
+dunefd_vertdrift_tpc:
+[
+    tpcrawdecoder
+]
+
+dunefd_vertdrift_pds_aronly:
+[
+    sipmArOnly,
+    opdigiArOnly
+]
+
+dunefd_vertdrift_pds_xeonly:
+[
+    sipmXeOnly,
+    opdigiXeOnly
+]
+
+dunefd_vertdrift_pds_bothelements:
+[
+    sipmAr10ppm,
+    sipmXe10ppm,
+    opdigi10ppm
+]
+
+dunefd_vertdrift_detsim_pds_only:
+[
+    rns,
+    @sequence::dunefd_vertdrift_pds_bothelements
+]
+
+dunefd_vertdrift_detsim_tpc_only:
+[
+    rns,
+    @sequence::dunefd_vertdrift_tpc
+]
+
+dunefd_vertdrift_detsim_all_systems:
+[
+    rns,
+    @sequence::dunefd_vertdrift_tpc,
+    @sequence::dunefd_vertdrift_pds_bothelements
+]
+
+#Overrides
+dunefd_vertdrift_producers.sipmArOnly.InputTag:  "PDFastSimAr"
+dunefd_vertdrift_producers.sipmXeOnly.InputTag:  "PDFastSimXe" #Default, but set anyway for clarity
+dunefd_vertdrift_producers.sipmAr10ppm.InputTag: "PDFastSimAr"
+dunefd_vertdrift_producers.sipmXe10ppm.InputTag: "PDFastSimXe" #Default, but set anyway for clarity
+dunefd_vertdrift_producers.opdigiArOnly.InputTags:   [sipmArOnly]
+dunefd_vertdrift_producers.opdigiXeOnly.InputTags:   [sipmXeOnly]
+dunefd_vertdrift_producers.opdigi10ppm.InputTags:    [sipmAr10ppm, sipmXe10ppm]
+
+END_PROLOG
