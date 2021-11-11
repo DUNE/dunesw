@@ -5,15 +5,9 @@
 #
 # Job fcl for running the VD reconstruction
 #
-#include "pandoramodules_dune.fcl"
-#include "wirecell_dune.fcl"
 #include "services_dune.fcl"
-#include "hitfindermodules_dune.fcl"
-#include "calorimetry_dune10kt.fcl"
-#include "pid_dune10kt.fcl"
-#include "energyreco.fcl"
-
-
+#include "workflow_reco_dunevd10kt.fcl"
+#
 process_name: Reco
 
 
@@ -39,35 +33,10 @@ source: {
 # Modules are grouped by type.
 physics: {
  producers: {
-   wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_data_nfsp
-   rns:            { module_type: "RandomNumberSaver" }
-   # actual hit finder
-   gaushit:            @local::dunevdfd_gaushitfinder
-   # pattern recognition
-   pandora:            @local::dunefdvd_pandora_neutrino
-   # Characterisation
-   pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
-   pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
-   pandoracalo:        @local::dunevd10kt_calomc_pandora
-   pandorapid:         @local::dunevd10kt_pid_pandora
-   energyrecnumu:         @local::dunefdvd_nuenergyreco_pandora_numu
-   energyrecnue:          @local::dunefdvd_nuenergyreco_pandora_nue
-   energyrecnc:           @local::dunefdvd_nuenergyreco_pandora_nc
-
+  @table::dunefd_vertdrift_producers
  }
 
- reco: [ rns,
-#         wclsdatanfsp,
-	        gaushit,
-         pandora,
-         pandoraTrack,
-         pandoraShower,
-         pandoracalo,
-         pandorapid,
-         energyrecnumu,
-         energyrecnue,
-         energyrecnc
-       ]
+ reco: [ @sequence::dunefd_vertdrift_reco_tpc_only ]
  stream1:  [ out1 ]
  trigger_paths: [reco] 
  end_paths:     [stream1]  
