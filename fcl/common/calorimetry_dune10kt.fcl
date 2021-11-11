@@ -16,4 +16,11 @@ dune10kt_calomc:                         @local::standard_calomc
 dune10kt_calomc.CaloAlg:                 @local::dune10kt_calorimetryalgmc
 dune10kt_calomc.CaloAlg.CaloUseModBox:   true
 
+dunevd10kt_calomc:                       @local::dune10kt_calomc
+dunevd10kt_calomc_pandora:               @local::dunevd10kt_calomc
+dunevd10kt_calomc_pandora.TrackModuleLabel:         "pandoraTrack"
+dunevd10kt_calomc_pandora.SpacePointModuleLabel:    "pandora"
+dunevd10kt_calomc_pandora.T0ModuleLabel:            ""
+dunevd10kt_calomc_pandora.MakeTree:                 false
+
 END_PROLOG

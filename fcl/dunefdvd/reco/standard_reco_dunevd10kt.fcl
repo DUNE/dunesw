@@ -5,12 +5,9 @@
 #
 # Job fcl for running the VD reconstruction
 #
-#include "pandoramodules_dune.fcl"
-#include "wirecell_dune.fcl"
 #include "services_dune.fcl"
-#include "hitfindermodules_dune.fcl"
-
-
+#include "workflow_reco_dunevd10kt.fcl"
+#
 process_name: Reco
 
 
@@ -21,7 +18,7 @@ services:
    MemoryTracker:         { } # default is one
    RandomNumberGenerator: {} #ART native random number generator
    FileCatalogMetadata:  @local::art_file_catalog_mc
-   @table::dunefdvd_simulation_services
+   @table::dunefdvd_reco_services
    message:              @local::dune_message_services_prod
 }
 
@@ -36,16 +33,10 @@ source: {
 # Modules are grouped by type.
 physics: {
  producers: {
-   wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_data_nfsp
-   rns:            { module_type: "RandomNumberSaver" }
-   # actual hit finder
-   gaushit:            @local::dunevdfd_gaushitfinder
+  @table::dunefd_vertdrift_producers
  }
 
- reco: [ rns,
-         wclsdatanfsp,
-	 gaushit
-       ]
+ reco: [ @sequence::dunefd_vertdrift_reco_tpc_only ]
  stream1:  [ out1 ]
  trigger_paths: [reco] 
  end_paths:     [stream1]  
@@ -59,6 +50,3 @@ outputs: {
    compressionLevel: 1
  }
 }
-
-### Here, we overwrite ALL module labels with the ones defined above.
-physics.producers.gaushit.CalDataModuleLabel: "wclsdatanfsp:gauss"

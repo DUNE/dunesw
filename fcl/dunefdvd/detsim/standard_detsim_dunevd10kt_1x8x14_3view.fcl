@@ -1,112 +1,18 @@
-# standard_detsim_dunevd10kt.fcl 
+#include "standard_detsim_dunevd10kt.fcl"
 
-# Dom Brailsford
-#
-#
-# Job fcl for running the VD detector simulation
-# L. Paulucci: Modified on 13Oct 2021 to include optical detsim (default = Ar+Xe)
+services: {
+    @table::services
+    @table::dunefdvd_1x8x14_3view_simulation_services
+}
 
-#include "wirecell_dune.fcl"
-#include "services_dune.fcl"
-#include "detsimmodules_dune.fcl"
-#include "opticaldetectormodules_dune.fcl"
-#include "SIPMOpSensorSim.fcl"
-#include "WaveformDigitizerSim.fcl"
-
-#include "tools_dune.fcl"
-
-process_name: detsim
-
-
-services:
+physics:
 {
-   TFileService: { fileName: "%ifb_detsim_hist.root" }
-   TimeTracker:       {}
-   MemoryTracker:         { } # default is one
-   RandomNumberGenerator: {} #ART native random number generator
-   FileCatalogMetadata:  @local::art_file_catalog_mc
-   @table::dunefdvd_simulation_services
-   @table::dunefdvd_1x8x14_3view_simulation_services
-   message:              @local::dune_message_services_prod
+    @table::physics
+    producers:
+    {
+      @table::physics.producers
+      tpcrawdecoder: @local::tpcrawdecoder_dunefd_vertdrift_3view
+    }
+
+    simulate: [ @sequence::dunefd_vertdrift_detsim_all_systems ]
 }
-
-#source is now a root file
-source: {
-  module_type: RootInput
-  maxEvents:  10        # Number of events to create
-}
-
-# Define and configure some modules to do work on each event.
-# First modules are defined; they are scheduled later.
-# Modules are grouped by type.
-physics: {
- producers: {
-#   daq:            @local::dune_detsim
-
-   tpcrawdecoder: @local::tpcrawdecoder_dunefd_vertdrift_2view
-   rns:            { module_type: "RandomNumberSaver" }
-# for light signal 
-   sipmArOnly:    @local::xarapuca_ar
-   sipmXeOnly:    @local::xarapuca_xetuned_xe10ppm
-   sipmAr10ppm:   @local::xarapuca_ar_xe10ppm
-   sipmXe10ppm:   @local::xarapuca_xe_xe10ppm
-   opdigiArOnly:  @local::standard_daphne
-   opdigiXeOnly:  @local::standard_daphne
-   opdigi10ppm:   @local::standard_daphne
-  }
-# simulate: [ rns, daq, @sequence::pd_detsim_path ]
-   ArOnlyPath: [ sipmArOnly, opdigiArOnly ]
-   XeOnlyPath: [ sipmXeOnly, opdigiXeOnly ]
-   BothPath:   [ sipmAr10ppm, sipmXe10ppm, opdigi10ppm ]
- #  trigger_paths: [ ArOnlyPath, XeOnlyPath, BothPath ]
- simulate: [ rns, tpcrawdecoder ]
- stream1:  [ out1 ]
- trigger_paths: [simulate, BothPath] 
- end_paths:     [stream1]  
-}
-
-outputs: {
- out1: {
-   module_type: RootOutput
-   fileName:    "%ifb_detsim.root"
-   dataTier:    "detector-simulated"
-   compressionLevel: 1
- }
-}
-
-physics.producers.sipmArOnly.InputTag:  "PDFastSimAr"
-physics.producers.sipmXeOnly.InputTag:  "PDFastSimXe" #Default, but set anyway for clarity
-physics.producers.sipmAr10ppm.InputTag: "PDFastSimAr"
-physics.producers.sipmXe10ppm.InputTag: "PDFastSimXe" #Default, but set anyway for clarity
-physics.producers.opdigiArOnly.InputTags:   [sipmArOnly]
-physics.producers.opdigiXeOnly.InputTags:   [sipmXeOnly]
-physics.producers.opdigi10ppm.InputTags:    [sipmAr10ppm, sipmXe10ppm]
-
-## Use fixed values instead of DB for pedestals.
-#services.DetPedestalService: @local::dune_fixedpeds
-#
-## DetSim flags.
-#physics.producers.daq.NoiseOn:     true
-#physics.producers.daq.PedestalOn:  true
-#physics.producers.daq.DistortOn:   false
-#physics.producers.daq.SuppressOn:  true
-#
-## DetSim services.
-#services.SimChannelExtractService: @local::scxgeneric
-#services.ChannelNoiseService:      @local::chnoiseold
-#services.PedestalAdditionService:  @local::padprovided
-#services.AdcDistortService:        @local::stuckbits
-#services.AdcSuppressService:       @local::zslegacy
-#services.AdcCompressService:       @local::cmpblock
-#
-## Disable bad channels.
-##services.IChannelStatusService.BadChannels: [ ]
-#
-#### Supernova detsim noise levels ###
-#### What value do I want for the Noise Level?
-#services.ChannelNoiseService.NoiseNormU:  5.75
-#services.ChannelNoiseService.NoiseNormV:  5.75
-#services.ChannelNoiseService.NoiseNormZ:  4.5
-
-#configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
-#=> configs: ["pgrapher/experiment/dune10kt-1x2x6/wcls-sim-drift-simchannel.jsonnet"]

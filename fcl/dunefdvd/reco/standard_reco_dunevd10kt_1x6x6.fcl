@@ -2,5 +2,5 @@
 
 services: {
     @table::services
-    @table::dunefdvd_1x6x6_simulation_services
+    @table::dunefdvd_1x6x6_reco_services
 }
