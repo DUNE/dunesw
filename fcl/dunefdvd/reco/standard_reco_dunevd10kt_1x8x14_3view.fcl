@@ -2,7 +2,7 @@
 
 services: {
     @table::services
-    @table::dunefdvd_1x8x14_3view_simulation_services
+    @table::dunefdvd_1x8x14_3view_reco_services
 }
 
 physics:

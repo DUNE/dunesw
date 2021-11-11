@@ -18,7 +18,7 @@ services:
    MemoryTracker:         { } # default is one
    RandomNumberGenerator: {} #ART native random number generator
    FileCatalogMetadata:  @local::art_file_catalog_mc
-   @table::dunefdvd_simulation_services
+   @table::dunefdvd_reco_services
    message:              @local::dune_message_services_prod
 }
 
