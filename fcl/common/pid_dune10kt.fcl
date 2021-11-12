@@ -1,0 +1,10 @@
+#include "particleid.fcl"
+
+BEGIN_PROLOG
+
+dunevd10kt_pid:                       @local::standard_chi2pid
+dunevd10kt_pid_pandora:               @local::dunevd10kt_pid
+dunevd10kt_pid_pandora.CalorimetryModuleLabel:    "pandoracalo"
+dunevd10kt_pid_pandora.TrackModuleLabel:          "pandoraTrack"
+
+END_PROLOG

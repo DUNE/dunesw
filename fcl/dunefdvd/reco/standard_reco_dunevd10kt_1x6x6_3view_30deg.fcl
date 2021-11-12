@@ -2,7 +2,7 @@
 
 services: {
     @table::services
-    @table::dunefdvd_1x6x6_3view_30deg_simulation_services
+    @table::dunefdvd_1x6x6_3view_30deg_reco_services
 }
 
 physics.producers:{

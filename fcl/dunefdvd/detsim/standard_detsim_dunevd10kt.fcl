@@ -5,10 +5,11 @@
 #
 # Job fcl for running the VD detector simulation
 
-#include "wirecell_dune.fcl"
-#include "services_dune.fcl"
-#include "detsimmodules_dune.fcl"
-#include "opticaldetectormodules_dune.fcl"
+##include "wirecell_dune.fcl"
+##include "services_dune.fcl"
+##include "detsimmodules_dune.fcl"
+##include "opticaldetectormodules_dune.fcl"
+#include "workflow_detsim_dunevd10kt.fcl"
 
 #include "tools_dune.fcl"
 
@@ -37,13 +38,10 @@ source: {
 # Modules are grouped by type.
 physics: {
  producers: {
-#   daq:            @local::dune_detsim
-
-   tpcrawdecoder: @local::tpcrawdecoder_dunefd_vertdrift_2view
-   rns:            { module_type: "RandomNumberSaver" }
+   @table::dunefd_vertdrift_producers 
  }
 # simulate: [ rns, daq, @sequence::pd_detsim_path ]
- simulate: [ rns, tpcrawdecoder ]
+ simulate: [ @sequence::dunefd_vertdrift_detsim_tpc_only ]
  stream1:  [ out1 ]
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
