@@ -1,0 +1,72 @@
+#Use this to generate a root output with waveforms per channel at a given event
+
+#include "services_dune.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "opticaldetectorservices_dune.fcl"
+
+
+process_name: OpDetAna
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "%ifb_waveforms_hist.root" }
+  TimeTracker:       {}
+   @table::dunefdvd_simulation_services
+   @table::dunefdvd_1x8x14_3view_simulation_services
+  message:      @local::standard_info 
+}
+
+
+source:
+{
+  module_type: RootInput
+  maxEvents :  -1
+}
+
+
+physics:
+{
+
+ analyzers:
+ {
+      opdigianaArOnly:  @local::dunefd_opdigiana
+      opdigianaXeOnly:  @local::dunefd_opdigiana
+      opdigiana10ppm:   @local::dunefd_opdigiana
+
+      averagewaveformArOnly:  @local::dunefd_averagewaveform
+      averagewaveformXeOnly:  @local::dunefd_averagewaveform
+      averagewaveform10ppm:   @local::dunefd_averagewaveform
+ }
+ #analyzeIt: [opdigianaArOnly, opdigianaXeOnly, opdigiana10ppm, 
+ #            averagewaveformArOnly, averagewaveformXeOnly, averagewaveform10ppm ]
+ analyzeIt: [ opdigiana10ppm ]
+
+ #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+ #ie analyzers and output streams.  these all run simultaneously
+ end_paths:     [analyzeIt]  
+}
+
+physics.analyzers.opdigianaArOnly.InputModule:  "opdigiArOnly"
+physics.analyzers.opdigianaXeOnly.InputModule:  "opdigiXeOnly"
+physics.analyzers.opdigiana10ppm.InputModule:   "opdigi10ppm"
+
+physics.analyzers.averagewaveformArOnly.InputModule:  "opdigiArOnly"
+physics.analyzers.averagewaveformXeOnly.InputModule:  "opdigiXeOnly"
+physics.analyzers.averagewaveform10ppm.InputModule:   "opdigi10ppm"
+
+# Longer than normal length to see overlap windows
+physics.analyzers.opdigianaArOnly.MaxEvents: 5
+physics.analyzers.opdigianaXeOnly.MaxEvents: 5
+physics.analyzers.opdigiana10ppm.MaxEvents:  5
+
+# Longer than normal length to see overlap windows
+physics.analyzers.averagewaveformArOnly.Nticks:  600
+physics.analyzers.averagewaveformXeOnly.Nticks:  600
+physics.analyzers.averagewaveform10ppm.Nticks:   600
+
+# Subtract the known baseline to averages work well past the nominal window
+physics.analyzers.averagewaveformArOnly.BaselineSubtract:  100
+physics.analyzers.averagewaveformXeOnly.BaselineSubtract:  100
+physics.analyzers.averagewaveform10ppm.BaselineSubtract:   100
+
