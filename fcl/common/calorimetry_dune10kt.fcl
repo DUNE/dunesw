@@ -16,7 +16,13 @@ dune10kt_calomc:                         @local::standard_calomc
 dune10kt_calomc.CaloAlg:                 @local::dune10kt_calorimetryalgmc
 dune10kt_calomc.CaloAlg.CaloUseModBox:   true
 
+
+dunevd10kt_calorimetryalgmc: @local::dune10kt_calorimetryalgmc
+dunevd10kt_calorimetryalgmc.CalAreaConstants: [ 4.833e-3, 4.815e-3, 0.008548 ]
+
 dunevd10kt_calomc:                       @local::dune10kt_calomc
+dunevd10kt_calomc.CaloAlg:               @local::dunevd10kt_calorimetryalgmc
+
 dunevd10kt_calomc_pandora:               @local::dunevd10kt_calomc
 dunevd10kt_calomc_pandora.TrackModuleLabel:         "pandoraTrack"
 dunevd10kt_calomc_pandora.SpacePointModuleLabel:    "pandora"
