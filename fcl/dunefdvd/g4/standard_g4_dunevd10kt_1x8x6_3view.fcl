@@ -1,0 +1,7 @@
+#include "standard_g4_dunevd10kt.fcl"
+
+services: {
+  @table::services
+  @table::dunefdvd_1x8x6_3view_simulation_services
+}
+
