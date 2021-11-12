@@ -1,0 +1,12 @@
+# vdcb_tools_dune.fcl
+
+# David Adams
+# November 2021
+#
+# Collect all tool definitions for 2021 vertical drift cold box.
+
+#include "detsimtools_dune.fcl"
+#include "dunecommon_tools.fcl"
+#include "pdsp_decoder.fcl"
+#include "protodune_dataprep_tools.fcl"
+#include "vdcb_tools.fcl"
