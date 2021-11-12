@@ -1,0 +1,9 @@
+#include "prodgenie_nu_numu2nutau_nue2numu_dunevd10kt_1x6x6.fcl"
+
+services: {
+    @table::services
+    @table::dunefdvd_1x8x6_3view_simulation_services
+}
+
+outputs.out1.fileName: "prodgenie_nu_numu2nutau_nue2numu_dunevd10kt_1x8x6_3view_gen.root"
+
