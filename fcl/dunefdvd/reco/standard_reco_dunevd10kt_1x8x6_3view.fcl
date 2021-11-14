@@ -1,0 +1,18 @@
+#include "standard_reco_dunevd10kt.fcl"
+
+services: {
+    @table::services
+    @table::dunefdvd_1x8x6_3view_reco_services
+}
+
+physics:
+{
+    @table::physics
+    producers:
+    {
+        @table::physics.producers
+        wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_1x8x6_3view_data_nfsp
+    }
+
+    reco: [ @sequence::dunefd_vertdrift_reco_all_systems ]
+}

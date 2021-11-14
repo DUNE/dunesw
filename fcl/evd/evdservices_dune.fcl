@@ -128,5 +128,8 @@ dunevd10kt_1x6x6_3view_30deg_disp.Geometry:    @local::dunevd10kt_1x6x6_3view_30
 dunevd10kt_1x8x14_3view_disp:             @local::dunevd10kt_disp
 dunevd10kt_1x8x14_3view_disp.Geometry:    @local::dunevd10kt_1x8x14_3view_geo 
 
+dunevd10kt_1x8x6_3view_disp:             @local::dunevd10kt_disp
+dunevd10kt_1x8x6_3view_disp.Geometry:    @local::dunevd10kt_1x8x6_3view_geo 
+
 
 END_PROLOG

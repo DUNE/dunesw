@@ -1,0 +1,14 @@
+#include "prodgenie_common_dunevd10kt.fcl"
+
+process_name: GenieGen
+
+services: {
+    @table::services
+    @table::dunefdvd_1x8x6_3view_simulation_services
+}
+
+source.firstRun: 20000001
+
+outputs.out1.fileName: "prodgenie_nu_dunevd10kt_1x8x6_gen.root"
+
+physics.producers.generator: @local::dunefdvd_1x8x6_genie_lbnf_dk2nu
