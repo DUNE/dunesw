@@ -25,6 +25,7 @@ services.RecoDrawingOptions.WireModuleLabels: ["wclsdatanfsp:gauss"]
 
 services.RawDrawingOptions.PedestalOption: 1
 services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
+services.RawDrawingOptions.TotalTicks: 9000
 
 services.SimulationDrawingOptions.ShowMCTruthTrajectories: true
 services.SimulationDrawingOptions.SimChannelLabel: "tpcrawdecoder:simpleSC"

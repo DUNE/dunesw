@@ -12,8 +12,8 @@ services.RecoDrawingOptions.TrackModuleLabels: [ "pandoraTrack" ]
 services.RecoDrawingOptions.ShowerModuleLabels: [ "pandoraShower" ]
 services.RecoDrawingOptions.SpacePointModuleLabels: [ "pandora" ]
 services.RecoDrawingOptions.DrawClusters: 0
-services.RecoDrawingOptions.DrawSpacePoints: 1
-services.RecoDrawingOptions.DrawTrackSpacePoints: 1
+services.RecoDrawingOptions.DrawSpacePoints: 0
+services.RecoDrawingOptions.DrawTrackSpacePoints: 0
 services.RecoDrawingOptions.DrawTrackTrajectoryPoints: 1
 services.RecoDrawingOptions.DrawTracks: 3
 services.RecoDrawingOptions.DrawShowers: 1
@@ -25,6 +25,7 @@ services.RecoDrawingOptions.WireModuleLabels: ["wclsdatanfsp:gauss"]
 
 services.RawDrawingOptions.PedestalOption: 1
 services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
+services.RawDrawingOptions.TotalTicks: 9000
 
 services.SimulationDrawingOptions.ShowMCTruthTrajectories: true
 services.SimulationDrawingOptions.SimChannelLabel: "tpcrawdecoder:simpleSC"
