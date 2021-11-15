@@ -34,6 +34,9 @@ table_fragment_begin
     pathPrepend(FHICL_FILE_PATH, .:./job)
     pathPrepend(PYTHONPATH, ${DUNETPC_FQ_DIR}/bin)
     # WireCellData
+    envSet(WIRECELL_PATH, ${WIRECELL_FQ_DIR}/share/wirecell)
+    pathPrepend(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
+    pathPrepend(WIRECELL_PATH, ${UPS_PROD_DIR}/wire-cell-cfg)
     #envSet(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
     #pathPrepend(WIRECELL_PATH, ${UPS_PROD_DIR}/wire-cell-cfg)
     envSet(DBIQEURL, http://dbdata0vm.fnal.gov:9090/QE/dune)
