@@ -5,7 +5,7 @@ includedServices: @local::services
 
 services: {
     @table::includedServices
-    @table::dunevd10kt_1x6x6_3view_disp
+    @table::dunevd10kt_1x8x6_3view_disp
 }
 
 services.RecoDrawingOptions.TrackModuleLabels: [ "pandoraTrack" ]

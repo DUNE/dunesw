@@ -8,6 +8,8 @@
 #include "services_dune.fcl"
 #include "workflow_reco_dunevd10kt.fcl"
 #
+#include "tools_dune.fcl"
+
 process_name: Reco
 
 
