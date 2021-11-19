@@ -1,0 +1,11 @@
+#include "prodgenie_nu_dunevd10kt_1x8x6_3view.fcl"
+
+source.firstRun: 30000001
+
+outputs.out1.fileName: "prodgenie_nu_dunevd10kt_1x8x6_gen.root"
+
+physics.producers.generator:
+{
+    @table::physics.producers.generator
+    @table::dunefdvd_1x8x6_genie_anu_lbnf_dk2nu_fluxpaths
+}

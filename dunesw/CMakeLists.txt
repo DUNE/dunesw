@@ -24,6 +24,7 @@ add_subdirectory(EnergyStudies)
 add_subdirectory(AnaTree)
 add_subdirectory(HitFinderDUNE)
 add_subdirectory(TrackFinderDUNE)
+add_subdirectory(HDF5Utils)
 add_subdirectory(DUNEPandora)
 add_subdirectory(SimFilter)
 add_subdirectory(FDSensOpt)
@@ -56,7 +57,7 @@ add_subdirectory(TrackPID)
 add_subdirectory(PandoraAnalysis)
 add_subdirectory(InfillChannels)
 add_subdirectory(VLNets)
-add_subdirectory(VDColdbox)
+add_subdirectory(Coldbox)
 
 # Respect the order specified in lar_build, which is:
 #
