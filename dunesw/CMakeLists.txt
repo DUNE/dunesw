@@ -71,7 +71,7 @@ add_subdirectory(Coldbox)
 #     "lardataobj_OpticalDetectorData",
 #     "lardataobj_AnalysisBase",
 #     "lardata_Utilities",
-#     "larsim_Simulation nug4_ParticleNavigation lardataobj_Simulation",
+#     "larsim_Simulation nug4::ParticleNavigation lardataobj_Simulation",
 #     "larsim_MCCheater",
 #     "larreco_Calorimetry",
 #     "lardata_RecoObjects",

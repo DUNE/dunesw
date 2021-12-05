@@ -54,10 +54,10 @@ cet_test(geometry_crmchannelmapping_test
             messagefacility::MF_MessageLogger
             larcorealg::GeometryTestLib
             ART_FRAMEWORK_SERVICES_REGISTRY
-            art_Utilities canvas
+            art::Utilities canvas
             ROOT_BASIC_LIB_LIST
-            FHICLCPP
-            cetlib cetlib_except
+            fhiclcpp::fhiclcpp
+            cetlib::cetlib cetlib_except
   USE_BOOST_UNIT
   DATAFILES test_geometry_dunedphase10kt.fcl
   TEST_ARGS -- ./test_geometry_dunedphase10kt.fcl
