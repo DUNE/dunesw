@@ -1,0 +1,7 @@
+#include "protoDUNE_refactored_g4_stage2.fcl"
+
+outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_*"]
+services.SpaceCharge.InputFilename: "SpaceChargeProtoDUNE/SCE_Alternate_v4_EField.root"
+services.SpaceCharge.EnableSimEfieldSCE: true
+services.SpaceCharge.EnableSimSpatialSCE: true
+services.SpaceCharge.EnableSimulationSCE: true

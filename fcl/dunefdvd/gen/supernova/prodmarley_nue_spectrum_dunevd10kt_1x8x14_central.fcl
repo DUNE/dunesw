@@ -1,0 +1,15 @@
+#include "prodmarley_nue_spectrum_dunevd10kt_1x8x14.fcl"
+
+process_name: MARLEYGen
+#Supernova events generated around +-3m from center in z
+
+outputs.out1.fileName: "prodmarley_nue_spectrum_dunevd10kt_1x8x14_central_gen.root" 
+
+services:
+{
+    @table::services
+    @table::dunefdvd_1x8x14_3view_simulation_services
+}
+
+physics.producers.marley.vertex: { type: "box"  min_position: [ -325., -675., -300. ] max_position: [ 325., 675., 300. ]}
+#physics.producers.marley.vertex: { type: "fixed"  position: [ 550., 0., 3000. ]}
