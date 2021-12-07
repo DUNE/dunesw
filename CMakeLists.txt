@@ -99,6 +99,7 @@ endif()
 if(DEFINED ENV{LAPACK_LIB} )
   find_ups_product( lapack )
 endif()
+
 if(( DEFINED ENV{TENSORFLOW_DIR} ) AND ( DEFINED ENV{TRITON_DIR} ))
   # find tensorflow library
   find_ups_product( protobuf )
