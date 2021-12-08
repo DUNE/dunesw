@@ -17,7 +17,7 @@
 
 cmake_minimum_required(VERSION 3.19 FATAL_ERROR)
 
-project(dunetpc VERSION 09.38.00 LANGUAGES CXX)
+project(dunetpc VERSION 09.39.01 LANGUAGES CXX)
 
 # cetbuildtools contains our cmake modules
 find_package(cetbuildtools REQUIRED)
@@ -99,6 +99,7 @@ endif()
 if(DEFINED ENV{LAPACK_LIB} )
   find_ups_product( lapack )
 endif()
+
 if(( DEFINED ENV{TENSORFLOW_DIR} ) AND ( DEFINED ENV{TRITON_DIR} ))
   # find tensorflow library
   find_ups_product( protobuf )
