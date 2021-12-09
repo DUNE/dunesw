@@ -60,7 +60,7 @@ table_fragment_end
 product			version
 larsoft			v09_39_01
 artdaq_core		v3_07_04
-duneutil		v09_33_00	-	optional
+duneutil		v09_39_01	-	optional
 dune_pardata		v01_77_00
 genie_xsec		v3_00_04a	-	optional
 genie_phyopt		v3_00_04
