@@ -1,0 +1,38 @@
+# standard_reco_vdcb_48deg_top.fcl
+
+#include "standard_reco_vdcb.fcl"
+
+services: {
+    @table::services
+    @table::vdcb_top_reco_services
+    ChannelStatusService: @local::data.ChannelStatusService_vdct1
+}
+
+physics:
+{
+    @table::physics
+    producers:
+    {
+        @table::physics.producers
+        #wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_1x8x6_3view_data_nfsp
+    }
+
+    reco: [ @sequence::dunecb_vertdrift_reco_tpc_only ]
+}
+
+physics.producers.gaushit.CalDataModuleLabel:   "caldata:dataprep"
+
+# V. Galymov:
+# this is a temporary config to check reco, to be cleaned up
+# set high treshold for hit finder (in ADC) to be fixed ...
+#
+
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 10.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 10.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 10.0
+#physics.producers.gaushit.InitWidth: [6.0, 6.0, 6.0]
+#physics.producers.gaushit.AreaNorms: [13.25, 13.25, 13.25]
+#physics.producers.gaushit.MaxMultiHit: 4
+#physics.producers.gaushit.Chi2NDF: 50
+#physics.producers.gaushit.LongMaxHits: [ 25, 25, 25 ]
+#physics.producers.gaushit.LongPulseWidth: [ 10, 10, 10 ]

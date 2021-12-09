@@ -1,0 +1,91 @@
+# workflow_reco_vdcb.fcl
+# Configuration fcl for the reconstruction workflows
+#
+# TODO create where necessary dedicated config tables
+#
+
+#include "pandoramodules_dune.fcl"
+#include "wirecell_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "calorimetry_dune10kt.fcl"
+#include "pid_dune10kt.fcl"
+#include "energyreco.fcl"
+#include "opticaldetectormodules_dune.fcl"
+
+BEGIN_PROLOG
+
+dunecb_vertdrift_producers:
+{
+   rns:            { module_type: "RandomNumberSaver" }
+   # WCL placeholder
+   wclsdatanfsp:       @local::dune10kt_dunefd_vertdrift_data_nfsp
+   # actual hit finder
+   gaushit:            @local::dunevdfd_gaushitfinder
+   # pattern recognition
+   pandora:            @local::dunefdvd_pandora_cosmic
+   # Characterisation
+   pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
+   pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
+   # PID
+   pandoracalo:        @local::dunevd10kt_calomc_pandora
+   pandorapid:         @local::dunevd10kt_pid_pandora
+
+   # PDS reconstruction
+   #ophitArOnly:     @local::dunefd_ophit
+   #ophitXeOnly:     @local::dunefd_ophit
+   #ophit10ppm:      @local::dunefd_ophit
+   #opflashArOnly:   @local::dunefd_opflash
+   #opflashXeOnly:   @local::dunefd_opflash
+   #opflash10ppm:    @local::dunefd_opflash
+}
+
+dunecb_vertdrift_producers.pandora.ShouldRunAllHitsCosmicReco: true
+dunecb_vertdrift_producers.pandora.ShouldRunNeutrinoRecoOption: false
+
+dunecb_vertdrift_tpc:
+[
+    #wclsdatanfsp, ### currently disabled!!!
+    gaushit,
+    pandora,
+    pandoraTrack #,
+    #pandoraShower,
+    #pandoracalo,
+    #pandorapid,
+]
+
+#dunecb_vertdrift_pds:
+#[
+#    ophit10ppm, 
+#    opflash10ppm
+#]
+
+dunecb_vertdrift_reco_tpc_only:
+[
+    rns,
+    @sequence::dunecb_vertdrift_tpc
+]
+
+#dunecb_vertdrift_reco_pds_only:
+#[
+#    rns,
+#    @sequence::dunecb_vertdrift_pds
+#]
+
+#dunecb_vertdrift_reco_all_systems:
+#[
+#    rns,
+#    @sequence::dunecb_vertdrift_tpc,
+#    @sequence::dunecb_vertdrift_pds
+#]
+
+dunecb_vertdrift_producers.gaushit.CalDataModuleLabel:   "wclsdatanfsp:gauss"
+
+#dunecb_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly
+#dunecb_vertdrift_producers.ophitXeOnly.InputModule:      opdigiXeOnly
+#dunecb_vertdrift_producers.ophit10ppm.InputModule:       opdigi10ppm
+#dunecb_vertdrift_producers.opflashArOnly.InputModule:    ophitArOnly
+#dunecb_vertdrift_producers.opflashXeOnly.InputModule:    ophitXeOnly
+#dunecb_vertdrift_producers.opflash10ppm.InputModule:     ophit10ppm
+
+END_PROLOG
+

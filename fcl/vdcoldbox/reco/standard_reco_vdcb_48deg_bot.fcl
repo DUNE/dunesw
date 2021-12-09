@@ -1,0 +1,22 @@
+# standard_reco_vdcb_48deg_bot.fcl
+
+#include "standard_reco_vdcb.fcl"
+
+services: {
+    @table::services
+    @table::vdcb_bot_reco_services
+    ChannelStatusService: @local::data.ChannelStatusService_vdcb2
+}
+
+physics:
+{
+    @table::physics
+    producers:
+    {
+        @table::physics.producers
+        #wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_1x8x6_3view_data_nfsp
+    }
+
+    reco: [ @sequence::dunecb_vertdrift_reco_tpc_only ]
+}
+
