@@ -7,5 +7,6 @@ add_subdirectory(protodunedp)
 add_subdirectory(3x1x1dp)
 add_subdirectory(evd)
 add_subdirectory(dunefddp)
+add_subdirectory(vdcoldbox)
 
 install_fhicl()
