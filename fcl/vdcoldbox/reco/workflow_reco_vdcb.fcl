@@ -18,7 +18,7 @@ dunecb_vertdrift_producers:
 {
    rns:            { module_type: "RandomNumberSaver" }
    # WCL placeholder
-   wclsdatanfsp:       @local::dune10kt_dunefd_vertdrift_data_nfsp
+   wclsdatanfsp:       @local::dune_vd_coldbox_nfsp
    # actual hit finder
    gaushit:            @local::dunevdfd_gaushitfinder
    # pattern recognition
@@ -44,7 +44,7 @@ dunecb_vertdrift_producers.pandora.ShouldRunNeutrinoRecoOption: false
 
 dunecb_vertdrift_tpc:
 [
-    #wclsdatanfsp, ### currently disabled!!!
+    wclsdatanfsp,
     gaushit,
     pandora,
     pandoraTrack #,

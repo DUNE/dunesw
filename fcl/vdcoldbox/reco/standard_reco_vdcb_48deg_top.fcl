@@ -20,7 +20,7 @@ physics:
     reco: [ @sequence::dunecb_vertdrift_reco_tpc_only ]
 }
 
-physics.producers.gaushit.CalDataModuleLabel:   "caldata:dataprep"
+physics.producers.gaushit.CalDataModuleLabel:   "wclsdatanfsp:gauss" # "caldata:dataprep"
 
 # V. Galymov:
 # this is a temporary config to check reco, to be cleaned up
