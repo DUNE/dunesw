@@ -47,10 +47,10 @@ dunecb_vertdrift_tpc:
     wclsdatanfsp,
     gaushit,
     pandora,
-    pandoraTrack #,
-    #pandoraShower,
-    #pandoracalo,
-    #pandorapid,
+    pandoraTrack,
+    pandoraShower,
+    pandoracalo,
+    pandorapid #,
 ]
 
 #dunecb_vertdrift_pds:
