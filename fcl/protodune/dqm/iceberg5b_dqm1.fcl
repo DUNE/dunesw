@@ -14,10 +14,10 @@ services.RawDigitPrepService.ToolNames: [
   "ib5_adcPedestalFit", 
   "ibmet_adcChannelPedestalPlotter",
   "ibmet_adcChannelPedestalNoisePlotter",
-  "ibmet_adcChannelPedestalOrfPlotter",
-  "ibmet_adcChannelPedestalPeakBinExcessPlotter",
-  "ibmet_adcChannelPedestalRawRmsPlotter",
-  "ibmet_adcChannelPedestalRawTailPlotter",
+  "ibmet_adcChannelOrfPlotter",
+  "ibmet_adcChannelPeakBinExcessPlotter",
+  "ibmet_adcChannelRawRmsPlotter",
+  "ibmet_adcChannelRawTailPlotter",
   #"ibcht_Apas",
   "ibcht_Xplanes",
   "ibcht_Iplanes"
@@ -33,6 +33,6 @@ tools.ib5_adcPedestalFit.FitRmsMin: 0.5   # Make low-RMS easy to see
 
 # Gain = 14 mV/fC, shaping = 2.0, 3.0 us
 tools.ibmet_adcChannelPedestalNoisePlotter.MetricMax: 41.0
-tools.ibmet_adcChannelPedestalRawRmsPlotter.MetricMax: 350
+tools.ibmet_adcChannelRawRmsPlotter.MetricMax: 350
 tools.ibcht_Xplanes.MaxSignal: 80
 tools.ibcht_Iplanes.MaxSignal: 80

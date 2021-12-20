@@ -13,10 +13,10 @@ services.RawDigitPrepService.ToolNames: [
   "ib5_adcPedestalFit",
   "ibmet_adcChannelPedestalPlotter",
   "ibmet_adcChannelPedestalNoisePlotter",
-  "ibmet_adcChannelPedestalOrfPlotter",
-  "ibmet_adcChannelPedestalPeakBinExcessPlotter",
-  "ibmet_adcChannelPedestalRawRmsPlotter",
-  "ibmet_adcChannelPedestalRawTailPlotter",
+  "ibmet_adcChannelOrfPlotter",
+  "ibmet_adcChannelPeakBinExcessPlotter",
+  "ibmet_adcChannelRawRmsPlotter",
+  "ibmet_adcChannelRawTailPlotter",
   "ibcht_Xplanes",
   "ibcht_Iplanes"
 ]
