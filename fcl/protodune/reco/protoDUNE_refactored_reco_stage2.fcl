@@ -93,6 +93,6 @@ physics: {
 # xyzt database
 services.XYZCalibService.IsMC: true
 services.XYZCalibService.UseCondbXYZCorr: true
-services.XYZCalibService.YZCorrDBTag: "v6.0"
-services.XYZCalibService.XCorrDBTag: "v6.0"
-services.XYZCalibService.NormCorrDBTag: "v6.0"
+services.XYZCalibService.YZCorrDBTag: "prod4"
+services.XYZCalibService.XCorrDBTag: "prod4"
+services.XYZCalibService.NormCorrDBTag: "prod4"
