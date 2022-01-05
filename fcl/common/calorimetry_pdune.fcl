@@ -16,7 +16,7 @@ pdune_sp_calorimetryalgmc.CalAreaConstants: [ 1.04e-3, 1.04e-3, 1.0156e-3 ]
 pdune_sp_calorimetryalgmc.CaloUseModBox: true
 
 pdune_sp_calorimetryalgmcnosce:          @local::pdune_sp_calorimetryalgmc
-pdune_sp_calorimetryalgmcnosce.CalAreaConstants: [ 1.039e-3, 1.038e-3, 1.01686e-3 ]
+pdune_sp_calorimetryalgmcnosce.CalAreaConstants: [ 1.039e-3, 1.038e-3, 1.0168e-3 ]
 pdune_sp_calodata:                       @local::standard_calodata
 pdune_sp_calodata.CaloAlg:               @local::pdune_sp_calorimetryalgdata
 pdune_sp_calodata.CaloAlg.CaloUseModBox: true
