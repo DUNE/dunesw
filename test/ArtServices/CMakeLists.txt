@@ -1,6 +1,6 @@
 cet_test(test_Geometry SOURCES test_Geometry.cxx
   LIBRARIES
-    dune_ArtSupport
+    dunecore_ArtSupport
     ART_FRAMEWORK_SERVICES_REGISTRY
     art::Utilities canvas
     larcorealg_Geometry
@@ -10,7 +10,7 @@ cet_test(test_Geometry SOURCES test_Geometry.cxx
 
 cet_test(test_DetectorClocksService SOURCES test_DetectorClocksService.cxx
   LIBRARIES
-    dune_ArtSupport
+    dunecore_ArtSupport
     ART_FRAMEWORK_SERVICES_REGISTRY
     art::Utilities canvas
     ROOT_BASIC_LIB_LIST
@@ -19,7 +19,7 @@ cet_test(test_DetectorClocksService SOURCES test_DetectorClocksService.cxx
 
 cet_test(test_DetectorProperties SOURCES test_DetectorProperties.cxx
   LIBRARIES
-    dune_ArtSupport
+    dunecore_ArtSupport
     ART_FRAMEWORK_SERVICES_REGISTRY
     lardataalg_DetectorInfo
     art::Utilities canvas
@@ -29,7 +29,7 @@ cet_test(test_DetectorProperties SOURCES test_DetectorProperties.cxx
 
 cet_test(test_LArProperties SOURCES test_LArProperties.cxx
   LIBRARIES
-    dune_ArtSupport
+    dunecore_ArtSupport
     ART_FRAMEWORK_SERVICES_REGISTRY
     art::Utilities canvas
     ROOT_BASIC_LIB_LIST
@@ -39,7 +39,7 @@ cet_test(test_LArProperties SOURCES test_LArProperties.cxx
 cet_test(test_LArSeedService SOURCES test_LArSeedService.cxx
   LIBRARIES
     nurandom::RandomUtils_NuRandomService_service
-    dune_ArtSupport
+    dunecore_ArtSupport
     ART_FRAMEWORK_SERVICES_REGISTRY
     art::Utilities canvas
     ROOT_BASIC_LIB_LIST
@@ -48,8 +48,8 @@ cet_test(test_LArSeedService SOURCES test_LArSeedService.cxx
 
 cet_test(test_SignalShapingServiceDUNE SOURCES test_SignalShapingServiceDUNE.cxx
   LIBRARIES
-    SignalShapingServiceDUNE_service
-    dune_ArtSupport
+    dunecore::SignalShapingServiceDUNE_service
+    dunecore_ArtSupport
     ART_FRAMEWORK_SERVICES_REGISTRY
     art::Utilities canvas
     lardata_Utilities

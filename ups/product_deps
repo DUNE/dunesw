@@ -1,9 +1,9 @@
- This @product_deps@ file defines dependencies for this package.
+# This @product_deps@ file defines dependencies for this package.
 
 # The *parent* line must the first non-commented line and defines this product and version
 # The version must be of the form vxx_yy_zz (e.g. v01_02_03).
 
-parent dunetpc #v09_41_00_01
+parent dunesw
 
 defaultqual e20
 
@@ -13,32 +13,14 @@ defaultqual e20
 #   where directory_type is one of incdir, libdir, or bindir
 #   where directory_path is one of product_dir, fq_dir and -
 # Defaults:
-# incdir  product_dir  include
-# fcldir  product_dir  fcl
-# libdir  fq_dir       lib
-# bindir  fq_dir       bin
-#
-fcldir	product_dir	job
-gdmldir	product_dir	gdml
-fwdir	product_dir	config_data
-wpdir	product_dir	wire-cell-cfg
+#incdir  product_dir  include
+#fcldir  product_dir  fcl
+#libdir  fq_dir       lib
+#bindir  fq_dir       bin
 
-# table fragment to set FW_SEARCH_PATH needed
-# to find gdml files:
 table_fragment_begin
-    pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/scripts)
-    pathPrepend(FW_SEARCH_PATH, ${DUNETPC_DIR}/gdml)
-    #pathPrepend(FW_SEARCH_PATH, ${DUNE_PARDATA_DIR}/FieldResponse)
-    # Add StashCache to the FW_SEARCH_PATH
     pathPrepend(FW_SEARCH_PATH, /cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/)
     pathPrepend(FHICL_FILE_PATH, .:./job)
-    pathPrepend(PYTHONPATH, ${DUNETPC_FQ_DIR}/bin)
-    # WireCellData
-    envSet(WIRECELL_PATH, ${WIRECELL_FQ_DIR}/share/wirecell)
-    pathPrepend(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
-    pathPrepend(WIRECELL_PATH, ${UPS_PROD_DIR}/wire-cell-cfg)
-    #envSet(WIRECELL_PATH, ${DUNE_PARDATA_DIR}/WireCellData)
-    #pathPrepend(WIRECELL_PATH, ${UPS_PROD_DIR}/wire-cell-cfg)
     envSet(DBIQEURL, http://dbdata0vm.fnal.gov:9090/QE/dune)
     envSet(DBIUSER, pdunesp_reader)
     envSet(DBIHOST, ifdbprod.fnal.gov)
@@ -47,42 +29,28 @@ table_fragment_begin
     envSet(DBIWSURLPUT, https://dbdata0vm.fnal.gov:9443/dune_con_prod/app/)
     envSet(DBIPORT, 5451)
     envSet(DBIWSURLINT, https://dbdata0vm.fnal.gov:9443/dune_con_prod/app/)
-    #dk2nu flux windows
-    envSet(GNUMIFLUXXML, ${DUNETPC_DIR}/dk2nuconfigs/GDk2Nu.xml)
-    envSet(GDK2NUFLUXXML,${DUNETPC_DIR}/dk2nuconfigs/GDk2Nu.xml)
 table_fragment_end
 
-
-# With "product	 version" table below, we now define depdendencies
+# With "product  version" table below, we now define depdendencies
 
 # Add the dependent product and version
 
-product			version
-larsoft			v09_41_00
-artdaq_core		v3_07_04
-duneutil		v09_39_01	-	optional
-dune_pardata		v01_77_00
-genie_xsec		v3_00_04a	-	optional
-genie_phyopt		v3_00_04
-cetbuildtools		v8_18_09	-	only_for_build
-dune_raw_data		v1_19_03
-nusystematics		v01_00_06
-systematicstools	v01_00_03
-dune_oslibs		v1_0_0		-	optional
-hep_hpc			v0_14_01
-valgrind		v3_17_0
-dunedetdataformats      v3_2_1
-dunedaqdataformats      v3_2_1
-
+product          version
+cetbuildtools	 v8_18_09	-	only_for_build
+duneexamples     v09_41_00_02
+dunedataprep     v09_41_00_02
+duneprototypes   v09_41_00_02
+duneana          v09_41_00_02
 end_product_list
 
-# We now define allowed qualifiers and the corresponding qualifiers for the dependencies.
+
+# We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
-qualifier	larsoft		duneutil	artdaq_core	dune_pardata	genie_xsec		genie_phyopt	dune_raw_data		nusystematics	systematicstools	dune_oslibs	hep_hpc		valgrind        dunedetdataformats      dunedaqdataformats notes
-c7:debug	c7:debug	c7:debug	c7:s112:debug	-nq-		G1810a0211a:k250:e1000	dkcharmtau	c7:nu:s112:debug	c7:debug	c7:debug		-nq-		c7:debug	-nq-            -nq-                    -nq-
-c7:prof		c7:prof		c7:prof		c7:s112:prof	-nq-		G1810a0211a:k250:e1000	dkcharmtau	c7:nu:s112:prof		c7:prof		c7:prof			-nq-		c7:prof		-nq-            -nq-                    -nq-
-e20:debug	e20:debug	e20:debug	e20:s112:debug	-nq-		G1810a0211a:k250:e1000	dkcharmtau	e20:nu:s112:debug	e20:debug	e20:debug		-nq-		e20:debug	-nq-            -nq-                    -nq-
-e20:prof	e20:prof	e20:prof	e20:s112:prof	-nq-		G1810a0211a:k250:e1000	dkcharmtau	e20:nu:s112:prof	e20:prof	e20:prof		-nq-		e20:prof	-nq-            -nq-                    -nq-
+qualifier       duneexamples   dunedataprep  duneana   duneprototypes     notes
+c7:debug        c7:debug       c7:debug      c7:debug  c7:debug         
+c7:prof         c7:prof        c7:prof       c7:prof   c7:prof          
+e20:debug       e20:debug      e20:debug     e20:debug e20:debug        
+e20:prof        e20:prof       e20:prof      e20:prof  e20:prof         
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
@@ -90,3 +58,4 @@ end_qualifier_list
 ### Local Variables:
 ### tab-width: 8
 ### End:
+

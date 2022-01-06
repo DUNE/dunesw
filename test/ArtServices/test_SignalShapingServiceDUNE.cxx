@@ -6,13 +6,13 @@
 // This test demonstrates how to configure and use the LArSoft signal
 // service service outside the art framework.
 
-#include "dune/Utilities/SignalShapingServiceDUNE.h"
+#include "dunecore/Utilities/SignalShapingServiceDUNE.h"
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <iomanip>
-#include "dune/ArtSupport/ArtServiceHelper.h"
+#include "dunecore/ArtSupport/ArtServiceHelper.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 #include "lardata/Utilities/LArFFT.h"
 #include "lardata/DetectorInfoServices/DetectorClocksService.h"

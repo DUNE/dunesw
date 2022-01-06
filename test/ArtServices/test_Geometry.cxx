@@ -18,7 +18,7 @@
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "dune/ArtSupport/ArtServiceHelper.h"
+#include "dunecore/ArtSupport/ArtServiceHelper.h"
 #include "art/Framework/Services/Registry/ServiceHandle.h"
 
 using std::string;

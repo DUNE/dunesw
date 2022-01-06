@@ -10,16 +10,16 @@
 # Install all fcl files in rundata in the rundata directory of the product fcl area.
 install(
   DIRECTORY rundata
-  DESTINATION ${dunetpc_FHICL_DIR}
+  DESTINATION ${dunesw_FHICL_DIR}
   FILES_MATCHING PATTERN *.fcl
 )
 install(
   DIRECTORY calib
-  DESTINATION ${dunetpc_FHICL_DIR}
+  DESTINATION ${dunesw_FHICL_DIR}
   FILES_MATCHING PATTERN *.fcl
 )
 install(
   DIRECTORY pedestal
-  DESTINATION ${dunetpc_FHICL_DIR}
+  DESTINATION ${dunesw_FHICL_DIR}
   FILES_MATCHING PATTERN *.fcl
 )

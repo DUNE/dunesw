@@ -18,5 +18,5 @@ function(make_dune_tool_builder NAME)
   cet_make_plugin_builder(${NAME} ${BASE} ${dest_subdir} ${kw} ${ARGN}
     LIBRARIES
     CONDITIONAL "$<$<TARGET_EXISTS:${NAME}>:${NAME}>"
-    REG dune::ArtSupport)
+    REG dunecore::ArtSupport)
 endfunction()
