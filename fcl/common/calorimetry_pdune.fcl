@@ -6,15 +6,17 @@ BEGIN_PROLOG
 # SP constants for production 4
 # https://indico.fnal.gov/event/50211/contributions/220626/attachments/145608/185442/dQdx_dEdx_new_calibrations_prod4a.pdf
 pdune_sp_calorimetryalgdata:             @local::standard_calorimetryalgdata
-pdune_sp_calorimetryalgdata.CalAreaConstants:  [ 1.162e-3, 1.116e-3, 1.0405e-3 ]
+pdune_sp_calorimetryalgdata.CalAreaConstants:  [ 1.166e-3, 1.122e-3, 1.038e-3 ]
 pdune_sp_calorimetryalgdata.CaloDoLifeTimeCorrection: false
 pdune_sp_calorimetryalgdata.CaloUseModBox: true
 
 pdune_sp_calorimetryalgmc:	         @local::standard_calorimetryalgmc
 pdune_sp_calorimetryalgmc.CaloDoLifeTimeCorrection: false
-pdune_sp_calorimetryalgmc.CalAreaConstants: [ 1.036e-3, 1.034e-3, 1.0205e-3 ]
+pdune_sp_calorimetryalgmc.CalAreaConstants: [ 1.04e-3, 1.04e-3, 1.0156e-3 ]
 pdune_sp_calorimetryalgmc.CaloUseModBox: true
 
+pdune_sp_calorimetryalgmcnosce:          @local::pdune_sp_calorimetryalgmc
+pdune_sp_calorimetryalgmcnosce.CalAreaConstants: [ 1.039e-3, 1.038e-3, 1.0168e-3 ]
 pdune_sp_calodata:                       @local::standard_calodata
 pdune_sp_calodata.CaloAlg:               @local::pdune_sp_calorimetryalgdata
 pdune_sp_calodata.CaloAlg.CaloUseModBox: true
@@ -32,6 +34,7 @@ pdune_sp_calomcsce.CaloAlg:              @local::pdune_sp_calorimetryalgmc
 
 pdune_sp_calomcnosce:                    @local::pdune_sp_calomcsce
 pdune_sp_calomcnosce.CorrectSCE:         false
+pdune_sp_calomcnosce.CaloAlg:            @local::pdune_sp_calorimetryalgmcnosce
 
 pdune_sp_alltrackcalodata:               @local::pdune_sp_calodata
 pdune_sp_alltrackcalodata.TrackModuleLabel: "pandora2Track"

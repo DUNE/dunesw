@@ -13,3 +13,10 @@ services.DetectorPropertiesService.Electronlifetime: 35000
 
 services.SpaceCharge.EnableCalEfieldSCE: true
 services.SpaceCharge.EnableCalSpatialSCE: true
+
+# xyzt database
+services.XYZCalibService.IsMC: true
+services.XYZCalibService.UseCondbXYZCorr: true
+services.XYZCalibService.YZCorrDBTag: "prod4"
+services.XYZCalibService.XCorrDBTag: "prod4"
+services.XYZCalibService.NormCorrDBTag: "prod4"
