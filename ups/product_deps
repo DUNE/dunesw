@@ -37,20 +37,21 @@ table_fragment_end
 
 product          version
 cetbuildtools	 v8_18_09	-	only_for_build
-duneexamples     v09_41_00_02
-dunedataprep     v09_41_00_02
-duneprototypes   v09_41_00_02
-duneana          v09_41_00_02
+duneexamples     v09_42_00
+dunedataprep     v09_42_00
+duneprototypes   v09_42_00
+duneana          v09_42_00
+protoduneana     v09_42_00
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
-qualifier       duneexamples   dunedataprep  duneana   duneprototypes     notes
-c7:debug        c7:debug       c7:debug      c7:debug  c7:debug         
-c7:prof         c7:prof        c7:prof       c7:prof   c7:prof          
-e20:debug       e20:debug      e20:debug     e20:debug e20:debug        
-e20:prof        e20:prof       e20:prof      e20:prof  e20:prof         
+qualifier       duneexamples   dunedataprep  duneana   duneprototypes  protoduneana     notes
+c7:debug        c7:debug       c7:debug      c7:debug  c7:debug        c7:debug   
+c7:prof         c7:prof        c7:prof       c7:prof   c7:prof         c7:prof    
+e20:debug       e20:debug      e20:debug     e20:debug e20:debug       e20:debug  
+e20:prof        e20:prof       e20:prof      e20:prof  e20:prof        e20:prof   
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
