@@ -1,0 +1,156 @@
+# workflow_detsim_dunevd10kt.fcl 
+
+# Dom Brailsford
+#
+# Configuration fcl defining the various detsim paths
+#include "wirecell_dune.fcl"
+#include "detsimmodules_dune.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "SIPMOpSensorSim.fcl"
+#include "WaveformDigitizerSim.fcl"
+
+BEGIN_PROLOG
+
+tpcrawdecoder_vdcb_tde : {
+   module_type : WireCellToolkit
+   wcls_main: {
+      tool_type: WCLS
+      apps: ["Pgrapher"]
+      # apps: ["TbbFlow"]
+
+      logsinks: ["stdout:info", "wcls-sim-drift-simchannel.log:debug"]
+      loglevels: ["debug"]
+
+      plugins: ["WireCellPgraph", "WireCellGen","WireCellSio","WireCellRoot","WireCellLarsoft","WireCellTbb"]
+
+      // needs to be found via your WIRECELL_PATH
+#tk      configs: ["pgrapher/experiment/dune-vd/wcls-sim-drift-simchannel.jsonnet"]
+      configs: ["pgrapher/experiment/dune-vd-coldbox/wcls-sim-drift-simchannel.jsonnet"]
+
+
+      // Contract note: these exact "type:name" must be used to identify
+      // the configuration data structures for these components in the Jsonnet.
+
+#tk      inputers: ["wclsSimDepoSource:"]
+      inputers: ["wclsSimDepoSource:electron"]
+      outputers: [
+         "wclsSimChannelSink:postdrift",
+         "wclsFrameSaver:simdigits"
+      ]
+
+      // Make available parameters via Jsonnet's std.extVar()
+      params: {
+        # file: wires
+        # dunevd10kt-1x6x6-3view-wires-v1.json.bz2
+        # dunevd10kt-1x6x6-3view30deg-wires-v1.json.bz2
+        # dunevd10kt-1x6x6-2view-wires-v1.json.bz2
+        # dunevd10kt-1x8x14-3view-wires-v1.json.bz2
+#tk        files_wires: "dunevdcb1-3view-wires-v1.json.bz2"
+        # file: fields
+        # dunevd-resp-isoc3views-18d92.json.bz2 30,-30,90
+        # pcbro-response-avg-12d50.json.bz2 2view prototype
+#tk        files_fields: "pcbro-response-avg-12d50.json.bz2"
+        # file: noise
+        # dunevd10kt-1x6x6-3view-noise-spectra-v1.json.bz2
+        # dunevd10kt-1x6x6-3view30deg-noise-spectra-v1.json.bz2
+        # dunevd10kt-1x6x6-2view-noise-spectra-v1.json.bz2
+#tk        files_noise: "dunevd10kt-1x6x6-2view-noise-spectra-v1.json.bz2"
+	active_cru: 'tde' // 'bde'
+      }
+
+
+      structs: {
+        # number of time samples
+#tk        nticks: @local::dunefdvd_detproperties.NumberTimeSamples
+        nticks: 10000.
+        # Longitudinal diffusion constant [cm2/ns] 4.0e-9
+        DL: @local::dunefd_largeantparameters.LongitudinalDiffusion
+        # Transverse diffusion constant [cm2/ns] 8.8e-9
+        DT: @local::dunefd_largeantparameters.TransverseDiffusion
+        # Electron lifetime [us] #10.4e3
+        lifetime: @local::dunefdvd_detproperties.Electronlifetime
+        # Electron drift speed, assumes a certain applied E-field [mm/us]
+        driftSpeed: 1.60563
+        # G4RefTime [us]
+        G4RefTime: @local::dunefd_detectorclocks.G4RefTime
+        # response plane [cm]
+        response_plane: 18.92
+        # number of CRMs, 36 for 1x6x6, 112 for 1x8x14
+        ncrm: 4
+      }
+   }
+}
+
+
+
+vdcb_tde_producers: 
+{
+   rns:            { module_type: "RandomNumberSaver" }
+   tpcrawdecoder: @local::tpcrawdecoder_vdcb_tde
+   # for light signal 
+##   sipmArOnly:    @local::xarapuca_ar
+##   sipmXeOnly:    @local::xarapuca_xetuned_xe10ppm
+##   sipmAr10ppm:   @local::xarapuca_ar_xe10ppm
+##   sipmXe10ppm:   @local::xarapuca_xe_xe10ppm
+##   opdigiArOnly:  @local::standard_daphne
+##   opdigiXeOnly:  @local::standard_daphne
+##   opdigi10ppm:   @local::standard_daphne
+}
+
+##dunefd_vertdrift_tpc:
+##[
+##    tpcrawdecoder
+##]
+vdcb_tde_tpc:
+[
+    tpcrawdecoder
+]
+
+##dunefd_vertdrift_pds_aronly:
+##[
+##    sipmArOnly,
+# #   opdigiArOnly
+##]
+
+##dunefd_vertdrift_pds_xeonly:
+##[
+##    sipmXeOnly,
+##    opdigiXeOnly
+##]
+
+##dunefd_vertdrift_pds_bothelements:
+##[
+##    sipmAr10ppm,
+##    sipmXe10ppm,
+##    opdigi10ppm
+##]
+
+##dunefd_vertdrift_detsim_pds_only:
+##[
+##    rns,
+##    @sequence::dunefd_vertdrift_pds_bothelements
+##]
+
+vdcb_tde_detsim_tpc_only:
+[
+    rns,
+    @sequence::vdcb_tde_tpc
+]
+
+##dunefd_vertdrift_detsim_all_systems:
+##[
+##    rns,
+##    @sequence::dunefd_vertdrift_tpc,
+##    @sequence::dunefd_vertdrift_pds_bothelements
+##]
+
+#Overrides
+##dunefd_vertdrift_producers.sipmArOnly.InputTag:  "PDFastSimAr"
+##dunefd_vertdrift_producers.sipmXeOnly.InputTag:  "PDFastSimXe" #Default, but set anyway for clarity
+##dunefd_vertdrift_producers.sipmAr10ppm.InputTag: "PDFastSimAr"
+##dunefd_vertdrift_producers.sipmXe10ppm.InputTag: "PDFastSimXe" #Default, but set anyway for clarity
+##dunefd_vertdrift_producers.opdigiArOnly.InputTags:   [sipmArOnly]
+##dunefd_vertdrift_producers.opdigiXeOnly.InputTags:   [sipmXeOnly]
+##dunefd_vertdrift_producers.opdigi10ppm.InputTags:    [sipmAr10ppm, sipmXe10ppm]
+
+END_PROLOG
