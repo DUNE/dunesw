@@ -14,7 +14,7 @@ outputs.out1.fileName: "prod_muminus_5.0GeV_fwdgoing_fixedstart_vdcb_tde_gen.roo
 physics.producers.generator.PDG: [ 13 ]            # mu-
 physics.producers.generator.PosDist: 0
 physics.producers.generator.X0: [ 0.0 ]
-physics.producers.generator.Y0: [ 42 ]
+physics.producers.generator.Y0: [ -20.0 ]
 physics.producers.generator.Z0: [ 0.0 ]
 physics.producers.generator.T0: [ 0. ]
 physics.producers.generator.SigmaX: [ -15.0 ]      # 0 = upstream of active volume, ~30 cm of drift 
@@ -25,8 +25,8 @@ physics.producers.generator.PDist: 0               # Flat momentum dist. (0.1-2.
 physics.producers.generator.P0: [ 5.0 ]
 physics.producers.generator.SigmaP: [ 0.0 ]
 physics.producers.generator.AngleDist: 0           # Flat angle dist.
-physics.producers.generator.Theta0XZ: [ 0. ]       # y-azimuth
-physics.producers.generator.Theta0YZ: [ 0. ]       # y-latitude
+physics.producers.generator.Theta0XZ: [ 45.0 ]       # y-azimuth
+physics.producers.generator.Theta0YZ: [ 45.0 ]       # y-latitude
 physics.producers.generator.SigmaThetaXZ: [ 0.0 ] # Quasi-isotropic
 physics.producers.generator.SigmaThetaYZ: [ 0.0 ]
 
