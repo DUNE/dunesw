@@ -125,10 +125,10 @@ protoDUNE_reco_data: [ caldata,
                        pandoracalo,
                        pandoracalonosce,
                        pandorapid,
-                       pandoracali,
-                       pandoracalipid,
                        pandoraShowercalo,
                        pandoraShowercalonosce,
+                       pandoracali,
+                       pandoracalipid,
                        emtrkmichelid,
                        ophitInternal,
                        ophitExternal,
@@ -143,11 +143,11 @@ protoDUNE_reco_data: [ caldata,
                        pandora2calo, 
                        pandora2calonosce, 
                        pandora2pid,
-                       pandora2cali,
-                       pandora2calipid,
                        pandora2Shower, 
                        pandora2Showercalo,
-                       pandora2Showercalonosce
+                       pandora2Showercalonosce,
+                       pandora2cali,
+                       pandora2calipid
                      ]
 
 protoDUNE_reco_data_producers.caldata.DigitLabel: "tpcrawdecoder:daq"
