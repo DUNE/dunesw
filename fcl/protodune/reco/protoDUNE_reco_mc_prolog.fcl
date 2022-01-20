@@ -106,10 +106,10 @@ protoDUNE_reco_mc_stage1: [ ophit,
                             pandoracalo,
                             pandoracalonosce,
                             pandorapid,
-                            pandoracalinoxyzt,
-                            pandoracalipidnoxyzt,
                             pandoraShowercalo,
                             pandoraShowercalonosce,
+                            pandoracalinoxyzt,
+                            pandoracalipidnoxyzt,
                             emtrkmichelid,
                             crttag,
                             crtreco,
@@ -118,11 +118,11 @@ protoDUNE_reco_mc_stage1: [ ophit,
                             pandora2calo,
                             pandora2calonosce,
                             pandora2pid,
-                            pandora2calinoxyzt,
-                            pandora2calipidnoxyzt,
                             pandora2Shower,
                             pandora2Showercalo,
-                            pandora2Showercalonosce
+                            pandora2Showercalonosce,
+                            pandora2calinoxyzt,
+                            pandora2calipidnoxyzt
                           ]
 
 
