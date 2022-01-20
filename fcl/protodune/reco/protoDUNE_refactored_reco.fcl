@@ -231,6 +231,8 @@ physics.producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
 
 physics.producers.pandora2cali.TrackModuleLabel:             "pandora2Track"
 physics.producers.pandora2cali.CalorimetryModuleLabel:       "pandora2calo"
+physics.producers.pandora2cali.ShowerModuleLabel:             "pandora2Shower"
+physics.producers.pandora2cali.ShowerCalorimetryModuleLabel:       "pandora2Showercalo"
 
 physics.producers.pandora2calipid.CalorimetryModuleLabel:    "pandora2cali"
 physics.producers.pandora2calipid.TrackModuleLabel:          "pandora2Track"

@@ -178,7 +178,9 @@ protoDUNE_reco_data_producers.pandora2pid.CalorimetryModuleLabel:        "pandor
 protoDUNE_reco_data_producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
 
 protoDUNE_reco_data_producers.pandora2cali.TrackModuleLabel:             "pandora2Track"
+protoDUNE_reco_data_producers.pandora2cali.ShowerModuleLabel:            "pandora2Shower"
 protoDUNE_reco_data_producers.pandora2cali.CalorimetryModuleLabel:       "pandora2calo"
+protoDUNE_reco_data_producers.pandora2cali.ShowerCalorimetryModuleLabel: "pandora2Showercalo"
 
 protoDUNE_reco_data_producers.pandora2calipid.CalorimetryModuleLabel:    "pandora2cali"
 protoDUNE_reco_data_producers.pandora2calipid.TrackModuleLabel:          "pandora2Track"
