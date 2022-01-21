@@ -24,14 +24,12 @@ tpcrawdecoder_vdcb_tde : {
       plugins: ["WireCellPgraph", "WireCellGen","WireCellSio","WireCellRoot","WireCellLarsoft","WireCellTbb"]
 
       // needs to be found via your WIRECELL_PATH
-#tk      configs: ["pgrapher/experiment/dune-vd/wcls-sim-drift-simchannel.jsonnet"]
       configs: ["pgrapher/experiment/dune-vd-coldbox/wcls-sim-drift-simchannel.jsonnet"]
 
 
       // Contract note: these exact "type:name" must be used to identify
       // the configuration data structures for these components in the Jsonnet.
 
-#tk      inputers: ["wclsSimDepoSource:"]
       inputers: ["wclsSimDepoSource:electron"]
       outputers: [
          "wclsSimChannelSink:postdrift",
@@ -45,24 +43,24 @@ tpcrawdecoder_vdcb_tde : {
         # dunevd10kt-1x6x6-3view30deg-wires-v1.json.bz2
         # dunevd10kt-1x6x6-2view-wires-v1.json.bz2
         # dunevd10kt-1x8x14-3view-wires-v1.json.bz2
-#tk        files_wires: "dunevdcb1-3view-wires-v1.json.bz2"
+        # files_wires: "dunevdcb1-3view-wires-v1.json.bz2"
         # file: fields
         # dunevd-resp-isoc3views-18d92.json.bz2 30,-30,90
         # pcbro-response-avg-12d50.json.bz2 2view prototype
-#tk        files_fields: "pcbro-response-avg-12d50.json.bz2"
+        # files_fields: "pcbro-response-avg-12d50.json.bz2"
         # file: noise
         # dunevd10kt-1x6x6-3view-noise-spectra-v1.json.bz2
         # dunevd10kt-1x6x6-3view30deg-noise-spectra-v1.json.bz2
         # dunevd10kt-1x6x6-2view-noise-spectra-v1.json.bz2
-#tk        files_noise: "dunevd10kt-1x6x6-2view-noise-spectra-v1.json.bz2"
+        # files_noise: "dunevd10kt-1x6x6-2view-noise-spectra-v1.json.bz2"
 	active_cru: 'tde' // 'bde'
       }
 
 
       structs: {
         # number of time samples
-#tk        nticks: @local::dunefdvd_detproperties.NumberTimeSamples
-        nticks: 10000.
+        nticks: @local::dunefdvd_detproperties.NumberTimeSamples
+#        nticks: 10000.
         # Longitudinal diffusion constant [cm2/ns] 4.0e-9
         DL: @local::dunefd_largeantparameters.LongitudinalDiffusion
         # Transverse diffusion constant [cm2/ns] 8.8e-9
