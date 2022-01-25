@@ -143,10 +143,10 @@ reco: [ ophit,
         pandoracalo,
         pandoracalonosce,
         pandorapid,
-        pandoracali,
-        pandoracalipid,
         pandoraShowercalo,
         pandoraShowercalonosce,
+        pandoracali,
+        pandoracalipid,
         emtrkmichelid,
         crttag,
         crtreco,
@@ -155,11 +155,11 @@ reco: [ ophit,
         pandora2calo,
         pandora2calonosce,
         pandora2pid,
-        pandora2cali,
-        pandora2calipid,
         pandora2Shower,
         pandora2Showercalo,
-        pandora2Showercalonosce
+        pandora2Showercalonosce,
+        pandora2cali,
+        pandora2calipid
           ]
 
   #define the output stream, there could be more than one if using filters
@@ -231,6 +231,8 @@ physics.producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
 
 physics.producers.pandora2cali.TrackModuleLabel:             "pandora2Track"
 physics.producers.pandora2cali.CalorimetryModuleLabel:       "pandora2calo"
+physics.producers.pandora2cali.ShowerModuleLabel:             "pandora2Shower"
+physics.producers.pandora2cali.ShowerCalorimetryModuleLabel:       "pandora2Showercalo"
 
 physics.producers.pandora2calipid.CalorimetryModuleLabel:    "pandora2cali"
 physics.producers.pandora2calipid.TrackModuleLabel:          "pandora2Track"
