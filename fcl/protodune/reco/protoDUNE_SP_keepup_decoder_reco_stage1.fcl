@@ -117,6 +117,12 @@ services.LifetimeCalibService.IsMC: false
 services.LifetimeCalibService.UseCondbLifetime: true
 services.LifetimeCalibService.LifetimeDBTag: "v1.1"
 
+# xyzt database
+services.XYZCalibService.IsMC: false
+services.XYZCalibService.UseCondbXYZCorr: false
+#services.XYZCalibService.YZCorrDBTag: "prod4"
+#services.XYZCalibService.XCorrDBTag: "prod4"
+#services.XYZCalibService.NormCorrDBTag: "prod4"
 
 #<friendly-type>_<module-label>_<instance-name>_<process-name>
 
