@@ -1,0 +1,7 @@
+#include "prodaddgenie_bdm_b1p5_m10_02a_dune10kt_1x2x6.fcl"
+
+services:
+{
+  @table::services
+  @table::dunefd_1x2x6_services_refactored
+}
