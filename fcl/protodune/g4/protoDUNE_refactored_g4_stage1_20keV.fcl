@@ -125,4 +125,4 @@ outputs:
 }
 
 physics.producers.largeant.macroPath: "FW_SEARCH_PATH"
-physics.producers.largeant.visMacro: "10keV.mac"
+physics.producers.largeant.visMacro: "20keV.mac"
