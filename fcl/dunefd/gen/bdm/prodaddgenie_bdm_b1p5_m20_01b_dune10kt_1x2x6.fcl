@@ -1,0 +1,12 @@
+#include "prodaddgenie_bdm_b1p5_m20_01b_dune10kt.fcl"
+
+services:
+{
+  @table::services
+  @table::dunefd_1x2x6_services
+}
+
+physics.producers.generator: @local::dunefd_1x2x6_add_genie
+outputs.out1.fileName: prodaddgenie_bdm_b1p5_m20_01b_dune10kt_1x2x6.root
+
+physics.producers.generator.fileList: @local::dune_add_genie_bdm_ar_b1p5_m20_01b_fileList

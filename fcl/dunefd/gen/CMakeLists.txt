@@ -6,5 +6,6 @@ add_subdirectory(atm)
 add_subdirectory(ndk)
 add_subdirectory(background)
 add_subdirectory(nnbar)
+add_subdirectory(bdm)
 
 install_fhicl()
