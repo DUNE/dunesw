@@ -14,6 +14,62 @@ services:
 
   @table::protodune_larg4_services
 
+  DetectorHolder: {}
+  ActionHolder: {}
+  PhysicsListHolder: {}
+  PhysicsList: {
+    PhysicsListName: "QGSP_BERT"
+    DumpList: true
+    enableNeutronLimit: false
+    NeutronTimeLimit: 0.0
+    NeutronKinELimit: 0.0
+    enableStepLimit: true
+    enableOptical: false
+    enableCerenkov: false
+    CerenkovStackPhotons: false
+    CerenkovMaxNumPhotons: 100
+    CerenkovMaxBetaChange: 10.0
+    enableScintillation: false
+    ScintillationStackPhotons: false
+    ScintillationByParticleType: false
+    ScintillationTrackInfo: false
+    ScintillationTrackSecondariesFirst: false
+    enableAbsorption: false
+    enableRayleigh: false
+    enableMieHG: false
+    enableBoundary: false
+    enableWLS: false
+    BoundaryInvokeSD: false
+    Verbosity: 1
+    WLSProfile: delta
+  }
+
+  MCTruthEventAction: {service_type: "MCTruthEventActionService"}
+  ParticleListAction: {service_type:  "ParticleListActionService"
+                       EnergyCut: 1e-2 # Kinetic Energy cut in [MeV]
+                       keepEMShowerDaughters: false
+                       storeTrajectories: false
+                       keepGenTrajectories: ["generator"] # list of generator labels for which we want to store
+                                                          # trajectory points. The protodune beam label is simply
+                                                          # "generator"
+                       keepOnlyPrimaryFullTrajectories : true  # (defaults to false in larg4) If set to true, only
+                                                                # the particles with MCTruth process == "primary" and
+                                                                # their descendants will have the full set of trajetory
+                                                                # points stored. Particles descending from primaries with
+                                                                # MCTruth process != "primary" will not have a full set
+                                                                # of trajectory points stored -- only their start and
+                                                                # end points. This filter only applies to the generator
+                                                                # labels listed in the keepGenTrajectories. E.g, for the
+                                                                # beam generator, no "primaryBackground" particles or their
+                                                                # descendants would have a full set of traj. points. if
+                                                                # this is set to true.
+                       SparsifyTrajectories: true # call SparsifyTrajectory() method on MCParticles with full trajectories
+                                                  # being stored. This helps reduce memory usage in the root output stage
+                                                  # if there are many trajectory points.
+                       SparsifyMargin: 0.015
+                                      
+                      }
+
   NuRandomService:       @local::dune_prod_seedservice
 }
 
@@ -68,4 +124,5 @@ outputs:
   }
 }
 
+physics.producers.largeant.macroPath: "FW_SEARCH_PATH"
 physics.producers.largeant.visMacro: "10keV.mac"

@@ -2,7 +2,7 @@
 #include "elecdrift_dune.fcl"
 #include "PDFastSim_dune.fcl"
 #include "services_vdcoldbox.fcl"
-
+#include "wirecell_dune.fcl"
 
 process_name: G4
 
@@ -27,7 +27,6 @@ services:
   @table::vdcb_sim_base_services
 } # end services
 
-##services.OpDetResponseInterface.QuantumEfficiency: 0.001
 
 #source is now a root file
 source:
@@ -45,23 +44,24 @@ physics:
   {
      largeant:			@local::vdcb_tde_larg4
 
-     wcsim : {
-         module_type : WireCellToolkit
-         wcls_main: {
-            tool_type: WCLS
-            apps: ["Pgrapher"]
-            plugins: ["WireCellPgraph", "WireCellGen","WireCellSio","WireCellRoot","WireCellLarsoft"]
-            configs: ["pgrapher/experiment/dune-vd-coldbox/wcls-sim-drift-simchannel.jsonnet"]
-            inputers: ["wclsSimDepoSource:electron"]
-            outputers: [
-               "wclsSimChannelSink:postdrift",
-               "wclsFrameSaver:simdigits"
-            ]
-            params: {
-                active_cru: 'tde' // 'bde'
-            }
-         }
-     }
+     wcsim: @local::wirecell_dunevd_coldbox_mc
+#     wcsim : {
+#         module_type : WireCellToolkit
+#         wcls_main: {
+#            tool_type: WCLS
+#            apps: ["Pgrapher"]
+#            plugins: ["WireCellPgraph", "WireCellGen","WireCellSio","WireCellRoot","WireCellLarsoft"]
+#            configs: ["pgrapher/experiment/dune-vd-coldbox/wcls-sim-drift-simchannel.jsonnet"]
+#            inputers: ["wclsSimDepoSource:electron"]
+#            outputers: [
+#               "wclsSimChannelSink:postdrift",
+#               "wclsFrameSaver:simdigits"
+#            ]
+#            params: {
+#                active_cru: 'tde' // 'bde'
+#            }
+#         }
+#     }
 
      IonAndScint:		@local::vdcb_tde_ionandscint
      IonAndScintExternal:	@local::vdcb_tde_ionandscint_external
@@ -89,6 +89,8 @@ physics:
   #ie analyzers and output streams.  these all run simultaneously
   end_paths:     [stream1]  
 }
+
+physics.producers.wcsim.wcls_main.params.active_cru: 'tde'
 
 
 

@@ -20,6 +20,9 @@ physics:
     reco: [ @sequence::dunecb_vertdrift_reco_tpc_only ]
 }
 
+# set TDE in wirecell signal processing
+physics.producers.wclsdatanfsp.wcls_main.params.active_cru: "tde"
+
 #
 # set high treshold for hit finder for now. to be fixed by tuning the response function ...
 #

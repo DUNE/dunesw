@@ -34,6 +34,7 @@ protodunespmcsce_calibrationdedx.UseLifetimeFromDatabase: false
 protodunespmcsce_calibrationdedx.ReferencedQdx: [0, 0, 0] # do not use reference dQdx for MC
 
 protodunespmcnosce_calibrationdedx:   @local::protodunespmcsce_calibrationdedx
+protodunespmcnosce_calibrationdedx.CaloAlg: @local::pdune_sp_calorimetryalgmcnosce
 protodunespmcnosce_calibrationdedx.CorrectSCE: false
 protodunespmcnosce_calibrationdedx.UseLifetimeFromDatabase: false
 protodunespmcnosce_calibrationdedx.ReferencedQdx: [0, 0, 0] # do not use reference dQdx for MC

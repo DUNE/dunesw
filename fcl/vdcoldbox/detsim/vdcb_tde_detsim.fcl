@@ -79,8 +79,8 @@ services.DetPedestalService: @local::dune_fixedpeds
 #physics.producers.daq.SuppressOn:  true
 #
 ## DetSim services.
-services.DetectorPropertiesService.NumberTimeSamples: 10000.
-services.DetectorPropertiesService.ReadOutWindowSize: 10000.
+#services.DetectorPropertiesService.NumberTimeSamples: 10000.
+#services.DetectorPropertiesService.ReadOutWindowSize: 10000.
 #services.SimChannelExtractService: @local::scxgeneric
 #services.ChannelNoiseService:      @local::chnoiseold
 #services.PedestalAdditionService:  @local::padprovided
