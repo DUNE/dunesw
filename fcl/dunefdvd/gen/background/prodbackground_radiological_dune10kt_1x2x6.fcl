@@ -36,12 +36,12 @@ physics:
 #    po210Gen:    @local::dune10kt_1x2x6_210po
     rns:       { module_type: "RandomNumberSaver" }
   }
- 
+
 #  simulate:      [ rns, ar39Gen, ar42Gen, apaGen, cNeutronGen, cpaGen, kr85Gen, rn222Gen, po210Gen ]
  simulate:      [ rns, ar39Gen, ar42Gen, kr85Gen, rn222Gen ]
   stream1:       [ out1 ]
-  trigger_paths: [ simulate ] 
-  end_paths:     [ stream1 ]  
+  trigger_paths: [ simulate ]
+  end_paths:     [ stream1 ]
 }
 
 outputs:
