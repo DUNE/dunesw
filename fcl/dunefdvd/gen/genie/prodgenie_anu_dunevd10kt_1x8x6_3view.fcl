@@ -1,8 +1,8 @@
 #include "prodgenie_nu_dunevd10kt_1x8x6_3view.fcl"
 
-source.firstRun: 30000001
+source.firstRun: 40000001
 
-outputs.out1.fileName: "prodgenie_nu_dunevd10kt_1x8x6_gen.root"
+outputs.out1.fileName: "prodgenie_anu_dunevd10kt_1x8x6_gen.root"
 
 physics.producers.generator:
 {

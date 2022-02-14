@@ -1,6 +1,6 @@
 #include "prodgenie_nu_numu2nutau_nue2numu_dunevd10kt_1x8x6_3view.fcl"
 
-source.firstRun: 30000003
+source.firstRun:40000003
 
 outputs.out1.fileName: "prodgenie_anu_numu2nutau_nue2numu_dunevd10kt_1x8x6_3view_gen.root"
 
