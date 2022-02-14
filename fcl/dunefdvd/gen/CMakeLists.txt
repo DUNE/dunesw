@@ -4,6 +4,6 @@ add_subdirectory(genie)
 add_subdirectory(supernova)
 #add_subdirectory(atm)
 #add_subdirectory(ndk)
-#add_subdirectory(background)
+add_subdirectory(background)
 
 install_fhicl()
