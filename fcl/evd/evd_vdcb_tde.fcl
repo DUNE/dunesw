@@ -7,7 +7,7 @@ services.ColorDrawingOptions.RawQLow:  [-50]
 services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
 services.RawDrawingOptions.PedestalOption: 1
 services.RawDrawingOptions.MinimumSignal: 5.0
-#services.RawDrawingOptions.TotalTicks: 10000
+services.RawDrawingOptions.TotalTicks: 10000
 services.DetectorPropertiesService.TimeOffsetY: 0
 
 services.SimulationDrawingOptions.ShowMCTruthTrajectories: true
