@@ -1,0 +1,10 @@
+#include "standard_anatree_dunevd10kt_1x8x6_3view.fcl"
+
+services:
+{
+  @table::services
+  @table::dunefdvd_1x8x14_3view_services
+}
+
+physics.analyzers.analysistree.MCTruthModuleLabel : "marley"
+physics.analyzers.analysistree.GenieGenModuleLabel : "marley"
