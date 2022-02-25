@@ -58,7 +58,7 @@ physics: {
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
 }
-physics.producers.tpcrawdecoder.wcls_main.params.raw_input_label: "dataprep"
+#physics.producers.tpcrawdecoder.wcls_main.params.raw_input_label: "dataprep"
 
 outputs: {
  out1: {
@@ -71,6 +71,8 @@ outputs: {
 
 ## Use fixed values instead of DB for pedestals.
 services.DetPedestalService: @local::dune_fixedpeds
+
+wcsim.wcls_main.params.active_cru:    'tde'
 #
 ## DetSim services.
 #services.DetectorPropertiesService.NumberTimeSamples: 10000.
