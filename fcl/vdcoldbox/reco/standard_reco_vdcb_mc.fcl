@@ -37,7 +37,7 @@ source: {
 # Modules are grouped by type.
 physics: {
  producers: {
-  caldata: @local::producer_adcprep # added
+  caldata: @local::producer_adcprep_notool
   @table::dunecb_vertdrift_producers
  }
 
