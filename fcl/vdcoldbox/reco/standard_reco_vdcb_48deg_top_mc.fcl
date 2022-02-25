@@ -26,19 +26,11 @@ physics:
 # set TDE in wirecell signal processing
 physics.producers.wclsdatanfsp.wcls_main.params.active_cru: "tde"
 
-# TK modifications to have reco working with simulations
-#physics.producers.wclsdatanfsp.wcls_main.inputers: [ "wclsRawFrameSource" ] # allows searching for rawdigits instead of expected recob::Wires
-#physics.producers.wclsdatanfsp.wcls_main.params.raw_input_label: "tpcrawdecoder:daq"
 services.RawDigitPrepService.ToolNames: @local::data.vdcb_dataprep_seqs.nocal
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 physics.producers.caldata.WireName: "dataprep"
-#services.RawDigitPrepService.ToolNames: @local::data.vdbcb_dataprep_seqs.nomcal_cnr_adc
 
-
-
-#
 # set high treshold for hit finder for now. to be fixed by tuning the response function ...
-#
 physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 5.0
 physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 5.0
 physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 5.0

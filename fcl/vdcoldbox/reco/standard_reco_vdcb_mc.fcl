@@ -1,6 +1,6 @@
 # standard_reco_vdcb.fcl 
 #
-# Job fcl for running the VD reconstruction
+# Job fcl for running the coldbox reconstruction
 #
 
 #include "services_dune.fcl"
@@ -45,14 +45,9 @@ physics: {
 	@sequence::dunecb_vertdrift_reco_tpc_only
 	]
 
-# reco:  [
-#	caldata, 
-#	@sequence::dunecb_vertdrift_reco_tpc_only
-#	]
 
  stream1:  [ out1 ]
  trigger_paths: [reco] 
-# trigger_paths: [produce] 
  end_paths:     [stream1]  
 }
 
