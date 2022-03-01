@@ -1,0 +1,36 @@
+# standard_reco_vdcb_48deg_top.fcl
+
+#include "standard_reco_vdcb_mc.fcl"
+
+services: {
+    @table::services
+    @table::vdcb_top_reco_services
+    ChannelStatusService: @local::data.ChannelStatusService_vdct1
+}
+
+physics:
+{
+    @table::physics
+    producers:
+    {
+        @table::physics.producers
+        #wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_1x8x6_3view_data_nfsp
+    }
+
+
+#    reco: [ @sequence::dunecb_vertdrift_reco_tpc_only ]
+	reco: [ caldata,
+		@sequence::dunecb_vertdrift_reco_tpc_only ]
+}
+
+# set TDE in wirecell signal processing
+physics.producers.wclsdatanfsp.wcls_main.params.active_cru: "tde"
+
+services.RawDigitPrepService.ToolNames: @local::data.vdcb_dataprep_seqs.nocal
+physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+physics.producers.caldata.WireName: "dataprep"
+
+# set high treshold for hit finder for now. to be fixed by tuning the response function ...
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 5.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 5.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 5.0

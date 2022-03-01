@@ -58,7 +58,7 @@ physics: {
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
 }
-physics.producers.tpcrawdecoder.wcls_main.params.raw_input_label: "dataprep"
+#physics.producers.tpcrawdecoder.wcls_main.params.raw_input_label: "dataprep"
 
 outputs: {
  out1: {
@@ -71,12 +71,8 @@ outputs: {
 
 ## Use fixed values instead of DB for pedestals.
 services.DetPedestalService: @local::dune_fixedpeds
-#
-## DetSim flags.
-#physics.producers.daq.NoiseOn:     true
-#physics.producers.daq.PedestalOn:  true
-#physics.producers.daq.DistortOn:   false
-#physics.producers.daq.SuppressOn:  true
+
+wcsim.wcls_main.params.active_cru:    'tde'
 #
 ## DetSim services.
 #services.DetectorPropertiesService.NumberTimeSamples: 10000.
@@ -88,14 +84,7 @@ services.DetPedestalService: @local::dune_fixedpeds
 #services.AdcSuppressService:       @local::zslegacy
 #services.AdcCompressService:       @local::cmpblock
 #
-## Disable bad channels.
-##services.IChannelStatusService.BadChannels: [ ]
-#
-#### Supernova detsim noise levels ###
-#### What value do I want for the Noise Level?
 #services.ChannelNoiseService.NoiseNormU:  5.75
 #services.ChannelNoiseService.NoiseNormV:  5.75
 #services.ChannelNoiseService.NoiseNormZ:  4.5
 
-#configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
-#=> configs: ["pgrapher/experiment/dune10kt-1x2x6/wcls-sim-drift-simchannel.jsonnet"]
