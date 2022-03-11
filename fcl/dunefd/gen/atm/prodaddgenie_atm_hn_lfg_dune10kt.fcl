@@ -1,0 +1,11 @@
+#include "prodaddgenie_dune.fcl"
+
+services:
+{
+    @table::services
+    @table::dunefd_services
+}
+
+outputs.out1.fileName: "prodaddgenie_atm_hn_lfg_dune10kt.root"
+
+physics.producers.generator.fileList: @local::dune_add_genie_atm_hn_lfg_fileList

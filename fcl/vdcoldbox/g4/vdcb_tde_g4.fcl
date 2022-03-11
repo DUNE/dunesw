@@ -23,7 +23,7 @@ services:
     stepLimits    : [0.4]       
 }
   @table::common_larg4_services
-  @table::vdcb_services
+  @table::vdcb_crp1_top_services
   @table::vdcb_sim_base_services
 } # end services
 
