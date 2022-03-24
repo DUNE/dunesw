@@ -281,7 +281,7 @@ dune10kt_222Rn_chain_from210Bi_in_CPA:{
 
 // This is copied straight from dune_radiological_model.fcl
 // This is MASSIVELY dependant on the geometry
-dune10kt_1x2x6_neutron_from_rock: // 1 cm thick box of 5 sides around the LAr volume as the neutrons starting point. -X not included since middle of full detector (CPA position).
+dune10kt_1x2x6_neutron_from_rock: // 1 cm thick box of 5 sides (each column below is one side) around the LAr volume as the neutrons starting point. -X not included since middle of full detector (CPA position).
 {
    module_type:           "RadioGen"
    Nuclide:               ["Concrete_DUNE10MeV", "Concrete_DUNE10MeV", "Concrete_DUNE10MeV", "Concrete_DUNE10MeV", "Concrete_DUNE10MeV" ]
@@ -290,8 +290,8 @@ dune10kt_1x2x6_neutron_from_rock: // 1 cm thick box of 5 sides around the LAr vo
    T0:                    [ -2246000.,-2246000.,-2246000.,-2246000.,-2246000 ] # ending time in ns
    T1:                    [  2246000., 2246000., 2246000., 2246000., 2246000 ] # ending time in ns
    
-   X0:                    [ -420. , -420. , -420., -420. ,  420.5 ] # in cm in world coordinates, bottom corner of box
-   X1:                    [  320. ,  320. ,  320.,  320. ,  419.5 ] # in cm in world coordinates, top corner of box
+   X0:                    [ -420. , -420. , -420., -420. ,  320.5 ] # in cm in world coordinates, bottom corner of box 
+   X1:                    [  320. ,  320. ,  320.,  320. ,  319.5 ] # in cm in world coordinates, top corner of box
    Y0:                    [ -775. , -775. , -776.,  775. , -775.  ] # in cm in world coordinates, bottom corner of box
    Y1:                    [  775. ,  775. , -775.,  776. ,  775.  ] # in cm in world coordinates, top corner of box
    Z0:                    [ -100.5,  999.5, -100., -100. , -100.  ] # in cm in world coordinates, bottom corner of box
