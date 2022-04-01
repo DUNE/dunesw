@@ -1,0 +1,8 @@
+#include "vdcb_tde_detsim.fcl"
+
+services:{
+  @table::services
+  @table::vdcb_crp1_bot_services
+}
+
+physics.producers.tpcrawdecoder.wcls_main.params.active_cru: 'bde'

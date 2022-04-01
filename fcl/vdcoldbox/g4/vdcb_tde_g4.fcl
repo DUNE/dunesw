@@ -21,7 +21,7 @@ services:
     gdmlFileName_ : @local::dunevdcb_geo.GDML
     volumeNames   : [ "volTPCActive" ] 
     stepLimits    : [0.4]       
-}
+  }
   @table::common_larg4_services
   @table::vdcb_crp1_top_services
   @table::vdcb_sim_base_services
@@ -44,7 +44,7 @@ physics:
   {
      largeant:			@local::vdcb_tde_larg4
 
-     wcsim: @local::wirecell_dunevd_coldbox_mc
+     # wcsim: @local::wirecell_dunevd_coldbox_mc
 #     wcsim : {
 #         module_type : WireCellToolkit
 #         wcls_main: {
@@ -75,7 +75,7 @@ physics:
 
   #define the producer and filter modules for this path, order matters, 
   #filters reject all following items.  see lines starting physics.producers below
-  simulate: [ rns, largeant, wcsim, IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimArExternal ]
+  simulate: [ rns, largeant, IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimArExternal ]
 #  simulate: [ rns, largeant , IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimXe, PDFastSimArExternal, PDFastSimXeExternal ]
  
   #define the output stream, there could be more than one if using filters 
@@ -89,10 +89,6 @@ physics:
   #ie analyzers and output streams.  these all run simultaneously
   end_paths:     [stream1]  
 }
-
-physics.producers.wcsim.wcls_main.params.active_cru: 'tde'
-
-
 
 #block to define where the output goes.  if you defined a filter in the physics
 #block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
