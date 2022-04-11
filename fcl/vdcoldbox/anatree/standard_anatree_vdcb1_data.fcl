@@ -87,10 +87,9 @@ physics.analyzers.analysistree.ShowerModuleLabel: [ "pandoraShower" ]
 physics.analyzers.analysistree.TrackModuleLabel: [ "pandoraTrack" ]
 physics.analyzers.analysistree.VertexModuleLabel: [ "pandora" ]
 physics.analyzers.analysistree.ClusterModuleLabel: "pandora"
-physics.analyzers.analysistree.CalorimetryModuleLabel: [ "pandoracalo" ]
+physics.analyzers.analysistree.CalorimetryModuleLabel: [ "pandoraGnoCalo" ]
 physics.analyzers.analysistree.ParticleIDModuleLabel: [ "pandorapid" ]
 physics.analyzers.analysistree.PandoraNuVertexModuleLabel: "pandora"
-physics.analyzers.analysistree.VertexModuleLabel: [ "pandora" ]
 physics.analyzers.analysistree.DigitModuleLabel: "tpcrawdecoder:daq"
 physics.analyzers.analysistree.HitsModuleLabel: "gaushit"
 physics.analyzers.analysistree.CalDataModuleLabel: "wclsdatanfsp:gauss"
