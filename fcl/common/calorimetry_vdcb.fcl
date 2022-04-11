@@ -1,0 +1,39 @@
+#include "calorimetry.fcl"
+
+BEGIN_PROLOG
+
+vdcb_calorimetryalgdata: @local::standard_calorimetryalgdata
+vdcb_calorimetryalgdata.CalAreaConstants:  [ 5.0E-3, 5.0E-3, 5.0E-3 ]
+vdcb_calorimetryalgdata.CaloDoLifeTimeCorrection: false
+vdcb_calorimetryalgdata.CaloUseModBox: true
+
+vdcb_calorimetryalgmc:   @local::standard_calorimetryalgmc
+vdcb_calorimetryalgmc.CalAreaConstants:  [ 5.0E-3, 5.0E-3, 5.0E-3 ]
+vdcb_calorimetryalgmc.CaloDoLifeTimeCorrection: false
+vdcb_calorimetryalgmc.CaloUseModBox: true
+
+# standard calo module 
+vdcb_standard_calodata:                          @local::standard_calodata
+vdcb_standard_caldata.CaloAlg:                   @local::vdcb_calorimetryalgdata
+vdcb_standard_calodata.TrackModuleLabel:         "pandoraTrack"
+vdcb_standard_calodata.SpacePointModuleLabel:    "pandora"
+vdcb_standard_calodata.T0ModuleLabel:            ""
+vdcb_standard_calodata.CorrectSCE:		 false
+
+
+# gnocchi calor module
+vdcb_gnocchi_calodata:
+{
+    module_type:                     "GnocchiCalorimetry"
+    TrackModuleLabel:                "pandoraTrack"
+    AssocHitModuleLabel:             "pandoraTrack"
+    T0ModuleLabel:                   ""
+    ChargeMethod:                    2
+    FieldDistortion:                 false
+    FieldDistortionEfield:           false
+    TrackIsFieldDistortionCorrected: false
+    Cryostat: 0
+    CaloAlg: @local::vdcb_calorimetryalgdata
+}
+
+END_PROLOG
