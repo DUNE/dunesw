@@ -23,7 +23,7 @@ services:
    MemoryTracker:         { } # default is one
    RandomNumberGenerator: {} #ART native random number generator
    FileCatalogMetadata:  @local::art_file_catalog_mc
-   @table::vdcb_services
+   @table::vdcb_crp1_top_services
    @table::vdcb_sim_base_services
 
   # the correct config should be added to dune/Simulation/larg4services_dune.fcl
@@ -32,7 +32,7 @@ services:
     gdmlFileName_ : @local::dunevdcb_geo.GDML
     volumeNames   : [ "volTPCActive" ] 
     stepLimits    : [0.4]       
-}
+  }
 
    message:              @local::dune_message_services_prod
 }
@@ -58,7 +58,7 @@ physics: {
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
 }
-#physics.producers.tpcrawdecoder.wcls_main.params.raw_input_label: "dataprep"
+physics.producers.tpcrawdecoder.wcls_main.params.active_cru: 'tde'
 
 outputs: {
  out1: {
@@ -72,7 +72,6 @@ outputs: {
 ## Use fixed values instead of DB for pedestals.
 services.DetPedestalService: @local::dune_fixedpeds
 
-wcsim.wcls_main.params.active_cru:    'tde'
 #
 ## DetSim services.
 #services.DetectorPropertiesService.NumberTimeSamples: 10000.

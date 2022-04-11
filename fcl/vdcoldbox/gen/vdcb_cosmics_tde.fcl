@@ -16,7 +16,7 @@ services:
   RandomNumberGenerator:	{} #ART native random number generator
   FileCatalogMetadata:		@local::art_file_catalog_mc
   DatabaseUtil:                 @local::dunefd_database
-  		@table::vdcb_services
+  		@table::vdcb_crp1_top_services
   		@table::vdcb_sim_base_services
 }
 
