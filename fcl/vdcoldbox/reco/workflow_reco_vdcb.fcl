@@ -1,13 +1,12 @@
 # workflow_reco_vdcb.fcl
 # Configuration fcl for the reconstruction workflows
 #
-# TODO create where necessary dedicated config tables
 #
 
 #include "pandoramodules_dune.fcl"
 #include "wirecell_dune.fcl"
 #include "hitfindermodules_dune.fcl"
-#include "calorimetry_dune10kt.fcl"
+#include "calorimetry_vdcb.fcl"
 #include "pid_dune10kt.fcl"
 #include "energyreco.fcl"
 #include "opticaldetectormodules_dune.fcl"
@@ -26,8 +25,12 @@ dunecb_vertdrift_producers:
    # Characterisation
    pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
    pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
-   # PID
-   pandoracalo:        @local::dunevd10kt_calomc_pandora
+   
+   # calorimetry modules
+   pandoraStdCalo:     @local::vdcb_standard_calodata
+   pandoraGnoCalo:     @local::vdcb_gnocchi_calodata
+
+   # PID   		       
    pandorapid:         @local::dunevd10kt_pid_pandora
 
    # PDS reconstruction
@@ -49,7 +52,8 @@ dunecb_vertdrift_tpc:
     pandora,
     pandoraTrack,
     pandoraShower,
-    pandoracalo,
+    pandoraStdCalo,
+    pandoraGnoCalo,
     pandorapid #,
 ]
 
