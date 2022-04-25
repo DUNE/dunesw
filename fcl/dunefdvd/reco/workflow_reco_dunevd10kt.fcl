@@ -8,6 +8,7 @@
 #include "hitfindermodules_dune.fcl"
 #include "calorimetry_dune10kt.fcl"
 #include "pid_dune10kt.fcl"
+#include "cvn_dune.fcl"
 #include "energyreco.fcl"
 #include "opticaldetectormodules_dune.fcl"
 
@@ -27,6 +28,8 @@ dunefd_vertdrift_producers:
    # PID
    pandoracalo:        @local::dunevd10kt_calomc_pandora
    pandorapid:         @local::dunevd10kt_pid_pandora
+   cvnmap:             @local::dunevd10kt_cvnmapper
+   cvneval:            @local::dunevd10kt_3view_cvnevaluator
    # Neutrino energy
    energyrecnumu:         @local::dunefdvd_nuenergyreco_pandora_numu
    energyrecnue:          @local::dunefdvd_nuenergyreco_pandora_nue
@@ -49,6 +52,8 @@ dunefd_vertdrift_tpc:
     pandoraShower,
     pandoracalo,
     pandorapid,
+    cvnmap,
+    cvneval,
     energyrecnumu,
     energyrecnue,
     energyrecnc
