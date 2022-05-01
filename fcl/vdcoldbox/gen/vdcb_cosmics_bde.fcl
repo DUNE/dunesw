@@ -1,0 +1,8 @@
+#include "vdcb_cosmics_tde.fcl"
+
+services:{
+  @table::services
+  @table::vdcb_crp1_bot_services
+}
+
+outputs.out1.fileName: "prodcosmics_vdcb_bde.root"

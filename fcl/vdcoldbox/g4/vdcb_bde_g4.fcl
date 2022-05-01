@@ -1,0 +1,6 @@
+#include "vdcb_tde_g4.fcl"
+
+services:{
+  @table::services
+  @table::vdcb_crp1_bot_services
+}
