@@ -11,6 +11,9 @@ BEGIN_PROLOG
 #dune10kt_42Kfrom42Ar_in_LAr           #K42 in LAr (from Ar42)
 #dune10kt_222Rn_chain_in_LAr           #Rn222 chain in LAr
 
+#dune10kt_1x2x6_40K_in_CPA	       #K40 in Cathode
+#dune10kt_1x2x6_238U_chain_in_CPA      #U238 chain in Cathode
+
 #dune10kt_1x2x6_neutron_from_rock      #Neutrons from concrete/rocks (from dune_radiological_model.fcl, with position adapted).
 
 #dune10kt_222Rn_chain_in_PDS           #Rn222 chain in PDS
@@ -88,7 +91,7 @@ dune10kt_1x2x6_42Kfrom42Ar_in_CPA:{ // if somebody change the geom of the cathod
 dune10kt_1x2x6_40K_in_CPA:{ // again beware of geometry change here
    module_type: "Decay0Gen"
    isotope: "K40"
-   volume_gen:".*Cathode.*"
+   volume_gen: "volGroundGrid"
    material: ".*"
    BqPercc: 0.0091
    # Should be 4.9 Bq/kg (measured for 40K) times a density of 1.85 g/cc for 3 mm thick G10 -JReichenbacher (01/11/2017)
@@ -97,7 +100,7 @@ dune10kt_1x2x6_40K_in_CPA:{ // again beware of geometry change here
 
 dune10kt_1x2x6_238U_chain_in_CPA:{ // again beware of geometry change here
    module_type: "Decay0Gen"
-   volume_gen:".*Cathode.*"
+   volume_gen: "volGroundGrid"
    material: ".*"
    decay_chain:{ # ALL THESE ARE ASSUMED TO BE @ EQUILIBRIUM!!
       isotope_0:"U238"
