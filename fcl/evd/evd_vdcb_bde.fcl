@@ -8,11 +8,14 @@ services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq", "caldata:datapre
 services.RawDrawingOptions.PedestalOption: 1
 services.RawDrawingOptions.MinimumSignal: 5.0
 services.RawDrawingOptions.TotalTicks: 8192
-services.RecoDrawingOptions.WireModuleLabels: [ "caldata:dataprep" ]
-
 services.DetectorPropertiesService.TimeOffsetY: 0
 
-services.RecoDrawingOptions.WireModuleLabels: [ "caldata:dataprep" ]
+services.SimulationDrawingOptions.ShowMCTruthTrajectories: true
+services.SimulationDrawingOptions.ShowSimEnergyInfo: true
+services.SimulationDrawingOptions.SimChannelLabel: "tpcrawdecoder:simpleSC"
+services.SimulationDrawingOptions.SimEnergyLabel: "largeant:LArG4DetectorServicevolTPCActive"
+
+services.RecoDrawingOptions.WireModuleLabels: [ "wclsdatanfsp:gauss" ]
 services.RecoDrawingOptions.TrackModuleLabels: [ "pandoraTrack" ]
 services.RecoDrawingOptions.ShowerModuleLabels: [ "pandoraShower" ]
 services.RecoDrawingOptions.SpacePointModuleLabels: [ "pandora" ]

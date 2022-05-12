@@ -1,4 +1,4 @@
-#include "standard_g4_dunevd10kt_1x8x6_3view.fcl"
+#include "standard_g4_dunevd10kt_1x8x6_3view_30deg.fcl"
 
 process_name: SupernovaG4
 

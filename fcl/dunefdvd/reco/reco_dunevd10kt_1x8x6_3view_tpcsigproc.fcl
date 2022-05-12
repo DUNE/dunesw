@@ -1,0 +1,13 @@
+#include "standard_reco_dunevd10kt_1x8x6_3view.fcl"
+
+physics.producers.wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_1x8x6_3view_data_nfsp
+physics.reco: [ wclsdatanfsp, @sequence::physics.reco ]
+
+BEGIN_PROLOG
+sigprocwirelabel: "wclsdatanfsp:gauss"
+END_PROLOG
+
+physics.producers.gaushit.CalDataModuleLabel:  @local::sigprocwirelabel
+physics.producers.energyrecnumu.WireLabel:     @local::sigprocwirelabel
+physics.producers.energyrecnue.WireLabel:      @local::sigprocwirelabel
+physics.producers.energyrecnc.WireLabel:       @local::sigprocwirelabel
