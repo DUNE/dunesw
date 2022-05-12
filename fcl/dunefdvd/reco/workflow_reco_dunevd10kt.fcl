@@ -1,6 +1,7 @@
 # workflow_reco_dunevd10kt.fcl
 
 # Dom Brailsford
+# Laura Paulucci: adding pmtracktc for LE events
 
 #Configuration fcl for the reconstruction workflows
 #include "pandoramodules_dune.fcl"
@@ -11,6 +12,9 @@
 #include "cvn_dune.fcl"
 #include "energyreco.fcl"
 #include "opticaldetectormodules_dune.fcl"
+#include "trackfindermodules_dune.fcl"
+#include "clusterfinder_dune.fcl"
+
 
 BEGIN_PROLOG
 
@@ -41,11 +45,16 @@ dunefd_vertdrift_producers:
    opflashArOnly:   @local::dunefd_opflash
    opflashXeOnly:   @local::dunefd_opflash
    opflash10ppm:    @local::dunefd_opflash
+   #PMTRACKTC for LE events
+   linecluster:        @local::dunefd_linecluster
+   trajcluster:        @local::dunefdmc_trajcluster
+   pmtracktc:          @local::dunefd_pmalgtrackmaker
+   energyreccalo:      @local::dunefd_nuenergyreco_pmtrack     
 }
 
 dunefd_vertdrift_tpc:
 [
-    wclsdatanfsp,
+#    wclsdatanfsp,
     gaushit,
     pandora,
     pandoraTrack,
@@ -65,22 +74,47 @@ dunefd_vertdrift_pds:
     opflash10ppm
 ]
 
+dunefd_vertdrift_tpc_le:
+[
+    wclsdatanfsp,
+    gaushit,
+    pandora,
+    pandoraTrack,
+    pandoraShower,
+    pandoracalo,
+    pandorapid,
+    cvnmap,
+    cvneval,
+    linecluster, 
+    trajcluster, 
+    pmtracktc, 
+    energyreccalo
+]
+
 dunefd_vertdrift_reco_tpc_only:
 [
-    rns,
-    @sequence::dunefd_vertdrift_tpc
+    @sequence::dunefd_vertdrift_tpc,
+    rns
 ]
 
 dunefd_vertdrift_reco_pds_only:
 [
-    rns,
-    @sequence::dunefd_vertdrift_pds
+    @sequence::dunefd_vertdrift_pds,
+    rns
 ]
 
 dunefd_vertdrift_reco_all_systems:
 [
-    rns,
     @sequence::dunefd_vertdrift_tpc,
+    @sequence::dunefd_vertdrift_pds,
+    rns
+]
+
+
+dunefd_vertdrift_reco_le:
+[
+    rns,
+    @sequence::dunefd_vertdrift_tpc_le,
     @sequence::dunefd_vertdrift_pds
 ]
 
@@ -92,6 +126,19 @@ dunefd_vertdrift_producers.ophit10ppm.InputModule:       opdigi10ppm
 dunefd_vertdrift_producers.opflashArOnly.InputModule:    ophitArOnly
 dunefd_vertdrift_producers.opflashXeOnly.InputModule:    ophitXeOnly
 dunefd_vertdrift_producers.opflash10ppm.InputModule:     ophit10ppm
+
+physics.producers.linecluster.LogLevel:                        2
+physics.producers.linecluster.HitFinderModuleLabel:            gaushit  # std::vector<recob::Hit> This is the default
+physics.producers.trajcluster.LogLevel:                        2
+physics.producers.trajcluster.HitModuleLabel:                  gaushit   # since hitfd fails
+physics.producers.pmtracktc.HitModuleLabel:                    "trajcluster"
+physics.producers.pmtracktc.ClusterModuleLabel:                "trajcluster"
+physics.producers.pmtracktc.WireModuleLabel:                   "wclsdatanfsp:gauss"
+physics.producers.pmtracktc.PMAlgTracking.RunVertexing:        true
+physics.producers.pmtracktc.PMAlgTracking.MinSeedSize2ndPass:  2
+physics.producers.pmtracktc.PMAlgTracking.FlipToBeam:          false
+physics.producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx:       true
+physics.producers.energyreccalo.RecoMethod:                    3
 
 END_PROLOG
 

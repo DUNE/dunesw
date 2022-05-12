@@ -5,14 +5,5 @@ services: {
     @table::dunefdvd_1x8x6_3view_30deg_reco_services
 }
 
-physics:
-{
-    @table::physics
-    producers:
-    {
-        @table::physics.producers
-        wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_1x8x6_3view_30deg_data_nfsp
-    }
+physics.reco: [ @sequence::dunefd_vertdrift_reco_all_systems ]
 
-    reco: [ @sequence::dunefd_vertdrift_reco_all_systems ]
-}
