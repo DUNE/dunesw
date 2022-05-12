@@ -54,7 +54,7 @@ dunefd_vertdrift_producers:
 
 dunefd_vertdrift_tpc:
 [
-    wclsdatanfsp,
+#    wclsdatanfsp,
     gaushit,
     pandora,
     pandoraTrack,
@@ -93,22 +93,23 @@ dunefd_vertdrift_tpc_le:
 
 dunefd_vertdrift_reco_tpc_only:
 [
-    rns,
-    @sequence::dunefd_vertdrift_tpc
+    @sequence::dunefd_vertdrift_tpc,
+    rns
 ]
 
 dunefd_vertdrift_reco_pds_only:
 [
-    rns,
-    @sequence::dunefd_vertdrift_pds
+    @sequence::dunefd_vertdrift_pds,
+    rns
 ]
 
 dunefd_vertdrift_reco_all_systems:
 [
-    rns,
     @sequence::dunefd_vertdrift_tpc,
-    @sequence::dunefd_vertdrift_pds
+    @sequence::dunefd_vertdrift_pds,
+    rns
 ]
+
 
 dunefd_vertdrift_reco_le:
 [
