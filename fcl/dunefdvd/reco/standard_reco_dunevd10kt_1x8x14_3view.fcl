@@ -10,16 +10,4 @@ source: {
   maxEvents:  100        # Number of events to create
 }
 
-physics:
-{
-    @table::physics
-    producers:
-    {
-        @table::physics.producers
-#        wclsdatanfsp: @local::dune10kt_dunefd_vertdrift_1x6x6_3view_data_nfsp
-    }
-
-#    reco: [ @sequence::dunefd_vertdrift_reco_all_systems ]
-#    Set up of PDS only reco in 1x8x14 geo until zero suppression is available for charge readout
-    reco: [ @sequence::dunefd_vertdrift_reco_pds_only ]
-}
+physics.reco: [ @sequence::dunefd_vertdrift_reco_all_systems ]
