@@ -3,3 +3,5 @@
 process_name: SupernovaG4
 
 services.PhysicsList:   @local::dune_physics_list_supernova
+
+outputs.out1.outputCommands: ["keep *", "drop sim::SimEnergyDeposits_largeant_*_SupernovaG4"]
