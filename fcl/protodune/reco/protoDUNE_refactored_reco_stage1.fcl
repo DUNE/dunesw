@@ -47,7 +47,7 @@ source:
 {
   module_type: RootInput
   maxEvents: -1
-  saveMemoryObjectThreshold: 10485760
+  saveMemoryObjectThreshold: 0
   fileNames: ["detsim_single_protoDUNE.root"]
 }
 
