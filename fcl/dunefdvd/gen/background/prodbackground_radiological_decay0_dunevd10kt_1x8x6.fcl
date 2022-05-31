@@ -77,3 +77,6 @@ services:
     @table::services
     @table::dunefdvd_1x8x6_3view_simulation_services
 }
+services.Geometry.GDML: "dunevd10kt_3view_v3_refactored_1x8x6ref.gdml"
+services.Geometry.Name: "dunevd10kt_3view_v3_refactored_1x8x6ref"
+services.Geometry.ROOT: "dunevd10kt_3view_v3_refactored_1x8x6ref.gdml"
