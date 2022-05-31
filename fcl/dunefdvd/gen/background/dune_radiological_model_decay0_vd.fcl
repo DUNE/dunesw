@@ -14,6 +14,9 @@ BEGIN_PROLOG
 #dune10kt_1x2x6_40K_in_CPA	       #K40 in Cathode
 #dune10kt_1x2x6_238U_chain_in_CPA      #U238 chain in Cathode
 
+#dune10kt_1x2x6_60Co_in_APA	       #Co60 in Charge Readout Plane
+#dune10kt_1x2x6_238U_chain_in_APA      #U238 chain in Charge Readout Plane
+
 #dune10kt_1x2x6_neutron_from_rock      #Neutrons from concrete/rocks (from dune_radiological_model.fcl, with position adapted).
 
 #dune10kt_222Rn_chain_in_PDS           #Rn222 chain in PDS
@@ -74,7 +77,8 @@ dune10kt_42Kfrom42Ar_in_LAr:{
    isotope: "K42"
    volume_rand: "volCryostat"
    material:    "LAr"
-   BqPercc: 0.00000002567536 // = 0.0000001283768*.2  as only 20% of the 42K stays in the Argon...
+   #BqPercc: 0.00000002567536 // = 0.0000001283768*.2  as only 20% of the 42K stays in the Argon...
+   BqPercc: 0.0000001283768 // = not considering ion drift to the cathode yet. need to calculated the fraction (see below),
 }
 
 dune10kt_1x2x6_42Kfrom42Ar_in_CPA:{ // if somebody change the geom of the cathode, the activity will need to change (hence I didn't drop the 1x2x6 spec here)
@@ -124,16 +128,16 @@ dune10kt_1x2x6_238U_chain_in_CPA:{ // again beware of geometry change here
 
 dune10kt_1x2x6_60Co_in_APA:{ // similar story as in the cathode
    module_type: "Decay0Gen"
-   volume_gen:".*APA.*"
-   material: "STEEL_STAINLESS_Fe7Cr2Ni"
+   volume_gen: "volAnodePlate"
+   material: ".*"
    isotope: "Co60"
-   BqPercc: 3.61e-4 # 45.5 mBq/kg = 45.5e-6 Bq/g (MPIK 2008 high measurement) and a density of 7.9300 g/cm3 (from gdml)
+   BqPercc: 3.61e-4 # 45.5 mBq/kg = 45.5e-6 Bq/g (MPIK 2008 high measurement) and a density of 7.9300 g/cm3 (from gdml) -> HD values. Need to update with VD survey values, when available.
 }
 
 dune10kt_1x2x6_238U_chain_in_APA:{ // similar story as in the cathode
    module_type: "Decay0Gen"
-   volume_gen:".*APA.*"
-   material: "STEEL_STAINLESS_Fe7Cr2Ni"
+   volume_gen: "volAnodePlate"
+   material: ".*"
    decay_chain:{ # ALL THESE ARE ASSUMED TO BE @ EQUILIBRIUM!!
       isotope_0:"U238"
       isotope_1:"Th234"
