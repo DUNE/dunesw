@@ -118,7 +118,6 @@ dunefd_vertdrift_reco_le:
     @sequence::dunefd_vertdrift_pds
 ]
 
-dunefd_vertdrift_producers.gaushit.CalDataModuleLabel:   "wclsdatanfsp:gauss"
 
 dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly
 dunefd_vertdrift_producers.ophitXeOnly.InputModule:      opdigiXeOnly
