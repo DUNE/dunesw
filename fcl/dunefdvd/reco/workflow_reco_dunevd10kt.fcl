@@ -15,7 +15,6 @@
 #include "trackfindermodules_dune.fcl"
 #include "clusterfinder_dune.fcl"
 
-
 BEGIN_PROLOG
 
 dunefd_vertdrift_producers:
@@ -46,10 +45,12 @@ dunefd_vertdrift_producers:
    opflashXeOnly:   @local::dunefd_opflash
    opflash10ppm:    @local::dunefd_opflash
    #PMTRACKTC for LE events
-   linecluster:        @local::dunefd_linecluster
-   trajcluster:        @local::dunefdmc_trajcluster
-   pmtracktc:          @local::dunefd_pmalgtrackmaker
-   energyreccalo:      @local::dunefd_nuenergyreco_pmtrack     
+   linecluster:        @local::dunefdvd_linecluster
+   trajcluster:        @local::dunefdvd_trajcluster
+   pmtracktc:          @local::dunefdvd_pmalgtrackmaker    #PMA using trajcluster clusters
+#   pmtracktccalo:      @local::dunevd10kt_calomc
+#   pmtracktcpid:       @local::standard_chi2pid
+   energyrecpmtracktc: @local::dunefdvd_nuenergyreco_pmtracktc     
 }
 
 dunefd_vertdrift_tpc:
@@ -76,19 +77,16 @@ dunefd_vertdrift_pds:
 
 dunefd_vertdrift_tpc_le:
 [
-    wclsdatanfsp,
     gaushit,
     pandora,
     pandoraTrack,
     pandoraShower,
     pandoracalo,
     pandorapid,
-    cvnmap,
-    cvneval,
     linecluster, 
     trajcluster, 
     pmtracktc, 
-    energyreccalo
+    energyrecpmtracktc
 ]
 
 dunefd_vertdrift_reco_tpc_only:
@@ -113,12 +111,10 @@ dunefd_vertdrift_reco_all_systems:
 
 dunefd_vertdrift_reco_le:
 [
-    rns,
     @sequence::dunefd_vertdrift_tpc_le,
-    @sequence::dunefd_vertdrift_pds
+    @sequence::dunefd_vertdrift_pds,
+    rns
 ]
-
-dunefd_vertdrift_producers.gaushit.CalDataModuleLabel:   "wclsdatanfsp:gauss"
 
 dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly
 dunefd_vertdrift_producers.ophitXeOnly.InputModule:      opdigiXeOnly
@@ -126,19 +122,6 @@ dunefd_vertdrift_producers.ophit10ppm.InputModule:       opdigi10ppm
 dunefd_vertdrift_producers.opflashArOnly.InputModule:    ophitArOnly
 dunefd_vertdrift_producers.opflashXeOnly.InputModule:    ophitXeOnly
 dunefd_vertdrift_producers.opflash10ppm.InputModule:     ophit10ppm
-
-physics.producers.linecluster.LogLevel:                        2
-physics.producers.linecluster.HitFinderModuleLabel:            gaushit  # std::vector<recob::Hit> This is the default
-physics.producers.trajcluster.LogLevel:                        2
-physics.producers.trajcluster.HitModuleLabel:                  gaushit   # since hitfd fails
-physics.producers.pmtracktc.HitModuleLabel:                    "trajcluster"
-physics.producers.pmtracktc.ClusterModuleLabel:                "trajcluster"
-physics.producers.pmtracktc.WireModuleLabel:                   "wclsdatanfsp:gauss"
-physics.producers.pmtracktc.PMAlgTracking.RunVertexing:        true
-physics.producers.pmtracktc.PMAlgTracking.MinSeedSize2ndPass:  2
-physics.producers.pmtracktc.PMAlgTracking.FlipToBeam:          false
-physics.producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx:       true
-physics.producers.energyreccalo.RecoMethod:                    3
 
 END_PROLOG
 
