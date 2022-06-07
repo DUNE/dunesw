@@ -1,0 +1,10 @@
+#include "standard_ana_dune10kt_1x2x6.fcl"
+
+services:
+{
+    @table::services
+    @table::dunefd_1x2x6_simulation_services_refactored
+}
+
+physics.analyzers.analysistree.LArGeantModuleLabel:"elecDrift"
+physics.analyzers.analysistree.ShowerModuleLabel: ["pandoraShower"]

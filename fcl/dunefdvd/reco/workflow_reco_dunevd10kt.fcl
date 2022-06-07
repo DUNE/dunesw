@@ -1,6 +1,7 @@
 # workflow_reco_dunevd10kt.fcl
 
 # Dom Brailsford
+# Laura Paulucci: adding pmtracktc for LE events
 
 #Configuration fcl for the reconstruction workflows
 #include "pandoramodules_dune.fcl"
@@ -11,6 +12,8 @@
 #include "cvn_dune.fcl"
 #include "energyreco.fcl"
 #include "opticaldetectormodules_dune.fcl"
+#include "trackfindermodules_dune.fcl"
+#include "clusterfinder_dune.fcl"
 
 BEGIN_PROLOG
 
@@ -41,6 +44,13 @@ dunefd_vertdrift_producers:
    opflashArOnly:   @local::dunefd_opflash
    opflashXeOnly:   @local::dunefd_opflash
    opflash10ppm:    @local::dunefd_opflash
+   #PMTRACKTC for LE events
+   linecluster:        @local::dunefdvd_linecluster
+   trajcluster:        @local::dunefdvd_trajcluster
+   pmtracktc:          @local::dunefdvd_pmalgtrackmaker    #PMA using trajcluster clusters
+#   pmtracktccalo:      @local::dunevd10kt_calomc
+#   pmtracktcpid:       @local::standard_chi2pid
+   energyrecpmtracktc: @local::dunefdvd_nuenergyreco_pmtracktc     
 }
 
 dunefd_vertdrift_tpc:
@@ -65,6 +75,20 @@ dunefd_vertdrift_pds:
     opflash10ppm
 ]
 
+dunefd_vertdrift_tpc_le:
+[
+    gaushit,
+    pandora,
+    pandoraTrack,
+    pandoraShower,
+    pandoracalo,
+    pandorapid,
+    linecluster, 
+    trajcluster, 
+    pmtracktc, 
+    energyrecpmtracktc
+]
+
 dunefd_vertdrift_reco_tpc_only:
 [
     @sequence::dunefd_vertdrift_tpc,
@@ -80,6 +104,14 @@ dunefd_vertdrift_reco_pds_only:
 dunefd_vertdrift_reco_all_systems:
 [
     @sequence::dunefd_vertdrift_tpc,
+    @sequence::dunefd_vertdrift_pds,
+    rns
+]
+
+
+dunefd_vertdrift_reco_le:
+[
+    @sequence::dunefd_vertdrift_tpc_le,
     @sequence::dunefd_vertdrift_pds,
     rns
 ]

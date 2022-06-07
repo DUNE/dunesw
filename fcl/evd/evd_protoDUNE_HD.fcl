@@ -1,0 +1,10 @@
+#include "services_protodunehd.fcl"
+#include "evd_protoDUNE_noped.fcl"
+
+services.Geometry: @local::protodunehdv1_geo
+services.DetPedestalService.FixedDetPedestal.PedMeanZ:  400
+#services.DetPedestalService.FixedDetPedestal.PedMeanV:  1800
+#services.DetPedestalService.FixedDetPedestal.PedMeanU:  1800
+#services.ChannelStatusService: @local::pdsp_channel_status
+services.RecoDrawingOptions.WireModuleLabels: ["caldata", "digitwire", "wclsdatanfsp:gauss"]
+services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
