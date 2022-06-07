@@ -1,0 +1,6 @@
+#include "standard_anatree_dunevd10kt_1x8x6_3view.fcl"
+
+services:{
+    @table::services
+    @table::dunefdvd_1x8x6_3view_30deg_services
+}
