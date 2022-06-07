@@ -48,7 +48,7 @@ outputs: {
  out1: {
    module_type: RootOutput
    fileName:    "%ifb_reco.root"
-   dataTier:    "reconstructed"
+   dataTier:    "full-reconstructed"
    compressionLevel: 1
  }
 }
