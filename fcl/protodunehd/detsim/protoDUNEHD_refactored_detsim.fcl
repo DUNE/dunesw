@@ -28,7 +28,7 @@ physics:
 
   producers:
   {
-    tpcrawdecoder:  @local::wirecell_protodunespmc
+    tpcrawdecoder:  @local::wirecell_protodunehdmc
     #opdigi:         @local::protodune_opdigi_refactor
     crt:            @local::CRTSimRefac_standard
     rns:            { module_type: "RandomNumberSaver" }
