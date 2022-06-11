@@ -1,0 +1,4 @@
+#include "protoDUNEHD_refactored_g4.fcl"
+
+services.PhysicsList.PhysicsListName: "MyQGSP_BERT_LASER"
+outputs.out1.fileName: "%ifb_laser_g4.root"
