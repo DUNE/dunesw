@@ -79,5 +79,9 @@ outputs:
 }
 
 
-
-
+physics.producers.cosmicgenerator.BufferBox: [ -15., 15., -170., 170., -150., 150. ]
+physics.producers.cosmicgenerator.DoRotation: True
+physics.producers.cosmicgenerator.ProjectToHeight: 150.
+physics.producers.cosmicgenerator.RandomXZShift: 100.
+physics.producers.cosmicgenerator.SampleTime: 0.012
+physics.producers.cosmicgenerator.ShowerAreaExtension: 600.
