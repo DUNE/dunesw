@@ -73,7 +73,7 @@ outputs:
    out1:
    {
       module_type: RootOutput
-      fileName:    "prodradiological_decay0_dunevd10kt_1x8x6_gen.root" # Default file name, can override from command line with -o or --output
+      fileName:    "prodradiological_decay0_dunevd10kt_1x8x14_gen.root" # Default file name, can override from command line with -o or --output
       dataTier:    "generated"
       compressionLevel: 1
    }
@@ -82,5 +82,5 @@ outputs:
 services:
 {
     @table::services
-    @table::dunefdvd_1x8x6_3view_30deg_simulation_services
+    @table::dunefdvd_1x8x14_3view_30deg_simulation_services
 }
