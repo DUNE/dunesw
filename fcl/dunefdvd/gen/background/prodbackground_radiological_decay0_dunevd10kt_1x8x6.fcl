@@ -43,6 +43,12 @@ physics:
       ##########################################################################
 
       ##########################################################################
+      # Anode
+      Co60inGenInAPA:	 	@local::dune10kt_1x2x6_60Co_in_APA
+      U238ChainGenInAPA: 	@local::dune10kt_1x2x6_238U_chain_in_APA
+      ##########################################################################
+
+      ##########################################################################
       # PDS
       Rn222ChainGenInPDS: 	@local::dune10kt_222Rn_chain_in_PDS
       ##########################################################################
@@ -55,7 +61,7 @@ physics:
       rns:       { module_type: "RandomNumberSaver" }
    }
 
-   simulate: [rns, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K40inGenInCPA, U238ChainGenInCPA, Rn222ChainGenInPDS, NeutronGenInRock]
+   simulate: [rns, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K40inGenInCPA, U238ChainGenInCPA, Co60inGenInAPA, U238ChainGenInAPA, Rn222ChainGenInPDS, NeutronGenInRock]
    stream1:       [ out1 ]
    trigger_paths: [ simulate ] 
    end_paths:     [ stream1 ]  
