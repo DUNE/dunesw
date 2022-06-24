@@ -38,14 +38,15 @@ physics:
 
       ##########################################################################
       # Cathode
-      K40inGenInCPA:	 	@local::dune10kt_1x2x6_40K_in_CPA
-      U238ChainGenInCPA: 	@local::dune10kt_1x2x6_238U_chain_in_CPA
+      K42From42ArGenInCPA:	@local::dune10kt_42Kfrom42Ar_in_CPA
+      K40inGenInCPA:	 	@local::dune10kt_40K_in_CPA
+      U238ChainGenInCPA: 	@local::dune10kt_238U_chain_in_CPA
       ##########################################################################
 
       ##########################################################################
-      # Anode
-      Co60inGenInAPA:	 	@local::dune10kt_1x2x6_60Co_in_APA
-      U238ChainGenInAPA: 	@local::dune10kt_1x2x6_238U_chain_in_APA
+      # CRP
+      Co60inGenInAPA:	 	@local::dune10kt_60Co_in_APA
+      U238ChainGenInAPA: 	@local::dune10kt_238U_chain_in_APA
       ##########################################################################
 
       ##########################################################################
@@ -55,13 +56,13 @@ physics:
 
       ##########################################################################
       # Externals
-      NeutronGenInRock:    	@local::dune10kt_1x2x6_neutron_from_rock
+      NeutronGenInRock:    	@local::dune10kt_neutron_from_rock
       ##########################################################################
 
       rns:       { module_type: "RandomNumberSaver" }
    }
 
-   simulate: [rns, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K40inGenInCPA, U238ChainGenInCPA, Co60inGenInAPA, U238ChainGenInAPA, Rn222ChainGenInPDS, NeutronGenInRock]
+   simulate: [rns, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K42From42ArGenInCPA, K40inGenInCPA, U238ChainGenInCPA, Co60inGenInAPA, U238ChainGenInAPA, Rn222ChainGenInPDS, NeutronGenInRock]
    stream1:       [ out1 ]
    trigger_paths: [ simulate ] 
    end_paths:     [ stream1 ]  
@@ -81,8 +82,5 @@ outputs:
 services:
 {
     @table::services
-    @table::dunefdvd_1x8x6_3view_simulation_services
+    @table::dunefdvd_1x8x6_3view_30deg_simulation_services
 }
-services.Geometry.GDML: "dunevd10kt_3view_v3_refactored_1x8x6ref.gdml"
-services.Geometry.Name: "dunevd10kt_3view_v3_refactored_1x8x6ref"
-services.Geometry.ROOT: "dunevd10kt_3view_v3_refactored_1x8x6ref.gdml"
