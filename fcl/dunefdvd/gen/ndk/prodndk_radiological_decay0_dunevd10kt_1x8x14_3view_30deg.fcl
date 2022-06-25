@@ -80,7 +80,7 @@ outputs:
    out1:
    {
       module_type: RootOutput
-      fileName:    "prodradiological_decay0_dunevd10kt_1x8x14_gen.root" # Default file name, can override from command line with -o or --output
+      fileName:    "prodndk_radiological_decay0_dunevd10kt_1x8x14_gen.root" # Default file name, can override from command line with -o or --output
       dataTier:    "generated"
       compressionLevel: 1
    }
