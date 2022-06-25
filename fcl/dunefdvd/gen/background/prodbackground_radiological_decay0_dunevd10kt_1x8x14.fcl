@@ -57,12 +57,13 @@ physics:
       ##########################################################################
       # Externals
       NeutronGenInRock:    	@local::dune10kt_neutron_from_rock
+      GammasGenInRock:          @local::dune10kt_caverngammas
       ##########################################################################
 
       rns:       { module_type: "RandomNumberSaver" }
    }
 
-   simulate: [rns, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K42From42ArGenInCPA, K40inGenInCPA, U238ChainGenInCPA, Co60inGenInAPA, U238ChainGenInAPA, Rn222ChainGenInPDS, NeutronGenInRock]
+   simulate: [rns, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K42From42ArGenInCPA, K40inGenInCPA, U238ChainGenInCPA, Co60inGenInAPA, U238ChainGenInAPA, Rn222ChainGenInPDS, NeutronGenInRock, GammasGenInRock]
    stream1:       [ out1 ]
    trigger_paths: [ simulate ] 
    end_paths:     [ stream1 ]  
