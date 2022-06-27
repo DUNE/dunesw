@@ -1,0 +1,24 @@
+#include "standard_detsim_dunevd10kt.fcl"
+
+services: {
+    @table::services
+    @table::dunefdvd_1x8x14_3view_30deg_simulation_services
+}
+
+source: {
+  module_type: RootInput
+  maxEvents:  100        # Number of events to create
+}
+
+physics:
+{
+    @table::physics
+    producers:
+    {
+      @table::physics.producers
+#    This will simulate charge response only in the central 1x8x14 geo
+      tpcrawdecoder: @local::dune10kt_dunefd_vertdrift_1x8x14_3view_30deg_sim_nfsp
+    }
+
+    simulate: [ @sequence::dunefd_vertdrift_detsim_all_systems ]
+}
