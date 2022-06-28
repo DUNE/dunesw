@@ -8,8 +8,6 @@ services:
         @table::dunefdvd_1x8x6_3view_30deg_simulation_services
 }
 
-services.Geometry: dunevd10kt_1x8x6_3view_30deg_v4_geo
-
 source.maxEvents: 1000
 source.firstRun: 20000047 
 
