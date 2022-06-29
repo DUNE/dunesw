@@ -1,13 +1,13 @@
 #include "services_dune.fcl"
-#include "marley_dune.fcl"
+#include "genie_dune.fcl"
 #include "dune_radiological_model_decay0_vd_1x8x6.fcl"
 
-process_name: MARLEYGen
+process_name: GenieNDK
 
 services:
 {
    @table::dunefd_services
-   TFileService:          { fileName: "prodmarley_radiological_decay0_integrated-hudepohl-shen-cooling-s11.2co_hist.root" }
+   TFileService:          { fileName: "prodradiological_hist.root" }
    TimeTracker:           {}
    RandomNumberGenerator: {}                 # ART native random number generator
    FileCatalogMetadata:  @local::art_file_catalog_mc
@@ -18,18 +18,19 @@ source:
 {
    module_type: EmptyEvent
    timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
-   maxEvents:   1000        # Number of events to create
+   maxEvents:   10          # Number of events to create
    firstRun:    20000047    # Run number to use for this file
    firstEvent:  1           # number of first event in the file
 }
 
 physics:
+
 {
    producers:
    {
       ##########################################################################
-      # MARLEY
-      marley:      @local::dune_marley_nue_spectrum
+      # NDK Signal
+      NDKgen:			@local::standard_ndk
       ##########################################################################
 
       ##########################################################################
@@ -68,7 +69,7 @@ physics:
       rns:       { module_type: "RandomNumberSaver" }
    }
 
-   simulate: [rns, marley, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K42From42ArGenInCPA, K40inGenInCPA, U238ChainGenInCPA, Co60inGenInAPA, U238ChainGenInAPA, Rn222ChainGenInPDS, NeutronGenInRock, GammasGenInRock]
+   simulate: [rns, NDKgen, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K42From42ArGenInCPA, K40inGenInCPA, U238ChainGenInCPA, Co60inGenInAPA, U238ChainGenInAPA, Rn222ChainGenInPDS, NeutronGenInRock, GammasGenInRock]
    stream1:       [ out1 ]
    trigger_paths: [ simulate ] 
    end_paths:     [ stream1 ]  
@@ -79,7 +80,7 @@ outputs:
    out1:
    {
       module_type: RootOutput
-      fileName:    "prodmarley_radiological_integrated-hudepohl-shen-cooling-s11.2co_dunevd10kt_1x8x6_gen.root" # Default file name, can override from command line with -o or --output
+      fileName:    "prodradiological_decay0_dunevd10kt_1x8x6_gen.root" # Default file name, can override from command line with -o or --output
       dataTier:    "generated"
       compressionLevel: 1
    }

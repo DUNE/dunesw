@@ -16,7 +16,7 @@ physics:
     producers:
     {
       @table::physics.producers
-      tpcrawdecoder: @local::tpcrawdecoder_dunefd_vertdrift_1x8x6_3view_sim_nfsp
+      tpcrawdecoder: @local::dune10kt_dunefd_vertdrift_1x8x14_3view_sim_nfsp
     }
 
     simulate: [ @sequence::dunefd_vertdrift_detsim_all_systems ]
