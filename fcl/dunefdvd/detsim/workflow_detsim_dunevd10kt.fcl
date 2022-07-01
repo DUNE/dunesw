@@ -24,9 +24,9 @@ dunefd_vertdrift_producers:
    sipmAr10ppmExt:@local::xarapuca_ar_xe10ppm
    sipmXe10ppm:   @local::xarapuca_xe_xe10ppm
    sipmXe10ppmExt:@local::xarapuca_xe_xe10ppm
-   opdigiArOnly:  @local::standard_daphne
-   opdigiXeOnly:  @local::standard_daphne
-   opdigi10ppm:   @local::standard_daphne
+   opdigiArOnly:  @local::standard_vddaphne
+   opdigiXeOnly:  @local::standard_vddaphne
+   opdigi10ppm:   @local::standard_vddaphne
 }
 
 dunefd_vertdrift_tpc:
@@ -84,6 +84,7 @@ dunefd_vertdrift_producers.sipmXeOnlyExt.InputTag:  "PDFastSimXeExternal"
 dunefd_vertdrift_producers.sipmAr10ppm.InputTag:    "PDFastSimAr"
 dunefd_vertdrift_producers.sipmAr10ppmExt.InputTag: "PDFastSimArExternal"
 dunefd_vertdrift_producers.sipmXe10ppm.InputTag:    "PDFastSimXe" #Default, but set anyway for clarity
+dunefd_vertdrift_producers.sipmXe10ppmExt.InputTag: "PDFastSimXeExternal" 
 dunefd_vertdrift_producers.opdigiArOnly.InputTags:   [sipmArOnly, sipmArOnlyExt]
 dunefd_vertdrift_producers.opdigiXeOnly.InputTags:   [sipmXeOnly, sipmXeOnlyExt]
 dunefd_vertdrift_producers.opdigi10ppm.InputTags:    [sipmAr10ppm, sipmAr10ppmExt, sipmXe10ppm, sipmXe10ppmExt]
