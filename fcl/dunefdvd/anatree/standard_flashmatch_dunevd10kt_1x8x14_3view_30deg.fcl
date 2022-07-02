@@ -49,4 +49,3 @@ physics.analyzers.vdflashmatch.OpFlashModuleLabel:   "opflash10ppm"
 physics.analyzers.vdflashmatch.OpHitModuleLabel:     "ophit10ppm"
 physics.analyzers.vdflashmatch.OpDetWaveformLabel: "opdigi10ppm"
 physics.analyzers.vdflashmatch.DistanceCut: 360.0
-services.PhotonBackTrackerService.PhotonBackTracker.G4ModuleLabel: ["PDFastSimAr", "PDFastSimXe"]
