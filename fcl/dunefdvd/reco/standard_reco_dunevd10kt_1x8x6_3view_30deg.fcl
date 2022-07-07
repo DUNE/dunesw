@@ -7,3 +7,7 @@ services: {
 
 physics.reco: [ @sequence::dunefd_vertdrift_reco_all_systems ]
 
+physics.producers.energyrecnumu:     @local::dunefdvd_30deg_nuenergyreco_pandora_numu
+physics.producers.energyrecnue:      @local::dunefdvd_30deg_nuenergyreco_pandora_nue
+physics.producers.energyrecnc:       @local::dunefdvd_30deg_nuenergyreco_pandora_nc
+
