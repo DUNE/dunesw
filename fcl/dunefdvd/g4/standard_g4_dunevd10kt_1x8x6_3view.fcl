@@ -4,4 +4,6 @@ services: {
   @table::services
   @table::dunefdvd_1x8x6_3view_simulation_services
 }
+physics.producers.PDFastSimExternal: @erase
+physics.simulate: [ rns, largeant , IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimXe ]
 
