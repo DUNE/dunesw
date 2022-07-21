@@ -16,8 +16,6 @@ services:
   FileCatalogMetadata:   @local::art_file_catalog_mc
 
   @table::dunefdvd_simulation_services
-  PhotonVisibilityService: @local::dune10kt_vd_1x8x14_photonvisibilityservice_ArXe 
-  # The PhotonVisibilityService is used for the hybrid model for light simulation. 
 }
 
 #source is now a root file
