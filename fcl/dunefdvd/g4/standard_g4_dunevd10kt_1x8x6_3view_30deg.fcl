@@ -4,6 +4,8 @@ services: {
   @table::services
   @table::dunefdvd_1x8x6_3view_30deg_simulation_services
 }
+
+# New modifications since the hybrid model implementation in the VD-DUNE 1x8x14 geometry. 
 physics.producers.PDFastSimExternal: @erase
 physics.simulate: [ rns, largeant , IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimXe ]
 

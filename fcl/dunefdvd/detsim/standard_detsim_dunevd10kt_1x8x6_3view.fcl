@@ -16,3 +16,21 @@ physics:
 
     simulate: [ @sequence::dunefd_vertdrift_detsim_all_systems ]
 }
+
+# New modifications since the hybrid model implementation in the VD-DUNE 1x8x14 geometry. 
+physics.producers.sipm10ppmExt: @erase
+physics.producers.opdigi10ppm.InputTags: [sipmAr10ppm, sipmXe10ppm]
+
+dunefd_vertdrift_pds_bothelements_new:
+[
+    sipmAr10ppm,
+    sipmXe10ppm,
+    opdigi10ppm
+]
+dunefd_vertdrift_detsim_all_systems_new:
+[
+    rns,
+    @sequence::dunefd_vertdrift_tpc,
+    @sequence::dunefd_vertdrift_pds_bothelements_new
+]
+physics.simulate:[ @sequence::dunefd_vertdrift_detsim_all_systems_new ]
