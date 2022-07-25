@@ -2,7 +2,7 @@
 
 services: {
     @table::services
-    @table::dunefdvd_1x8x6_3view_30deg_reco_services
+    @table::dunefdvd_1x8x14_3view_30deg_reco_services
 }
 
 physics.reco: [ @sequence::dunefd_vertdrift_reco_all_systems ]
@@ -10,4 +10,3 @@ physics.reco: [ @sequence::dunefd_vertdrift_reco_all_systems ]
 physics.producers.energyrecnumu:     @local::dunefdvd_30deg_nuenergyreco_pandora_numu
 physics.producers.energyrecnue:      @local::dunefdvd_30deg_nuenergyreco_pandora_nue
 physics.producers.energyrecnc:       @local::dunefdvd_30deg_nuenergyreco_pandora_nc
-
