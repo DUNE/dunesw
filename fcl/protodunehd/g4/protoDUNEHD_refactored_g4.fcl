@@ -37,7 +37,7 @@ physics:
     #retain largeant name for compatibility
     largeant:     @local::protodune_larg4
     IonAndScint:  @local::protodunehd_ionandscint
-    #PDFastSim:    @local::protodune_pdfastsim_pvs
+    PDFastSim:    @local::protodune_pdfastsim_pvs
     rns: {module_type: "RandomNumberSaver"}
   }
 
@@ -46,8 +46,8 @@ physics:
 
   }
 
-  #simulate:      [  rns, largeant, IonAndScint, PDFastSim ]
-  simulate:      [  rns, largeant, IonAndScint]
+  simulate:      [  rns, largeant, IonAndScint, PDFastSim ]
+  #simulate:      [  rns, largeant, IonAndScint]
 
   stream1:       [ out1 ]
 
