@@ -54,7 +54,12 @@ dunefd_vertdrift_pds_bothelements:
     sipm10ppmExt,
     opdigi10ppm
 ]
-
+dunefd_vertdrift_pds_bothelements_1x8x6:
+[
+    sipmAr10ppm,
+    sipmXe10ppm,
+    opdigi10ppm
+]
 dunefd_vertdrift_detsim_pds_only:
 [
     rns,
@@ -72,6 +77,13 @@ dunefd_vertdrift_detsim_all_systems:
     rns,
     @sequence::dunefd_vertdrift_tpc,
     @sequence::dunefd_vertdrift_pds_bothelements
+]
+
+dunefd_vertdrift_detsim_all_systems_1x8x6:
+[
+    rns,
+    @sequence::dunefd_vertdrift_tpc,
+    @sequence::dunefd_vertdrift_pds_bothelements_1x8x6
 ]
 
 #Overrides
