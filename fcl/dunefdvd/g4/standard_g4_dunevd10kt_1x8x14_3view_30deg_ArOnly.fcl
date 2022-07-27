@@ -1,0 +1,3 @@
+#include "standard_g4_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+services.PhotonVisibilityService.LibraryFile: "PhotonPropagation/LibraryData/Photon_library_dunevd10kt_3view_v2_refactored_1x8x14ref_ReflAnode_argon_non_active.root"
