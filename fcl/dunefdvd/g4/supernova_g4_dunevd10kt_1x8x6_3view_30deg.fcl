@@ -6,4 +6,8 @@ services.PhysicsList:   @local::dune_physics_list_supernova
 
 services.Geometry: @local::dunevd10kt_1x8x6_3view_30deg_v4_geo
 
+# New modifications since the hybrid model implementation in the VD-DUNE 1x8x14 geometry. 
+physics.producers.PDFastSimExternal: @erase
+physics.simulate: [ rns, largeant , IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimXe ]
+
 outputs.out1.outputCommands: ["keep *", "drop sim::SimEnergyDeposits_largeant_*_SupernovaG4"]
