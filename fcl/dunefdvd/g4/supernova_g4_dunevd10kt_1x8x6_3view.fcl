@@ -4,4 +4,8 @@ process_name: SupernovaG4
 
 services.PhysicsList:   @local::dune_physics_list_supernova
 
+# New modifications since the hybrid model implementation in the VD-DUNE 1x8x14 geometry. 
+physics.producers.PDFastSimExternal: @erase
+physics.simulate: [ rns, largeant , IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimXe ]
+
 outputs.out1.outputCommands: ["keep *", "drop sim::SimEnergyDeposits_largeant_*_SupernovaG4"]
