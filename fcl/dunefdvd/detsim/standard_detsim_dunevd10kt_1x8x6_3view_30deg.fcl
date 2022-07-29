@@ -14,5 +14,9 @@ physics:
       tpcrawdecoder: @local::dune10kt_dunefd_vertdrift_1x8x6_3view_30deg_sim_nfsp
     }
 
-    simulate: [ @sequence::dunefd_vertdrift_detsim_all_systems ]
+    simulate: [ @sequence::dunefd_vertdrift_detsim_all_systems_1x8x6 ]
 }
+
+# New modifications since the hybrid model implementation in the VD-DUNE 1x8x14 geometry. 
+physics.producers.sipm10ppmExt: @erase
+physics.producers.opdigi10ppm.InputTags: [sipmAr10ppm, sipmXe10ppm]

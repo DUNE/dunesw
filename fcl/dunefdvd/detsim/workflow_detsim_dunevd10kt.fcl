@@ -21,9 +21,8 @@ dunefd_vertdrift_producers:
    sipmXeOnly:    @local::xarapuca_xetuned_xe10ppm
    sipmXeOnlyExt: @local::xarapuca_xetuned_xe10ppm
    sipmAr10ppm:   @local::xarapuca_ar_xe10ppm
-   sipmAr10ppmExt:@local::xarapuca_ar_xe10ppm
    sipmXe10ppm:   @local::xarapuca_xe_xe10ppm
-   sipmXe10ppmExt:@local::xarapuca_xe_xe10ppm
+   sipm10ppmExt:  @local::xarapuca_ar              #Merged library for Ar and Xe mix already in place. No extra cuts
    opdigiArOnly:  @local::standard_vddaphne
    opdigiXeOnly:  @local::standard_vddaphne
    opdigi10ppm:   @local::standard_vddaphne
@@ -51,12 +50,16 @@ dunefd_vertdrift_pds_xeonly:
 dunefd_vertdrift_pds_bothelements:
 [
     sipmAr10ppm,
-    sipmAr10ppmExt,
     sipmXe10ppm,
-    sipmXe10ppmExt,
+    sipm10ppmExt,
     opdigi10ppm
 ]
-
+dunefd_vertdrift_pds_bothelements_1x8x6:
+[
+    sipmAr10ppm,
+    sipmXe10ppm,
+    opdigi10ppm
+]
 dunefd_vertdrift_detsim_pds_only:
 [
     rns,
@@ -76,17 +79,23 @@ dunefd_vertdrift_detsim_all_systems:
     @sequence::dunefd_vertdrift_pds_bothelements
 ]
 
+dunefd_vertdrift_detsim_all_systems_1x8x6:
+[
+    rns,
+    @sequence::dunefd_vertdrift_tpc,
+    @sequence::dunefd_vertdrift_pds_bothelements_1x8x6
+]
+
 #Overrides
 dunefd_vertdrift_producers.sipmArOnly.InputTag:     "PDFastSimAr"
-dunefd_vertdrift_producers.sipmArOnlyExt.InputTag:  "PDFastSimArExternal"
+dunefd_vertdrift_producers.sipmArOnlyExt.InputTag:  "PDFastSimExternal"
 dunefd_vertdrift_producers.sipmXeOnly.InputTag:     "PDFastSimXe" #Default, but set anyway for clarity
-dunefd_vertdrift_producers.sipmXeOnlyExt.InputTag:  "PDFastSimXeExternal" 
+dunefd_vertdrift_producers.sipmXeOnlyExt.InputTag:  "PDFastSimExternal" 
 dunefd_vertdrift_producers.sipmAr10ppm.InputTag:    "PDFastSimAr"
-dunefd_vertdrift_producers.sipmAr10ppmExt.InputTag: "PDFastSimArExternal"
 dunefd_vertdrift_producers.sipmXe10ppm.InputTag:    "PDFastSimXe" #Default, but set anyway for clarity
-dunefd_vertdrift_producers.sipmXe10ppmExt.InputTag: "PDFastSimXeExternal" 
+dunefd_vertdrift_producers.sipm10ppmExt.InputTag:   "PDFastSimExternal" 
 dunefd_vertdrift_producers.opdigiArOnly.InputTags:   [sipmArOnly, sipmArOnlyExt]
 dunefd_vertdrift_producers.opdigiXeOnly.InputTags:   [sipmXeOnly, sipmXeOnlyExt]
-dunefd_vertdrift_producers.opdigi10ppm.InputTags:    [sipmAr10ppm, sipmAr10ppmExt, sipmXe10ppm, sipmXe10ppmExt]
+dunefd_vertdrift_producers.opdigi10ppm.InputTags:    [sipmAr10ppm, sipmXe10ppm, sipm10ppmExt]
 
 END_PROLOG
