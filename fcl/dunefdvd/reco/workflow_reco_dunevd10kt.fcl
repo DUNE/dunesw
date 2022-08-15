@@ -38,9 +38,9 @@ dunefd_vertdrift_producers:
    energyrecnue:          @local::dunefdvd_nuenergyreco_pandora_nue
    energyrecnc:           @local::dunefdvd_nuenergyreco_pandora_nc
    # PDS reconstruction
-   ophitArOnly:     @local::dunefd_ophit
-   ophitXeOnly:     @local::dunefd_ophit
-   ophit10ppm:      @local::dunefd_ophit
+   ophitArOnly:     @local::dunefdvd_ophit
+   ophitXeOnly:     @local::dunefdvd_ophit
+   ophit10ppm:      @local::dunefdvd_ophit
    opflashArOnly:   @local::dunefd_opflash
    opflashXeOnly:   @local::dunefd_opflash
    opflash10ppm:    @local::dunefd_opflash
