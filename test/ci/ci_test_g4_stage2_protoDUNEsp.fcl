@@ -3,6 +3,7 @@
 services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
 services.NuRandomService.IonAndScint.NEST: 1234
+services.NuRandomService.IonAndScint.ISCalcAlg: 1234
 services.NuRandomService.PDFastSim.photon: 1234
 services.NuRandomService.PDFastSim.scinttime: 1234
 services.NuRandomService.largeant: 1234
