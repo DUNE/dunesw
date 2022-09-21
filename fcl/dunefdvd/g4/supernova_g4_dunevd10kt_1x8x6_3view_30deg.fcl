@@ -6,4 +6,4 @@ services.PhysicsList:   @local::dune_physics_list_supernova
 
 services.Geometry: @local::dunevd10kt_1x8x6_3view_30deg_v4_geo
 
-outputs.out1.outputCommands: ["keep *", "drop sim::SimEnergyDeposits_largeant_*_SupernovaG4"]
+services.ParticleListAction.keepEMShowerDaughters: true
