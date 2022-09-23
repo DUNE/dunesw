@@ -3,5 +3,3 @@
 process_name: SupernovaG4
 
 services.PhysicsList:   @local::dune_physics_list_supernova
-
-services.ParticleListAction.keepEMShowerDaughters: true
