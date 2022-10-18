@@ -43,8 +43,8 @@ physics:
 
   }
 
-  #simulate:      [  rns, IonAndScint, PDFastSim ]
-  simulate:      [  rns, IonAndScint]
+  simulate:      [  rns, largeant, IonAndScint, IonAndScintExternal, PDFastSim, PDFastSimExternal ]
+  # simulate:      [  rns, IonAndScint]
 
   stream1:       [ out1 ]
 
