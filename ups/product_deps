@@ -37,10 +37,10 @@ table_fragment_end
 
 product          version
 cetbuildtools	 v8_20_00	-	only_for_build
-duneexamples     v09_61_00d00_genie_G1810b0211a
-dunedataprep     v09_61_00d00_genie_G1810b0211a
-duneana          v09_61_00d00_genie_G1810b0211a
-protoduneana     v09_61_00d00_genie_G1810b0211a
+duneexamples     v09_61_00d00G1810b0211a
+dunedataprep     v09_61_00d00G1810b0211a
+duneana          v09_61_00d00G1810b0211a
+protoduneana     v09_61_00d00G1810b0211a
 end_product_list
 
 
