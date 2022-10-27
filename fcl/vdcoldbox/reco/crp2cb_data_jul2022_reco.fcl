@@ -1,0 +1,19 @@
+#include "crpcb_top_process.fcl"
+
+process_name: CRP2CBDataReco
+
+services: @local::crp2_july22_services
+
+source: @local::data_source
+
+outputs: {
+  rootout: @local::proc_rootout
+}
+
+physics: {
+  producers: @local::crp2_july22_prod_config
+  produce: @local::crp2_july22_prod_seq
+  output : [ rootout ]
+  trigger_paths: [ produce ]
+  end_paths : [ output ]
+}
