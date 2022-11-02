@@ -13,7 +13,6 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:      @local::standard_info
 
-  @table::protodunehd_larg4_services
   @table::protodunehd_refactored_simulation_services
 
   NuRandomService:       @local::dune_prod_seedservice
@@ -37,7 +36,9 @@ physics:
     #retain largeant name for compatibility
     largeant:     @local::protodune_larg4
     IonAndScint:  @local::protodunehd_ionandscint
-    #PDFastSim:    @local::protodune_pdfastsim_pvs
+    IonAndScintExternal: @local::protodunehd_ionandscint_external
+    PDFastSim:    @local::protodune_hd_pdfastsim_par
+    PDFastSimExternal: @local::protodune_hd_pdfastsim_pvs_external
     rns: {module_type: "RandomNumberSaver"}
   }
 
@@ -46,8 +47,8 @@ physics:
 
   }
 
-  #simulate:      [  rns, largeant, IonAndScint, PDFastSim ]
-  simulate:      [  rns, largeant, IonAndScint]
+  simulate:      [  rns, largeant, IonAndScint, IonAndScintExternal, PDFastSim, PDFastSimExternal ]
+  #simulate:      [  rns, largeant, IonAndScint]
 
   stream1:       [ out1 ]
 
