@@ -34,6 +34,18 @@ vdcb_gnocchi_calodata:
     TrackIsFieldDistortionCorrected: false
     Cryostat: 0
     CaloAlg: @local::vdcb_calorimetryalgdata
+    NormTools: []
 }
+
+#vdcb_gnocchi_calodata: @local::standard_gnocchicalo                
+#vdcb_gnocchi_calodata.TrackModuleLabel:                "pandoraTrack"
+#vdcb_gnocchi_calodata.AssocHitModuleLabel:             "pandoraTrack"
+#vdcb_gnocchi_calodata.T0ModuleLabel:                   ""
+#vdcb_gnocchi_calodata.ChargeMethod:                    2
+#vdcb_gnocchi_calodata.FieldDistortion:                 false
+#vdcb_gnocchi_calodata.FieldDistortionEfield:           false
+#vdcb_gnocchi_calodata.TrackIsFieldDistortionCorrected: false
+#vdcb_gnocchi_calodata.Cryostat:                        0
+#vdcb_gnocchi_calodata.CaloAlg: @local::vdcb_calorimetryalgdata
 
 END_PROLOG
