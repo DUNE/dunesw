@@ -8,7 +8,7 @@
 #include "channelstatus_vdcrp3.fcl"
 
 
-data.dataprep_tools: @local::data.vdtcb2_dataprep_seqs.nomcal_cnrw_rmbadch
+data.dataprep_tools: @local::data.vdtcb2_dataprep_seqs.adc_cnrw_rmbadch
 
 services_base: {
   TFileService: { fileName: "%ifb_reco_hist.root" }
