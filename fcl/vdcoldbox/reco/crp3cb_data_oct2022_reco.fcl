@@ -1,0 +1,19 @@
+#include "crpcb_top_process.fcl"
+
+process_name: CRP3CBDataReco
+
+services: @local::crp3_oct22_services
+
+source: @local::data_source
+
+outputs: {
+  rootout: @local::proc_rootout
+}
+
+physics: {
+  producers: @local::crp3_oct22_prod_config
+  produce: @local::crp3_oct22_prod_seq
+  output : [ rootout ]
+  trigger_paths: [ produce ]
+  end_paths : [ output ]
+}

@@ -1,6 +1,6 @@
 #include "services_refactored_pdune.fcl"
 #include "wirecell_dune.fcl"
-#include "opticaldetectormodules_dune.fcl"
+#include "WaveformDigitizerSim.fcl"
 #include "CRT.fcl"
 #include "tools_dune.fcl"
 
@@ -29,7 +29,7 @@ physics:
   producers:
   {
     tpcrawdecoder:  @local::wirecell_protodunehdmc
-    #opdigi:         @local::protodune_opdigi_refactor
+    opdigi:         @local::standard_daphne
     crt:            @local::CRTSimRefac_standard
     rns:            { module_type: "RandomNumberSaver" }
   }
@@ -38,7 +38,7 @@ physics:
               # TPC simulation
               tpcrawdecoder,
               # OpDet and CRT simulation
-              #opdigi,
+              opdigi,
               crt] 
   stream1:  [ out1 ]
 

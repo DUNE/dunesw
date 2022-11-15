@@ -1,0 +1,84 @@
+#include "services_vdcoldbox.fcl"
+#include "workflow_reco_crpcb_top.fcl"
+#include "vdct_decoder.fcl"
+#include "protodune_tools_dune.fcl"
+#include "vdcb_tools.fcl"
+#include "vdcb_dataprep_sequences.fcl"
+#include "channelstatus_vdcrp2.fcl"
+#include "channelstatus_vdcrp3.fcl"
+
+
+data.dataprep_tools: @local::data.vdtcb2_dataprep_seqs.adc_cnrw_rmbadch
+
+services_base: {
+  TFileService: { fileName: "%ifb_reco_hist.root" }
+  TimeTracker:       @local::dune_time_tracker
+  MemoryTracker:     @local::dune_memory_tracker
+  RandomNumberGenerator: {} 
+  FileCatalogMetadata:  @local::art_file_catalog_data
+  FileCatalogMetadata: {
+  #applicationVersion: "v07_08_00_04"
+  fileType: "detector"
+  runType: "vd-coldbox-top" }
+  message:  @local::dune_message_services_prod
+}
+
+#
+data_source: @local::vdctdecoder_source
+proc_rootout: {
+    module_type: RootOutput
+    fileName: "%ifb_crpcb_top_reco.root"
+    #outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*" ]
+    outputCommands: [ "keep *", "drop recob::Wires_caldata_dataprep_*" ]
+    compressionLevel: 1
+    dataTier: "full-reconstructed"
+    streamName: "test"
+}
+
+data.crp2cb_july22_Efield:  [0.411, 1.0, 1.0]
+data.crp3cb_oct22_Efield:   [0.411, 1.0, 1.0]
+
+crp2_july22_services: {
+  @table::services_base
+  @table::vdcb_crp2_data_services
+  SpaceCharge: @local::dunefd_spacecharge
+  ChannelStatusService: @local::data.ChannelStatusService_vdcrp2
+}
+crp2_july22_services.DetectorPropertiesService.Efield: @local::data.crp3cb_oct22_Efield
+crp2_july22_services.RawDigitPrepService.ToolNames: @local::data.dataprep_tools #data.vdcb_dataprep_seqs.nocal
+
+crp3_oct22_services: {
+  @table::services_base
+  @table::vdcb_crp2_data_services
+  SpaceCharge: @local::dunefd_spacecharge
+  ChannelStatusService: @local::data.ChannelStatusService_vdcrp3
+}
+crp3_oct22_services.DetectorPropertiesService.Efield: @local::data.crp3cb_oct22_Efield
+crp3_oct22_services.RawDigitPrepService.ToolNames: @local::data.dataprep_tools #data.vdcb_dataprep_seqs.nocal
+
+
+#
+# CRP2 July 2022 runs producers
+#
+crp2_july22_prod_config: {
+  caldata: @local::producer_adcprep
+  @table::dunecrpcb_top_producers
+}
+crp2_july22_prod_config.caldata.DecoderTool: ""
+crp2_july22_prod_config.caldata.DigitLabel:  "tpcrawdecoder:daq"
+crp2_july22_prod_config.caldata.WireName: "dataprep"
+crp2_july22_prod_config.caldata.ChannelGroups: ["cru"]
+crp2_july22_prod_config.caldata.DoGroups: true
+crp2_july22_prod_config.caldata.OnlineChannelMapTool: ""
+crp2_july22_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 1.0
+crp2_july22_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 1.0
+crp2_july22_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 1.0
+
+crp2_july22_prod_seq: [caldata, @sequence::dunecrpcb_top_reco_tpc_only]
+
+
+#
+# CRP3 Oct 2022 runs producers
+#
+crp3_oct22_prod_config: @local::crp2_july22_prod_config
+crp3_oct22_prod_seq: [caldata, @sequence::dunecrpcb_top_reco_tpc_only]
