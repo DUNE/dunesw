@@ -1,0 +1,12 @@
+# vdcb1_tools_dune.fcl
+
+# David Adams
+# November 2022
+#
+# Collect all tool definitions for CRP1 vertical drift (2021 coldbox).
+
+#include "detsimtools_dune.fcl"
+#include "dunecommon_tools.fcl"
+#include "pdsp_decoder.fcl"
+#include "protodune_dataprep_tools.fcl"
+#include "vdcb1_tools.fcl"
