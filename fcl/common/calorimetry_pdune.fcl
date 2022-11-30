@@ -92,6 +92,7 @@ pdune_dp_calorimetryalgmc.CaloDoLifeTimeCorrection: false
 pdune_dp_calorimetryalgmc.CalAreaConstants: [ 14.275E-3, 14.275E-3 ]
 pdune_dp_calorimetryalgmc.CaloUseModBox: true
 
+# standard calo module 
 pdune_dp_calodata:                       @local::standard_calodata
 pdune_dp_calodata.CaloAlg:               @local::pdune_dp_calorimetryalgdata
 pdune_dp_calodata.CaloAlg.CaloUseModBox: true
@@ -100,6 +101,22 @@ pdune_dp_calodata.SpacePointModuleLabel: "pandora"
 pdune_dp_calodata.CorrectSCE:            false
 pdune_dp_calodata.T0ModuleLabel:         ""
 pdune_dp_calodata.MakeTree:              false
+
+# gnocchi calor module
+pdune_dp_gnocalodata:
+{
+    module_type:                     "GnocchiCalorimetry"
+    TrackModuleLabel:                "pandoraTrack"
+    AssocHitModuleLabel:             "pandoraTrack"
+    T0ModuleLabel:                   ""
+    ChargeMethod:                    2
+    FieldDistortion:                 false
+    FieldDistortionEfield:           false
+    TrackIsFieldDistortionCorrected: false
+    Cryostat:                        0
+    CaloAlg:                         @local::pdune_dp_calorimetryalgdata
+    NormTools:                       []
+}
 
 
 END_PROLOG
