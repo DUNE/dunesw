@@ -2,7 +2,7 @@
 #include "workflow_reco_crpcb_top.fcl"
 #include "vdct_decoder.fcl"
 #include "protodune_tools_dune.fcl"
-#include "vdcb_tools.fcl"
+#include "vdcb2_tools.fcl"
 #include "vdcb_dataprep_sequences.fcl"
 #include "channelstatus_vdcrp2.fcl"
 #include "channelstatus_vdcrp3.fcl"
