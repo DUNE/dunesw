@@ -1,0 +1,3 @@
+#include "crp2cb_data_jul2022_reco.fcl"
+
+physics.produce: [caldata]
