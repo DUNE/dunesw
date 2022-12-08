@@ -1,3 +1,19 @@
+# vdcb2t_dataprep.fcl
+#
+# David Adams
+# December 2022
+#
+# Top-level fcl to read CRP2+ top data and run dataprep
+#
+# Start from production reco, drop all producers except dataprep
+# and flag all channels as good.
+
 #include "crp2cb_data_jul2022_reco.fcl"
 
 physics.produce: [caldata]
+
+services.ChannelStatusService: {
+  service_provider: "SimpleChannelStatusService"
+  BadChannels:   []
+  NoisyChannels: []
+}
