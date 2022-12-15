@@ -1,0 +1,27 @@
+# vdcb2t_dataprep.fcl
+#
+# David Adams
+# December 2022
+#
+# Top-level fcl to read CRP2+ top data and run dataprep only.
+#
+# Start from production reco, drop all producers except dataprep
+# and flag all channels as good.
+
+#include "crp2cb_data_jul2022_reco.fcl"
+
+physics.produce: [caldata]
+
+# So we don't get warnings when trying to write non-existent wires.
+services.RawDigitPrepService.DoWires: false
+physics.producers.caldata.WireName: ""
+
+# Drop the flagging of bad channels.
+# Users can replace this with therir own service: e.g.
+# services.ChannelStatusService: @local::data.ChannelStatusService_vdcrp2
+# services.ChannelStatusService: @local::data.ChannelStatusService_vdcrp3
+services.ChannelStatusService: {
+  service_provider: "SimpleChannelStatusService"
+  BadChannels:   []
+  NoisyChannels: []
+}

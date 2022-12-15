@@ -69,7 +69,7 @@ physics:
       rns:       { module_type: "RandomNumberSaver" }
    }
 
-   simulate: [rns, NDKgen, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K42From42ArGenInCPA, K40inGenInCPA, U238ChainGenInCPA, Co60inGenInAPA, U238ChainGenInAPA, Rn222ChainGenInPDS, NeutronGenInRock, GammasGenInRock]
+   simulate: [rns, generator, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K42From42ArGenInCPA, K40inGenInCPA, U238ChainGenInCPA, Co60inGenInAPA, U238ChainGenInAPA, Rn222ChainGenInPDS, NeutronGenInRock, GammasGenInRock]
    stream1:       [ out1 ]
    trigger_paths: [ simulate ] 
    end_paths:     [ stream1 ]  
