@@ -40,12 +40,12 @@ physics: {
 #   daq:            @local::dune_detsim
 
    tpcrawdecoder: @local::tpcrawdecoder_dunefd_horizdrift
-   sipm:          @local::xarapuca_ar
+   sipmSim:       @local::xarapuca_ar
    opdigi:        @local::standard_daphne
    rns:            { module_type: "RandomNumberSaver" }
  }
 # simulate: [ rns, daq, @sequence::pd_detsim_path ]
- simulate: [ rns, tpcrawdecoder, sipm, opdigi ]
+ simulate: [ rns, tpcrawdecoder, sipmSim, opdigi ]
  stream1:  [ out1 ]
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
@@ -88,5 +88,3 @@ services.ChannelNoiseService.NoiseNormZ:  4.5
 
 #configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
 #=> configs: ["pgrapher/experiment/dune10kt-1x2x6/wcls-sim-drift-simchannel.jsonnet"]
-physics.producers.sipm.InputTag:  "PDFastSim"
-physics.producers.opdigi.InputTags:   [sipm]
