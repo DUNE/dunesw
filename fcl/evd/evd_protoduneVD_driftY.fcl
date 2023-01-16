@@ -1,0 +1,11 @@
+#include "evd_dune.fcl"
+services.Geometry: @local::protodunevd_v1_geo_driftY
+
+services.SimulationDrawingOptions.SimChannelLabel: "tpcrawdecoder:simpleSC"
+services.SimulationDrawingOptions.SimEnergyLabel: "IonAndScint"
+
+
+services.RawDrawingOptions.TotalTicks:                10000
+services.RawDrawingOptions.PedestalOption:            1
+services.RawDrawingOptions.RawDataLabels:             "tpcrawdecoder:daq"
+services.RawDrawingOptions.MinimumSignal:               5
