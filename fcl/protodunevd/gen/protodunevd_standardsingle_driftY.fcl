@@ -2,7 +2,6 @@
 ##include "services_vdcoldbox.fcl"
 #include "singles_dune.fcl"
 #include "services_protodunevd.fcl"
-#include "localservice.fcl"
 
 process_name: SinglesGen
 
