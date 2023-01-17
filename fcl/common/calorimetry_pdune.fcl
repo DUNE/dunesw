@@ -117,6 +117,32 @@ pdune_dp_gnocalodata:
     CaloAlg:                         @local::pdune_dp_calorimetryalgdata
     NormTools:                       []
 }
+# standard calo module 
+pdune_vd_standard_calodata:                          @local::standard_calodata
+pdune_vd_standard_calodata.CaloAlg:                   @local::vdcb_calorimetryalgdata
+pdune_vd_standard_calodata.TrackModuleLabel:         "pandoraTrack"
+pdune_vd_standard_calodata.SpacePointModuleLabel:    "pandora"
+pdune_vd_standard_calodata.T0ModuleLabel:            ""
+pdune_vd_standard_calodata.CorrectSCE:           false
+
+
+# gnocchi calor module
+pdune_vd_gnocchi_calodata:
+{
+    module_type:                     "GnocchiCalorimetry"
+    TrackModuleLabel:                "pandoraTrack"
+    AssocHitModuleLabel:             "pandoraTrack"
+    T0ModuleLabel:                   ""
+    ChargeMethod:                    2
+    FieldDistortion:                 false
+    FieldDistortionEfield:           false
+    TrackIsFieldDistortionCorrected: false
+    Cryostat: 0
+    CaloAlg: @local::vdcb_calorimetryalgdata
+    NormTools: []
+}
+
+
 
 
 END_PROLOG
