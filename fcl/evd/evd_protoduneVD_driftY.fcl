@@ -7,5 +7,5 @@ services.SimulationDrawingOptions.SimEnergyLabel: "IonAndScint"
 
 services.RawDrawingOptions.TotalTicks:                10000
 services.RawDrawingOptions.PedestalOption:            1
-services.RawDrawingOptions.RawDataLabels:             "tpcrawdecoder:daq"
+services.RawDrawingOptions.RawDataLabels:             ["tpcrawdecoder:daq"]
 services.RawDrawingOptions.MinimumSignal:               5
