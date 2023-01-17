@@ -1,0 +1,61 @@
+#include "services_refactored_pdune.fcl"
+#include "wirecell_dune.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "CRT.fcl"
+#include "tools_dune.fcl"
+
+process_name: Detsim
+
+services:
+{
+  TFileService: { fileName: "detsim_single_protoDUNE_hist.root" }
+  TimeTracker:       @local::dune_time_tracker
+  MemoryTracker:     @local::dune_memory_tracker
+  RandomNumberGenerator: {}
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+  @table::protodunevd_refactored_simulation_services
+  IFDH: {}
+}
+
+services.DetectorPropertiesService:    @local::protodunevd_detproperties
+
+source:
+{
+  module_type: RootInput
+  maxEvents: 100
+  fileNames: ["g4single_protoDUNE.root"]
+}
+
+physics:
+{
+
+  producers:
+  {
+    tpcrawdecoder:  @local::wirecell_protodunevd_mc
+    # opdigi:         @local::protodune_opdigi_refactor
+    # crt:            @local::CRTSimRefac_standard
+    rns:            { module_type: "RandomNumberSaver" }
+  }
+
+  simulate: [ rns,
+              tpcrawdecoder]
+  stream1:  [ out1 ]
+
+  trigger_paths: [simulate]
+  end_paths:     [stream1]
+}
+
+outputs:
+{
+  out1:
+  {
+    module_type: RootOutput
+    fileName:    "%ifb_detsim.root"
+    dataTier:    "detector-simulated"
+    compressionLevel: 1 #zlib argument (0-9)
+    fastCloning: true
+    outputCommands : [
+      "keep *", "drop sim::SimEnergyDeposit*_*_*_*"
+    ]
+  }
+}
