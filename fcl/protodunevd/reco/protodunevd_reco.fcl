@@ -9,8 +9,8 @@
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
-#include "calorimetry_pdune.fcl"
 #include "calorimetry_vdcb.fcl"
+#include "calorimetry_pdune.fcl"
 #include "calibration_dune.fcl"
 #include "featurelabelingmodules.fcl"
 #include "particleid.fcl"
@@ -85,8 +85,8 @@ physics: {
     #pandoraShower:      @local::dune_pandoraShowerCreation
 
     pandoraWriter:      @local::dune_pandorawriter
-    pandoraStdcalo:     @local::vdprotoD_standard_calodata
-    pandoraGnocalo:     @local::vdprotoD_gnocchi_calodata
+    pandoraStdcalo:     @local::pdune_vd_standard_calodata
+    pandoraGnocalo:     @local::pdune_vd_gnocchi_calodata
   }
 
 reco: [ caldata,
