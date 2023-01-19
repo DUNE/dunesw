@@ -1,0 +1,47 @@
+#include "services_refactored_pdune.fcl"
+#include "CellTree.fcl"
+
+process_name: celltree
+
+services:
+{
+  # TFileService: { fileName: "test.root" }
+  TimeTracker:   {}
+  RandomNumberGenerator: {}
+  message:      @local::standard_info
+  @table::protodunevd_refactored_simulation_services
+}
+
+
+source:
+{
+  module_type: RootInput
+  fileNames:  [ "gen.root" ]
+  firstEvent : 1
+  maxEvents:  -1
+}
+
+
+outputs:{}
+
+
+physics:
+{
+  analyzers:
+  {
+    wirecell: @local::standard_celltree
+  }
+  analysis: [ wirecell ]
+  end_paths: [ analysis ]
+}
+
+physics.analyzers.wirecell.saveCalib : false
+physics.analyzers.wirecell.CalibLabel: "wclsdatanfsp:gauss"
+
+physics.analyzers.wirecell.nRawSamples : 10000
+physics.analyzers.wirecell.saveJSON : true
+physics.analyzers.wirecell.SpacePointLabels : ["pandora","reco3d"]
+
+#physics.analyzers.wirecell.SpacePointLabels : ["truthDepo"]
+#physics.analyzers.wirecell.SimEnergyDepositLabel: "largeant:LArG4DetectorServicevolTPCActive"
+#physics.analyzers.wirecell.SimEnergyDepositLabel: "largeant:LArG4DetectorServicevolCryostat"

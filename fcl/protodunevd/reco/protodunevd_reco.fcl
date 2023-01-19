@@ -97,7 +97,7 @@ reco: [ caldata,
         hitpdune,
         pandora,
         pandoraTrack,
-        pandoraShower,
+        # pandoraShower,
         pandoraStdcalo,
         pandoraGnocalo #,
         ]
