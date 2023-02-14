@@ -1,0 +1,23 @@
+#include "reco_1dsignalprocessing_dune10kt_1x2x6_refactored.fcl"
+
+process_name: Reco #for reprocessing change this name to something other than Reco
+
+physics.reco: [
+    @sequence::dunefd_horizdrift_lowlevelreco,
+    @sequence::dunefd_horizdrift_hitdisambiguation,
+    @sequence::dunefd_horizdrift_2dclustering,
+    @sequence::dunefd_horizdrift_pandora,
+    @sequence::dunefd_horizdrift_pmtrack,
+    @sequence::dunefd_horizdrift_pmtrack_trajcluster,
+    @sequence::dunefd_horizdrift_pmtrack_trajcluster_pfp,
+    @sequence::dunefd_horizdrift_pmtrack_showers,
+    @sequence::dunefd_horizdrift_cvn,
+#   @sequence::dunefd_horizdrift_nuenergy,
+#   @sequence::pd_reco_path,
+         rns
+                ]
+
+     
+physics.reco[0]: caldata #This is an awful way of changing the running producer from wirecell to caldata.  Erasing the wirecell producer above should give some defence against changing the wrong element (the job will crash if we change the wrong element)
+
+physics.producers.pandora.ConfigFile: "PandoraSettings_Master_Atmos_DUNEFD.xml"

@@ -37,7 +37,7 @@ physics:
      IonAndScint: @local::dunefdvd_ionandscint
      IonAndScintExternal: @local::dunefdvd_ionandscint_external
      elecDrift:   @local::dunefd_elecdrift
-     PDFastSimAr: @local::dunevd_pdfastsim_par_ar_fastonly
+     PDFastSimAr: @local::dunevd_pdfastsim_par_ar
      PDFastSimXe: @local::dunevd_pdfastsim_par_xe
      PDFastSimExternal: @local::dunevd_pdfastsim_pvs_external
      rns:         { module_type: "RandomNumberSaver" }

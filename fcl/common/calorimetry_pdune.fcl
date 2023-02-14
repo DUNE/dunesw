@@ -1,4 +1,5 @@
 #include "calorimetry.fcl"
+#include "calorimetry_vdcb.fcl"
 #include "ShowerCalorimetry.fcl"
 
 BEGIN_PROLOG
@@ -92,6 +93,7 @@ pdune_dp_calorimetryalgmc.CaloDoLifeTimeCorrection: false
 pdune_dp_calorimetryalgmc.CalAreaConstants: [ 14.275E-3, 14.275E-3 ]
 pdune_dp_calorimetryalgmc.CaloUseModBox: true
 
+# standard calo module 
 pdune_dp_calodata:                       @local::standard_calodata
 pdune_dp_calodata.CaloAlg:               @local::pdune_dp_calorimetryalgdata
 pdune_dp_calodata.CaloAlg.CaloUseModBox: true
@@ -100,6 +102,48 @@ pdune_dp_calodata.SpacePointModuleLabel: "pandora"
 pdune_dp_calodata.CorrectSCE:            false
 pdune_dp_calodata.T0ModuleLabel:         ""
 pdune_dp_calodata.MakeTree:              false
+
+# gnocchi calor module
+pdune_dp_gnocalodata:
+{
+    module_type:                     "GnocchiCalorimetry"
+    TrackModuleLabel:                "pandoraTrack"
+    AssocHitModuleLabel:             "pandoraTrack"
+    T0ModuleLabel:                   ""
+    ChargeMethod:                    2
+    FieldDistortion:                 false
+    FieldDistortionEfield:           false
+    TrackIsFieldDistortionCorrected: false
+    Cryostat:                        0
+    CaloAlg:                         @local::pdune_dp_calorimetryalgdata
+    NormTools:                       []
+}
+# standard calo module 
+pdune_vd_standard_calodata:                          @local::standard_calodata
+pdune_vd_standard_calodata.CaloAlg:                   @local::vdcb_calorimetryalgdata
+pdune_vd_standard_calodata.TrackModuleLabel:         "pandoraTrack"
+pdune_vd_standard_calodata.SpacePointModuleLabel:    "pandora"
+pdune_vd_standard_calodata.T0ModuleLabel:            ""
+pdune_vd_standard_calodata.CorrectSCE:           false
+
+
+# gnocchi calor module
+pdune_vd_gnocchi_calodata:
+{
+    module_type:                     "GnocchiCalorimetry"
+    TrackModuleLabel:                "pandoraTrack"
+    AssocHitModuleLabel:             "pandoraTrack"
+    T0ModuleLabel:                   ""
+    ChargeMethod:                    2
+    FieldDistortion:                 false
+    FieldDistortionEfield:           false
+    TrackIsFieldDistortionCorrected: false
+    Cryostat: 0
+    CaloAlg: @local::vdcb_calorimetryalgdata
+    NormTools: []
+}
+
+
 
 
 END_PROLOG

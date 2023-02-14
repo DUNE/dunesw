@@ -78,8 +78,7 @@ class GeometryCRMChannelMappingTestFixture:
   GeometryCRMChannelMappingTestFixture()
     {
       // create a new tester
-      tester_ptr = std::make_shared<Tester_t>(TesterParameters());
-      tester_ptr->Setup(*(Provider<geo::GeometryCore>()));
+      tester_ptr = std::make_shared<Tester_t>(Provider<geo::GeometryCore>());
       // if no tester is default yet, share ours:
       TesterRegistry_t::ProvideDefaultSharedResource(tester_ptr);
     }
@@ -127,4 +126,3 @@ BOOST_AUTO_TEST_CASE( ChannelMappingTestCase )
   GeometryCRMChannelMappingTestFixture::GlobalTester()
     .ChannelMappingTest();
 } // BOOST_AUTO_TEST_CASE( ChannelMappingTestCase )
-

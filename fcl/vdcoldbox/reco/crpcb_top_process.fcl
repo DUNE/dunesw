@@ -2,47 +2,13 @@
 #include "workflow_reco_crpcb_top.fcl"
 #include "vdct_decoder.fcl"
 #include "protodune_tools_dune.fcl"
-#include "vdcb_tools.fcl"
+#include "vdcb2_tools.fcl"
 #include "vdcb_dataprep_sequences.fcl"
 #include "channelstatus_vdcrp2.fcl"
 #include "channelstatus_vdcrp3.fcl"
 
 
-# group channels by adapter board for CNR filter
-data.crpcb_tde_adau: ["ADA4_U:0:61", "ADA5_U:62:125", "ADA6_U:126:189", "ADA7_U:190:253",
-		      "ADA8_U:254:317", "ADA9_U:318:379", "ADA10_U:380:411", "ADA11_U:412:443",
-		      "ADA12_U:444:475", "ADA24_U:476:507", "ADA23_U:508:539", "ADA22_U:540:571",
-		      "ADA21_U:572:633", "ADA20_U:634:697", "ADA19_U:698:761", "ADA18_U:762:825",
-		      "ADA17_U:826:889", "ADA16_U:890:951"]
-
-data.crpcb_tde_adav: ["ADA1_V:952:983", "ADA2_V:984:1015", "ADA3_V:1016:1047", 
-		      "ADA4_V:1048:1109","ADA5_V:1110:1173", "ADA6_V:1174:1237", 
-		      "ADA7_V:1238:1301", "ADA8_V:1302:1365", "ADA9_V:1366:1427",
-		      "ADA21_V:1428:1489", "ADA20_V:1490:1553", "ADA19_V:1554:1617",
-		      "ADA18_V:1618:1681", "ADA17_V:1682:1745", "ADA16_V:1746:1807",
-		      "ADA15_V:1808:1839","ADA14_V:1840:1871", "ADA13_V:1872:1903"]
-
-data.crpcb_tde_adaz: ["ADA3_Z:1904:2003", "ADA2_Z:2004:2099", "ADA1_Z:2100:2195",
-		      "ADA10_Z:2196:2295", "ADA11_Z:2296:2391", "ADA12_Z:2392:2487",
-		      "ADA24_Z:2488:2583", "ADA23_Z:2584:2679", "ADA22_Z:2680:2779",
-		      "ADA13_Z:2780:2875", "ADA14_Z:2876:2971", "ADA15_Z:2972:3071"]
-
-data.crpcb_tde_ada: [ @sequence::data.crpcb_tde_adau,
-		      @sequence::data.crpcb_tde_adav,
-		      @sequence::data.crpcb_tde_adaz ]
-
-
-data.dataprep_tools: 
-[
- digitReader,
- vdbcb_adcChannelRawRmsFiller,
- adcSampleFiller,
- vdcb_RemoveBadChannels,
- vdtcb_cnrw,
- adcKeepAllSignalFinder
-]
-tools.vdtcb_cnrw.Groups: @local::data.crpcb_tde_ada
-tools.vdbcb_adcChannelRawRmsFiller.ChannelRanges: [cru]
+data.dataprep_tools: @local::data.vdtcb2_dataprep_seqs.adc_cnrw_rmbadch
 
 services_base: {
   TFileService: { fileName: "%ifb_reco_hist.root" }
