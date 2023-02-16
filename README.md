@@ -5,7 +5,7 @@ dunesw is the top-level software product, split from the legacy dunetpc reposito
 ## Copyright and Licensing
 Copyright © 2023 FERMI NATIONAL ACCELERATOR LABORATORY for the benefit of the DUNE Collaboration.
 
-This repository, and all software contained within, is licensed under
+This repository, and all software contained within, except where noted within the individual source files, is licensed under
 the Apache License, Version 2.0 (the "License"); you may not use this
 file except in compliance with the License. You may obtain a copy of
 the License at
