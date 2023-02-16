@@ -11,7 +11,6 @@
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 #include "imagepatternalgs.fcl"
-#include "OpDetMultisim.fcl"
 #include "wirecell_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
 #include "cvn_dune.fcl"
@@ -70,7 +69,8 @@ dunefd_horizdrift_producers:
   energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
   energyrecnc:           @local::dunefd_nuenergyreco_pandora_nc
   # photon detector reconstruction
-  @table::pd_reco_modules
+  ophit:      @local::dunefd_ophit
+  opflash:    @local::dunefd_opflash
 
 }
 
@@ -146,6 +146,12 @@ dunefd_horizdrift_nuenergy:
     energyrecnc
 ]
 
+dunefd_horizdrift_pd_reco:
+[
+    ophit,
+    opflash
+]
+
 dunefd_horizdrift_workflow_reco: 
 [ 
     @sequence::dunefd_horizdrift_lowlevelreco,
@@ -158,7 +164,7 @@ dunefd_horizdrift_workflow_reco:
 #    @sequence::dunefd_horizdrift_pmtrack_showers,
     @sequence::dunefd_horizdrift_cvn,
     @sequence::dunefd_horizdrift_nuenergy,
-    @sequence::pd_reco_path,
+    @sequence::dunefd_horizdrift_pd_reco,
     rns
 ]
 
@@ -270,5 +276,9 @@ dunefd_horizdrift_producers.emshower.CNNEMModuleLabel:      "emtrkmichelid:emtrk
 dunefd_horizdrift_producers.emshower.UseCNNtoIDEMPFP:       true
 dunefd_horizdrift_producers.emshower.UseCNNtoIDEMHit:       false
 dunefd_horizdrift_producers.emshower.MinTrackLikeScore:     0.1
+
+#optical reco configuration
+dunefd_horizdrift_producers.ophit.InputModule:   opdigi
+dunefd_horizdrift_producers.opflash.InputModule: ophit
 
 END_PROLOG

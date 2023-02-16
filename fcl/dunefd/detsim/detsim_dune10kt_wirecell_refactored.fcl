@@ -1,16 +1,14 @@
 # standard_detsim_dune10kt.fcl 
 
-# Dom Brailsford (based on Alex Himmel's multidetsim)
+# Dom Brailsford 
+# (Laura Paulucci: opdetsim updated on Jan 2022)
 #
-#
-# Job fhicl for running multiple variants of the photon detector simulation simulatneously
-# Runs a single variant of TPC detsim as well
 
 #include "wirecell_dune.fcl"
 #include "services_dune.fcl"
 #include "detsimmodules_dune.fcl"
-#include "opticaldetectormodules_dune.fcl"
-#include "OpDetMultisim.fcl"
+#include "SIPMOpSensorSim.fcl"
+#include "WaveformDigitizerSim.fcl"
 
 #include "tools_dune.fcl"
 
@@ -42,11 +40,12 @@ physics: {
 #   daq:            @local::dune_detsim
 
    tpcrawdecoder: @local::tpcrawdecoder_dunefd_horizdrift
-   @table::pd_detsim_modules
+   sipmSim:       @local::xarapuca_ar
+   opdigi:        @local::standard_daphne
    rns:            { module_type: "RandomNumberSaver" }
  }
 # simulate: [ rns, daq, @sequence::pd_detsim_path ]
- simulate: [ rns, tpcrawdecoder, @sequence::pd_detsim_path ]
+ simulate: [ rns, tpcrawdecoder, sipmSim, opdigi ]
  stream1:  [ out1 ]
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
