@@ -66,7 +66,7 @@ dunefd_horizdrift_producers:
   cvnmap:                @local::dunefd_horizdrift_cvnmapper
   cvneva:                @local::dunefd_horizdrift_cvnevaluator
   #neutrino energy reco
-  energyrecnumu:         @local::dunefd_nuenergyreco_pandora_numu
+  energyrecnumu:        @local::dunefd_nuenergyreco_pandora_numu
   energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
   energyrecnc:           @local::dunefd_nuenergyreco_pandora_nc
   # photon detector reconstruction
@@ -178,6 +178,7 @@ dunefd_horizdrift_producers.pmtrack.PMAlgTracking.RunVertexing:   true
 dunefd_horizdrift_producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:  2
 dunefd_horizdrift_producers.pmtrack.PMAlgTracking.FlipToBeam:     false
 dunefd_horizdrift_producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: true
+#dunefd_horizdrift_producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: false
 
 dunefd_horizdrift_producers.pmtracktc.WireModuleLabel:            "wclsmcnfsp:gauss"
 dunefd_horizdrift_producers.pmtracktc.HitModuleLabel:               "trajcluster"
@@ -186,6 +187,7 @@ dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.RunVertexing:   true
 dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.MinSeedSize2ndPass:  2
 dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.FlipToBeam:     false
 dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx:  true
+#dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx:  false
 
 dunefd_horizdrift_producers.pmtrajfittc.HitModuleLabel:             "trajcluster"
 dunefd_horizdrift_producers.pmtrajfittc.PfpModuleLabel:             "trajcluster"
