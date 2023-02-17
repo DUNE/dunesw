@@ -3,7 +3,7 @@
 # Dom Brailsford
 # April 2020
 #
-# Runs the full suite of dune FD reconstruction algorithms, including the photon detection system (provided by Alex Himmel's fcl)
+# Runs the full suite of dune FD reconstruction algorithms, including the photon detection system
 
 #include "services_dune.fcl"
 #include "workflow_reco_dune10kt.fcl"

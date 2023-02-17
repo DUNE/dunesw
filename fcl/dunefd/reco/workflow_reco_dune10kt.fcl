@@ -11,7 +11,6 @@
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 #include "imagepatternalgs.fcl"
-#include "OpDetMultisim.fcl"
 #include "wirecell_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
 #include "cvn_dune.fcl"
@@ -66,11 +65,12 @@ dunefd_horizdrift_producers:
   cvnmap:                @local::dunefd_horizdrift_cvnmapper
   cvneva:                @local::dunefd_horizdrift_cvnevaluator
   #neutrino energy reco
-  energyrecnumu:         @local::dunefd_nuenergyreco_pandora_numu
+  energyrecnumu:        @local::dunefd_nuenergyreco_pandora_numu
   energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
   energyrecnc:           @local::dunefd_nuenergyreco_pandora_nc
   # photon detector reconstruction
-  @table::pd_reco_modules
+  ophit:      @local::dunefd_ophit
+  opflash:    @local::dunefd_opflash
 
 }
 
@@ -146,6 +146,12 @@ dunefd_horizdrift_nuenergy:
     energyrecnc
 ]
 
+dunefd_horizdrift_pd_reco:
+[
+    ophit,
+    opflash
+]
+
 dunefd_horizdrift_workflow_reco: 
 [ 
     @sequence::dunefd_horizdrift_lowlevelreco,
@@ -158,7 +164,7 @@ dunefd_horizdrift_workflow_reco:
 #    @sequence::dunefd_horizdrift_pmtrack_showers,
     @sequence::dunefd_horizdrift_cvn,
     @sequence::dunefd_horizdrift_nuenergy,
-    @sequence::pd_reco_path,
+    @sequence::dunefd_horizdrift_pd_reco,
     rns
 ]
 
@@ -178,6 +184,7 @@ dunefd_horizdrift_producers.pmtrack.PMAlgTracking.RunVertexing:   true
 dunefd_horizdrift_producers.pmtrack.PMAlgTracking.MinSeedSize2ndPass:  2
 dunefd_horizdrift_producers.pmtrack.PMAlgTracking.FlipToBeam:     false
 dunefd_horizdrift_producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: true
+#dunefd_horizdrift_producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: false
 
 dunefd_horizdrift_producers.pmtracktc.WireModuleLabel:            "wclsmcnfsp:gauss"
 dunefd_horizdrift_producers.pmtracktc.HitModuleLabel:               "trajcluster"
@@ -186,6 +193,7 @@ dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.RunVertexing:   true
 dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.MinSeedSize2ndPass:  2
 dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.FlipToBeam:     false
 dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx:  true
+#dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.AutoFlip_dQdx:  false
 
 dunefd_horizdrift_producers.pmtrajfittc.HitModuleLabel:             "trajcluster"
 dunefd_horizdrift_producers.pmtrajfittc.PfpModuleLabel:             "trajcluster"
@@ -268,5 +276,9 @@ dunefd_horizdrift_producers.emshower.CNNEMModuleLabel:      "emtrkmichelid:emtrk
 dunefd_horizdrift_producers.emshower.UseCNNtoIDEMPFP:       true
 dunefd_horizdrift_producers.emshower.UseCNNtoIDEMHit:       false
 dunefd_horizdrift_producers.emshower.MinTrackLikeScore:     0.1
+
+#optical reco configuration
+dunefd_horizdrift_producers.ophit.InputModule:   opdigi
+dunefd_horizdrift_producers.opflash.InputModule: ophit
 
 END_PROLOG
