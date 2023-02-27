@@ -1,6 +1,6 @@
 #include "services_refactored_pdune.fcl"
 #include "wirecell_dune.fcl"
-#include "WaveformDigitizerSim.fcl"
+#include "opticaldetectormodules_dune.fcl"
 #include "CRT.fcl"
 #include "tools_dune.fcl"
 
@@ -29,7 +29,7 @@ physics:
   producers:
   {
     tpcrawdecoder:  @local::wirecell_protodunehdmc
-    opdigi:         @local::standard_daphne
+    opdigi:         @local::protodune_opdigi_refactor
     crt:            @local::CRTSimRefac_standard
     rns:            { module_type: "RandomNumberSaver" }
   }
@@ -63,3 +63,5 @@ outputs:
     ]
   }
 }
+
+services.ExptGeoHelperInterface.ChannelMapClass: "DuneApaChannelMapAlg"
