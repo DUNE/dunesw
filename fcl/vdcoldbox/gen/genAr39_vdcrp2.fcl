@@ -1,0 +1,70 @@
+#include "services_vdcoldbox.fcl"
+#include "dune_radiological_model.fcl"
+
+BEGIN_PROLOG
+
+vdcoldbox_39ar:
+{
+ module_type:           "RadioGen"
+ Nuclide:               [ "39Ar" ]    # list of nuclides to simulate, supported so far: 39Ar, 60Co, 85Kr, 40K, 232Th, 238U, 222Rn
+ Material:              ["LAr"]
+ BqPercc:               [ 0.00141 ]   # activity -- Becquerels per cc. 0.00141 assumes 1.01 Bq/kg (typical for 39Ar) and a density of 1.396 g/cc for LAr
+ X0:                    [ -10. ]     # in cm in world coordinates, bottom corner of box
+ X1:                    [  10. ]     # in cm in world coordinates, top corner of box
+ Y0:                    [  -150 ]     # in cm in world coordinates, bottom corner of box
+ Y1:                    [  150. ]     # in cm in world coordinates, top corner of box
+ Z0:                    [  0. ]     # in cm in world coordinates, bottom corner of box
+ Z1:                    [  300. ]     # in cm in world coordinates, top corner of box
+ T0:                    [ 0. ] # max drift time (2.25 ms) + trigger offset (0.25 ms)
+ T1:                    [  4000000. ] # ending time in ns (readout window size)
+}                           
+
+END_PROLOG
+
+
+process_name: AR39Gen
+
+services:
+{
+  TFileService:          { fileName: "prodradiological_hist.root" }
+  TimeTracker:           {}
+  RandomNumberGenerator: {}                 # ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                 	@table::vdcb_crp2_services
+}
+
+source:
+{
+  module_type: EmptyEvent
+  timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
+  maxEvents:   10          # Number of events to create
+  firstRun:    20000014           # Run number to use for this file
+  firstEvent:  0           # number of first event in the file
+}
+
+physics:
+{
+  producers:
+  {
+    ar39Gen:     @local::vdcoldbox_39ar
+    rns:       { module_type: "RandomNumberSaver" }
+  }
+
+ simulate:      [ rns, ar39Gen ]
+  stream1:       [ out1 ]
+  trigger_paths: [ simulate ]
+  end_paths:     [ stream1 ]
+}
+
+outputs:
+{
+  out1:
+  {
+    module_type: RootOutput
+    fileName:    "prodAr39_vdcrp2_gen.root" # Default file name, can override from command line with -o or --output
+    dataTier:    "generated"
+    compressionLevel: 1
+  }
+}
+
+
