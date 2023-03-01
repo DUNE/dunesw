@@ -1,4 +1,4 @@
-#include "detsim_dune10kt_1x2x6_wirecell_refactored.fcl"
+#include "standard_detsim_dune10kt_1x2x6.fcl"
 
 physics.producers.daq:            @local::dune_detsim
 physics.producers.rns:            { module_type: "RandomNumberSaver" }
