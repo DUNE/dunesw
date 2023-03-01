@@ -236,7 +236,7 @@ dunefd_horizdrift_producers.pmtrajfittcpid.TrackModuleLabel:        "pmtrajfittc
 dunefd_horizdrift_producers.linecluster.HitFinderModuleLabel:     "hitfd"
 
 #Pandora configurations
-dunefd_horizdrift_producers.pandora.HitFinderModuleLabel:         "linecluster"
+dunefd_horizdrift_producers.pandora.HitFinderModuleLabel:         "hitfd"
 dunefd_horizdrift_producers.pandoraTrack.PFParticleLabel:         "pandora"
 dunefd_horizdrift_producers.pandoraShower.PFParticleLabel:        "pandora"
 
