@@ -1,4 +1,4 @@
-#include "reco_1dsignalprocessing_dune10kt_1x2x6_refactored.fcl"
+#include "reco_1dsignalprocessing_dune10kt_1x2x6.fcl"
 
 process_name: Reco #for reprocessing change this name to something other than Reco
 

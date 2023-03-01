@@ -1,4 +1,4 @@
-#include "reco_dune10kt_1x2x6_wirecell_refactored.fcl"
+#include "standard_reco_dune10kt_1x2x6.fcl"
 
 physics.producers:
 {
