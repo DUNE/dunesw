@@ -1,0 +1,39 @@
+# crpcb_data_reco.fcl
+#
+# David Adams
+# March 2023
+#
+# Top-level full reco for vdct (2022 vertical-drift top-electronics coldbox)
+# runs with CRP2 and later.
+#
+#include "crpcb_top_process.fcl"
+#include "channelstatus_vdct.fcl"
+
+process_name: CRPCBDataReco
+
+services: @local::crp2_july22_services
+
+# Add service that sets context, i.e. makes the run and event numbers
+# globally available.
+services.EventContextService: {
+  service_provider: EventContextService
+  LogLevel: 1
+}
+
+# Use the context-dependent channel status service for
+# vertical-drift top-electronics data.
+services.ChannelStatusService: @local::data.ChannelStatusService_vdct
+
+source: @local::data_source
+
+outputs: {
+  rootout: @local::proc_rootout
+}
+
+physics: {
+  producers: @local::crp2_july22_prod_config
+  produce: @local::crp2_july22_prod_seq
+  output : [ rootout ]
+  trigger_paths: [ produce ]
+  end_paths : [ output ]
+}
