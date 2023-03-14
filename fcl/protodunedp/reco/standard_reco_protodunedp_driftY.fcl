@@ -26,6 +26,7 @@ services:
 
 services.CrpGainService:					@local::protodunedphase_crpgain
 services.ChannelStatusService:         				@local::pddp_channel_status_lemblind
+services.AuxDetGeometry: @local::protodunedphase_driftY_auxdet_geo
 services.Geometry: @local::protodunedphase_driftY_geo
 services.DetectorPropertiesService: @local::protodunedphase_detproperties
 

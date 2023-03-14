@@ -167,8 +167,7 @@ services:
     @table::dunefd_1x2x6_services
 }
 services.Geometry.GDML: "dune10kt_v4_refactored_1x2x2.gdml"
-services.Geometry.Name: "dune10kt_v4_refactored_1x2x2"
-services.Geometry.ROOT: "dune10kt_v4_refactored_1x2x2.gdml"
+services.AuxDetGeometry.GDML: @local::services.Geometry.GDML
 
 
 physics.producers.marley.marley_parameters.reactions: ["ES.react", "ve40ArCC_Bhattacharya2009.react" ]

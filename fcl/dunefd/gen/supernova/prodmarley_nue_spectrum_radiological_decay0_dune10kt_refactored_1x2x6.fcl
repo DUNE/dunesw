@@ -3,8 +3,7 @@
 #include "dune_radiological_model_decay0.fcl"
 #
 services.Geometry.GDML: "dune10kt_v4_refactored_1x2x6.gdml"
-services.Geometry.name: "dune10kt_v4_refactored_1x2x6"
-services.Geometry.ROOT: "dune10kt_v4_refactored_1x2x6.gdml"
+services.AuxDetGeometry.GDML: @local::services.Geometry.GDML
 
 dune10kt_1x2x2_neutron_from_rock: // Center region is added to simulate neutrons comming in from the rock at the outermost APAs (on the edge of the cryostat) per J. Reichenbacher's request. This should more accurately represent the worst case scenario in the FD.
 {
