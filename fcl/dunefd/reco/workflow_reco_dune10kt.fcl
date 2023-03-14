@@ -20,7 +20,7 @@ BEGIN_PROLOG
 
 dunefd_horizdrift_producers:
 {
-# random number saver
+  # random number saver
   rns:                 { module_type: RandomNumberSaver }
   # data preparation and, optionally, 1D signal processing
   caldata:            @local::producer_adcprep_notool
@@ -152,10 +152,15 @@ dunefd_horizdrift_pd_reco:
     opflash
 ]
 
-dunefd_horizdrift_workflow_reco: 
-[ 
+dunefd_horizdrift_workflow_reco1:
+[
     @sequence::dunefd_horizdrift_lowlevelreco,
     @sequence::dunefd_horizdrift_hitdisambiguation,
+    rns
+]
+
+dunefd_horizdrift_workflow_reco2:
+[
     @sequence::dunefd_horizdrift_2dclustering,
     @sequence::dunefd_horizdrift_pandora,
     @sequence::dunefd_horizdrift_pmtrack,
@@ -166,6 +171,12 @@ dunefd_horizdrift_workflow_reco:
     @sequence::dunefd_horizdrift_nuenergy,
     @sequence::dunefd_horizdrift_pd_reco,
     rns
+]
+
+dunefd_horizdrift_workflow_reco: 
+[ 
+    @sequence::dunefd_horizdrift_workflow_reco1,
+    @sequence::dunefd_horizdrift_workflow_reco2
 ]
 
 ### Here, we overwrite ALL module labels with the ones defined above.
