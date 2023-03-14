@@ -15,5 +15,5 @@ source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco2" ]
 
 physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco2 ]
 
-outputs.out1.fileName: "%ifb_reco.root"
-outputs.out1.fileName: "hit-reconstructed"
+outputs.out1.fileName: "%ifb_reco2.root"
+outputs.out1.dataTier: "full-reconstructed"
