@@ -91,3 +91,4 @@ services.TFileService.fileName: "gen_protoDune_beam_p1GeV_cosmics_hist.root"
 source.maxEvents: 10
 outputs.out1.fileName: "gen_protoDune_beam_p1GeV_cosmics.root"
 
+physics.producers.generator.StreamInput: true
