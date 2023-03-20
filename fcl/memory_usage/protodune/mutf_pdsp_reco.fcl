@@ -1,0 +1,24 @@
+## same as protoDUNE_refactored_reco_35ms_sce_datadriven_stage1.fcl, with sce; with lifetime correction, no yz, x, t correction; *calinoxyzt<->*cali; *calipidnoxyzt<->*calipid
+## this fcl is currently kept; we use two stage recos once we have calibration done: protoDUNE_refactored_reco_35ms_sce_datadriven_stage1.fcl and protoDUNE_refactored_reco_35ms_sce_datadriven_stage2.fcl
+
+#include "protoDUNE_refactored_reco.fcl"
+
+physics.producers.pandoracalo:           @local::pdune_sp_calomcsce
+physics.producers.pandoraShowercalo:     @local::pdune_sp_showercalomcsce
+physics.producers.pandora2calo:          @local::pdune_sp_alltrackcalomcsce
+physics.producers.pandora2Showercalo:    @local::pdune_sp_allshowercalomcsce
+physics.producers.pandoracali:           @local::protodunespmcsce_calibrationdedx
+
+services.DetectorPropertiesService.Electronlifetime: 35000
+
+services.SpaceCharge.EnableCalEfieldSCE: true
+services.SpaceCharge.EnableCalSpatialSCE: true
+
+# xyzt database
+services.XYZCalibService.IsMC: true
+services.XYZCalibService.UseCondbXYZCorr: false 
+services.XYZCalibService.YZCorrDBTag: "prod4"
+services.XYZCalibService.XCorrDBTag: "prod4"
+services.XYZCalibService.NormCorrDBTag: "prod4"
+
+services.MemoryTracker.dbOutput.filename: "recomem.db"

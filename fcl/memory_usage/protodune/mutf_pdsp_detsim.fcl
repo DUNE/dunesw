@@ -1,0 +1,3 @@
+#include "protoDUNE_refactored_detsim.fcl"
+services.MemoryTracker.dbOutput.filename: "detsimmem.db"
+
