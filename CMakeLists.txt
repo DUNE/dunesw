@@ -7,7 +7,7 @@
 cmake_minimum_required (VERSION 3.19 FATAL_ERROR)
 
 project(dunesw LANGUAGES CXX)
-set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.69.01d00)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.69.01g01)
 
 # cetbuildtools contains our cmake modules
 find_package(cetbuildtools REQUIRED)

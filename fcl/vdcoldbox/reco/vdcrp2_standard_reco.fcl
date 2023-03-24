@@ -1,0 +1,129 @@
+# vdcrp2_standard_reco.fcl
+#
+# Job fcl for running the coldbox crp2 reconstruction (mc)
+#
+
+#include "services_dune.fcl"
+#include "services_vdcoldbox.fcl" 
+##include "workflow_reco_vdcrp2_mc.fcl"
+
+#include "pandoramodules_dune.fcl"
+#include "wirecell_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "calorimetry_vdcb.fcl"
+#include "pid_dune10kt.fcl"
+#include "energyreco.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "dataprep_dune.fcl"
+#include "SpacePointSolver_dune.fcl"
+
+
+#include "channelstatus_vdcb.fcl"
+#include "channelstatus_vdct.fcl"
+#include "vdcb_dataprep_sequences.fcl"
+#include "tools_dune.fcl"
+
+
+process_name: Reco
+
+services:
+{
+   TFileService: { fileName: "%ifb_reco_hist.root" }
+   TimeTracker:       @local::dune_time_tracker
+   MemoryTracker:        @local::dune_memory_tracker
+   RandomNumberGenerator: {} #ART native random number generator
+   FileCatalogMetadata:  @local::art_file_catalog_mc
+   @table::vdcb_crp2_services
+   @table::vdcb_dataprep_base_services
+   message:              @local::dune_message_services_prod
+   IFDH: {}
+#   SpaceCharge: @local::dunefd_spacecharge
+   @table::vdcb_sim_base_services
+}
+
+#source is a root file
+source: {
+  module_type: RootInput
+  maxEvents:  -1
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics: {
+ producers: {
+   caldata: @local::producer_adcprep_notool
+#  @table::dunecbcrp2_vertdrift_producers
+   rns:            { module_type: "RandomNumberSaver" }
+   # WCL placeholder
+   wclsvdcrp2:       @local::dune_vd_crp2_nfsp
+   # actual hit finder
+   gaushit:            @local::dunevdfd_gaushitfinder
+
+   hitpdune:           @local::pdune_disambigfromsp
+   reco3d:             @local::protodunespmc_spacepointsolver
+
+   # pattern recognition
+   pandora:            @local::dunefdvd_pandora_cosmic
+   # Characterisation
+   pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
+   pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
+
+   # calorimetry modules
+   pandoraStdCalo:     @local::vdcb_standard_calodata
+   pandoraGnoCalo:     @local::vdcb_gnocchi_calodata
+
+   # PID
+   pandorapid:         @local::dunevd10kt_pid_pandora
+
+ }
+
+ reco:[caldata, 
+       rns,
+       wclsvdcrp2,
+       gaushit,
+       reco3d,
+       hitpdune,
+       pandora,
+       pandoraTrack,
+       pandoraShower,
+       pandoraStdCalo,
+       pandoraGnoCalo,
+       pandorapid 
+	]
+
+
+ stream1:  [ out1 ]
+ trigger_paths: [reco] 
+ end_paths:     [stream1]  
+}
+
+outputs: {
+ out1: {
+   module_type: RootOutput
+   fileName:    "%ifb_reco.root"
+   dataTier:    "reconstructed"
+   compressionLevel: 1
+ }
+}
+#caldata
+physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+physics.producers.caldata.WireName: "dataprep"
+physics.producers.caldata.LogLevel: 3
+
+
+# gaushit
+physics.producers.gaushit.CalDataModuleLabel: "wclsvdcrp2:gauss"
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 1.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 1.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 1.0
+
+# pandora
+physics.producers.pandora.ShouldRunAllHitsCosmicReco: true
+physics.producers.pandora.ShouldRunNeutrinoRecoOption: false
+physics.producers.pandora.GeantModuleLabel: "tpcrawdecoder:simpleSC"
+physics.producers.pandora.HitFinderModuleLabel: "hitpdune"
+
+#pandorapid
+physics.producers.pandorapid.CalorimetryModuleLabel: "pandoraGnoCalo"
+

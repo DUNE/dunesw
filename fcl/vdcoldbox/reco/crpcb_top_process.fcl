@@ -66,6 +66,7 @@ crp2_july22_prod_config: {
 }
 crp2_july22_prod_config.caldata.DecoderTool: ""
 crp2_july22_prod_config.caldata.DigitLabel:  "tpcrawdecoder:daq"
+crp2_july22_prod_config.caldata.StatusLabel:  "daq"
 crp2_july22_prod_config.caldata.WireName: "dataprep"
 crp2_july22_prod_config.caldata.ChannelGroups: ["cru"]
 crp2_july22_prod_config.caldata.DoGroups: true
