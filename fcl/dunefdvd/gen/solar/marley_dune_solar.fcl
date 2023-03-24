@@ -1,37 +1,21 @@
-#include "marley.fcl" 
+#include "marley.fcl"
 
 BEGIN_PROLOG
 
 # DUNE-specific MARLEY configurations
 dune_marley_monoenergetic: @local::standard_marley_monoenergetic
-dune_marley_monoenergetic.marley_parameters.source: {
-      
-      type: "monoenergetic"
-      # May be either a string or a PDG code. Note that
-      # for the current reactions, only ve is allowed.
-      neutrino: "ve"
-      energy: 15. # MeV
-}
+dune_marley_nue_spectrum: @local::standard_marley_nue_spectrum
+dune_marley_fermi_dirac: @local::standard_marley_fermi_dirac
 
-dune_marley_solar_nue_spectrum: @local::standard_marley
-# dune_marley_solar_nue_spectrum.marley_parameters.reactions: [ "ve40ArCC_Bhattacharya1998.react" ]
-# dune_marley_solar_nue_spectrum.marley_parameters.reactions: [ "ve40ArCC_Liu1998.react" ]
-dune_marley_solar_nue_spectrum.marley_parameters.source: {
-      
+dune_marley_flat: @local::standard_marley
+dune_marley_flat.marley_parameters.source: {
       type: "histogram"
       neutrino: "ve"
-      E_bin_lefts: [14. ,14.2,14.4,14.6,14.8,15. ,15.2,15.4,15.6,15.8,16. ,16.2,16.4,16.6,
-      16.8,17. ,17.2,17.4,17.6,17.8,18. ,18.2,18.4,18.6,18.8]  # Low edge of uniform distribution
-      
-      weights: [1.09785049e+04,6.79961334e+03,4.08387210e+03,2.42927194e+03,
-      1.46472393e+03,9.15840057e+02,6.08306637e+02,4.37343151e+02,
-      3.42007281e+02,2.86277870e+02,2.50177222e+02,2.22393525e+02,
-      1.97953875e+02,1.75324583e+02,1.53406139e+02,1.32314237e+02,
-      1.12272567e+02,9.33510138e+01,7.55617980e+01,5.92398746e+01,
-      4.44134213e+01,3.11436059e+01,1.96672122e+01,9.89277036e+00,
-      0.00000000e+00]       # Can be any positive value
+      E_bin_lefts: [ 4. ]   # Low edge of uniform distribution
+      weights: [ 1. ]       # Can be any positive value
       Emax: 20.             # High edge of uniform distribution
-      weight_flux: false    # Tells MARLEY to apply cross section weighting
-}
+      weight_flux: false    # Tells MARLEY not to apply cross section weighting
+    }
+
 
 END_PROLOG

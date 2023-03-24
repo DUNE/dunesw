@@ -29,9 +29,9 @@ physics:
    {
       ##########################################################################
       # Liquid Argon
-      Ar39GenInLAr:		@local::dune10kt_39Ar_in_LAr
-      Kr85GenInLAr:             @local::dune10kt_85Kr_in_LAr
-      Ar42GenInLAr:             @local::dune10kt_42Ar_in_LAr
+      Ar39GenInLAr:		   @local::dune10kt_39Ar_in_LAr
+      Kr85GenInLAr:        @local::dune10kt_85Kr_in_LAr
+      Ar42GenInLAr:        @local::dune10kt_42Ar_in_LAr
       K42From42ArGenInLAr:	@local::dune10kt_42Kfrom42Ar_in_LAr
       Rn222ChainGenInLAr:	@local::dune10kt_222Rn_chain_in_LAr
       ##########################################################################
@@ -39,7 +39,7 @@ physics:
       ##########################################################################
       # Cathode
       K42From42ArGenInCPA:	@local::dune10kt_42Kfrom42Ar_in_CPA
-      K40inGenInCPA:	 	@local::dune10kt_40K_in_CPA
+      K40inGenInCPA:	 	   @local::dune10kt_40K_in_CPA
       U238ChainGenInCPA: 	@local::dune10kt_238U_chain_in_CPA
       ##########################################################################
 
@@ -56,8 +56,8 @@ physics:
 
       ##########################################################################
       # Externals
-      NeutronGenInRock:    	@local::dune10kt_neutron_from_rock
-      GammasGenInRock:          @local::dune10kt_caverngammas
+      NeutronGenInRock:    @local::dune10kt_neutron_from_rock
+      GammasGenInRock:     @local::dune10kt_caverngammas
       ##########################################################################
 
       rns:       { module_type: "RandomNumberSaver" }
