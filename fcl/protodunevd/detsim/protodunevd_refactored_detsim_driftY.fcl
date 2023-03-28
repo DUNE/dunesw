@@ -46,6 +46,10 @@ physics:
   end_paths:     [stream1]  
 }
 
+physics.producers.tpcrawdecoder.wcls_main.configs: ["pgrapher/experiment/protodunevd/wcls-sim-drift-y-simchannel.jsonnet"]
+physics.producers.tpcrawdecoder.wcls_main.outputers: ["wclsFrameSaver:simdigits"]
+physics.producers.tpcrawdecoder.wcls_main.params.wires: "protodunevd-wires-larsoft-v1-drift-y.json.bz2"
+
 outputs:
 {
   out1:
