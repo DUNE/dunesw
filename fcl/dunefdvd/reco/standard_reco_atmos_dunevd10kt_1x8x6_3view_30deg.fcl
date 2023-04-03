@@ -1,0 +1,4 @@
+#include "standard_reco_dunevd10kt_1x8x6_3view_30deg.fcl"
+
+physics.producers.pandora.ConfigFile:   "PandoraSettings_Master_Atmos_DUNEFD.xml"
+physics.producers.pandora.EnableMCParticles:   true
