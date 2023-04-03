@@ -1,4 +1,4 @@
 #include "standard_reco_dune10kt_1x2x6.fcl"
 
 physics.producers.pandora.ConfigFile:   "PandoraSettings_Master_Atmos_DUNEFD.xml"
-
+physics.producers.pandora.EnableMCParticles:   true
