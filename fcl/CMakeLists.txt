@@ -10,5 +10,6 @@ add_subdirectory(3x1x1dp)
 add_subdirectory(evd)
 add_subdirectory(dunefddp)
 add_subdirectory(vdcoldbox)
+add_subdirectory(iceberg)
 
 install_fhicl()
