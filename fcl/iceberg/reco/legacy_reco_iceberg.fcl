@@ -1,0 +1,31 @@
+#include "standard_reco_dune10kt_legacy.fcl"
+process_name: Reco
+services.Geometry: @local::iceberg_geo
+physics.reco: [ 
+"rns", 
+"caldata", 
+"gaushit", 
+"hitfd", 
+"linecluster", 
+"trajcluster",       
+"trkshowersplit",
+"pandora",
+"pandoraTrack",
+"pandoraShower",
+"pandoracalo",
+"pandorapid",
+"pmtrack",
+"pmtrackcalo",
+"pmtrackpid",
+"pmtrajfit",
+"pmtrajfitcalo",
+"pmtrajfitpid",
+"pmtracktc",
+"pmtracktccalo",
+"pmtracktcpid",
+"pmtrajfittc",
+"pmtrajfittccalo",
+"pmtrajfittcpid",
+"blurredcluster",
+"emtrkmichelid",
+"emshower" ]

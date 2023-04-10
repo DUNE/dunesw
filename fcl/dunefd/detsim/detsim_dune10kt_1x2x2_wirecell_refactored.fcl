@@ -9,5 +9,5 @@ services:
 physics.producers: 
 {
     @table::physics.producers
-    tpcrawdecoder: @local::tpcrawdecoder_dunefd_horizdrift_1x2x6
+    tpcrawdecoder: @local::tpcrawdecoder_dunefd_horizdrift_1x2x2
 }
