@@ -64,8 +64,9 @@ crp4_prod_config: {
   @table::dunecrpcb_top_producers
 }
 crp4_prod_config.caldata.DecoderTool: "crp4_decoder"
-crp4_prod_config.caldata.DigitLabel:  "tpcrawdecoder:daq"
-crp4_prod_config.caldata.StatusLabel:  "daq"
+crp4_prod_config.caldata.DigitLabel:  "none"
+crp4_prod_config.caldata.StatusLabel:  "none"
+crp4_prod_config.caldata.TriggerLabel:  "none"
 crp4_prod_config.caldata.WireName: "dataprep"
 crp4_prod_config.caldata.ChannelGroups: ["cru"]
 crp4_prod_config.caldata.DoGroups: true
