@@ -1,6 +1,6 @@
 #include "services_dune.fcl"
 #include "marley_dune_solar.fcl"
-#include "dune_radiological_model_decay0_vd_1x8x6.fcl"
+#include "dune_radiological_model_decay0_vd_1x8x14.fcl"
 
 process_name: MARLEYGen
 
@@ -34,7 +34,7 @@ physics:
 
       ##########################################################################
       # Liquid Argon
-      Ar39GenInLAr:		   @local::dune10kt_39Ar_in_LAr
+      # Ar39GenInLAr:		   @local::dune10kt_39Ar_in_LAr
       # Kr85GenInLAr:        @local::dune10kt_85Kr_in_LAr
       # Ar42GenInLAr:        @local::dune10kt_42Ar_in_LAr
       # K42From42ArGenInLAr:	@local::dune10kt_42Kfrom42Ar_in_LAr
@@ -44,7 +44,7 @@ physics:
       ##########################################################################
       # Cathode
       # K42From42ArGenInCPA:	@local::dune10kt_42Kfrom42Ar_in_CPA
-      # K40inGenInCPA:	 	   @local::dune10kt_40K_in_CPA
+      K40inGenInCPA:	 	   @local::dune10kt_40K_in_CPA
       # U238ChainGenInCPA: 	@local::dune10kt_238U_chain_in_CPA
       ##########################################################################
 
@@ -69,7 +69,7 @@ physics:
    }
 
    # simulate: [rns, marley, Ar39GenInLAr, Kr85GenInLAr, Ar42GenInLAr, K42From42ArGenInLAr, Rn222ChainGenInLAr, K42From42ArGenInCPA, K40inGenInCPA, U238ChainGenInCPA, Co60inGenInAPA, U238ChainGenInAPA, Rn222ChainGenInPDS, NeutronGenInRock, GammasGenInRock]
-   simulate: [rns, marley, Ar39GenInLAr]
+   simulate: [rns, marley, K40inGenInCPA]
    
    stream1:       [ out1 ]
    trigger_paths: [ simulate ] 
@@ -81,7 +81,7 @@ outputs:
    out1:
    {
       module_type: RootOutput
-      fileName:    "prodmarley_flat_ar39_dunevd10kt_1x8x14_3view_30deg_gen.root" # Default file name, can override from command line with -o or --output
+      fileName:    "prodmarley_flat_k40cpa_dunevd10kt_1x8x14_3view_30deg_gen.root" # Default file name, can override from command line with -o or --output
       dataTier:    "generated"
       compressionLevel: 1
    }
@@ -93,5 +93,4 @@ services:
     @table::dunefdvd_1x8x14_3view_30deg_simulation_services
 }
 
-physics.producers.Ar39GenInLAr.dune10kt_39Ar_in_LAr.BqPercc: 0.00141 # Default
-# physics.producers.Ar39GenInLAr.dune10kt_39Ar_in_LAr.BqPercc: 1. # Default
+physics.producers.K40inGenInCPA.dune10kt_40K_in_CPA.BqPercc: 0.0091 # Default is 0.0091
