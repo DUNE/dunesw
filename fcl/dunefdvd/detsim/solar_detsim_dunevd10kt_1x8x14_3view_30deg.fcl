@@ -1,0 +1,90 @@
+# standard_detsim_dunevd10kt.fcl 
+
+# Dom Brailsford
+#
+#
+# Job fcl for running the VD detector simulation
+
+##include "wirecell_dune.fcl"
+##include "services_dune.fcl"
+##include "detsimmodules_dune.fcl"
+##include "opticaldetectormodules_dune.fcl"
+#include "workflow_detsim_dunevd10kt.fcl"
+
+#include "tools_dune.fcl"
+
+process_name: detsim
+
+
+services:
+{
+   TFileService: { fileName: "%ifb_detsim_hist.root" }
+   TimeTracker:       {}
+   MemoryTracker:         { } # default is one
+   RandomNumberGenerator: {} #ART native random number generator
+   FileCatalogMetadata:  @local::art_file_catalog_mc
+   @table::dunefdvd_simulation_services
+   message:              @local::dune_message_services_prod
+   @table::dunefdvd_1x8x14_3view_30deg_simulation_services
+
+}
+
+#source is now a root file
+source: {
+  module_type: RootInput
+  maxEvents:  1000         # Number of events to create
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics: {
+  producers: {
+    @table::dunefd_vertdrift_producers 
+    tpcrawdecoder: @local::dune10kt_dunefd_vertdrift_1x8x14_3view_30deg_sim_nfsp
+}
+
+# simulate: [ rns, daq, @sequence::pd_detsim_path ]
+ simulate: [ @sequence::dunefd_vertdrift_detsim_tpc_only ]
+ stream1:  [ out1 ]
+ trigger_paths: [simulate] 
+ end_paths:     [stream1]  
+}
+
+outputs: {
+ out1: {
+   module_type: RootOutput
+   fileName:    "%ifb_detsim.root"
+   dataTier:    "detector-simulated"
+   compressionLevel: 1
+ }
+}
+
+## Use fixed values instead of DB for pedestals.
+#services.DetPedestalService: @local::dune_fixedpeds
+#
+## DetSim flags.
+#physics.producers.daq.NoiseOn:     true
+#physics.producers.daq.PedestalOn:  true
+#physics.producers.daq.DistortOn:   false
+#physics.producers.daq.SuppressOn:  true
+#
+## DetSim services.
+#services.SimChannelExtractService: @local::scxgeneric
+#services.ChannelNoiseService:      @local::chnoiseold
+#services.PedestalAdditionService:  @local::padprovided
+#services.AdcDistortService:        @local::stuckbits
+#services.AdcSuppressService:       @local::zslegacy
+#services.AdcCompressService:       @local::cmpblock
+#
+## Disable bad channels.
+##services.IChannelStatusService.BadChannels: [ ]
+#
+#### Supernova detsim noise levels ###
+#### What value do I want for the Noise Level?
+#services.ChannelNoiseService.NoiseNormU:  5.75
+#services.ChannelNoiseService.NoiseNormV:  5.75
+#services.ChannelNoiseService.NoiseNormZ:  4.5
+
+#configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
+#=> configs: ["pgrapher/experiment/dune10kt-1x2x6/wcls-sim-drift-simchannel.jsonnet"]

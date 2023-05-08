@@ -1,0 +1,127 @@
+# workflow_reco_dunevd10kt.fcl
+
+# Dom Brailsford
+# Laura Paulucci: adding pmtracktc for LE events
+
+#Configuration fcl for the reconstruction workflows
+#include "pandoramodules_dune.fcl"
+#include "wirecell_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "calorimetry_dune10kt.fcl"
+#include "pid_dune10kt.fcl"
+#include "cvn_dune.fcl"
+#include "energyreco.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "trackfindermodules_dune.fcl"
+#include "clusterfinder_dune.fcl"
+
+BEGIN_PROLOG
+
+dunefd_vertdrift_producers:
+{
+   rns:            { module_type: "RandomNumberSaver" }
+   wclsdatanfsp:       @local::dune10kt_dunefd_vertdrift_data_nfsp
+   # actual hit finder
+   gaushit:            @local::dunevdfd_gaushitfinder
+   # pattern recognition
+   pandora:            @local::dunefdvd_pandora_neutrino
+   # Characterisation
+   pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
+   pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
+   # PID
+   pandoracalo:        @local::dunevd10kt_calomc_pandora
+   pandorapid:         @local::dunevd10kt_pid_pandora
+   cvnmap:             @local::dunevd10kt_cvnmapper
+   cvneval:            @local::dunevd10kt_3view_cvnevaluator
+   # Neutrino energy
+   energyrecnumu:         @local::dunefdvd_nuenergyreco_pandora_numu
+   energyrecnue:          @local::dunefdvd_nuenergyreco_pandora_nue
+   energyrecnc:           @local::dunefdvd_nuenergyreco_pandora_nc
+   # PDS reconstruction
+   #    ophitArOnly:     @local::dunefdvd_ophit
+   #    ophitXeOnly:     @local::dunefdvd_ophit
+   #    ophit10ppm:      @local::dunefdvd_ophit
+   #    opflashArOnly:   @local::dunefd_opflash
+   #    opflashXeOnly:   @local::dunefd_opflash
+   #    opflash10ppm:    @local::dunefd_opflash
+   #PMTRACKTC for LE events
+   linecluster:        @local::dunefdvd_linecluster
+   trajcluster:        @local::dunefdvd_trajcluster
+   pmtracktc:          @local::dunefdvd_pmalgtrackmaker    #PMA using trajcluster clusters
+#   pmtracktccalo:      @local::dunevd10kt_calomc
+#   pmtracktcpid:       @local::standard_chi2pid
+   energyrecpmtracktc: @local::dunefdvd_nuenergyreco_pmtracktc     
+}
+
+dunefd_vertdrift_tpc:
+[
+#    wclsdatanfsp,
+    gaushit,
+    pandora,
+    pandoraTrack,
+    pandoraShower,
+    pandoracalo,
+    pandorapid,
+    cvnmap,
+    cvneval,
+    energyrecnumu,
+    energyrecnue,
+    energyrecnc
+]
+
+dunefd_vertdrift_pds:
+[
+    ophit10ppm, 
+    opflash10ppm
+]
+
+dunefd_vertdrift_tpc_le:
+[
+    gaushit,
+    pandora,
+    pandoraTrack,
+    pandoraShower,
+    pandoracalo,
+    pandorapid,
+    linecluster, 
+    trajcluster, 
+    pmtracktc, 
+    energyrecpmtracktc
+]
+
+dunefd_vertdrift_reco_tpc_only:
+[
+    @sequence::dunefd_vertdrift_tpc,
+    rns
+]
+
+dunefd_vertdrift_reco_pds_only:
+[
+    @sequence::dunefd_vertdrift_pds,
+    rns
+]
+
+dunefd_vertdrift_reco_all_systems:
+[
+    @sequence::dunefd_vertdrift_tpc,
+    @sequence::dunefd_vertdrift_pds,
+    rns
+]
+
+
+dunefd_vertdrift_reco_le:
+[
+    @sequence::dunefd_vertdrift_tpc_le,
+    @sequence::dunefd_vertdrift_pds,
+    rns
+]
+
+# dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly
+# dunefd_vertdrift_producers.ophitXeOnly.InputModule:      opdigiXeOnly
+# dunefd_vertdrift_producers.ophit10ppm.InputModule:       opdigi10ppm
+# dunefd_vertdrift_producers.opflashArOnly.InputModule:    ophitArOnly
+# dunefd_vertdrift_producers.opflashXeOnly.InputModule:    ophitXeOnly
+# dunefd_vertdrift_producers.opflash10ppm.InputModule:     ophit10ppm
+
+END_PROLOG
+
