@@ -4,8 +4,8 @@
 #include "protodune_tools_dune.fcl"
 #include "vdcb2_tools.fcl"
 #include "vdcb_dataprep_sequences.fcl"
-#include "channelstatus_vdcrp2.fcl"
-#include "channelstatus_vdcrp3.fcl"
+#include "channelstatus_vdcrp4.fcl"
+#include "channelstatus_vdcrp5.fcl"
 
 
 data.dataprep_tools: @local::data.vdtcb2_dataprep_seqs.adc_cnrw_rmbadch
@@ -51,7 +51,7 @@ crp4_services: {
   @table::services_base
   @table::vdcb_crp2_data_services
   SpaceCharge: @local::dunefd_spacecharge
-  ChannelStatusService: @local::data.ChannelStatusService_vdcrp2
+  ChannelStatusService: @local::data.ChannelStatusService_vdcrp4
 }
 crp4_services.DetectorPropertiesService.Efield: @local::data.crp4cb_Efield
 crp4_services.RawDigitPrepService.ToolNames: @local::data.dataprep_tools #data.vdcb_dataprep_seqs.nocal
