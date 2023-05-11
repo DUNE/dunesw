@@ -1,0 +1,21 @@
+#include "crpcb_bottom_process.fcl"
+
+process_name: CRP4CBDataReco
+
+services: @local::crp4_services
+services.PD2HDChannelMapService.FileName: "vdcbce_chanmap_v4.txt"
+services.HDF5RawFile2Service: {}
+
+source: @local::data_source
+
+outputs: {
+  rootout: @local::proc_rootout
+}
+
+physics: {
+  producers: @local::crp4_prod_config
+  produce: @local::crp4_prod_seq
+  output : [ rootout ]
+  trigger_paths: [ produce ]
+  end_paths : [ output ]
+}

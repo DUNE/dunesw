@@ -35,8 +35,8 @@ proc_rootout: {
     streamName: "test"
 }
 
-data.crp2cb_july22_Efield:  [0.411, 1.0, 1.0]
-data.crp3cb_oct22_Efield:   [0.411, 1.0, 1.0]
+data.crp2cb_july22_Efield:  [0.441, 1.0, 1.0]
+data.crp3cb_oct22_Efield:   [0.441, 1.0, 1.0]
 
 crp2_july22_services: {
   @table::services_base

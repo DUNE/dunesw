@@ -1,0 +1,90 @@
+#include "services_vdcoldbox.fcl"
+#include "workflow_reco_crpcb_top.fcl"
+#include "vdct_decoder.fcl"
+#include "protodune_tools_dune.fcl"
+#include "vdcb2_tools.fcl"
+#include "vdcb_dataprep_sequences.fcl"
+#include "channelstatus_vdcrp4.fcl"
+#include "channelstatus_vdcrp5.fcl"
+
+
+data.dataprep_tools: @local::data.vdtcb2_dataprep_seqs.adc_cnrw_rmbadch
+
+services_base: {
+  TFileService: { fileName: "%ifb_reco_hist.root" }
+  TimeTracker:       @local::dune_time_tracker
+  MemoryTracker:     @local::dune_memory_tracker
+  RandomNumberGenerator: {} 
+  FileCatalogMetadata:  @local::art_file_catalog_data
+  FileCatalogMetadata: {
+  #applicationVersion: "v07_08_00_04"
+  fileType: "detector"
+  runType: "vd-coldbox-bottom" }
+  message:  @local::dune_message_services_prod
+}
+
+#
+data_source:
+{
+   ClockFrequencyMHz: 6.25e1
+   HandleSequenceOption: "ignore"
+   LogLevel: 0
+   TrnScale: 10000
+   module_type: "HDF5RawInput2"
+   raw_data_label: "daq"
+}
+
+proc_rootout: {
+    module_type: RootOutput
+    fileName: "%ifb_crpcb_bottom_reco.root"
+    #outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*" ]
+    #outputCommands: [ "keep *", "drop recob::Wires_caldata_dataprep_*" ]
+    outputCommands: [ "keep *"]
+    compressionLevel: 1
+    dataTier: "full-reconstructed"
+    streamName: "test"
+}
+
+data.crp4cb_Efield:  [0.411, 1.0, 1.0]
+
+crp4_services: {
+  @table::services_base
+  @table::vdcb_crp2_data_services
+  SpaceCharge: @local::dunefd_spacecharge
+  ChannelStatusService: @local::data.ChannelStatusService_vdcrp4
+}
+crp4_services.DetectorPropertiesService.Efield: @local::data.crp4cb_Efield
+crp4_services.RawDigitPrepService.ToolNames: @local::data.dataprep_tools #data.vdcb_dataprep_seqs.nocal
+
+#
+# CRP4 runs producers
+#
+crp4_prod_config: {
+  caldata: @local::producer_adcprep
+  @table::dunecrpcb_top_producers
+}
+crp4_prod_config.caldata.DecoderTool: "crp4_decoder"
+crp4_prod_config.caldata.DigitLabel:  "none"
+crp4_prod_config.caldata.StatusLabel:  "none"
+crp4_prod_config.caldata.TriggerLabel:  "none"
+crp4_prod_config.caldata.WireName: "dataprep"
+crp4_prod_config.caldata.ChannelGroups: ["cru"]
+crp4_prod_config.caldata.DoGroups: true
+crp4_prod_config.caldata.OnlineChannelMapTool: ""
+crp4_prod_config.caldata.OutputDigitName: "dataprep"
+
+tools.crp4_decoder: {
+   DebugLevel: 0
+   DefaultCrate: 1
+   FileInfoLabel: "daq"
+   MaxChan: 1e7
+   SubDetectorString: "VD_Bottom_TPC"
+   tool_type: "PDHDDataInterfaceWIB3"
+}
+
+crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 1.0
+crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 1.0
+crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 1.0
+
+crp4_prod_seq: [caldata, @sequence::dunecrpcb_top_reco_tpc_only]
+

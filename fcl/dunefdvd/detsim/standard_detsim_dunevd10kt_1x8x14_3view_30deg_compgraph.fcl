@@ -1,0 +1,33 @@
+#include "standard_detsim_dunevd10kt.fcl"
+
+#########
+#This module runs the digitizer for fast optical simulation using the computable graph model (ANN)#
+#########
+
+services: {
+    @table::services
+    @table::dunefdvd_1x8x14_3view_30deg_simulation_services
+}
+
+source: {
+  module_type: RootInput
+  maxEvents:  1000        # Number of events to create
+}
+
+physics:
+{
+    @table::physics
+    producers:
+    {
+      @table::physics.producers
+#    This will simulate charge response only in the central 1x8x14 geo
+      tpcrawdecoder: @local::dune10kt_dunefd_vertdrift_1x8x14_3view_30deg_sim_nfsp
+    }
+
+#    Set up of PDS only digitizer in 1x8x14 geo
+    simulate: [ rns, tpcrawdecoder, sipmAr10ppm, sipmXe10ppm, opdigi10ppm ]
+}
+
+physics.producers.sipmAr10ppm.QuantumEfficiency: 2.7e-2
+physics.producers.sipmXe10ppm.QuantumEfficiency: 2.7e-2
+physics.producers.opdigi10ppm.InputTags:    [sipmAr10ppm, sipmXe10ppm]
