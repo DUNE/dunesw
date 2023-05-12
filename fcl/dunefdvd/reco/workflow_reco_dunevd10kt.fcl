@@ -50,7 +50,6 @@ dunefd_vertdrift_producers:
    pmtracktc:          @local::dunefdvd_pmalgtrackmaker    #PMA using trajcluster clusters
 #   pmtracktccalo:      @local::dunevd10kt_calomc
 #   pmtracktcpid:       @local::standard_chi2pid
-   energyrecpmtracktc: @local::dunefdvd_nuenergyreco_pmtracktc     
 }
 
 dunefd_vertdrift_pds_reco1:
@@ -120,8 +119,7 @@ dunefd_vertdrift_tpc_le_reco2:
     pandorapid,
     linecluster, 
     trajcluster, 
-    pmtracktc, 
-    energyrecpmtracktc
+    pmtracktc 
 ]
 
 dunefd_vertdrift_tpc_le:
