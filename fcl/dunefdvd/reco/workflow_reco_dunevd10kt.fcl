@@ -53,10 +53,24 @@ dunefd_vertdrift_producers:
    energyrecpmtracktc: @local::dunefdvd_nuenergyreco_pmtracktc     
 }
 
-dunefd_vertdrift_tpc:
+dunefd_vertdrift_pds:
 [
-#    wclsdatanfsp,
-    gaushit,
+    ophit10ppm, 
+    opflash10ppm
+]
+
+dunefd_vertdrift_tpc_reco1:
+[
+    gaushit
+]
+
+dunefd_vertdrift_reco1:
+[
+    @sequence::dunefd_vertdrift_tpc_reco1
+]
+
+dunefd_vertdrift_tpc_reco2:
+[
     pandora,
     pandoraTrack,
     pandoraShower,
@@ -66,13 +80,19 @@ dunefd_vertdrift_tpc:
     cvneval,
     energyrecnumu,
     energyrecnue,
-    energyrecnc
+    energyrecnue
 ]
 
-dunefd_vertdrift_pds:
+dunefd_vertdrift_reco2:
 [
-    ophit10ppm, 
-    opflash10ppm
+    @sequence::dunefd_vertdrift_tpc_reco2,
+    @sequence::dunefd_vertdrift_pds
+]
+
+dunefd_vertdrift_tpc:
+[
+    @sequence::dunefd_vertdrift_tpc_reco1,
+    @sequence::dunefd_vertdrift_tpc_reco2
 ]
 
 dunefd_vertdrift_tpc_le:
@@ -88,6 +108,7 @@ dunefd_vertdrift_tpc_le:
     pmtracktc, 
     energyrecpmtracktc
 ]
+
 
 dunefd_vertdrift_reco_tpc_only:
 [
