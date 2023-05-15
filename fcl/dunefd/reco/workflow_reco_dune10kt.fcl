@@ -182,7 +182,7 @@ dunefd_horizdrift_workflow_reco:
 ### Here, we overwrite ALL module labels with the ones defined above.
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 
-dunefd_horizdrift_producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.gaushit.CalDataModuleLabel: "tpcrawdecoder:gauss"
 
 
 dunefd_horizdrift_producers.trkshowersplit.HitModuleLabel:        "linecluster"
