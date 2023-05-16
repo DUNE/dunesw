@@ -187,7 +187,7 @@ dunefd_horizdrift_producers.gaushit.CalDataModuleLabel: "tpcrawdecoder:gauss"
 
 dunefd_horizdrift_producers.trkshowersplit.HitModuleLabel:        "linecluster"
 
-dunefd_horizdrift_producers.pmtrack.WireModuleLabel:              "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.pmtrack.WireModuleLabel:              "tpcrawdecoder:gauss"
 dunefd_horizdrift_producers.pmtrack.HitModuleLabel:               "linecluster"
 dunefd_horizdrift_producers.pmtrack.ClusterModuleLabel:           "linecluster"
 dunefd_horizdrift_producers.pmtrack.EmClusterModuleLabel:         "trkshowersplit"
@@ -197,7 +197,7 @@ dunefd_horizdrift_producers.pmtrack.PMAlgTracking.FlipToBeam:     false
 dunefd_horizdrift_producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: true
 #dunefd_horizdrift_producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: false
 
-dunefd_horizdrift_producers.pmtracktc.WireModuleLabel:            "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.pmtracktc.WireModuleLabel:            "tpcrawdecoder:gauss"
 dunefd_horizdrift_producers.pmtracktc.HitModuleLabel:               "trajcluster"
 dunefd_horizdrift_producers.pmtracktc.ClusterModuleLabel:           "trajcluster"
 dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.RunVertexing:   true
@@ -267,7 +267,7 @@ dunefd_horizdrift_producers.blurredcluster.GlobalTPCRecon:  true
 dunefd_horizdrift_producers.blurredcluster.ShowerReconOnly: false
 dunefd_horizdrift_producers.blurredcluster.VertexModuleLabel: "linecluster"
 
-dunefd_horizdrift_producers.emtrkmichelid.WireLabel: "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.emtrkmichelid.WireLabel: "tpcrawdecoder:gauss"
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet"
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.NNetOutputs:     ["track", "em", "michel", "none"]
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
