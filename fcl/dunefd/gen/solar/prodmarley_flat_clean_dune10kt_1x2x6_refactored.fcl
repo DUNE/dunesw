@@ -1,6 +1,10 @@
 #include "services_dune.fcl"
 #include "marley_dune.fcl"
-#include "dune_radiological_model.fcl"
+#include "dune_radiological_model_decay0.fcl"
+#
+services.Geometry.GDML: "dune10kt_v4_refactored_1x2x6.gdml"
+services.Geometry.name: "dune10kt_v4_refactored_1x2x6"
+services.Geometry.ROOT: "dune10kt_v4_refactored_1x2x6.gdml"
 
 process_name: MARLEYGen
 
@@ -16,11 +20,11 @@ services:
 
 source:
 {
-  module_type:     EmptyEvent
+  module_type: EmptyEvent
   timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
-  maxEvents:       1000          # Number of events to create
-  firstRun:        20000047           # Run number to use for this file
-  firstEvent:      1           # number of first event in the file
+  maxEvents:   10          # Number of events to create
+  firstRun:    20000047           # Run number to use for this file
+  firstEvent:  1           # number of first event in the file
 }
 
 physics:
@@ -28,19 +32,13 @@ physics:
   producers:
   {
     marley:      @local::dune_marley_flat
-    # ar39Gen:     @local::dune10kt_1x2x6_39ar
-    # ar42Gen:     @local::dune10kt_1x2x6_42ar
-    # apaGen:      @local::dune10kt_1x2x6_APA        #Co60 in APA frame
-    # cNeutronGen: @local::dune10kt_1x2x6_neutron    #Originally use for K40 in Field Cage. Now repurposed  for Neutrons from concrete.
-    # cpaGen:      @local::dune10kt_1x2x6_CPA        #K40 from CPA
-    # kr85Gen:     @local::dune10kt_1x2x6_85kr       #Kr in LAr
-    # rn222Gen:    @local::dune10kt_1x2x6_222rn      #Rn in LAr
-    # po210Gen:    @local::dune10kt_1x2x6_210po
     rns:       { module_type: "RandomNumberSaver" }
   }
- 
-  # simulate:      [ rns, marley, ar39Gen, ar42Gen, apaGen, cNeutronGen, cpaGen, kr85Gen, rn222Gen, po210Gen ]
-  simulate:      [ rns, marley]
+  simulate: [
+    marley,
+    rns
+ ]      
+
   stream1:       [ out1 ]
   trigger_paths: [ simulate ] 
   end_paths:     [ stream1 ]  
@@ -51,7 +49,7 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "prodmarley_flat_clean_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
+    fileName:    "prodmarley_flat_clean_dune10kt_1x2x6_refactored_gen.root" # Default file name, can override from command line with -o or --output
     dataTier:    "generated"
     compressionLevel: 1
   }
@@ -63,6 +61,7 @@ services:
     @table::dunefd_1x2x6_services
 }
 
+
 dune_marley_flat: @local::standard_marley
 dune_marley_flat.marley_parameters.source: 
 {
@@ -73,3 +72,9 @@ dune_marley_flat.marley_parameters.source:
   Emax: 20.             # High edge of uniform distribution
   weight_flux: false    # Tells MARLEY not to apply cross section weighting
 }
+
+# physics.producers.marley.marley_parameters.reactions: [ "ve40ArCC_Bhattacharya2009.react" ]
+# physics.producers.marley.marley_parameters.reactions: ["ES.react", "ve40ArCC_Bhattacharya2009.react" ]
+# physics.producers.marley.marley_parameters.direction.x:0.0
+# physics.producers.marley.marley_parameters.direction.y:0.0
+# physics.producers.marley.marley_parameters.direction.z:1.0
