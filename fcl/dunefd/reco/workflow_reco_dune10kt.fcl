@@ -288,6 +288,10 @@ dunefd_horizdrift_producers.emshower.UseCNNtoIDEMPFP:       true
 dunefd_horizdrift_producers.emshower.UseCNNtoIDEMHit:       false
 dunefd_horizdrift_producers.emshower.MinTrackLikeScore:     0.1
 
+dunefd_horizdrift_producers.energyrecnumu.WireLabel:    "tpcrawdecoder:gauss"
+dunefd_horizdrift_producers.energyrecnue.WireLabel:     "tpcrawdecoder:gauss"
+dunefd_horizdrift_producers.energyrecnc.WireLabel:      "tpcrawdecoder:gauss"
+
 #optical reco configuration
 dunefd_horizdrift_producers.ophit.InputModule:   opdigi
 dunefd_horizdrift_producers.opflash.InputModule: ophit
