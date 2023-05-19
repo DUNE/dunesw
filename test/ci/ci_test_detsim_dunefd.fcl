@@ -5,6 +5,7 @@ services.NuRandomService.baseSeed: 1234
 services.NuRandomService.StuckBitAdcDistortionService: 1234
 services.NuRandomService.ExponentialChannelNoiseService: 1234
 services.NuRandomService.ProvidedPedestalAdditionService: 1234
+services.NuRandomService.opdigi.waveformdigi: 1234
 
 services.RandomNumberGenerator.restoreFrom: "DetSimRandomSeeds_Ref_dunefd.dat"
 services.RandomNumberGenerator.saveTo: "DetSimRandomSeeds.dat"
