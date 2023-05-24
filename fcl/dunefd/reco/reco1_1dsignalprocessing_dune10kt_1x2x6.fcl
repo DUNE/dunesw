@@ -1,0 +1,7 @@
+#include "standard_reco1_dune10kt_1x2x6.fcl"
+
+physics.reco: [ caldata, @sequence::physics.reco ]
+
+physics.producers.gaushit.CalDataModuleLabel: "caldata"
+
+services.DetectorPropertiesService.IncludeInterPlanePitchInXTickOffsets: true
