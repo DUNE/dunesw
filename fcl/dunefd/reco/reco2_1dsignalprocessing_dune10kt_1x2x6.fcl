@@ -1,6 +1,6 @@
 #include "standard_reco2_dune10kt_1x2x6.fcl"
 
-physics.reco: [ pandora, pandoraTrack, pandoraShower ]
+physics.reco: [ linecluster, pandora, pandoraTrack, pandoraShower ]
 
 physics.producers.pmtrack.WireModuleLabel:    "caldata"
 physics.producers.pmtracktc.WireModuleLabel:  "caldata"
@@ -10,3 +10,7 @@ physics.producers.energyrecnue.WireLabel:     "caldata"
 physics.producers.energyrecnc.WireLabel:      "caldata"
 
 services.DetectorPropertiesService.IncludeInterPlanePitchInXTickOffsets: true
+
+physics.producers.pandora.HitFinderModuleLabel: "linecluster"
+physics.producers.pandoraTrack.UseAllParticles: false
+physics.producers.pandoraShower.UseAllParticles: false
