@@ -3,7 +3,7 @@
 physics.producers.daq:            @local::dune_detsim
 physics.producers.rns:            { module_type: "RandomNumberSaver" }
 
-physics.simulate: [ rns, daq,  @sequence::pd_detsim_path ]
+physics.simulate: [ rns, daq ]
 physics.trigger_paths: [ simulate ]
 
 # Use fixed values instead of DB for pedestals.
