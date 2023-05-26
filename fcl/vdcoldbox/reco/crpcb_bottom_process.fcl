@@ -4,8 +4,8 @@
 #include "protodune_tools_dune.fcl"
 #include "vdcb2_tools.fcl"
 #include "vdcb_dataprep_sequences.fcl"
-#include "channelstatus_vdcrp2.fcl"
-#include "channelstatus_vdcrp3.fcl"
+#include "channelstatus_vdcrp4.fcl"
+#include "channelstatus_vdcrp5.fcl"
 
 
 data.dataprep_tools: @local::data.vdtcb2_dataprep_seqs.adc_cnrw_rmbadch
@@ -51,7 +51,7 @@ crp4_services: {
   @table::services_base
   @table::vdcb_crp2_data_services
   SpaceCharge: @local::dunefd_spacecharge
-  ChannelStatusService: @local::data.ChannelStatusService_vdcrp2
+  ChannelStatusService: @local::data.ChannelStatusService_vdcrp4
 }
 crp4_services.DetectorPropertiesService.Efield: @local::data.crp4cb_Efield
 crp4_services.RawDigitPrepService.ToolNames: @local::data.dataprep_tools #data.vdcb_dataprep_seqs.nocal
@@ -71,6 +71,7 @@ crp4_prod_config.caldata.WireName: "dataprep"
 crp4_prod_config.caldata.ChannelGroups: ["cru"]
 crp4_prod_config.caldata.DoGroups: true
 crp4_prod_config.caldata.OnlineChannelMapTool: ""
+crp4_prod_config.caldata.OutputDigitName: "dataprep"
 
 tools.crp4_decoder: {
    DebugLevel: 0
@@ -85,5 +86,5 @@ crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 1.0
 crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 1.0
 crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 1.0
 
-crp4_prod_seq: [caldata] #, @sequence::dunecrpcb_top_reco_tpc_only]
+crp4_prod_seq: [caldata, @sequence::dunecrpcb_top_reco_tpc_only]
 

@@ -65,3 +65,4 @@ outputs:
 }
 
 services.ExptGeoHelperInterface.ChannelMapClass: "DuneApaChannelMapAlg"
+physics.producers.opdigi.InputModules: ["PDFastSim", "PDFastSimExternal"]

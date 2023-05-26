@@ -17,7 +17,7 @@ dunecrpcb_top_producers:
 {
    rns:            { module_type: "RandomNumberSaver" }
    # WCL placeholder
-   wclsdatanfsp:       @local::dune_vd_crp2_nfsp
+   wclsdatanfsp:       @local::dune_vd_crp2_sp
    # actual hit finder
    gaushit:            @local::dunevdfd_gaushitfinder
    # pattern recognition

@@ -128,9 +128,9 @@ physics: {
 
   #define the producer and filter modules for this path, order matters,
 #filters reject all following items.  see lines starting physics.producers below
-reco: [ #ophit,
-        #opflash,
-        #opslicer,
+reco: [ ophit,
+        opflash,
+        opslicer,
         caldata,
         wclsdatahd,
         gaushit,
@@ -217,12 +217,13 @@ physics.producers.pandoracalipid.CalorimetryModuleLabel:        "pandoracali"
 physics.producers.pandoracalipid.TrackModuleLabel:              "pandoraTrack"
 
 ##Optical detector configuration
-#physics.producers.ophit.InputModule:                        "opdigi"
-#physics.producers.opflash.InputModule:                      "ophit"
-#physics.producers.opslicer.OpHitModuleLabel:                "ophit"
+physics.producers.ophit.InputModule:                        "opdigi"
+physics.producers.opflash.InputModule:                      "ophit"
+physics.producers.opslicer.OpHitModuleLabel:                "ophit"
 
 # Use channel map service for data
 #services.PdspChannelMapService:        @local::pdspchannelmap
+services.ExptGeoHelperInterface.ChannelMapClass: "DuneApaChannelMapAlg"
 
 #Forcing Pandora to create either all tracks or all showers on each PFParticle object
 physics.producers.pandora2Track.PFParticleLabel:             "pandora"
