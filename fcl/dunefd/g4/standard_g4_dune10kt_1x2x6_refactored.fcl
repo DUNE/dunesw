@@ -7,4 +7,4 @@ services: {
 
 services.ParticleListAction.keepEMShowerDaughters: false
 physics.producers.IonAndScint.ISCalcAlg: "Separate"
-physics.producers.IonAndScint.Instances: "LArG4DetectorServicevolTPCActive;LArG4DetectorServicevolTPCActiveOuter"
+#physics.producers.IonAndScint.Instances: "LArG4DetectorServicevolTPCActive;LArG4DetectorServicevolTPCActiveOuter"
