@@ -48,6 +48,6 @@ outputs:
 }
 
 #physics.analyzers.pandoraAna.HitLabel: "h"
-
+services.BackTrackerService.BackTracker.SimChannelModuleLabel: "elecDrift"
 #services.BackTrackerService.BackTracker.HitTimeRMS: 1.0
 #services.DetectorPropertiesService.IncludeInterPlanePitchInXTickOffsets: false
