@@ -1,5 +1,7 @@
 #include "reco_dune10kt_1x2x6_wirecell_refactored.fcl"
 
+process_name: Reco2
+
 physics.producers:
 {
     @table::physics.producers
