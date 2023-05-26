@@ -18,3 +18,8 @@ physics.producers.emtrkmichelid.WireLabel:    "caldata"
 physics.producers.energyrecnumu.WireLabel:    "caldata"
 physics.producers.energyrecnue.WireLabel:     "caldata"
 physics.producers.energyrecnc.WireLabel:      "caldata"
+
+source.inputCommands: [
+    "keep *_*_*_*",
+    "drop *_*_*_Reco1"
+]
