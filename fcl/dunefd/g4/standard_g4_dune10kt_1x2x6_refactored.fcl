@@ -4,3 +4,5 @@ services: {
     @table::services
     @table::dunefd_1x2x6_simulation_services_refactored
 }
+
+services.ParticleListAction.keepEMShowerDaughters: false
