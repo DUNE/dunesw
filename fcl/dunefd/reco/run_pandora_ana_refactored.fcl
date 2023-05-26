@@ -23,7 +23,7 @@ services:
    ExptGeoHelperInterface: @local::dune_geometry_helper
    Geometry:               @local::dune10kt_1x2x6_v4_geo
    FileCatalogMetadata:    @local::art_file_catalog_mc
-                           @table::dunefd_simulation_services
+                           @table::dunefd_simulation_services_refactored
 }
 
 services.Geometry: @local::dune10kt_1x2x6_v4_geo
