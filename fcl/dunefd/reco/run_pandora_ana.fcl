@@ -1,0 +1,53 @@
+#include "pandora_analysis_config.fcl"
+#include "simulationservices_dune.fcl"
+#include "services_dune.fcl"
+#include "detectorclocks_dune.fcl"
+#include "backtrackerservice_dune.fcl"
+#include "particleinventoryservice_dune.fcl"
+#include "trackfindermodules.fcl"
+
+process_name: pAnalysis
+
+source:
+{
+   module_type:    RootInput
+                   maxEvents : -1
+}
+
+services:
+{
+   TFileService: { fileName: "pandoraAnalysis.root"}
+   TimeTracker:       {}
+   RandomNumberGenerator: {}
+   MemoryTracker:         { } # default is one
+   ExptGeoHelperInterface: @local::dune_geometry_helper
+   Geometry:               @local::dune10kt_1x2x6_v4_geo
+   FileCatalogMetadata:    @local::art_file_catalog_mc
+                           @table::dunefd_simulation_services
+}
+
+services.Geometry: @local::dune10kt_1x2x6_v4_geo
+
+physics:
+{
+    analyzers: { pandoraAna:        @local::pandoraAnalysis }
+    stream1:   [ out1 ]
+    ana:       [ pandoraAna ]
+    end_paths: [ stream1, ana ]
+}
+
+outputs:
+{
+    out1:
+    {
+        module_type: RootOutput
+        fileName:    "%ifb_%tc_pandoraAnaMerged.root"
+        dataTier:    "full-reconstructed"
+        compressionLevel: 1
+    }
+}
+
+#physics.analyzers.pandoraAna.HitLabel: "h"
+
+#services.BackTrackerService.BackTracker.HitTimeRMS: 1.0
+#services.DetectorPropertiesService.IncludeInterPlanePitchInXTickOffsets: false
