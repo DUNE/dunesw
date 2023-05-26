@@ -9,7 +9,7 @@ physics.producers:
     wclsmcnfsp:         @erase
 }
 
-physics.reco: [ pandora, pandoraTrack, pandoraShower ] #This is an awful way of changing the running producer from wirecell to caldata.  Erasing the wirecell producer above should give some defence against changing the wrong element (the job will crash if we change the wrong element)
+physics.reco: [ linecluster, pandora, pandoraTrack, pandoraShower ] #This is an awful way of changing the running producer from wirecell to caldata.  Erasing the wirecell producer above should give some defence against changing the wrong element (the job will crash if we change the wrong element)
 
 physics.producers.gaushit.CalDataModuleLabel: "caldata"
 physics.producers.pmtrack.WireModuleLabel:    "caldata"
