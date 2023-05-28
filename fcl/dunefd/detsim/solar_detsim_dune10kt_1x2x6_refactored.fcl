@@ -45,6 +45,7 @@ physics:
   }
 
   # simulate: [ rns, daq, @sequence::pd_detsim_path ]
+  # simulate:      [ rns, daq, sipmSim, opdigi ]
   simulate:      [ rns, tpcrawdecoder, sipmSim, opdigi ]
   stream1:       [ out1 ]
   trigger_paths: [simulate] 
@@ -66,10 +67,10 @@ outputs:
 services.DetPedestalService:       @local::dune_fixedpeds
 
 # DetSim flags.
-physics.producers.daq.NoiseOn:     true
-physics.producers.daq.PedestalOn:  true
-physics.producers.daq.DistortOn:   false
-physics.producers.daq.SuppressOn:  true
+physics.producers.daq.NoiseOn:     false # true
+physics.producers.daq.PedestalOn:  false # true
+physics.producers.daq.DistortOn:   false # false
+physics.producers.daq.SuppressOn:  false # true
 
 # DetSim services.
 services.SimChannelExtractService: @local::scxgeneric
@@ -84,9 +85,9 @@ services.AdcCompressService:       @local::cmpblock
 
 ### Supernova detsim noise levels ###
 ### What value do I want for the Noise Level?
-# services.ChannelNoiseService.NoiseNormU:  5.75
-# services.ChannelNoiseService.NoiseNormV:  5.75
-# services.ChannelNoiseService.NoiseNormZ:  4.5
+services.ChannelNoiseService.NoiseNormU: 0.0 # 5.75
+services.ChannelNoiseService.NoiseNormV: 0.0 # 5.75
+services.ChannelNoiseService.NoiseNormZ: 0.0 # 4.5
 
 #configs: ["pgrapher/experiment/pdsp/wcls-sim-drift-simchannel.jsonnet"]
 #=> configs: ["pgrapher/experiment/dune10kt-1x2x6/wcls-sim-drift-simchannel.jsonnet"]

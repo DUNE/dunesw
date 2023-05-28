@@ -71,4 +71,4 @@ outputs:
   }
 }
 
-physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+# physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
