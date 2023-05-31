@@ -27,3 +27,4 @@ services.AdcDistortService:        @local::stuckbits
 services.AdcSuppressService:       @local::zslegacy
 services.AdcCompressService:       @local::cmpblock
 
+services.DetectorPropertiesService.IncludeInterPlanePitchInXTickOffsets: true

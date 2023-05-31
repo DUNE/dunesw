@@ -1,6 +1,6 @@
-#include "reco1_dune10kt_1x2x6_tpcsigproc.fcl"
+#include "reco2_dune10kt_1x2x6_tpcsigproc.fcl"
 
-physics.reco: [ caldata, @sequence::physics.reco ]
+services.DetectorPropertiesService.IncludeInterPlanePitchInXTickOffsets: true
 
 physics.producers.gaushit.CalDataModuleLabel: "caldata"
 physics.producers.pmtrack.WireModuleLabel:    "caldata"
