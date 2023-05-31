@@ -30,8 +30,9 @@ dunefd_horizdrift_producers:
   gaushit:            @local::dunefd_gaushitfinder
 
   # actual disambiguation
-  spsolve:           @local::dunefd_horizdrift_spacepointsolver
-  hitfd:             @local::dunefd_disambigfromsp
+#  spsolve:           @local::dunefd_horizdrift_spacepointsolver
+#  hitfd:             @local::dunefd_disambigfromsp
+  hitfd:             @local::@local::dunefd_hitfinderfd
   # 2D clustering
   linecluster:        @local::dune35t_linecluster
   trajcluster:          @local::dunefdmc_trajcluster
@@ -82,7 +83,7 @@ dunefd_horizdrift_lowlevelreco:
 
 dunefd_horizdrift_hitdisambiguation:
 [
-    spsolve,
+#    spsolve,
     hitfd
 ]
 
