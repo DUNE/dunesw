@@ -32,7 +32,7 @@ dunefd_horizdrift_producers:
   # actual disambiguation
 #  spsolve:           @local::dunefd_horizdrift_spacepointsolver
 #  hitfd:             @local::dunefd_disambigfromsp
-  hitfd:             @local::@local::dunefd_hitfinderfd
+  hitfd:             @local::dunefd_hitfinderfd
   # 2D clustering
   linecluster:        @local::dune35t_linecluster
   trajcluster:          @local::dunefdmc_trajcluster
