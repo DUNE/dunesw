@@ -56,7 +56,7 @@ physics: {
 #  @table::dunecbcrp2_vertdrift_producers
    rns:            { module_type: "RandomNumberSaver" }
    # WCL placeholder
-   wclsvdcrp2:       @local::dune_vd_crp2_nfsp
+   wclsvdcrp2:       @local::dune_vd_crp2_sp
    # actual hit finder
    gaushit:            @local::dunevdfd_gaushitfinder
 
