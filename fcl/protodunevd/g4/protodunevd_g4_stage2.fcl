@@ -33,7 +33,7 @@ physics:
   {
     rns: {module_type: "RandomNumberSaver"}
     IonAndScint:  @local::protodunevd_ionandscint
-    #PDFastSim:    @local::protodune_pdfastsim_pvs
+    PDFastSim:    @local::protodune_vd_pdfastsim_ann_ar
   }
 
   analyzers:
@@ -41,8 +41,8 @@ physics:
 
   }
 
-  #simulate:      [  rns, IonAndScint, PDFastSim ]
-  simulate:      [  rns, IonAndScint ]
+  simulate:      [  rns, IonAndScint, PDFastSim ]
+  #simulate:      [  rns, IonAndScint ]
 
   stream1:       [ out1 ]
 
