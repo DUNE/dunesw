@@ -90,7 +90,7 @@ dunefd_vertdrift_tpc_reco2:
     cvneval,
     energyrecnumu,
     energyrecnue,
-    energyrecnue
+    energyrecnc
 ]
 
 dunefd_vertdrift_reco2:
