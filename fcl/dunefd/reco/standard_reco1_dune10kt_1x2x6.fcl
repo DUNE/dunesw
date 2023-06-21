@@ -1,9 +1,11 @@
-#include "reco_dune10kt_wirecell_refactored.fcl"
+#include "standard_reco1_dune10kt.fcl"
+
+process_name: Reco1
 
 services: 
 {
     @table::services
-    @table::dunefd_1x2x6_reco_services_refactored
+    @table::dunefd_1x2x6_reco_services
 }
 
 physics.producers:
