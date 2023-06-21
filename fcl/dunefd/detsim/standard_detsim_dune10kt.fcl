@@ -7,9 +7,7 @@
 #include "wirecell_dune.fcl"
 #include "services_dune.fcl"
 #include "detsimmodules_dune.fcl"
-#include "SIPMOpSensorSim.fcl"
-#include "WaveformDigitizerSim.fcl"
-
+#include "opticaldetectormodules_dune.fcl"
 #include "tools_dune.fcl"
 
 process_name: detsim
@@ -40,12 +38,11 @@ physics: {
 #   daq:            @local::dune_detsim
 
    tpcrawdecoder: @local::tpcrawdecoder_dunefd_horizdrift
-   sipmSim:       @local::xarapuca_ar
-   opdigi:        @local::standard_daphne
+   opdigi:        @local::standard_template_digitizer
    rns:            { module_type: "RandomNumberSaver" }
  }
 # simulate: [ rns, daq, @sequence::pd_detsim_path ]
- simulate: [ tpcrawdecoder, sipmSim, opdigi, rns ]
+simulate: [ tpcrawdecoder, opdigi, rns ]
  stream1:  [ out1 ]
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
