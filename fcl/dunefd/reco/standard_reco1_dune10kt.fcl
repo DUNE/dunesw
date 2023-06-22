@@ -1,0 +1,19 @@
+# standard_reco_dune10kt.fcl
+#
+# Dom Brailsford
+# March 2022
+#
+# Runs the low level reconstruction for DUNE FD
+
+#include "standard_reco_dune10kt.fcl"
+#
+process_name: Reco1
+
+services.TFileService.fileName: "reco1_hist.root"
+
+source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco1" ]
+
+physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco1 ]
+
+outputs.out1.fileName: "%ifb_reco1.root"
+outputs.out1.dataTier: "hit-reconstructed"
