@@ -1,6 +1,3 @@
-add_subdirectory(legacy)
-add_subdirectory(opdet)
-
 # Install fcl files in /job subdirectory.
 
 install_fhicl()

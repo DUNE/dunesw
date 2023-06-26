@@ -20,7 +20,7 @@ BEGIN_PROLOG
 
 dunefd_horizdrift_producers:
 {
-# random number saver
+  # random number saver
   rns:                 { module_type: RandomNumberSaver }
   # data preparation and, optionally, 1D signal processing
   caldata:            @local::producer_adcprep_notool
@@ -32,6 +32,7 @@ dunefd_horizdrift_producers:
   # actual disambiguation
   spsolve:           @local::dunefd_horizdrift_spacepointsolver
   hitfd:             @local::dunefd_disambigfromsp
+  #hitfd:             @local::dunefd_hitfinderfd
   # 2D clustering
   linecluster:        @local::dune35t_linecluster
   trajcluster:          @local::dunefdmc_trajcluster
@@ -76,7 +77,7 @@ dunefd_horizdrift_producers:
 
 dunefd_horizdrift_lowlevelreco: 
 [ 
-    wclsmcnfsp,
+#    wclsmcnfsp,
     gaushit
 ]
 
@@ -152,10 +153,15 @@ dunefd_horizdrift_pd_reco:
     opflash
 ]
 
-dunefd_horizdrift_workflow_reco: 
-[ 
+dunefd_horizdrift_workflow_reco1:
+[
     @sequence::dunefd_horizdrift_lowlevelreco,
     @sequence::dunefd_horizdrift_hitdisambiguation,
+    rns
+]
+
+dunefd_horizdrift_workflow_reco2:
+[
     @sequence::dunefd_horizdrift_2dclustering,
     @sequence::dunefd_horizdrift_pandora,
     @sequence::dunefd_horizdrift_pmtrack,
@@ -168,15 +174,21 @@ dunefd_horizdrift_workflow_reco:
     rns
 ]
 
+dunefd_horizdrift_workflow_reco: 
+[ 
+    @sequence::dunefd_horizdrift_workflow_reco1,
+    @sequence::dunefd_horizdrift_workflow_reco2
+]
+
 ### Here, we overwrite ALL module labels with the ones defined above.
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 
-dunefd_horizdrift_producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.gaushit.CalDataModuleLabel: "tpcrawdecoder:gauss"
 
 
 dunefd_horizdrift_producers.trkshowersplit.HitModuleLabel:        "linecluster"
 
-dunefd_horizdrift_producers.pmtrack.WireModuleLabel:              "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.pmtrack.WireModuleLabel:              "tpcrawdecoder:gauss"
 dunefd_horizdrift_producers.pmtrack.HitModuleLabel:               "linecluster"
 dunefd_horizdrift_producers.pmtrack.ClusterModuleLabel:           "linecluster"
 dunefd_horizdrift_producers.pmtrack.EmClusterModuleLabel:         "trkshowersplit"
@@ -186,7 +198,7 @@ dunefd_horizdrift_producers.pmtrack.PMAlgTracking.FlipToBeam:     false
 dunefd_horizdrift_producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: true
 #dunefd_horizdrift_producers.pmtrack.PMAlgTracking.AutoFlip_dQdx: false
 
-dunefd_horizdrift_producers.pmtracktc.WireModuleLabel:            "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.pmtracktc.WireModuleLabel:            "tpcrawdecoder:gauss"
 dunefd_horizdrift_producers.pmtracktc.HitModuleLabel:               "trajcluster"
 dunefd_horizdrift_producers.pmtracktc.ClusterModuleLabel:           "trajcluster"
 dunefd_horizdrift_producers.pmtracktc.PMAlgTracking.RunVertexing:   true
@@ -236,7 +248,7 @@ dunefd_horizdrift_producers.pmtrajfittcpid.TrackModuleLabel:        "pmtrajfittc
 dunefd_horizdrift_producers.linecluster.HitFinderModuleLabel:     "hitfd"
 
 #Pandora configurations
-dunefd_horizdrift_producers.pandora.HitFinderModuleLabel:         "linecluster"
+dunefd_horizdrift_producers.pandora.HitFinderModuleLabel:         "hitfd"
 dunefd_horizdrift_producers.pandoraTrack.PFParticleLabel:         "pandora"
 dunefd_horizdrift_producers.pandoraShower.PFParticleLabel:        "pandora"
 
@@ -256,7 +268,7 @@ dunefd_horizdrift_producers.blurredcluster.GlobalTPCRecon:  true
 dunefd_horizdrift_producers.blurredcluster.ShowerReconOnly: false
 dunefd_horizdrift_producers.blurredcluster.VertexModuleLabel: "linecluster"
 
-dunefd_horizdrift_producers.emtrkmichelid.WireLabel: "wclsmcnfsp:gauss"
+dunefd_horizdrift_producers.emtrkmichelid.WireLabel: "tpcrawdecoder:gauss"
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.NNetModelFile:   "CnnModels/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet"
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.NNetOutputs:     ["track", "em", "michel", "none"]
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.PatchSizeW:      44
@@ -276,6 +288,10 @@ dunefd_horizdrift_producers.emshower.CNNEMModuleLabel:      "emtrkmichelid:emtrk
 dunefd_horizdrift_producers.emshower.UseCNNtoIDEMPFP:       true
 dunefd_horizdrift_producers.emshower.UseCNNtoIDEMHit:       false
 dunefd_horizdrift_producers.emshower.MinTrackLikeScore:     0.1
+
+dunefd_horizdrift_producers.energyrecnumu.WireLabel:    "tpcrawdecoder:gauss"
+dunefd_horizdrift_producers.energyrecnue.WireLabel:     "tpcrawdecoder:gauss"
+dunefd_horizdrift_producers.energyrecnc.WireLabel:      "tpcrawdecoder:gauss"
 
 #optical reco configuration
 dunefd_horizdrift_producers.ophit.InputModule:   opdigi

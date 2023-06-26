@@ -50,13 +50,37 @@ dunefd_vertdrift_producers:
    pmtracktc:          @local::dunefdvd_pmalgtrackmaker    #PMA using trajcluster clusters
 #   pmtracktccalo:      @local::dunevd10kt_calomc
 #   pmtracktcpid:       @local::standard_chi2pid
-   energyrecpmtracktc: @local::dunefdvd_nuenergyreco_pmtracktc     
 }
 
-dunefd_vertdrift_tpc:
+dunefd_vertdrift_pds_reco1:
 [
-#    wclsdatanfsp,
-    gaushit,
+    ophit10ppm
+]
+
+dunefd_vertdrift_pds_reco2:
+[
+    opflash10ppm
+]
+
+dunefd_vertdrift_pds:
+[
+    @sequence::dunefd_vertdrift_pds_reco1,
+    @sequence::dunefd_vertdrift_pds_reco2
+]
+
+dunefd_vertdrift_tpc_reco1:
+[
+    gaushit
+]
+
+dunefd_vertdrift_reco1:
+[
+    @sequence::dunefd_vertdrift_tpc_reco1,
+    @sequence::dunefd_vertdrift_pds_reco1
+]
+
+dunefd_vertdrift_tpc_reco2:
+[
     pandora,
     pandoraTrack,
     pandoraShower,
@@ -69,15 +93,25 @@ dunefd_vertdrift_tpc:
     energyrecnc
 ]
 
-dunefd_vertdrift_pds:
+dunefd_vertdrift_reco2:
 [
-    ophit10ppm, 
-    opflash10ppm
+    @sequence::dunefd_vertdrift_tpc_reco2,
+    @sequence::dunefd_vertdrift_pds_reco2
 ]
 
-dunefd_vertdrift_tpc_le:
+dunefd_vertdrift_tpc:
 [
-    gaushit,
+    @sequence::dunefd_vertdrift_tpc_reco1,
+    @sequence::dunefd_vertdrift_tpc_reco2
+]
+
+dunefd_vertdrift_tpc_le_reco1:
+[
+    gaushit
+]
+
+dunefd_vertdrift_tpc_le_reco2:
+[
     pandora,
     pandoraTrack,
     pandoraShower,
@@ -85,9 +119,27 @@ dunefd_vertdrift_tpc_le:
     pandorapid,
     linecluster, 
     trajcluster, 
-    pmtracktc, 
-    energyrecpmtracktc
+    pmtracktc 
 ]
+
+dunefd_vertdrift_tpc_le:
+[
+    @sequence::dunefd_vertdrift_tpc_le_reco1,
+    @sequence::dunefd_vertdrift_tpc_le_reco2
+]
+
+dunefd_vertdrift_le_reco1:
+[
+    @sequence::dunefd_vertdrift_tpc_le_reco1,
+    @sequence::dunefd_vertdrift_pds_reco1
+]
+
+dunefd_vertdrift_le_reco2:
+[
+    @sequence::dunefd_vertdrift_tpc_le_reco2,
+    @sequence::dunefd_vertdrift_pds_reco2
+]
+
 
 dunefd_vertdrift_reco_tpc_only:
 [

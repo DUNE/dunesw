@@ -21,4 +21,3 @@ physics:
     reco: [ @sequence::dunefd_vertdrift_reco_le ]
 }
 
-physics.producers.energyrecpmtracktc:       @local::dunefdvd_30deg_nuenergyreco_pmtracktc
