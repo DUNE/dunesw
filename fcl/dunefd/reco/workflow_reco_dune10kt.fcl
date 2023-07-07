@@ -72,7 +72,6 @@ dunefd_horizdrift_producers:
   # photon detector reconstruction
   ophit:      @local::dunefd_ophit
   opflash:    @local::dunefd_opflash
-
 }
 
 dunefd_horizdrift_lowlevelreco: 
