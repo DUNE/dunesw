@@ -1,6 +1,6 @@
 #include "standard_reco1_dune10kt_1x2x6.fcl"
 
-physics.reco: [ wclsmcnfsp, @sequence::physics.reco1 ]
+physics.reco: [ wclsmcnfsp, @sequence::physics.reco ]
 
 dunefd_horizdrift_producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
 
