@@ -1,0 +1,4 @@
+#include "prodbackground_radiological_decay0_dunevd10kt_1x8x14.fcl"
+
+physics.producers.NeutronGenInRock.BqPercc: [ 7.6e-4, 7.6e-4, 7.6e-4, 7.6e-4, 7.6e-4, 7.6e-4 ]
+physics.simulate: [ rns , NeutronGenInRock ]

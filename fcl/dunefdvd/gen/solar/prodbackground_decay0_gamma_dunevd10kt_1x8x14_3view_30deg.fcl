@@ -1,0 +1,4 @@
+#include "prodbackground_radiological_decay0_dunevd10kt_1x8x14.fcl"
+
+physics.producers.GammasGenInRock.BqPercc: [ 0.064, 0.064, 0.064, 0.064, 0.064 ]
+physics.simulate: [ rns , GammasGenInRock ]

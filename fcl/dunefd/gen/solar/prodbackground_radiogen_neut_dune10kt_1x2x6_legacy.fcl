@@ -1,0 +1,4 @@
+#include "prodbackground_radiological_dune10kt_1x2x6_legacy.fcl"
+
+physics.producers.cNeutronGen.BqPercc: [ 7.6e-4, 7.6e-4, 7.6e-4, 7.6e-4, 7.6e-4, 7.6e-4 ]
+physics.simulate: [ rns , cNeutronGen ]
