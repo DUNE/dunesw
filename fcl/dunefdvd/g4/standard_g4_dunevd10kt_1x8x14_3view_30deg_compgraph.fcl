@@ -76,5 +76,3 @@ outputs:
 }
 
 physics.producers.IonAndScint.Instances: "LArG4DetectorServicevolTPCActive; LArG4DetectorServicevolExternalActive"
-physics.producers.PDFastSimAr.TFLoaderTool.ModelName:   "/cvmfs/dune.opensciencegrid.org/products/dune/dune_pardata/v01_84_00/PhotonPropagation/ComputableGraph/dunevd_128nm_tf2.6"
-physics.producers.PDFastSimXe.TFLoaderTool.ModelName:   "/cvmfs/dune.opensciencegrid.org/products/dune/dune_pardata/v01_84_00/PhotonPropagation/ComputableGraph/dunevd_175nm_tf2.6"
