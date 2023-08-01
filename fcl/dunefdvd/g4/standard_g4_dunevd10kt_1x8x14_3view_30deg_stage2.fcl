@@ -11,4 +11,5 @@ physics.producers.elecDrift: @erase
 physics.producers.PDFastSimAr: @erase
 physics.producers.PDFastSimArExternal: @erase
 
+physics.producers.PDFastSimXeExternal.DoFastComponent: false
 physics.simulate: [ rns, PDFastSimXe, PDFastSimXeExternal]
