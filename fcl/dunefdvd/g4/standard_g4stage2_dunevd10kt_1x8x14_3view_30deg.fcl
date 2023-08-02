@@ -1,5 +1,5 @@
-# this fhicls is running fast optical simulation for xenon in the region outside of Field Cage. 
-#include "standard_g4_dunevd10kt_1x8x14_3view_30deg.fcl"
+# g4 fcl that runs the Xe-scintillation simulation 
+#include "jobconfig_g4_dunevd10kt_1x8x14_3view_30deg.fcl"
 
 services.PhotonVisibilityService: @local::dune10kt_vd_photonvisibilityservice_Xe # changing to the xenon libaray. 
 

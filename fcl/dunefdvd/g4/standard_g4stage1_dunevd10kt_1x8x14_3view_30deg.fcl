@@ -1,0 +1,7 @@
+# g4 fcl that runs the particle tracking and the Ar-scintillation simulation
+#include "jobconfig_g4_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+# New modifications since we set PhotonVisibilityService by default to be dune10kt_vd_photonvisibilityservice_Ar 
+physics.producers.PDFastSimXe: @erase
+physics.producers.PDFastSimXeExternal: @erase
+physics.simulate: [ rns, largeant, IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimArExternal]
