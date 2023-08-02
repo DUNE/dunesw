@@ -1,6 +1,8 @@
 # g4 fcl that runs the Xe-scintillation simulation 
 #include "jobconfig_g4_dunevd10kt_1x8x14_3view_30deg.fcl"
 
+process_name: G4Stage2
+
 services.PhotonVisibilityService: @local::dune10kt_vd_photonvisibilityservice_Xe # changing to the xenon libaray. 
 
 # New modifications since we set PhotonVisibilityService by default to be dune10kt_vd_photonvisibilityservice_Ar 
@@ -13,3 +15,5 @@ physics.producers.PDFastSimArExternal: @erase
 
 physics.producers.PDFastSimXeExternal.DoFastComponent: false
 physics.simulate: [ rns, PDFastSimXe, PDFastSimXeExternal]
+
+outputs.out1.fileName: "%ifb_%p-%tc.root"
