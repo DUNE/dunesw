@@ -79,7 +79,7 @@ outputs:
  }
 }
 
-services.Geometry: @local::dune10kt_1x2x6_geo
+services.Geometry: @local::dune10kt_1x2x6_refactored_geo
 
 physics.producers.mvaselectnue.MVAMethod:  "BDTG"
 physics.producers.mvaselectnumu.MVAMethod: "BDTG"
