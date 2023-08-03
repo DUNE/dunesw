@@ -15,5 +15,3 @@ physics.producers.PDFastSimArExternal: @erase
 
 physics.producers.PDFastSimXeExternal.DoFastComponent: false
 physics.simulate: [ rns, PDFastSimXe, PDFastSimXeExternal]
-
-outputs.out1.fileName: "%ifb_%p-%tc.root"

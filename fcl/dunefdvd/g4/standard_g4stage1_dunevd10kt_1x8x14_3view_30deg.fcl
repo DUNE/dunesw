@@ -6,6 +6,3 @@ process_name: G4Stage1
 physics.producers.PDFastSimXe: @erase
 physics.producers.PDFastSimXeExternal: @erase
 physics.simulate: [ rns, largeant, IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimArExternal]
-
-
-outputs.out1.fileName: "%ifb_%p-%tc.root"
