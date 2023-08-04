@@ -1,0 +1,3 @@
+#include "evd_iceberg_data.fcl"
+
+services.RawDrawingOptions.RawDataLabels: [ "daq" ]

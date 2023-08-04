@@ -1,8 +1,5 @@
-#include "standard_reco_dune10kt_1x2x6.fcl"
+#include "standard_reco2_dune10kt_1x2x6.fcl"
 
-physics.reco: [ caldata, @sequence::physics.reco ]
-
-physics.producers.gaushit.CalDataModuleLabel: "caldata"
 physics.producers.pmtrack.WireModuleLabel:    "caldata"
 physics.producers.pmtracktc.WireModuleLabel:  "caldata"
 physics.producers.emtrkmichelid.WireLabel:    "caldata"
