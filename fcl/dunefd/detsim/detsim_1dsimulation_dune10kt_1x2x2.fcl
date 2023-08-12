@@ -1,4 +1,4 @@
-#include "detsim_dune10kt_1x2x2_wirecell.fcl"
+#include "detsim_dune10kt_1x2x2_notpcsigproc.fcl"
 
 #physics.producers.daq:            @local::dune_detsim
 #physics.producers.rns:            { module_type: "RandomNumberSaver" }
