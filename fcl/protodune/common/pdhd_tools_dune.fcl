@@ -1,0 +1,9 @@
+# pdhd_tools_dune.fcl
+
+# David Adams
+# July 2023
+#
+# Collect all tool definitions for the DUNE 2023 horizontal-drift
+# prototype detector.
+
+#include "pdhd_tools.fcl"
