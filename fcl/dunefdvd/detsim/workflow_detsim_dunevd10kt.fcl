@@ -4,8 +4,6 @@
 #
 # Configuration fcl defining the various detsim paths
 #include "wirecell_dune.fcl"
-#include "detsimmodules_dune.fcl"
-#include "opticaldetectormodules_dune.fcl"
 #include "SIPMOpSensorSim.fcl"
 #include "WaveformDigitizerSim.fcl"
 
@@ -16,16 +14,11 @@ dunefd_vertdrift_producers:
    rns:            { module_type: "RandomNumberSaver" }
    tpcrawdecoder: @local::tpcrawdecoder_dunefd_vertdrift_2view
    # for light signal 
-   sipmArOnly:    @local::xarapuca_ar              #TPC Active volume
-   sipmArOnlyExt: @local::xarapuca_ar              #Region between FC and Cryostat wall
-   sipmXeOnly:    @local::xarapuca_xetuned_xe10ppm
-   sipmXeOnlyExt: @local::xarapuca_xetuned_xe10ppm
-   sipmAr10ppm:   @local::xarapuca_ar_xe10ppm
-   sipmXe10ppm:   @local::xarapuca_xe_xe10ppm
-   sipm10ppmExt:  @local::xarapuca_ar              #Merged library for Ar and Xe mix already in place. No extra cuts
-   opdigiArOnly:  @local::standard_vddaphne
-   opdigiXeOnly:  @local::standard_vddaphne
-   opdigi10ppm:   @local::standard_vddaphne
+   sipmAr10ppm:    @local::xarapuca_ar_xe10ppm     #TPC Active volume
+   sipmAr10ppmExt: @local::xarapuca_ar_xe10ppm_ext #Region between FC and Cryostat wall
+   sipmXe10ppm:    @local::xarapuca_xe_xe10ppm
+   sipmXe10ppmExt: @local::xarapuca_xe_xe10ppm_ext  
+   opdigi10ppm:    @local::standard_vddaphne_xe10ppm
 }
 
 dunefd_vertdrift_tpc:
@@ -33,25 +26,12 @@ dunefd_vertdrift_tpc:
     tpcrawdecoder
 ]
 
-dunefd_vertdrift_pds_aronly:
-[
-    sipmArOnly,
-    sipmArOnlyExt,
-    opdigiArOnly
-]
-
-dunefd_vertdrift_pds_xeonly:
-[
-    sipmXeOnly,
-    sipmXeOnlyExt,
-    opdigiXeOnly
-]
-
 dunefd_vertdrift_pds_bothelements:
 [
     sipmAr10ppm,
     sipmXe10ppm,
-    sipm10ppmExt,
+    sipmAr10ppmExt,
+    sipmXe10ppmExt,
     opdigi10ppm
 ]
 dunefd_vertdrift_pds_bothelements_1x8x6:
@@ -86,16 +66,5 @@ dunefd_vertdrift_detsim_all_systems_1x8x6:
     @sequence::dunefd_vertdrift_pds_bothelements_1x8x6
 ]
 
-#Overrides
-dunefd_vertdrift_producers.sipmArOnly.InputTag:     "PDFastSimAr"
-dunefd_vertdrift_producers.sipmArOnlyExt.InputTag:  "PDFastSimExternal"
-dunefd_vertdrift_producers.sipmXeOnly.InputTag:     "PDFastSimXe" #Default, but set anyway for clarity
-dunefd_vertdrift_producers.sipmXeOnlyExt.InputTag:  "PDFastSimExternal" 
-dunefd_vertdrift_producers.sipmAr10ppm.InputTag:    "PDFastSimAr"
-dunefd_vertdrift_producers.sipmXe10ppm.InputTag:    "PDFastSimXe" #Default, but set anyway for clarity
-dunefd_vertdrift_producers.sipm10ppmExt.InputTag:   "PDFastSimExternal" 
-dunefd_vertdrift_producers.opdigiArOnly.InputTags:   [sipmArOnly, sipmArOnlyExt]
-dunefd_vertdrift_producers.opdigiXeOnly.InputTags:   [sipmXeOnly, sipmXeOnlyExt]
-dunefd_vertdrift_producers.opdigi10ppm.InputTags:    [sipmAr10ppm, sipmXe10ppm, sipm10ppmExt]
 
 END_PROLOG
