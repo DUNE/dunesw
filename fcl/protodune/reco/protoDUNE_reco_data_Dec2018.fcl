@@ -1,6 +1,5 @@
 ## protoDUNE reco on data for Dec 2018 production
 
-#include "services_dune.fcl"
 #include "RawDecoder.fcl"
 #include "BeamEvent.fcl"
 #include "caldata_dune.fcl"
