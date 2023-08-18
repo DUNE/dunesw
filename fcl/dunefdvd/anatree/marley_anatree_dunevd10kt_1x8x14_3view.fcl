@@ -13,7 +13,7 @@ physics:
  {
    analysistree:      @local::dune10kt_analysistree
    pmtracktceff:      @local::standard_neutrinotrackingeff
-   vdflashmatch:      @local::marley_flashmatchana
+   vdflashmatch:      @local::marley_vdflashmatchana
  }
  #define the output stream, there could be more than one if using filters 
   stream1:  [ out1 ]
@@ -27,18 +27,15 @@ physics:
   end_paths:     [stream1,ana]
 } 
 
+physics.analyzers.pmtracktceff.TrackModuleLabel: "pmtracktc"
+physics.analyzers.pmtracktceff.MCTruthModuleLabel: "marley"
+physics.analyzers.pmtracktceff.NeutrinoPDGcode: 12
+physics.analyzers.pmtracktceff.LeptonPDGcode: 11
+physics.analyzers.pmtracktceff.MaxLeptonP: 0.05
+physics.analyzers.pmtracktceff.MaxNeutrinoE: 0.05
+
 physics.analyzers.analysistree.MCTruthModuleLabel : "marley"
 physics.analyzers.analysistree.GenieGenModuleLabel: "marley"
-physics.analyzers.vdflashmatch.OpFlashModuleLabel:  "opflash10ppm"  
-physics.analyzers.vdflashmatch.OpHitModuleLabel:    "ophit10ppm"
-physics.analyzers.vdflashmatch.OpDetWaveformLabel:  "opdigi10ppm"
-physics.analyzers.pmtracktctceff.TrackModuleLabel: "pmtracktc"
-physics.analyzers.pmtracktctceff.MCTruthModuleLabel: "marley"
-physics.analyzers.pmtracktctceff.NeutrinoPDGcode: 12
-physics.analyzers.pmtracktctceff.LeptonPDGcode: 11
-physics.analyzers.pmtracktctceff.MaxLeptonP: 0.05
-physics.analyzers.pmtracktctceff.MaxNeutrinoE: 0.05
-
 physics.analyzers.analysistree.UseBuffers:               false
 physics.analyzers.analysistree.IgnoreMissingShowers:     false
 physics.analyzers.analysistree.SaveAuxDetInfo:           false

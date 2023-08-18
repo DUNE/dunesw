@@ -1,0 +1,7 @@
+#include "prodmarley_nue_spectrum_dune10kt_1x2x6.fcl"
+
+physics.producers.marley: @local::dune_marley_flat
+physics.producers.marley.marley_parameters.source.Emin: 5.
+physics.producers.marley.marley_parameters.source.Emax: 70.
+
+outputs.out1.fileName: "prodmarley_nue_flat_dune10kt_1x2x6_gen.root"
