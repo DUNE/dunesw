@@ -170,7 +170,6 @@ dunefd_vertdrift_reco_le:
 
 dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly
 dunefd_vertdrift_producers.ophitXeOnly.InputModule:      opdigiXeOnly
-dunefd_vertdrift_producers.ophit10ppm.InputModule:       opdigi10ppm
 dunefd_vertdrift_producers.opflashArOnly.InputModule:    ophitArOnly
 dunefd_vertdrift_producers.opflashXeOnly.InputModule:    ophitXeOnly
 dunefd_vertdrift_producers.opflash10ppm.InputModule:     ophit10ppm

@@ -1,40 +1,12 @@
-#include "services_dune.fcl"
-#include "OpDetMultisim.fcl"
-
- process_name: Mergeana
-
- services:
- {
-   # Load the service that manages root files for histograms.
-    TFileService: { fileName: "%ifb_ana_hist.root" }
-    TimeTracker:       {}
-    RandomNumberGenerator: {}
-    MemoryTracker:         { } # default is one
-    @table::dunefdvd_simulation_services
-    message:      @local::dune_message_services_prod
-                        @table::dunefdvd_1x8x14_3view_30deg_simulation_services
-  }
-
- #source is now a root file
- source:
- {
-   module_type: RootInput
-   maxEvents:  1000        # Number of events to create
- }
-
+#include "standard_flashmatch_dunevd10kt_1x8x14_3view_30deg.fcl"
 
  physics:
  {
     analyzers:
     {
-      vdflashmatch: @local::marley_flashmatchana
+      vdflashmatch: @local::marley_vdflashmatchana
      }
 
   anapath: [ vdflashmatch ]
   end_paths: [ anapath ]
  }
-             
-physics.analyzers.vdflashmatch.OpFlashModuleLabel:   "opflash10ppm"  
-physics.analyzers.vdflashmatch.OpHitModuleLabel:     "ophit10ppm"
-physics.analyzers.vdflashmatch.OpDetWaveformLabel: "opdigi10ppm"
-physics.analyzers.vdflashmatch.DistanceCut: 360.0
