@@ -1,0 +1,14 @@
+# cbcrp2_tools_dune.fcl
+
+# David Adams
+# August 2023
+#
+# Collect all tool definitions for CRP2 vertical drift.
+
+#include "vdcb2_tools_dune.fcl"
+
+tools.channelRanges: @local::tools.channelRangesCBCrp2
+tools.channelRanges.LogLevel: 0
+
+tools.channelGroups: @local::tools.channelGroupsCBCrp2
+tools.channelGroups.LogLevel: 0
