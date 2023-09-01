@@ -1,0 +1,3 @@
+#include "standard_reco1_dune10kt_1x2x6.fcl"
+
+physics.producers.spsolve.MinNHits: 2 #lower the threshold for low energy interactions
