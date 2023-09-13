@@ -1,0 +1,4 @@
+#include "prodbackground_radiological_dune10kt_1x2x6_legacy.fcl"
+
+physics.producers.ar42Gen.BqPercc: [ 0.00001283768 ] # (x100) Default: 0.0000001283768
+physics.simulate: [ rns , ar42Gen ]

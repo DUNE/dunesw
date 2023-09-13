@@ -1,0 +1,4 @@
+#include "prodbackground_radiological_dune10kt_1x2x6_legacy.fcl"
+
+physics.producers.po210Gen.BqPercc: [ 0.005 ] # (x1000) Default: 0.000005 
+physics.simulate: [ rns , po210Gen ]

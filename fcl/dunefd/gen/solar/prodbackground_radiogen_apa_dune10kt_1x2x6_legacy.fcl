@@ -1,0 +1,4 @@
+#include "prodbackground_radiological_dune10kt_1x2x6_legacy.fcl"
+
+physics.producers.apaGen.BqPercc: [ 0.00082 ] # (x100) Default 0.000082 Bq/cc
+physics.simulate: [ rns , apaGen ]

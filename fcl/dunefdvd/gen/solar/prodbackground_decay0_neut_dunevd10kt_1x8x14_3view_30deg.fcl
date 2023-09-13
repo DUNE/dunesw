@@ -1,0 +1,4 @@
+#include "prodmarley_nue_spectrum_radiological_decay0_hudepohl_11.2M_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+physics.simulate: [ rns , NeutronGenInRock ]
+physics.producers.NeutronGenInRock.BqPercc: [ 7.6e-4, 7.6e-4, 7.6e-4, 7.6e-4, 7.6e-4, 7.6e-4 ]

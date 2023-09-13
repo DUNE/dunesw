@@ -1,0 +1,5 @@
+#include "standard_detsim_dune10kt_1x2x6_legacy.fcl"
+process_name: Detsim
+services.Geometry: @local::dune10kt_1x2x6_geo
+
+physics.producers.opdigi.InputModules: ["largeant"]

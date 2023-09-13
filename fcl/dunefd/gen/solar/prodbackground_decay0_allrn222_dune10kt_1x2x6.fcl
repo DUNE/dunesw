@@ -1,0 +1,3 @@
+#include "prodbackground_radiological_decay0_v3_2_dune10kt_1x2x6.fcl"
+
+physics.simulate: [ rns,Rn222ChainPo218GenInLAr,Rn222ChainPb214GenInLAr,Rn222ChainBi214GenInLAr,Rn222ChainPb210GenInLAr,Rn220ChainPb212GenInLAr ]

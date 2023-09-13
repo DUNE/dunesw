@@ -1,0 +1,4 @@
+#include "prodbackground_radiological_decay0_v3_2_dune10kt_1x2x6.fcl"
+
+physics.producers.Rn220ChainPb212GenInLAr.BqPercc: 0.000015252 # x100 (Default 0.00000015252)
+physics.simulate: [ rns,Rn220ChainPb212GenInLAr ]

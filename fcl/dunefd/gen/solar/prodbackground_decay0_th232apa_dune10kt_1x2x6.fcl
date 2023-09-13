@@ -1,0 +1,4 @@
+#include "prodbackground_radiological_decay0_v3_2_dune10kt_1x2x6.fcl"
+
+physics.producers.Th232ChainGenInAPA.BqPercc: 0.48373 # Default activity 4.8373
+physics.simulate: [ rns, Th232ChainGenInAPA ]

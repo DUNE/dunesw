@@ -1,0 +1,4 @@
+#include "standard_reco1_dune10kt_1x2x6.fcl"
+
+# physics.producers.hitfd: @local::dunefd_hitfinderfd
+physics.producers.spsolve.MinNHits: 2
