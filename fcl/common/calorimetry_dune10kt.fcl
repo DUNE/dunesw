@@ -6,7 +6,9 @@ dune10kt_calorimetryalgdata:	@local::standard_calorimetryalgdata
 dune10kt_calorimetryalgmc:	@local::standard_calorimetryalgmc
 
 dune10kt_calorimetryalgmc.CalAmpConstants:  [ 0.9033e-3, 1.0287e-3, 0.8800e-3 ]
-dune10kt_calorimetryalgmc.CalAreaConstants: [ 4.833e-3, 4.815e-3, 4.966e-3 ]
+
+### Tuned by Rhiannon Jones in August 2023. Summary given here: https://indico.fnal.gov/event/58097/contributions/276314/
+dune10kt_calorimetryalgmc.CalAreaConstants: [ 5.122e-3, 5.102e-3, 5.045e-3 ]
 
 dune10kt_calodata:                       @local::standard_calodata
 dune10kt_calodata.CaloAlg:               @local::dune10kt_calorimetryalgdata
@@ -18,7 +20,8 @@ dune10kt_calomc.CaloAlg.CaloUseModBox:   true
 
 
 dunevd10kt_calorimetryalgmc: @local::dune10kt_calorimetryalgmc
-dunevd10kt_calorimetryalgmc.CalAreaConstants: [ 5.129e-3, 5.189e-3, 5.029e-3 ]
+### Tuned by Rhiannon Jones in August 2023. Summary given here: https://indico.fnal.gov/event/58097/contributions/276314/
+dunevd10kt_calorimetryalgmc.CalAreaConstants: [ 5.346e-3, 5.339e-3, 5.292e-3 ]
 
 dunevd10kt_calomc:                       @local::dune10kt_calomc
 dunevd10kt_calomc.CaloAlg:               @local::dunevd10kt_calorimetryalgmc
