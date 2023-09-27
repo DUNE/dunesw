@@ -32,6 +32,11 @@ standard_MUSUN_1x2x6:
  Phimin:                 0.         # Minimum angle, must be more than or equal to 0. 
  Phimax:                 360.       # Maximum angle, must be less than or equal to 360
 	
+ # Standard rotation for FD HD
+  DetRotX:               0.         # rotation around X axis, clockwise
+  DetRotY:               0.         # rotation around Y axis, clockwise
+  DetRotZ:               0.         # rotation around Z axis, clockwise
+
  # You have to change all these dimensions if you change the size of the
  # parallelepiped. The dimensions are given in cm.
  # Ideally want the surface on which the muons are sampled to be extended by 5 m
