@@ -1,28 +1,21 @@
 #include "prodgenie_atmnu_max_dune10kt_1x2x6.fcl"
 
+process_name: GenieGen
+
+outputs.out1.fileName: "prodgenie_atmnu_max_weighted_dune10kt_1x2x6_gen.root"
+
+services:
+{
+    @table::services
+    @table::dunefd_1x2x6_simulation_services
+}
+
+source.firstRun: 20000063
+
+physics.producers.generator: @local::dune_fd_genie_atmo_max_weighted_honda
 physics.producers.generator.EventsPerSpill: 1
 physics.producers.generator.POTPerSpill: 0
-
-# Using the power spectrum weighted generation
-physics.producers.generator.GenFlavors: [-14, 14, 12, -12, 16, -16]
-physics.producers.generator.FluxType: "atmo_POWER"
-physics.producers.generator.SpectralIndex: 2.5
-physics.producers.generator.AtmoEmin: 0.1 
-physics.producers.generator.AtmoEmax: 100 
-physics.producers.generator.ForceApplyFlxWgt: true
-
-physics.producers.generator.FluxSearchPaths: "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/TaskForce_Flux/atmos/Honda_interp/"                                                        
-physics.producers.generator.FluxFiles: [
-    "honda_2d_homestake_2015_numu.root",
-    "honda_2d_homestake_2015_numu.root",
-    "honda_2d_homestake_2015_numu.root",
-    "honda_2d_homestake_2015_numu.root",
-    "honda_2d_homestake_2015_numu.root",
-    "honda_2d_homestake_2015_numu.root"
-    ] #Using nu_mu flux as a baseline to weight all the events.
-
-physics.producers.generator: {
-    @table::physics.producers.generator
-    @table::dune_fd_atmo_flux_rotation_precise
-    FiducialCut: "mbox:-363,-608,-0,363,608,1394" #Only interactions in the active volume
-}
+# reduce the flux window to increase generation efficiency;
+# see `genie_dune.fcl` (or, better, GENIE manual) for explanations
+physics.producers.generator.Rl: 20 # meters
+physics.producers.generator.Rt: 20 # meters
