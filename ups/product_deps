@@ -47,8 +47,12 @@ end_product_list
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 qualifier       duneexamples   dunedataprep  duneana     protoduneana     notes
+c14:debug       c14:debug      c14:debug     c14:debug   c14:debug   
+c14:prof        c14:prof       c14:prof      c14:prof    c14:prof    
 c7:debug        c7:debug       c7:debug      c7:debug    c7:debug   
 c7:prof         c7:prof        c7:prof       c7:prof     c7:prof    
+e26:debug       e26:debug      e26:debug     e26:debug   e26:debug  
+e26:prof        e26:prof       e26:prof      e26:prof    e26:prof   
 e20:debug       e20:debug      e20:debug     e20:debug   e20:debug  
 e20:prof        e20:prof       e20:prof      e20:prof    e20:prof   
 end_qualifier_list
