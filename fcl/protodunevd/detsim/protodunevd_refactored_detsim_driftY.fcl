@@ -1,8 +1,10 @@
 #include "services_refactored_pdune.fcl"
 #include "wirecell_dune.fcl"
+#include "CRTVD.fcl"
 #include "opticaldetectormodules_dune.fcl"
-#include "CRT.fcl"
 #include "tools_dune.fcl"
+
+#test
 
 process_name: Detsim
 
@@ -26,20 +28,23 @@ source:
 physics:
 {
 
+
+
+
   producers:
   {
     tpcrawdecoder:  @local::wirecell_protodunevd_mc
-    # opdigi:         @local::protodune_opdigi_refactor
-    # crt:            @local::CRTSimRefac_standard
+    opdigi:         @local::protodune_opdigi_refactor
+    crt:            @local::CRTVD_sim
     rns:            { module_type: "RandomNumberSaver" }
   }
   
   simulate: [ rns, 
-              # TPC simulation
-              tpcrawdecoder]
-              # OpDet and CRT simulation
+              ## TPC simulation
+#              tpcrawdecoder,
+              ## OpDet and CRT simulation
               # opdigi,
-              # crt] 
+               crt] 
   stream1:  [ out1 ]
 
   trigger_paths: [simulate] 

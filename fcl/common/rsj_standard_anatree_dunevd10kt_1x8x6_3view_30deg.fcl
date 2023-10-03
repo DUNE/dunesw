@@ -1,0 +1,34 @@
+#include "rsj_standard_anatree_dunevd10kt_1x8x6_3view.fcl"
+
+services:{
+    @table::services
+    @table::dunefdvd_1x8x6_3view_30deg_services
+}
+
+physics.analyzers.analysistree.G4minE:                   -1
+physics.analyzers.analysistree.ShowerModuleLabel: [ "pandoraShower" ]
+physics.analyzers.analysistree.TrackModuleLabel: [ "pandoraTrack" ]
+physics.analyzers.analysistree.VertexModuleLabel: [ "pandora" ]
+physics.analyzers.analysistree.ClusterModuleLabel: "pandora"
+physics.analyzers.analysistree.CalorimetryModuleLabel: [ "gnocchicalo" ]
+physics.analyzers.analysistree.ParticleIDModuleLabel: [ "pandorapid" ]
+physics.analyzers.analysistree.PandoraNuVertexModuleLabel: "pandora"
+physics.analyzers.analysistree.VertexModuleLabel: [ "pandora" ]
+physics.analyzers.analysistree.DigitModuleLabel: "tpcrawdecoder:daq"
+physics.analyzers.analysistree.HitsModuleLabel: "gaushit"
+physics.analyzers.analysistree.CalDataModuleLabel: "wclsdatanfsp:gauss"
+physics.analyzers.analysistree.OpFlashModuleLabel: "opflash10ppm"
+physics.analyzers.analysistree.FlashT0FinderLabel: [ "" ]
+physics.analyzers.analysistree.MVAPIDTrackModuleLabel: [ "" ]
+physics.analyzers.analysistree.MVAPIDShowerModuleLabel: [ "" ]
+physics.analyzers.analysistree.MCT0FinderLabel: [ "" ]
+physics.analyzers.analysistree.CosmicTaggerAssocLabel: [ "" ]
+physics.analyzers.analysistree.ContainmentTaggerAssocLabel: [ "" ]
+physics.analyzers.analysistree.FlashMatchAssocLabel: [ "" ]
+physics.analyzers.analysistree.SaveCryInfo:                false
+physics.analyzers.analysistree.SaveGenieInfo:              true
+physics.analyzers.analysistree.SaveGeantInfo:              true
+physics.analyzers.analysistree.SaveExternCounterInfo:      false
+physics.analyzers.analysistree.SaveFlashInfo:              false
+physics.analyzers.analysistree.SaveShowerInfo:             true
+physics.analyzers.analysistree.SavePandoraNuVertexInfo:    true
