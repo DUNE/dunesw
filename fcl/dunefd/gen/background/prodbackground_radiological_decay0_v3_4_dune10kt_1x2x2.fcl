@@ -1,5 +1,5 @@
 #include "services_dune.fcl"
-#include "dune_radiological_model_decay0_v3_4_for1x2x6.fcl"
+#include "dune_radiological_model_decay0_v3_4_for1x2x2.fcl"
 
 process_name: MARLEYGen
 
@@ -158,13 +158,13 @@ outputs:
    out1:
    {
       module_type: RootOutput
-      fileName:    "prodradiological_decay0_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
+      fileName:    "prodradiological_decay0_dune10kt_1x2x2_gen.root" # Default file name, can override from command line with -o or --output
       dataTier:    "generated"
       compressionLevel: 1
    }
 }
 
-services.Geometry: @local::dune10kt_1x2x6_geo
+services.Geometry: @local::dune10kt_1x2x2_geo
 services.message.destinations.LogStandardOut.categories.BackTracker.limit: 0
 services.message.destinations.LogStandardError.categories.BackTracker.limit: 0
 

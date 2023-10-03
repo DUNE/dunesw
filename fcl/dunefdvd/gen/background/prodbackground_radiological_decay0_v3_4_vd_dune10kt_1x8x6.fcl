@@ -1,17 +1,20 @@
 #include "services_dune.fcl"
-#include "dune_radiological_model_decay0_v3_4_for1x2x6.fcl"
+#include "dune_radiological_model_decay0_v3_4_vd_for1x8x6.fcl"
 
 process_name: MARLEYGen
 
 services:
 {
-   @table::dunefd_services
+   #  @table::dunefd_services
    TFileService:          { fileName: "prodradiological_hist.root" }
    TimeTracker:           {}
+  MemoryTracker:         {} # default is one
    RandomNumberGenerator: {}                 # ART native random number generator
    FileCatalogMetadata:  @local::art_file_catalog_mc
    message:              @local::dune_message_services_prod
-
+  @table::dunefd_services
+  IFDH: {}
+  @table::dunefdvd_1x8x6_3view_30deg_services
 }
 
 source:
@@ -34,6 +37,7 @@ physics:
       Ar42GenInLAr:             @local::dune10kt_42Ar_in_LAr
       K42From42ArGenInLAr:      @local::dune10kt_42Kfrom42Ar_in_LAr
       # This will need to change to whatever 
+     #Rn222ChainRn222GenInLAr:  @local::dune10kt_222Rn_chain_in_LAr
       Rn222ChainRn222GenInLAr:  @local::dune10kt_222Rn_chain_222RnOnly_in_LAr
       ## Subject to ion drifting (funky x-profile)
       Rn222ChainPo218GenInLAr:  @local::dune10kt_222Rn_chain_218PoOnly_in_LAr
@@ -44,28 +48,27 @@ physics:
       ##########################################################################
 
       ##########################################################################
-      # CPA
-      K40GenInCPA:         @local::dune10kt_1x2x6_40K_in_CPA
-      U238ChainGenInCPA:   @local::dune10kt_1x2x6_238U_chain_in_CPA
-      Th232ChainGenInCPA:  @local::dune10kt_1x2x6_232Th_chain_in_CPA
-      ## Product of ion drifting, on CPA, but these actually came from the liquid argon
-      K42From42ArGenInCPA:      @local::dune10kt_1x2x6_42Kfrom42Ar_in_CPA
-      Rn222ChainPo218GenInCPA:  @local::dune10kt_222Rn_chain_218PoOnly_in_CPA
-      Rn222ChainPb214GenInCPA:  @local::dune10kt_222Rn_chain_214PbOnly_in_CPA
-      Rn222ChainBi214GenInCPA:  @local::dune10kt_222Rn_chain_214BiOnly_in_CPA
-      Rn222ChainPb210GenInCPA:  @local::dune10kt_222Rn_chain_210PbOnly_in_CPA
-      Rn222ChainFromBi210GenInCPA:  @local::dune10kt_222Rn_chain_from210Bi_in_CPA
-      Rn220ChainFromPb212GenInCPA:  @local::dune10kt_220Rn_chain_from212Pb_in_CPA
+      # Cathode
+      K40GenInCathode:         @local::dune10kt_40K_in_Cathode
+      U238ChainGenInCathode:   @local::dune10kt_238U_chain_in_Cathode
+      Th232ChainGenInCathode:  @local::dune10kt_232Th_chain_in_Cathode
+      ## Product of ion drifting, on Cathode, but these actually came from the liquid argon
+     #K42From42ArGenInCathode:           @local::dune10kt_42Kfrom42Ar_in_Cathode
+      K42From42ArGenInUpperMesh:         @local::dune10kt_42Kfrom42Ar_in_upperCathodeMesh
+      Rn222ChainFromPo218GenInUpperMesh: @local::dune10kt_222Rn_chain_218PoOnly_in_upperCathodeMesh
+      Rn222ChainFromPb214GenInUpperMesh: @local::dune10kt_222Rn_chain_214PbOnly_in_upperCathodeMesh
+      Rn222ChainFromBi214GenInUpperMesh: @local::dune10kt_222Rn_chain_214BiOnly_in_upperCathodeMesh
+      Rn222ChainFromPb210GenInUpperMesh: @local::dune10kt_222Rn_chain_210PbOnly_in_upperCathodeMesh
+      Rn222ChainFromBi210GenInUpperMesh: @local::dune10kt_222Rn_chain_from210Bi_in_upperCathodeMesh
+     #Rn220ChainFromPb212GenInCathode:    @local::dune10kt_220Rn_chain_from212Pb_in_Cathode
+      Rn220ChainFromPb212GenInUpperMesh:  @local::dune10kt_220Rn_chain_from212Pb_in_upperCathodeMesh
       ##########################################################################
 
       ##########################################################################
-      # APA
-      Co60GenInAPA:        @local::dune10kt_1x2x6_60Co_in_APA
-      U238ChainGenInAPA:   @local::dune10kt_1x2x6_238U_chain_in_APA
-      Th232ChainGenInAPA:  @local::dune10kt_1x2x6_232Th_chain_in_APA
-      K40GenInAPAboards:         @local::dune10kt_1x2x6_40K_in_APAboards
-      U238ChainGenInAPAboards:   @local::dune10kt_1x2x6_238U_chain_in_APAboards
-      Th232ChainGenInAPAboards:  @local::dune10kt_1x2x6_232Th_chain_in_APAboards
+      # CRP
+      K40GenInAnode:         @local::dune10kt_40K_in_Anode
+      U238ChainGenInAnode:   @local::dune10kt_238U_chain_in_Anode
+      Th232ChainGenInAnode:  @local::dune10kt_232Th_chain_in_Anode
       ##########################################################################
 
       ##########################################################################
@@ -80,12 +83,11 @@ physics:
       
       ##########################################################################
       # Externals
-      #NeutronGenInRock:    @local::dune10kt_1x2x6_neutron_from_rock
-      CavernwallGammasAtLAr: @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
-      foamGammasAtLAr: @local::dune10kt_1x2x6_gammas_from_foam_atLAr
-      CavernwallNeutronsAtLAr: @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
-      CryostatNGammasAtLAr: @local::dune10kt_1x2x6_CryostatNGammas_from_CavernNeutrons_atLAr
-      CavernNGammasAtLAr: @local::dune10kt_1x2x6_CavernNGammas_atLAr
+      CavernwallGammasAtLAr: @local::dune10kt_1x8x6_gammas_from_cavernwall_atLAr
+      foamGammasAtLAr: @local::dune10kt_1x8x6_gammas_from_foam_atLAr
+      CavernwallNeutronsAtLAr: @local::dune10kt_1x8x6_neutrons_from_cavernwall_atLAr
+      CryostatNGammasAtLAr: @local::dune10kt_1x8x6_CryostatNGammas_from_CavernNeutrons_atLAr
+      CavernNGammasAtLAr: @local::dune10kt_1x8x6_CavernNGammas_atLAr
       ##########################################################################
       rns:       { module_type: "RandomNumberSaver" }
    }
@@ -109,28 +111,27 @@ physics:
       ##########################################################################
 
       ##########################################################################
-      # CPA
-      K40GenInCPA,
-      U238ChainGenInCPA,
-      Th232ChainGenInCPA,
-      ## Product of ion drifting, on CPA, but these actually came from the liquid argon
-      K42From42ArGenInCPA,
-      Rn222ChainPo218GenInCPA,
-      Rn222ChainPb214GenInCPA,
-      Rn222ChainBi214GenInCPA,
-      Rn222ChainPb210GenInCPA,
-      Rn222ChainFromBi210GenInCPA,
-      Rn220ChainFromPb212GenInCPA,
+      # Cathode
+      K40GenInCathode,
+      U238ChainGenInCathode,
+      Th232ChainGenInCathode,
+      ## Product of ion drifting, on Cathode, but these actually came from the liquid argon
+     #K42From42ArGenInCathode,
+      K42From42ArGenInUpperMesh,
+      Rn222ChainFromPo218GenInUpperMesh,
+      Rn222ChainFromPb214GenInUpperMesh,
+      Rn222ChainFromBi214GenInUpperMesh,
+      Rn222ChainFromPb210GenInUpperMesh,
+      Rn222ChainFromBi210GenInUpperMesh,
+     #Rn220ChainFromPb212GenInCathode,
+      Rn220ChainFromPb212GenInUpperMesh,
       ##########################################################################
 
       ##########################################################################
-      # APA
-      Co60GenInAPA,
-      U238ChainGenInAPA,
-      Th232ChainGenInAPA,
-      K40GenInAPAboards,
-      U238ChainGenInAPAboards,
-      Th232ChainGenInAPAboards,
+      # CRP
+      K40GenInAnode,
+      U238ChainGenInAnode,
+      Th232ChainGenInAnode,
       ##########################################################################
 
       ##########################################################################
@@ -158,13 +159,13 @@ outputs:
    out1:
    {
       module_type: RootOutput
-      fileName:    "prodradiological_decay0_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
+      fileName:    "prodradiological_decay0_dune10kt_1x8x6_gen.root" # Default file name, can override from command line with -o or --output
       dataTier:    "generated"
       compressionLevel: 1
    }
 }
 
-services.Geometry: @local::dune10kt_1x2x6_geo
+  #services.Geometry: @local::dune10kt_1x8x6_geo
 services.message.destinations.LogStandardOut.categories.BackTracker.limit: 0
 services.message.destinations.LogStandardError.categories.BackTracker.limit: 0
 
