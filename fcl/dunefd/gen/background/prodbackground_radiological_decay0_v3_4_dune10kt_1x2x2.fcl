@@ -164,7 +164,7 @@ outputs:
    }
 }
 
-services.Geometry: @local::dune10kt_1x2x2_geo
+services.Geometry: @local::dune10kt_1x2x2_refactored_geo
 services.message.destinations.LogStandardOut.categories.BackTracker.limit: 0
 services.message.destinations.LogStandardError.categories.BackTracker.limit: 0
 
