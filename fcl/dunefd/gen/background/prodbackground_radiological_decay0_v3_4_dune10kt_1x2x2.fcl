@@ -63,9 +63,9 @@ physics:
       Co60GenInAPA:        @local::dune10kt_1x2x6_60Co_in_APA
       U238ChainGenInAPA:   @local::dune10kt_1x2x6_238U_chain_in_APA
       Th232ChainGenInAPA:  @local::dune10kt_1x2x6_232Th_chain_in_APA
-      K40GenInAPAboards:         @local::dune10kt_1x2x6_40K_in_APAboards
-      U238ChainGenInAPAboards:   @local::dune10kt_1x2x6_238U_chain_in_APAboards
-      Th232ChainGenInAPAboards:  @local::dune10kt_1x2x6_232Th_chain_in_APAboards
+      K40GenInAPAboards:         @local::dune10kt_40K_in_APAboards
+      U238ChainGenInAPAboards:   @local::dune10kt_238U_chain_in_APAboards
+      Th232ChainGenInAPAboards:  @local::dune10kt_232Th_chain_in_APAboards
       ##########################################################################
 
       ##########################################################################
@@ -80,7 +80,6 @@ physics:
       
       ##########################################################################
       # Externals
-      #NeutronGenInRock:    @local::dune10kt_1x2x6_neutron_from_rock
       CavernwallGammasAtLAr: @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
       foamGammasAtLAr: @local::dune10kt_1x2x6_gammas_from_foam_atLAr
       CavernwallNeutronsAtLAr: @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
@@ -140,7 +139,6 @@ physics:
       
       ##########################################################################
       # Externals
-      #NeutronGenInRock
       CavernwallGammasAtLAr,
       foamGammasAtLAr,
       CavernwallNeutronsAtLAr,

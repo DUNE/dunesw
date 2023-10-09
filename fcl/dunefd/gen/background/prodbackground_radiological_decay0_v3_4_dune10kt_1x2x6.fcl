@@ -49,23 +49,23 @@ physics:
       U238ChainGenInCPA:   @local::dune10kt_1x2x6_238U_chain_in_CPA
       Th232ChainGenInCPA:  @local::dune10kt_1x2x6_232Th_chain_in_CPA
       ## Product of ion drifting, on CPA, but these actually came from the liquid argon
-      K42From42ArGenInCPA:      @local::dune10kt_1x2x6_42Kfrom42Ar_in_CPA
-      Rn222ChainPo218GenInCPA:  @local::dune10kt_222Rn_chain_218PoOnly_in_CPA
-      Rn222ChainPb214GenInCPA:  @local::dune10kt_222Rn_chain_214PbOnly_in_CPA
-      Rn222ChainBi214GenInCPA:  @local::dune10kt_222Rn_chain_214BiOnly_in_CPA
-      Rn222ChainPb210GenInCPA:  @local::dune10kt_222Rn_chain_210PbOnly_in_CPA
+      K42From42ArGenInCPA:          @local::dune10kt_1x2x6_42Kfrom42Ar_in_CPA
+      Rn222ChainPo218GenInCPA:      @local::dune10kt_222Rn_chain_218PoOnly_in_CPA
+      Rn222ChainPb214GenInCPA:      @local::dune10kt_222Rn_chain_214PbOnly_in_CPA
+      Rn222ChainBi214GenInCPA:      @local::dune10kt_222Rn_chain_214BiOnly_in_CPA
+      Rn222ChainPb210GenInCPA:      @local::dune10kt_222Rn_chain_210PbOnly_in_CPA
       Rn222ChainFromBi210GenInCPA:  @local::dune10kt_222Rn_chain_from210Bi_in_CPA
       Rn220ChainFromPb212GenInCPA:  @local::dune10kt_220Rn_chain_from212Pb_in_CPA
       ##########################################################################
 
       ##########################################################################
       # APA
-      Co60GenInAPA:        @local::dune10kt_1x2x6_60Co_in_APA
-      U238ChainGenInAPA:   @local::dune10kt_1x2x6_238U_chain_in_APA
-      Th232ChainGenInAPA:  @local::dune10kt_1x2x6_232Th_chain_in_APA
-      K40GenInAPAboards:         @local::dune10kt_1x2x6_40K_in_APAboards
-      U238ChainGenInAPAboards:   @local::dune10kt_1x2x6_238U_chain_in_APAboards
-      Th232ChainGenInAPAboards:  @local::dune10kt_1x2x6_232Th_chain_in_APAboards
+      Co60GenInAPA:              @local::dune10kt_1x2x6_60Co_in_APA
+      U238ChainGenInAPA:         @local::dune10kt_1x2x6_238U_chain_in_APA
+      Th232ChainGenInAPA:        @local::dune10kt_1x2x6_232Th_chain_in_APA
+      K40GenInAPAboards:         @local::dune10kt_40K_in_APAboards
+      U238ChainGenInAPAboards:   @local::dune10kt_238U_chain_in_APAboards
+      Th232ChainGenInAPAboards:  @local::dune10kt_232Th_chain_in_APAboards
       ##########################################################################
 
       ##########################################################################
@@ -80,7 +80,6 @@ physics:
       
       ##########################################################################
       # Externals
-      #NeutronGenInRock:    @local::dune10kt_1x2x6_neutron_from_rock
       CavernwallGammasAtLAr: @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
       foamGammasAtLAr: @local::dune10kt_1x2x6_gammas_from_foam_atLAr
       CavernwallNeutronsAtLAr: @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
@@ -140,7 +139,6 @@ physics:
       
       ##########################################################################
       # Externals
-      #NeutronGenInRock
       CavernwallGammasAtLAr,
       foamGammasAtLAr,
       CavernwallNeutronsAtLAr,
