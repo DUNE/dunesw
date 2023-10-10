@@ -38,7 +38,7 @@ physics:
   producers:
   {
      largeant:    @local::dunefd_larg4
-     IonAndScint: @local::dunefd_ionandscint_larql
+     IonAndScint: @local::dunefd_ionandscint
      elecDrift:   @local::dunefd_elecdrift
      PDFastSimAr: @local::dunevd_pdfastsim_ann_ar
      PDFastSimXe: @local::dunevd_pdfastsim_ann_xe
