@@ -1,0 +1,18 @@
+#include "dune_radiological_model_decay0_v3_4_vd_common.fcl"
+#include "dune_radiological_model_decay0_v3_4_vd_1x8x6.fcl"
+
+BEGIN_PROLOG
+dunefd_vertdrift_common_producers:
+{
+}
+
+dunefd_vertdrift_1x2x2_producers:
+{
+    @table::dunefd_vertdrift_common_producers
+}
+
+dunefd_vertdrift_1x2x6_producers:
+{
+    @table::dunefd_vertdrift_common_producers
+}
+END_PROLOG
