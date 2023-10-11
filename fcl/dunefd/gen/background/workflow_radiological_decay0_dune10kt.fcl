@@ -1,0 +1,17 @@
+#include "dune_radiological_model_decay0_v3_4_hd_common.fcl"
+
+BEGIN_PROLOG
+dunefd_horizdrift_common_producers:
+{
+}
+
+dunefd_horizdrift_1x2x2_producers:
+{
+    @table::dunefd_horizdrift_common_producers
+}
+
+dunefd_horizdrift_1x2x6_producers:
+{
+    @table::dunefd_horizdrift_common_producers
+}
+END_PROLOG
