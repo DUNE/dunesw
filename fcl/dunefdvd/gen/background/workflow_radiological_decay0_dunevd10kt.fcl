@@ -6,12 +6,12 @@ dunefd_vertdrift_common_producers:
 {
 }
 
-dunefd_vertdrift_1x2x2_producers:
+dunefd_vertdrift_1x8x6_producers:
 {
     @table::dunefd_vertdrift_common_producers
 }
 
-dunefd_vertdrift_1x2x6_producers:
+dunefd_vertdrift_1x8x14_producers:
 {
     @table::dunefd_vertdrift_common_producers
 }
