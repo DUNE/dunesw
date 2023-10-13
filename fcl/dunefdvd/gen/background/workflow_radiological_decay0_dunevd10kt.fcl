@@ -6,47 +6,47 @@ dunefd_vertdrift_common_producers:
 {
     ##########################################################################
     # Liquid argon
-    Ar39GenInLAr:             @local::dune10kt_39Ar_in_LAr
-    Kr85GenInLAr:             @local::dune10kt_85Kr_in_LAr
-    Ar42GenInLAr:             @local::dune10kt_42Ar_in_LAr
-    K42From42ArGenInLAr:      @local::dune10kt_42Kfrom42Ar_in_LAr
+    Ar39GenInLAr:             @local::dunevd10kt_39Ar_in_LAr
+    Kr85GenInLAr:             @local::dunevd10kt_85Kr_in_LAr
+    Ar42GenInLAr:             @local::dunevd10kt_42Ar_in_LAr
+    K42From42ArGenInLAr:      @local::dunevd10kt_42Kfrom42Ar_in_LAr
     # This will need to change to whatever 
     Rn222ChainRn222GenInLAr:  @local::dune10kt_222Rn_chain_222RnOnly_in_LAr
     ## Subject to ion drifting (funky x-profile)
-    Rn222ChainPo218GenInLAr:  @local::dune10kt_222Rn_chain_218PoOnly_in_LAr_VD
-    Rn222ChainPb214GenInLAr:  @local::dune10kt_222Rn_chain_214PbOnly_in_LAr_VD
-    Rn222ChainBi214GenInLAr:  @local::dune10kt_222Rn_chain_214BiOnly_in_LAr_VD
-    Rn222ChainPb210GenInLAr:  @local::dune10kt_222Rn_chain_210PbOnly_in_LAr_VD
-    Rn220ChainPb212GenInLAr:  @local::dune10kt_220Rn_chain_212PbOnly_in_LAr_VD
+    Rn222ChainPo218GenInLAr:  @local::dunevd10kt_222Rn_chain_218PoOnly_in_LAr
+    Rn222ChainPb214GenInLAr:  @local::dunevd10kt_222Rn_chain_214PbOnly_in_LAr
+    Rn222ChainBi214GenInLAr:  @local::dunevd10kt_222Rn_chain_214BiOnly_in_LAr
+    Rn222ChainPb210GenInLAr:  @local::dunevd10kt_222Rn_chain_210PbOnly_in_LAr
+    Rn220ChainPb212GenInLAr:  @local::dunevd10kt_220Rn_chain_212PbOnly_in_LAr
     ##########################################################################
 
     ##########################################################################
     # Cathode
-    K40GenInCathode:                   @local::dune10kt_40K_in_Cathode
-    U238ChainGenInCathode:             @local::dune10kt_238U_chain_in_Cathode
-    Th232ChainGenInCathode:            @local::dune10kt_232Th_chain_in_Cathode
+    K40GenInCathode:                   @local::dunevd10kt_40K_in_Cathode
+    U238ChainGenInCathode:             @local::dunevd10kt_238U_chain_in_Cathode
+    Th232ChainGenInCathode:            @local::dunevd10kt_232Th_chain_in_Cathode
     ## Product of ion drifting, on Cathode, but these actually came from the liquid argon
     #K42From42ArGenInCathode:           @local::dune10kt_42Kfrom42Ar_in_Cathode
-    K42From42ArGenInUpperMesh:         @local::dune10kt_42Kfrom42Ar_in_upperCathodeMesh
-    Rn222ChainFromPo218GenInUpperMesh: @local::dune10kt_222Rn_chain_218PoOnly_in_upperCathodeMesh
-    Rn222ChainFromPb214GenInUpperMesh: @local::dune10kt_222Rn_chain_214PbOnly_in_upperCathodeMesh
-    Rn222ChainFromBi214GenInUpperMesh: @local::dune10kt_222Rn_chain_214BiOnly_in_upperCathodeMesh
-    Rn222ChainFromPb210GenInUpperMesh: @local::dune10kt_222Rn_chain_210PbOnly_in_upperCathodeMesh
-    Rn222ChainFromBi210GenInUpperMesh: @local::dune10kt_222Rn_chain_from210Bi_in_upperCathodeMesh
+    K42From42ArGenInUpperMesh:         @local::dunevd10kt_42Kfrom42Ar_in_upperCathodeMesh
+    Rn222ChainFromPo218GenInUpperMesh: @local::dunevd10kt_222Rn_chain_218PoOnly_in_upperCathodeMesh
+    Rn222ChainFromPb214GenInUpperMesh: @local::dunevd10kt_222Rn_chain_214PbOnly_in_upperCathodeMesh
+    Rn222ChainFromBi214GenInUpperMesh: @local::dunevd10kt_222Rn_chain_214BiOnly_in_upperCathodeMesh
+    Rn222ChainFromPb210GenInUpperMesh: @local::dunevd10kt_222Rn_chain_210PbOnly_in_upperCathodeMesh
+    Rn222ChainFromBi210GenInUpperMesh: @local::dunevd10kt_222Rn_chain_from210Bi_in_upperCathodeMesh
     #Rn220ChainFromPb212GenInCathode:    @local::dune10kt_220Rn_chain_from212Pb_in_Cathode
-    Rn220ChainFromPb212GenInUpperMesh:  @local::dune10kt_220Rn_chain_from212Pb_in_upperCathodeMesh
+    Rn220ChainFromPb212GenInUpperMesh: @local::dunevd10kt_220Rn_chain_from212Pb_in_upperCathodeMesh
     ##########################################################################
 
     ##########################################################################
     # CRP
-    K40GenInAnode:         @local::dune10kt_40K_in_Anode
-    U238ChainGenInAnode:   @local::dune10kt_238U_chain_in_Anode
-    Th232ChainGenInAnode:  @local::dune10kt_232Th_chain_in_Anode
+    K40GenInAnode:         @local::dunevd10kt_40K_in_Anode
+    U238ChainGenInAnode:   @local::dunevd10kt_238U_chain_in_Anode
+    Th232ChainGenInAnode:  @local::dunevd10kt_232Th_chain_in_Anode
     ##########################################################################
 
     ##########################################################################
     # PDS
-    Rn222ChainGenInPDS: @local::dune10kt_222Rn_chain_in_PDS_VD
+    Rn222ChainGenInPDS: @local::dunevd10kt_222Rn_chain_in_PDS
     ##########################################################################
 
     ##########################################################################
@@ -60,11 +60,11 @@ dunefd_vertdrift_1x8x6_producers:
     @table::dunefd_vertdrift_common_producers
     ##########################################################################
     # Externals
-    CavernwallGammasAtLAr1x8x6:   @local::dune10kt_1x8x6_gammas_from_cavernwall_atLAr
-    foamGammasAtLAr1x8x6:         @local::dune10kt_1x8x6_gammas_from_foam_atLAr
-    CavernwallNeutronsAtLAr1x8x6: @local::dune10kt_1x8x6_neutrons_from_cavernwall_atLAr
-    CryostatNGammasAtLAr1x8x6:    @local::dune10kt_1x8x6_CryostatNGammas_from_CavernNeutrons_atLAr
-    CavernNGammasAtLAr1x8x6:      @local::dune10kt_1x8x6_CavernNGammas_atLAr
+    CavernwallGammasAtLAr1x8x6:   @local::dunevd10kt_1x8x6_gammas_from_cavernwall_atLAr
+    foamGammasAtLAr1x8x6:         @local::dunevd10kt_1x8x6_gammas_from_foam_atLAr
+    CavernwallNeutronsAtLAr1x8x6: @local::dunevd10kt_1x8x6_neutrons_from_cavernwall_atLAr
+    CryostatNGammasAtLAr1x8x6:    @local::dunevd10kt_1x8x6_CryostatNGammas_from_CavernNeutrons_atLAr
+    CavernNGammasAtLAr1x8x6:      @local::dunevd10kt_1x8x6_CavernNGammas_atLAr
 
 }
 

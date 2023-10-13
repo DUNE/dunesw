@@ -1,5 +1,5 @@
 #include "services_dune.fcl"
-#include "dune_radiological_model_decay0.fcl"
+#include "workflow_radiological_decay0_dune10kt.fcl"
 
 process_name: MARLEYGen
 
@@ -27,103 +27,11 @@ physics:
 {
    producers:
    {
-      ##########################################################################
-      # Liquid argon
-      Ar39GenInLAr:             @local::dune10kt_39Ar_in_LAr
-      Kr85GenInLAr:             @local::dune10kt_85Kr_in_LAr
-      Ar42GenInLAr:             @local::dune10kt_42Ar_in_LAr
-      K42From42ArGenInLAr:      @local::dune10kt_42Kfrom42Ar_in_LAr
-      # This will need to change to whatever 
-      Rn222ChainRn222GenInLAr:  @local::dune10kt_222Rn_chain_222RnOnly_in_LAr
-      ## Subject to ion drifting (funky x-profile)
-      Rn222ChainPo218GenInLAr:  @local::dune10kt_222Rn_chain_218PoOnly_in_LAr
-      Rn222ChainPb214GenInLAr:  @local::dune10kt_222Rn_chain_214PbOnly_in_LAr
-      Rn222ChainBi214GenInLAr:  @local::dune10kt_222Rn_chain_214BiOnly_in_LAr
-      Rn222ChainPb210GenInLAr:  @local::dune10kt_222Rn_chain_210PbOnly_in_LAr
-      ##########################################################################
-
-      ##########################################################################
-      # CPA
-      K40GenInCPA:         @local::dune10kt_1x2x6_40K_in_CPA
-      U238ChainGenInCPA:   @local::dune10kt_1x2x6_238U_chain_in_CPA
-      ## Product of ion drifting, on CPA, but these actually came from the liquid argon
-      K42From42ArGenInCPA:      @local::dune10kt_1x2x6_42Kfrom42Ar_in_CPA
-      Rn222ChainPo218GenInCPA:  @local::dune10kt_222Rn_chain_218PoOnly_in_CPA
-      Rn222ChainPb214GenInCPA:  @local::dune10kt_222Rn_chain_214PbOnly_in_CPA
-      Rn222ChainBi214GenInCPA:  @local::dune10kt_222Rn_chain_214BiOnly_in_CPA
-      Rn222ChainPb210GenInCPA:  @local::dune10kt_222Rn_chain_210PbOnly_in_CPA
-      Rn222ChainFromBi210GenInCPA:  @local::dune10kt_222Rn_chain_from210Bi_in_CPA
-      ##########################################################################
-
-      ##########################################################################
-      # APA
-      Co60GenInAPA:        @local::dune10kt_1x2x6_60Co_in_APA
-      U238ChainGenInAPA:   @local::dune10kt_1x2x6_238U_chain_in_APA
-      ##########################################################################
-
-      ##########################################################################
-      # PDS
-      Rn222ChainGenInPDS: @local::dune10kt_222Rn_chain_in_PDS
-      ##########################################################################
-
-      ##########################################################################
-      # Field Cage
-      # ...
-      ##########################################################################
-      
-      ##########################################################################
-      # Externals
-      NeutronGenInRock:    @local::dune10kt_1x2x6_neutron_from_rock
-      ##########################################################################
       rns:       { module_type: "RandomNumberSaver" }
+      @table::dunefd_horizdrift_1x2x6_producers
    }
-   
-   simulate: [
-      rns,
-      
-      ##########################################################################
-      # Liquid argon
-      Ar39GenInLAr,
-      Kr85GenInLAr,
-      Ar42GenInLAr,
-      K42From42ArGenInLAr,
-      Rn222ChainRn222GenInLAr,
-      ## Subject to ion drifting (funky x-profile)
-      Rn222ChainPo218GenInLAr,
-      Rn222ChainPb214GenInLAr,
-      Rn222ChainBi214GenInLAr,
-      Rn222ChainPb210GenInLAr,
-      ##########################################################################
 
-      ##########################################################################
-      # CPA
-      K40GenInCPA,
-      U238ChainGenInCPA,
-      ## Product of ion drifting, on CPA, but these actually came from the liquid argon
-      K42From42ArGenInCPA,
-      Rn222ChainPo218GenInCPA,
-      Rn222ChainPb214GenInCPA,
-      Rn222ChainBi214GenInCPA,
-      Rn222ChainPb210GenInCPA,
-      Rn222ChainFromBi210GenInCPA,
-      ##########################################################################
-
-      ##########################################################################
-      # APA
-      Co60GenInAPA,
-      U238ChainGenInAPA,
-      ##########################################################################
-
-      ##########################################################################
-      # PDS
-      Rn222ChainGenInPDS,
-      ##########################################################################
-      
-      ##########################################################################
-      # Externals
-      NeutronGenInRock
-      ##########################################################################
-   ]      
+   simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x6 ]         
    stream1:       [ out1 ]
    trigger_paths: [ simulate ] 
    end_paths:     [ stream1 ]  

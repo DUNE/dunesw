@@ -20,10 +20,10 @@ dunefd_horizdrift_common_producers:
       # This will need to change to whatever 
       Rn222ChainRn222GenInLAr:  @local::dune10kt_222Rn_chain_222RnOnly_in_LAr
       ## Subject to ion drifting (funky x-profile)
-      Rn222ChainPo218GenInLAr:  @local::dune10kt_222Rn_chain_218PoOnly_in_LAr_HD
-      Rn222ChainPb214GenInLAr:  @local::dune10kt_222Rn_chain_214PbOnly_in_LAr_HD
-      Rn222ChainBi214GenInLAr:  @local::dune10kt_222Rn_chain_214BiOnly_in_LAr_HD
-      Rn222ChainPb210GenInLAr:  @local::dune10kt_222Rn_chain_210PbOnly_in_LAr_HD
+      Rn222ChainPo218GenInLAr:  @local::dune10kt_222Rn_chain_218PoOnly_in_LAr
+      Rn222ChainPb214GenInLAr:  @local::dune10kt_222Rn_chain_214PbOnly_in_LAr
+      Rn222ChainBi214GenInLAr:  @local::dune10kt_222Rn_chain_214BiOnly_in_LAr
+      Rn222ChainPb210GenInLAr:  @local::dune10kt_222Rn_chain_210PbOnly_in_LAr
       Rn220ChainPb212GenInLAr:  @local::dune10kt_220Rn_chain_212PbOnly_in_LAr
       ##########################################################################
 
@@ -54,7 +54,7 @@ dunefd_horizdrift_common_producers:
 
       ##########################################################################
       # PDS
-      Rn222ChainGenInPDS: @local::dune10kt_222Rn_chain_in_PDS_HD
+      Rn222ChainGenInPDS: @local::dune10kt_222Rn_chain_in_PDS
       ##########################################################################
 
       ##########################################################################
