@@ -5,7 +5,7 @@
 
 parent dunesw
 
-defaultqual e20
+defaultqual e26
 
 # These optional lines define where headers, libraries, and executables go and should
 # be used only if your product does not conform to the defaults.
@@ -37,20 +37,20 @@ table_fragment_end
 
 product          version
 cetbuildtools	 v8_20_00	-	only_for_build
-duneexamples     v09_78_03d01
-dunedataprep     v09_78_03d01
-duneana          v09_78_03d01
-protoduneana     v09_78_03d01
+duneexamples     v09_79_00d02
+dunedataprep     v09_79_00d02
+duneana          v09_79_00d02
+protoduneana     v09_79_00d02
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 qualifier       duneexamples   dunedataprep  duneana     protoduneana     notes
-c7:debug        c7:debug       c7:debug      c7:debug    c7:debug   
-c7:prof         c7:prof        c7:prof       c7:prof     c7:prof    
-e20:debug       e20:debug      e20:debug     e20:debug   e20:debug  
-e20:prof        e20:prof       e20:prof      e20:prof    e20:prof   
+c14:debug       c14:debug      c14:debug     c14:debug   c14:debug   
+c14:prof        c14:prof       c14:prof      c14:prof    c14:prof    
+e26:debug       e26:debug      e26:debug     e26:debug   e26:debug  
+e26:prof        e26:prof       e26:prof      e26:prof    e26:prof   
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:

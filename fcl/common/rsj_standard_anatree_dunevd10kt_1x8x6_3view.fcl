@@ -1,0 +1,90 @@
+#include "services_dune.fcl"
+#include "RSJAnalysisTree.fcl"
+#include "trackfindermodules.fcl"
+#include "showerfindermodules.fcl"
+#include "checkrecoenergy.fcl"
+
+process_name: Mergeana
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "%ifb_%tc_ana_hist.root" }
+  TimeTracker:       {}
+  RandomNumberGenerator: {}
+  MemoryTracker:         { } # default is one
+  message:      @local::dune_message_services_prod
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::dunefdvd_1x8x6_3view_services
+}
+#services.PhotonVisibilityService:      @local::dune35t_photonvisibilityservice
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents:  10        # Number of events to create
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics:
+{
+ analyzers:
+{
+ analysistree:      @local::dune10kt_analysistree
+}
+ #define the output stream, there could be more than one if using filters 
+ stream1:  [ out1 ]
+
+ #define the producer and filter modules for this path, order matters, 
+ #filters reject all following items.  see lines starting physics.producers below
+ ana:  [ analysistree ] 
+
+ #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+ #ie analyzers and output streams.  these all run simultaneously
+ end_paths:     [stream1,ana]  
+# end_paths:     [stream1]  
+}
+
+#block to define where the output goes.  if you defined a filter in the physics
+#block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
+#entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_%tc_merged.root"
+   dataTier:    "full-reconstructed"
+   compressionLevel: 1
+ }
+}
+
+physics.analyzers.analysistree.G4minE:                   -1
+physics.analyzers.analysistree.ShowerModuleLabel: [ "pandoraShower" ]
+physics.analyzers.analysistree.TrackModuleLabel: [ "pandoraTrack" ]
+physics.analyzers.analysistree.VertexModuleLabel: [ "pandora" ]
+physics.analyzers.analysistree.ClusterModuleLabel: "pandora"
+physics.analyzers.analysistree.CalorimetryModuleLabel: [ "gnocchicalo" ]
+physics.analyzers.analysistree.ParticleIDModuleLabel: [ "pandorapid" ]
+physics.analyzers.analysistree.PandoraNuVertexModuleLabel: "pandora"
+physics.analyzers.analysistree.VertexModuleLabel: [ "pandora" ]
+physics.analyzers.analysistree.DigitModuleLabel: "tpcrawdecoder:daq"
+physics.analyzers.analysistree.HitsModuleLabel: "gaushit"
+physics.analyzers.analysistree.CalDataModuleLabel: "wclsdatanfsp:gauss"
+physics.analyzers.analysistree.OpFlashModuleLabel: "opflash10ppm"
+physics.analyzers.analysistree.FlashT0FinderLabel: [ "" ]
+physics.analyzers.analysistree.MVAPIDTrackModuleLabel: [ "" ]
+physics.analyzers.analysistree.MVAPIDShowerModuleLabel: [ "" ]
+physics.analyzers.analysistree.MCT0FinderLabel: [ "" ]
+physics.analyzers.analysistree.CosmicTaggerAssocLabel: [ "" ]
+physics.analyzers.analysistree.ContainmentTaggerAssocLabel: [ "" ]
+physics.analyzers.analysistree.FlashMatchAssocLabel: [ "" ]
+physics.analyzers.analysistree.SaveCryInfo:                false
+physics.analyzers.analysistree.SaveGenieInfo:              true
+physics.analyzers.analysistree.SaveGeantInfo:              true
+physics.analyzers.analysistree.SaveExternCounterInfo:      false
+physics.analyzers.analysistree.SaveFlashInfo:              false
+physics.analyzers.analysistree.SaveShowerInfo:             true
+physics.analyzers.analysistree.SavePandoraNuVertexInfo:    true
