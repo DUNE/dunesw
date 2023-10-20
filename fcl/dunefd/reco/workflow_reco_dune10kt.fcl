@@ -154,7 +154,7 @@ dunefd_horizdrift_nuenergy:
 dunefd_horizdrift_pd_reco1:
 [
     opdec,
-    ophitspe,
+    ophitspe
 ]
 
 dunefd_horizdrift_pd_reco2:
