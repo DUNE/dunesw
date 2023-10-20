@@ -15,9 +15,6 @@
 #include "SpacePointSolver_dune.fcl"
 #include "cvn_dune.fcl"
 #include "energyreco.fcl"
-#include "Deconvolution.fcl"
-#include "OpHitFinderDeco.fcl"
-#include "opticaldetectorservices_dune.fcl"
 
 BEGIN_PROLOG
 
@@ -73,8 +70,7 @@ dunefd_horizdrift_producers:
   energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
   energyrecnc:           @local::dunefd_nuenergyreco_pandora_nc
   # photon detector reconstruction
-  opdec:      @local::dune_deconvolution
-  ophitspe:   @local::dune_ophit_finder_deco
+  ophit:      @local::dunefd_ophit
   opflash:    @local::dunefd_opflash
 
 }
@@ -153,8 +149,7 @@ dunefd_horizdrift_nuenergy:
 
 dunefd_horizdrift_pd_reco:
 [
-   opdec,
-    ophitspe,
+    ophit,
     opflash
 ]
 
@@ -299,6 +294,7 @@ dunefd_horizdrift_producers.energyrecnue.WireLabel:     "tpcrawdecoder:gauss"
 dunefd_horizdrift_producers.energyrecnc.WireLabel:      "tpcrawdecoder:gauss"
 
 #optical reco configuration
-dunefd_horizdrift_producers.opflash.InputModule: ophitspe
+dunefd_horizdrift_producers.ophit.InputModule:   opdigi
+dunefd_horizdrift_producers.opflash.InputModule: ophit
 
 END_PROLOG
