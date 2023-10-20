@@ -15,9 +15,6 @@ physics:
     @sequence::dunefd_hd_backgrounds_1x2x2 
  ]      
 
-  stream1:       [ out1 ]
-  trigger_paths: [ simulate ] 
-  end_paths:     [ stream1 ]  
 }
 
 outputs.out1.fileName:    "prodmarley_radiological_dune10kt_decay0_1x2x2_gen.root" # Default file name, can override from command line with -o or --output
