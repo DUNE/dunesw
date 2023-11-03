@@ -36,10 +36,11 @@ physics:
   
   simulate: [ rns, 
               # TPC simulation
-              tpcrawdecoder,
+              tpcrawdecoder
               # OpDet and CRT simulation
               # opdigi,
-               crt] 
+              # crt
+               ] 
   stream1:  [ out1 ]
 
   trigger_paths: [simulate] 
