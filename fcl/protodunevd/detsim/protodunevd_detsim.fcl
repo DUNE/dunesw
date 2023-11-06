@@ -33,13 +33,14 @@ physics:
   {
     tpcrawdecoder:  @local::wirecell_protodunevd_mc
     # opdigi:         @local::protodune_opdigi_refactor
-     crt:            @local::CRTVD_simrefac
+    crt:            @local::CRTVD_simrefac
     rns:            { module_type: "RandomNumberSaver" }
   }
 
   simulate: [ rns,
-              tpcrawdecoder,
-              crt]
+              tpcrawdecoder
+              #crt
+              ]
   stream1:  [ out1 ]
 
   trigger_paths: [simulate]
