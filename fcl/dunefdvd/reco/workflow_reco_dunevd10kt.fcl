@@ -99,6 +99,11 @@ dunefd_vertdrift_reco2:
     @sequence::dunefd_vertdrift_pds_reco2
 ]
 
+dunefd_vertdrift_1x8x6_reco2:
+[
+    @sequence::dunefd_vertdrift_tpc_reco2
+]
+
 dunefd_vertdrift_tpc:
 [
     @sequence::dunefd_vertdrift_tpc_reco1,

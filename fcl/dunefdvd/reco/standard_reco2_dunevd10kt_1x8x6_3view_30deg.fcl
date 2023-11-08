@@ -13,7 +13,7 @@ services.TFileService.fileName: "reco2_hist.root"
 
 source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco2" ]
 
-physics.reco: [ @sequence::dunefd_vertdrift_reco2 ]
+physics.reco: [ @sequence::dunefd_vertdrift_1x8x6_reco2 ]
 
 outputs.out1.fileName: "%ifb_reco2.root"
 outputs.out1.dataTier: "full-reconstructed"
