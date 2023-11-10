@@ -1,7 +1,7 @@
 #include "services_dune.fcl"
 #include "workflow_radiological_decay0_dunevd10kt.fcl"
 
-process_name: MARLEYGen
+process_name: RadioGen
 
 services:
 {
