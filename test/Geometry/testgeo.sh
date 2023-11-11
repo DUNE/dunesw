@@ -47,7 +47,7 @@ function TestGeometry() {
 	#include "geotest.fcl"
 	
 	services.user.Geometry:               @local::${Geometry}_geo
-	services.user.ExptGeoHelperInterface: @local::dune_geometry_helper
+	services.user.WireReadout: @local::dune_geometry_helper
 	EOC
 	
 	local LogFile="${ConfigFile%.fcl}.log"

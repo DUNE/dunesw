@@ -1,5 +1,6 @@
 #include "evd_dune10kt.fcl"
 
+services.AuxDetGeometry: @local::dunecrpcb_auxdet_geo
 services.Geometry: @local::dunecrpcb_geo
 
 services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]

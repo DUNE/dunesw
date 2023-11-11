@@ -1,4 +1,5 @@
 #include "filterMUSUN_dune10kt_legacy.fcl"
 
+services.AuxDetGeometry: @local::dune10kt_1x2x6_auxdet_geo
 services.Geometry: @local::dune10kt_1x2x6_geo
 output1.out1.fileName: "MUSUN_gen_dunefd_1x2x6_filtered.root"

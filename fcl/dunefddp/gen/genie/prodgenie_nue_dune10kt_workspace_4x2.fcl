@@ -14,5 +14,6 @@ physics.producers.generator.FluxType:		"simple_flux"
 physics.producers.generator.FluxFiles:		["*.root"]
 physics.producers.generator.FluxSearchPaths:    "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/Flux/g4lbne/v3r5p4/QGSP_BERT/OptimizedEngineeredNov2017/neutrino/dune10kt_dphase_workspace4x2/"
 
+services.AuxDetGeometry: @local::dunedphase10kt_workspace4x2_auxdet_geo
 services.Geometry: @local::dunedphase10kt_workspace4x2_geo
 source.firstRun: 20000002
