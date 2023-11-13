@@ -41,7 +41,7 @@ physics:
   
   simulate: [ rns, 
               ## TPC simulation
-#              tpcrawdecoder,
+              tpcrawdecoder,
               ## OpDet and CRT simulation
               # opdigi,
                crt] 
@@ -52,7 +52,6 @@ physics:
 }
 
 physics.producers.tpcrawdecoder.wcls_main.configs: ["pgrapher/experiment/protodunevd/wcls-sim-drift-y-simchannel.jsonnet"]
-physics.producers.tpcrawdecoder.wcls_main.params.wires: "protodunevd-wires-larsoft-v2.json.bz2"
 physics.producers.tpcrawdecoder.wcls_main.inputers: ["wclsSimDepoSetSource:"]
 physics.producers.tpcrawdecoder.wcls_main.outputers: [
   "wclsDepoSetSimChannelSink:postdrift",

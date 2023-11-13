@@ -29,3 +29,5 @@ physics.reco: [
 "blurredcluster",
 "emtrkmichelid",
 "emshower" ]
+
+physics.producers.gaushit.CalDataModuleLabel: "caldata"
