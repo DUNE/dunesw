@@ -3,6 +3,7 @@
 
 physics:
 {
+  @table::physics
   producers:
   {
     @table::dunefd_horizdrift_1x2x6_producers

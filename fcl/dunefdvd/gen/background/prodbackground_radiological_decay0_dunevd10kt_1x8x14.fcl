@@ -2,6 +2,7 @@
 
 physics:
 {
+   @table::physics
    producers:
    {
       rns:       { module_type: "RandomNumberSaver" }

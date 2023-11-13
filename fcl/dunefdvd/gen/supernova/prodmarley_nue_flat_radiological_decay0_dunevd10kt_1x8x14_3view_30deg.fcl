@@ -3,6 +3,7 @@
 
 physics:
 {
+  @table::physics
   producers:
   {
     @table::dunefd_vertdrift_1x8x14_producers
