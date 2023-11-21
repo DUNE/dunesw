@@ -1,0 +1,23 @@
+#include "prodmarley_nue_spectrum_radiological_decay0_dune10kt_1x2x6.fcl"
+#include "NuEScatterGen.fcl"
+
+process_name: NueScatterGen
+
+physics:
+{
+  @table::physics
+  producers:
+  {
+    @table::dunefd_horizdrift_1x2x6_producers
+    generator:   @local::standard_nuescattergen_solar
+    rns:       { module_type: "RandomNumberSaver" }
+  }
+  simulate: [
+    rns,
+    generator,
+    @sequence::dunefd_hd_backgrounds_1x2x6 
+ ]      
+
+}
+
+outputs.out1.fileName:    "prodsolar_nuescatter_radiological_decay0_dune10kt_1x2x6_gen.root"
