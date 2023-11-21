@@ -160,12 +160,21 @@ dunefd_vertdrift_reco_all_systems:
     rns
 ]
 
-
 dunefd_vertdrift_reco_le:
 [
     @sequence::dunefd_vertdrift_tpc_le,
     @sequence::dunefd_vertdrift_pds,
     rns
+]
+
+dunefd_vertdrift_solar:
+[
+    gaushit,
+    ophit10ppm,
+    # opflash10ppm, # Full bkg leads to memory issues
+    linecluster, 
+    trajcluster, 
+    pmtracktc
 ]
 
 dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly
