@@ -3,6 +3,7 @@
 services:
 {
     @table::services
+    @table::dunefd_1x2x2_services
 }
 
 physics:
@@ -18,5 +19,3 @@ physics:
 }
 
 outputs.out1.fileName:    "prodradiological_decay0_dune10kt_1x2x2_gen.root"
-
-services.Geometry: @local::dune10kt_1x2x2_refactored_geo

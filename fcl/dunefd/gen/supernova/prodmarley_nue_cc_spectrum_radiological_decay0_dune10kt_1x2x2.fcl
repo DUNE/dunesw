@@ -1,5 +1,5 @@
 #include "services_dune.fcl"
-#include "prodmarley_nue_spectrum_radiological_decay0_dune10kt_refactored_1x2x2.fcl"
+#include "prodmarley_nue_spectrum_radiological_decay0_dune10kt_1x2x2.fcl"
 
 outputs.out1.fileName:    "prodmarley_nue_cc_radiological_decay0_dune10kt_1x2x2_gen.root" # Default file name, can override from command line with -o or --output
 
