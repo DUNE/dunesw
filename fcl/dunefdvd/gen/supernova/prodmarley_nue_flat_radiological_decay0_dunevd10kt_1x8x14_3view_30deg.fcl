@@ -6,9 +6,8 @@ physics:
   @table::physics
   producers:
   {
+    @table::physics.producers
     @table::dunefd_vertdrift_1x8x14_producers
-    marley:      @local::dune_marley_flat
-    rns:       { module_type: "RandomNumberSaver" }
   }
   simulate: [
     rns,

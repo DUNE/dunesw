@@ -11,16 +11,14 @@ physics:
   @table::physics
   producers:
   {
+    @table::physics.producers
     @table::dunefd_horizdrift_1x2x2_producers
-    marley:      @local::dune_marley_nue_spectrum
-    rns:       { module_type: "RandomNumberSaver" }
   }
   simulate: [
     rns,
     marley,
     @sequence::dunefd_hd_backgrounds_1x2x2 
  ]      
-
 }
 
 outputs.out1.fileName:    "prodmarley_radiological_dune10kt_decay0_1x2x2_gen.root" # Default file name, can override from command line with -o or --output
