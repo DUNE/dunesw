@@ -1,0 +1,7 @@
+# Antineutrino reconstruction 2 fcl for LBL
+# author: Dom Brailsford
+# date: 23rd Nov 2023
+
+#include "standard_reco2_dunevd10kt_nu_1x8x6_3view_30deg.fcl"
+
+physics.producers.cvneva: @local::dunevd_8x6_RHC_cvnevaluator
