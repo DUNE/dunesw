@@ -1,0 +1,7 @@
+# Anti-neutrino LBNF reconstruction fcl
+# author: Dom Brailsford
+# date: 23rd Nov 2023
+
+#include "standard_reco2_dune10kt_nu_1x2x6.fcl"
+
+physics.producers.cvneva: @local::dunehd_1x2x6_RHC_cvnevaluator
