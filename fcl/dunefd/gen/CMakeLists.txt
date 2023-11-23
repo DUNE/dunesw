@@ -7,5 +7,6 @@ add_subdirectory(ndk)
 add_subdirectory(background)
 add_subdirectory(nnbar)
 add_subdirectory(bdm)
+add_subdirectory(solar)
 
 install_fhicl()
