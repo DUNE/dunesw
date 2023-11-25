@@ -6,7 +6,7 @@ services:
         @table::dunefdvd_1x8x6_3view_30deg_simulation_services
 }
 
-outputs.out1.fileName: "prodmarley_flat_dunevd10kt_1x8x6_3view_30deg_gen.root"
+outputs.out1.fileName: "prodmarley_solar_flat_dunevd10kt_1x8x6_3view_30deg_gen.root"
 
 physics.producers.marley: @local::dune_marley_flat
 physics.producers.marley.marley_parameters.source.Emax: 30.
