@@ -13,3 +13,5 @@ physics.producers.pmtrackcalo.Flip_dQdx: false
 physics.producers.pmtrajfitcalo.Flip_dQdx: false
 physics.producers.pmtracktccalo.Flip_dQdx: false
 physics.producers.pmtrajfittccalo.Flip_dQdx: false
+physics.producers.cvnmap: @local::dunehd_1x2x6_cvnmapper
+physics.producers.cvneva: @local::dunehd_1x2x6_FHC_cvnevaluator
