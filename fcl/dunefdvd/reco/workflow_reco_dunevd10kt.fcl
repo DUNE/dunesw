@@ -31,8 +31,8 @@ dunefd_vertdrift_producers:
    # PID
    pandoracalo:        @local::dunevd10kt_calomc_pandora
    pandorapid:         @local::dunevd10kt_pid_pandora
-   cvnmap:             @local::dunevd10kt_cvnmapper
-   cvneval:            @local::dunevd10kt_3view_cvnevaluator
+   cvnmap:             @local::dunevd_8x6_cvnmapper
+   cvneva:            @local::dunevd_8x6_FHC_cvnevaluator
    # Neutrino energy
    energyrecnumu:         @local::dunefdvd_nuenergyreco_pandora_numu
    energyrecnue:          @local::dunefdvd_nuenergyreco_pandora_nue
@@ -87,7 +87,7 @@ dunefd_vertdrift_tpc_reco2:
     pandoracalo,
     pandorapid,
     cvnmap,
-    cvneval,
+    cvneva,
     energyrecnumu,
     energyrecnue,
     energyrecnc
@@ -97,6 +97,11 @@ dunefd_vertdrift_reco2:
 [
     @sequence::dunefd_vertdrift_tpc_reco2,
     @sequence::dunefd_vertdrift_pds_reco2
+]
+
+dunefd_vertdrift_1x8x6_reco2:
+[
+    @sequence::dunefd_vertdrift_tpc_reco2
 ]
 
 dunefd_vertdrift_tpc:
@@ -160,12 +165,21 @@ dunefd_vertdrift_reco_all_systems:
     rns
 ]
 
-
 dunefd_vertdrift_reco_le:
 [
     @sequence::dunefd_vertdrift_tpc_le,
     @sequence::dunefd_vertdrift_pds,
     rns
+]
+
+dunefd_vertdrift_solar:
+[
+    gaushit,
+    ophit10ppm,
+    # opflash10ppm, # Full bkg leads to memory issues
+    linecluster, 
+    trajcluster, 
+    pmtracktc
 ]
 
 dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly

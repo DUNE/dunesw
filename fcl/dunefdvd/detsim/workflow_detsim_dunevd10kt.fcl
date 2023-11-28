@@ -14,10 +14,10 @@ dunefd_vertdrift_producers:
    rns:            { module_type: "RandomNumberSaver" }
    tpcrawdecoder: @local::tpcrawdecoder_dunefd_vertdrift_2view
    # for light signal 
-   sipmAr10ppm:    @local::xarapuca_ar_xe10ppm     #TPC Active volume
-   sipmAr10ppmExt: @local::xarapuca_ar_xe10ppm_ext #Region between FC and Cryostat wall
-   sipmXe10ppm:    @local::xarapuca_xe_xe10ppm
-   sipmXe10ppmExt: @local::xarapuca_xe_xe10ppm_ext  
+   sipmAr10ppm:    @local::dunefdvd_xarapuca_ar_xe10ppm     #TPC Active volume
+   sipmAr10ppmExt: @local::dunefdvd_xarapuca_ar_xe10ppm_ext #Region between FC and Cryostat wall
+   sipmXe10ppm:    @local::dunefdvd_xarapuca_xe_xe10ppm
+   sipmXe10ppmExt: @local::dunefdvd_xarapuca_xe_xe10ppm_ext  
    opdigi10ppm:    @local::standard_vddaphne_xe10ppm
 }
 
