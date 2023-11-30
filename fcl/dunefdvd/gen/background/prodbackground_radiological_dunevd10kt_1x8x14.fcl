@@ -1,7 +1,7 @@
 #include "services_dune.fcl"
 #include "dune_radiological_model.fcl"
 
-process_name: RadBkgGen
+process_name: RadioGen
 
 services:
 {

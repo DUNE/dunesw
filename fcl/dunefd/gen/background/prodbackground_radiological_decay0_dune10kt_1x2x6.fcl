@@ -1,16 +1,17 @@
 #include "services_dune.fcl"
 #include "workflow_radiological_decay0_dune10kt.fcl"
 
-process_name: RadBkgGen
+process_name: RadioGen
 
 services:
 {
+   @table::dunefd_services
    TFileService:          { fileName: "prodradiological_hist.root" }
    TimeTracker:           {}
    RandomNumberGenerator: {}                 # ART native random number generator
    FileCatalogMetadata:  @local::art_file_catalog_mc
    message:              @local::dune_message_services_prod
-                         @table::dunefd_1x2x6_services
+                        @table::dunefd_services
 }
 
 source:
@@ -18,7 +19,7 @@ source:
    module_type: EmptyEvent
    timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
    maxEvents:   10          # Number of events to create
-   firstRun:    20000047    # Run number to use for this file
+   firstRun:    20000047           # Run number to use for this file
    firstEvent:  1           # number of first event in the file
 }
 
@@ -46,3 +47,15 @@ outputs:
       compressionLevel: 1
    }
 }
+
+services:
+{
+    @table::services
+    @table::dunefd_1x2x6_services
+}
+
+services.message.destinations.LogStandardOut.categories.BackTracker.limit: 0
+services.message.destinations.LogStandardError.categories.BackTracker.limit: 0
+
+services.message.destinations.LogStandardOut.categories.BaseRadioGen.limit: 1
+services.message.destinations.LogStandardError.categories.BaseRadioGen.limit: 1

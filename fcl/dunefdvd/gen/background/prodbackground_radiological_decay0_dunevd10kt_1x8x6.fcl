@@ -1,18 +1,20 @@
 #include "services_dune.fcl"
 #include "workflow_radiological_decay0_dunevd10kt.fcl"
 
-process_name: RadBkgGen
+process_name: RadioGen
 
 services:
 {
+   #  @table::dunefd_services
    TFileService:          { fileName: "prodradiological_hist.root" }
    TimeTracker:           {}
-   MemoryTracker:         {} # default is one
+  MemoryTracker:         {} # default is one
    RandomNumberGenerator: {}                 # ART native random number generator
    FileCatalogMetadata:  @local::art_file_catalog_mc
    message:              @local::dune_message_services_prod
-   IFDH: {}
-   @table::dunefdvd_1x8x6_3view_30deg_services
+  @table::dunefd_services
+  IFDH: {}
+  @table::dunefdvd_1x8x6_3view_30deg_services
 }
 
 source:
@@ -20,7 +22,7 @@ source:
    module_type: EmptyEvent
    timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
    maxEvents:   10          # Number of events to create
-   firstRun:    20000047    # Run number to use for this file
+   firstRun:    20000047           # Run number to use for this file
    firstEvent:  1           # number of first event in the file
 }
 
@@ -47,3 +49,10 @@ outputs:
       compressionLevel: 1
    }
 }
+
+  #services.Geometry: @local::dune10kt_1x8x6_geo
+services.message.destinations.LogStandardOut.categories.BackTracker.limit: 0
+services.message.destinations.LogStandardError.categories.BackTracker.limit: 0
+
+services.message.destinations.LogStandardOut.categories.BaseRadioGen.limit: 1
+services.message.destinations.LogStandardError.categories.BaseRadioGen.limit: 1
