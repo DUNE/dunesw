@@ -66,8 +66,8 @@ dunefd_horizdrift_producers:
   emshower:                @local::dune10kt_emshower
   emtrkmichelid:           @local::standard_emtrackmichelid
   #cvn
-  cvnmap:                @local::dunefd_horizdrift_cvnmapper
-  cvneva:                @local::dunefd_horizdrift_cvnevaluator
+  cvnmap:                @local::dunehd_1x2x6_cvnmapper 
+  cvneva:                @local::dunehd_1x2x6_FHC_cvnevaluator
   #neutrino energy reco
   energyrecnumu:        @local::dunefd_nuenergyreco_pandora_numu
   energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue

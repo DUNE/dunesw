@@ -1,0 +1,8 @@
+# Reconstruction 2 fcl for LBNF neutrinos
+# author: Dom Brailsford
+# date: 23rd November 2023
+
+#include "standard_reco2_dunevd10kt_1x8x6_3view_30deg.fcl"
+#
+physics.producers.cvnmap:      @local::dunevd_8x6_cvnmapper
+physics.producers.cvneva:      @local::dunevd_8x6_FHC_cvnevaluator
