@@ -1,7 +1,7 @@
 #include "services_dune.fcl"
 #include "workflow_radiological_decay0_dune10kt.fcl"
 
-process_name: RadioGen
+process_name: RadBkgGen
 
 services:
 {
@@ -9,9 +9,9 @@ services:
    TFileService:          { fileName: "prodradiological_hist.root" }
    TimeTracker:           {}
    RandomNumberGenerator: {}                 # ART native random number generator
-   FileCatalogMetadata:  @local::art_file_catalog_mc
-   message:              @local::dune_message_services_prod
-                        @table::dunefd_services
+   FileCatalogMetadata:   @local::art_file_catalog_mc
+   message:               @local::dune_message_services_prod
+                          @table::dunefd_1x2x6_services
 }
 
 source:
@@ -47,15 +47,3 @@ outputs:
       compressionLevel: 1
    }
 }
-
-services:
-{
-    @table::services
-    @table::dunefd_1x2x6_services
-}
-
-services.message.destinations.LogStandardOut.categories.BackTracker.limit: 0
-services.message.destinations.LogStandardError.categories.BackTracker.limit: 0
-
-services.message.destinations.LogStandardOut.categories.BaseRadioGen.limit: 1
-services.message.destinations.LogStandardError.categories.BaseRadioGen.limit: 1
