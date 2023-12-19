@@ -1,0 +1,4 @@
+#include "evd_iceberg_data.fcl"
+
+services.RawDrawingOptions.RawDataLabels: [ "tpcrawdecoder:daq" ]
+services.RawDrawingOptions.TotalTicks: 8256
