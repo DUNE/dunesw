@@ -11,7 +11,7 @@ services:
   MemoryTracker:         { } # default is one
   RandomNumberGenerator: {}                 # ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
-                        @table::dunefd_services
+                        @table::dunefd_1x2x6_services
 }
 
 # Start each new event with an empty event.
@@ -64,11 +64,5 @@ outputs:
     dataTier:    "generated"
     compressionLevel: 1
   }
-}
-
-services:
-{
-    @table::services
-    @table::dunefd_1x2x6_services
 }
 
