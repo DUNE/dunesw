@@ -1,3 +1,5 @@
+#include "PDHDTriggerReader.fcl"
+#include "PDHDTPCReader.fcl"
 #include "services_vdcoldbox.fcl"
 #include "workflow_reco_crpcb_top.fcl"
 #include "vdct_decoder.fcl"
@@ -6,7 +8,6 @@
 #include "vdcb_dataprep_sequences.fcl"
 #include "channelstatus_vdcrp4.fcl"
 #include "channelstatus_vdcrp5.fcl"
-
 
 data.dataprep_tools: @local::data.vdtcb2_dataprep_seqs.adc_cnrw_rmbadch
 
@@ -52,6 +53,11 @@ crp4_services: {
   @table::vdcb_crp2_data_services
   SpaceCharge: @local::dunefd_spacecharge
   ChannelStatusService: @local::data.ChannelStatusService_vdcrp4
+  HDF5RawFile2Service:  {}
+  PD2HDChannelMapService:
+   {
+     FileName: "vdcbce_chanmap_v4.txt"
+   }
 }
 crp4_services.DetectorPropertiesService.Efield: @local::data.crp4cb_Efield
 crp4_services.RawDigitPrepService.ToolNames: @local::data.dataprep_tools #data.vdcb_dataprep_seqs.nocal
@@ -61,6 +67,8 @@ crp4_services.RawDigitPrepService.ToolNames: @local::data.dataprep_tools #data.v
 #
 crp4_prod_config: {
   caldata: @local::producer_adcprep
+  tpcrawdecoder: @local::PDHDTPCReaderDefaults
+  pdvdtriggerreader: @local::PDHDTriggerReaderDefaults
   @table::dunecrpcb_top_producers
 }
 crp4_prod_config.caldata.DecoderTool: "crp4_decoder"
@@ -72,6 +80,12 @@ crp4_prod_config.caldata.ChannelGroups: ["cru"]
 crp4_prod_config.caldata.DoGroups: true
 crp4_prod_config.caldata.OnlineChannelMapTool: ""
 crp4_prod_config.caldata.OutputDigitName: "dataprep"
+
+crp4_prod_config.tpcrawdecoder.APAList: [ 6 ]
+crp4_prod_config.tpcrawdecoder.DecoderToolParams.DebugLevel: 0
+crp4_prod_config.tpcrawdecoder.DecoderToolParams.SubDetectorString: "VD_Bottom_TPC"
+
+# crp4_prod_config.wclsdatanfsp: @local::dune_vd_crp2_nfsp
 
 tools.crp4_decoder: {
    DebugLevel: 0
@@ -86,5 +100,6 @@ crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 1.0
 crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 1.0
 crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 1.0
 
-crp4_prod_seq: [caldata, @sequence::dunecrpcb_top_reco_tpc_only]
+crp4_prod_seq: [caldata, pdvdtriggerreader, @sequence::dunecrpcb_top_reco_tpc_only]
+# crp4_prod_seq: [tpcrawdecoder, pdvdtriggerreader, @sequence::dunecrpcb_top_reco_tpc_only]
 

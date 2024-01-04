@@ -12,6 +12,7 @@ services:
   message:               @local::standard_info
   #message:              @local::dune_message_services_prod_debug
 
+  @table::protodune_refactored_simulation_services
   @table::protodune_larg4_services
 
   NuRandomService:       @local::dune_prod_seedservice
