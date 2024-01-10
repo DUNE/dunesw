@@ -26,13 +26,16 @@ source:
   fileNames: ["g4_stage1_protoDUNE.root"]
 }
 
+protodunevd_ionandscint_active: @local::protodunevd_ionandscint
+protodunevd_ionandscint_active.Instances:    "LArG4DetectorServicevolTPCActive"
+
 physics:
 {
 
   producers:
   {
     rns: {module_type: "RandomNumberSaver"}
-    IonAndScint:  @local::protodunevd_ionandscint
+    IonAndScint:  @local::protodunevd_ionandscint_active
     #PDFastSim:    @local::protodune_pdfastsim_pvs
   }
 
