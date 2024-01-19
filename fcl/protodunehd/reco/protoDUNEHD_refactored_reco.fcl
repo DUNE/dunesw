@@ -25,6 +25,8 @@
 #include "T0RecoAnodePiercers.fcl"
 #include "numberofhitsfilter.fcl"
 #include "protodune_tools_dune.fcl"
+#include "Deconvolution.fcl"
+#include "OpHitFinderDeco.fcl"
 
 process_name: Reco
 
@@ -98,6 +100,8 @@ physics: {
     pandoraShowercalo:  @local::pdune_sp_showercalomcnosce
     pandoraShowercalonosce:  @local::pdune_sp_showercalomcnosce
 #   photon detector reconstruction
+    #opdec:              @local::dune_deconvolution
+    #ophit:              @local::dune_ophit_finder_deco 
     ophit:              @local::protodune_ophit
     opflash:            @local::protodune_opflash
     opslicer:           @local::protodune_opslicer
@@ -124,7 +128,9 @@ physics: {
 
   #define the producer and filter modules for this path, order matters,
 #filters reject all following items.  see lines starting physics.producers below
-reco: [ ophit,
+reco: [ 
+        #opdeco,
+        ophit,
         opflash,
         opslicer,
         caldata,
