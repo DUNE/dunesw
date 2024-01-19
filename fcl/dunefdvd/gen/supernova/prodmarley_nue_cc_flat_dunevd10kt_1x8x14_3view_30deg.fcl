@@ -1,0 +1,5 @@
+#include "prodmarley_nue_flat_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+physics.producers.marley: @local::dunevd_marley_nue_cc_flat #includes non-active volume
+
+outputs.out1.fileName: "prodmarley_nue_cc_flat_dunevd10kt_1x8x14_3view_30deg_gen.root"

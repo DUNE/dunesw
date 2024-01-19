@@ -1,5 +1,11 @@
 #include "prodmarley_nue_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg.fcl"
 
+services:
+{
+	@table::services
+        @table::dunefdvd_1x8x6_3view_30deg_simulation_services
+}
+
 physics:
 {
   @table::physics
@@ -18,9 +24,3 @@ physics:
 }
 
 outputs.out1.fileName: "prodmarley_nue_flat_radiological_decay0_dune10ktvd_1x8x6_3view_30deg_gen.root"
-
-services:
-{
-	@table::services
-        @table::dunefdvd_1x8x6_3view_30deg_simulation_services
-}

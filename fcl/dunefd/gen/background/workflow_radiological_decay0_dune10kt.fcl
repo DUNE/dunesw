@@ -6,6 +6,7 @@
 #include "dune_radiological_model_decay0_v3_4_hd_common.fcl"
 #include "dune_radiological_model_decay0_v3_4_hd_1x2x2.fcl"
 #include "dune_radiological_model_decay0_v3_4_hd_1x2x6.fcl"
+#include "dune_radiological_model_decay0_v3_5_hd_1x2x6.fcl"
 
 BEGIN_PROLOG
 
@@ -81,11 +82,12 @@ dunefd_horizdrift_1x2x6_producers:
       @table::dunefd_horizdrift_common_producers
       ##########################################################################
       # Externals
-      CavernwallGammasAtLAr1x2x6:   @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
-      foamGammasAtLAr1x2x6:         @local::dune10kt_1x2x6_gammas_from_foam_atLAr
-      CavernwallNeutronsAtLAr1x2x6: @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
-      CryostatNGammasAtLAr1x2x6:    @local::dune10kt_1x2x6_CryostatNGammas_from_CavernNeutrons_atLAr
-      CavernNGammasAtLAr1x2x6:      @local::dune10kt_1x2x6_CavernNGammas_atLAr
+      CavernwallGammasAtLAr1x2x6:    @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
+      foamGammasAtLAr1x2x6:          @local::dune10kt_1x2x6_gammas_from_foam_atLAr
+      CavernwallNeutronsAtLAr1x2x6:  @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
+      CryostatNGammasAtLAr1x2x6:     @local::dune10kt_1x2x6_CryostatNGammas_from_CavernNeutrons_atLAr
+      CavernNGammasAtLAr1x2x6:       @local::dune10kt_1x2x6_CavernNGammas_atLAr
+      U238Th232K40GenInLArAPAboards: @local::dune10kt_1x2x6_gammas_in_APAboards
       ##########################################################################
 }
 
@@ -154,6 +156,58 @@ dunefd_hd_backgrounds_1x2x6:
 [
     @sequence::dunefd_backgrounds_common,
     @sequence::dunefd_backgrounds_1x2x6_external
+]
+
+#temporarily arranging for an alternative background model in HD because of APA geometry not being correct in the gdml
+
+dunefd_backgrounds_common_v3_5:
+[
+      # Liquid argon
+      Ar39GenInLAr,
+      Kr85GenInLAr,
+      Ar42GenInLAr,
+      K42From42ArGenInLAr,
+      Rn222ChainRn222GenInLAr,
+      ## Subject to ion drifting (funky x-profile)
+      Rn222ChainPo218GenInLAr,
+      Rn222ChainPb214GenInLAr,
+      Rn222ChainBi214GenInLAr,
+      Rn222ChainPb210GenInLAr,
+      Rn220ChainPb212GenInLAr,
+      # CPA
+      K40GenInCPA,
+      U238ChainGenInCPA,
+      Th232ChainGenInCPA,
+      ## Product of ion drifting, on CPA, but these actually came from the liquid argon
+      K42From42ArGenInCPA,
+      Rn222ChainPo218GenInCPA,
+      Rn222ChainPb214GenInCPA,
+      Rn222ChainBi214GenInCPA,
+      Rn222ChainPb210GenInCPA,
+      Rn222ChainFromBi210GenInCPA,
+      Rn220ChainFromPb212GenInCPA,
+      # APA -- removed APA board contribution
+      Co60GenInAPA,
+      U238ChainGenInAPA,
+      Th232ChainGenInAPA,
+      # PDS
+      Rn222ChainGenInPDS
+]
+
+dunefd_backgrounds_1x2x6_external_v3_5:
+[
+      U238Th232K40GenInLArAPAboards, #new hacked APA board contribution
+      CavernwallGammasAtLAr1x2x6,
+      foamGammasAtLAr1x2x6,
+      CavernwallNeutronsAtLAr1x2x6,
+      CryostatNGammasAtLAr1x2x6,
+      CavernNGammasAtLAr1x2x6
+]
+
+dunefd_hd_backgrounds_1x2x6_v3_5:
+[
+    @sequence::dunefd_backgrounds_common_v3_5,
+    @sequence::dunefd_backgrounds_1x2x6_external_v3_5
 ]
 
 END_PROLOG
