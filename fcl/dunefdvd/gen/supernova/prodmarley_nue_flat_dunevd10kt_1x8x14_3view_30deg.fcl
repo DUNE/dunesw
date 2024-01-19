@@ -8,8 +8,6 @@ services:
         @table::dunefdvd_1x8x14_3view_30deg_simulation_services
 }
 
-source.maxEvents: 1000
-source.firstRun: 20000047 
 physics.producers.marley: @local::dune_marley_flat
 
 outputs.out1.fileName: "prodmarley_nue_flat_dunevd10kt_1x8x14_3view_30deg_gen.root"
