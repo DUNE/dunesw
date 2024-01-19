@@ -3,6 +3,7 @@
 #include "corsika_protodune.fcl"
 #include "CORSIKAGendp.fcl"
 #include "dune_radiological_model.fcl"
+#include "gen_protodunevd_singlep.fcl"
 
 process_name: SinglesGen
 
@@ -35,12 +36,17 @@ physics:
 
  producers:
  {
+   generator: @local::pdvd_1GeV_electron
    cosmicgenerator: @local::standard_CORSIKAGendp_CMC
+   ar39:  @local::protodunesp_39ar
+   ar42:  @local::protodunesp_42ar
+   kr85:  @local::protodunesp_85kr
+   rn222: @local::protodunesp_222rn
  }
 
 
- #define the producer and filter modules for this path, order matters,
-simulate: [ cosmicgenerator]
+ #define the producer, and filter modules for this path, order matters,
+simulate: [ generator, cosmicgenerator, ar39, ar42, kr85, rn222 ]
 
  #define the output stream, there could be more than one if using filters
  stream1:  [ out1 ]
@@ -68,6 +74,7 @@ outputs:
  }
 }
 
-services.TFileService.fileName: "gen_protodunevd_cosmics_hist.root"
+services.TFileService.fileName: "gen_protodunevd_cosmics_radio_electron_1GeV_hist.root"
 source.maxEvents: 1
-outputs.out1.fileName: "gen_protodunevd_cosmics.root"
+outputs.out1.fileName: "gen_protodunevd_cosmics_radio_electron_1GeV.root"
+
