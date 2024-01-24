@@ -68,7 +68,6 @@ physics: {
     rns:            { module_type: "RandomNumberSaver" }
     caldata:            @local::producer_adcprep_notool
     wclsdatavd:         @local::protodunevd_nfsp
-    #wclsdatanfsp:       @local::dune_vd_coldbox_nfsp
     gaushit:            @local::dunevdfd_gaushitfinder
     reco3d:             @local::protodunespmc_spacepointsolver
 
@@ -76,13 +75,9 @@ physics: {
     hitpdune:           @local::pdune_disambigfromsp
     emtrkmichelid:      @local::protodune_emtrkmichelid
 
-    pandora:            @local::dunefdvd_pandora_cosmic
-    pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
-    pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
-
-    #pandora:            @local::protodune_pandora
-    #pandoraTrack:       @local::dune_pandoraTrackCreation
-    #pandoraShower:      @local::dune_pandoraShowerCreation
+    pandora:            @local::protodune_pandora
+    pandoraTrack:       @local::dune_pandoraTrackCreation
+    pandoraShower:      @local::dune_pandoraShowerCreation
 
     pandoraWriter:      @local::dune_pandorawriter
     pandoraStdcalo:     @local::pdune_vd_standard_calodata
@@ -97,7 +92,7 @@ reco: [ caldata,
         hitpdune,
         pandora,
         pandoraTrack,
-        # pandoraShower,
+        pandoraShower,
         pandoraStdcalo,
         pandoraGnocalo #,
         ]
@@ -133,14 +128,10 @@ physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 5.0
 physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 5.0
 
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatavd:gauss"
-#physics.producers.gaushit.CalDataModuleLabel: "wclsdatanfsp:gauss"
 physics.producers.emtrkmichelid.WireLabel: "wclsdatavd:gauss"
 
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
 physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
-physics.producers.pandora.ShouldRunAllHitsCosmicReco:   true
-physics.producers.pandora.ShouldRunNeutrinoRecoOption:  false
-
 
 physics.producers.pandoraWriter.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
 physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
