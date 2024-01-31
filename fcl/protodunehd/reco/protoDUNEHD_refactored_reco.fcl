@@ -1,7 +1,3 @@
-## same as protoDUNE_refactored_reco_stage1.fcl, no sce; no lifetime correction; no yz, x, t correction; *calinoxyzt<->*cali; *calipidnoxyzt<->*calipid
-## this fcl is currently kept; we use two stage recos once we have calibration done: protoDUNE_refactored_reco_stage1.fcl and protoDUNE_refactored_reco_stage2.fcl
-
-##include "services_dune.fcl"
 #include "services_refactored_pdune.fcl"
 #include "caldata_dune.fcl"
 #include "wirecell_dune.fcl"
@@ -17,6 +13,8 @@
 #include "mctrutht0matching.fcl"
 #include "t0reco.fcl"
 #include "opticaldetectormodules_dune.fcl"
+#include "Deconvolution.fcl"
+#include "OpHitFinderDeco.fcl"
 #include "showerfindermodules_dune.fcl"
 #include "emshower3d.fcl"
 #include "ProtoDUNETriggerFilter.fcl"
@@ -25,6 +23,7 @@
 #include "T0RecoAnodePiercers.fcl"
 #include "numberofhitsfilter.fcl"
 #include "protodune_tools_dune.fcl"
+#include "tools_dune.fcl"
 
 process_name: Reco
 
@@ -42,6 +41,10 @@ services:
   IFDH: {}
 }
 
+#services.Geometry.SortingParameters.ChannelsPerOpDet: 12
+#services.Geometry.GDML: "protodune_v7.gdml"
+#services.Geometry.ROOT: "protodune_v7.gdml"
+
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
 services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC"
@@ -49,10 +52,10 @@ services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:si
 #services.DetectorPropertiesService.GetHVDriftfromSamweb:           false
 #services.DetectorPropertiesService.GetReadOutWindowSizefromSamweb: false
 #services.DetectorPropertiesService.UseRunDependentTemperature:     false
-
 services.RawDigitPrepService.ToolNames: @local::pdsim_dataprep_tools_wirecell
 
 #source is now a root file
+
 source:
 {
   module_type: RootInput
@@ -60,17 +63,17 @@ source:
   saveMemoryObjectThreshold: 0
   fileNames: ["detsim_single_protoDUNE.root"]
 }
-
 # Define and configure some modules to do work on each event.
 # First modules are defined; they are scheduled later.
-# Modules are grouped by type.
-physics: {
 
+# Modules are grouped by type.
+
+physics: {
   filters: {
     trigfilter:  @local::pdsp_trigfilter_all
     nhitsfilter: @local::standard_numberofhitsfilter
   }
-
+  
   producers: {
     # TPC wire signals
     caldata:            @local::producer_adcprep_notool          
@@ -98,14 +101,14 @@ physics: {
     pandoraShowercalo:  @local::pdune_sp_showercalomcnosce
     pandoraShowercalonosce:  @local::pdune_sp_showercalomcnosce
 #   photon detector reconstruction
-    ophit:              @local::protodune_ophit
+    opdec:              @local::dune_deconvolution
+    ophitspe:           @local::dune_ophit_finder_deco
     opflash:            @local::protodune_opflash
     opslicer:           @local::protodune_opslicer
     crtreco: @local::TwoCRTMatching_producer
     crttag: @local::SingleCRTMatching_producer
-#	Anode piercing tracks t0 reconstruction
-    anodepiercerst0:	@local::T0RecoAnodePiercers
-
+#       Anode piercing tracks t0 reconstruction
+    anodepiercerst0:    @local::T0RecoAnodePiercers
     ##Producers for forcing pandora to create track or shower objects
     ##for each PFParticle
     pandora2Track:         @local::dune_pandoraTrackCreation
@@ -114,17 +117,14 @@ physics: {
     pandora2pid:           @local::standard_chi2pid
     pandora2cali:          @local::protodunespmcnosce_calibrationdedx
     pandora2calipid:       @local::standard_chi2pid
-
     pandora2Shower:        @local::dune_pandoraShowerCreation
     pandora2Showercalo:    @local::pdune_sp_allshowercalomcnosce
     pandora2Showercalonosce:    @local::pdune_sp_allshowercalomcnosce
-
   }
-
-
   #define the producer and filter modules for this path, order matters,
 #filters reject all following items.  see lines starting physics.producers below
-reco: [ ophit,
+reco: [ opdec,
+        ophitspe,
         opflash,
         opslicer,
         caldata,
@@ -158,19 +158,15 @@ reco: [ ophit,
         #pandora2cali,
         #pandora2calipid
           ]
-
   #define the output stream, there could be more than one if using filters
   stream1:  [ out1 ]
-
   #trigger_paths is a keyword and contains the paths that modify the art::event,
   #ie filters and producers
   trigger_paths: [reco]
-
   #end_paths is a keyword and contains the paths that do not modify the art::Event,
   #ie analyzers and output streams.  these all run simultaneously
   end_paths:     [stream1]
 }
-
 #block to define where the output goes.  if you defined a filter in the physics
 #block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
 #entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
@@ -190,14 +186,11 @@ outputs:
    #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
  }
 }
-
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq" 
 physics.producers.caldata.WireName: "dataprep" 
 physics.producers.caldata.LogLevel: 3
-
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatahd:gauss"
 physics.producers.emtrkmichelid.WireLabel: "wclsdatahd:gauss"
-
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
 physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
 physics.producers.pandoraWriter.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
@@ -205,37 +198,30 @@ physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
 physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
 physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"
-
 physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
 physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
-
 physics.producers.pandoracalipid.CalorimetryModuleLabel:        "pandoracali"
 physics.producers.pandoracalipid.TrackModuleLabel:              "pandoraTrack"
 
 ##Optical detector configuration
 physics.producers.ophit.InputModule:                        "opdigi"
-physics.producers.opflash.InputModule:                      "ophit"
-physics.producers.opslicer.OpHitModuleLabel:                "ophit"
+physics.producers.opflash.InputModule:                      "ophitspe"
+physics.producers.opslicer.OpHitModuleLabel:                "ophitspe"
 
 # Use channel map service for data
 #services.PdspChannelMapService:        @local::pdspchannelmap
 services.ExptGeoHelperInterface.ChannelMapClass: "DuneApaChannelMapAlg"
-
 #Forcing Pandora to create either all tracks or all showers on each PFParticle object
 physics.producers.pandora2Track.PFParticleLabel:             "pandora"
 physics.producers.pandora2Track.UseAllParticles:             true
 ####The above line forces pandora to fit a track to all PFParticles
-
 physics.producers.pandora2pid.CalorimetryModuleLabel:        "pandora2calo"
 physics.producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
-
 physics.producers.pandora2cali.TrackModuleLabel:             "pandora2Track"
 physics.producers.pandora2cali.CalorimetryModuleLabel:       "pandora2calo"
 physics.producers.pandora2cali.ShowerModuleLabel:             "pandora2Shower"
 physics.producers.pandora2cali.ShowerCalorimetryModuleLabel:       "pandora2Showercalo"
-
 physics.producers.pandora2calipid.CalorimetryModuleLabel:    "pandora2cali"
 physics.producers.pandora2calipid.TrackModuleLabel:          "pandora2Track"
-
 physics.producers.pandora2Shower.PFParticleLabel:            "pandora"
 physics.producers.pandora2Shower.UseAllParticles:            true
