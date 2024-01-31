@@ -1,4 +1,4 @@
-#include "protoDUNE_refactored_g4_stage2.fcl"
+#include "standard_g4_protodunehd_stage2.fcl"
 
 services.SpaceCharge.InputFilename:  			"SpaceChargeProtoDUNE/SCE_DataDriven_180kV_v4.root"
 services.SpaceCharge.CalibrationInputFilename:	        "SpaceChargeProtoDUNE/SCE_DataDriven_180kV_v4.root"
