@@ -10,7 +10,7 @@ process_name: SinglesGen
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "gensingle_protoDUNE_hist.root" }
+  TFileService: { fileName: "prod_beam_p1GeV_cosmics_protodunehd_hist.root" }
   TimeTracker:       @local::dune_time_tracker
   MemoryTracker:     @local::dune_memory_tracker
   RandomNumberGenerator: {} #ART native random number generator
@@ -68,7 +68,7 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "gensingle_protoDUNE.root" #default file name, can override from command line with -o or --output
+   fileName:    "prod_beam_p1GeV_cosmics_protodunehd.root" #default file name, can override from command line with -o or --output
    dataTier: "generated"
    compressionLevel: 1
  }
@@ -89,7 +89,5 @@ physics.producers.generator.StreamInput: true
 physics.producers.generator.UseDataDrivenPrimary: false 
 
 ## Specific .fcl for the +1 GeV/c momentum setting
-services.TFileService.fileName: "gen_protoDune_beam_p1GeV_cosmics_hist.root"
 source.maxEvents: 10
-outputs.out1.fileName: "gen_protoDune_beam_p1GeV_cosmics.root"
 
