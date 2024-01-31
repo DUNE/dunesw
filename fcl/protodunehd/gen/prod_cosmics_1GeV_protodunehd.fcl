@@ -9,7 +9,7 @@ process_name: SinglesGen
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "gen_protodunehd_cosmics_only_hist.root" }
+  TFileService: { fileName: "prod_cosmics_protodunehd_hist.root" }
   TimeTracker:       @local::dune_time_tracker
   MemoryTracker:     @local::dune_memory_tracker
   RandomNumberGenerator: {} #ART native random number generator
@@ -66,7 +66,7 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "gen_protodunehd_cosmics_only.root" #default file name, can override from command line with -o or --output
+   fileName:    "prod_cosmics_protodunehd_hist.root" #default file name, can override from command line with -o or --output
    dataTier: "generated"
    compressionLevel: 1
  }
