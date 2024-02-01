@@ -1,3 +1,4 @@
 #include "standard_reco_dune10kt_1x2x6.fcl"
 
+physics.reco: [ @sequence::dunefd_horizontaldrift_workflow_solar ]
 physics.producers.spsolve.MinNHits: 2 #lower the threshold for low energy interactions
