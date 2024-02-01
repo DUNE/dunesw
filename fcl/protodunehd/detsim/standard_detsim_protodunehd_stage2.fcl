@@ -1,0 +1,5 @@
+#include "standard_detsim_protodunehd.fcl"
+process_name: DetsimStage2
+
+physics.simulate: [rns, opdigi, crt]
+outputs.out1.fileName: "%ifb_detsim_stage2.root"
