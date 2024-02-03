@@ -65,4 +65,6 @@ outputs:
     #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
   }
 }
-services.LArPropertiesService.ScintYield: 40000
+services.LArPropertiesService.ScintYield: 24000
+services.OpDetResponseInterface.QuantumEfficiency: 0.03
+services.LArPropertiesService.ScintPreScale: 0.03

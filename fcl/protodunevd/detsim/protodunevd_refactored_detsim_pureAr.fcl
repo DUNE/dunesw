@@ -31,8 +31,8 @@ physics:
   producers:
   {
     tpcrawdecoder:  @local::wirecell_protodunevd_mc
-    sipmAr:    @local::xarapuca_ar
-    opdigi:    @local::standard_vddaphne_xe10ppm
+    sipmSim:    @local::xarapuca_ar
+    opdigi:    @local::standard_vddaphne
     crt:            @local::CRTVD_sim
     rns:            { module_type: "RandomNumberSaver" }
   }
@@ -41,7 +41,7 @@ physics:
               # TPC simulation
               tpcrawdecoder,
               # OpDet and CRT simulation
-              sipmAr, opdigi
+              sipmSim, opdigi
               # crt
                ] 
   stream1:  [ out1 ]
@@ -67,4 +67,6 @@ outputs:
     ]
   }
 }
-physics.producers.sipmAr.QuantumEfficiency: 0.027
+physics.producers.sipmAr.QuantumEfficiency: 0.03
+services.OpDetResponseInterface.QuantumEfficiency: 0.03
+services.LArPropertiesService.ScintPreScale: 0.03
