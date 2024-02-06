@@ -1,0 +1,5 @@
+#include "standard_detsim_protodunehd.fcl"
+process_name: DetsimStage1
+
+physics.simulate: [tpcrawdecoder]
+outputs.out1.fileName: "%ifb_detsim_stage1.root"

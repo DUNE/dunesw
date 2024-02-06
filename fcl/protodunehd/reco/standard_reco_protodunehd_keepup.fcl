@@ -1,0 +1,57 @@
+#include "HDF5RawInput2.fcl"
+#include "PDHDTPCReader.fcl"
+#include "PDHDDataInterfaceWIBEth.fcl"
+#include "PDHDTriggerReader.fcl"
+#include "DAPHNEReaderPDHD.fcl"
+
+services:
+{
+  TimeTracker:  {}
+  TFileService: 
+  {
+    fileName: "pdhd_tpc_decoder_TFile.root"
+  } 
+  HDF5RawFile2Service:  {}
+  DAPHNEChannelMapService: {
+    FileName: "DAPHNE_test_ChannelMap_v0.txt"
+  }
+  PD2HDChannelMapService: 
+   {
+     FileName: "PD2HDChannelMap_WIBEth_electronics_v1.txt"
+   }
+}
+
+physics:
+{
+  producers:
+  {
+    # Raw decoding
+    tpcrawdecoder: @local::PDHDTPCReaderDefaults
+    tpstreamdecoder: @local::PDHDTriggerReaderDefaults 
+    pdhddaphne: @local::DAPHNEReaderPDHD
+  }
+
+  produce: [
+    tpcrawdecoder,
+    tpstreamdecoder,
+    pdhddaphne
+  ]
+
+  output: [ out1 ]
+  trigger_paths : [ produce ]
+  end_paths: [ output ]
+}            
+
+outputs:
+{
+  out1:
+  {
+    compressionLevel: 1
+    module_type: RootOutput
+    fileName: "%ifb_keepup.root"
+  }
+}
+source: @local::hdf5rawinput2
+process_name: pdhdkeepupprocessing 
+
+physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEthDefaults

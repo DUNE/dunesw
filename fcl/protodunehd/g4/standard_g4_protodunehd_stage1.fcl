@@ -1,0 +1,6 @@
+#include "standard_g4_protodunehd.fcl"
+
+process_name: G4Stage1
+services.TFileService.fileName: "g4_protodunehd_stage1_hist.root"
+physics.simulate: [largeant]
+outputs.out1.fileName:    "%ifb_g4_stage1.root"
