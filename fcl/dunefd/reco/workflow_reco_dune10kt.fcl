@@ -18,6 +18,7 @@
 #include "Deconvolution.fcl"
 #include "OpHitFinderDeco.fcl"
 #include "opticaldetectorservices_dune.fcl"
+#include "OpSlicer.fcl"
 
 BEGIN_PROLOG
 
@@ -76,6 +77,7 @@ dunefd_horizdrift_producers:
   opdec:      @local::dune_deconvolution
   ophitspe:   @local::dune_ophit_finder_deco
   opflash:    @local::dunefd_opflash
+  opslicer:   @local::dune10kt_1x2x6_opslicer
 
 }
 
@@ -159,7 +161,8 @@ dunefd_horizdrift_pd_reco1:
 
 dunefd_horizdrift_pd_reco2:
 [
-    opflash
+    opflash,
+    opslicer
 ]
 
 dunefd_horizdrift_workflow_reco1:
