@@ -177,8 +177,7 @@ outputs:
    module_type: RootOutput
    fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
-   outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wires_caldata_dataprep_*", "drop *_wclsdatasp_wiener_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
-   #outputCommands: [ "keep *", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
+   outputCommands: [ "keep *", "drop recob::Wires_caldata_dataprep_*", "drop *_wclsdatasp_wiener_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
    compressionLevel: 1 #zlib argument (0-9)
    fastCloning: true
    #basketSize: 8192 #[Byte] buffer size at 8k
@@ -189,6 +188,8 @@ outputs:
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq" 
 physics.producers.caldata.WireName: "dataprep" 
 physics.producers.caldata.LogLevel: 3
+physics.producers.caldata.OnlineChannelMapTool: ""
+
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatahd:gauss"
 physics.producers.emtrkmichelid.WireLabel: "wclsdatahd:gauss"
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
