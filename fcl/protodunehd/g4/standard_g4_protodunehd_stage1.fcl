@@ -4,3 +4,5 @@ process_name: G4Stage1
 services.TFileService.fileName: "g4_protodunehd_stage1_hist.root"
 physics.simulate: [largeant]
 outputs.out1.fileName:    "%ifb_g4_stage1.root"
+##Keeping everything for later reprocessing
+outputs.out1.outputCommands: [ "keep *" ]
