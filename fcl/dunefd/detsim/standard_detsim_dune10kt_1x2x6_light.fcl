@@ -1,17 +1,3 @@
 #include "standard_detsim_dune10kt_1x2x6.fcl"
 
-physics:
-{
-    @table::physics
-    producers:
-    {
-      @table::physics.producers
-    }
-
-#    Set up of PDS only digitizer in 1x2x6 geo
-    simulate: 
-    [
-    opdigi,
-    rns
-    ]
-}
+physics.simulate: [ opdigi, rns ]

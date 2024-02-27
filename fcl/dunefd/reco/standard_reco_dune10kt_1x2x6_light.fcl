@@ -1,15 +1,8 @@
 #include "standard_reco2_dune10kt_1x2x6.fcl"
 
-physics:
-{
-  @table::physics
-
-   #  Set up of PDS only reconstruction in 1x2x6 geo
-  reco: 
-  [
-    @sequence::dunefd_horizdrift_pd_reco1,
-    @sequence::dunefd_horizdrift_pd_reco2,
-    rns
-  ]
-
-}
+physics.reco: 
+[
+  @sequence::dunefd_horizdrift_pd_reco1,
+  @sequence::dunefd_horizdrift_pd_reco2,
+  rns
+]
