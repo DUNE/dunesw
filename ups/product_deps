@@ -246,10 +246,10 @@ defaultqual	e26
 #
 ####################################
 product		version		qual	flags		<table_format=2>
-duneana		v09_82_02d01	-
-dunedataprep	v09_82_02d01	-
-duneexamples	v09_82_02d01	-
-protoduneana	v09_82_02d01	-
+duneana		v09_83_01d00	-
+dunedataprep	v09_83_01d00	-
+duneexamples	v09_83_01d00	-
+protoduneana	v09_83_01d00	-
 cetmodules	v3_22_02	-	only_for_build
 end_product_list
 ####################################
