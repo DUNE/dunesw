@@ -1,3 +1,4 @@
+#include "angularreco.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
@@ -190,6 +191,20 @@ dunefd_horizdrift_workflow_reco:
     @sequence::dunefd_horizdrift_workflow_reco2
 ]
 
+dunefd_horizdrift_workflow_nuanglereco:
+[
+    anglereconue,
+    anglereconumu,
+    anglereconuepfps,
+    anglereconumupfps
+]
+
+dunefd_horizdrift_workflow_reco2_atmos:
+[
+    @sequence::dunefd_horizdrift_workflow_reco2,
+    @sequence::dunefd_horizdrift_workflow_nuanglereco
+]
+
 ### Here, we overwrite ALL module labels with the ones defined above.
 physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
 
@@ -305,5 +320,11 @@ dunefd_horizdrift_producers.energyrecnc.WireLabel:      "tpcrawdecoder:gauss"
 
 #optical reco configuration
 dunefd_horizdrift_producers.opflash.InputModule: ophitspe
+
+#angle reco configuration
+dunefd_horizdrift_producers.anglereconue:  @local::dunefd_nuangularreco_pandora_nue
+dunefd_horizdrift_producers.anglereconumu: @local::dunefd_nuangularreco_pandora_numu
+dunefd_horizdrift_producers.anglereconuepfps: @local::dunefd_nuangularreco_pandora_nue_allpfps
+dunefd_horizdrift_producers.anglereconumupfps: @local::dunefd_nuangularreco_pandora_numu_allpfps
 
 END_PROLOG
