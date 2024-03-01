@@ -1,54 +1,58 @@
-cet_test(test_Geometry SOURCES test_Geometry.cxx
+cet_test(test_Geometry SOURCE test_Geometry.cxx
   LIBRARIES
     dunecore::ArtSupport
+    larcore::headers
     art::Framework_Services_Registry
     larcorealg::Geometry
     ROOT::Core
-    cetlib::cetlib cetlib_except
+    cetlib::cetlib cetlib_except::cetlib_except
 )
 
-cet_test(test_DetectorClocksService SOURCES test_DetectorClocksService.cxx
+cet_test(test_DetectorClocksService SOURCE test_DetectorClocksService.cxx
   LIBRARIES
     dunecore::ArtSupport
+    lardata::Utilities
     art::Framework_Services_Registry
     ROOT::Core
-    cetlib::cetlib cetlib_except
+    cetlib::cetlib cetlib_except::cetlib_except
 )
 
-cet_test(test_DetectorProperties SOURCES test_DetectorProperties.cxx
+cet_test(test_DetectorProperties SOURCE test_DetectorProperties.cxx
   LIBRARIES
     dunecore::ArtSupport
+    lardata::Utilities
     art::Framework_Services_Registry
-    lardataalg_DetectorInfo
+    lardataalg::DetectorInfo
     ROOT::Core
-    cetlib::cetlib cetlib_except
+    cetlib::cetlib cetlib_except::cetlib_except
 )
 
-cet_test(test_LArProperties SOURCES test_LArProperties.cxx
+cet_test(test_LArProperties SOURCE test_LArProperties.cxx
   LIBRARIES
     dunecore::ArtSupport
+    lardata::Utilities
     art::Framework_Services_Registry
     ROOT::Core
-    cetlib::cetlib cetlib_except
+    cetlib::cetlib cetlib_except::cetlib_except
 )
 
-cet_test(test_LArSeedService SOURCES test_LArSeedService.cxx
+cet_test(test_LArSeedService SOURCE test_LArSeedService.cxx
   LIBRARIES
     nurandom::RandomUtils_NuRandomService_service
     dunecore::ArtSupport
     art::Framework_Services_Registry
     ROOT::Core
-    cetlib::cetlib cetlib_except
+    cetlib::cetlib cetlib_except::cetlib_except
 )
 
-cet_test(test_SignalShapingServiceDUNE SOURCES test_SignalShapingServiceDUNE.cxx
+cet_test(test_SignalShapingServiceDUNE SOURCE test_SignalShapingServiceDUNE.cxx
   LIBRARIES
     dunecore::SignalShapingServiceDUNE_service
     dunecore::ArtSupport
     art::Framework_Services_Registry
     lardata::Utilities
     ROOT::Core
-    cetlib::cetlib cetlib_except
+    cetlib::cetlib cetlib_except::cetlib_except
 )
 
 install_source()
