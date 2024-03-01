@@ -1,0 +1,19 @@
+# supernova_neutronfilter_g4_dune10kt_1x2x6.fcl
+# Author: Dom Brailsford (2024)
+# Purpose: Run the supernova g4 HD 1x2x6 jobset and reject any events that do not have a neutron stopping in the TPC 
+#
+# V1.0
+#
+
+#include "supernova_g4_dune10kt_1x2x6.fcl"
+#include "larg4particlefilter_dune.fcl"
+
+
+#Define the neutron filter
+physics.filters.neutronfilter:  @local::dunefd_neutrontpcfilter
+
+#Run neutron filter at the end
+physics.simulate:  [ @sequence:: physics.simulate, neutronfilter ]
+
+#Tell ART to actually filter using the ART filter
+outputs.out1.SelectEvents: [ neutronfilter ]
