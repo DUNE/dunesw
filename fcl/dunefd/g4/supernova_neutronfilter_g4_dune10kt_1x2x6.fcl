@@ -5,8 +5,8 @@
 # V1.0
 #
 
-#include "supernova_g4_dune10kt_1x2x6.fcl"
 #include "larg4particlefilter_dune.fcl"
+#include "supernova_g4_dune10kt_1x2x6.fcl"
 
 
 #Define the neutron filter
