@@ -16,4 +16,4 @@ physics.filters.neutronfilter:  @local::dunefd_neutrontpcfilter
 physics.simulate:  [ @sequence::physics.simulate, neutronfilter ]
 
 #Tell ART to actually filter using the ART filter
-outputs.out1.SelectEvents: [ neutronfilter ]
+outputs.out1.SelectEvents: [ simulate ]
