@@ -32,7 +32,7 @@ physics:
  
   producers:
   {
-    marley: @local::dune_marley_solar_flat
+    marley: @local::dune_marley_solar_nue_cc_flat
     rns:    { module_type: "RandomNumberSaver" }
   }
  
