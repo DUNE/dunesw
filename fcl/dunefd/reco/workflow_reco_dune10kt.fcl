@@ -1,3 +1,4 @@
+#include "angularreco.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
@@ -72,11 +73,15 @@ dunefd_horizdrift_producers:
   energyrecnumu:        @local::dunefd_nuenergyreco_pandora_numu
   energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
   energyrecnc:           @local::dunefd_nuenergyreco_pandora_nc
+  #angle reco configuration
+  anglereconue:  @local::dunefd_nuangularreco_pandora_nue
+  anglereconumu: @local::dunefd_nuangularreco_pandora_numu
+  anglereconuepfps: @local::dunefd_nuangularreco_pandora_nue_allpfps
+  anglereconumupfps: @local::dunefd_nuangularreco_pandora_numu_allpfps
   # photon detector reconstruction
   opdec:      @local::dune_deconvolution
   ophitspe:   @local::dune_ophit_finder_deco
   opflash:    @local::dunefd_opflash
-
 }
 
 dunefd_horizdrift_lowlevelreco: 
@@ -188,6 +193,20 @@ dunefd_horizdrift_workflow_reco:
 [ 
     @sequence::dunefd_horizdrift_workflow_reco1,
     @sequence::dunefd_horizdrift_workflow_reco2
+]
+
+dunefd_horizdrift_workflow_nuanglereco:
+[
+    anglereconue,
+    anglereconumu,
+    anglereconuepfps,
+    anglereconumupfps
+]
+
+dunefd_horizdrift_workflow_reco2_atmos:
+[
+    @sequence::dunefd_horizdrift_workflow_reco2,
+    @sequence::dunefd_horizdrift_workflow_nuanglereco
 ]
 
 ### Here, we overwrite ALL module labels with the ones defined above.
