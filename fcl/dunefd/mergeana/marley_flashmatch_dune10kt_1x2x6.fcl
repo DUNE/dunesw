@@ -1,0 +1,45 @@
+
+#include "services_dune.fcl"
+#include "FlashMatchAna.fcl"
+
+process_name: Mergeana
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "ana_hist.root" }
+  TimeTracker:       {}
+  RandomNumberGenerator: {}
+  MemoryTracker:         { } # default is one
+  message:      @local::dune_message_services_prod
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::dunefd_1x2x6_services
+}
+source:
+{
+ module_type: RootInput
+ maxEvents:  1000        # Number of events to create
+}
+
+
+physics:
+{
+ analyzers:
+ {
+    flashmatch: @local::marley_flashmatchana
+ }
+
+ anapath: [ flashmatch ]
+ end_paths: [ anapath ]
+}
+                                                                                                         
+outputs:
+{
+  out1:
+  {
+    module_type: RootOutput
+    fileName:    "%ifb_%tc_merged.root"
+    dataTier:    "full-reconstructed"
+    compressionLevel: 1
+  }
+}

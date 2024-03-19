@@ -31,7 +31,7 @@ physics:
       @table::dunefd_horizdrift_1x2x6_producers
    }
 
-   simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x6_v3_5 ]
+   simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x6_v3_6 ]
    stream1:       [ out1 ]
    trigger_paths: [ simulate ] 
    end_paths:     [ stream1 ]  

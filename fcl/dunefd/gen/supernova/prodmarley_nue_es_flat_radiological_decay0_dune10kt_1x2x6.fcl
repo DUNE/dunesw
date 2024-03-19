@@ -8,7 +8,7 @@ physics:
   producers:
   {
      @table::dunefd_horizdrift_1x2x6_producers
-     marley:      @local::dune_marley_flat
+     marley:      @local::dune_marley_nue_es_flat
      rns:       { module_type: "RandomNumberSaver" }
   }
   simulate: [
