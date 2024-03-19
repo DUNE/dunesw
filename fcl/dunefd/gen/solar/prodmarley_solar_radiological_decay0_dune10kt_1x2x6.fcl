@@ -1,0 +1,16 @@
+#include "workflow_radiological_decay0_dune10kt.fcl"
+#include "prodmarley_solar_flat_dune10kt_1x2x6.fcl"
+
+physics:
+{
+   @table::physics
+   producers:
+   {  
+      @table::physics.producers 
+      @table::dunefd_horizdrift_1x2x6_producers
+   }
+   
+   simulate: [rns, marley, @sequence::dunefd_hd_backgrounds_1x2x6_v3_5 ]      
+}
+
+outputs.out1.fileName:    "prodmarley_solar_radiological_decay0_dune10kt_1x2x6_gen.root" 

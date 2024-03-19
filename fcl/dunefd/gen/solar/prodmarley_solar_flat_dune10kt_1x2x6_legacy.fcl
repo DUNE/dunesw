@@ -1,0 +1,9 @@
+#include "prodmarley_solar_flat_dune10kt.fcl"
+
+services:
+{
+    @table::services
+    @table::dunefd_services_legacy
+}
+
+outputs.out1.fileName: "prodmarley_solar_flat_dune10kt_1x2x6_legacy_gen.root"
