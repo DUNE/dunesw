@@ -14,7 +14,7 @@ physics:
   simulate: [
              rns,
              marley,
-             @sequence::dunefd_hd_backgrounds_1x2x6_v3_5
+             @sequence::dunefd_hd_backgrounds_1x2x6_lowBgAPA_v3_6
             ]
 }
 
