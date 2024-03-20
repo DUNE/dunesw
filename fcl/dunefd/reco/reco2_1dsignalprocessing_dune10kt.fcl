@@ -1,5 +1,12 @@
 #include "standard_reco2_dune10kt.fcl"
 
 services.BackTrackerService.BackTracker.SimChannelModuleLabel: "elecDrift"
+
 physics.producers.pandora.SimChannelModuleLabel: "elecDrift"
+physics.producers.pmtrack.WireModuleLabel:    "caldata"
+physics.producers.pmtracktc.WireModuleLabel:  "caldata"
+physics.producers.emtrkmichelid.WireLabel:    "caldata"
+physics.producers.energyrecnumu.WireLabel:    "caldata"
+physics.producers.energyrecnue.WireLabel:     "caldata"
+physics.producers.energyrecnc.WireLabel:      "caldata"
 
