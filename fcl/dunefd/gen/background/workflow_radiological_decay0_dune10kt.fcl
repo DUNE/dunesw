@@ -3,10 +3,10 @@
 # Dom Brailsford & Laura Paulucci
 
 
-#include "dune_radiological_model_decay0_v3_4_hd_common.fcl"
 #include "dune_radiological_model_decay0_v3_4_hd_1x2x2.fcl"
 #include "dune_radiological_model_decay0_v3_4_hd_1x2x6.fcl"
-#include "dune_radiological_model_decay0_v3_5_hd_1x2x6.fcl"
+#include "dune_radiological_model_decay0_v3_6_hd_1x2x6.fcl"
+#include "dune_radiological_model_decay0_v3_6_hd_1x2x2.fcl"
 
 BEGIN_PROLOG
 
@@ -69,11 +69,19 @@ dunefd_horizdrift_1x2x2_producers:
       @table::dunefd_horizdrift_common_producers
       ##########################################################################
       # Externals
-      CavernwallGammasAtLAr1x2x2:   @local::dune10kt_1x2x2_gammas_from_cavernwall_atLAr
-      foamGammasAtLAr1x2x2:         @local::dune10kt_1x2x2_gammas_from_foam_atLAr
-      CavernwallNeutronsAtLAr1x2x2: @local::dune10kt_1x2x2_neutrons_from_cavernwall_atLAr
-      CryostatNGammasAtLAr1x2x2:    @local::dune10kt_1x2x2_CryostatNGammas_from_CavernNeutrons_atLAr
-      CavernNGammasAtLAr1x2x2:      @local::dune10kt_1x2x2_CavernNGammas_atLAr
+      CavernwallGammasAtLAr1x2x2:         @local::dune10kt_1x2x2_gammas_from_cavernwall_atLAr
+      foamGammasAtLAr1x2x2:               @local::dune10kt_1x2x2_gammas_from_foam_atLAr
+      CavernwallNeutronsAtLAr1x2x2:       @local::dune10kt_1x2x2_neutrons_from_cavernwall_atLAr
+      CryostatNGammasAtLAr1x2x2:          @local::dune10kt_1x2x2_CryostatNGammas_from_CavernNeutrons_atLAr
+      CavernNGammasAtLAr1x2x2:            @local::dune10kt_1x2x2_CavernNGammas_atLAr
+      U238Th232K40GenInLArAPAboards1x2x2: @local::dune10kt_1x2x2_gammas_in_APAboards
+      ##########################################################################
+      # Attenuated Externals
+      CavernwallGammasAtLAr1x2x2lowBgAPA:   @local::dune10kt_1x2x2_lowBgAPA_gammas_from_cavernwall_atLAr
+      foamGammasAtLAr1x2x2lowBgAPA:         @local::dune10kt_1x2x2_lowBgAPA_gammas_from_foam_atLAr
+      CavernwallNeutronsAtLAr1x2x2lowBgAPA: @local::dune10kt_1x2x2_lowBgAPA_neutrons_from_cavernwall_atLAr
+      CryostatNGammasAtLAr1x2x2lowBgAPA:    @local::dune10kt_1x2x2_lowBgAPA_CryostatNGammas_from_CavernNeutrons_atLAr
+      CavernNGammasAtLAr1x2x2lowBgAPA:      @local::dune10kt_1x2x2_lowBgAPA_CavernNGammas_atLAr
       ##########################################################################
 }
 
@@ -82,12 +90,19 @@ dunefd_horizdrift_1x2x6_producers:
       @table::dunefd_horizdrift_common_producers
       ##########################################################################
       # Externals
-      CavernwallGammasAtLAr1x2x6:    @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
-      foamGammasAtLAr1x2x6:          @local::dune10kt_1x2x6_gammas_from_foam_atLAr
-      CavernwallNeutronsAtLAr1x2x6:  @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
-      CryostatNGammasAtLAr1x2x6:     @local::dune10kt_1x2x6_CryostatNGammas_from_CavernNeutrons_atLAr
-      CavernNGammasAtLAr1x2x6:       @local::dune10kt_1x2x6_CavernNGammas_atLAr
-      U238Th232K40GenInLArAPAboards: @local::dune10kt_1x2x6_gammas_in_APAboards
+      CavernwallGammasAtLAr1x2x6:         @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
+      foamGammasAtLAr1x2x6:               @local::dune10kt_1x2x6_gammas_from_foam_atLAr
+      CavernwallNeutronsAtLAr1x2x6:       @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
+      CryostatNGammasAtLAr1x2x6:          @local::dune10kt_1x2x6_CryostatNGammas_from_CavernNeutrons_atLAr
+      CavernNGammasAtLAr1x2x6:            @local::dune10kt_1x2x6_CavernNGammas_atLAr
+      U238Th232K40GenInLArAPAboards1x2x6: @local::dune10kt_1x2x6_gammas_in_APAboards
+      ##########################################################################
+      # Attenuated Externals
+      CavernwallGammasAtLAr1x2x6lowBgAPA:   @local::dune10kt_1x2x6_lowBgAPA_gammas_from_cavernwall_atLAr
+      foamGammasAtLAr1x2x6lowBgAPA:         @local::dune10kt_1x2x6_lowBgAPA_gammas_from_foam_atLAr
+      CavernwallNeutronsAtLAr1x2x6lowBgAPA: @local::dune10kt_1x2x6_lowBgAPA_neutrons_from_cavernwall_atLAr
+      CryostatNGammasAtLAr1x2x6lowBgAPA:    @local::dune10kt_1x2x6_lowBgAPA_CryostatNGammas_from_CavernNeutrons_atLAr
+      CavernNGammasAtLAr1x2x6lowBgAPA:      @local::dune10kt_1x2x6_lowBgAPA_CavernNGammas_atLAr
       ##########################################################################
 }
 
@@ -148,19 +163,19 @@ dunefd_backgrounds_1x2x6_external:
 
 dunefd_hd_backgrounds_1x2x2:
 [
-    @sequence::dunefd_backgrounds_common,
-    @sequence::dunefd_backgrounds_1x2x2_external
+      @sequence::dunefd_backgrounds_common,
+      @sequence::dunefd_backgrounds_1x2x2_external
 ]
 
 dunefd_hd_backgrounds_1x2x6:
 [
-    @sequence::dunefd_backgrounds_common,
-    @sequence::dunefd_backgrounds_1x2x6_external
+      @sequence::dunefd_backgrounds_common,
+      @sequence::dunefd_backgrounds_1x2x6_external
 ]
 
 #temporarily arranging for an alternative background model in HD because of APA geometry not being correct in the gdml
 
-dunefd_backgrounds_common_v3_5:
+dunefd_backgrounds_common_v3_6:
 [
       # Liquid argon
       Ar39GenInLAr,
@@ -194,9 +209,9 @@ dunefd_backgrounds_common_v3_5:
       Rn222ChainGenInPDS
 ]
 
-dunefd_backgrounds_1x2x6_external_v3_5:
+dunefd_backgrounds_1x2x6_external_v3_6:
 [
-      U238Th232K40GenInLArAPAboards, #new hacked APA board contribution
+      U238Th232K40GenInLArAPAboards1x2x6, #new hacked APA board contribution
       CavernwallGammasAtLAr1x2x6,
       foamGammasAtLAr1x2x6,
       CavernwallNeutronsAtLAr1x2x6,
@@ -204,10 +219,58 @@ dunefd_backgrounds_1x2x6_external_v3_5:
       CavernNGammasAtLAr1x2x6
 ]
 
-dunefd_hd_backgrounds_1x2x6_v3_5:
+dunefd_hd_backgrounds_1x2x6_v3_6:
 [
-    @sequence::dunefd_backgrounds_common_v3_5,
-    @sequence::dunefd_backgrounds_1x2x6_external_v3_5
+      @sequence::dunefd_backgrounds_common_v3_6,
+      @sequence::dunefd_backgrounds_1x2x6_external_v3_6
+]
+
+dunefd_backgrounds_1x2x2_external_v3_6:
+[
+      U238Th232K40GenInLArAPAboards1x2x2, #new hacked APA board contribution
+      CavernwallGammasAtLAr1x2x2,
+      foamGammasAtLAr1x2x2,
+      CavernwallNeutronsAtLAr1x2x2,
+      CryostatNGammasAtLAr1x2x2,
+      CavernNGammasAtLAr1x2x2
+]
+
+dunefd_hd_backgrounds_1x2x2_v3_6:
+[
+      @sequence::dunefd_backgrounds_common_v3_6,
+      @sequence::dunefd_backgrounds_1x2x2_external_v3_6
+]
+
+dunefd_backgrounds_1x2x2_lowBgAPA_external_v3_6:
+[
+      U238Th232K40GenInLArAPAboards1x2x2, #new hacked APA board contribution
+      CavernwallGammasAtLAr1x2x2lowBgAPA,
+      foamGammasAtLAr1x2x2lowBgAPA,
+      CavernwallNeutronsAtLAr1x2x2lowBgAPA,
+      CryostatNGammasAtLAr1x2x2lowBgAPA,
+      CavernNGammasAtLAr1x2x2lowBgAPA
+]
+
+dunefd_hd_backgrounds_1x2x2_lowBgAPA_v3_6:
+[
+      @sequence::dunefd_backgrounds_common_v3_6,
+      @sequence::dunefd_backgrounds_1x2x2_lowBgAPA_external_v3_6
+]
+
+dunefd_backgrounds_1x2x6_lowBgAPA_external_v3_6:
+[
+      U238Th232K40GenInLArAPAboards1x2x6, #new hacked APA board contribution
+      CavernwallGammasAtLAr1x2x6lowBgAPA,
+      foamGammasAtLAr1x2x6lowBgAPA,
+      CavernwallNeutronsAtLAr1x2x6lowBgAPA,
+      CryostatNGammasAtLAr1x2x6lowBgAPA,
+      CavernNGammasAtLAr1x2x6lowBgAPA
+]
+
+dunefd_hd_backgrounds_1x2x6_lowBgAPA_v3_6:
+[
+      @sequence::dunefd_backgrounds_common_v3_6,
+      @sequence::dunefd_backgrounds_1x2x6_lowBgAPA_external_v3_6
 ]
 
 END_PROLOG
