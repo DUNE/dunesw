@@ -2,7 +2,7 @@
 
 process_name: SinglesGen
 
-outputs.out1.fileName: "prod_muminus_5.0GeV_45deg_fixedstart_dune10kt_1x2x6.root"
+outputs.out1.fileName: "prod_muminus_5.0GeV_45deg_fixedstart_dune10kt.root"
 
 source.firstRun: 20000014
 
