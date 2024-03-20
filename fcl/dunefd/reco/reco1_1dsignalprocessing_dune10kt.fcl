@@ -1,0 +1,5 @@
+#include "standard_reco1_dune10kt.fcl"
+
+physics.reco: [ caldata, @sequence::physics.reco ]
+
+physics.producers.gaushit.CalDataModuleLabel: "caldata"
