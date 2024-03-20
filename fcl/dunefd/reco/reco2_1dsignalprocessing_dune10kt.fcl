@@ -1,0 +1,5 @@
+#include "standard_reco2_dune10kt.fcl"
+
+services.BackTrackerService.BackTracker.SimChannelModuleLabel: "elecDrift"
+physics.producers.pandora.SimChannelModuleLabel: "elecDrift"
+
