@@ -1,13 +1,7 @@
 # This fhicl enables the generation of energy deposits in just half the active volume (x>0) to emulate the lateral APA in the HD geometry
 
-#include "standard_g4_dune10kt_1x2x6.fcl"
-
-process_name: SupernovaG4
-
-services.PhysicsList:   @local::dune_physics_list_supernova
+#include "supernova_g4_dune10kt_1x2x6.fcl"
 
 services.LArG4Detector.stepLimits: [ 4e-1 ]
 services.LArG4Detector.volumeNames: ["volTPCActiveInner1"]
 physics.producers.IonAndScint.Instances: "LArG4DetectorServicevolTPCActiveInner1;LArG4DetectorServicevolTPCInner1"
-
-outputs.out1.outputCommands: ["keep *", "drop sim::SimEnergyDeposits_largeant_*_*G4*"]

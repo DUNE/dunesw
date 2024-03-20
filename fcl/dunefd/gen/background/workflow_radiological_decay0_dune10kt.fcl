@@ -163,14 +163,14 @@ dunefd_backgrounds_1x2x6_external:
 
 dunefd_hd_backgrounds_1x2x2:
 [
-    @sequence::dunefd_backgrounds_common,
-    @sequence::dunefd_backgrounds_1x2x2_external
+      @sequence::dunefd_backgrounds_common,
+      @sequence::dunefd_backgrounds_1x2x2_external
 ]
 
 dunefd_hd_backgrounds_1x2x6:
 [
-    @sequence::dunefd_backgrounds_common,
-    @sequence::dunefd_backgrounds_1x2x6_external
+      @sequence::dunefd_backgrounds_common,
+      @sequence::dunefd_backgrounds_1x2x6_external
 ]
 
 #temporarily arranging for an alternative background model in HD because of APA geometry not being correct in the gdml
@@ -221,8 +221,8 @@ dunefd_backgrounds_1x2x6_external_v3_6:
 
 dunefd_hd_backgrounds_1x2x6_v3_6:
 [
-    @sequence::dunefd_backgrounds_common_v3_6,
-    @sequence::dunefd_backgrounds_1x2x6_external_v3_6
+      @sequence::dunefd_backgrounds_common_v3_6,
+      @sequence::dunefd_backgrounds_1x2x6_external_v3_6
 ]
 
 dunefd_backgrounds_1x2x2_external_v3_6:
@@ -237,8 +237,8 @@ dunefd_backgrounds_1x2x2_external_v3_6:
 
 dunefd_hd_backgrounds_1x2x2_v3_6:
 [
-    @sequence::dunefd_backgrounds_common_v3_6,
-    @sequence::dunefd_backgrounds_1x2x2_external_v3_6
+      @sequence::dunefd_backgrounds_common_v3_6,
+      @sequence::dunefd_backgrounds_1x2x2_external_v3_6
 ]
 
 dunefd_backgrounds_1x2x2_lowBgAPA_external_v3_6:
@@ -253,8 +253,8 @@ dunefd_backgrounds_1x2x2_lowBgAPA_external_v3_6:
 
 dunefd_hd_backgrounds_1x2x2_lowBgAPA_v3_6:
 [
-    @sequence::dunefd_backgrounds_common_v3_6,
-    @sequence::dunefd_backgrounds_1x2x2_lowBgAPA_external_v3_6
+      @sequence::dunefd_backgrounds_common_v3_6,
+      @sequence::dunefd_backgrounds_1x2x2_lowBgAPA_external_v3_6
 ]
 
 dunefd_backgrounds_1x2x6_lowBgAPA_external_v3_6:
@@ -269,8 +269,8 @@ dunefd_backgrounds_1x2x6_lowBgAPA_external_v3_6:
 
 dunefd_hd_backgrounds_1x2x6_lowBgAPA_v3_6:
 [
-    @sequence::dunefd_backgrounds_common_v3_6,
-    @sequence::dunefd_backgrounds_1x2x6_lowBgAPA_external_v3_6
+      @sequence::dunefd_backgrounds_common_v3_6,
+      @sequence::dunefd_backgrounds_1x2x6_lowBgAPA_external_v3_6
 ]
 
 END_PROLOG
