@@ -15,7 +15,7 @@ physics:
       @table::dunefd_horizdrift_1x2x2_producers
    }
    
-   simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x2 ]      
+   simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x2_v3_6 ]      
 }
 
 outputs.out1.fileName:    "prodradiological_decay0_dune10kt_1x2x2_gen.root"
