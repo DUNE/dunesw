@@ -81,13 +81,14 @@ dunefd_horizdrift_1x2x6_producers:
 {
       @table::dunefd_horizdrift_common_producers
       ##########################################################################
+      # APA
+      U238Th232K40GenInLArAPAboards: @local::dune10kt_1x2x6_gammas_in_APAboards
       # Externals
       CavernwallGammasAtLAr1x2x6:    @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
       foamGammasAtLAr1x2x6:          @local::dune10kt_1x2x6_gammas_from_foam_atLAr
       CavernwallNeutronsAtLAr1x2x6:  @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
       CryostatNGammasAtLAr1x2x6:     @local::dune10kt_1x2x6_CryostatNGammas_from_CavernNeutrons_atLAr
       CavernNGammasAtLAr1x2x6:       @local::dune10kt_1x2x6_CavernNGammas_atLAr
-      U238Th232K40GenInLArAPAboards: @local::dune10kt_1x2x6_gammas_in_APAboards
       ##########################################################################
 }
 
@@ -190,13 +191,13 @@ dunefd_backgrounds_common_v3_5:
       Co60GenInAPA,
       U238ChainGenInAPA,
       Th232ChainGenInAPA,
+      U238Th232K40GenInLArAPAboards, #new hacked APA board contribution
       # PDS
       Rn222ChainGenInPDS
 ]
 
 dunefd_backgrounds_1x2x6_external_v3_5:
 [
-      U238Th232K40GenInLArAPAboards, #new hacked APA board contribution
       CavernwallGammasAtLAr1x2x6,
       foamGammasAtLAr1x2x6,
       CavernwallNeutronsAtLAr1x2x6,
