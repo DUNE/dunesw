@@ -85,11 +85,11 @@ physics:
       ##########################################################################
       # Externals
       #NeutronGenInRock:    @local::dune10kt_1x2x6_neutron_from_rock
-      CavernwallGammasAtLAr: @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
-      foamGammasAtLAr: @local::dune10kt_1x2x6_gammas_from_foam_atLAr
-      CavernwallNeutronsAtLAr: @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
-      CryostatNGammasAtLAr: @local::dune10kt_1x2x6_CryostatNGammas_from_CavernNeutrons_atLAr
-      CavernNGammasAtLAr: @local::dune10kt_1x2x6_CavernNGammas_atLAr
+      CavernwallGammasAtLAr1x2x6: @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
+      foamGammasAtLAr1x2x6: @local::dune10kt_1x2x6_gammas_from_foam_atLAr
+      CavernwallNeutronsAtLAr1x2x6: @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
+      CryostatNGammasAtLAr1x2x6: @local::dune10kt_1x2x6_CryostatNGammas_from_CavernNeutrons_atLAr
+      CavernNGammasAtLAr1x2x6: @local::dune10kt_1x2x6_CavernNGammas_atLAr
       ##########################################################################
       rns:       { module_type: "RandomNumberSaver" }
    }
@@ -146,11 +146,11 @@ physics:
       ##########################################################################
       # Externals
       #NeutronGenInRock
-      CavernwallGammasAtLAr,
-      foamGammasAtLAr,
-      CavernwallNeutronsAtLAr,
-      CryostatNGammasAtLAr,
-      CavernNGammasAtLAr
+      CavernwallGammasAtLAr1x2x6,
+      foamGammasAtLAr1x2x6,
+      CavernwallNeutronsAtLAr1x2x6,
+      CryostatNGammasAtLAr1x2x6,
+      CavernNGammasAtLAr1x2x6
       ##########################################################################
    ]      
    stream1:       [ out1 ]
