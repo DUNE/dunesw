@@ -1,0 +1,43 @@
+#include "wirecell_dune.fcl"
+#include "standard_reco_dune10kt_legacy.fcl"
+process_name: Reco
+services.Geometry: @local::iceberg_geo
+physics.producers.wctnfsp: @local::iceberg_wctnfsp
+
+physics.reco: [ 
+"rns", 
+#"caldata", 
+"wctnfsp",
+"gaushit", 
+"hitfd", 
+"linecluster", 
+"trajcluster",       
+"trkshowersplit",
+"pandora",
+"pandoraTrack",
+"pandoraShower",
+"pandoracalo",
+"pandorapid",
+"pmtrack",
+"pmtrackcalo",
+"pmtrackpid",
+"pmtrajfit",
+"pmtrajfitcalo",
+"pmtrajfitpid",
+"pmtracktc",
+"pmtracktccalo",
+"pmtracktcpid",
+"pmtrajfittc",
+"pmtrajfittccalo",
+"pmtrajfittcpid",
+"blurredcluster",
+"emtrkmichelid",
+"emshower" ]
+
+physics.producers.gaushit.CalDataModuleLabel: "wctnfsp:gauss"
+physics.producers.emtrkmichelid.WireLabel: "wctnfsp:gauss"
+physics.producers.fasthit.CalDataModuleLabel: "wctnfsp:gauss"
+physics.producers.pmtrack.WireModuleLabel: "wctnfsp:gauss"
+physics.producers.pmtrackdc.WireModuleLabel: "wctnfsp:gauss"
+physics.producers.pmtracktc.WireModuleLabel: "wctnfsp:gauss"
+physics.producers.pmtracktcdc.WireModuleLabel: "wctnfsp:gauss"
