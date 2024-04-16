@@ -31,6 +31,7 @@ find_ups_product( larcore )
 find_ups_product( lardata )
 find_ups_product( larcorealg )
 find_ups_product( lardataalg )
+find_ups_product( nurandom )
 
 cet_report_compiler_flags()
 
