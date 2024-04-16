@@ -244,74 +244,6 @@ defaultqual	e26
 # * It is an error for more than one non-(<qual-trigger> == "-default-")
 #   entry to match for a given product.
 #
-####################################
-product		version		qual	flags		<table_format=2>
-duneana		v09_83_01d00	-
-dunedataprep	v09_83_01d00	-
-duneexamples	v09_83_01d00	-
-protoduneana	v09_83_01d00	-
-cetmodules	v3_22_02	-	only_for_build
-end_product_list
-####################################
-
-####################################
-# Qualifier table.
-#
-# For each valid qualifer set of the parent, specify how dependencies
-# should be set up.
-#
-# Format:
-#
-#>  qualifier		<prod-spec>...	[<notes>]
-#>  <parent-qual>	<spec>...   [<text...>]
-#>...
-#>  end_qualifier_list
-#
-# <prod-spec> may be a product name or "compiler."
-#
-# <parent-qual> may be a colon-delimited qualifier set, or "-nq-" as a
-# column placeholder in the case of no parent qualifiers.
-#
-# Unless <prod-spec> is "compiler", <spec> may be a colon-delimited
-# qualifier set, or:
-#
-# * -
-#
-#   The dependency is not required for this <parent-qual> and will not
-#   be set up.
-#
-# * -nq-
-#
-#   The dependency will be set up without qualifiers.
-#
-# * -b- (deprecated)
-#
-#   A build-only dependency for this <parent-qual>. If the dependency is
-#   set up in this way, it will be set up without qualifiers. For more
-#   flexibility, use the product table to specify the only_for_build
-#   nature of the dependency and the qualifier table to specifiy how it
-#   should be set up.
-#
-# If <prod-spec> is "compiler", <spec> must be `-' (no compiler
-# required) or the name of the UPS product for the desired compiler. Any
-# qualifiers required to set up the compiler should be specified in the
-# appropriate column for that product.
-#
-##################
-# Notes.
-#
-# * A column for every product in the product table (see above) is
-#   *required* unless the only_for_build flag is specified, in which
-#   case it is optional.
-#
-####################################
-qualifier	duneexamples	dunedataprep	duneana		protoduneana	notes
-c14:debug	c14:debug	c14:debug	c14:debug	c14:debug
-c14:prof	c14:prof	c14:prof	c14:prof	c14:prof
-e26:debug	e26:debug	e26:debug	e26:debug	e26:debug
-e26:prof	e26:prof	e26:prof	e26:prof	e26:prof
-end_qualifier_list
-####################################
 
 ####################################
 # Table fragment.
@@ -331,10 +263,24 @@ table_fragment_begin
 table_fragment_end
 ####################################
 
-####################################
-# Backmatter.
-#
-# Comments and editor-specific metadata.
+
+product          version
+cetmodules	 v3_24_01	-	only_for_build
+duneexamples     v09_89_01d00
+dunedataprep     v09_89_01d00
+duneana          v09_89_01d00
+protoduneana     v09_89_01d00
+end_product_list
+
+
+# We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
+# Make a table by adding columns before "notes".
+qualifier       duneexamples   dunedataprep  duneana     protoduneana     notes
+c14:debug       c14:debug      c14:debug     c14:debug   c14:debug   
+c14:prof        c14:prof       c14:prof      c14:prof    c14:prof    
+e26:debug       e26:debug      e26:debug     e26:debug   e26:debug  
+e26:prof        e26:prof       e26:prof      e26:prof    e26:prof   
+end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
 

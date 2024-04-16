@@ -41,9 +41,6 @@ services:
   IFDH: {}
 }
 
-#services.Geometry.SortingParameters.ChannelsPerOpDet: 12
-#services.Geometry.GDML: "protodune_v7.gdml"
-#services.Geometry.ROOT: "protodune_v7.gdml"
 
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
@@ -89,7 +86,7 @@ physics: {
     # event feature labeling
     emtrkmichelid:      @local::protodune_emtrkmichelid
     # reconstruction using disambiguated hits
-    pandora:            @local::protodune_pandora
+    pandora:            @local::protodunehd_pandora
     pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
@@ -138,10 +135,10 @@ reco: [ opdec,
         pandoraTrack,
         pandoraShower,
         pandoracalo,
-        #pandoracalonosce,
+        pandoracalonosce,
         #pandorapid,
         pandoraShowercalo,
-        #pandoraShowercalonosce,
+        pandoraShowercalonosce,
         #pandoracali,
         #pandoracalipid,
         emtrkmichelid,
@@ -150,11 +147,11 @@ reco: [ opdec,
         #anodepiercerst0,
         pandora2Track,
         pandora2calo,
-        #pandora2calonosce,
+        pandora2calonosce,
         #pandora2pid,
         pandora2Shower,
-        pandora2Showercalo #,
-        #pandora2Showercalonosce,
+        pandora2Showercalo,
+        pandora2Showercalonosce
         #pandora2cali,
         #pandora2calipid
           ]
@@ -177,7 +174,9 @@ outputs:
    module_type: RootOutput
    fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
-   outputCommands: [ "keep *", "drop recob::Wires_caldata_dataprep_*", "drop *_wclsdatasp_wiener_*", "drop *_reco3d_noreg_*", "drop *_reco3d_pre_*" ]
+   outputCommands: [ "keep *", "drop recob::Wires_caldata_dataprep_*",
+                     "drop *_wclsdatasp_wiener_*", "drop *_reco3d_noreg_*",
+                     "drop *_reco3d_pre_*" ]
    compressionLevel: 1 #zlib argument (0-9)
    fastCloning: true
    #basketSize: 8192 #[Byte] buffer size at 8k

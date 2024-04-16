@@ -1,5 +1,15 @@
 #include "standard_detsim_protodunehd.fcl"
 process_name: DetsimStage1
 
+# minimum services for wirecell tpc simulation
+services:
+{
+  TimeTracker:       @local::dune_time_tracker
+  MemoryTracker:     @local::dune_memory_tracker
+  RandomNumberGenerator: {} #ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+  ExptGeoHelperInterface:       @local::dune_geometry_helper
+}
+
 physics.simulate: [tpcrawdecoder]
 outputs.out1.fileName: "%ifb_detsim_stage1.root"
