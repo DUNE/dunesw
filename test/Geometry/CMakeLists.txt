@@ -48,16 +48,16 @@ cet_test(geometry_iterator_loop_dunefd HANDBUILT
 
 # test for CRM channel mapping (BOOST unit test)
 cet_test(geometry_crmchannelmapping_test
-  SOURCES geometry_crmchannelmapping_test.cxx
-  LIBRARIES larcorealg_Geometry
-            dunecore_Geometry
+  SOURCE geometry_crmchannelmapping_test.cxx
+  LIBRARIES larcorealg::Geometry
+            dunecore::Geometry
             messagefacility::MF_MessageLogger
             larcorealg::GeometryTestLib
-            ART_FRAMEWORK_SERVICES_REGISTRY
-            art::Utilities canvas
-            ROOT_BASIC_LIB_LIST
+            art::Framework_Services_Registry
+            art::Utilities canvas::canvas
+	    ROOT::Core
             fhiclcpp::fhiclcpp
-            cetlib::cetlib cetlib_except
+            cetlib::cetlib 
   USE_BOOST_UNIT
   DATAFILES test_geometry_dunedphase10kt.fcl
   TEST_ARGS -- ./test_geometry_dunedphase10kt.fcl
