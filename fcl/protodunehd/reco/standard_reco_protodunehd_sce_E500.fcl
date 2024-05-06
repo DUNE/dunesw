@@ -1,0 +1,29 @@
+#include "standard_reco_protodunehd.fcl"
+
+
+physics.producers.pandoracalo:           @local::pdune_sp_calomcsce
+physics.producers.pandoraShowercalo:     @local::pdune_sp_showercalomcsce
+physics.producers.pandora2calo:          @local::pdune_sp_alltrackcalomcsce
+physics.producers.pandora2Showercalo:    @local::pdune_sp_allshowercalomcsce
+
+services.SpaceCharge.InputFilename:        		"ProtoDUNE/HD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDHD_Sim_NoFluidFlow_E500_v2.root"
+services.SpaceCharge.CalibrationInputFilename:          "ProtoDUNE/HD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDHD_Sim_NoFluidFlow_E500_v2.root"
+services.SpaceCharge.RepresentationType:               "Splines_TH3"
+services.SpaceCharge.service_provider:                  SpaceChargeServiceProtoDUNEhd
+
+# Electron Diverter sim should remain off for HD
+services.SpaceCharge.EnableElectronDiverterDistortions: []
+services.SpaceCharge.EDZCenter:                         [] # gap center in cm
+services.SpaceCharge.EDAXPosOffs:                       []  # X distortion shift scale in cm
+services.SpaceCharge.EDBZPosOffs:                       [] #  Z distoriton shift scale in cm
+services.SpaceCharge.EDs:                               [] # width of distortion function in cm
+services.SpaceCharge.EDChargeLossZLow:                  [] # range in which charge is lost, low end, cm in Z
+services.SpaceCharge.EDChargeLossZHigh:                 [] # range in which charge is lost, high end, cm in Z
+
+services.SpaceCharge.EnableSimEfieldSCE: true
+services.SpaceCharge.EnableSimSpatialSCE: true
+services.SpaceCharge.EnableSimulationSCE: true
+
+services.SpaceCharge.EnableCalEfieldSCE: true
+services.SpaceCharge.EnableCalSpatialSCE: true
+services.SpaceCharge.EnableCorrSCE: true

@@ -1,3 +1,4 @@
+#include "angularreco.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
@@ -70,13 +71,19 @@ dunefd_horizdrift_producers:
   cvneva:                @local::dunehd_1x2x6_FHC_cvnevaluator
   #neutrino energy reco
   energyrecnumu:        @local::dunefd_nuenergyreco_pandora_numu
+  energyrecnumurange:   @local::dunefd_nuenergyreco_pandora_numu_range
+  energyrecnumumcs:     @local::dunefd_nuenergyreco_pandora_numu_mcs
   energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
   energyrecnc:           @local::dunefd_nuenergyreco_pandora_nc
+  #angle reco configuration
+  anglereconue:  @local::dunefd_nuangularreco_pandora_nue
+  anglereconumu: @local::dunefd_nuangularreco_pandora_numu
+  anglereconuepfps: @local::dunefd_nuangularreco_pandora_nue_allpfps
+  anglereconumupfps: @local::dunefd_nuangularreco_pandora_numu_allpfps
   # photon detector reconstruction
   opdec:      @local::dune_deconvolution
   ophitspe:   @local::dune_ophit_finder_deco
   opflash:    @local::dunefd_opflash
-
 }
 
 dunefd_horizdrift_lowlevelreco: 
@@ -148,7 +155,9 @@ dunefd_horizdrift_nuenergy:
 [
     energyrecnumu,
     energyrecnue,
-    energyrecnc
+    energyrecnc,
+    energyrecnumurange,
+    energyrecnumumcs
 ]
 
 dunefd_horizdrift_pd_reco1:
@@ -171,11 +180,13 @@ dunefd_horizdrift_workflow_reco1:
 
 dunefd_horizdrift_workflow_reco2:
 [
-    @sequence::dunefd_horizdrift_2dclustering,
+    # All the workflows depending on trajcluster have been disabled until the following issue
+    # gets solved: https://cdcvs.fnal.gov/redmine/issues/28517
+#   @sequence::dunefd_horizdrift_2dclustering,
     @sequence::dunefd_horizdrift_pandora,
-    @sequence::dunefd_horizdrift_pmtrack,
-    @sequence::dunefd_horizdrift_pmtrack_trajcluster,
-    @sequence::dunefd_horizdrift_pmtrack_trajcluster_pfp,
+#   @sequence::dunefd_horizdrift_pmtrack,
+#   @sequence::dunefd_horizdrift_pmtrack_trajcluster,
+#   @sequence::dunefd_horizdrift_pmtrack_trajcluster_pfp,
 #    @sequence::dunefd_horizdrift_pmtrack_showers,
     @sequence::dunefd_horizdrift_cvn,
     @sequence::dunefd_horizdrift_nuenergy,
@@ -188,6 +199,20 @@ dunefd_horizdrift_workflow_reco:
 [ 
     @sequence::dunefd_horizdrift_workflow_reco1,
     @sequence::dunefd_horizdrift_workflow_reco2
+]
+
+dunefd_horizdrift_workflow_nuanglereco:
+[
+    anglereconue,
+    anglereconumu,
+    anglereconuepfps,
+    anglereconumupfps
+]
+
+dunefd_horizdrift_workflow_reco2_atmos:
+[
+    @sequence::dunefd_horizdrift_workflow_reco2,
+    @sequence::dunefd_horizdrift_workflow_nuanglereco
 ]
 
 ### Here, we overwrite ALL module labels with the ones defined above.
