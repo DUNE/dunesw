@@ -1,0 +1,74 @@
+# standard_detsim_dunevd10kt.fcl 
+
+# Dom Brailsford
+#
+#
+# Job fcl for running the VD detector simulation
+
+##include "wirecell_dune.fcl"
+##include "services_dune.fcl"
+##include "detsimmodules_dune.fcl"
+##include "opticaldetectormodules_dune.fcl"
+#include "workflow_detsim_vdcb_tde.fcl"
+#include "services_vdcoldbox.fcl"
+#include "tools_dune.fcl"
+
+process_name: detsim
+
+
+services:
+{
+   TFileService: { fileName: "%ifb_detsim_hist.root" }
+   TimeTracker:       {}
+   MemoryTracker:         { } # default is one
+   RandomNumberGenerator: {} #ART native random number generator
+   FileCatalogMetadata:  @local::art_file_catalog_mc
+   @table::vdcb_crp4_services
+   @table::vdcb_sim_base_services
+
+  # the correct config should be added to dune/Simulation/larg4services_dune.fcl
+  LArG4Detector: {
+    category      : "world"
+    gdmlFileName_ : @local::dunevdcb_geo.GDML
+    volumeNames   : [ "volTPCActive" ] 
+    stepLimits    : [0.4]       
+  }
+
+   message:              @local::dune_message_services_prod
+}
+
+
+
+#source is now a root file
+source: {
+  module_type: RootInput
+  maxEvents:  100        # Number of events to create
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics: {
+ producers: {
+   rns:            { module_type: "RandomNumberSaver" }
+   tpcrawdecoder: @local::wirecell_dunevd_coldboxcrp4_mc
+}
+# simulate: [ rns, daq, @sequence::pd_detsim_path ]
+ simulate: [ rns, tpcrawdecoder ]
+ stream1:  [ out1 ]
+ trigger_paths: [simulate] 
+ end_paths:     [stream1]  
+}
+
+outputs: {
+ out1: {
+   module_type: RootOutput
+   fileName:    "%ifb_detsim.root"
+   dataTier:    "detector-simulated"
+   compressionLevel: 1
+ }
+}
+
+## Use fixed values instead of DB for pedestals.
+#services.DetPedestalService: @local::dune_fixedpeds
+
