@@ -18,4 +18,4 @@ physics:
    simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x2 ]      
 }
 
-outputs.out1.fileName:    "prodradiological_decay0_dune10kt_1x2x2_gen.root"
+outputs.out1.fileName:    "prodradiological_decay0_dune10kt_1x2x2_lateralAPA_gen.root"
