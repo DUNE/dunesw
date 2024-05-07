@@ -42,7 +42,7 @@ outputs:
    out1:
    {
       module_type: RootOutput
-      fileName:    "prodradiological_decay0_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
+      fileName:    "prodradiological_decay0_dune10kt_1x2x6_lateralAPA_gen.root" # Default file name, can override from command line with -o or --output
       dataTier:    "generated"
       compressionLevel: 1
    }
