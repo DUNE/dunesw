@@ -1,7 +1,10 @@
+#include "HDF5RawInput3.fcl"
+#include "PDHDDataInterfaceWIBEth3.fcl"
+
 #include "PDHDTriggerReader.fcl"
 #include "PDHDTPCReader.fcl"
 #include "services_vdcoldbox.fcl"
-#include "workflow_reco_crpcb_top.fcl"
+#include "workflow_reco_crpcb_bottom.fcl"
 #include "vdct_decoder.fcl"
 #include "protodune_tools_dune.fcl"
 #include "vdcb2_tools.fcl"
@@ -50,7 +53,7 @@ data.crp4cb_Efield:  [0.411, 1.0, 1.0]
 
 crp4_services: {
   @table::services_base
-  @table::vdcb_crp2_data_services
+  @table::vdcb_crp4_data_services
   SpaceCharge: @local::dunefd_spacecharge
   ChannelStatusService: @local::data.ChannelStatusService_vdcrp4
   HDF5RawFile2Service:  {}
@@ -69,7 +72,7 @@ crp4_prod_config: {
   caldata: @local::producer_adcprep
   tpcrawdecoder: @local::PDHDTPCReaderDefaults
   pdvdtriggerreader: @local::PDHDTriggerReaderDefaults
-  @table::dunecrpcb_top_producers
+  @table::dunecrpcb_bottom_producers
 }
 crp4_prod_config.caldata.DecoderTool: "crp4_decoder"
 crp4_prod_config.caldata.DigitLabel:  "none"
@@ -85,7 +88,7 @@ crp4_prod_config.tpcrawdecoder.APAList: [ 6 ]
 crp4_prod_config.tpcrawdecoder.DecoderToolParams.DebugLevel: 0
 crp4_prod_config.tpcrawdecoder.DecoderToolParams.SubDetectorString: "VD_Bottom_TPC"
 
-# crp4_prod_config.wclsdatanfsp: @local::dune_vd_crp2_nfsp
+# crp4_prod_config.wclsdatanfsp: @local::dune_vd_crp4_nfsp
 
 tools.crp4_decoder: {
    DebugLevel: 0
@@ -100,6 +103,40 @@ crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 1.0
 crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 1.0
 crp4_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 1.0
 
-crp4_prod_seq: [caldata, pdvdtriggerreader, @sequence::dunecrpcb_top_reco_tpc_only]
-# crp4_prod_seq: [tpcrawdecoder, pdvdtriggerreader, @sequence::dunecrpcb_top_reco_tpc_only]
+crp4_prod_seq: [caldata, pdvdtriggerreader, @sequence::dunecrpcb_bottom_reco_tpc_only]
+# crp4_prod_seq: [tpcrawdecoder, pdvdtriggerreader, @sequence::dunecrpcb_bottom_reco_tpc_only]
 
+#
+# CRP6
+#
+crp6_services: {
+  @table::services_base
+  @table::vdcb_crp4_data_services
+  SpaceCharge: @local::dunefd_spacecharge
+  ChannelStatusService: @local::data.ChannelStatusService_vdcrp4
+  HDF5RawFile3Service:  {}
+  PD2HDChannelMapService:
+   {
+     FileName: "vdcbce_chanmap_v4.txt"
+   }
+}
+crp6_services.DetectorPropertiesService.Efield: @local::data.crp4cb_Efield
+
+crp6_prod_config: {
+  tpcrawdecoder: @local::PDHDTPCReaderDefaults
+  # pdvdtriggerreader: @local::PDHDTriggerReaderDefaults
+  @table::dunecrpcb_bottom_producers
+}
+
+crp6_prod_config.tpcrawdecoder.APAList: [ 6 ]
+crp6_prod_config.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEth3Defaults
+crp6_prod_config.tpcrawdecoder.DecoderToolParams.DebugLevel: 0
+crp6_prod_config.tpcrawdecoder.DecoderToolParams.SubDetectorString: "VD_Bottom_TPC"
+
+crp6_prod_config.wclsdatanfsp.wcls_main.params.raw_input_label: "tpcrawdecoder:daq"
+
+crp6_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 1.0
+crp6_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 1.0
+crp6_prod_config.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 1.0
+
+crp6_prod_seq: [tpcrawdecoder, @sequence::dunecrpcb_bottom_reco_tpc_only]
