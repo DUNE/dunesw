@@ -1,20 +1,24 @@
-#include "HDF5RawInput2.fcl"
+#include "HDF5RawInput3.fcl"
 #include "PDHDTPCReader.fcl"
-#include "PDHDDataInterfaceWIBEth.fcl"
+#include "PDHDDataInterfaceWIBEth3.fcl"
 #include "PDHDTriggerReader.fcl"
 #include "DAPHNEReaderPDHD.fcl"
+
+process_name: pdhdkeepupprocessing 
 
 services:
 {
   TimeTracker:  {}
   TFileService: 
   {
-    fileName: "pdhd_tpc_decoder_TFile.root"
+    fileName: "pdhd_keepup_decoder.root"
   } 
-  HDF5RawFile2Service:  {}
+  HDF5RawFile3Service:  {}
+
   DAPHNEChannelMapService: {
-    FileName: "DAPHNE_test_ChannelMap_v0.txt"
+    FileName: "DAPHNE_test5_ChannelMap_v1.txt"
   }
+
   PD2HDChannelMapService: 
    {
      FileName: "PD2HDChannelMap_WIBEth_electronics_v1.txt"
@@ -33,7 +37,7 @@ physics:
 
   produce: [
     tpcrawdecoder,
-    tpstreamdecoder,
+    #tpstreamdecoder, ##Need to reimplement with Wes' changes
     pdhddaphne
   ]
 
@@ -51,7 +55,8 @@ outputs:
     fileName: "%ifb_keepup.root"
   }
 }
-source: @local::hdf5rawinput2
-process_name: pdhdkeepupprocessing 
+source: @local::hdf5rawinput3
 
-physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEthDefaults
+##Check this
+physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEth3Defaults
+physics.producers.pdhddaphne.DAPHNEInterface: { tool_type: "DAPHNEInterface2" }
