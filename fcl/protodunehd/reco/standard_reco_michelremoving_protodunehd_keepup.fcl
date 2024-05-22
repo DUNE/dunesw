@@ -1,0 +1,17 @@
+#include "standard_reco_protodunehd_keepup.fcl"
+
+services.TFileService: { fileName: "michelremoving_pdhd.root" }
+
+physics.analyzers: {
+  michelremoving: {
+    module_type: "michelremoving"
+    TrackModuleLabel:        "pandoraTrack"
+    CalorimetryModuleLabel:  "pandoracalo"
+    HitsModuleLabel:  "hitpdune"
+    SaveTrackInfo: true
+    MaxZ: 410.
+  }
+}
+
+physics.ana: [michelremoving]
+physics.end_paths: [ana]
