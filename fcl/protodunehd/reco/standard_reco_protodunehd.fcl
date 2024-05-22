@@ -7,7 +7,7 @@
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
 #include "calorimetry_pdune.fcl"
-#include "calibration_dune.fcl"
+#include "calibration_dune10kt.fcl"
 #include "featurelabelingmodules.fcl"
 #include "particleid.fcl"
 #include "mctrutht0matching.fcl"
@@ -37,7 +37,6 @@ services:
   message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodunehd_reco_services
-#  ChannelStatusService: @local::pdsp_channel_status
   IFDH: {}
 }
 
