@@ -1,0 +1,23 @@
+#include "standard_reco_protodunehd_keepup.fcl"
+#####include "dune_calibanatree.fcl"
+
+services.TFileService: {fileName: "%ifb_keepup_hists.root" }
+
+physics.analyzers: {
+  michelremoving: {
+    module_type: "michelremoving"
+    TrackModuleLabel:        "pandoraTrack"
+    CalorimetryModuleLabel:  "pandoracalo"
+    HitsModuleLabel:  "hitpdune"
+    SaveTrackInfo: true
+    MaxZ: 410.
+  }
+
+  #calibana: @local::dune_calibanatree_mc
+}
+
+physics.ana: [michelremoving] #, calibana]
+physics.end_paths: [output, ana]
+#physics.analyzers.calibana.SimChannelproducer: ""
+#physics.analyzers.calibana.HITproducer : "hitpdune"
+#physics.analyzers.calibana.G4producer: ""

@@ -167,7 +167,7 @@ physics:
   output: [ out1 ]
   trigger_paths : [ produce ]
   end_paths: [ output ]
-}            
+}
 
 outputs:
 {
