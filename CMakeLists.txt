@@ -4,13 +4,12 @@
 
 
 # use cmake 3.14 or later
-cmake_minimum_required (VERSION 3.19 FATAL_ERROR)
+cmake_minimum_required (VERSION 3.20 FATAL_ERROR)
+# cmake_policy(VERSION 3.19)
 
+find_package(cetmodules REQUIRED)
 project(dunesw LANGUAGES CXX)
-set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.85.00d00)
-
-# cetbuildtools contains our cmake modules
-find_package(cetbuildtools REQUIRED)
+set(${PROJECT_NAME}_CMAKE_PROJECT_VERSION_STRING 09.90.00d00)
 
 include(CetCMakeEnv)
 cet_cmake_env()
@@ -20,17 +19,18 @@ cet_set_compiler_flags(DIAGS CAUTIOUS
   NO_UNDEFINED
   EXTRA_FLAGS -pedantic -Wno-unused-local-typedefs
 )
-find_ups_product( art )
-find_ups_product( art_root_io )
-find_ups_product( canvas_root_io )
-find_ups_boost( )
-find_ups_root()
-find_ups_product( cetbuildtools )
-find_ups_product( dunecore )
-find_ups_product( larcore )
-find_ups_product( lardata )
-find_ups_product( larcorealg )
-find_ups_product( lardataalg )
+
+find_package( art REQUIRED )
+find_package( art_root_io REQUIRED )
+find_package( canvas_root_io REQUIRED )
+find_package( Boost REQUIRED )
+find_package(ROOT REQUIRED)
+find_package( dunecore REQUIRED )
+find_package( larcore REQUIRED )
+find_package( lardata REQUIRED )
+find_package( larcorealg REQUIRED )
+find_package( lardataalg REQUIRED )
+find_package( nurandom REQUIRED )
 
 cet_report_compiler_flags()
 
@@ -42,8 +42,7 @@ include(BuildPlugins)
 # nothing yet
 
 #add_subdirectory(dunesw)
-add_subdirectory(ups)
 add_subdirectory(fcl)
 add_subdirectory(test)
 
-include(UseCPack)
+cet_cmake_config()

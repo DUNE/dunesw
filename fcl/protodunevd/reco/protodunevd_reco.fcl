@@ -2,7 +2,7 @@
 ## this fcl is currently kept; we use two stage recos once we have calibration done: protoDUNE_refactored_reco_stage1.fcl and protoDUNE_refactored_reco_stage2.fcl
 
 #include "services_refactored_pdune.fcl"
-#include "caldata_dune.fcl"
+##include "caldata_dune.fcl"
 #include "wirecell_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
@@ -24,7 +24,7 @@
 #include "CRT.fcl"
 #include "T0RecoAnodePiercers.fcl"
 #include "numberofhitsfilter.fcl"
-#include "protodune_tools_dune.fcl"
+##include "protodune_tools_dune.fcl"
 
 process_name: Reco
 
@@ -47,7 +47,7 @@ services:
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
 services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC"
 
-services.RawDigitPrepService.ToolNames: @local::pdsim_dataprep_tools_wirecell
+# services.RawDigitPrepService.ToolNames: @local::pdsim_dataprep_tools_wirecell
 
 source:
 {
@@ -66,7 +66,7 @@ physics: {
 
   producers: {
     rns:            { module_type: "RandomNumberSaver" }
-    caldata:            @local::producer_adcprep_notool
+    # caldata:            @local::producer_adcprep_notool
     wclsdatavd:         @local::protodunevd_nfsp
     gaushit:            @local::dunevdfd_gaushitfinder
     reco3d:             @local::protodunespmc_spacepointsolver
@@ -84,7 +84,7 @@ physics: {
     pandoraGnocalo:     @local::pdune_vd_gnocchi_calodata
   }
 
-reco: [ caldata,
+reco: [ # caldata,
         rns,
         wclsdatavd,
         gaushit,
@@ -117,9 +117,9 @@ outputs:
  }
 }
 
-physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
-physics.producers.caldata.WireName: "dataprep"
-physics.producers.caldata.LogLevel: 3
+# physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+# physics.producers.caldata.WireName: "dataprep"
+# physics.producers.caldata.LogLevel: 3
 
 physics.producers.wclsdatavd.wcls_main.params.use_magnify:  "false"
 
