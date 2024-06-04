@@ -1,10 +1,10 @@
 #include "standard_reco_protodunehd.fcl"
 
 
-physics.producers.pandoracalo:           @local::pdune_sp_calomcsce
-physics.producers.pandoraShowercalo:     @local::pdune_sp_showercalomcsce
-physics.producers.pandora2calo:          @local::pdune_sp_alltrackcalomcsce
-physics.producers.pandora2Showercalo:    @local::pdune_sp_allshowercalomcsce
+physics.producers.pandoracalo:           @local::pdune_sp_calomcsce          #@local::pdhd_calomc
+physics.producers.pandoraShowercalo:     @local::pdune_sp_showercalomcsce    #@local::pdhd_calomc
+physics.producers.pandora2calo:          @local::pdune_sp_alltrackcalomcsce  #@local::pdhd_calomc
+physics.producers.pandora2Showercalo:    @local::pdune_sp_allshowercalomcsce #@local::pdhd_calomc
 
 services.SpaceCharge.InputFilename:        		"ProtoDUNE/HD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDHD_Sim_NoFluidFlow_E500_v2.root"
 services.SpaceCharge.CalibrationInputFilename:          "ProtoDUNE/HD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDHD_Sim_NoFluidFlow_E500_v2.root"

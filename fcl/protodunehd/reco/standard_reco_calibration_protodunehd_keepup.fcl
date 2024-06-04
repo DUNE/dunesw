@@ -13,7 +13,9 @@ physics.analyzers: {
     MaxZ: 410.
   }
 
-  #calibana: @local::dune_calibanatree_mc
+  #michelremovinggnocchi: @local::michelremoving
+  #michelremovinggnocchi.CalorimetryModuleLabel: "pandoragnocchicalo" ###CHECK THIS
+  #calibana: @local::dune_calibanatree_data ##_data??
 }
 
 physics.ana: [michelremoving] #, calibana]
