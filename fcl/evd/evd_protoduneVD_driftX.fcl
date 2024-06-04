@@ -1,4 +1,5 @@
 #include "evd_dune.fcl"
+services.AuxDetGeometry: @local::protodunevd_v2_auxdet_geo
 services.Geometry: @local::protodunevd_v2_geo
 
 services.SimulationDrawingOptions.SimChannelLabel: "tpcrawdecoder:simpleSC"

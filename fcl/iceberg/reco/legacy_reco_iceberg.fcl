@@ -1,5 +1,6 @@
 #include "standard_reco_dune10kt_legacy.fcl"
 process_name: Reco
+services.AuxDetGeometry: @local::iceberg_auxdet_geo
 services.Geometry: @local::iceberg_geo
 physics.reco: [ 
 "rns", 

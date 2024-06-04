@@ -21,8 +21,9 @@ services:
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodune_data_services
                         @table::protodune_reco_services
-  ExptGeoHelperInterface:       @local::dune_geometry_helper
+  WireReadout:       @local::dune_wire_readout
   GeometryConfigurationWriter: {}
+AuxDetGeometry: @local::protodune_auxdet_geo
   Geometry:                     @local::protodune_geo
   DetectorClocksService:        @local::protodune_detectorclocks # will change to protodune
   DetectorPropertiesService:    @local::protodune_detproperties

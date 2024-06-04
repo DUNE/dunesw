@@ -1,6 +1,6 @@
 #
 # Geometry test module on DUNE full detector geometry
-# 
+#
 # Version: 1.1
 #
 
@@ -9,14 +9,14 @@
 process_name: testGeo
 
 services: {
-  
-  Geometry:               @local::dune10kt_workspace_geo
-  ExptGeoHelperInterface: @local::dune_geometry_helper
+  AuxDetGeometry: @local::dune10kt_workspace_auxdet_geo
+  Geometry:       @local::dune10kt_workspace_geo
+  WireReadout:    @local::dune_wire_readout
   GeometryConfigurationWriter: {}
-  
+
   message: {
     destinations: {
-      LogDebugFile: { 
+      LogDebugFile: {
         type:       "file"
         filename:   "geometry_dunefd.txt"
         append:     false
@@ -69,7 +69,7 @@ physics: {
         "@default",
         # in addition (overriding the default): print wires
         "+PrintWires",
-        
+
         # - WireIntersection fails because the test is not always able to compute
         #   the correct expected distance from the intersection;
         #   this is a bug related to having a point not lying on a z wire together
@@ -77,13 +77,13 @@ physics: {
         #   the test needs to be fixed
         "-WireIntersection"
       ]
-      
+
       # expected wire pitches; empty to check just that they are all the same
       # ExpectedWirePitches: [ 0.487811, 0.500144, 0.449055 ]
       ExpectedWirePitches: [  ]
       # plane pitches (#0 -> #1, #1 -> #2)
       ExpectedPlanePitch: [ 0.5, 0.5 ]
-      
+
       # The test feeds a out-of-world coordinate to NearestWire() and expects
       # an exception to be thrown; DUNE currently prefers to cap the wire ID to
       # a valid wire.

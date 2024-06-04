@@ -28,6 +28,7 @@ services:
                         @table::dunefddphase_reco_services_legacy
 }
 
+services.AuxDetGeometry: @local::dunedphase10kt_workspace4x2_auxdet_geo
 services.Geometry: @local::dunedphase10kt_workspace4x2_geo
 services.message.destinations.infomsg.threshold: "DEBUG"
 

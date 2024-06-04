@@ -2,6 +2,7 @@
 
 process_name: SupernovaG4
 
+services.AuxDetGeometry: @local::dune10kt_3mmpitch_1x2x6_auxdet_geo
 services.Geometry: @local::dune10kt_3mmpitch_1x2x6_geo
 
 services.PhotonVisibilityService: @local::dune10kt_1x2x6_photonvisibilityservice

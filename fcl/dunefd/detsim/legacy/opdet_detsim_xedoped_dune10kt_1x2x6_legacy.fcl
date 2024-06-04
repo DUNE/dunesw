@@ -18,6 +18,7 @@ services:
 }
 
 # DUNE FD 1x2x6 workspace geometry
+services.AuxDetGeometry: @local::dune10kt_1x2x6_auxdet_geo
 services.Geometry:                @local::dune10kt_1x2x6_geo
 
 

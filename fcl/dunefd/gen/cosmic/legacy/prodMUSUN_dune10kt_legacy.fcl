@@ -12,6 +12,7 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefd_simulation_services_legacy
+AuxDetGeometry: @local::dune10kt_auxdet_geo
   Geometry:     @local::dune10kt_geo
 }
 

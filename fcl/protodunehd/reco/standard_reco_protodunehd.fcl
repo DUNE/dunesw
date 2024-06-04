@@ -73,8 +73,8 @@ physics: {
   
   producers: {
     # TPC wire signals
-    caldata:            @local::producer_adcprep_notool          
-    # WireCell 
+    caldata:            @local::producer_adcprep_notool
+    # WireCell
     wclsdatahd:         @local::protodunehddata_wctsp
     #wclsdatahd:         @local::protodunehddata_wctsp
     # Hit finder
@@ -210,7 +210,7 @@ physics.producers.opslicer.OpHitModuleLabel:                "ophitspe"
 
 # Use channel map service for data
 #services.PdspChannelMapService:        @local::pdspchannelmap
-services.ExptGeoHelperInterface.ChannelMapClass: "DuneApaChannelMapAlg"
+services.WireReadout.WireReadoutClass: "DuneApaWireReadout"
 #Forcing Pandora to create either all tracks or all showers on each PFParticle object
 physics.producers.pandora2Track.PFParticleLabel:             "pandora"
 physics.producers.pandora2Track.UseAllParticles:             true

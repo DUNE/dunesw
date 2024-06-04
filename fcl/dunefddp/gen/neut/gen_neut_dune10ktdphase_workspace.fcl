@@ -12,6 +12,7 @@ services:
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::dunefddphase_simulation_services_legacy
 }
+services.AuxDetGeometry: @local::dunedphase10kt_driftY_workspace_auxdet_geo
 services.Geometry: @local::dunedphase10kt_driftY_workspace_geo
 
 source:

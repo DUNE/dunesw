@@ -33,7 +33,7 @@ dunefd_evd:                                   @local::standard_evd
 
 dunefd_disp:
 {
- ExptGeoHelperInterface:   @local::dune_geometry_helper
+ WireReadout:   @local::dune_wire_readout
  GeometryConfigurationWriter: {}
  Geometry:                 @local::dune10kt_workspace_geo 
  LArPropertiesService:            @local::dunefd_properties

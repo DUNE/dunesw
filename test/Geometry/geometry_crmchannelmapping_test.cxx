@@ -13,7 +13,8 @@
 #define BOOST_TEST_MODULE GeometryCRMChannelMappingTest
 
 // LArSoft libraries
-#include "dunecore/Geometry/ChannelMapCRMAlg.h"
+#include "dunecore/Geometry/GeoObjectSorterCRM.h"
+#include "dunecore/Geometry/WireReadoutCRMGeom.h"
 #include "larcorealg/TestUtils/geometry_unit_test_base.h"
 #include "larcorealg/test/Geometry/ChannelMapStandardTestAlg.h"
 #include "larcorealg/Geometry/GeometryCore.h"
@@ -37,7 +38,7 @@
 // to catch it when instantiating the fixture.
 struct CRMGeometryConfiguration:
   public testing::BoostCommandLineConfiguration<
-    testing::BasicGeometryEnvironmentConfiguration<geo::ChannelMapCRMAlg>
+    testing::BasicGeometryEnvironmentConfiguration
     >
 {
   /// Constructor: overrides the application name
@@ -66,7 +67,7 @@ struct CRMGeometryConfiguration:
  * tester depends on Boost unit test implementation.
  */
 class GeometryCRMChannelMappingTestFixture:
-  private testing::GeometryTesterEnvironment<CRMGeometryConfiguration>
+  private testing::GeometryTesterEnvironment<CRMGeometryConfiguration, geo::GeoObjectSorterCRM>
 {
   using Tester_t = geo::ChannelMapStandardTestAlg;
   
@@ -78,7 +79,8 @@ class GeometryCRMChannelMappingTestFixture:
   GeometryCRMChannelMappingTestFixture()
     {
       // create a new tester
-      tester_ptr = std::make_shared<Tester_t>(Provider<geo::GeometryCore>());
+      channel_map = std::make_unique<geo::WireReadoutCRMGeom>(fhicl::ParameterSet{}, Geometry());
+      tester_ptr = std::make_shared<Tester_t>(Geometry(), channel_map.get());
       // if no tester is default yet, share ours:
       TesterRegistry_t::ProvideDefaultSharedResource(tester_ptr);
     }
@@ -90,6 +92,7 @@ class GeometryCRMChannelMappingTestFixture:
   static Tester_t& GlobalTester() { return TesterRegistry_t::Resource(); }
   
     private:
+  std::unique_ptr<geo::WireReadoutGeom> channel_map;
   std::shared_ptr<Tester_t> tester_ptr; ///< our tester (may be shared)
 }; // class GeometryCRMChannelMappingTestFixture
 

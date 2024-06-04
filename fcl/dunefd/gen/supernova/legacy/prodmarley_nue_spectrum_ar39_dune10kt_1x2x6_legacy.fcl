@@ -68,6 +68,7 @@ outputs:
   }
 }
 
+services.AuxDetGeometry: @local::dune10kt_1x2x6_auxdet_geo
 services.Geometry: @local::dune10kt_1x2x6_geo
 
 physics.producers.radiogen.T0: [ -2246000.0 ]

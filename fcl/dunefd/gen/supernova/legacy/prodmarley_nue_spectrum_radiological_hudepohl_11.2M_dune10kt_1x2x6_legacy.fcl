@@ -56,6 +56,7 @@ outputs:
   }
 }
 
+services.AuxDetGeometry: @local::dune10kt_1x2x6_auxdet_geo
 services.Geometry: @local::dune10kt_1x2x6_geo
 physics.producers.marley.marley_parameters.source.type: "th1"
 physics.producers.marley.marley_parameters.source.tfile: "integrated_hudepohl_cooling_shen_s11.2co.root"

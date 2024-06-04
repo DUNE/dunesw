@@ -12,6 +12,7 @@ services.TFileService: { fileName: "cosmics_corsika_rotation_hist.root" }
 services.TimeTracker:  {}
 services.MemoryTracker: { } # default is one
 services.RandomNumberGenerator: {} #ART native random number generator
+services.AuxDetGeometry: @local::protodunedphase_auxdet_geo
 services.Geometry: @local::protodunedphase_geo
 services.DetectorPropertiesService: @local::protodunedphase_detproperties
 

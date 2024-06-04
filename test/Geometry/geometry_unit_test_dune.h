@@ -47,7 +47,7 @@ namespace dune {
      * that can store an instance of it and extract configuration information
      * from it.
      * 
-     * This class should be used with ChannelMapCRMAlg.
+     * This class should be used with WireReadoutCRMGeom.
      * 
      * We reuse BasicGeometryEnvironmentConfiguration as base class and we
      * override its setup.

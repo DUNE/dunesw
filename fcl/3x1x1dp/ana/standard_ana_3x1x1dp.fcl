@@ -17,6 +17,7 @@ services:
                        @table::dunefddphase_reco_services_legacy
 }
 
+services.AuxDetGeometry: @local::dphase3x1x1_auxdet_geo
 services.Geometry: @local::dphase3x1x1_geo
 services.DetectorPropertiesService: @local::dphase3x1x1_detproperties
 services.DetectorPropertiesService.Electronlifetime: 1000.0e3         #in us

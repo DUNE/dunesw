@@ -44,7 +44,7 @@ services:
 
 services.Geometry.SortingParameters.ChannelsPerOpDet: 12
 services.Geometry.GDML: "protodune_v7.gdml"
-services.Geometry.ROOT: "protodune_v7.gdml"
+services.AuxDetGeometry.GDML: @local::services.Geometry.GDML
 
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
