@@ -195,25 +195,25 @@ pdhd_showercalomcnosce.CorrectSCE:   false
 
 
 ##all shower data
-pdhd_allShower_calodata: @local:pdhd_showercalodata
+pdhd_allShower_calodata: @local::pdhd_showercalodata
 pdhd_allShower_calodata.ShowerTag: "pandora2Shower"
-pdhd_allShower_calodatanosce: @local:pdhd_showercalodatanosce
+pdhd_allShower_calodatanosce: @local::pdhd_showercalodatanosce
 pdhd_allShower_calodatanosce.ShowerTag: "pandora2Shower"
 ##all Shower MC
-pdhd_allShower_calomcsce: @local:pdhd_showercalomcsce
+pdhd_allShower_calomcsce: @local::pdhd_showercalomcsce
 pdhd_allShower_calomcsce.ShowerTag: "pandora2Shower"
-pdhd_allShower_calomcnosce: @local:pdhd_showercalomcnosce
+pdhd_allShower_calomcnosce: @local::pdhd_showercalomcnosce
 pdhd_allShower_calomcnosce.ShowerTag: "pandora2Shower"
 
 ##all Track data
-pdhd_allTrack_calodata: @local:pdhd_calodata
+pdhd_allTrack_calodata: @local::pdhd_calodata
 pdhd_allTrack_calodata.TrackModuleLabel: "pandora2Track"
-pdhd_allTrack_calodatanosce: @local:pdhd_calodatanosce
+pdhd_allTrack_calodatanosce: @local::pdhd_calodatanosce
 pdhd_allTrack_calodatanosce.TrackModuleLabel: "pandora2Track"
 ##all Track MC
-pdhd_allTrack_calomcsce: @local:pdhd_showercalomcsce
+pdhd_allTrack_calomcsce: @local::pdhd_showercalomcsce
 pdhd_allTrack_calomcsce.TrackModuleLabel: "pandora2Track"
-pdhd_allTrack_calomcnosce: @local:pdhd_showercalomcnosce
+pdhd_allTrack_calomcnosce: @local::pdhd_showercalomcnosce
 pdhd_allTrack_calomcnosce.TrackModuleLabel: "pandora2Track"
 
 
@@ -226,8 +226,11 @@ pdhd_gnocchi_calodata:
     AssocHitModuleLabel:             "pandoraTrack"
     T0ModuleLabel:                   ""
     ChargeMethod:                    2
-    FieldDistortion:                 false
-    FieldDistortionEfield:           false
+    FieldDistortion:                 true
+    FieldDistortionEfield:           true
+    ##Keep this false -- only useful if the input tracks are themselves are 
+    ##                   SCE Corrected. We correct the calorimetry pts in
+    ##                   pandoracalo but not pandoraTrack
     TrackIsFieldDistortionCorrected: false
     Cryostat: 0
     CaloAlg: @local::pdhd_calorimetryalgdata

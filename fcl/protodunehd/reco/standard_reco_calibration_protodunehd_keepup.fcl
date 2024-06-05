@@ -1,7 +1,7 @@
+#include "dune_calibanatree.fcl"
 #include "standard_reco_protodunehd_keepup.fcl"
-#####include "dune_calibanatree.fcl"
 
-services.TFileService: {fileName: "%ifb_keepup_hists.root" }
+services.TFileService: {fileName: "%ifb_%tc_keepup_hists.root" }
 
 physics.analyzers: {
   michelremoving: {
@@ -13,13 +13,20 @@ physics.analyzers: {
     MaxZ: 410.
   }
 
-  #michelremovinggnocchi: @local::michelremoving
-  #michelremovinggnocchi.CalorimetryModuleLabel: "pandoragnocchicalo" ###CHECK THIS
-  #calibana: @local::dune_calibanatree_data ##_data??
+  michelremovinggnocchi: {
+    module_type: "michelremoving"
+    TrackModuleLabel:        "pandoraTrack"
+    CalorimetryModuleLabel:  "pandoragnocchicalo"
+    HitsModuleLabel:  "hitpdune"
+    SaveTrackInfo: true
+    MaxZ: 410.
+  }
+
+  calibana: @local::pdhd_calibana_data
+  calibanagnocchi: @local::pdhd_calibana_data
 }
 
-physics.ana: [michelremoving] #, calibana]
+physics.ana: [michelremoving, michelremovinggnocchi, calibana, calibanagnocchi]
 physics.end_paths: [output, ana]
-#physics.analyzers.calibana.SimChannelproducer: ""
-#physics.analyzers.calibana.HITproducer : "hitpdune"
-#physics.analyzers.calibana.G4producer: ""
+
+physics.analyzers.calibanagnocchi.CALOproducer: "pandoragnocchicalo"

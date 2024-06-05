@@ -50,7 +50,7 @@ services:
   BackTrackerService:           @local::pdsp_backtrackerservice
   ParticleInventoryService:     @local::dunefd_particleinventoryservice
   PhotonBackTrackerService:     @local::dunefd_photonbacktrackerservice_legacy
-  SpaceCharge:                  @local::protodune_spacecharge
+  SpaceCharge:                  @local::pdhd_spacecharge
 
 
   IFDH: {}
@@ -96,7 +96,7 @@ physics:
     # Hit finding
     gaushit:            @local::protodunespmc_gaushitfinder
     # space point solver
-    reco3d:             @local::protodunespmc_spacepointsolver ##MC TODO -- CHECK THIS
+    reco3d:             @local::pdhd_data_spacepointsolv
     # actual disambiguation
     hitpdune:           @local::pdune_disambigfromsp
     # event feature labeling
@@ -107,25 +107,22 @@ physics:
     pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
-    pandoracalo:        @local::pdune_sp_calomcsce  #@local::pdhd_calodata
-    pandoracalonosce:   @local::pdune_sp_calomcnosce  #@local::pdhd_calodatanosce
+    pandoracalo:        @local::pdhd_calodata
+    pandoracalonosce:   @local::pdhd_calodatanosce
     pandorapid:         @local::standard_chi2pid
     #pandoracali:        @local::protodunespmcnosce_calibrationdedx
     #pandoracalipid:     @local::standard_chi2pid
-    pandoraShowercalo:  @local::pdune_sp_showercalomcsce #@local::pdhd_showercalodata
-    pandoraShowercalonosce:  @local::pdune_sp_showercalomcnosce #@local::pdhd_showercalodatanosce
-    #pandoragnocchicalo: @local::pdhd_gnocchi_calodata
+    pandoraShowercalo:  @local::pdhd_showercalodata
+    pandoraShowercalonosce:  @local::pdhd_showercalodatanosce
+    pandoragnocchicalo: @local::pdhd_gnocchi_calodata
 
     # CRT Reconstruction
     crtreco: @local::TwoCRTMatching_producer
     crttag: @local::SingleCRTMatching_producer
-
-    # Anode piercing tracks t0 reconstruction
-    anodepiercerst0:    @local::T0RecoAnodePiercers
   }
 
   produce: [
-    tpcrawdecoder,
+    tpcrawdecoder ,
     #tpstreamdecoder, ##Need to reimplement with Wes' changes
     pdhddaphne,
     opdec,
@@ -139,9 +136,9 @@ physics:
     hitpdune,
     pandora, pandoraWriter, pandoraTrack, pandoraShower, pandoracalo, pandoracalonosce,
     pandorapid, pandoraShowercalo, pandoraShowercalonosce,
-    #pandoragnocchicalo,
+    pandoragnocchicalo,
     emtrkmichelid
-    #crtreco, crttag, anodepiercerst0
+    #crtreco, crttag
   ]
 
   output: [ out1 ]
@@ -155,7 +152,7 @@ outputs:
   {
     compressionLevel: 1
     module_type: RootOutput
-    fileName: "%ifb_keepup.root"
+    fileName: "%ifb_%tc_keepup.root"
     dataTier:    "full-reconstructed"
     streamName: "out1"
   }
@@ -172,20 +169,6 @@ physics.producers.opflash.InputModule: "ophitspe"
 physics.producers.opslicer.OpHitModuleLabel: "ophitspe"
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatahd:gauss"
 physics.producers.emtrkmichelid.WireLabel: "wclsdatahd:gauss"
-
-services.SpaceCharge.InputFilename:        		"ProtoDUNE/HD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDHD_Sim_NoFluidFlow_E500_v2.root"
-services.SpaceCharge.CalibrationInputFilename:          "ProtoDUNE/HD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDHD_Sim_NoFluidFlow_E500_v2.root"
-services.SpaceCharge.RepresentationType:               "Splines_TH3"
-services.SpaceCharge.service_provider:                  SpaceChargeServiceProtoDUNEhd
-
-# Electron Diverter sim should remain off for HD
-services.SpaceCharge.EnableElectronDiverterDistortions: []
-services.SpaceCharge.EDZCenter:                         [] # gap center in cm
-services.SpaceCharge.EDAXPosOffs:                       []  # X distortion shift scale in cm
-services.SpaceCharge.EDBZPosOffs:                       [] #  Z distoriton shift scale in cm
-services.SpaceCharge.EDs:                               [] # width of distortion function in cm
-services.SpaceCharge.EDChargeLossZLow:                  [] # range in which charge is lost, low end, cm in Z
-services.SpaceCharge.EDChargeLossZHigh:                 [] # range in which charge is lost, high end, cm in Z
 
 services.SpaceCharge.EnableSimEfieldSCE: true
 services.SpaceCharge.EnableSimSpatialSCE: true
