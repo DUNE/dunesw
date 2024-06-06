@@ -7,7 +7,7 @@
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
 #include "calorimetry_pdune.fcl"
-#include "calibration_dune.fcl"
+#include "calibration_dune10kt.fcl"
 #include "featurelabelingmodules.fcl"
 #include "particleid.fcl"
 #include "mctrutht0matching.fcl"
@@ -37,7 +37,6 @@ services:
   message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodunehd_reco_services
-#  ChannelStatusService: @local::pdsp_channel_status
   IFDH: {}
 }
 
@@ -90,13 +89,13 @@ physics: {
     pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
-    pandoracalo:        @local::pdune_sp_calomcnosce
-    pandoracalonosce:   @local::pdune_sp_calomcnosce
+    pandoracalo:        @local::pdune_sp_calomcnosce #@local::pdhd_calomcnosce
+    pandoracalonosce:   @local::pdune_sp_calomcnosce #@local::pdhd_calomcnosce
     pandorapid:         @local::standard_chi2pid
     pandoracali:        @local::protodunespmcnosce_calibrationdedx
     pandoracalipid:     @local::standard_chi2pid
-    pandoraShowercalo:  @local::pdune_sp_showercalomcnosce
-    pandoraShowercalonosce:  @local::pdune_sp_showercalomcnosce
+    pandoraShowercalo:  @local::pdune_sp_showercalomcnosce #@local::pdhd_showercalomcnosce
+    pandoraShowercalonosce:  @local::pdune_sp_showercalomcnosce #@local::pdhd_showercalomcnosce
 #   photon detector reconstruction
     opdec:              @local::dune_deconvolution
     ophitspe:           @local::dune_ophit_finder_deco
@@ -117,6 +116,7 @@ physics: {
     pandora2Shower:        @local::dune_pandoraShowerCreation
     pandora2Showercalo:    @local::pdune_sp_allshowercalomcnosce
     pandora2Showercalonosce:    @local::pdune_sp_allshowercalomcnosce
+    #pandoragnocchicalo: @local::pdhd_gnocchi_calomc
   }
   #define the producer and filter modules for this path, order matters,
 #filters reject all following items.  see lines starting physics.producers below
@@ -139,6 +139,7 @@ reco: [ opdec,
         #pandorapid,
         pandoraShowercalo,
         pandoraShowercalonosce,
+        #pandoragnocchicalo,
         #pandoracali,
         #pandoracalipid,
         emtrkmichelid,
