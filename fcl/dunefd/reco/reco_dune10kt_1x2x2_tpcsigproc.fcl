@@ -1,4 +1,4 @@
-#include "standard_reco_dune10kt_1x2x6.fcl"
+#include "standard_reco_dune10kt_1x2x2.fcl"
 
 physics.producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
 physics.producers.pmtrack.WireModuleLabel: "wclsmcnfsp:gauss"
