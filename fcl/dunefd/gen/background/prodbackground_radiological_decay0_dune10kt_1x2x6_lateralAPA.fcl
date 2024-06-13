@@ -31,7 +31,7 @@ physics:
       @table::dunefd_horizdrift_1x2x6_producers
    }
 
-   simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x6_v3_6 ]
+   simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x6 ]
    stream1:       [ out1 ]
    trigger_paths: [ simulate ] 
    end_paths:     [ stream1 ]  
@@ -42,7 +42,7 @@ outputs:
    out1:
    {
       module_type: RootOutput
-      fileName:    "prodradiological_decay0_dune10kt_1x2x6_gen.root" # Default file name, can override from command line with -o or --output
+      fileName:    "prodradiological_decay0_dune10kt_1x2x6_lateralAPA_gen.root" # Default file name, can override from command line with -o or --output
       dataTier:    "generated"
       compressionLevel: 1
    }

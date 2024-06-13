@@ -1,20 +1,70 @@
-#include "HDF5RawInput2.fcl"
+#include "HDF5RawInput3.fcl"
 #include "PDHDTPCReader.fcl"
-#include "PDHDDataInterfaceWIBEth.fcl"
+#include "PDHDDataInterfaceWIBEth3.fcl"
 #include "PDHDTriggerReader.fcl"
 #include "DAPHNEReaderPDHD.fcl"
+#
+#include "opticaldetectormodules_dune.fcl"
+#include "Deconvolution.fcl"
+#include "OpHitFinderDeco.fcl"
+#include "OpSlicer.fcl"
+
+#include "t0reco.fcl"
+#include "pandoramodules_dune.fcl"
+#include "wirecell_dune.fcl"
+#include "particleid.fcl"
+
+#include "CRT.fcl"
+#include "T0RecoAnodePiercers.fcl"
+#
+#include "numberofhitsfilter.fcl"
+#include "SpacePointSolver_dune.fcl"
+#include "featurelabelingmodules.fcl"
+#include "calorimetry_pdune.fcl"
+#include "calibration_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+
+
+#include "services_dune.fcl"
+
+process_name: pdhdkeepupprocessing 
 
 services:
 {
-  TimeTracker:  {}
+  # Load the service that manages root files for histograms.
+  TimeTracker:       @local::dune_time_tracker
+  MemoryTracker:     @local::dune_memory_tracker
+  RandomNumberGenerator: {} #ART native random number generator
+  message:              @local::dune_message_services_prod
+  FileCatalogMetadata:  @local::art_file_catalog_data
+                        #@table::protodunehd_reco_services
+  ChannelStatusService: @local::dunefd_channel_status
+  ExptGeoHelperInterface:       @local::dune_geometry_helper
+  GeometryConfigurationWriter:  {}
+  Geometry:                     @local::protodunehdv6_geo
+  DetectorClocksService:        @local::protodunehd_detectorclocks
+  DetectorPropertiesService:    @local::protodune_detproperties
+  LArPropertiesService:         @local::dunefd_properties
+  LArFFT:                       @local::dunefd_larfft
+  DatabaseUtil:                 @local::dunefd_database
+  BackTrackerService:           @local::pdsp_backtrackerservice
+  ParticleInventoryService:     @local::dunefd_particleinventoryservice
+  PhotonBackTrackerService:     @local::dunefd_photonbacktrackerservice_legacy
+  SpaceCharge:                  @local::pdhd_spacecharge
+
+
+  IFDH: {}
+
   TFileService: 
   {
-    fileName: "pdhd_tpc_decoder_TFile.root"
+    fileName: "pdhd_keepup_decoder.root"
   } 
-  HDF5RawFile2Service:  {}
+  HDF5RawFile3Service:  {}
+
   DAPHNEChannelMapService: {
-    FileName: "DAPHNE_test_ChannelMap_v0.txt"
+    FileName: "DAPHNE_test5_ChannelMap_v1.txt"
   }
+
   PD2HDChannelMapService: 
    {
      FileName: "PD2HDChannelMap_WIBEth_electronics_v1.txt"
@@ -23,24 +73,78 @@ services:
 
 physics:
 {
+
+  filters: {
+    nhitsfilter: @local::standard_numberofhitsfilter
+  }
+
   producers:
   {
     # Raw decoding
     tpcrawdecoder: @local::PDHDTPCReaderDefaults
     tpstreamdecoder: @local::PDHDTriggerReaderDefaults 
     pdhddaphne: @local::DAPHNEReaderPDHD
+
+    # Optical reconstruction
+    opdec:              @local::dune_deconvolution
+    ophitspe:           @local::dune_ophit_finder_deco
+    opflash:            @local::protodune_opflash
+    opslicer:           @local::protodune_opslicer
+
+    # Signal Processing (data prep)
+    wclsdatahd:         @local::protodunehd_nfsp
+    # Hit finding
+    gaushit:            @local::protodunespmc_gaushitfinder
+    # space point solver
+    reco3d:             @local::pdhd_data_spacepointsolv
+    # actual disambiguation
+    hitpdune:           @local::pdune_disambigfromsp
+    # event feature labeling
+    emtrkmichelid:      @local::protodune_emtrkmichelid
+
+    # Pandora Reconstruction
+    pandora:            @local::protodunehd_pandora
+    pandoraWriter:      @local::dune_pandorawriter
+    pandoraTrack:       @local::dune_pandoraTrackCreation
+    pandoraShower:      @local::dune_pandoraShowerCreation
+    pandoracalo:        @local::pdhd_calodata
+    pandoracalonosce:   @local::pdhd_calodatanosce
+    pandorapid:         @local::standard_chi2pid
+    #pandoracali:        @local::protodunespmcnosce_calibrationdedx
+    #pandoracalipid:     @local::standard_chi2pid
+    pandoraShowercalo:  @local::pdhd_showercalodata
+    pandoraShowercalonosce:  @local::pdhd_showercalodatanosce
+    pandoragnocchicalo: @local::pdhd_gnocchi_calodata
+
+    # CRT Reconstruction
+    crtreco: @local::TwoCRTMatching_producer
+    crttag: @local::SingleCRTMatching_producer
   }
 
   produce: [
-    tpcrawdecoder,
-    tpstreamdecoder,
-    pdhddaphne
+    tpcrawdecoder ,
+    #tpstreamdecoder, ##Need to reimplement with Wes' changes
+    pdhddaphne,
+    opdec,
+    ophitspe,
+    opflash,
+    opslicer,
+    wclsdatahd,
+    gaushit,
+    nhitsfilter, ##Do we need this?
+    reco3d,
+    hitpdune,
+    pandora, pandoraWriter, pandoraTrack, pandoraShower, pandoracalo, pandoracalonosce,
+    pandorapid, pandoraShowercalo, pandoraShowercalonosce,
+    pandoragnocchicalo,
+    emtrkmichelid
+    #crtreco, crttag
   ]
 
   output: [ out1 ]
   trigger_paths : [ produce ]
   end_paths: [ output ]
-}            
+}
 
 outputs:
 {
@@ -48,10 +152,35 @@ outputs:
   {
     compressionLevel: 1
     module_type: RootOutput
-    fileName: "%ifb_keepup.root"
+    fileName: "%ifb_%tc_keepup.root"
+    dataTier:    "full-reconstructed"
+    streamName: "out1"
   }
 }
-source: @local::hdf5rawinput2
-process_name: pdhdkeepupprocessing 
+source: @local::hdf5rawinput3
 
-physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEthDefaults
+##Check this
+physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEth3Defaults
+physics.producers.pdhddaphne.DAPHNEInterface: { tool_type: "DAPHNEInterface2" }
+physics.producers.opdec.InputModule: "pdhddaphne"
+physics.producers.opdec.InstanceName: "daq"
+physics.producers.ophitspe.InputModuledigi: "pdhddaphne:daq"
+physics.producers.opflash.InputModule: "ophitspe"
+physics.producers.opslicer.OpHitModuleLabel: "ophitspe"
+physics.producers.gaushit.CalDataModuleLabel: "wclsdatahd:gauss"
+physics.producers.emtrkmichelid.WireLabel: "wclsdatahd:gauss"
+
+services.SpaceCharge.EnableSimEfieldSCE: true
+services.SpaceCharge.EnableSimSpatialSCE: true
+services.SpaceCharge.EnableSimulationSCE: true
+
+services.SpaceCharge.EnableCalEfieldSCE: true
+services.SpaceCharge.EnableCalSpatialSCE: true
+services.SpaceCharge.EnableCorrSCE: true
+
+physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
+physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
+physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
+physics.producers.pandoraShower.PFParticleLabel:            "pandora"
+physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
+physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"

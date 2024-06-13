@@ -1,5 +1,5 @@
-#include "dune_radiological_model_decay0_v3_5_vd_1x8x6.fcl"
-#include "dune_radiological_model_decay0_v3_5_vd_1x8x14.fcl"
+#include "dune_radiological_model_decay0_vd_1x8x6.fcl"
+#include "dune_radiological_model_decay0_vd_1x8x14.fcl"
 
 BEGIN_PROLOG
 dunefd_vertdrift_common_producers:
