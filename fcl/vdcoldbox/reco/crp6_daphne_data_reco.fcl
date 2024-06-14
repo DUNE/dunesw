@@ -14,7 +14,6 @@
 #include "calorimetry_dune10kt.fcl"
 #include "pid_dune10kt.fcl"
 #include "featurelabelingmodules.fcl"
-##include "crpcb_daphne_bottom_process.fcl"
 #include "channelstatus_vdcrp4.fcl"
 
 process_name: Reco
