@@ -64,6 +64,7 @@ outputs:
  }
 }
 
+services.AuxDetGeometry: @local::dunedphase10kt_workspace_auxdet_geo
 services.Geometry: @local::dunedphase10kt_workspace_geo
 services.LArG4Parameters.MinNumberOfElCluster: 20
 

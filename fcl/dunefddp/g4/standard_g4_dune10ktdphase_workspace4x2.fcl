@@ -15,6 +15,7 @@ services:
   @table::dunefddphase_simulation_services_legacy
 }
 
+services.AuxDetGeometry: @local::dunedphase10kt_workspace4x2_auxdet_geo
 services.Geometry: @local::dunedphase10kt_workspace4x2_geo
 
 #source is now a root file
