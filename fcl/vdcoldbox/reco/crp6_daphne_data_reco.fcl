@@ -40,7 +40,7 @@ services:{
      FileName: "vdcbce_chanmap_v4.txt"
    }
    DAPHNEChannelMapService: {
-    FileName: "temp_vdcb_channelmap.txt"
+    FileName: "vdcbpds_channelmap_crp6-III.txt"
     IgnoreLinks: true
    }
 }
