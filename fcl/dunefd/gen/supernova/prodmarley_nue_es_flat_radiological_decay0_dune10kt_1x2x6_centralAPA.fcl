@@ -11,7 +11,7 @@ physics:
      marley: @local::dune_marley_nue_es_flat
      rns: { module_type: "RandomNumberSaver" }
   }
-  simulate: [ rns, marley, @sequence::dunefd_hd_backgrounds_1x2x6_lowBgAPA_v3_6 ]
+  simulate: [ rns, marley, @sequence::dunefd_hd_backgrounds_1x2x6_lowBgAPA ]
 }
 
-outputs.out1.fileName: "prodmarley_nue_es_flat_radiological_decay0_dune10kt_1x2x6_gen.root"
+outputs.out1.fileName: "prodmarley_nue_es_flat_radiological_decay0_dune10kt_1x2x6_centralAPA_gen.root"
