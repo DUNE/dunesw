@@ -2,9 +2,6 @@
 #include "mvamodule.fcl"
 #include "CAFMaker.fcl"
 
-#include "energyreco.fcl"
-#include "angularreco.fcl"
-
 process_name: CafMaker
 
 services:
@@ -25,38 +22,6 @@ source:
   maxEvents:  -1        # Number of events to create
 }
 
-dunefd_hd_producers:
-{
-    #neutrino energy reco
-    energyrecnumu:      @local::dunefd_nuenergyreco_pandora_numu
-    energyrecnumurange: @local::dunefd_nuenergyreco_pandora_numu_range
-    energyrecnumumcs:   @local::dunefd_nuenergyreco_pandora_numu_mcs
-    energyrecnue:       @local::dunefd_nuenergyreco_pandora_nue
-    energyrecnc:        @local::dunefd_nuenergyreco_pandora_nc
-    #angle reco configuration
-    anglereconue:       @local::dunefd_nuangularreco_pandora_nue
-    anglereconumu:      @local::dunefd_nuangularreco_pandora_numu
-    anglereconuepfps:   @local::dunefd_nuangularreco_pandora_nue_allpfps
-    anglereconumupfps:  @local::dunefd_nuangularreco_pandora_numu_allpfps
-}
-
-dunefd_hd_ereco:
-[
-    energyrecnumu,
-    energyrecnumurange,
-    energyrecnumumcs,
-    energyrecnue,
-    energyrecnc
-]
-
-dunefd_hd_anglereco:
-[
-    anglereconue,
-    anglereconumu,
-    anglereconuepfps,
-    anglereconumupfps
-]
-
 # Define and configure some modules to do work on each event.
 # First modules are defined; they are scheduled later.
 # Modules are grouped by type.
@@ -64,7 +29,6 @@ physics:
 {
 
  producers:{
-    @table::dunefd_hd_producers
  }
 
  analyzers:
@@ -72,37 +36,11 @@ physics:
  cafmaker:          @local::dunefd_cafmaker
 }
 
-
- #define the producer and filter modules for this path, order matters, 
- #filters reject all following items.  see lines starting physics.producers below
- prod: [
-    @sequence::dunefd_hd_ereco
-]
  caf:  [ cafmaker]
- trigger_paths: [ prod ] 
+ trigger_paths: [ ] 
 
  #end_paths is a keyword and contains the paths that do not modify the art::Event, 
  #ie analyzers and output streams.  these all run simultaneously
  end_paths:     [ caf ]  
 
 }
-
-physics.producers.energyrecnumu.HitLabel: "hitfd"
-physics.producers.energyrecnumu.WireLabel: "tpcrawdecoder:gauss"
-physics.producers.energyrecnumu.HitToSpacePointLabel: "hitfd"
-
-physics.producers.energyrecnumurange.HitLabel: "hitfd"
-physics.producers.energyrecnumurange.WireLabel: "tpcrawdecoder:gauss"
-physics.producers.energyrecnumurange.HitToSpacePointLabel: "hitfd"
-
-physics.producers.energyrecnumumcs.HitLabel: "hitfd"
-physics.producers.energyrecnumumcs.WireLabel: "tpcrawdecoder:gauss"
-physics.producers.energyrecnumumcs.HitToSpacePointLabel: "hitfd"
-
-physics.producers.energyrecnue.HitLabel: "hitfd"
-physics.producers.energyrecnue.WireLabel: "tpcrawdecoder:gauss"
-physics.producers.energyrecnue.HitToSpacePointLabel: "hitfd"
-
-physics.producers.energyrecnc.HitLabel: "hitfd"
-physics.producers.energyrecnc.WireLabel: "tpcrawdecoder:gauss"
-physics.producers.energyrecnc.HitToSpacePointLabel: "hitfd"

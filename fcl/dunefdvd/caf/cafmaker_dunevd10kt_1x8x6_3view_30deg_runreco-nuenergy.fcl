@@ -1,0 +1,28 @@
+#include "cafmaker_dune10kt_1x2x6_runreco-nuenergy.fcl"
+#include "tools_dune.fcl"
+
+services: {
+    @table::services
+    @table::dunefdvd_reco_services
+    @table::dunefdvd_1x8x6_3view_30deg_reco_services
+}
+
+physics.producers.energyrecnumu.HitLabel: "gaushit"
+physics.producers.energyrecnumu.WireLabel: "tpcrawdecoder:gauss"
+physics.producers.energyrecnumu.HitToSpacePointLabel: "pandora"
+
+physics.producers.energyrecnumurange.HitLabel: "gaushit"
+physics.producers.energyrecnumurange.WireLabel: "tpcrawdecoder:gauss"
+physics.producers.energyrecnumurange.HitToSpacePointLabel: "pandora"
+
+physics.producers.energyrecnumumcs.HitLabel: "gaushit"
+physics.producers.energyrecnumumcs.WireLabel: "tpcrawdecoder:gauss"
+physics.producers.energyrecnumumcs.HitToSpacePointLabel: "pandora"
+
+physics.producers.energyrecnue.HitLabel: "gaushit"
+physics.producers.energyrecnue.WireLabel: "tpcrawdecoder:gauss"
+physics.producers.energyrecnue.HitToSpacePointLabel: "pandora"
+
+physics.producers.energyrecnc.HitLabel: "gaushit"
+physics.producers.energyrecnc.WireLabel: "tpcrawdecoder:gauss"
+physics.producers.energyrecnc.HitToSpacePointLabel: "pandora"
