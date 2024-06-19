@@ -28,7 +28,7 @@ fi
 echo "PRODUCTS $PRODUCTS"
 
 #Setup recent lar software suite
-DUNE_VERSION=${DUNE_VERSION:-v09_90_01d00}
+DUNE_VERSION=${DUNE_VERSION:-v09_90_02d00}
 setup dunesw \
    "${DUNE_VERSION}" \
    -q "${DUNE_QUALIFIER:-e26:prof}"
