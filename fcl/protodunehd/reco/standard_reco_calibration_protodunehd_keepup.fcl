@@ -33,8 +33,11 @@ physics.analyzers: {
 physics.ana: [michelremoving, michelremovinggnocchi, calibana, calibanagnocchi]
 physics.end_paths: [output, ana]
 
-physics.producers.pandoraGnocchiCalonosce.PFPModuleLabel: "pandora" 
-physics.producers.pandoraGnocchiCalonosce.T0ModuleLabel: "pandora" 
+#physics.producers.pandoraGnocchiCalonosce.PFPModuleLabel: "pandora" 
+#physics.producers.pandoraGnocchiCalonosce.T0ModuleLabel: "pandora" 
+#
+#physics.producers.pandoraGnocchiCalo.PFPModuleLabel: "pandora" 
+#physics.producers.pandoraGnocchiCalo.T0ModuleLabel: "pandora" 
 
 
 physics.analyzers.michelremoving.SelectEvents: [produce]

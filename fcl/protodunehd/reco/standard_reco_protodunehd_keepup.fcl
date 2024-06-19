@@ -15,7 +15,6 @@
 #include "wirecell_dune.fcl"
 #include "particleid.fcl"
 
-#include "PDHDHitChecker.fcl"
 #include "CRT.fcl"
 #include "T0RecoAnodePiercers.fcl"
 #
@@ -132,23 +131,23 @@ physics:
 
   produce: [
     tpcrawdecoder,
-    triggerrawdecoder,
-    timingrawdecoder,
-    pdhddaphne,
-    opdec,
-    ophitspe,
-    opflash,
-    opslicer,
-    wclsdatahd,
-    gaushit,
-    nhitsfilter, ##Do we need this?
-    reco3d,
-    hitpdune,
-    pandora, pandoraWriter, pandoraTrack, pandoraShower, pandoracalo, pandoracalonosce,
-    pandorapid, pandoraShowercalo, pandoraShowercalonosce,
-    pandoraGnocchiCalo,
-    pandoraGnocchiCalonosce,
-    emtrkmichelid
+    #triggerrawdecoder,
+    #timingrawdecoder,
+    #pdhddaphne,
+    wclsdatahd
+    #gaushit,
+    #nhitsfilter,
+    #reco3d,
+    #hitpdune,
+    #pandora, pandoraWriter, pandoraTrack, pandoraShower, pandoracalo, pandoracalonosce,
+    #pandorapid, pandoraShowercalo, pandoraShowercalonosce,
+    #pandoraGnocchiCalo,
+    #pandoraGnocchiCalonosce,
+    #emtrkmichelid
+    #opdec,
+    #ophitspe,
+    #opflash,
+    #opslicer,
     #crtreco, crttag
   ]
 

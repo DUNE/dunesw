@@ -224,7 +224,8 @@ pdhd_gnocchi_calodata:
     module_type:                     "GnocchiCalorimetry"
     TrackModuleLabel:                "pandoraTrack"
     AssocHitModuleLabel:             "pandoraTrack"
-    T0ModuleLabel:                   ""
+    T0ModuleLabel:                   "pandora"
+    PFPModuleLabel:                  "pandora"
     ChargeMethod:                    2
     FieldDistortion:                 true
     FieldDistortionEfield:           true
