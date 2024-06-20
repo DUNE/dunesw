@@ -131,24 +131,25 @@ physics:
 
   produce: [
     tpcrawdecoder,
-    #triggerrawdecoder,
-    #timingrawdecoder,
-    #pdhddaphne,
-    wclsdatahd
-    #gaushit,
-    #nhitsfilter,
-    #reco3d,
-    #hitpdune,
-    #pandora, pandoraWriter, pandoraTrack, pandoraShower, pandoracalo, pandoracalonosce,
+    triggerrawdecoder,
+    timingrawdecoder,
+    pdhddaphne,
+    wclsdatahd,
+    gaushit,
+    nhitsfilter,
+    reco3d,
+    hitpdune,
+    ###Commenting a lot out for now for just beam reco
+    pandora, pandoraWriter, pandoraTrack, pandoraShower #, pandoracalo, pandoracalonosce,
     #pandorapid, pandoraShowercalo, pandoraShowercalonosce,
     #pandoraGnocchiCalo,
     #pandoraGnocchiCalonosce,
-    #emtrkmichelid
+    #emtrkmichelid,
     #opdec,
     #ophitspe,
     #opflash,
-    #opslicer,
-    #crtreco, crttag
+    #opslicer
+    ##crtreco, crttag
   ]
 
   output: [ out1 ]
