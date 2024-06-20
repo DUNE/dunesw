@@ -1,0 +1,32 @@
+#include "energyreco.fcl"
+#include "cafmaker_dune10kt_1x2x6_runreco-nuenergy.fcl"
+#include "tools_dune.fcl"
+
+dunefd_vd_30deg_producers:
+{
+    #neutrino energy reco
+    energyrecnumu:      @local::dunefdvd_30deg_nuenergyreco_pandora_numu
+    energyrecnumurange: @local::dunefdvd_30deg_nuenergyreco_pandora_numu_range
+    energyrecnumumcs:   @local::dunefdvd_30deg_nuenergyreco_pandora_numu_mcs
+    energyrecnue:       @local::dunefdvd_30deg_nuenergyreco_pandora_nue
+    energyrecnc:        @local::dunefdvd_30deg_nuenergyreco_pandora_nc
+}
+
+dunefd_vd_30deg_ereco:
+[
+    energyrecnumu,
+    energyrecnumurange,
+    energyrecnumumcs,
+    energyrecnue,
+    energyrecnc
+]
+
+physics.producers: {
+    @table::dunefd_vd_30deg_producers
+}
+
+physics.prod: [
+    @sequence::dunefd_vd_30deg_ereco
+]
+
+physics.trigger_paths: [ prod ] 
