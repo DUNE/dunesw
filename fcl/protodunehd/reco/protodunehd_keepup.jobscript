@@ -1,0 +1,173 @@
+#!/bin/bash
+#
+
+source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh
+setup metacat
+export METACAT_SERVER_URL=https://metacat.fnal.gov:9443/dune_meta_prod/app
+export METACAT_AUTH_SERVER_URL=https://metacat.fnal.gov:8143/auth/dune
+
+if [ -n "${DUNESW_DIR}" ]; then
+  stat ${DUNESW_DIR}
+  if [ $? -ne 0 ]; then
+    echo "failed to stat dunesw dir"
+  fi
+
+  export PRODUCTS=$DUNESW_DIR:$PRODUCTS
+fi
+
+if [ -n "${LARRECO_DIR}" ]; then
+  stat ${LARRECO_DIR}
+  if [ $? -ne 0 ]; then
+    echo "failed to stat larreco dir"
+  fi
+
+  export PRODUCTS=$LARRECO_DIR:$PRODUCTS
+fi
+
+
+echo "PRODUCTS $PRODUCTS"
+
+#Setup recent lar software suite
+DUNE_VERSION=${DUNE_VERSION:-v09_90_02d00}
+setup dunesw \
+   "${DUNE_VERSION}" \
+   -q "${DUNE_QUALIFIER:-e26:prof}"
+
+if [ $? -ne 0 ]; then
+  echo "Failed to setup dunesw $DUNE_VERSION $DUNE_QUALIFIER"
+  exit 1
+fi
+
+if [ -n "${USE_INPUT_FCL}" ]; then
+  
+  if [ -z ${INPUT_DIR} ]; then
+    echo "Error, INPUT_DIR is undefined but user requested USE_INPUT_FCL"
+    exit 1
+  fi
+
+  stat ${INPUT_DIR}
+  if [ $? -ne 0 ]; then
+    echo "Failed to stat input dir. Exiting safely"
+    exit 0
+  fi
+
+  FHICL_FILE_PATH=${INPUT_DIR}:${FHICL_FILE_PATH}
+  echo "FCL PATH: $FHICL_FILE_PATH"
+fi
+
+if [ -n "${METADATA_DIR}" ]; then
+  stat ${METADATA_DIR}
+  if [ $? -ne 0 ]; then
+    echo "failed to stat metadata dir"
+  fi
+
+  echo "metadata dir contents:"
+  ls $METADATA_DIR
+  PYTHONPATH=${METADATA_DIR}:$PYTHONPATH
+fi
+
+
+FCL=${FCL:-"standard_reco_calibration_protodunehd_keepup.fcl"}
+echo "FCL dump:"
+fhicl-dump ${FCL}
+
+echo "DUNESW loc:"
+ups active | grep dunesw
+
+if [ -z ${JUSTIN_PROCESSORS} ]; then
+  JUSTIN_PROCESSORS=1
+fi
+
+echo "Justin processors: ${JUSTIN_PROCESSORS}"
+
+export TF_NUM_THREADS=${JUSTIN_PROCESSORS}   
+export OPENBLAS_NUM_THREADS=${JUSTIN_PROCESSORS} 
+export JULIA_NUM_THREADS=${JUSTIN_PROCESSORS} 
+export MKL_NUM_THREADS=${JUSTIN_PROCESSORS} 
+export NUMEXPR_NUM_THREADS=${JUSTIN_PROCESSORS} 
+export OMP_NUM_THREADS=${JUSTIN_PROCESSORS}  
+
+echo "printing env"
+env
+
+echo "Will use justin-get-file"
+#
+DID_PFN_RSE=`$JUSTIN_PATH/justin-get-file`
+##Check that any file was returned
+if [ "${DID_PFN_RSE}" == "" ] ; then
+  echo "Could not get file"
+  exit 0
+fi
+
+pfn=`echo ${DID_PFN_RSE} | cut -f2 -d' '`
+did=`echo ${DID_PFN_RSE} | cut -f1 -d' '`
+echo "pfn: ${pfn}"
+echo "did: ${did}"
+now=$(date -u +"%Y%m%dT%H%M%SZ")
+
+nevents=${NEVENTS:--1}
+
+echo "Running reco"
+touch reco.log
+starttime=`date +"%s"`.0
+LD_PRELOAD=$XROOTD_LIB/libXrdPosixPreload.so lar \
+    -c ${FCL} \
+    -n ${nevents} \
+    ${pfn} #>reco.log 2>&1
+larExit=$?
+endtime=`date +"%s"`.0
+
+if [ $larExit -ne 0 ]; then
+  echo "Error in reco"
+  cat reco.log
+  exit $larExit
+fi
+
+output_reco_file=`ls *keepup.root`
+output_mr_file=`ls *keepup_hists.root`
+
+echo "Output files:"
+echo "\tReco: ${output_reco_file}"
+echo "\tHists: ${output_mr_file}"
+
+echo "Forming reco metadata"
+python -m meta_maker --start_time $starttime --end_time $endtime --file_format "artroot" \
+                     --app_family "dunesw" --app_name "reco" --app_version ${DUNE_VERSION} \
+                     --data_tier "full-reconstructed" --get_events -p "$did" \
+                     --fcl $FCL \
+                     -f "${JUSTIN_SCOPE}:$output_reco_file" -j "${output_reco_file}.json"
+echo "Ran successfully"
+## TODO -- CHECK
+cat ${output_reco_file}.json
+
+echo "Forming hist metadata"
+python -m meta_maker --start_time $starttime --end_time $endtime --file_format "root" \
+                     --app_family "dunesw" --app_name "reco" --app_version ${DUNE_VERSION} \
+                     --data_tier "root-tuple" -p $output_reco_file.json \
+                     --parent_as_json \
+                     --fcl $FCL \
+                     -f "${JUSTIN_SCOPE}:$output_mr_file" -j "${output_mr_file}.json"
+echo "formed"
+cat ${output_mr_file}.json
+
+####TEMPORARY FOR HIT CHECKER RUNNING
+#output_reco_file=`ls *keepup.root`
+#echo "Reco? ${output_reco_file}"
+#output_mr_file=`echo ${output_reco_file}  | sed -e "s/keepup/keepup_hists/"`
+#echo lar -c run_pdhd_hit_checker.fcl \
+#     -T ${output_mr_file} \
+#     ${output_reco_file}
+#lar -c run_pdhd_hit_checker.fcl \
+#     -T ${output_mr_file} \
+#     ${output_reco_file}
+#larExit=$?
+#
+#if [ $larExit -ne 0 ]; then
+#  echo "Error in hit check"
+#  exit $larExit
+#fi
+#
+
+
+
+echo "$pfn" > justin-processed-pfns.txt
