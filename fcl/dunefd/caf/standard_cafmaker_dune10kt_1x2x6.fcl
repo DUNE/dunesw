@@ -1,19 +1,15 @@
 #include "services_dune.fcl"
 #include "mvamodule.fcl"
 #include "CAFMaker.fcl"
+#include "tools_dune.fcl"
 
 process_name: CafMaker
 
 services:
 {
+  @table::dunefd_1x2x6_reco_services
   # Load the service that manages root files for histograms where the CAF info will be saved.
   TFileService: { fileName: "caf.root" }
-  TimeTracker:       {}
-  RandomNumberGenerator: {}
-  MemoryTracker:         {}
-  message:      @local::dune_message_services_prod_debug #TODO: Change for prod
-  FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::dunefd_simulation_services
 }
 
 source:

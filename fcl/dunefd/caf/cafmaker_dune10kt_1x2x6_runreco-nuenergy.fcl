@@ -43,24 +43,3 @@ physics.prod: [
 ]
 
 physics.trigger_paths: [ prod ] 
-
-
-physics.producers.energyrecnumu.HitLabel: "hitfd"
-physics.producers.energyrecnumu.WireLabel: "tpcrawdecoder:gauss"
-physics.producers.energyrecnumu.HitToSpacePointLabel: "hitfd"
-
-physics.producers.energyrecnumurange.HitLabel: "hitfd"
-physics.producers.energyrecnumurange.WireLabel: "tpcrawdecoder:gauss"
-physics.producers.energyrecnumurange.HitToSpacePointLabel: "hitfd"
-
-physics.producers.energyrecnumumcs.HitLabel: "hitfd"
-physics.producers.energyrecnumumcs.WireLabel: "tpcrawdecoder:gauss"
-physics.producers.energyrecnumumcs.HitToSpacePointLabel: "hitfd"
-
-physics.producers.energyrecnue.HitLabel: "hitfd"
-physics.producers.energyrecnue.WireLabel: "tpcrawdecoder:gauss"
-physics.producers.energyrecnue.HitToSpacePointLabel: "hitfd"
-
-physics.producers.energyrecnc.HitLabel: "hitfd"
-physics.producers.energyrecnc.WireLabel: "tpcrawdecoder:gauss"
-physics.producers.energyrecnc.HitToSpacePointLabel: "hitfd"
