@@ -1,0 +1,11 @@
+#include "standard_reco_dune10kt.fcl"
+
+services.DetectorPropertiesService.NumberTimeSamples: 6000
+services.DetectorPropertiesService.ReadOutWindowSize: 6000
+
+physics.producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
+physics.producers.gaushit.HitFilterAlg.MinPulseHeight: [ 2, 2, 2 ]
+physics.producers.spsolve.MinNHits: 2 #lower the threshold for low energy interactions
+physics.producers.pmtracktc.WireModuleLabel: "wclsmcnfsp:gauss"
+
+physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco_supernova ]

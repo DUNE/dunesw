@@ -1,0 +1,8 @@
+#include "cafmaker_dune10kt_1x2x6_runreco-nuenergy.fcl"
+
+physics.analyzers.cafmaker.IsAtmoCVN: true
+
+physics.prod: [
+    @sequence::dunefd_hd_ereco,
+    @sequence::dunefd_hd_anglereco
+]

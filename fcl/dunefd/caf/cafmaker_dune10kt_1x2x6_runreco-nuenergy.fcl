@@ -1,0 +1,45 @@
+#include "energyreco.fcl"
+#include "angularreco.fcl"
+#include "standard_cafmaker_dune10kt_1x2x6.fcl"
+
+dunefd_hd_producers:
+{
+    #neutrino energy reco
+    energyrecnumu:      @local::dunefd_nuenergyreco_pandora_numu
+    energyrecnumurange: @local::dunefd_nuenergyreco_pandora_numu_range
+    energyrecnumumcs:   @local::dunefd_nuenergyreco_pandora_numu_mcs
+    energyrecnue:       @local::dunefd_nuenergyreco_pandora_nue
+    energyrecnc:        @local::dunefd_nuenergyreco_pandora_nc
+    #angle reco configuration
+    anglereconue:       @local::dunefd_nuangularreco_pandora_nue
+    anglereconumu:      @local::dunefd_nuangularreco_pandora_numu
+    anglereconuepfps:   @local::dunefd_nuangularreco_pandora_nue_allpfps
+    anglereconumupfps:  @local::dunefd_nuangularreco_pandora_numu_allpfps
+}
+
+dunefd_hd_ereco:
+[
+    energyrecnumu,
+    energyrecnumurange,
+    energyrecnumumcs,
+    energyrecnue,
+    energyrecnc
+]
+
+dunefd_hd_anglereco:
+[
+    anglereconue,
+    anglereconumu,
+    anglereconuepfps,
+    anglereconumupfps
+]
+
+physics.producers: {
+    @table::dunefd_hd_producers
+}
+
+physics.prod: [
+    @sequence::dunefd_hd_ereco
+]
+
+physics.trigger_paths: [ prod ] 

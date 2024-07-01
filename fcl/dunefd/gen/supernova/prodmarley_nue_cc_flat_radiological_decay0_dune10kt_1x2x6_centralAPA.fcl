@@ -1,0 +1,17 @@
+
+#include "workflow_radiological_decay0_dune10kt.fcl"
+#include "prodmarley_nue_cc_flat_dune10kt_1x2x6.fcl"
+
+physics:
+{
+  @table::physics
+  producers:
+  {
+     @table::dunefd_horizdrift_1x2x6_producers
+     marley: @local::dune_marley_nue_cc_flat
+     rns: { module_type: "RandomNumberSaver" }
+  }
+  simulate: [ rns, marley, @sequence::dunefd_hd_backgrounds_1x2x6_lowBgAPA ]
+}
+
+outputs.out1.fileName:    "prodmarley_nue_cc_flat_radiological_decay0_dune10kt_1x2x6_centralAPA_gen.root"

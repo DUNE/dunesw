@@ -71,6 +71,8 @@ dunefd_horizdrift_producers:
   cvneva:                @local::dunehd_1x2x6_FHC_cvnevaluator
   #neutrino energy reco
   energyrecnumu:        @local::dunefd_nuenergyreco_pandora_numu
+  energyrecnumurange:   @local::dunefd_nuenergyreco_pandora_numu_range
+  energyrecnumumcs:     @local::dunefd_nuenergyreco_pandora_numu_mcs
   energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
   energyrecnc:           @local::dunefd_nuenergyreco_pandora_nc
   #angle reco configuration
@@ -153,7 +155,9 @@ dunefd_horizdrift_nuenergy:
 [
     energyrecnumu,
     energyrecnue,
-    energyrecnc
+    energyrecnc,
+    energyrecnumurange,
+    energyrecnumumcs
 ]
 
 dunefd_horizdrift_pd_reco1:
@@ -181,7 +185,7 @@ dunefd_horizdrift_workflow_reco2:
     @sequence::dunefd_horizdrift_pmtrack,
     @sequence::dunefd_horizdrift_pmtrack_trajcluster,
     @sequence::dunefd_horizdrift_pmtrack_trajcluster_pfp,
-#    @sequence::dunefd_horizdrift_pmtrack_showers,
+    @sequence::dunefd_horizdrift_pmtrack_showers,
     @sequence::dunefd_horizdrift_cvn,
     @sequence::dunefd_horizdrift_nuenergy,
     @sequence::dunefd_horizdrift_pd_reco1,
@@ -207,6 +211,20 @@ dunefd_horizdrift_workflow_reco2_atmos:
 [
     @sequence::dunefd_horizdrift_workflow_reco2,
     @sequence::dunefd_horizdrift_workflow_nuanglereco
+]
+
+dunefd_horizdrift_workflow_reco_supernova: 
+[ 
+    wclsmcnfsp,
+    gaushit,
+    spsolve,
+    hitfd,
+    trajcluster,
+    pmtracktc,
+    opdec,
+    ophitspe,
+    opflash,
+    rns
 ]
 
 ### Here, we overwrite ALL module labels with the ones defined above.

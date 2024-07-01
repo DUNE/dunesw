@@ -1,0 +1,10 @@
+#include "protodunevd_refactored_g4_stage1.fcl"
+
+services.NuRandomService.policy: "preDefinedSeed"
+services.NuRandomService.baseSeed: 1234
+services.NuRandomService.largeant: 1234
+
+services.RandomNumberGenerator.restoreFrom: "G4RandomSeeds_Ref_protoDUNE.dat"
+services.RandomNumberGenerator.saveTo: "G4RandomSeeds.dat"
+
+#outputs.out1.fastCloning: false

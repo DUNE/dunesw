@@ -1,0 +1,63 @@
+# workflow_reco_crpcb_bottom.fcl
+# Configuration fcl for the reconstruction workflows
+# of CRP4 and CRP5 for coldbox test using BDE readout
+#
+
+#include "pandoramodules_dune.fcl"
+#include "wirecell_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "calorimetry_vdcb.fcl"
+#include "pid_dune10kt.fcl"
+#include "energyreco.fcl"
+
+
+BEGIN_PROLOG
+
+dunecrpcb_bottom_producers:
+{
+   rns:            { module_type: "RandomNumberSaver" }
+   # WCL placeholder
+   wclsdatanfsp:       @local::dune_vd_crp4_nfsp
+   # actual hit finder
+   gaushit:            @local::dunevdfd_gaushitfinder
+   # pattern recognition
+   pandora:            @local::dunefdvd_pandora_cosmic
+   # Characterisation
+   pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
+   pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
+   
+   # calorimetry modules
+   pandoraStdCalo:     @local::vdcb_standard_calodata
+   pandoraGnoCalo:     @local::vdcb_gnocchi_calodata
+
+   # PID   		       
+   pandorapid:         @local::dunevd10kt_pid_pandora
+}
+
+dunecrpcb_bottom_producers.pandora.ShouldRunAllHitsCosmicReco:  true
+dunecrpcb_bottom_producers.pandora.ShouldRunNeutrinoRecoOption: false
+
+dunecrpcb_bottom_tpc:
+[
+    wclsdatanfsp,
+    gaushit,
+    pandora,
+    pandoraTrack,
+    pandoraShower,
+    pandoraStdCalo,
+    pandoraGnoCalo,
+    pandorapid #,
+]
+
+dunecrpcb_bottom_reco_tpc_only:
+[
+    rns,
+    @sequence::dunecrpcb_bottom_tpc
+]
+
+
+dunecrpcb_bottom_producers.gaushit.CalDataModuleLabel:   "wclsdatanfsp:gauss"
+
+
+END_PROLOG
+

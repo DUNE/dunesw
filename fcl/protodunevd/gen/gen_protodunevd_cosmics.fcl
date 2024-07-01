@@ -71,3 +71,6 @@ outputs:
 services.TFileService.fileName: "gen_protodunevd_cosmics_hist.root"
 source.maxEvents: 1
 outputs.out1.fileName: "gen_protodunevd_cosmics.root"
+
+physics.producers.cosmicgenerator.SampleTime: 6.0e-3
+physics.producers.cosmicgenerator.TimeOffset: -3.0e-3

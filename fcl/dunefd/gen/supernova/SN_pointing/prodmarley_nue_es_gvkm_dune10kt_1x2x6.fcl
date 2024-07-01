@@ -1,0 +1,5 @@
+#include "prodmarley_nue_gvkm_dune10kt_1x2x6.fcl"
+
+physics.producers.marley: @local::dune_marley_nue_es_gvkm
+
+outputs.out1.fileName: "prodmarley_nue_es_gvkm_dune10kt_1x2x6_gen.root"

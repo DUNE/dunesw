@@ -4,6 +4,7 @@
 # CNN bsed pixel-level feature labeling modules for DUNE.
 
 #include "imagepatternalgs.fcl"
+#include "calorimetry_pdune.fcl"
 
 BEGIN_PROLOG
 
@@ -26,6 +27,11 @@ protodune_emtrkmichelid.Views:                        []
 
 protodunespdata_emtrkmichelid:                        @local::protodune_emtrkmichelid
 #protodunespdata_emtrkmichelid.WireLabel:              "wclsdatasp:gauss"
+
+pdhd_data_emtrkmichelid: @local::protodunespdata_emtrkmichelid
+pdhd_data_emtrkmichelid.WireLabel: "wclsdatahd:gauss"
+
+pdhd_mc_emtrkmichelid: @local::pdhd_data_emtrkmichelid
 
 END_PROLOG
 

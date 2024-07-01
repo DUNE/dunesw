@@ -1,19 +1,17 @@
 #include "detsim_dune10kt_1x2x2_notpcsigproc.fcl"
 
-#physics.producers.daq:            @local::dune_detsim
-#physics.producers.rns:            { module_type: "RandomNumberSaver" }
-
-#physics.simulate: [ rns, daq,  @sequence::pd_detsim_path ]
-#physics.trigger_paths: [ simulate ]
-
 physics.producers:
 {
     @table::physics.producers
+    elecDrift:   @local::dunefd_elecdrift
     daq:                   @local::dune_detsim
     tpcrawdecoder:         @erase
 }
 
 physics.simulate[0]: daq #terrible way of changing the running producer from wirecell to the older detsim.  Erasing tpcrawdecoder does provide a small amount of protection against us replacing the wrong array element (as the job will not run)
+
+# Now prepend elecDrift to the modified simulate sequence
+physics.simulate: [ elecDrift, @sequence::physics.simulate ]
 
 # Use fixed values instead of DB for pedestals.
 services.DetPedestalService: @local::dune_fixedpeds
