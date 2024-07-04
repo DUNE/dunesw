@@ -1,0 +1,4 @@
+### Runs before 26930 used 8256 time samples
+#include "standard_reco_protodunehd_keepup.fcl"
+services.DetectorPropertiesService.NumberTimeSamples: 8256 
+services.DetectorPropertiesService.ReadOutWindowSize: 8256 

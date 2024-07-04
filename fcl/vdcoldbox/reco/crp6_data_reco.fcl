@@ -1,0 +1,19 @@
+#include "crpcb_bottom_process.fcl"
+
+process_name: CRP6CBDataReco
+
+services: @local::crp6_services
+
+source: @local::hdf5rawinput3
+
+outputs: {
+  rootout: @local::proc_rootout
+}
+
+physics: {
+  producers: @local::crp6_prod_config
+  produce: @local::crp6_prod_seq
+  output : [ rootout ]
+  trigger_paths: [ produce ]
+  end_paths : [ output ]
+}
