@@ -3,8 +3,8 @@
 # Dom Brailsford & Laura Paulucci
 
 
-#include "dune_radiological_model_decay0_v3_6_hd_1x2x6.fcl"
-#include "dune_radiological_model_decay0_v3_6_hd_1x2x2.fcl"
+#include "dune_radiological_model_decay0_hd_1x2x6.fcl"
+#include "dune_radiological_model_decay0_hd_1x2x2.fcl"
 
 BEGIN_PROLOG
 
