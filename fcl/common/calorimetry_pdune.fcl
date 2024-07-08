@@ -229,6 +229,7 @@ pdhd_gnocchi_calodata:
     ChargeMethod:                    2
     FieldDistortion:                 true
     FieldDistortionEfield:           true
+    FieldDistortionCorrectionXSign: 1.
     ##Keep this false -- only useful if the input tracks are themselves are 
     ##                   SCE Corrected. We correct the calorimetry pts in
     ##                   caloriemtry products but not track/shower 
