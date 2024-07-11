@@ -2,11 +2,12 @@
 
 #### NOTE -- analyzer modules are instantiated in the included fcl
 
-
 #make sure only one WCTK is here -- not sure this part is necessary
 #or if only one can be in the produce list
+#physics.filters.fembfilter.LogLevel: 1
 physics.producers.wclsdatahd: @local::protodunehd_sp  #Signal processing
 physics.produce: [
+  fembfilter,
   wclsdatahd,
   gaushit,
   nhitsfilter,
@@ -16,11 +17,11 @@ physics.produce: [
   pandorapid, pandoraShowercalo, pandoraShowercalonosce,
   pandoraGnocchiCalo,
   pandoraGnocchiCalonosce,
-  emtrkmichelid,
-  opdec,
-  ophitspe,
-  opflash,
-  opslicer
+  emtrkmichelid
+  #opdec,
+  #ophitspe,
+  #opflash,
+  #opslicer
   #crtreco, crttag
 ]
 
@@ -28,10 +29,6 @@ physics.produce: [
 #physics.ana: []
 #physics.end_paths: [output]
 
-
-physics.analyzers.calibana.RawDigitproducers: [
-  "wclsdatahdfilter:raw"
-]
 
 physics.analyzers.calibanagnocchi.RawDigitproducers: [
   "wclsdatahdfilter:raw"
@@ -47,5 +44,6 @@ source:
   fileNames: ["reco_stage2_protodunehd.root"]
 }
 
-outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*"]
+outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wire*_*_wiener_*"]
 process_name: pdhdkeepupstage2
+physics.filters.nhitsfilter.Verbose: true
