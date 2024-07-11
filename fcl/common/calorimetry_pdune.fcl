@@ -110,6 +110,8 @@ pdune_dp_gnocalodata:
     TrackModuleLabel:                "pandoraTrack"
     AssocHitModuleLabel:             "pandoraTrack"
     T0ModuleLabel:                   ""
+    PFPModuleLabel:                  "pandora"
+    FieldDistortionCorrectionXSign: 1.
     ChargeMethod:                    2
     FieldDistortion:                 false
     FieldDistortionEfield:           false
@@ -133,6 +135,8 @@ pdune_vd_gnocchi_calodata:
     module_type:                     "GnocchiCalorimetry"
     TrackModuleLabel:                "pandoraTrack"
     AssocHitModuleLabel:             "pandoraTrack"
+    PFPModuleLabel:                  "pandora"
+    FieldDistortionCorrectionXSign: 1.
     T0ModuleLabel:                   ""
     ChargeMethod:                    2
     FieldDistortion:                 false
