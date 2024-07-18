@@ -94,6 +94,7 @@ physics.analyzers.analysistree.SaveTrackInfo:            true
 physics.analyzers.analysistree.SaveVertexInfo:           true 
 physics.analyzers.analysistree.SaveNuRecoEnergyInfo:     true
 physics.analyzers.analysistree.SaveNuRecoAngleInfo:      true
+physics.analyzers.analysistree.SaveCVNScoresInfo:        true
 physics.analyzers.analysistree.SavePandoraNuVertexInfo:  true 
 physics.analyzers.analysistree.SaveClusterInfo:          false
 physics.analyzers.analysistree.SaveFlashInfo:            false
@@ -123,6 +124,8 @@ physics.analyzers.analysistree.ContainmentTaggerAssocLabel: [ "" ]
 physics.analyzers.analysistree.FlashMatchAssocLabel: [ "" ]
 
 physics.analyzers.analysistree.SavePFParticleInfo: true
+
+physics.analyzers.analysistree.IsAtmoCVN: true
 
 # LongestTrackMethod: 1 range, 2 MCS
 # Needs to be set to force usage of range or mcs regardless of containement
