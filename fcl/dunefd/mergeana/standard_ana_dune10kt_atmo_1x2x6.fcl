@@ -1,0 +1,4 @@
+#include "standard_ana_dune10kt_atmo.fcl"
+process_name: Mergeana
+services.LArG4Detector: @local::dune10kt_1x2x6_larg4detector
+services.Geometry: @local::dune10kt_1x2x6_v5_refactored_geo
