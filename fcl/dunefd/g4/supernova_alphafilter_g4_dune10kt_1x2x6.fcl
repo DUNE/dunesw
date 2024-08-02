@@ -1,0 +1,19 @@
+# supernova_alphafilter_g4_dune10kt_1x2x6.fcl
+# Author: Sergio Manthey Corchado (2024) (based on supernova_neutronfilter_g4_dune10kt_1x2x6.fcl by Dom Brailsford)
+# Purpose: Run the supernova g4 HD 1x2x6 jobset and reject any events that do not have an alpha in the TPC 
+#
+# V1.0
+#
+
+#include "larg4particlefilter_dune.fcl"
+#include "supernova_g4_dune10kt_1x2x6.fcl"
+
+
+#Define the neutron filter
+physics.filters.alphafilter:  @local::dunefd_alphafilter
+
+#Run neutron filter at the end
+physics.simulate:  [ @sequence::physics.simulate, alphafilter ]
+
+#Tell ART to actually filter using the ART filter
+outputs.out1.SelectEvents: [ simulate ]
