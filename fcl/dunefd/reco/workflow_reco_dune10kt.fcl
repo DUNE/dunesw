@@ -219,7 +219,7 @@ dunefd_horizdrift_workflow_reco2_atmos:
 
 dunefd_horizdrift_workflow_reco_solar: 
 [ 
-    wclsmcnfsp,
+    # wclsmcnfsp,
     gaushit,
     spsolve,
     hitfd,
