@@ -11,6 +11,8 @@
 
 #Define the neutron filter
 physics.filters.alphafilter:  @local::dunefd_alphafilter
+# physics.filters.alphafilter.ParticleMinMomentum: [ 3.72737941 ] #Require a minimum momentum of alpha particle mass
+physics.filters.alphafilter.ParticleMinMomentum: [ 3.73237941 ] #Require a minimum momentum of alpha particle mass + 0.005 GeV
 
 #Run neutron filter at the end
 physics.simulate:  [ @sequence::physics.simulate, alphafilter ]
