@@ -177,6 +177,50 @@ dunefd_hd_backgrounds_1x2x6:
       @sequence::dunefd_backgrounds_1x2x6_specific
 ]
 
+dunefd_hd_backgrounds_1x2x6_LAr_highRate:[
+      Ar39GenInLAr,
+      Kr85GenInLAr
+]
+
+dunefd_hd_backgrounds_1x2x6_LAr_lowRate:[
+      Ar42GenInLAr,
+      K42From42ArGenInLAr,
+      Rn222ChainRn222GenInLAr,
+      Rn222ChainPo218GenInLAr,
+      Rn222ChainPb214GenInLAr,
+      Rn222ChainBi214GenInLAr,
+      Rn222ChainPb210GenInLAr,
+      Rn220ChainPb212GenInLAr
+]
+
+dunefd_hd_backgrounds_1x2x6_LAr:
+[
+      @sequence::dunefd_hd_backgrounds_1x2x6_LAr_highRate,
+      @sequence::dunefd_hd_backgrounds_1x2x6_LAr_lowRate
+]
+
+dunefd_backgrounds_1x2x6_CPA:
+[
+      K40GenInCPA,
+      U238ChainGenInCPA,
+      Th232ChainGenInCPA,
+      K42From42ArGenInCPA,
+      Rn222ChainPo218GenInCPA,
+      Rn222ChainPb214GenInCPA,
+      Rn222ChainBi214GenInCPA,
+      Rn222ChainPb210GenInCPA,
+      Rn222ChainFromBi210GenInCPA,
+      Rn220ChainFromPb212GenInCPA
+]
+
+dunefd_backgrounds_1x2x6_APA:
+[
+      U238Th232K40GenInLArAPAboards1x2x6, #new hacked APA board contribution
+      Co60GenInAPA,
+      U238ChainGenInAPA,
+      Th232ChainGenInAPA
+]
+
 dunefd_backgrounds_1x2x2_lowBgAPA_specific:
 [
       U238Th232K40GenInLArAPAboards1x2x2, #new hacked APA board contribution
