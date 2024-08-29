@@ -1,4 +1,4 @@
-#include "standard_ana_dune10kt_atmo.fcl"
+#include "standard_ana_atmos_dune10kt.fcl"
 process_name: Mergeana
 services: 
 {
