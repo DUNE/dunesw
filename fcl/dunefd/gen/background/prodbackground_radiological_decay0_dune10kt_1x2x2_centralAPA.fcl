@@ -1,4 +1,4 @@
-#include "prodbackground_radiological_decay0_dune10kt_1x2x2.fcl"
+#include "prodbackground_radiological_decay0_dune10kt_1x2x2_lateralAPA.fcl"
 
 physics.simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x2_lowBgAPA ]      
 

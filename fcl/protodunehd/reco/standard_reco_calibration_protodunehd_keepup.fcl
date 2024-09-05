@@ -30,7 +30,8 @@ physics.analyzers: {
   calibanagnocchi: @local::pdhd_calibana_data
 }
 
-physics.ana: [michelremoving, michelremovinggnocchi, calibana, calibanagnocchi]
+##Just doing gnocchi now
+physics.ana: [michelremoving, michelremovinggnocchi, calibanagnocchi]
 physics.end_paths: [output, ana]
 
 #physics.producers.pandoraGnocchiCalonosce.PFPModuleLabel: "pandora" 

@@ -1,0 +1,4 @@
+#include "prodbackground_radiological_decay0_dune10kt_1x2x6_lateralAPA.fcl"
+
+physics.simulate: [ rns, @sequence::dunefd_backgrounds_1x2x6_CPA ]
+outputs.out1.fileName:    "prodradiological_decay0_cathode_dune10kt_1x2x6_gen.root"

@@ -110,6 +110,8 @@ pdune_dp_gnocalodata:
     TrackModuleLabel:                "pandoraTrack"
     AssocHitModuleLabel:             "pandoraTrack"
     T0ModuleLabel:                   ""
+    PFPModuleLabel:                  "pandora"
+    FieldDistortionCorrectionXSign: 1.
     ChargeMethod:                    2
     FieldDistortion:                 false
     FieldDistortionEfield:           false
@@ -133,6 +135,8 @@ pdune_vd_gnocchi_calodata:
     module_type:                     "GnocchiCalorimetry"
     TrackModuleLabel:                "pandoraTrack"
     AssocHitModuleLabel:             "pandoraTrack"
+    PFPModuleLabel:                  "pandora"
+    FieldDistortionCorrectionXSign: 1.
     T0ModuleLabel:                   ""
     ChargeMethod:                    2
     FieldDistortion:                 false
@@ -229,6 +233,7 @@ pdhd_gnocchi_calodata:
     ChargeMethod:                    2
     FieldDistortion:                 true
     FieldDistortionEfield:           true
+    FieldDistortionCorrectionXSign: 1.
     ##Keep this false -- only useful if the input tracks are themselves are 
     ##                   SCE Corrected. We correct the calorimetry pts in
     ##                   caloriemtry products but not track/shower 

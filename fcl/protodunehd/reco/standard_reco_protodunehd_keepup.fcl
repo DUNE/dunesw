@@ -24,9 +24,10 @@
 #include "calorimetry_pdune.fcl"
 #include "calibration_dune.fcl"
 #include "hitfindermodules_dune.fcl"
-
+#include "PDHDFEMBFilter.fcl"
 
 #include "services_dune.fcl"
+#include "spacecharge_dune.fcl"
 #include "dune_calibanatree.fcl"
 
 process_name: pdhdkeepupprocessing 
@@ -76,7 +77,8 @@ physics:
 {
 
   filters: {
-    nhitsfilter: @local::standard_numberofhitsfilter
+    nhitsfilter: @local::pdhd_nhitsfilter
+    fembfilter: @local::pdhdfembfilter
   }
 
   producers:
@@ -131,9 +133,10 @@ physics:
 
   produce: [
     tpcrawdecoder,
-    triggerrawdecoder,
-    timingrawdecoder,
-    pdhddaphne,
+    #triggerrawdecoder,
+    #timingrawdecoder,
+    #pdhddaphne,
+    fembfilter,
     wclsdatahd,
     gaushit,
     nhitsfilter,
