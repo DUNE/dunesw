@@ -14,6 +14,7 @@
 #include "opticaldetectormodules_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "clusterfinder_dune.fcl"
+#include "SolarOpFlash.fcl"
 
 BEGIN_PROLOG
 
@@ -50,6 +51,7 @@ dunefd_vertdrift_producers:
    pmtracktc:          @local::dunefdvd_pmalgtrackmaker    #PMA using trajcluster clusters
 #   pmtracktccalo:      @local::dunevd10kt_calomc
 #   pmtracktcpid:       @local::standard_chi2pid
+    solarflash: @local::solar_opflash_dunevd10kt_1x8x14_3view_30deg
 }
 
 dunefd_vertdrift_pds_reco1:
@@ -172,15 +174,24 @@ dunefd_vertdrift_reco_le:
     rns
 ]
 
-dunefd_vertdrift_reco_solar:
-[
-    gaushit,
-    ophit10ppm,
-    # opflash10ppm, # Full bkg leads to memory issues
+dunefd_vertdrift_reco1_solar: 
+[ 
+    @sequence::dunefd_vertdrift_reco1,
+    rns
+]
+
+dunefd_vertdrift_reco2_solar: 
+[ 
     linecluster, 
     trajcluster, 
     pmtracktc,
-    rns
+    solarflash
+]
+
+dunefd_vertdrift_solar:
+[
+    @sequence::dunefd_vertdrift_reco1_solar,
+    @sequence::dunefd_vertdrift_reco2_solar
 ]
 
 dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly
