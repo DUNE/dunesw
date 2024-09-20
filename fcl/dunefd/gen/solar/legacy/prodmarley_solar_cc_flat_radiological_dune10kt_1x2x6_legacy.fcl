@@ -1,6 +1,0 @@
-#include "prodmarley_nue_spectrum_radiological_timedep_hudepohl_11.2M_dune10kt_1x2x6_legacy.fcl"
-
-physics.producers.marley: @local::dune_marley_flat
-physics.producers.marley.marley_parameters.source.Emax: 30.
-physics.producers.marley.marley_parameters.source.E_bin_lefts: [2.0]
-outputs.out1.fileName:    "prodmarley_solar_cc_flat_radiological_dune10kt_1x2x6_legacy_gen.root"
