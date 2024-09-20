@@ -172,14 +172,15 @@ dunefd_vertdrift_reco_le:
     rns
 ]
 
-dunefd_vertdrift_solar:
+dunefd_vertdrift_reco_solar:
 [
     gaushit,
     ophit10ppm,
     # opflash10ppm, # Full bkg leads to memory issues
     linecluster, 
     trajcluster, 
-    pmtracktc
+    pmtracktc,
+    rns
 ]
 
 dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly

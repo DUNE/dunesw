@@ -9,4 +9,7 @@ physics.producers:
 }
 
 physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco_solar ]
-# outputs.out1.dataTier: "hit-reconstructed"
+# outputs.out1.dataTier: "hit-reconstructed#include "standard_reco_dune10kt_1x2x6.fcl"
+
+physics.reco: [ @sequence::dunefd_horizontaldrift_workflow_solar ]
+physics.producers.spsolve.MinNHits: 2 #lower the threshold for low energy interactions
