@@ -1,0 +1,9 @@
+#include "prodmarley_nue_spectrum_dune10kt_1x2x6.fcl"
+
+services: 
+{
+    @table::services
+    @table::dunefd_1x2x2_services
+}
+
+outputs.out1.fileName: "prodmarley_nue_spectrum_dune10kt_1x2x2_gen.root"

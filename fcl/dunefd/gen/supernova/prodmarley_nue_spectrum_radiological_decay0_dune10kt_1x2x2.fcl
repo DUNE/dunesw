@@ -1,10 +1,5 @@
-#include "prodmarley_nue_spectrum_radiological_decay0_dune10kt_refactored_1x2x6.fcl"
-
-services:
-{
-    @table::services
-    @table::dunefd_1x2x2_services
-}
+#include "workflow_radiological_decay0_dune10kt.fcl"
+#include "prodmarley_nue_spectrum_dune10kt_1x2x2.fcl"
 
 physics:
 {
@@ -12,15 +7,11 @@ physics:
   producers:
   {
     @table::dunefd_horizdrift_1x2x2_producers
-    marley:      @local::dune_marley_nue_spectrum
-    rns:       { module_type: "RandomNumberSaver" }
+    marley: @local::dune_marley_nue_spectrum
+    rns: { module_type: "RandomNumberSaver" }
   }
-  simulate: [
-    rns,
-    marley,
-    @sequence::dunefd_hd_backgrounds_1x2x2 
- ]      
+  simulate: [ rns, marley, @sequence::dunefd_hd_backgrounds_1x2x2 ]      
 
 }
 
-outputs.out1.fileName:    "prodmarley_radiological_dune10kt_decay0_1x2x2_gen.root" # Default file name, can override from command line with -o or --output
+outputs.out1.fileName: "prodmarley_nue_spectrum_radiological_decay0_dune10kt_1x2x2_gen.root"

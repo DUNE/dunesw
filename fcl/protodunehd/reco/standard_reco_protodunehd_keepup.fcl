@@ -1,7 +1,8 @@
 #include "HDF5RawInput3.fcl"
 #include "PDHDTPCReader.fcl"
 #include "PDHDDataInterfaceWIBEth3.fcl"
-#include "PDHDTriggerReader.fcl"
+#include "PDHDTriggerReader3.fcl"
+#include "PDHDTimingRawDecoder.fcl"
 #include "DAPHNEReaderPDHD.fcl"
 #
 #include "opticaldetectormodules_dune.fcl"
@@ -23,9 +24,11 @@
 #include "calorimetry_pdune.fcl"
 #include "calibration_dune.fcl"
 #include "hitfindermodules_dune.fcl"
-
+#include "PDHDFEMBFilter.fcl"
 
 #include "services_dune.fcl"
+#include "spacecharge_dune.fcl"
+#include "dune_calibanatree.fcl"
 
 process_name: pdhdkeepupprocessing 
 
@@ -37,13 +40,12 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_data
-                        #@table::protodunehd_reco_services
   ChannelStatusService: @local::dunefd_channel_status
   ExptGeoHelperInterface:       @local::dune_geometry_helper
   GeometryConfigurationWriter:  {}
   Geometry:                     @local::protodunehdv6_geo
   DetectorClocksService:        @local::protodunehd_detectorclocks
-  DetectorPropertiesService:    @local::protodune_detproperties
+  DetectorPropertiesService:    @local::protodunehd_detproperties
   LArPropertiesService:         @local::dunefd_properties
   LArFFT:                       @local::dunefd_larfft
   DatabaseUtil:                 @local::dunefd_database
@@ -75,15 +77,20 @@ physics:
 {
 
   filters: {
-    nhitsfilter: @local::standard_numberofhitsfilter
+    nhitsfilter: @local::pdhd_nhitsfilter
+    fembfilter: @local::pdhdfembfilter
   }
 
   producers:
   {
     # Raw decoding
     tpcrawdecoder: @local::PDHDTPCReaderDefaults
-    tpstreamdecoder: @local::PDHDTriggerReaderDefaults 
+    triggerrawdecoder: @local::PDHDTriggerReader3Defaults 
+    timingrawdecoder: @local::PDHDTimingRawDecoder
     pdhddaphne: @local::DAPHNEReaderPDHD
+
+    # Beam Instrumentation Info
+    # TODO 
 
     # Optical reconstruction
     opdec:              @local::dune_deconvolution
@@ -96,25 +103,28 @@ physics:
     # Hit finding
     gaushit:            @local::protodunespmc_gaushitfinder
     # space point solver
-    reco3d:             @local::pdhd_data_spacepointsolv
+    reco3d:             @local::pdhd_data_spacepointsolver
     # actual disambiguation
     hitpdune:           @local::pdune_disambigfromsp
-    # event feature labeling
-    emtrkmichelid:      @local::protodune_emtrkmichelid
+    # hit feature labeling
+    emtrkmichelid:      @local::pdhd_data_emtrkmichelid
 
     # Pandora Reconstruction
     pandora:            @local::protodunehd_pandora
     pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
+
+    ## Standard/Old PDSP style Calorimetry
     pandoracalo:        @local::pdhd_calodata
     pandoracalonosce:   @local::pdhd_calodatanosce
     pandorapid:         @local::standard_chi2pid
-    #pandoracali:        @local::protodunespmcnosce_calibrationdedx
-    #pandoracalipid:     @local::standard_chi2pid
     pandoraShowercalo:  @local::pdhd_showercalodata
     pandoraShowercalonosce:  @local::pdhd_showercalodatanosce
-    pandoragnocchicalo: @local::pdhd_gnocchi_calodata
+
+    ## Gnocchi Calorimetry 
+    pandoraGnocchiCalo: @local::pdhd_gnocchi_calodata
+    pandoraGnocchiCalonosce: @local::pdhd_gnocchi_calodata_nosce
 
     # CRT Reconstruction
     crtreco: @local::TwoCRTMatching_producer
@@ -122,23 +132,27 @@ physics:
   }
 
   produce: [
-    tpcrawdecoder ,
-    #tpstreamdecoder, ##Need to reimplement with Wes' changes
-    pdhddaphne,
-    opdec,
-    ophitspe,
-    opflash,
-    opslicer,
+    tpcrawdecoder,
+    #triggerrawdecoder,
+    #timingrawdecoder,
+    #pdhddaphne,
+    fembfilter,
     wclsdatahd,
     gaushit,
-    nhitsfilter, ##Do we need this?
+    nhitsfilter,
     reco3d,
     hitpdune,
-    pandora, pandoraWriter, pandoraTrack, pandoraShower, pandoracalo, pandoracalonosce,
-    pandorapid, pandoraShowercalo, pandoraShowercalonosce,
-    pandoragnocchicalo,
-    emtrkmichelid
-    #crtreco, crttag
+    ###Commenting a lot out for now for just beam reco
+    pandora, pandoraWriter, pandoraTrack, pandoraShower #, pandoracalo, pandoracalonosce,
+    #pandorapid, pandoraShowercalo, pandoraShowercalonosce,
+    #pandoraGnocchiCalo,
+    #pandoraGnocchiCalonosce,
+    #emtrkmichelid,
+    #opdec,
+    #ophitspe,
+    #opflash,
+    #opslicer
+    ##crtreco, crttag
   ]
 
   output: [ out1 ]
@@ -150,6 +164,7 @@ outputs:
 {
   out1:
   {
+    outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*"]
     compressionLevel: 1
     module_type: RootOutput
     fileName: "%ifb_%tc_keepup.root"
@@ -168,7 +183,6 @@ physics.producers.ophitspe.InputModuledigi: "pdhddaphne:daq"
 physics.producers.opflash.InputModule: "ophitspe"
 physics.producers.opslicer.OpHitModuleLabel: "ophitspe"
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatahd:gauss"
-physics.producers.emtrkmichelid.WireLabel: "wclsdatahd:gauss"
 
 services.SpaceCharge.EnableSimEfieldSCE: true
 services.SpaceCharge.EnableSimSpatialSCE: true
@@ -184,3 +198,4 @@ physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"
 physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
 physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
+

@@ -1,0 +1,28 @@
+#include "standard_reco_protodunehd_keepup.fcl"
+
+services.DAPHNEChannelMapService.IgnoreLinks: true
+
+#make sure only one WCTK is here -- not sure this part is necessary
+#or if only one can be in the produce list
+physics.producers.wclsdatahd: @erase
+physics.producers.wclsdatahdfilter: @local::protodunehd_nf
+
+#Put all of the raw decoders here since they're quick
+physics.produce: [
+  tpcrawdecoder,
+  triggerrawdecoder,
+  timingrawdecoder,
+  pdhddaphne,
+  fembfilter,
+  wclsdatahdfilter  #new to output raw digits from Wirecell
+]
+
+#physics.filters.fembfilter.LogLevel: 1
+
+#don't need a timestamp here -- only intermittent
+outputs.out1.fileName: "%ifb_reco_stage1.root"
+outputs.out1.outputCommands: [ "keep *"]
+process_name: pdhdkeepupstage1
+
+physics.producers.wclsdatahdfilter.wcls_main.loglevels: @erase 
+physics.producers.wclsdatahdfilter.wcls_main.logsinks: @erase 

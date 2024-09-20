@@ -1,0 +1,49 @@
+#include "standard_reco_calibration_protodunehd_keepup.fcl"
+
+#### NOTE -- analyzer modules are instantiated in the included fcl
+
+#make sure only one WCTK is here -- not sure this part is necessary
+#or if only one can be in the produce list
+#physics.filters.fembfilter.LogLevel: 1
+physics.producers.wclsdatahd: @local::protodunehd_sp  #Signal processing
+physics.produce: [
+  fembfilter,
+  wclsdatahd,
+  gaushit,
+  nhitsfilter,
+  reco3d,
+  hitpdune,
+  pandora, pandoraWriter, pandoraTrack, pandoraShower, pandoracalo, pandoracalonosce,
+  pandorapid, pandoraShowercalo, pandoraShowercalonosce,
+  pandoraGnocchiCalo,
+  pandoraGnocchiCalonosce,
+  emtrkmichelid
+  #opdec,
+  #ophitspe,
+  #opflash,
+  #opslicer
+  #crtreco, crttag
+]
+
+### FOR TESTING
+#physics.ana: []
+#physics.end_paths: [output]
+
+
+physics.analyzers.calibanagnocchi.RawDigitproducers: [
+  "wclsdatahdfilter:raw"
+]
+
+outputs.out1.fileName: "%ifb_reco_stage2_%tc_keepup.root"
+
+#have to make this intake a root file now 
+source:
+{
+  module_type: RootInput
+  maxEvents: 30000
+  fileNames: ["reco_stage2_protodunehd.root"]
+}
+
+outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wire*_*_wiener_*"]
+process_name: pdhdkeepupstage2
+physics.filters.nhitsfilter.Verbose: true

@@ -19,6 +19,8 @@
 #include "Deconvolution.fcl"
 #include "OpHitFinderDeco.fcl"
 #include "opticaldetectorservices_dune.fcl"
+#include "OpSlicer.fcl"
+#include "SolarOpFlash.fcl"
 
 BEGIN_PROLOG
 
@@ -84,6 +86,8 @@ dunefd_horizdrift_producers:
   opdec:      @local::dune_deconvolution
   ophitspe:   @local::dune_ophit_finder_deco
   opflash:    @local::dunefd_opflash
+  opslicer:   @local::dune10kt_1x2x6_opslicer
+  solarflash: @local::solar_opflash_dune10kt_1x2x6
 }
 
 dunefd_horizdrift_lowlevelreco: 
@@ -211,6 +215,36 @@ dunefd_horizdrift_workflow_reco2_atmos:
 [
     @sequence::dunefd_horizdrift_workflow_reco2,
     @sequence::dunefd_horizdrift_workflow_nuanglereco
+]
+
+dunefd_horizdrift_workflow_reco_solar: 
+[ 
+    # wclsmcnfsp,
+    gaushit,
+    spsolve,
+    hitfd,
+    trajcluster,
+    pmtracktc,
+    opdec,
+    ophitspe,
+    opflash,
+    opslicer,
+    solarflash,
+    rns
+]
+
+dunefd_horizdrift_workflow_reco_supernova: 
+[ 
+    wclsmcnfsp,
+    gaushit,
+    spsolve,
+    hitfd,
+    trajcluster,
+    pmtracktc,
+    opdec,
+    ophitspe,
+    opflash,
+    rns
 ]
 
 ### Here, we overwrite ALL module labels with the ones defined above.

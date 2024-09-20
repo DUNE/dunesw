@@ -110,6 +110,8 @@ pdune_dp_gnocalodata:
     TrackModuleLabel:                "pandoraTrack"
     AssocHitModuleLabel:             "pandoraTrack"
     T0ModuleLabel:                   ""
+    PFPModuleLabel:                  "pandora"
+    FieldDistortionCorrectionXSign: 1.
     ChargeMethod:                    2
     FieldDistortion:                 false
     FieldDistortionEfield:           false
@@ -133,6 +135,8 @@ pdune_vd_gnocchi_calodata:
     module_type:                     "GnocchiCalorimetry"
     TrackModuleLabel:                "pandoraTrack"
     AssocHitModuleLabel:             "pandoraTrack"
+    PFPModuleLabel:                  "pandora"
+    FieldDistortionCorrectionXSign: 1.
     T0ModuleLabel:                   ""
     ChargeMethod:                    2
     FieldDistortion:                 false
@@ -224,21 +228,34 @@ pdhd_gnocchi_calodata:
     module_type:                     "GnocchiCalorimetry"
     TrackModuleLabel:                "pandoraTrack"
     AssocHitModuleLabel:             "pandoraTrack"
-    T0ModuleLabel:                   ""
+    T0ModuleLabel:                   "pandora"
+    PFPModuleLabel:                  "pandora"
     ChargeMethod:                    2
     FieldDistortion:                 true
     FieldDistortionEfield:           true
+    FieldDistortionCorrectionXSign: 1.
     ##Keep this false -- only useful if the input tracks are themselves are 
     ##                   SCE Corrected. We correct the calorimetry pts in
-    ##                   pandoracalo but not pandoraTrack
+    ##                   caloriemtry products but not track/shower 
     TrackIsFieldDistortionCorrected: false
     Cryostat: 0
     CaloAlg: @local::pdhd_calorimetryalgdata
     NormTools: []
 }
 
+### For first pass of processing, turn off SCE Corrections
+pdhd_gnocchi_calodata_nosce: @local::pdhd_gnocchi_calodata
+pdhd_gnocchi_calodata_nosce.FieldDistortion: false
+pdhd_gnocchi_calodata_nosce.FieldDistortionEfield: false
+
+
 pdhd_gnocchi_calomc: @local::pdhd_gnocchi_calodata
 pdhd_gnocchi_calomc.CaloAlg: @local::pdhd_calorimetryalgmc
+
+### Also have sce-off for mc
+pdhd_gnocchi_calomc_nosce: @local::pdhd_gnocchi_calomc
+pdhd_gnocchi_calomc_nosce.FieldDistortion: false
+pdhd_gnocchi_calomc_nosce.FieldDistortionEfield: false
 
 
 END_PROLOG
