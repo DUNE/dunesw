@@ -200,17 +200,6 @@ dunefd_horizdrift_workflow_reco2:
     rns
 ]
 
-dunefd_horizontaldrift_workflow_solar:
-[
-    @sequence::dunefd_horizdrift_lowlevelreco,
-    @sequence::dunefd_horizdrift_hitdisambiguation,
-    @sequence::dunefd_horizdrift_2dclustering,
-    @sequence::dunefd_horizdrift_pmtrack_trajcluster,
-    @sequence::dunefd_horizdrift_pd_reco1,
-    @sequence::dunefd_horizdrift_pd_reco2,
-    rns
-]
-
 dunefd_horizdrift_workflow_reco: 
 [ 
     @sequence::dunefd_horizdrift_workflow_reco1,
