@@ -1,0 +1,174 @@
+#include "services_dune.fcl"
+#include "dune_radiological_model_decay0_v3_6_for1x2x2.fcl"
+
+process_name: MARLEYGen
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService:          { fileName: "prodradiological_hist.root" }
+  TimeTracker:           {}
+  MemoryTracker:         { } # default is one
+  RandomNumberGenerator: {}                 # ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::dunefd_1x2x2_services
+}
+
+source:
+{
+   module_type: EmptyEvent
+   timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
+   maxEvents:   10          # Number of events to create
+   firstRun:    20000047           # Run number to use for this file
+   firstEvent:  1           # number of first event in the file
+}
+
+physics:
+{
+   producers:
+   {
+      ##########################################################################
+      # Liquid argon
+      Ar39GenInLAr:             @local::dune10kt_39Ar_in_LAr
+      Kr85GenInLAr:             @local::dune10kt_85Kr_in_LAr
+      Ar42GenInLAr:             @local::dune10kt_42Ar_in_LAr
+      K42From42ArGenInLAr:      @local::dune10kt_42Kfrom42Ar_in_LAr
+      # This will need to change to whatever 
+      Rn222ChainRn222GenInLAr:  @local::dune10kt_222Rn_chain_222RnOnly_in_LAr
+      ## Subject to ion drifting (funky x-profile)
+      Rn222ChainPo218GenInLAr:  @local::dune10kt_222Rn_chain_218PoOnly_in_LAr
+      Rn222ChainPb214GenInLAr:  @local::dune10kt_222Rn_chain_214PbOnly_in_LAr
+      Rn222ChainBi214GenInLAr:  @local::dune10kt_222Rn_chain_214BiOnly_in_LAr
+      Rn222ChainPb210GenInLAr:  @local::dune10kt_222Rn_chain_210PbOnly_in_LAr
+      Rn220ChainPb212GenInLAr:  @local::dune10kt_220Rn_chain_212PbOnly_in_LAr
+      ##########################################################################
+
+      ##########################################################################
+      # CPA
+      K40GenInCPA:         @local::dune10kt_1x2x6_40K_in_CPA
+      U238ChainGenInCPA:   @local::dune10kt_1x2x6_238U_chain_in_CPA
+      Th232ChainGenInCPA:  @local::dune10kt_1x2x6_232Th_chain_in_CPA
+      ## Product of ion drifting, on CPA, but these actually came from the liquid argon
+      K42From42ArGenInCPA:      @local::dune10kt_1x2x6_42Kfrom42Ar_in_CPA
+      Rn222ChainPo218GenInCPA:  @local::dune10kt_222Rn_chain_218PoOnly_in_CPA
+      Rn222ChainPb214GenInCPA:  @local::dune10kt_222Rn_chain_214PbOnly_in_CPA
+      Rn222ChainBi214GenInCPA:  @local::dune10kt_222Rn_chain_214BiOnly_in_CPA
+      Rn222ChainPb210GenInCPA:  @local::dune10kt_222Rn_chain_210PbOnly_in_CPA
+      Rn222ChainFromBi210GenInCPA:  @local::dune10kt_222Rn_chain_from210Bi_in_CPA
+      Rn220ChainFromPb212GenInCPA:  @local::dune10kt_220Rn_chain_from212Pb_in_CPA
+      ##########################################################################
+
+      ##########################################################################
+      # APA
+      Co60GenInAPA:        @local::dune10kt_1x2x6_60Co_in_APA
+      U238ChainGenInAPA:   @local::dune10kt_1x2x6_238U_chain_in_APA
+      Th232ChainGenInAPA:  @local::dune10kt_1x2x6_232Th_chain_in_APA
+      #K40GenInAPAboards:         @local::dune10kt_1x2x6_40K_in_APAboards
+      #U238ChainGenInAPAboards:   @local::dune10kt_1x2x6_238U_chain_in_APAboards
+      #Th232ChainGenInAPAboards:  @local::dune10kt_1x2x6_232Th_chain_in_APAboards
+      U238Th232K40GenInLArAPAboards:  @local::dune10kt_1x2x6_gammas_in_APAboards
+      ##########################################################################
+
+      ##########################################################################
+      # PDS
+      Rn222ChainGenInPDS: @local::dune10kt_222Rn_chain_in_PDS
+      ##########################################################################
+
+      ##########################################################################
+      # Field Cage
+      # ...
+      ##########################################################################
+      
+      ##########################################################################
+      # Externals
+      #NeutronGenInRock:    @local::dune10kt_1x2x6_neutron_from_rock
+      CavernwallGammasAtLAr: @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
+      foamGammasAtLAr: @local::dune10kt_1x2x6_gammas_from_foam_atLAr
+      CavernwallNeutronsAtLAr: @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
+      CryostatNGammasAtLAr: @local::dune10kt_1x2x6_CryostatNGammas_from_CavernNeutrons_atLAr
+      CavernNGammasAtLAr: @local::dune10kt_1x2x6_CavernNGammas_atLAr
+      ##########################################################################
+      rns:       { module_type: "RandomNumberSaver" }
+   }
+   
+   simulate: [
+      rns,
+      
+      ##########################################################################
+      # Liquid argon
+      Ar39GenInLAr,
+      Kr85GenInLAr,
+      Ar42GenInLAr,
+      K42From42ArGenInLAr,
+      Rn222ChainRn222GenInLAr,
+      ## Subject to ion drifting (funky x-profile)
+      Rn222ChainPo218GenInLAr,
+      Rn222ChainPb214GenInLAr,
+      Rn222ChainBi214GenInLAr,
+      Rn222ChainPb210GenInLAr,
+      Rn220ChainPb212GenInLAr,
+      ##########################################################################
+
+      ##########################################################################
+      # CPA
+      K40GenInCPA,
+      U238ChainGenInCPA,
+      Th232ChainGenInCPA,
+      ## Product of ion drifting, on CPA, but these actually came from the liquid argon
+      K42From42ArGenInCPA,
+      Rn222ChainPo218GenInCPA,
+      Rn222ChainPb214GenInCPA,
+      Rn222ChainBi214GenInCPA,
+      Rn222ChainPb210GenInCPA,
+      Rn222ChainFromBi210GenInCPA,
+      Rn220ChainFromPb212GenInCPA,
+      ##########################################################################
+
+      ##########################################################################
+      # APA
+      Co60GenInAPA,
+      U238ChainGenInAPA,
+      Th232ChainGenInAPA,
+      #K40GenInAPAboards,
+      #U238ChainGenInAPAboards,
+      #Th232ChainGenInAPAboards,
+      U238Th232K40GenInLArAPAboards,
+      ##########################################################################
+
+      ##########################################################################
+      # PDS
+      Rn222ChainGenInPDS,
+      ##########################################################################
+      
+      ##########################################################################
+      # Externals
+      #NeutronGenInRock
+      CavernwallGammasAtLAr,
+      foamGammasAtLAr,
+      CavernwallNeutronsAtLAr,
+      CryostatNGammasAtLAr,
+      CavernNGammasAtLAr
+      ##########################################################################
+   ]      
+   stream1:       [ out1 ]
+   trigger_paths: [ simulate ] 
+   end_paths:     [ stream1 ]  
+}
+
+outputs:
+{
+   out1:
+   {
+      module_type: RootOutput
+      fileName:    "prodradiological_decay0_dune10kt_1x2x2_gen.root" # Default file name, can override from command line with -o or --output
+      dataTier:    "generated"
+      compressionLevel: 1
+   }
+}
+
+services.Geometry: @local::dune10kt_1x2x2_geo
+services.message.destinations.LogStandardOut.categories.BackTracker.limit: 0
+services.message.destinations.LogStandardError.categories.BackTracker.limit: 0
+
+services.message.destinations.LogStandardOut.categories.BaseRadioGen.limit: 1
+services.message.destinations.LogStandardError.categories.BaseRadioGen.limit: 1
