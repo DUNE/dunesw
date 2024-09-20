@@ -14,6 +14,7 @@
 #include "calorimetry_dune10kt.fcl"
 #include "pid_dune10kt.fcl"
 #include "featurelabelingmodules.fcl"
+##include "crpcb_daphne_bottom_process.fcl"
 #include "channelstatus_vdcrp4.fcl"
 
 process_name: Reco
@@ -40,8 +41,12 @@ services:{
      FileName: "vdcbce_chanmap_v4.txt"
    }
    DAPHNEChannelMapService: {
-    FileName: "vdcbpds_channelmap_crp6-III.txt"
+    FileName: "DAPHNE_vd_coldbox_ChannelMap_bde2.txt"
     IgnoreLinks: true
+   }
+   IPhotonCalibrator: {
+      BadChannels: []
+      service_provider: "PhotonCalibratorServiceProtoDUNESP"
    }
 }
 
@@ -70,7 +75,8 @@ physics: {
        #PDS reco
        opdec:            @local::dune_deconvolution
        ophitspe:         @local::dune_ophit_finder_deco
-       opflash:          @local::protodune_opflash
+       ophit:            @local::protodune_ophit_data_internal
+       opflash:          @local::protodune_opflash_data_internal
        opslicer:         @local::protodune_opslicer
        #CRP reco
        wclsdatanfsp:     @local::dune_vd_crp4_nfsp
@@ -84,43 +90,54 @@ physics: {
        emtrkmichelid:    @local::protodune_emtrkmichelid
   }
   produce: [ tpcrawdecoder, pdhddaphne, 
-             opdec, 
-             ophitspe, opflash, opslicer, 
+#            opdec, ophitspe, 
+             ophit, opflash, 
+             opslicer, 
              wclsdatanfsp, gaushit, pandora, 
              pandoraTrack, pandoraShower, pandoraStdCalo, pandoraGnoCalo, 
-             pandorapid, emtrkmichelid ]
+#            pandorapid, 
+             emtrkmichelid 
+           ]
+  prod_daphne: [tpcrawdecoder, pdhddaphne]
   output : [ rootout ]
+#  trigger_paths: [ prod_daphne ]
   trigger_paths: [ produce ]
   end_paths : [ output ]
 }
 
+#Set number of Optical detectors
+services.Geometry.GDML: "dunecrpcb2_v3_refactored.gdml"
+services.Geometry.ROOT: "dunecrpcb2_v3_refactored.gdml"
+
 #CRP sampling rate
 services.DetectorClocksService: @local::protodune_detectorclocks
 services.DetectorClocksService.ClockSpeedTPC: 1.953125 # 512ns per sample
+services.DetectorClocksService.ClockSpeedOptical: 62.5 # 016ns per sample
 
 services.DetectorPropertiesService.Efield: [0.438, 1, 1]
-services.DetectorPropertiesService.NumberTimeSamples: 6000
-services.DetectorPropertiesService.ReadOutWindowSize: 6000
+services.DetectorPropertiesService.NumberTimeSamples: 8191
+services.DetectorPropertiesService.ReadOutWindowSize: 8191
 
 #CRP raw data decoder settings
 physics.producers.tpcrawdecoder.APAList: [ 6 ]
 physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEth3Defaults
-physics.producers.tpcrawdecoder.DecoderToolParams.DebugLevel: 1
+physics.producers.tpcrawdecoder.DecoderToolParams.DebugLevel: 0 
 physics.producers.tpcrawdecoder.DecoderToolParams.SubDetectorString: "VD_Bottom_TPC"
 
 #PDS raw data decoder settings
 physics.producers.pdhddaphne.DAPHNEInterface: { tool_type: "DAPHNEInterface2" }
 
 #PDS reconstruction settings
-physics.producers.opdec.InputModule:                        "pdhddaphne"
-physics.producers.opdec.InstanceName:                       "daq"
-physics.producers.opdec.Samples:                             65600
-physics.producers.opdec.ApplyPostBLCorrection:               true
-#physics.producers.ophit.InputModule:                        "pdhddaphne"
+#physics.producers.opdec.InputModule:                        "pdhddaphne"
+#physics.producers.opdec.InstanceName:                       "daq"
+#physics.producers.opdec.Samples:                             65600
+#physics.producers.opdec.ApplyPostBLCorrection:               true
+physics.producers.ophit.InputModule:                         "pdhddaphne"
+physics.producers.ophit.InputLabels:                         [ "daq" ]
 #physics.producers.ophitspe.InputModule:                     "pdhddaphne:daq"
-physics.producers.ophitspe.InputModuledigi:                 "pdhddaphne:daq"
-physics.producers.opflash.InputModule:                      "ophitspe"
-physics.producers.opslicer.OpHitModuleLabel:                "ophitspe"
+#physics.producers.ophitspe.InputModuledigi:                 "pdhddaphne:daq"
+physics.producers.opflash.InputModule:                       "ophit"
+physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
 
 #WireCell signal processing settings
 physics.producers.wclsdatanfsp.wcls_main.params.raw_input_label: "tpcrawdecoder:daq"
@@ -134,6 +151,10 @@ physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 1.0
 #Pandora reconstruction settings
 physics.producers.pandora.ShouldRunAllHitsCosmicReco:  true
 physics.producers.pandora.ShouldRunNeutrinoRecoOption: false
+
+#Calorimetry settings
+physics.producers.pandoraGnoCalo.PFPModuleLabel: "pandora"
+physics.producers.pandoraGnoCalo.FieldDistortionCorrectionXSign: 1
 
 #CNN particle identification settings
 physics.producers.emtrkmichelid.WireLabel:      "wclsdatanfsp:gauss"
