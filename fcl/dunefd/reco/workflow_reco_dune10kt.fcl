@@ -217,20 +217,25 @@ dunefd_horizdrift_workflow_reco2_atmos:
     @sequence::dunefd_horizdrift_workflow_nuanglereco
 ]
 
-dunefd_horizdrift_workflow_reco_solar: 
+dunefd_horizdrift_workflow_reco1_solar: 
 [ 
-    # wclsmcnfsp,
-    gaushit,
-    spsolve,
-    hitfd,
-    trajcluster,
-    pmtracktc,
-    opdec,
-    ophitspe,
+    @sequence::dunefd_horizdrift_workflow_reco1,
+    @sequence::dunefd_horizdrift_2dclustering,
+    @sequence::dunefd_horizdrift_pmtrack_trajcluster,
+    @sequence::dunefd_horizdrift_pd_reco1
+]
+
+dunefd_horizdrift_workflow_reco2_solar: 
+[ 
     opflash,
     opslicer,
-    solarflash,
-    rns
+    solarflash
+]
+
+dunefd_horizdrift_workflow_reco_solar: 
+[ 
+    @sequence::dunefd_horizdrift_workflow_reco1_solar,
+    @sequence::dunefd_horizdrift_workflow_reco2_solar
 ]
 
 dunefd_horizdrift_workflow_reco_supernova: 
