@@ -1,12 +1,9 @@
-#include "standard_reco_dune10kt_1x2x6.fcl"
+#include "standard_reco2_dune10kt_1x2x6.fcl"
 
-process_name: Reco2
-
-physics.producers:
-{
-    @table::physics.producers
-    wclsmcnfsp: @local::dune10kt_1x2x6_mc_nfsp
-}
+# physics.producers:
+# {
+#     @table::physics.producers
+#     wclsmcnfsp: @local::dune10kt_1x2x6_mc_nfsp
+# }
 
 physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco2_solar ]
-# outputs.out1.dataTier: "hit-reconstructed"
