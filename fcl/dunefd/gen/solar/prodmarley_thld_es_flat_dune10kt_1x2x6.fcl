@@ -1,0 +1,5 @@
+#include "prodmarley_nue_es_flat_dune10kt_1x2x6.fcl"
+
+physics.producers.marley.marley_parameters.source.Emax: 5.
+physics.producers.marley.marley_parameters.source.E_bin_lefts: [0.0]
+outputs.out1.fileName:    "prodmarley_solar_es_flat_dune10kt_1x2x6_gen.root"
