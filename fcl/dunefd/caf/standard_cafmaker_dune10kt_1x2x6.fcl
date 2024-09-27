@@ -1,0 +1,42 @@
+#include "services_dune.fcl"
+#include "mvamodule.fcl"
+#include "CAFMaker.fcl"
+#include "tools_dune.fcl"
+
+process_name: CafMaker
+
+services:
+{
+  @table::dunefd_1x2x6_reco_services
+  # Load the service that manages root files for histograms where the CAF info will be saved.
+  TFileService: { fileName: "caf.root" }
+}
+
+source:
+{
+  module_type: RootInput
+  maxEvents:  -1        # Number of events to create
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics:
+{
+
+ producers:{
+ }
+
+ analyzers:
+{
+ cafmaker:          @local::dunefd_cafmaker
+}
+
+ caf:  [ cafmaker]
+ trigger_paths: [ ] 
+
+ #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+ #ie analyzers and output streams.  these all run simultaneously
+ end_paths:     [ caf ]  
+
+}

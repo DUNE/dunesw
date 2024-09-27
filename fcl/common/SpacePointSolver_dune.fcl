@@ -10,6 +10,14 @@ protodunespdata_spacepointsolver: @local::standard_spacepointsolver
 protodunespdata_spacepointsolver.WireIntersectThreshold: 0.3
 protodunespdata_spacepointsolver.WireIntersectThresholdDriftDir: 0.3
 
+pdhd_data_spacepointsolver: @local::standard_spacepointsolver
+pdhd_data_spacepointsolver.WireIntersectThreshold: 0.3
+pdhd_data_spacepointsolver.WireIntersectThresholdDriftDir: 0.3
+
+pdhd_mc_spacepointsolver: @local::standard_spacepointsolver
+pdhd_mc_spacepointsolver.WireIntersectThreshold: 0.3
+pdhd_mc_spacepointsolver.WireIntersectThresholdDriftDir: 0.3
+
 dunefd_horizdrift_spacepointsolver:
 {
     @table::standard_spacepointsolver

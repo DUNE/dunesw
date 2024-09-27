@@ -1,0 +1,11 @@
+#include "standard_reco_dune10kt_1x2x2.fcl"
+
+physics.producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
+physics.producers.pmtrack.WireModuleLabel: "wclsmcnfsp:gauss"
+physics.producers.pmtracktc.WireModuleLabel: "wclsmcnfsp:gauss"
+physics.producers.emtrkmichelid.WireLabel: "wclsmcnfsp:gauss"
+physics.producers.energyrecnumu.WireLabel: "wclsmcnfsp:gauss"
+physics.producers.energyrecnue.WireLabel: "wclsmcnfsp:gauss"
+physics.producers.energyrecnc.WireLabel: "wclsmcnfsp:gauss"
+
+physics.reco: [ wclsmcnfsp, @sequence::physics.reco ]

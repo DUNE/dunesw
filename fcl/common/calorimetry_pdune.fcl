@@ -110,6 +110,8 @@ pdune_dp_gnocalodata:
     TrackModuleLabel:                "pandoraTrack"
     AssocHitModuleLabel:             "pandoraTrack"
     T0ModuleLabel:                   ""
+    PFPModuleLabel:                  "pandora"
+    FieldDistortionCorrectionXSign: 1.
     ChargeMethod:                    2
     FieldDistortion:                 false
     FieldDistortionEfield:           false
@@ -133,6 +135,8 @@ pdune_vd_gnocchi_calodata:
     module_type:                     "GnocchiCalorimetry"
     TrackModuleLabel:                "pandoraTrack"
     AssocHitModuleLabel:             "pandoraTrack"
+    PFPModuleLabel:                  "pandora"
+    FieldDistortionCorrectionXSign: 1.
     T0ModuleLabel:                   ""
     ChargeMethod:                    2
     FieldDistortion:                 false
@@ -144,6 +148,114 @@ pdune_vd_gnocchi_calodata:
 }
 
 
+## Old Standard Calo pdhd -- tracks
+pdhd_calorimetryalgdata: @local::standard_calorimetryalgdata
+pdhd_calorimetryalgdata.CalAreaConstants:  [ 1.0E-3, 1.0E-3, 1.0E-3 ]
+pdhd_calorimetryalgdata.CaloDoLifeTimeCorrection: false
+pdhd_calorimetryalgdata.CaloUseModBox: true
+
+pdhd_calorimetryalgmc:   @local::standard_calorimetryalgmc
+pdhd_calorimetryalgmc.CalAreaConstants:  [ 1.0E-3, 1.0E-3, 1.0E-3 ]
+pdhd_calorimetryalgmc.CaloDoLifeTimeCorrection: false
+pdhd_calorimetryalgmc.CaloUseModBox: true
+
+pdhd_calodata:                       @local::standard_calodata
+pdhd_calodata.CaloAlg:               @local::pdhd_calorimetryalgdata
+pdhd_calodata.CaloAlg.CaloUseModBox: true
+pdhd_calodata.TrackModuleLabel:      "pandoraTrack"
+pdhd_calodata.SpacePointModuleLabel: "pandora"
+pdhd_calodata.CorrectSCE:            true
+pdhd_calodata.T0ModuleLabel:         ""
+pdhd_calodata.MakeTree:              false
+
+pdhd_calodatanosce:                      @local::pdhd_calodata 
+pdhd_calodatanosce.CorrectSCE:           false 
+
+pdhd_calomcsce:                       @local::standard_calomc
+pdhd_calomcsce.CaloAlg:               @local::pdhd_calorimetryalgmc
+pdhd_calomcsce.CaloAlg.CaloUseModBox: true
+pdhd_calomcsce.TrackModuleLabel:      "pandoraTrack"
+pdhd_calomcsce.SpacePointModuleLabel: "pandora"
+pdhd_calomcsce.CorrectSCE:            true 
+pdhd_calomcsce.T0ModuleLabel:         ""
+pdhd_calomcsce.MakeTree:              false
+
+pdhd_calomcnosce:                       @local::pdhd_calomcsce 
+pdhd_calomcnosce.CorrectSCE:            false
+
+pdhd_showercalodata:                 @local::shower_calorimetry
+pdhd_showercalodata.CalorimetryAlg:  @local::pdhd_calorimetryalgdata
+pdhd_showercalodata.ShowerTag:       "pandoraShower"
+pdhd_showercalodata.CorrectSCE:      true
+
+pdhd_showercalodatanosce:            @local::pdhd_showercalodata
+pdhd_showercalodatanosce.CorrectSCE: false
+
+pdhd_showercalomcsce:                @local::pdhd_showercalodata
+pdhd_showercalomcsce.CaloAlg:        @local::pdhd_calorimetryalgmc
+
+pdhd_showercalomcnosce:              @local::pdhd_showercalomcsce
+pdhd_showercalomcnosce.CorrectSCE:   false
+
+
+##all shower data
+pdhd_allShower_calodata: @local::pdhd_showercalodata
+pdhd_allShower_calodata.ShowerTag: "pandora2Shower"
+pdhd_allShower_calodatanosce: @local::pdhd_showercalodatanosce
+pdhd_allShower_calodatanosce.ShowerTag: "pandora2Shower"
+##all Shower MC
+pdhd_allShower_calomcsce: @local::pdhd_showercalomcsce
+pdhd_allShower_calomcsce.ShowerTag: "pandora2Shower"
+pdhd_allShower_calomcnosce: @local::pdhd_showercalomcnosce
+pdhd_allShower_calomcnosce.ShowerTag: "pandora2Shower"
+
+##all Track data
+pdhd_allTrack_calodata: @local::pdhd_calodata
+pdhd_allTrack_calodata.TrackModuleLabel: "pandora2Track"
+pdhd_allTrack_calodatanosce: @local::pdhd_calodatanosce
+pdhd_allTrack_calodatanosce.TrackModuleLabel: "pandora2Track"
+##all Track MC
+pdhd_allTrack_calomcsce: @local::pdhd_showercalomcsce
+pdhd_allTrack_calomcsce.TrackModuleLabel: "pandora2Track"
+pdhd_allTrack_calomcnosce: @local::pdhd_showercalomcnosce
+pdhd_allTrack_calomcnosce.TrackModuleLabel: "pandora2Track"
+
+
+
+#### Gnocchi calo for PDHD
+pdhd_gnocchi_calodata:
+{
+    module_type:                     "GnocchiCalorimetry"
+    TrackModuleLabel:                "pandoraTrack"
+    AssocHitModuleLabel:             "pandoraTrack"
+    T0ModuleLabel:                   "pandora"
+    PFPModuleLabel:                  "pandora"
+    ChargeMethod:                    2
+    FieldDistortion:                 true
+    FieldDistortionEfield:           true
+    FieldDistortionCorrectionXSign: 1.
+    ##Keep this false -- only useful if the input tracks are themselves are 
+    ##                   SCE Corrected. We correct the calorimetry pts in
+    ##                   caloriemtry products but not track/shower 
+    TrackIsFieldDistortionCorrected: false
+    Cryostat: 0
+    CaloAlg: @local::pdhd_calorimetryalgdata
+    NormTools: []
+}
+
+### For first pass of processing, turn off SCE Corrections
+pdhd_gnocchi_calodata_nosce: @local::pdhd_gnocchi_calodata
+pdhd_gnocchi_calodata_nosce.FieldDistortion: false
+pdhd_gnocchi_calodata_nosce.FieldDistortionEfield: false
+
+
+pdhd_gnocchi_calomc: @local::pdhd_gnocchi_calodata
+pdhd_gnocchi_calomc.CaloAlg: @local::pdhd_calorimetryalgmc
+
+### Also have sce-off for mc
+pdhd_gnocchi_calomc_nosce: @local::pdhd_gnocchi_calomc
+pdhd_gnocchi_calomc_nosce.FieldDistortion: false
+pdhd_gnocchi_calomc_nosce.FieldDistortionEfield: false
 
 
 END_PROLOG

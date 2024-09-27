@@ -3,10 +3,8 @@
 # Dom Brailsford & Laura Paulucci
 
 
-#include "dune_radiological_model_decay0_v3_4_hd_1x2x2.fcl"
-#include "dune_radiological_model_decay0_v3_4_hd_1x2x6.fcl"
-#include "dune_radiological_model_decay0_v3_6_hd_1x2x6.fcl"
-#include "dune_radiological_model_decay0_v3_6_hd_1x2x2.fcl"
+#include "dune_radiological_model_decay0_hd_1x2x6.fcl"
+#include "dune_radiological_model_decay0_hd_1x2x2.fcl"
 
 BEGIN_PROLOG
 
@@ -48,9 +46,9 @@ dunefd_horizdrift_common_producers:
       Co60GenInAPA:              @local::dune10kt_1x2x6_60Co_in_APA
       U238ChainGenInAPA:         @local::dune10kt_1x2x6_238U_chain_in_APA
       Th232ChainGenInAPA:        @local::dune10kt_1x2x6_232Th_chain_in_APA
-      K40GenInAPAboards:         @local::dune10kt_40K_in_APAboards
-      U238ChainGenInAPAboards:   @local::dune10kt_238U_chain_in_APAboards
-      Th232ChainGenInAPAboards:  @local::dune10kt_232Th_chain_in_APAboards
+ #    K40GenInAPAboards:         @local::dune10kt_40K_in_APAboards          #decay0_v3.4 with APA boards
+ #    U238ChainGenInAPAboards:   @local::dune10kt_238U_chain_in_APAboards   #decay0_v3.4 with APA boards
+ #    Th232ChainGenInAPAboards:  @local::dune10kt_232Th_chain_in_APAboards  #decay0_v3.4 with APA boards
       ##########################################################################
 
       ##########################################################################
@@ -68,13 +66,15 @@ dunefd_horizdrift_1x2x2_producers:
 {
       @table::dunefd_horizdrift_common_producers
       ##########################################################################
+      # Hacked APA boards
+      U238Th232K40GenInLArAPAboards1x2x2: @local::dune10kt_1x2x2_gammas_in_APAboards
+      ##########################################################################
       # Externals
       CavernwallGammasAtLAr1x2x2:         @local::dune10kt_1x2x2_gammas_from_cavernwall_atLAr
       foamGammasAtLAr1x2x2:               @local::dune10kt_1x2x2_gammas_from_foam_atLAr
       CavernwallNeutronsAtLAr1x2x2:       @local::dune10kt_1x2x2_neutrons_from_cavernwall_atLAr
       CryostatNGammasAtLAr1x2x2:          @local::dune10kt_1x2x2_CryostatNGammas_from_CavernNeutrons_atLAr
       CavernNGammasAtLAr1x2x2:            @local::dune10kt_1x2x2_CavernNGammas_atLAr
-      U238Th232K40GenInLArAPAboards1x2x2: @local::dune10kt_1x2x2_gammas_in_APAboards
       ##########################################################################
       # Attenuated Externals
       CavernwallGammasAtLAr1x2x2lowBgAPA:   @local::dune10kt_1x2x2_lowBgAPA_gammas_from_cavernwall_atLAr
@@ -89,13 +89,15 @@ dunefd_horizdrift_1x2x6_producers:
 {
       @table::dunefd_horizdrift_common_producers
       ##########################################################################
+      # Hacked APA boards
+      U238Th232K40GenInLArAPAboards1x2x6: @local::dune10kt_1x2x6_gammas_in_APAboards
+      ##########################################################################
       # Externals
       CavernwallGammasAtLAr1x2x6:         @local::dune10kt_1x2x6_gammas_from_cavernwall_atLAr
       foamGammasAtLAr1x2x6:               @local::dune10kt_1x2x6_gammas_from_foam_atLAr
       CavernwallNeutronsAtLAr1x2x6:       @local::dune10kt_1x2x6_neutrons_from_cavernwall_atLAr
       CryostatNGammasAtLAr1x2x6:          @local::dune10kt_1x2x6_CryostatNGammas_from_CavernNeutrons_atLAr
       CavernNGammasAtLAr1x2x6:            @local::dune10kt_1x2x6_CavernNGammas_atLAr
-      U238Th232K40GenInLArAPAboards1x2x6: @local::dune10kt_1x2x6_gammas_in_APAboards
       ##########################################################################
       # Attenuated Externals
       CavernwallGammasAtLAr1x2x6lowBgAPA:   @local::dune10kt_1x2x6_lowBgAPA_gammas_from_cavernwall_atLAr
@@ -136,15 +138,16 @@ dunefd_backgrounds_common:
       Co60GenInAPA,
       U238ChainGenInAPA,
       Th232ChainGenInAPA,
-      K40GenInAPAboards,
-      U238ChainGenInAPAboards,
-      Th232ChainGenInAPAboards,
+  #   K40GenInAPAboards,        #decay0_v3.4 with APA boards
+  #   U238ChainGenInAPAboards,  #decay0_v3.4 with APA boards
+  #   Th232ChainGenInAPAboards, #decay0_v3.4 with APA boards
       # PDS
       Rn222ChainGenInPDS
 ]
 
-dunefd_backgrounds_1x2x2_external:
+dunefd_backgrounds_1x2x2_specific:
 [
+      U238Th232K40GenInLArAPAboards1x2x2, #new hacked APA board contribution
       CavernwallGammasAtLAr1x2x2,
       foamGammasAtLAr1x2x2,
       CavernwallNeutronsAtLAr1x2x2,
@@ -152,8 +155,9 @@ dunefd_backgrounds_1x2x2_external:
       CavernNGammasAtLAr1x2x2
 ]
 
-dunefd_backgrounds_1x2x6_external:
+dunefd_backgrounds_1x2x6_specific:
 [
+      U238Th232K40GenInLArAPAboards1x2x6, #new hacked APA board contribution
       CavernwallGammasAtLAr1x2x6,
       foamGammasAtLAr1x2x6,
       CavernwallNeutronsAtLAr1x2x6,
@@ -164,84 +168,60 @@ dunefd_backgrounds_1x2x6_external:
 dunefd_hd_backgrounds_1x2x2:
 [
       @sequence::dunefd_backgrounds_common,
-      @sequence::dunefd_backgrounds_1x2x2_external
+      @sequence::dunefd_backgrounds_1x2x2_specific
 ]
 
 dunefd_hd_backgrounds_1x2x6:
 [
       @sequence::dunefd_backgrounds_common,
-      @sequence::dunefd_backgrounds_1x2x6_external
+      @sequence::dunefd_backgrounds_1x2x6_specific
 ]
 
-#temporarily arranging for an alternative background model in HD because of APA geometry not being correct in the gdml
-
-dunefd_backgrounds_common_v3_6:
-[
-      # Liquid argon
+dunefd_hd_backgrounds_1x2x6_LAr_highRate:[
       Ar39GenInLAr,
-      Kr85GenInLAr,
+      Kr85GenInLAr
+]
+
+dunefd_hd_backgrounds_1x2x6_LAr_lowRate:[
       Ar42GenInLAr,
       K42From42ArGenInLAr,
       Rn222ChainRn222GenInLAr,
-      ## Subject to ion drifting (funky x-profile)
       Rn222ChainPo218GenInLAr,
       Rn222ChainPb214GenInLAr,
       Rn222ChainBi214GenInLAr,
       Rn222ChainPb210GenInLAr,
-      Rn220ChainPb212GenInLAr,
-      # CPA
+      Rn220ChainPb212GenInLAr
+]
+
+dunefd_hd_backgrounds_1x2x6_LAr:
+[
+      @sequence::dunefd_hd_backgrounds_1x2x6_LAr_highRate,
+      @sequence::dunefd_hd_backgrounds_1x2x6_LAr_lowRate
+]
+
+dunefd_backgrounds_1x2x6_CPA:
+[
       K40GenInCPA,
       U238ChainGenInCPA,
       Th232ChainGenInCPA,
-      ## Product of ion drifting, on CPA, but these actually came from the liquid argon
       K42From42ArGenInCPA,
       Rn222ChainPo218GenInCPA,
       Rn222ChainPb214GenInCPA,
       Rn222ChainBi214GenInCPA,
       Rn222ChainPb210GenInCPA,
       Rn222ChainFromBi210GenInCPA,
-      Rn220ChainFromPb212GenInCPA,
-      # APA -- removed APA board contribution
-      Co60GenInAPA,
-      U238ChainGenInAPA,
-      Th232ChainGenInAPA,
-      # PDS
-      Rn222ChainGenInPDS
+      Rn220ChainFromPb212GenInCPA
 ]
 
-dunefd_backgrounds_1x2x6_external_v3_6:
+dunefd_backgrounds_1x2x6_APA:
 [
       U238Th232K40GenInLArAPAboards1x2x6, #new hacked APA board contribution
-      CavernwallGammasAtLAr1x2x6,
-      foamGammasAtLAr1x2x6,
-      CavernwallNeutronsAtLAr1x2x6,
-      CryostatNGammasAtLAr1x2x6,
-      CavernNGammasAtLAr1x2x6
+      Co60GenInAPA,
+      U238ChainGenInAPA,
+      Th232ChainGenInAPA
 ]
 
-dunefd_hd_backgrounds_1x2x6_v3_6:
-[
-      @sequence::dunefd_backgrounds_common_v3_6,
-      @sequence::dunefd_backgrounds_1x2x6_external_v3_6
-]
-
-dunefd_backgrounds_1x2x2_external_v3_6:
-[
-      U238Th232K40GenInLArAPAboards1x2x2, #new hacked APA board contribution
-      CavernwallGammasAtLAr1x2x2,
-      foamGammasAtLAr1x2x2,
-      CavernwallNeutronsAtLAr1x2x2,
-      CryostatNGammasAtLAr1x2x2,
-      CavernNGammasAtLAr1x2x2
-]
-
-dunefd_hd_backgrounds_1x2x2_v3_6:
-[
-      @sequence::dunefd_backgrounds_common_v3_6,
-      @sequence::dunefd_backgrounds_1x2x2_external_v3_6
-]
-
-dunefd_backgrounds_1x2x2_lowBgAPA_external_v3_6:
+dunefd_backgrounds_1x2x2_lowBgAPA_specific:
 [
       U238Th232K40GenInLArAPAboards1x2x2, #new hacked APA board contribution
       CavernwallGammasAtLAr1x2x2lowBgAPA,
@@ -251,13 +231,13 @@ dunefd_backgrounds_1x2x2_lowBgAPA_external_v3_6:
       CavernNGammasAtLAr1x2x2lowBgAPA
 ]
 
-dunefd_hd_backgrounds_1x2x2_lowBgAPA_v3_6:
+dunefd_hd_backgrounds_1x2x2_lowBgAPA:
 [
-      @sequence::dunefd_backgrounds_common_v3_6,
-      @sequence::dunefd_backgrounds_1x2x2_lowBgAPA_external_v3_6
+      @sequence::dunefd_backgrounds_common,
+      @sequence::dunefd_backgrounds_1x2x2_lowBgAPA_specific
 ]
 
-dunefd_backgrounds_1x2x6_lowBgAPA_external_v3_6:
+dunefd_backgrounds_1x2x6_lowBgAPA_specific:
 [
       U238Th232K40GenInLArAPAboards1x2x6, #new hacked APA board contribution
       CavernwallGammasAtLAr1x2x6lowBgAPA,
@@ -267,10 +247,10 @@ dunefd_backgrounds_1x2x6_lowBgAPA_external_v3_6:
       CavernNGammasAtLAr1x2x6lowBgAPA
 ]
 
-dunefd_hd_backgrounds_1x2x6_lowBgAPA_v3_6:
+dunefd_hd_backgrounds_1x2x6_lowBgAPA:
 [
-      @sequence::dunefd_backgrounds_common_v3_6,
-      @sequence::dunefd_backgrounds_1x2x6_lowBgAPA_external_v3_6
+      @sequence::dunefd_backgrounds_common,
+      @sequence::dunefd_backgrounds_1x2x6_lowBgAPA_specific
 ]
 
 END_PROLOG

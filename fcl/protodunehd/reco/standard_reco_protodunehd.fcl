@@ -7,7 +7,7 @@
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
 #include "calorimetry_pdune.fcl"
-#include "calibration_dune.fcl"
+#include "calibration_dune10kt.fcl"
 #include "featurelabelingmodules.fcl"
 #include "particleid.fcl"
 #include "mctrutht0matching.fcl"
@@ -37,7 +37,6 @@ services:
   message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodunehd_reco_services
-#  ChannelStatusService: @local::pdsp_channel_status
   IFDH: {}
 }
 
@@ -73,14 +72,14 @@ physics: {
   
   producers: {
     # TPC wire signals
-    caldata:            @local::producer_adcprep_notool
-    # WireCell
-    wclsdatahd:         @local::protodunehddata_wctsp
+    #caldata:            @local::producer_adcprep_notool          
+    # WireCell 
     #wclsdatahd:         @local::protodunehddata_wctsp
+    wclsdatahd:         @local::protodunehd_nfsp
     # Hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
     # space point solver
-    reco3d:             @local::protodunespmc_spacepointsolver
+    reco3d:             @local::pdhd_data_spacepointsolver
     # actual disambiguation
     hitpdune:           @local::pdune_disambigfromsp
     # event feature labeling
@@ -90,33 +89,43 @@ physics: {
     pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
-    pandoracalo:        @local::pdune_sp_calomcnosce
-    pandoracalonosce:   @local::pdune_sp_calomcnosce
+    pandoracalo:        @local::pdhd_calomcnosce
+    pandoracalonosce:   @local::pdhd_calomcnosce
     pandorapid:         @local::standard_chi2pid
-    pandoracali:        @local::protodunespmcnosce_calibrationdedx
-    pandoracalipid:     @local::standard_chi2pid
-    pandoraShowercalo:  @local::pdune_sp_showercalomcnosce
-    pandoraShowercalonosce:  @local::pdune_sp_showercalomcnosce
-#   photon detector reconstruction
+   # pandoracali:        @local::protodunespmcnosce_calibrationdedx
+   # pandoracalipid:     @local::standard_chi2pid
+    pandoraShowercalo:       @local::pdhd_showercalomcnosce
+    pandoraShowercalonosce:  @local::pdhd_showercalomcnosce
+
+    #photon detector reconstruction
     opdec:              @local::dune_deconvolution
     ophitspe:           @local::dune_ophit_finder_deco
     opflash:            @local::protodune_opflash
     opslicer:           @local::protodune_opslicer
+
     crtreco: @local::TwoCRTMatching_producer
     crttag: @local::SingleCRTMatching_producer
-#       Anode piercing tracks t0 reconstruction
+
+    #Anode piercing tracks t0 reconstruction
     anodepiercerst0:    @local::T0RecoAnodePiercers
+
     ##Producers for forcing pandora to create track or shower objects
     ##for each PFParticle
     pandora2Track:         @local::dune_pandoraTrackCreation
-    pandora2calo:          @local::pdune_sp_alltrackcalomcnosce
-    pandora2calonosce:     @local::pdune_sp_alltrackcalomcnosce
-    pandora2pid:           @local::standard_chi2pid
-    pandora2cali:          @local::protodunespmcnosce_calibrationdedx
-    pandora2calipid:       @local::standard_chi2pid
+    pandora2calo:          @local::pdhd_showercalomcnosce
+    pandora2calonosce:     @local::pdhd_showercalomcnosce
+    #pandora2pid:           @local::standard_chi2pid
+    #pandora2cali:          @local::protodunespmcnosce_calibrationdedx
+    #pandora2calipid:       @local::standard_chi2pid
     pandora2Shower:        @local::dune_pandoraShowerCreation
     pandora2Showercalo:    @local::pdune_sp_allshowercalomcnosce
     pandora2Showercalonosce:    @local::pdune_sp_allshowercalomcnosce
+
+    ##Turn off SCE here, we'll have a dedicated fcl for it on
+    pandoraGnocchicalo: @local::pdhd_gnocchi_calomcnosce
+    pandora2Gnocchicalo: @local::pdhd_gnocchi_calomcnosce
+    pandoraGnocchicalonosce: @local::pdhd_gnocchi_calomcnosce
+    pandora2Gnocchicalonosce: @local::pdhd_gnocchi_calomcnosce
   }
   #define the producer and filter modules for this path, order matters,
 #filters reject all following items.  see lines starting physics.producers below
@@ -124,7 +133,6 @@ reco: [ opdec,
         ophitspe,
         opflash,
         opslicer,
-        caldata,
         wclsdatahd,
         gaushit,
         nhitsfilter,
@@ -139,8 +147,8 @@ reco: [ opdec,
         #pandorapid,
         pandoraShowercalo,
         pandoraShowercalonosce,
-        #pandoracali,
-        #pandoracalipid,
+        pandoraGnocchicalo,
+        pandoraGnocchicalonosce,
         emtrkmichelid,
         crttag,
         crtreco,
@@ -148,12 +156,12 @@ reco: [ opdec,
         pandora2Track,
         pandora2calo,
         pandora2calonosce,
+        pandora2Gnocchicalo,
+        pandora2Gnocchicalonosce,
         #pandora2pid,
         pandora2Shower,
         pandora2Showercalo,
         pandora2Showercalonosce
-        #pandora2cali,
-        #pandora2calipid
           ]
   #define the output stream, there could be more than one if using filters
   stream1:  [ out1 ]
@@ -174,7 +182,7 @@ outputs:
    module_type: RootOutput
    fileName:    "%ifb_reco.root"
    dataTier:    "full-reconstructed"
-   outputCommands: [ "keep *", "drop recob::Wires_caldata_dataprep_*",
+   outputCommands: [ "keep *",
                      "drop *_wclsdatasp_wiener_*", "drop *_reco3d_noreg_*",
                      "drop *_reco3d_pre_*" ]
    compressionLevel: 1 #zlib argument (0-9)
@@ -184,13 +192,9 @@ outputs:
    #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
  }
 }
-physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq" 
-physics.producers.caldata.WireName: "dataprep" 
-physics.producers.caldata.LogLevel: 3
-physics.producers.caldata.OnlineChannelMapTool: ""
 
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatahd:gauss"
-physics.producers.emtrkmichelid.WireLabel: "wclsdatahd:gauss"
+#physics.producers.emtrkmichelid.WireLabel: "wclsdatahd:gauss"
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
 physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
 physics.producers.pandoraWriter.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
@@ -200,8 +204,6 @@ physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"
 physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
 physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
-physics.producers.pandoracalipid.CalorimetryModuleLabel:        "pandoracali"
-physics.producers.pandoracalipid.TrackModuleLabel:              "pandoraTrack"
 
 ##Optical detector configuration
 physics.producers.ophit.InputModule:                        "opdigi"
@@ -217,11 +219,15 @@ physics.producers.pandora2Track.UseAllParticles:             true
 ####The above line forces pandora to fit a track to all PFParticles
 physics.producers.pandora2pid.CalorimetryModuleLabel:        "pandora2calo"
 physics.producers.pandora2pid.TrackModuleLabel:              "pandora2Track"
-physics.producers.pandora2cali.TrackModuleLabel:             "pandora2Track"
-physics.producers.pandora2cali.CalorimetryModuleLabel:       "pandora2calo"
-physics.producers.pandora2cali.ShowerModuleLabel:             "pandora2Shower"
-physics.producers.pandora2cali.ShowerCalorimetryModuleLabel:       "pandora2Showercalo"
-physics.producers.pandora2calipid.CalorimetryModuleLabel:    "pandora2cali"
-physics.producers.pandora2calipid.TrackModuleLabel:          "pandora2Track"
 physics.producers.pandora2Shower.PFParticleLabel:            "pandora"
 physics.producers.pandora2Shower.UseAllParticles:            true
+
+physics.producers.pandora2Showercalo.ShowerTag: "pandora2Shower"
+physics.producers.pandora2Showercalonosce.ShowerTag: "pandora2Shower"
+physics.producers.pandora2calo.TrackModuleLabel: "pandora2Track"
+physics.producers.pandora2calonosce.TrackModuleLabel: "pandora2Track"
+
+physics.producers.pandora2Gnocchicalo.TrackModuleLabel:                "pandora2Track"
+physics.producers.pandora2Gnocchicalo.AssocHitModuleLabel:             "pandora2Track"
+physics.producers.pandora2Gnocchicalonosce.TrackModuleLabel:                "pandora2Track"
+physics.producers.pandora2Gnocchicalonosce.AssocHitModuleLabel:             "pandora2Track"

@@ -1,0 +1,11 @@
+#include "standard_reco1_dune10kt_1x2x6.fcl"
+
+physics.producers:
+{
+    @table::physics.producers
+    wclsmcnfsp: @local::dune10kt_1x2x6_mc_nfsp
+}
+
+physics.producers.spsolve.MinNHits: 2 #lower the threshold for low energy interactions
+
+physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco1_solar ]

@@ -9,3 +9,5 @@ services.DetPedestalService.FixedDetPedestal.PedMeanZ:  400
 #services.ChannelStatusService: @local::pdsp_channel_status
 services.RecoDrawingOptions.WireModuleLabels: ["caldata", "digitwire", "wclsdatanfsp:gauss"]
 services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
+services.RawDrawingOptions.PedestalOption: 1
+services.EvdLayoutOptions.AutoZoomInterest: 0

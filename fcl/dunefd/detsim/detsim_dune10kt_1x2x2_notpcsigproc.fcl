@@ -11,3 +11,10 @@ physics.producers:
     @table::physics.producers
     tpcrawdecoder: @local::tpcrawdecoder_dunefd_horizdrift_1x2x2
 }
+
+# We want wirecell to output the noise-free clean signal waveforms too
+physics.producers.tpcrawdecoder.wcls_main.outputers:[
+    	 "wclsSimChannelSink:postdrift",
+    	 "wclsFrameSaver:simsignals",
+    	 "wclsFrameSaver:simdigits"
+]

@@ -1,0 +1,3 @@
+#include "cafmaker_dunevd10kt_1x8x6_3view_30deg_runreco-nuenergy.fcl"
+
+services.Geometry: @local::dunevd10kt_1x8x6_3view_30deg_v3_geo

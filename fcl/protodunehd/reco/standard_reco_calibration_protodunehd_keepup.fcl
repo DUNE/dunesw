@@ -1,0 +1,65 @@
+#include "dune_calibanatree.fcl"
+#include "standard_reco_protodunehd_keepup.fcl"
+
+services.TFileService: {fileName: "%ifb_%tc_keepup_hists.root" }
+
+physics.analyzers: {
+
+
+  ### For first pass of keepup production, keep SCE corrections Off.
+  ### We won't understand the corrections yet, so don't bias the calo/calibration
+  michelremoving: {
+    module_type: "michelremoving"
+    TrackModuleLabel:        "pandoraTrack"
+    CalorimetryModuleLabel:  "pandoracalonosce"
+    HitsModuleLabel:  "hitpdune"
+    SaveTrackInfo: true
+    MaxZ: 410.
+  }
+
+  michelremovinggnocchi: {
+    module_type: "michelremoving"
+    TrackModuleLabel:        "pandoraTrack"
+    CalorimetryModuleLabel:  "pandoraGnocchiCalonosce" ##This will have 
+    HitsModuleLabel:  "hitpdune"
+    SaveTrackInfo: true
+    MaxZ: 410.
+  }
+
+  calibana: @local::pdhd_calibana_data
+  calibanagnocchi: @local::pdhd_calibana_data
+}
+
+##Just doing gnocchi now
+physics.ana: [michelremoving, michelremovinggnocchi, calibanagnocchi]
+physics.end_paths: [output, ana]
+
+#physics.producers.pandoraGnocchiCalonosce.PFPModuleLabel: "pandora" 
+#physics.producers.pandoraGnocchiCalonosce.T0ModuleLabel: "pandora" 
+#
+#physics.producers.pandoraGnocchiCalo.PFPModuleLabel: "pandora" 
+#physics.producers.pandoraGnocchiCalo.T0ModuleLabel: "pandora" 
+
+
+physics.analyzers.michelremoving.SelectEvents: [produce]
+physics.analyzers.michelremovinggnocchi.SelectEvents: [produce]
+physics.analyzers.calibana.SelectEvents: [produce]
+physics.analyzers.calibanagnocchi.SelectEvents: [produce]
+physics.analyzers.calibanagnocchi.CALOproducer: "pandoraGnocchiCalonosce"
+physics.analyzers.calibana.CALOproducer: "pandoracalonosce"
+
+physics.analyzers.calibanagnocchi.T0producers: ["pandora"]
+physics.analyzers.calibana.T0producers: ["pandora"]
+physics.analyzers.calibanagnocchi.RequireT0: true
+physics.analyzers.calibana.RequireT0: true
+physics.analyzers.calibanagnocchi.SelectionTools[1].RequireT0: true #: @local::fixed_sel_tools
+physics.analyzers.calibanagnocchi.SelectionTools[2].RequireT0: true
+physics.analyzers.calibana.SelectionTools[1].RequireT0: true #: @local::fixed_sel_tools
+physics.analyzers.calibana.SelectionTools[2].RequireT0: true
+physics.analyzers.calibana.RawDigitproducers: [
+  "tpcrawdecoder:daq"
+]
+
+physics.analyzers.calibanagnocchi.RawDigitproducers: [
+  "tpcrawdecoder:daq"
+]
