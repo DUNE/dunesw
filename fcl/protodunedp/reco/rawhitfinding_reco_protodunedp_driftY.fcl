@@ -26,6 +26,7 @@ services:
                         @table::dunefddphase_reco_services_legacy
 }
 
+services.AuxDetGeometry: @local::protodunedphase_driftY_auxdet_geo
 services.Geometry: @local::protodunedphase_driftY_geo
 services.DetectorPropertiesService: @local::protodunedphase_detproperties
 services.DetectorPropertiesService.Electronlifetime:  1000.0e3         #in us

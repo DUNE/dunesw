@@ -1,5 +1,6 @@
 #include "prodsingle_dune10ktdphase.fcl"
 
+services.AuxDetGeometry: @local::dunedphase10kt_workspace4x2_auxdet_geo
 services.Geometry: @local::dunedphase10kt_workspace4x2_geo
 
 physics.producers.generator.PDG: [ 13 ]

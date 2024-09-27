@@ -211,7 +211,8 @@ physics.producers.opflash.InputModule:                      "ophitspe"
 physics.producers.opslicer.OpHitModuleLabel:                "ophitspe"
 
 # Use channel map service for data
-services.ExptGeoHelperInterface.ChannelMapClass: "DuneApaChannelMapAlg"
+#services.PdspChannelMapService:        @local::pdspchannelmap
+services.WireReadout.WireReadoutClass: "DuneApaWireReadout"
 #Forcing Pandora to create either all tracks or all showers on each PFParticle object
 physics.producers.pandora2Track.PFParticleLabel:             "pandora"
 physics.producers.pandora2Track.UseAllParticles:             true
