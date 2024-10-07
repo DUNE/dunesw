@@ -36,10 +36,10 @@ physics:
  producers:
  {
    cosmicgenerator: @local::standard_CORSIKAGendp_CMC
-   ar39:  @local::protodunesp_39ar
-   ar42:  @local::protodunesp_42ar
-   kr85:  @local::protodunesp_85kr
-   rn222: @local::protodunesp_222rn
+   ar39:  @local::protodunevd_39ar
+   ar42:  @local::protodunevd_42ar
+   kr85:  @local::protodunevd_85kr
+   rn222: @local::protodunevd_222rn
  }
 
 
