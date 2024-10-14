@@ -39,7 +39,6 @@ physics:
    ar39:  @local::protodunesp_39ar
    ar42:  @local::protodunesp_42ar
    kr85:  @local::protodunesp_85kr
-   rn222: @local::protodunesp_222rn
  }
 
 
