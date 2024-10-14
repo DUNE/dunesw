@@ -1,0 +1,6 @@
+#include "semianalytical_g4_protodunehd.fcl"
+
+process_name: G4Stage2
+
+physics.simulate:      [  rns, IonAndScint, IonAndScintExternal, PDFastSim, PDFastSimExternal ]
+
