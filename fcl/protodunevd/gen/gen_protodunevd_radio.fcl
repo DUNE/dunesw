@@ -38,12 +38,11 @@ physics:
    ar39:  @local::protodunevd_39ar
    ar42:  @local::protodunevd_42ar
    kr85:  @local::protodunevd_85kr
-   rn222: @local::protodunevd_222rn
  }
 
 
  #define the producer and filter modules for this path, order matters,
- simulate: [ ar39, ar42, kr85, rn222 ]
+ simulate: [ ar39, ar42, kr85 ]
 
  #define the output stream, there could be more than one if using filters
  stream1:  [ out1 ]
