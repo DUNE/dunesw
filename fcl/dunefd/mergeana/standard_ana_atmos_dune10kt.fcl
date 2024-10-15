@@ -1,0 +1,177 @@
+#include "services_dune.fcl"
+#include "AnalysisTree.fcl"
+#include "trackfindermodules.fcl"
+#include "showerfindermodules.fcl"
+#include "checkrecoenergy.fcl"
+#include "FlashMatchAna.fcl"
+#include "energyreco.fcl"
+#include "angularreco.fcl"
+
+process_name: Mergeana
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "ana_hist.root" }
+  TimeTracker:       {}
+  RandomNumberGenerator: {}
+  MemoryTracker:         { } # default is one
+  message:      @local::dune_message_services_prod
+  FileCatalogMetadata: 
+    @local::art_file_catalog_mc
+    @table::dunefd_simulation_services 
+  }
+
+#source is now a root file
+source:
+{
+  module_type: RootInput
+  maxEvents:  -1        # Number of events to create
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics:
+{
+  producers:{
+    energyreconue:  @local::dunefd_nuenergyreco_pandora_nue
+    energyreconumu: @local::dunefd_nuenergyreco_pandora_numu
+    energyreconumurange: @local::dunefd_nuenergyreco_pandora_numu
+    energyreconumumcschi2: @local::dunefd_nuenergyreco_pandora_numu
+    energyreconumumcsllhd: @local::dunefd_nuenergyreco_pandora_numu
+    energyreconc: @local::dunefd_nuenergyreco_pandora_nc
+    angularreconue:  @local::dunefd_nuangularreco_pandora_nue
+    angularreconumu: @local::dunefd_nuangularreco_pandora_numu
+    angularreconuepfp:  @local::dunefd_nuangularreco_pandora_nue_allpfps
+    angularreconumupfp: @local::dunefd_nuangularreco_pandora_numu_allpfps
+  }
+ analyzers:
+{
+ analysistree:      @local::dune10kt_analysistree
+}
+ #define the output stream, there could be more than one if using filters 
+ stream1:  [ ]
+
+ #define the producer and filter modules for this path, order matters, 
+ #filters reject all following items.  see lines starting physics.producers below
+ prod: [
+   energyreconue,
+   energyreconumu,
+   energyreconumurange,
+   energyreconumumcschi2,
+   energyreconumumcsllhd,
+   energyreconc,
+   angularreconue,
+   angularreconumu,
+   angularreconuepfp,
+   angularreconumupfp
+ ]
+ ana:  [ analysistree ] 
+ trigger_paths: [prod] 
+
+ #end_paths is a keyword and contains the paths that do not modify the art::Event, 
+ #ie analyzers and output streams.  these all run simultaneously
+ end_paths:     [ana]  
+}
+
+
+physics.analyzers.analysistree.UseBuffers:               false
+physics.analyzers.analysistree.IgnoreMissingShowers:     false
+physics.analyzers.analysistree.SaveAuxDetInfo:           false
+physics.analyzers.analysistree.SaveCryInfo:              false
+physics.analyzers.analysistree.SaveProtoInfo:            false 
+physics.analyzers.analysistree.SaveGenieInfo:            true 
+physics.analyzers.analysistree.SaveGeantInfo:            true
+physics.analyzers.analysistree.SaveGeantPrimaryOnly:     false
+physics.analyzers.analysistree.SaveGeantLeptonOnly:      false
+physics.analyzers.analysistree.AddGeantFlag:             true
+physics.analyzers.analysistree.SaveMCShowerInfo:         false  
+physics.analyzers.analysistree.SaveMCTrackInfo:          false 
+physics.analyzers.analysistree.SaveHitInfo:              false
+physics.analyzers.analysistree.SaveRawDigitInfo:         false 
+physics.analyzers.analysistree.SaveTrackInfo:            true
+physics.analyzers.analysistree.SaveVertexInfo:           true 
+physics.analyzers.analysistree.SaveNuRecoEnergyInfo:     true
+physics.analyzers.analysistree.SaveNuRecoAngleInfo:      true
+physics.analyzers.analysistree.SaveCVNScoresInfo:        true
+physics.analyzers.analysistree.SavePandoraNuVertexInfo:  true 
+physics.analyzers.analysistree.SaveClusterInfo:          false
+physics.analyzers.analysistree.SaveFlashInfo:            false
+physics.analyzers.analysistree.SaveExternCounterInfo:    false
+physics.analyzers.analysistree.SaveShowerInfo:           true
+physics.analyzers.analysistree.SaveCaloCosmics:          false
+physics.analyzers.analysistree.SaveSpacePointSolverInfo: false
+physics.analyzers.analysistree.SaveCnnInfo:              false
+physics.analyzers.analysistree.G4minE:                   -1
+physics.analyzers.analysistree.ShowerModuleLabel: [ "pandoraShower" ]
+physics.analyzers.analysistree.TrackModuleLabel: [ "pandoraTrack" ]
+physics.analyzers.analysistree.VertexModuleLabel: [ "pandora" ]
+physics.analyzers.analysistree.ClusterModuleLabel: "pandora"
+physics.analyzers.analysistree.CalorimetryModuleLabel: [ "pandoracalo" ]
+physics.analyzers.analysistree.ParticleIDModuleLabel: [ "pandorapid" ]
+physics.analyzers.analysistree.PandoraNuVertexModuleLabel: "pandora"
+physics.analyzers.analysistree.DigitModuleLabel: "tpcrawdecoder:daq"
+physics.analyzers.analysistree.HitsModuleLabel: "gaushit"
+physics.analyzers.analysistree.CalDataModuleLabel: "wclsdatanfsp:gauss"
+physics.analyzers.analysistree.OpFlashModuleLabel: "opflash10ppm"
+physics.analyzers.analysistree.FlashT0FinderLabel: [ "" ]
+physics.analyzers.analysistree.MVAPIDTrackModuleLabel: [ "" ]
+physics.analyzers.analysistree.MVAPIDShowerModuleLabel: [ "" ]
+physics.analyzers.analysistree.MCT0FinderLabel: [ "" ]
+physics.analyzers.analysistree.CosmicTaggerAssocLabel: [ "" ]
+physics.analyzers.analysistree.ContainmentTaggerAssocLabel: [ "" ]
+physics.analyzers.analysistree.FlashMatchAssocLabel: [ "" ]
+
+physics.analyzers.analysistree.SavePFParticleInfo: true
+
+physics.analyzers.analysistree.IsAtmoCVN: true
+
+# LongestTrackMethod: 1 range, 2 MCS
+# Needs to be set to force usage of range or mcs regardless of containement
+physics.producers.energyreconumurange.LongestTrackMethod: 1
+physics.producers.energyreconumumcschi2.LongestTrackMethod: 2
+physics.producers.energyreconumumcsllhd.LongestTrackMethod: 2
+
+physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MCSMethod: "LLHD"
+physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MinTrackLengthMCS: 0
+physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MaxTrackLengthMCS: 3000
+physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MaxMomentumMCS: 100000
+physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MinResolutionMCSLLHD: 0
+physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MaxResolutionMCSLLHD: 0
+physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MCSAngleMethod: 3
+
+
+physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MCSMethod: "Chi2"
+physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MinTrackLengthMCS: 0
+physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MaxTrackLengthMCS: 3000
+physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MaxMomentumMCS: 100000
+physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MinResolutionMCSChi2: 0
+physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MaxResolutionMCSChi2: 0
+physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MCSAngleMethod: 3
+
+physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MCSMethod: "LLHD"
+physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MinTrackLengthMCS: 0
+physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MaxTrackLengthMCS: 3000
+physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MaxMomentumMCS: 100000
+physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MinResolutionMCSLLHD: 0
+physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MaxResolutionMCSLLHD: 0
+physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MCSAngleMethod: 3
+
+physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MuonRangeToMCSThreshold: -1e12
+
+
+##block to define where the output goes.  if you defined a filter in the physics
+##block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
+##entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
+#outputs:
+#{
+# out1:
+# {
+#   module_type: RootOutput
+#   fileName:    "%ifb_%tc_merged.root"
+#   dataTier:    "full-reconstructed"
+#   compressionLevel: 1
+# }
+#}
+

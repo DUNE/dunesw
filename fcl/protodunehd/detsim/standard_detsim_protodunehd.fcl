@@ -64,5 +64,5 @@ outputs:
   }
 }
 
-services.ExptGeoHelperInterface.ChannelMapClass: "DuneApaChannelMapAlg"
+services.WireReadout.WireReadoutClass: "DuneApaWireReadout"
 physics.producers.opdigi.InputModules: ["PDFastSim", "PDFastSimExternal"]

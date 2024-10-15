@@ -19,6 +19,9 @@
 #include "Deconvolution.fcl"
 #include "OpHitFinderDeco.fcl"
 #include "opticaldetectorservices_dune.fcl"
+#include "OpSlicer.fcl"
+#include "SolarOpFlash.fcl"
+#include "OpSlicer.fcl"
 
 BEGIN_PROLOG
 
@@ -84,6 +87,9 @@ dunefd_horizdrift_producers:
   opdec:      @local::dune_deconvolution
   ophitspe:   @local::dune_ophit_finder_deco
   opflash:    @local::dunefd_opflash
+  opslicer:   @local::dune10kt_1x2x6_opslicer
+  solarflash: @local::solar_opflash_dune10kt_1x2x6  opslicer:   @local::dune10kt_1x2x6_opslicer
+
 }
 
 dunefd_horizdrift_lowlevelreco: 
@@ -168,7 +174,8 @@ dunefd_horizdrift_pd_reco1:
 
 dunefd_horizdrift_pd_reco2:
 [
-    opflash
+    opflash,
+    opslicer
 ]
 
 dunefd_horizdrift_workflow_reco1:
@@ -211,6 +218,27 @@ dunefd_horizdrift_workflow_reco2_atmos:
 [
     @sequence::dunefd_horizdrift_workflow_reco2,
     @sequence::dunefd_horizdrift_workflow_nuanglereco
+]
+
+dunefd_horizdrift_workflow_reco1_solar: 
+[ 
+    @sequence::dunefd_horizdrift_workflow_reco1,
+    @sequence::dunefd_horizdrift_2dclustering,
+    @sequence::dunefd_horizdrift_pmtrack_trajcluster,
+    @sequence::dunefd_horizdrift_pd_reco1
+]
+
+dunefd_horizdrift_workflow_reco2_solar: 
+[ 
+    opflash,
+    opslicer,
+    solarflash
+]
+
+dunefd_horizdrift_workflow_reco_solar: 
+[ 
+    @sequence::dunefd_horizdrift_workflow_reco1_solar,
+    @sequence::dunefd_horizdrift_workflow_reco2_solar
 ]
 
 dunefd_horizdrift_workflow_reco_supernova: 
