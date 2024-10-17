@@ -1,5 +1,6 @@
 #include "standard_detsim_dune10kt_legacy.fcl"
 process_name: Detsim
+services.AuxDetGeometry: @local::dune10kt_1x2x6_auxdet_geo
 services.Geometry: @local::dune10kt_1x2x6_geo
 
 ### What value do I want for the Noise Level?

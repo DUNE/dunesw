@@ -1,5 +1,6 @@
 #include "evd_dune10kt.fcl"
 
+services.AuxDetGeometry: @local::dunevdcb_auxdet_geo
 services.Geometry: @local::dunevdcb_geo
 
 services.ColorDrawingOptions.RawQHigh: [100]

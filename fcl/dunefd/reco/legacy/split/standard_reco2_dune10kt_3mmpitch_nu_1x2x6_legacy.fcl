@@ -1,3 +1,4 @@
 #include "standard_reco2_dune10kt_nu_1x2x6_legacy.fcl"
 process_name: Reco2
+services.AuxDetGeometry: @local::dune10kt_3mmpitch_1x2x6_auxdet_geo
 services.Geometry: @local::dune10kt_3mmpitch_1x2x6_geo

@@ -79,6 +79,7 @@ outputs:
  }
 }
 
+services.AuxDetGeometry: @local::dune10kt_workspace_auxdet_geo
 services.Geometry: @local::dune10kt_workspace_geo
 services.Geometry.GDML: "dune10kt_v1_1x2x6.gdml"
 

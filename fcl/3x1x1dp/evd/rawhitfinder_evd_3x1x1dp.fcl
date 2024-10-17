@@ -1,6 +1,7 @@
 #include "evd_dune.fcl"
 process_name: EVD
 
+services.AuxDetGeometry: @local::dphase3x1x1_auxdet_geo
 services.Geometry: @local::dphase3x1x1_geo
 services.RawDrawingOptions.TotalTicks: 1667
 services.DetectorPropertiesService.Efield:	[0.5, 4.0, 0.0]
@@ -15,4 +16,4 @@ services.RawDrawingOptions.TPC: 0	#there is only one TPC volume for the 3x1x1
 
 services.DetPedestalService: @local::dunedp_fixedpeds
 services.DetPedestalService.FixedDetPedestal.PedMeanY: 0
-services.DetPedestalService.FixedDetPedestal.PedMeanZ: 0 
+services.DetPedestalService.FixedDetPedestal.PedMeanZ: 0
