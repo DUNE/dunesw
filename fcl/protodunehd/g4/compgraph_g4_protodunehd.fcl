@@ -14,7 +14,6 @@ services:
   message:      @local::standard_info
 
   @table::protodunehd_refactored_simulation_services
-  PhotonVisibilityService: @local::protodune_hd_v6_photonvisibilityservice
 
   NuRandomService:       @local::dune_prod_seedservice
 }
@@ -37,7 +36,7 @@ physics:
     #retain largeant name for compatibility
     largeant:     @local::protodune_larg4
     IonAndScint:  @local::protodunehd_ionandscint_correlated
-    PDFastSim:    @local::protodune_hd_pdfastsim_pvs
+    PDFastSim:    @local::protodune_hd_pdfastsim_ann_ar
     rns: {module_type: "RandomNumberSaver"}
   }
 
@@ -46,7 +45,7 @@ physics:
 
   }
 
-  simulate:      [  rns, largeant, IonAndScint, PDFastSim ]
+  simulate:      [  rns, largeant, IonAndScint, PDFastSim, PDFastSimExternal ]
 
   stream1:       [ out1 ]
 
