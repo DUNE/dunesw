@@ -241,6 +241,19 @@ dunefd_horizdrift_workflow_reco_solar:
     @sequence::dunefd_horizdrift_workflow_reco2_solar
 ]
 
+dunefd_horizdrift_workflow_reco2_supernova:
+[
+    @sequence::dunefd_horizdrift_2dclustering,
+    @sequence::dunefd_horizdrift_pandora,
+    @sequence::dunefd_horizdrift_pmtrack,
+    @sequence::dunefd_horizdrift_pmtrack_trajcluster,
+    @sequence::dunefd_horizdrift_pmtrack_trajcluster_pfp,
+    @sequence::dunefd_horizdrift_pmtrack_showers,
+    @sequence::dunefd_horizdrift_pd_reco1,
+    @sequence::dunefd_horizdrift_pd_reco2,
+    rns
+]
+
 dunefd_horizdrift_workflow_reco_supernova: 
 [ 
     wclsmcnfsp,
