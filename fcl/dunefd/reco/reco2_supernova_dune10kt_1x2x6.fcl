@@ -1,0 +1,6 @@
+#include "standard_reco2_dune10kt_1x2x6.fcl"
+
+#to update with new Pandora training for LE
+#physics.producers.pandora.ConfigFile:   "PandoraSettings_Master_Atmos_DUNEFD.xml"
+
+physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco2_supernova ]
