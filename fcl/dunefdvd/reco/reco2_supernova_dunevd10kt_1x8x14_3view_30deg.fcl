@@ -15,5 +15,7 @@ source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco2" ]
 
 physics.reco: [ @sequence::dunefd_vertdrift_le_reco2 ]
 
+physics.producers.pandora.ConfigFile: "PandoraSettings_Master_LowE_DUNEFD_VD.xml"
+
 outputs.out1.fileName: "%ifb_reco2.root"
 outputs.out1.dataTier: "full-reconstructed"
