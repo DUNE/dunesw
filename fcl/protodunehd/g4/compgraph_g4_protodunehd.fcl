@@ -45,7 +45,7 @@ physics:
 
   }
 
-  simulate:      [  rns, largeant, IonAndScint, PDFastSim, PDFastSimExternal ]
+  simulate:      [  rns, largeant, IonAndScint, PDFastSim ]
 
   stream1:       [ out1 ]
 
@@ -61,7 +61,7 @@ outputs:
     fileName:    "%ifb_g4.root"
     dataTier:    "simulated"
     #outputCommands: [ "keep *" ]
-    outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_G4"]
+    outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_G4*"]
     #fastCloning: false #will fail if the split level is not the same as for the gen stage, so turn it off
     compressionLevel: 1 #zlib argument (0-9) 
     #basketSize: 8192 #[Byte] buffer size at 8k

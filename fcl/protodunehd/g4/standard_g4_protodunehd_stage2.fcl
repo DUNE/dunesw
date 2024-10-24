@@ -1,6 +1,6 @@
 #include "standard_g4_protodunehd.fcl"
 
 process_name: G4Stage2
-physics.simulate:      [  rns, IonAndScint, PDFastSim ]
-services.TFileService.fileName: "g4_protodunehd_hist.root"
-outputs.out1.fileName:    "%ifb_g4_stage2.root"
+
+physics.simulate:      [  rns, IonAndScint, IonAndScintExternal, PDFastSim, PDFastSimExternal ]
+

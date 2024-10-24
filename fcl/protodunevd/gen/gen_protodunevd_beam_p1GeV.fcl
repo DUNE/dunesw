@@ -4,6 +4,8 @@
 #include "corsika_protodune.fcl"
 #include "protodunebeam.fcl"
 #include "dune_radiological_model.fcl"
+#include "dune_radiological_model_decay0.fcl"
+
 
 process_name: SinglesGen
 
@@ -37,16 +39,16 @@ physics:
  producers:
  {
    generator: @local::protodunedp_triggeredbeam
-   #cosmicgenerator: @local::protodune_corsika_cmc  
-   #ar39:  @local::protodunesp_39ar
-   #ar42:  @local::protodunesp_42ar
-   #kr85:  @local::protodunesp_85kr
-   #rn222: @local::protodunesp_222rn
+   #cosmicgenerator: @local::protodune_corsika_cmc
+   ar39:             @local::dune10kt_39Ar_in_LAr
+   kr85:             @local::dune10kt_85Kr_in_LAr
+   ar42:             @local::dune10kt_42Ar_in_LAr
+   k42fromar42:      @local::dune10kt_42Kfrom42Ar_in_LAr
  }
 
 
  #define the producer and filter modules for this path, order matters, 
- #simulate: [ generator, cosmicgenerator, ar39, ar42, kr85, rn222 ]
+ #simulate: [ generator, cosmicgenerator, ar39, ar42, kr85, k42fromar42 ]
  simulate: [ generator ]
 
  #define the output stream, there could be more than one if using filters 
