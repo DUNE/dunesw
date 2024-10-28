@@ -1,4 +1,4 @@
-#include "standard_reco_protodunehd.fcl"
+#include "standard_reco_protodunehd_MC.fcl"
 
 #make sure only one WCTK is here -- not sure this part is necessary
 #or if only one can be in the produce list
