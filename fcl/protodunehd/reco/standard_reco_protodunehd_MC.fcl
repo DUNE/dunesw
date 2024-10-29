@@ -36,7 +36,7 @@ services:
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         #@table::protodunehd_reco_services
   ChannelStatusService: @local::dunefd_channel_status
-  ExptGeoHelperInterface:       @local::dune_geometry_helper
+  WireReadout:          @local::dune_wire_readout
   GeometryConfigurationWriter:  {}
   Geometry:                     @local::protodunehdv6_geo
   DetectorClocksService:        @local::protodunehd_detectorclocks
@@ -55,6 +55,8 @@ services:
 
 }
 
+services.AuxDetGeometry.GDML: "protodunehd_v6_refactored.gdml"
+services.AuxDetGeometry.Name: "protodunehdv6"
 
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
@@ -208,8 +210,8 @@ physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
 
 ##Optical detector configuration
 physics.producers.opdec.InputModule: "opdigi"
-physics.producers.opdec.InstanceName: "daq"
-physics.producers.ophitspe.InputModuledigi: "opdigi:daq" ##TODO check this
+physics.producers.opdec.InstanceName: ""
+physics.producers.ophitspe.InputModuledigi: "opdigi" ##TODO check this
 physics.producers.opflash.InputModule: "ophitspe"
 physics.producers.opslicer.OpHitModuleLabel: "ophitspe"
 
