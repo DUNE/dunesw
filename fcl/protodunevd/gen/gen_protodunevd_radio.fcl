@@ -3,7 +3,7 @@
 #include "corsika_protodune.fcl"
 #include "CORSIKAGendp.fcl"
 #include "dune_radiological_model.fcl"
-#include "dune_radiological_model_decay0.fcl"
+#include "dune_radiological_model_decay0_hd_common.fcl"
 
 process_name: SinglesGen
 
