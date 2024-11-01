@@ -29,7 +29,7 @@ physics:
   producers:
   {
     tpcrawdecoder:  @local::wirecell_protodunehdmc
-    opdigi:         @local::protodune_opdigi_refactor
+    opdigi:         @local::protodunehd_opdigi
     crt:            @local::CRTSimRefac_standard
     rns:            { module_type: "RandomNumberSaver" }
   }
@@ -65,4 +65,3 @@ outputs:
 }
 
 services.WireReadout.WireReadoutClass: "DuneApaWireReadout"
-physics.producers.opdigi.InputModules: ["PDFastSim", "PDFastSimExternal"]

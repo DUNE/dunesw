@@ -3,6 +3,7 @@
 #include "corsika_protodune.fcl"
 #include "CORSIKAGendp.fcl"
 #include "dune_radiological_model.fcl"
+#include "dune_radiological_model_decay0_hd_common.fcl"
 
 process_name: SinglesGen
 
@@ -35,14 +36,15 @@ physics:
 
  producers:
  {
-   ar39:  @local::protodunevd_39ar
-   ar42:  @local::protodunevd_42ar
-   kr85:  @local::protodunevd_85kr
+   ar39:             @local::dune10kt_39Ar_in_LAr
+   kr85:             @local::dune10kt_85Kr_in_LAr
+   ar42:             @local::dune10kt_42Ar_in_LAr
+   k42fromar42:      @local::dune10kt_42Kfrom42Ar_in_LAr
  }
 
 
  #define the producer and filter modules for this path, order matters,
- simulate: [ ar39, ar42, kr85 ]
+ simulate: [ ar39, ar42, kr85, k42fromar42 ]
 
  #define the output stream, there could be more than one if using filters
  stream1:  [ out1 ]
