@@ -1,27 +1,9 @@
-#include "services_dune.fcl"
-#include "workflow_radiological_decay0_dunevd10kt.fcl"
-
-process_name: RadBkgGen
+#include "prodbackground_radiological_decay0_common_dunevd10kt.fcl"
 
 services:
 {
-   TFileService:          { fileName: "prodradiological_hist.root" }
-   TimeTracker:           {}
-   MemoryTracker:         {} # default is one
-   RandomNumberGenerator: {}                 # ART native random number generator
-   FileCatalogMetadata:  @local::art_file_catalog_mc
-   message:              @local::dune_message_services_prod
-   IFDH: {}
+   @table::services
    @table::dunefdvd_1x8x6_3view_30deg_services
-}
-
-source:
-{
-   module_type: EmptyEvent
-   timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
-   maxEvents:   10          # Number of events to create
-   firstRun:    20000047           # Run number to use for this file
-   firstEvent:  1           # number of first event in the file
 }
 
 physics:
@@ -37,13 +19,4 @@ physics:
    end_paths:     [ stream1 ]  
 }
 
-outputs:
-{
-   out1:
-   {
-      module_type: RootOutput
-      fileName:    "prodradiological_decay0_dunevd10kt_1x8x6_gen.root" # Default file name, can override from command line with -o or --output
-      dataTier:    "generated"
-      compressionLevel: 1
-   }
-}
+outputs.out1.fileName: "prodradiological_decay0_dunevd10kt_1x8x6_gen.root"

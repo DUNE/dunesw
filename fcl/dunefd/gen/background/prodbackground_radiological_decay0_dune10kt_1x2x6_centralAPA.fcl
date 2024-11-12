@@ -1,5 +1,20 @@
-#include "prodbackground_radiological_decay0_dune10kt_1x2x6_lateralAPA.fcl"
+#include "prodbackground_radiological_decay0_dune10kt_common.fcl"
 
-physics.simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x6_lowBgAPA ]      
+services:
+{
+   @table::services
+   @table::dunefd_1x2x6_services
+}
+
+physics:
+{
+   producers:
+   {
+      rns:       { module_type: "RandomNumberSaver" }
+      @table::dunefd_horizdrift_1x2x6_producers
+   }
+
+   simulate: [rns, @sequence::dunefd_hd_backgrounds_1x2x6_lowBgAPA ]
+}
 
 outputs.out1.fileName:    "prodradiological_decay0_dune10kt_1x2x6_centralAPA_gen.root"
