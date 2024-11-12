@@ -41,7 +41,7 @@ services:
   message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_data
   ChannelStatusService: @local::dunefd_channel_status
-  ExptGeoHelperInterface:       @local::dune_geometry_helper
+  WireReadout:          @local::dune_wire_readout
   GeometryConfigurationWriter:  {}
   Geometry:                     @local::protodunehdv6_geo
   DetectorClocksService:        @local::protodunehd_detectorclocks
@@ -72,6 +72,9 @@ services:
      FileName: "PD2HDChannelMap_WIBEth_electronics_v1.txt"
    }
 }
+
+services.AuxDetGeometry.GDML: "protodunehd_v6_refactored.gdml"
+services.AuxDetGeometry.Name: "protodunehdv6"
 
 physics:
 {

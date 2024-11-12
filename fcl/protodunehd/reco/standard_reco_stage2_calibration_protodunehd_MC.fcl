@@ -1,5 +1,5 @@
 #include "dune_calibanatree.fcl"
-#include "standard_reco_protodunehd.fcl"
+#include "standard_reco_protodunehd_MC.fcl"
 
 #### NOTE -- analyzer modules are instantiated in the included fcl
 

@@ -123,13 +123,14 @@ outputs:
 
 physics.producers.wclsdatavd.wcls_main.params.use_magnify:  "false"
 
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 5.0
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 5.0
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 5.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 2.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 2.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 2.0
 
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatavd:gauss"
 physics.producers.emtrkmichelid.WireLabel: "wclsdatavd:gauss"
 
+physics.producers.pandora.ConfigFile:     "PandoraSettings_Master_ProtoDUNE_VD.xml"
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
 physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
 

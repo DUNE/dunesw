@@ -1,22 +1,21 @@
-##include "services_refactored_pdune.fcl"
+#include "services_refactored_pdune.fcl"
 #include "singles_dune.fcl"
 #include "corsika_protodune.fcl"
-##include "CORSIKAGendp.fcl"
+#include "CORSIKAGendp.fcl"
 #include "dune_radiological_model.fcl"
-#include "services_protodunevd.fcl"
-#include "dune_radiological_model_decay0.fcl"
+#include "gen_protodunevd_singlep.fcl"
 
 process_name: SinglesGen
 
 services:
 {
   # Load the service that manages root files for histograms.
-  TFileService: { fileName: "cosmicgen_protoduneVD_driftY_hist.root" }
+  TFileService: { fileName: "gensingle_protoDUNE_hist.root" }
   TimeTracker:       @local::dune_time_tracker
   MemoryTracker:     @local::dune_memory_tracker
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
-  @table::protodunevd_simulation_services_driftY
+  @table::protodunevd_refactored_simulation_services
 }
 
 #Start each new event with an empty event.
@@ -37,18 +36,12 @@ physics:
 
  producers:
  {
-   cosmicgenerator: @local::protodune_corsika_cmc
-#   cosmicgenerator: @local::standard_CORSIKAGendp_CMC
-   ar39:             @local::dune10kt_39Ar_in_LAr
-   kr85:             @local::dune10kt_85Kr_in_LAr
-   ar42:             @local::dune10kt_42Ar_in_LAr
-   k42fromar42:      @local::dune10kt_42Kfrom42Ar_in_LAr
+   generator: @local::pdvd_1GeV_muon
  }
 
 
  #define the producer and filter modules for this path, order matters,
-#simulate: [ cosmicgenerator, ar39, ar42, kr85, k42fromar42 ]
- simulate: [ cosmicgenerator]
+simulate: [ generator ]
 
  #define the output stream, there could be more than one if using filters
  stream1:  [ out1 ]
@@ -70,9 +63,13 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName: "cosmicgen_protoduneVD.root" #default file name, can override from command line with -o or --output
+   fileName: "gensingle_protoDUNE.root" #default file name, can override from command line with -o or --output
    dataTier: "generated"
    compressionLevel: 1
  }
 }
+
+services.TFileService.fileName: "gen_protodunevd_muon_1GeV_hist.root"
+source.maxEvents: 1
+outputs.out1.fileName: "gen_protodunevd_muon_1GeV.root"
 
