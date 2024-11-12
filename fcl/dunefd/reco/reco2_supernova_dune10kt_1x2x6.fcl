@@ -4,3 +4,4 @@ physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco2_supernova ]
 
 physics.producers.pandora.ConfigFile: "PandoraSettings_Master_LowE_DUNEFD.xml"
 
+outputs.out1.outputCommands: ["keep *", "drop recob::OpWaveforms_*_*_*Reco2*"]
