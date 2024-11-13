@@ -37,7 +37,7 @@ physics: {
  producers: {
 #   daq:            @local::dune_detsim
 
-   tpcrawdecoder: @local::dune10kt_hd_sim_nfsp
+   tpcrawdecoder: @local::dune10kt_horizdrift_sim_nfsp
    opdigi:        @local::standard_template_digitizer
    rns:            { module_type: "RandomNumberSaver" }
  }
