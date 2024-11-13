@@ -168,7 +168,6 @@ services:
 }
 #services.Geometry.GDML: "dune10kt_v4_refactored_1x2x2.gdml"
 #services.Geometry.Name: "dune10kt_v4_refactored_1x2x2"
-#services.Geometry.ROOT: "dune10kt_v4_refactored_1x2x2.gdml"
 
 
 physics.producers.marley.marley_parameters.reactions: ["ve40ArCC_Bhattacharya2009.react" ]

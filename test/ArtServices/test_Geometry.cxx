@@ -38,7 +38,11 @@ int test_Geometry(string gname) {
   std::ostringstream oss;
   oss << "#include \"geometry_dune.fcl\"" << endl;
   oss << "services.Geometry:                   @local::" << gname << endl;
-  oss << "services.ExptGeoHelperInterface:     @local::dune_geometry_helper" << endl;
+  if (gname.find("dune35t") != std::string::npos) {
+    oss << "services.WireReadout:     @local::dune35t_wire_readout" << endl;
+  } else {
+    oss << "services.WireReadout:     @local::dune_wire_readout" << endl;
+  }
   ArtServiceHelper::load_services(oss.str());
 
   cout << myname << line << endl;

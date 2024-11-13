@@ -12,6 +12,7 @@ services:
   MemoryTracker:         { } # default is one
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
+AuxDetGeometry: @local::dunevdcb_auxdet_geo
   Geometry:		@local::dunevdcb_geo
 		@table::vdcb_crp1_top_services
                	@table::vdcb_sim_base_services

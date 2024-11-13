@@ -24,7 +24,6 @@ physics.reco: [
 # Change geometry from v3 to v2 used to produce the reco files
 #services.Geometry.GDML: "dunevd10kt_3view_v2_refactored_1x8x6ref.gdml"
 #services.Geometry.Name: "dunevd10kt_3view_v2_refactored_1x8x6ref"
-#services.Geometry.ROOT: "dunevd10kt_3view_v2_refactored_1x8x6ref.gdml"
 # adjust configuration for Gnocchi calorimetry module
 physics.producers.gnocchicalo.TrackModuleLabel: "pandoraTrack"
 physics.producers.gnocchicalo.SpacePointModuleLabel: @erase

@@ -1,6 +1,7 @@
 #include "services_protodunehd.fcl"
 #include "evd_protoDUNE_noped.fcl"
 
+services.AuxDetGeometry: @local::protodunehdv6_auxdet_geo
 services.Geometry: @local::protodunehdv6_geo
 services.DetPedestalService.FixedDetPedestal.PedMeanZ:  400
 #services.DetPedestalService.FixedDetPedestal.PedMeanV:  1800

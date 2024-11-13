@@ -14,7 +14,6 @@ services:
   message:      @local::standard_info
 
   @table::protodunehd_refactored_simulation_services
-  PhotonVisibilityService: @local::protodune_hd_v6_photonvisibilityservice
 
   NuRandomService:       @local::dune_prod_seedservice
 }
@@ -38,7 +37,7 @@ physics:
     largeant:     @local::protodune_larg4
     IonAndScint:  @local::protodunehd_ionandscint
     IonAndScintExternal: @local::protodunehd_ionandscint_external
-    PDFastSim:    @local::protodune_hd_pdfastsim_pvs
+    PDFastSim:    @local::protodune_hd_pdfastsim_par
     PDFastSimExternal: @local::protodune_hd_pdfastsim_pvs_external
     rns: {module_type: "RandomNumberSaver"}
   }
@@ -64,7 +63,7 @@ outputs:
     fileName:    "%ifb_g4.root"
     dataTier:    "simulated"
     #outputCommands: [ "keep *" ]
-    outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_G4"]
+    outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_G4*"]
     #fastCloning: false #will fail if the split level is not the same as for the gen stage, so turn it off
     compressionLevel: 1 #zlib argument (0-9) 
     #basketSize: 8192 #[Byte] buffer size at 8k

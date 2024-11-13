@@ -13,6 +13,7 @@ services:
   @table::dunefddphase_simulation_services_legacy
   IFDH: {}
 }
+services.AuxDetGeometry: @local::dunedphase10kt_workspace_auxdet_geo
 services.Geometry: @local::dunedphase10kt_workspace_geo
 #Start each new event with an empty event.
 source:

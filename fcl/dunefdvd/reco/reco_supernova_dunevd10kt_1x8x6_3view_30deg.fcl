@@ -5,6 +5,7 @@ services: {
     @table::dunefdvd_1x8x6_3view_30deg_reco_services
 }
 
+services.AuxDetGeometry: @local::dunevd10kt_1x8x6_3view_30deg_v4_auxdet_geo
 services.Geometry: @local::dunevd10kt_1x8x6_3view_30deg_v4_geo
 
 source: {

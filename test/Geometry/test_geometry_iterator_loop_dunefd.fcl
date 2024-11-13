@@ -1,6 +1,6 @@
 #
 # Geometry iterators test module on DUNE far detector geometry
-# 
+#
 # Version: 1.0
 #
 
@@ -9,11 +9,12 @@
 process_name: testGeoIter
 
 services: {
-  
-  Geometry:               @local::dune10kt_workspace_geo
-  ExptGeoHelperInterface: @local::dune_geometry_helper
+
+  AuxDetGeometry: @local::dune10kt_workspace_auxdet_geo
+  Geometry:       @local::dune10kt_workspace_geo
+  WireReadout:    @local::dune_wire_readout
   GeometryConfigurationWriter: {}
-  
+
   message: {
     destinations: {
       LogDebugFile: {
@@ -66,4 +67,3 @@ physics: {
   trigger_paths: [ ]
   end_paths:     [ ana ]
 }
-

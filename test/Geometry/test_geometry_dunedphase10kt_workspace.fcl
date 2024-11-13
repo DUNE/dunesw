@@ -1,6 +1,6 @@
 #
 # Geometry test module on DUNE Dual Phase Far Detector workspace geometry
-# 
+#
 # Version: 1.0
 #
 
@@ -9,14 +9,15 @@
 process_name: testGeo
 
 services: {
-  
-  Geometry:               @local::dunedphase10kt_workspace_geo
-  ExptGeoHelperInterface: @local::dune_geometry_helper
+
+  AuxDetGeometry: @local::dunedphase10kt_workspace_auxdet_geo
+  Geometry:       @local::dunedphase10kt_workspace_geo
+  WireReadout:    @local::dune_wire_readout
   GeometryConfigurationWriter: {}
-  
+
   message: {
     destinations: {
-      LogDebugFile: { 
+      LogDebugFile: {
         type:       "file"
         filename:   "geometry_dunedphase10k_workspace.txt"
         append:     false
@@ -69,15 +70,15 @@ physics: {
         "@default",
         # in addition (overriding the default): print wires
         "+PrintWires"
-        
+
       ]
-      
+
       # expected wire pitches; empty to check just that they are all the same
       # ExpectedWirePitches: [ 0.487811, 0.500144, 0.449055 ]
       ExpectedWirePitches: [  ]
       # plane pitches (#0 -> #1, #1 -> #2)
       ExpectedPlanePitches: [ 0.015 ]
-      
+
       # The test feeds a out-of-world coordinate to NearestWire() and expects
       # an exception to be thrown; DUNE currently prefers to cap the wire ID to
       # a valid wire.

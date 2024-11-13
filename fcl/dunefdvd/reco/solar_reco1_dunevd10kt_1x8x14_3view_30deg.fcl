@@ -1,0 +1,9 @@
+#include "standard_reco_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+process_name: Reco1
+
+services.TFileService.fileName: "%ifb_reco1_hist.root"
+
+physics.reco: [ @sequence::dunefd_vertdrift_reco1_solar ]
+
+outputs.out1.fileName: "%ifb_reco1.root"

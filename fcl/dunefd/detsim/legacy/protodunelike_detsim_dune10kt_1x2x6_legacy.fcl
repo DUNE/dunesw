@@ -5,6 +5,7 @@ physics.producers.daq.SuppressOn:  false
 physics.producers.daq.AdcSimulator: "adcsim_noisy"
 tools.adcsim_noisy.Noise:5
 
+services.AuxDetGeometry: @local::dune10kt_1x2x6_auxdet_geo
 services.Geometry: @local::dune10kt_1x2x6_geo
 
 services.PdspChannelMapService: @local::pdspchannelmap

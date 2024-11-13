@@ -12,6 +12,7 @@ services.MemoryTracker:         {} # default is one
 services.RandomNumberGenerator: {} #ART native random number generator
 services.FileCatalogMetadata:  @local::art_file_catalog_mc
 services.NuRandomService:       @local::random_NuRandomService  # seedservice.fcl
+services.AuxDetGeometry: @local::protodunedphase_auxdet_geo
 services.Geometry: @local::protodunedphase_geo
 services.DetectorPropertiesService: @local::protodunedphase_detproperties
 

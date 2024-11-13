@@ -29,7 +29,7 @@ physics:
   producers:
   {
     tpcrawdecoder:  @local::wirecell_protodunehdmc
-    opdigi:         @local::protodune_opdigi_refactor
+    opdigi:         @local::protodunehd_opdigi
     crt:            @local::CRTSimRefac_standard
     rns:            { module_type: "RandomNumberSaver" }
   }
@@ -64,5 +64,4 @@ outputs:
   }
 }
 
-services.ExptGeoHelperInterface.ChannelMapClass: "DuneApaChannelMapAlg"
-physics.producers.opdigi.InputModules: ["PDFastSim", "PDFastSimExternal"]
+services.WireReadout.WireReadoutClass: "DuneApaWireReadout"

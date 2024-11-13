@@ -1,0 +1,161 @@
+#include "services_vdcoldbox.fcl"
+#include "HDF5RawInput3.fcl"
+#include "PDHDDataInterfaceWIBEth3.fcl"
+#include "PDHDTPCReader.fcl"
+#include "DAPHNEReaderPDHD.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "Deconvolution.fcl"
+#include "OpHitFinderDeco.fcl"
+#include "OpSlicer.fcl"
+#include "wirecell_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "pandoramodules_dune.fcl"
+#include "calorimetry_vdcb.fcl"
+#include "calorimetry_dune10kt.fcl"
+#include "pid_dune10kt.fcl"
+#include "featurelabelingmodules.fcl"
+##include "crpcb_daphne_bottom_process.fcl"
+#include "channelstatus_vdcrp4.fcl"
+
+process_name: Reco
+
+services:{
+   TFileService: { fileName: "%ifb_reco_hist.root" }
+   TimeTracker:       @local::dune_time_tracker
+   MemoryTracker:     @local::dune_memory_tracker
+   RandomNumberGenerator: {}
+   FileCatalogMetadata:  @local::art_file_catalog_data
+   FileCatalogMetadata: {
+  #applicationVersion: "v07_08_00_04"
+   fileType: "detector"
+   runType: "vd-coldbox-bottom" }
+   message:  @local::dune_message_services_prod
+        
+   @table::vdcb_services
+
+   Geometry: @local::dunecrpcb_geo
+   SpaceCharge: @local::dunefd_spacecharge
+   ChannelStatusService: @local::data.ChannelStatusService_vdcrp4
+   HDF5RawFile3Service:  {}
+   PD2HDChannelMapService:{
+     FileName: "vdcbce_chanmap_v4.txt"
+   }
+   DAPHNEChannelMapService: {
+    FileName: "DAPHNE_vd_coldbox_ChannelMap_bde2.txt"
+    IgnoreLinks: true
+   }
+   IPhotonCalibrator: {
+      BadChannels: []
+      service_provider: "PhotonCalibratorServiceProtoDUNESP"
+   }
+}
+
+source: @local::hdf5rawinput3
+
+proc_rootout: {
+  module_type: RootOutput
+  fileName: "%ifb_crpcb_bottom_reco.root"
+  #outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*" ]
+  outputCommands: [ "keep *"]
+  compressionLevel: 1
+  dataTier: "full-reconstructed"
+  streamName: "test"
+}
+
+outputs: {
+  rootout: @local::proc_rootout
+}
+
+physics: {
+  producers: {
+       rns:            { module_type: "RandomNumberSaver" }
+       #Decoders
+       tpcrawdecoder:    @local::PDHDTPCReaderDefaults
+       pdhddaphne:       @local::DAPHNEReaderPDHD   
+       #PDS reco
+       opdec:            @local::dune_deconvolution
+       ophitspe:         @local::dune_ophit_finder_deco
+       ophit:            @local::protodune_ophit_data_internal
+       opflash:          @local::protodune_opflash_data_internal
+       opslicer:         @local::protodune_opslicer
+       #CRP reco
+       wclsdatanfsp:     @local::dune_vd_crp4_nfsp
+       gaushit:          @local::dunevdfd_gaushitfinder
+       pandora:          @local::dunefdvd_pandora_cosmic
+       pandoraTrack:     @local::dunefdvd_pandoraTrackCreation
+       pandoraShower:    @local::dunefdvd_pandoraModularShowerCreation
+       pandoraStdCalo:   @local::vdcb_standard_calodata
+       pandoraGnoCalo:   @local::vdcb_gnocchi_calodata
+       pandorapid:       @local::dunevd10kt_pid_pandora
+       emtrkmichelid:    @local::protodune_emtrkmichelid
+  }
+  produce: [ tpcrawdecoder, pdhddaphne, 
+#            opdec, ophitspe, 
+             ophit, opflash, 
+             opslicer, 
+             wclsdatanfsp, gaushit, pandora, 
+             pandoraTrack, pandoraShower, pandoraStdCalo, pandoraGnoCalo, 
+#            pandorapid, 
+             emtrkmichelid 
+           ]
+  prod_daphne: [tpcrawdecoder, pdhddaphne]
+  output : [ rootout ]
+#  trigger_paths: [ prod_daphne ]
+  trigger_paths: [ produce ]
+  end_paths : [ output ]
+}
+
+#Set number of Optical detectors
+services.Geometry.GDML: "dunecrpcb2_v3_refactored.gdml"
+services.Geometry.ROOT: "dunecrpcb2_v3_refactored.gdml"
+
+#CRP sampling rate
+services.DetectorClocksService: @local::protodune_detectorclocks
+services.DetectorClocksService.ClockSpeedTPC: 1.953125 # 512ns per sample
+services.DetectorClocksService.ClockSpeedOptical: 62.5 # 016ns per sample
+
+services.DetectorPropertiesService.Efield: [0.438, 1, 1]
+services.DetectorPropertiesService.NumberTimeSamples: 8191
+services.DetectorPropertiesService.ReadOutWindowSize: 8191
+
+#CRP raw data decoder settings
+physics.producers.tpcrawdecoder.APAList: [ 6 ]
+physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEth3Defaults
+physics.producers.tpcrawdecoder.DecoderToolParams.DebugLevel: 0 
+physics.producers.tpcrawdecoder.DecoderToolParams.SubDetectorString: "VD_Bottom_TPC"
+
+#PDS raw data decoder settings
+physics.producers.pdhddaphne.DAPHNEInterface: { tool_type: "DAPHNEInterface2" }
+
+#PDS reconstruction settings
+#physics.producers.opdec.InputModule:                        "pdhddaphne"
+#physics.producers.opdec.InstanceName:                       "daq"
+#physics.producers.opdec.Samples:                             65600
+#physics.producers.opdec.ApplyPostBLCorrection:               true
+physics.producers.ophit.InputModule:                         "pdhddaphne"
+physics.producers.ophit.InputLabels:                         [ "daq" ]
+#physics.producers.ophitspe.InputModule:                     "pdhddaphne:daq"
+#physics.producers.ophitspe.InputModuledigi:                 "pdhddaphne:daq"
+physics.producers.opflash.InputModule:                       "ophit"
+physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
+
+#WireCell signal processing settings
+physics.producers.wclsdatanfsp.wcls_main.params.raw_input_label: "tpcrawdecoder:daq"
+
+#Hit finder settings
+physics.producers.gaushit.CalDataModuleLabel:   "wclsdatanfsp:gauss"
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 1.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 1.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 1.0
+
+#Pandora reconstruction settings
+physics.producers.pandora.ShouldRunAllHitsCosmicReco:  true
+physics.producers.pandora.ShouldRunNeutrinoRecoOption: false
+
+#Calorimetry settings
+physics.producers.pandoraGnoCalo.PFPModuleLabel: "pandora"
+physics.producers.pandoraGnoCalo.FieldDistortionCorrectionXSign: 1
+
+#CNN particle identification settings
+physics.producers.emtrkmichelid.WireLabel:      "wclsdatanfsp:gauss"
+physics.producers.emtrkmichelid.HitModuleLabel: "gaushit"

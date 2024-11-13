@@ -10,8 +10,9 @@ process_name: testGeo
 
 services: {
   
+AuxDetGeometry: @local::dunedphase10kt_auxdet_geo
   Geometry:               @local::dunedphase10kt_geo
-  ExptGeoHelperInterface: @local::dune_geometry_helper
+  WireReadout: @local::dune_wire_readout
   GeometryConfigurationWriter: {}
   
   message: {

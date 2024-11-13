@@ -1,4 +1,4 @@
-#include "standard_reco_protodunehd.fcl"
+#include "standard_reco_protodunehd_keepup.fcl"
 
 
 physics.producers.pandoracalo:           @local::pdune_sp_calomcsce          #@local::pdhd_calomc

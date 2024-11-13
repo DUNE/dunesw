@@ -1,5 +1,6 @@
 # #include "channelstatus_iceberg.fcl"
 #include "evd_dune.fcl"
+services.AuxDetGeometry: @local::iceberg_auxdet_geo
 services.Geometry: @local::iceberg_geo
 
 # services.ChannelStatusService.BadChannels: @local::iceberg_bad_channels
