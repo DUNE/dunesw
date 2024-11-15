@@ -83,6 +83,7 @@ dunefd_horizdrift_producers:
   anglereconumu: @local::dunefd_nuangularreco_pandora_numu
   anglereconuepfps: @local::dunefd_nuangularreco_pandora_nue_allpfps
   anglereconumupfps: @local::dunefd_nuangularreco_pandora_numu_allpfps
+  anglerecohits: @local::dunefd_nuangularreco_pandora_hits
   # photon detector reconstruction
   opdec:      @local::dune_deconvolution
   ophitspe:   @local::dune_ophit_finder_deco
@@ -211,7 +212,8 @@ dunefd_horizdrift_workflow_nuanglereco:
     anglereconue,
     anglereconumu,
     anglereconuepfps,
-    anglereconumupfps
+    anglereconumupfps,
+    anglerecohits
 ]
 
 dunefd_horizdrift_workflow_reco2_atmos:

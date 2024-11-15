@@ -15,6 +15,7 @@
 #include "trackfindermodules_dune.fcl"
 #include "clusterfinder_dune.fcl"
 #include "SolarOpFlash.fcl"
+#include "angularreco.fcl"
 
 BEGIN_PROLOG
 
@@ -38,6 +39,12 @@ dunefd_vertdrift_producers:
    energyrecnumu:         @local::dunefdvd_nuenergyreco_pandora_numu
    energyrecnue:          @local::dunefdvd_nuenergyreco_pandora_nue
    energyrecnc:           @local::dunefdvd_nuenergyreco_pandora_nc
+   #angle reco configuration
+   anglereconue:  @local::dunefdvd_30deg_nuangularreco_pandora_nue
+   anglereconumu: @local::dunefdvd_30deg_nuangularreco_pandora_numu
+   anglereconuepfps: @local::dunefdvd_30deg_nuangularreco_pandora_nue_allpfps
+   anglereconumupfps: @local::dunefdvd_30deg_nuangularreco_pandora_numu_allpfps
+   anglerecohits: @local::dunefdvd_30deg_nuangularreco_pandora_hits
    # PDS reconstruction
    ophitArOnly:     @local::dunefdvd_ophit
    ophitXeOnly:     @local::dunefdvd_ophit
@@ -192,6 +199,21 @@ dunefd_vertdrift_solar:
 [
     @sequence::dunefd_vertdrift_reco1_solar,
     @sequence::dunefd_vertdrift_reco2_solar
+]
+
+dunefd_vertdrift_nuanglereco:
+[
+    anglereconue,
+    anglereconumu,
+    anglereconuepfps,
+    anglereconumupfps,
+    anglerecohits
+]
+
+dunefd_vertdrift_atmos_reco2:
+[
+    @sequence::dunefd_vertdrift_tpc_reco2,
+    @sequence::dunefd_vertdrift_nuanglereco
 ]
 
 dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly
