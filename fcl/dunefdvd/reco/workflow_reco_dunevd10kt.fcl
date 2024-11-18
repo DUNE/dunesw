@@ -37,6 +37,8 @@ dunefd_vertdrift_producers:
    cvneva:            @local::dunevd_8x6_FHC_cvnevaluator
    # Neutrino energy
    energyrecnumu:         @local::dunefdvd_nuenergyreco_pandora_numu
+   energyrecnumurange:   @local::dunefdvd_nuenergyreco_pandora_numu_range
+   energyrecnumumcs:     @local::dunefdvd_nuenergyreco_pandora_numu_mcs
    energyrecnue:          @local::dunefdvd_nuenergyreco_pandora_nue
    energyrecnc:           @local::dunefdvd_nuenergyreco_pandora_nc
    #angle reco configuration
@@ -98,6 +100,8 @@ dunefd_vertdrift_tpc_reco2:
     cvnmap,
     cvneva,
     energyrecnumu,
+    energyrecnumurange,
+    energyrecnumumcs,
     energyrecnue,
     energyrecnc
 ]
