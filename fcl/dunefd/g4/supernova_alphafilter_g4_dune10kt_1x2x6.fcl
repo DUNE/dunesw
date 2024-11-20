@@ -11,8 +11,8 @@
 
 #Define the alpha filter
 physics.filters.alphafilter:  @local::dunefd_alphafilter
-# physics.filters.alphafilter.ParticleMinMomentum: [ 3.72737941 ] #Require a minimum momentum of alpha particle mass
-physics.filters.alphafilter.ParticleMinMomentum: [ 3.73237941 ] #Require a minimum momentum of alpha particle mass + 0.005 GeV
+# Move energy filter to solar_alphafilter_g4_dune10kt_1x2x6.fcl
+# physics.filters.alphafilter.ParticleMinMomentum: [ 0.273 ] #Require a minimum momentum of alpha particle mass 3.72737941 + KE 0.010 GeV
 
 #Run alpha filter at the end
 physics.simulate:  [ @sequence::physics.simulate, alphafilter ]
