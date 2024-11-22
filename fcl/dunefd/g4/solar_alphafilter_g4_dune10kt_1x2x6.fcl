@@ -1,0 +1,15 @@
+# solar_alphafilter_g4_dune10kt_1x2x6.fcl
+# Author: Sergio Manthey Corchado (2024) (based on supernova_neutronfilter_g4_dune10kt_1x2x6.fcl by Dom Brailsford)
+# Purpose: Run the supernova g4 HD 1x2x6 jobset and reject any events that do not have an alpha in the TPC above a certain energy threshold
+#
+# V1.0
+#
+
+#include "supernova_alphafilter_g4_dune10kt_1x2x6.fcl"
+
+
+# Define the alpha energy filter
+physics.filters.alphafilter.ParticleMinMomentum: [ 0.273 ] #Require a minimum momentum of alpha particle mass 3.72737941 + KE 0.010 GeV
+
+# Rename the output file
+output.out1.fileName:    "%ifb_g4_alphafilter.root"
