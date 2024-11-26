@@ -80,7 +80,7 @@ physics: {
   filters: {
     nhitsfilter: @local::pdhd_nhitsfilter
   }
-  
+
   producers: {
     wclsdatahd:         @local::protodunehd_nfsp
     # Hit finder
@@ -104,14 +104,14 @@ physics: {
     pandoraShowercalo:       @local::pdhd_showercalomcsce
     pandoraShowercalonosce:  @local::pdhd_showercalomcnosce
 
-    ## Gnocchi Calorimetry 
+    ## Gnocchi Calorimetry
 
     # CRT Reconstruction
     crtreco: @local::TwoCRTMatching_producer
     crttag: @local::SingleCRTMatching_producer
 
     #photon detector reconstruction
-    opdec:              @local::dune_deconvolution
+    opdec:              @local::protodunehd_mc_deconvolution
     ophitspe:           @local::dune_ophit_finder_deco
     opflash:            @local::protodune_opflash
     opslicer:           @local::protodune_opslicer
