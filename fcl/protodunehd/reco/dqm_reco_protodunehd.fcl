@@ -1,7 +1,7 @@
 #include "HDF5RawInput2.fcl"
 #include "DAPHNEReaderPDHD.fcl"
 #include "PDHDTPCReader.fcl"
-#include "pdhd_channel_map_services.fcl" 
+#include "pdhd_channel_map_services.fcl"
 
 #include "services_refactored_pdune.fcl"
 #include "caldata_dune.fcl"
@@ -62,7 +62,7 @@ physics: {
     #trigfilter:  @local::pdsp_trigfilter_all
     #nhitsfilter: @local::standard_numberofhitsfilter
   }
-  
+
   producers: {
 
     # Raw Decoders
@@ -70,10 +70,10 @@ physics: {
     pdhddaphne: @local::DAPHNEReaderPDHD
 
     # TPC wire signals
-    caldata:            @local::producer_adcprep_notool          
-    # WireCell 
+    caldata:            @local::producer_adcprep_notool
+    # WireCell
     #wclsdatahd:         @local::protodunehddata_wctsp
-    wclsdatahd:         @local::protodunehd_nfsp	
+    wclsdatahd:         @local::protodunehd_nfsp
     # Hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
     # space point solver
@@ -85,7 +85,7 @@ physics: {
     pandoraTrack:       @local::dune_pandoraTrackCreation
     pandoraShower:      @local::dune_pandoraShowerCreation
     #photon detector reconstruction
-    opdec:              @local::dune_deconvolution
+    opdec:              @local::protodunehd_deconvolution
     ophitspe:           @local::dune_ophit_finder_deco
     opflash:            @local::protodune_opflash
     opslicer:           @local::protodune_opslicer
@@ -96,7 +96,7 @@ physics: {
   }
   #define the producer and filter modules for this path, order matters,
   #filters reject all following items.  see lines starting physics.producers below
-  reco: [ 
+  reco: [
         tpcrawdecoder,
         pdhddaphne,
         #opdec,
@@ -146,8 +146,8 @@ outputs:
    #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
  }
 }
-#physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq" 
-#physics.producers.caldata.WireName: "dataprep" 
+#physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+#physics.producers.caldata.WireName: "dataprep"
 #physics.producers.caldata.LogLevel: 3
 #physics.producers.caldata.OnlineChannelMapTool: ""
 #
