@@ -71,4 +71,4 @@ outputs:
 physics.producers.sipmAr10ppm.QuantumEfficiency: 0.03
 physics.producers.sipmXe10ppm.QuantumEfficiency: 0.03
 services.OpDetResponseInterface.QuantumEfficiency: 0.03
-services.LArPropertiesService.ScintPreScale: 0.03
+#services.LArPropertiesService.ScintPreScale: 0.03
