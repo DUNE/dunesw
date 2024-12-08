@@ -30,3 +30,5 @@ physics.producers.generator.Theta0XZ: [ 0. ]       # y-azimuth
 physics.producers.generator.Theta0YZ: [ 0. ]       # y-latitude
 physics.producers.generator.SigmaThetaXZ: [ 180. ] # Quasi-isotropic
 physics.producers.generator.SigmaThetaYZ: [ 90. ]
+
+services.NuRandomService.policy: "random"
