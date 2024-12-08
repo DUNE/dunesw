@@ -29,6 +29,7 @@ services:
 # services.message.destinations.LogStandardOut.threshold: "INFO"
 services.CrpGainService:					@local::protodunedphase_crpgain
 services.ChannelStatusService:         				@local::pddp_channel_status_lemblind
+services.AuxDetGeometry: @local::protodunedphase_auxdet_geo
 services.Geometry:						@local::protodunedphase_geo
 
 #source is now a root file

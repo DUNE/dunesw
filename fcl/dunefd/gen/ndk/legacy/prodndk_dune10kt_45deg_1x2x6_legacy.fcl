@@ -4,5 +4,6 @@ process_name: GenieNDK
 
 outputs.out1.fileName: "prodndk_dune10kt_45deg_1x2x6_gen.root"
 
+services.AuxDetGeometry: @local::dune10kt_45deg_1x2x6_auxdet_geo
 services.Geometry: @local::dune10kt_45deg_1x2x6_geo
 source.firstRun: 20000251

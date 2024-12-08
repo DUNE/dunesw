@@ -17,6 +17,7 @@ services:
   FileCatalogMetadata:  @local::art_file_catalog_mc
                           @table::dunefddphase_simulation_services_legacy
  NuRandomService:       @local::random_NuRandomService  # seedservice.fcl
+AuxDetGeometry: @local::dunedphase10kt_workspace4x2_auxdet_geo
  Geometry: @local::dunedphase10kt_workspace4x2_geo
 }
 

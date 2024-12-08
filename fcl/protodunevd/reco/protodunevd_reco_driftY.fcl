@@ -2,7 +2,7 @@
 ## this fcl is currently kept; we use two stage recos once we have calibration done: protoDUNE_refactored_reco_stage1.fcl and protoDUNE_refactored_reco_stage2.fcl
 
 #include "services_refactored_pdune.fcl"
-#include "caldata_dune.fcl"
+##include "caldata_dune.fcl"
 #include "wirecell_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
@@ -24,7 +24,7 @@
 #include "CRT.fcl"
 #include "T0RecoAnodePiercers.fcl"
 #include "numberofhitsfilter.fcl"
-#include "protodune_tools_dune.fcl"
+##include "protodune_tools_dune.fcl"
 
 process_name: Reco
 
@@ -47,7 +47,7 @@ services:
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
 services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC"
 
-services.RawDigitPrepService.ToolNames: @local::pdsim_dataprep_tools_wirecell
+# services.RawDigitPrepService.ToolNames: @local::pdsim_dataprep_tools_wirecell
 
 source:
 {
@@ -66,9 +66,8 @@ physics: {
 
   producers: {
     rns:            { module_type: "RandomNumberSaver" }
-    caldata:            @local::producer_adcprep_notool
+    # caldata:            @local::producer_adcprep_notool
     wclsdatavd:         @local::protodunevd_nfsp
-    #wclsdatanfsp:       @local::dune_vd_coldbox_nfsp
     gaushit:            @local::dunevdfd_gaushitfinder
     reco3d:             @local::protodunespmc_spacepointsolver
 
@@ -76,20 +75,16 @@ physics: {
     hitpdune:           @local::pdune_disambigfromsp
     emtrkmichelid:      @local::protodune_emtrkmichelid
 
-    pandora:            @local::dunefdvd_pandora_cosmic
-    pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
-    pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
-
-    #pandora:            @local::protodune_pandora
-    #pandoraTrack:       @local::dune_pandoraTrackCreation
-    #pandoraShower:      @local::dune_pandoraShowerCreation
+    pandora:            @local::protodune_pandora
+    pandoraTrack:       @local::dune_pandoraTrackCreation
+    pandoraShower:      @local::dune_pandoraShowerCreation
 
     pandoraWriter:      @local::dune_pandorawriter
     pandoraStdcalo:     @local::pdune_vd_standard_calodata
     pandoraGnocalo:     @local::pdune_vd_gnocchi_calodata
   }
 
-reco: [ caldata,
+reco: [ # caldata,
         rns,
         wclsdatavd,
         gaushit,
@@ -97,7 +92,7 @@ reco: [ caldata,
         hitpdune,
         pandora,
         pandoraTrack,
-        # pandoraShower,
+        pandoraShower,
         pandoraStdcalo,
         pandoraGnocalo #,
         ]
@@ -122,28 +117,25 @@ outputs:
  }
 }
 
-physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
-physics.producers.caldata.WireName: "dataprep"
-physics.producers.caldata.LogLevel: 3
+# physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
+# physics.producers.caldata.WireName: "dataprep"
+# physics.producers.caldata.LogLevel: 3
 
 physics.producers.wclsdatavd.wcls_main.params.use_magnify:  "false"
 
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 5.0
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 5.0
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 5.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 2.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 2.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 2.0
 
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatavd:gauss"
-#physics.producers.gaushit.CalDataModuleLabel: "wclsdatanfsp:gauss"
 physics.producers.emtrkmichelid.WireLabel: "wclsdatavd:gauss"
 
-physics.producers.pandora.HitFinderModuleLabel:             "gaushit"
+physics.producers.pandora.ConfigFile:     "PandoraSettings_Master_ProtoDUNE_VD.xml"
+physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
 physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
-physics.producers.pandora.ShouldRunAllHitsCosmicReco:   true
-physics.producers.pandora.ShouldRunNeutrinoRecoOption:  false
-
 
 physics.producers.pandoraWriter.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
-physics.producers.pandoraWriter.HitFinderModuleLabel:       "gaushit"
+physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
 physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
 physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"
@@ -155,6 +147,5 @@ physics.producers.pandoracalipid.CalorimetryModuleLabel:        "pandoracali"
 physics.producers.pandoracalipid.TrackModuleLabel:              "pandoraTrack"
 
 
-
-
-#physics.producers.pandora.EnableMCParticles: false
+# Use channel map service for data
+#services.PdspChannelMapService:        @local::pdspchannelmap

@@ -13,11 +13,12 @@ pdvd_1GeV_electron:
  PDist:                 "Gaussian"                                 
 
  X0:                    [ 94.8 ]                                           
- Y0:                    [ -142.6 ]    
- Z0:                    [ 299.3 ]                                                               
+ Y0:                    [ 142.6 ]    
+ Z0:                    [ 0.7 ]                                                               
  T0:                    [ 0.0 ]     
- Theta0XZ:              [ -169.175 ]                                         
- Theta0YZ:              [ 44.486 ]                                          
+ Theta0XZ:              [ 169.175 ]                                         
+ Theta0YZ:              [ -135.514 ]                                          
+# Theta0YZ:              [ 44.486 ]                                          
 
  SigmaX:                [ 0.0 ]     
  SigmaY:                [ 0.0 ]                                 
@@ -37,6 +38,9 @@ pdvd_1GeV_kaon.PDG: [321]
 
 pdvd_1GeV_pion: @local::pdvd_1GeV_electron
 pdvd_1GeV_pion.PDG: [211]
+
+pdvd_1GeV_muon: @local::pdvd_1GeV_electron
+pdvd_1GeV_muon.PDG: [13]
 
 
 END_PROLOG

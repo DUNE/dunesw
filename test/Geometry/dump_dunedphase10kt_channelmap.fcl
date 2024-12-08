@@ -4,7 +4,7 @@
 # Author:  Gianluca Petrillo (petrillo@fnal.gov)
 # Date:    May 2, 2017
 # Version: 1.0
-# 
+#
 # Dependencies:
 # - geometry service
 #
@@ -14,14 +14,15 @@
 process_name: DumpChannelMap
 
 services: {
-   
-  Geometry:               @local::dunedphase10kt_geo
-  ExptGeoHelperInterface: @local::dune_geometry_helper
+
+  AuxDetGeometry:  @local::dunedphase10kt_auxdet_geo
+  Geometry:        @local::dunedphase10kt_geo
+  WireReadout:     @local::dune_wire_readout
   GeometryConfigurationWriter: {}
-  
+
   message: {
     destinations: {
-      LogChannelMap: { 
+      LogChannelMap: {
         type:       "file"
         filename:   "dunedphase10kt_channelmap.txt"
         append:     false
@@ -60,24 +61,23 @@ source: {
 outputs: { }
 
 physics: {
-  
+
   analyzers: {
     dumpchannelmap: {
       module_type:  "DumpChannelMap"
       module_label: "dumpchannelmapgeotest"
-      
+
       ChannelToWires: true
       WireToChannel:  true
-      
+
       OutputCategory: DumpChannelMap
-      
+
     } # dumpchannelmap
   } # analyzers
-  
+
   ana:           [ dumpchannelmap ]
-  
+
   trigger_paths: [ ]
   end_paths:     [ ana ]
-  
-} # physics
 
+} # physics

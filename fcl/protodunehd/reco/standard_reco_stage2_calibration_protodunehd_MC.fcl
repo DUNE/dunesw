@@ -1,0 +1,110 @@
+#include "dune_calibanatree.fcl"
+#include "standard_reco_protodunehd_MC.fcl"
+
+#### NOTE -- analyzer modules are instantiated in the included fcl
+
+#make sure only one WCTK is here -- not sure this part is necessary
+#or if only one can be in the produce list
+#physics.filters.fembfilter.LogLevel: 1
+physics.producers.wclsdatahd: @local::protodunehd_sp  #Signal processing
+physics.produce: [
+  wclsdatahd,
+  gaushit,
+  nhitsfilter,
+  reco3d,
+  hitpdune,
+  pandora, pandoraWriter, pandoraTrack, pandoraShower, pandoracalo, pandoracalonosce,
+  pandoraShowercalo, pandoraShowercalonosce,
+  pandoraGnocchiCalo,
+  pandoraGnocchiCalonosce,
+  emtrkmichelid,
+  opdec,
+  ophitspe,
+  opflash,
+  opslicer,
+  crtreco, crttag,
+  pandora2Track,
+  pandora2calo,
+  pandora2calonosce,
+  pandora2Gnocchicalo,
+  pandora2Gnocchicalonosce,
+  pandora2Shower,
+  pandora2Showercalo,
+  pandora2Showercalonosce
+]
+
+### FOR TESTING
+#physics.ana: []
+#physics.end_paths: [output]
+
+services.TFileService: {fileName: "%ifb_%tc_hists.root" }
+
+physics.analyzers: {
+
+
+  ### For first pass of keepup production, keep SCE corrections Off.
+  ### We won't understand the corrections yet, so don't bias the calo/calibration
+  michelremoving: {
+    module_type: "michelremoving"
+    TrackModuleLabel:        "pandoraTrack"
+    CalorimetryModuleLabel:  "pandoracalonosce"
+    HitsModuleLabel:  "hitpdune"
+    SaveTrackInfo: true
+    MaxZ: 410.
+  }
+
+  michelremovinggnocchi: {
+    module_type: "michelremoving"
+    TrackModuleLabel:        "pandoraTrack"
+    CalorimetryModuleLabel:  "pandoraGnocchiCalonosce" ##This will have 
+    HitsModuleLabel:  "hitpdune"
+    SaveTrackInfo: true
+    MaxZ: 410.
+  }
+
+  calibana: @local::pdhd_calibana_mc
+  calibanagnocchi: @local::pdhd_calibana_mc
+}
+
+##Just doing gnocchi now
+physics.ana: [michelremoving, michelremovinggnocchi, calibanagnocchi]
+physics.end_paths: [output, ana]
+
+
+#block to define where the output goes.  if you defined a filter in the physics
+#block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
+#entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "%ifb_stage2_calibration.root"
+   dataTier:    "full-reconstructed"
+   compressionLevel: 1 #zlib argument (0-9)
+   fastCloning: true
+   #basketSize: 8192 #[Byte] buffer size at 8k
+   #splitLevel: 0 #reduces number of buffers
+   #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
+ }
+}
+
+physics.analyzers.calibanagnocchi.RawDigitproducers: [
+  "wclsdatahdfilter:raw"
+]
+
+outputs.out1.fileName: "%ifb_reco_stage2_%tc.root"
+
+#have to make this intake a root file now 
+source:
+{
+  module_type: RootInput
+  maxEvents: 30000
+  fileNames: ["reco_stage2_protodunehd.root"]
+}
+
+outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wire*_*_wiener_*"]
+process_name: pdhdrecostage2
+physics.filters.nhitsfilter.Verbose: true
+physics.producers.opdec.InstanceName: ""
+physics.producers.ophitspe.InputModuledigi: "opdigi"

@@ -30,7 +30,7 @@
 #include "spacecharge_dune.fcl"
 #include "dune_calibanatree.fcl"
 
-process_name: pdhdkeepupprocessing 
+process_name: pdhdkeepupprocessing
 
 services:
 {
@@ -41,7 +41,7 @@ services:
   message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_data
   ChannelStatusService: @local::dunefd_channel_status
-  ExptGeoHelperInterface:       @local::dune_geometry_helper
+  WireReadout:          @local::dune_wire_readout
   GeometryConfigurationWriter:  {}
   Geometry:                     @local::protodunehdv6_geo
   DetectorClocksService:        @local::protodunehd_detectorclocks
@@ -57,21 +57,24 @@ services:
 
   IFDH: {}
 
-  TFileService: 
+  TFileService:
   {
     fileName: "pdhd_keepup_decoder.root"
-  } 
+  }
   HDF5RawFile3Service:  {}
 
   DAPHNEChannelMapService: {
     FileName: "DAPHNE_test5_ChannelMap_v1.txt"
   }
 
-  PD2HDChannelMapService: 
+  PD2HDChannelMapService:
    {
      FileName: "PD2HDChannelMap_WIBEth_electronics_v1.txt"
    }
 }
+
+services.AuxDetGeometry.GDML: "protodunehd_v6_refactored.gdml"
+services.AuxDetGeometry.Name: "protodunehdv6"
 
 physics:
 {
@@ -85,15 +88,15 @@ physics:
   {
     # Raw decoding
     tpcrawdecoder: @local::PDHDTPCReaderDefaults
-    triggerrawdecoder: @local::PDHDTriggerReader3Defaults 
+    triggerrawdecoder: @local::PDHDTriggerReader3Defaults
     timingrawdecoder: @local::PDHDTimingRawDecoder
     pdhddaphne: @local::DAPHNEReaderPDHD
 
     # Beam Instrumentation Info
-    # TODO 
+    # TODO
 
     # Optical reconstruction
-    opdec:              @local::dune_deconvolution
+    opdec:              @local::protodunehd_deconvolution
     ophitspe:           @local::dune_ophit_finder_deco
     opflash:            @local::protodune_opflash
     opslicer:           @local::protodune_opslicer
@@ -122,7 +125,7 @@ physics:
     pandoraShowercalo:  @local::pdhd_showercalodata
     pandoraShowercalonosce:  @local::pdhd_showercalodatanosce
 
-    ## Gnocchi Calorimetry 
+    ## Gnocchi Calorimetry
     pandoraGnocchiCalo: @local::pdhd_gnocchi_calodata
     pandoraGnocchiCalonosce: @local::pdhd_gnocchi_calodata_nosce
 
@@ -198,4 +201,3 @@ physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"
 physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
 physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
-
