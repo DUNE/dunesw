@@ -1,0 +1,7 @@
+#include "standard_detsim_dune10kt_1x2x6.fcl"
+
+outputs.out1.fileName: "%ifb_detsim_gain140.root"
+
+physics.tpcrawdecoder.wcls_main.configs: [
+"pgrapher/experiment/dune10kt-1x2x6/wcls-sim-drift-simchannel-nf-sp_gain140.jsonnet"
+]
