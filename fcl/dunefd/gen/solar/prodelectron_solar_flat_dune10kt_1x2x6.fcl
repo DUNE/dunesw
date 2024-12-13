@@ -10,18 +10,27 @@ services:
     @table::dunefd_1x2x6_simulation_services
 }
 
-source.firstRun: 20000011
+services.NuRandomService.policy: "random"
+
+producers:
+{
+    generator: @local::standard_singlep
+}
+
+#define the producer and filter modules for this path, order matters, 
+#filters reject all following items.  see lines starting physics.producers below
+simulate: [ generator ]
 
 physics.producers.generator.PDG:    [ 11 ]       # electron
 physics.producers.generator.PosDist: 0             # Flat position dist.
 physics.producers.generator.X0: [ 0 ]
 physics.producers.generator.Y0: [ 0.0 ]
 physics.producers.generator.Z0: [ 695 ]
-physics.producers.generator.T0: [ 500.0 ]
+physics.producers.generator.T0: [ 0 ]
 physics.producers.generator.SigmaX: [ 360 ]      # x = (-3.6, 3.6)
 physics.producers.generator.SigmaY: [ 600 ]      # y = (-6, 6)
 physics.producers.generator.SigmaZ: [ 695 ]      # z = (0, 13.9)
-physics.producers.generator.SigmaT: [ 500.0 ]        # In time
+physics.producers.generator.SigmaT: [ 0 ]        # In time
 physics.producers.generator.PDist:    0          # Flat K.E. dist. (1-20 MeV)
 physics.producers.generator.P0:     [ 10.43e-3 ]
 physics.producers.generator.SigmaP: [ 09.57e-3 ]
