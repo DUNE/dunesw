@@ -67,4 +67,4 @@ outputs:
 }
 services.LArPropertiesService.ScintYield: 24000
 services.OpDetResponseInterface.QuantumEfficiency: 0.03
-services.LArPropertiesService.ScintPreScale: 0.03
+#services.LArPropertiesService.ScintPreScale: 0.03

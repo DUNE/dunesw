@@ -1,0 +1,19 @@
+# supernova_gamma_g4_dune10kt_1x2x6.fcl
+# Author: Sergio Manthey Corchado (2024)
+# Purpose: Run the supernova g4 HD 1x2x6 jobset and reject any events that do not have a gamma stopping in the TPC 
+#
+# V1.0
+#
+
+#include "larg4particlefilter_dune.fcl"
+#include "supernova_g4_dune10kt_1x2x6.fcl"
+
+
+#Define the gamma filter
+physics.filters.gammafilter:  @local::dunefd_gammafilter
+
+#Run gamma filter at the end
+physics.simulate:  [ @sequence::physics.simulate, gammafilter ]
+
+#Tell ART to actually filter using the ART filter
+outputs.out1.SelectEvents: [ simulate ]
