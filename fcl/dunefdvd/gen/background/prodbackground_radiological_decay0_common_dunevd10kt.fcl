@@ -33,6 +33,7 @@ physics:
    
    simulate: [rns ]      
    stream1:       [ out1 ]
+   trigger_paths: [simulate] 
    end_paths:     [ stream1 ]  
 }
 

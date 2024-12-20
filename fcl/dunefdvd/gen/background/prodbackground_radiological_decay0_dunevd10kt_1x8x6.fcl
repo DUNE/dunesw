@@ -6,17 +6,12 @@ services:
    @table::dunefdvd_1x8x6_3view_30deg_services
 }
 
-physics:
-{
-   producers:
+physics.producers:
    {
-      rns:       { module_type: "RandomNumberSaver" }
+      @table::physics.producers
       @table::dunefd_vertdrift_1x8x6_producers
    }
    
-   simulate: [rns, @sequence::dunefdvd_backgrounds_1x8x6 ]      
-   stream1:       [ out1 ]
-   end_paths:     [ stream1 ]  
-}
+physics.simulate: [rns, @sequence::dunefdvd_backgrounds_1x8x6 ]      
 
 outputs.out1.fileName: "prodradiological_decay0_dunevd10kt_1x8x6_gen.root"
