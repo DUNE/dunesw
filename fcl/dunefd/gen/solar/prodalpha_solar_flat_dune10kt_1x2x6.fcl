@@ -3,6 +3,6 @@
 outputs.out1.fileName: "prodalpha_solar_flat_dune10kt_1x2x6_gen.root"
 
 physics.producers.generator.PDG:    [ 1000020040 ] # alpha
-physics.producers.generator.PDist:    0            # Flat K.E. dist. (1-20 MeV)
-physics.producers.generator.P0:     [ 236.24e-3 ]
-physics.producers.generator.SigmaP: [ 149.89e-3 ]
+physics.producers.generator.PDist:    0            # Flat momentum dist. for K.E. (4-14 MeV)
+physics.producers.generator.P0:     [ 247.8e-3 ]
+physics.producers.generator.SigmaP: [  75.2e-3 ]
