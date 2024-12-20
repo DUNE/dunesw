@@ -26,8 +26,8 @@ physics.producers.generator.SigmaY:       [ 630 ]      # y = (-6.3, 6.3) m
 physics.producers.generator.SigmaZ:       [ 730 ]      # z = (-0.3, 14.3) m
 physics.producers.generator.SigmaT:       [   0 ]      # In time
 physics.producers.generator.PDist:            0        # Flat K.E. dist. (1-20 MeV)
-physics.producers.generator.P0:           [  10.43e-3 ]
-physics.producers.generator.SigmaP:       [  09.57e-3 ]
+physics.producers.generator.P0:           [  9.49e-3 ]
+physics.producers.generator.SigmaP:       [  5.01e-3 ]
 physics.producers.generator.AngleDist:        0        # Flat angle dist.
 physics.producers.generator.Theta0XZ:     [   0 ]      # y-azimuth
 physics.producers.generator.Theta0YZ:     [   0 ]      # y-latitude
