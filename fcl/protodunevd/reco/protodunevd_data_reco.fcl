@@ -1,8 +1,5 @@
 #include "HDF5RawInput3.fcl"
-#include "PDHDTPCReader.fcl"
-#include "PDHDDataInterfaceWIBEth3.fcl"
-#include "PDHDTriggerReader3.fcl"
-#include "PDHDTimingRawDecoder.fcl"
+#include "PDVDTPCReader.fcl"
 #include "DAPHNEReaderPDHD.fcl"
 
 #include "wirecell_dune.fcl"
@@ -42,18 +39,14 @@ services:{
    IFDH: {}
    DetectorPropertiesService:  @local::protodunevd_detproperties
 
-   PD2HDChannelMapService:
+   PDVDChannelMapService:
    {
      FileName: "PD2VDBottomTPCChannelMap_v1.txt"
    }
-
-   #PD2HDChannelMapService:{
-   #  FileName: "vdcbce_chanmap_v4.txt"
-   #}
-   #DAPHNEChannelMapService: {
-   # FileName: "DAPHNE_vd_coldbox_ChannelMap_bde2.txt"
-   # IgnoreLinks: true
-   #}
+   DAPHNEChannelMapService: {
+    FileName: "DAPHNE_vd_coldbox_ChannelMap_bde2.txt"
+    IgnoreLinks: true
+   }
    #IPhotonCalibrator: {
    #   BadChannels: []
    #   service_provider: "PhotonCalibratorServiceProtoDUNESP"
@@ -80,9 +73,14 @@ physics: {
   producers: {
     rns:            { module_type: "RandomNumberSaver" }
     #Decoders
-    tpcrawdecoder:    @local::PDHDTPCReaderDefaults
-    #pdhddaphne:       @local::DAPHNEReaderPDHD   
-       #PDS reco
+    tpcrawdecoder:    @local::PDVDTPCReaderDefaults
+    pdhddaphne:       @local::DAPHNEReaderPDHD   
+    #PDS reco
+    ophit:            @local::protodune_ophit_data_internal
+    opflash:          @local::protodune_opflash_data_internal
+    opslicer:         @local::protodune_opslicer
+
+    #CRP reco
     wclsdatavd:         @local::protodunevd_nfsp
     gaushit:            @local::dunevdfd_gaushitfinder
     reco3d:             @local::protodunespmc_spacepointsolver
@@ -100,8 +98,10 @@ physics: {
     pandoraGnocalo:     @local::pdune_vd_gnocchi_calodata
 
   }
-  reco: [tpcrawdecoder,
-        rns,
+  reco: [rns,
+	tpcrawdecoder,
+        #pdhddaphne,
+        #ophit, opflash, opslicer,
         wclsdatavd,
         gaushit,
         reco3d,
@@ -120,19 +120,32 @@ physics: {
   end_paths : [ output ]
 }
 
-physics.producers.tpcrawdecoder.APAList: [ 10, 11 ]
-physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEth3Defaults
+#PDS raw data decoder settings
+physics.producers.pdhddaphne.DAPHNEInterface: { tool_type: "DAPHNEInterface2" }
+
+#PDS reconstruction settings
+physics.producers.ophit.InputModule:                         "pdhddaphne"
+physics.producers.ophit.InputLabels:                         [ "daq" ]
+physics.producers.opflash.InputModule:                       "ophit"
+physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
+
+#CRP raw data decoder settings
 physics.producers.tpcrawdecoder.DecoderToolParams.DebugLevel: 0 
-physics.producers.tpcrawdecoder.DecoderToolParams.SubDetectorString: "VD_Bottom_TPC"
+
+#WireCell signal processing settings
 physics.producers.wclsdatavd.wcls_main.params.use_magnify:  "false"
+physics.producers.wclsdatavd.wcls_main.params.raw_input_label: "tpcrawdecoder:daq"
 
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 2.0
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 2.0
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 2.0
-
+#Hit finder settings
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 0.5
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 0.5
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 0.5
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatavd:gauss"
+
+# CNN settings
 physics.producers.emtrkmichelid.WireLabel: "wclsdatavd:gauss"
 
+# Pandora settings
 physics.producers.pandora.ConfigFile:     "PandoraSettings_Master_ProtoDUNE_VD.xml"
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
 physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
