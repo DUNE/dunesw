@@ -232,8 +232,6 @@ dunefd_horizdrift_workflow_reco1_solar:
 
 dunefd_horizdrift_workflow_reco2_solar:
 [
-    opflash,
-    opslicer,
     solarflash
 ]
 
