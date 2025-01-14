@@ -1,0 +1,3 @@
+#include "standard_detsim_protodunehd.fcl"
+
+physics.producers.tpcrawdecoder.wcls_main.structs.elecGain:     7.8 # mV/fC
