@@ -1,0 +1,6 @@
+#include "prodneutron_solar_flat_radiological_decay0_dune10kt_1x2x6_centralAPA.fcl"
+
+outputs.out1.fileName:    "prodneutron_solar_top_radiological_decay0_dune10kt_1x2x6_centralAPA_gen.root"
+
+physics.producers.generator.Y0:     [ 625. ]
+physics.producers.generator.SigmaY: [ 0.50 ]      # Flat particle dist. on top layer (cm)
