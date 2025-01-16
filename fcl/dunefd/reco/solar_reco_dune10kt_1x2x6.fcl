@@ -9,4 +9,4 @@ physics.producers:
 physics.producers.spsolve.MinNHits: 2 #lower the threshold for low energy interactions
 
 physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco_solar ]
-outputs.out1.outputCommands: [ "keep *", "drop *raw::OpDetWaveform*_*_*_detsim", "drop *recob::Wire*_*_*_detsim", "drop *recob::OpWaveform*_*_*_Reco" ]
+outputs.out1.outputCommands: [ "keep *", "drop *recob::Wire*_*_*_detsim", "drop *recob::OpWaveform*_*_*_Reco" ]
