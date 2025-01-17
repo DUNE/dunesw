@@ -1,0 +1,3 @@
+#include "standard_reco_protodunehd_MC.fcl"
+
+physics.producers.wclsdatahd.wcls_main.structs.elecGain:     7.8 # mV/fC
