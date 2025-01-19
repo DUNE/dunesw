@@ -1,8 +1,8 @@
-#include "prodelectron_solar_flat_radiological_decay0_dune10kt_1x2x6_lateralAPA.fcl"
+#include "prodsingle_solar_flat_radiological_decay0_dune10kt_1x2x6_lateralAPA.fcl"
 
 outputs.out1.fileName:    "prodalpha_solar_flat_radiological_decay0_dune10kt_1x2x6_lateralAPA_gen.root"
 
 physics.producers.generator.PDG:    [ 1000020040 ] # alpha
 physics.producers.generator.PDist:    0            # Flat momentum dist. for K.E. (4-14 MeV)
-physics.producers.generator.P0:     [ 247.8e-3 ]
-physics.producers.generator.SigmaP: [  75.2e-3 ]
+physics.producers.generator.P0:     [ 136.5e-3 ]
+physics.producers.generator.SigmaP: [ 136.5e-3 ]

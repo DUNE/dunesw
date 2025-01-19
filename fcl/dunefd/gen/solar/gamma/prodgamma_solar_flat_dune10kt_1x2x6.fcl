@@ -1,8 +1,8 @@
-#include "prodelectron_solar_flat_dune10kt_1x2x6.fcl"
+#include "prodsingle_solar_flat_dune10kt_1x2x6.fcl"
 
 outputs.out1.fileName: "prodgamma_solar_flat_dune10kt_1x2x6_gen.root"
 
 physics.producers.generator.PDG:    [ 22 ]      # gamma
 physics.producers.generator.PDist:    0         # Flat momentum dist. (4-14 MeV)
-physics.producers.generator.P0:     [ 9 ]
-physics.producers.generator.SigmaP: [ 5 ]
+physics.producers.generator.P0:     [ 9e-3 ]
+physics.producers.generator.SigmaP: [ 5e-3 ]

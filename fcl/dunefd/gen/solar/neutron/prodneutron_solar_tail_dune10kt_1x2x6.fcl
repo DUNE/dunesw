@@ -1,0 +1,6 @@
+#include "prodneutron_solar_flat_dune10kt_1x2x6.fcl"
+
+outputs.out1.fileName: "prodneutron_solar_tail_dune10kt_1x2x6_gen.root"
+
+physics.producers.generator.Z0:     [ 1420 ]
+physics.producers.generator.SigmaZ: [ 0.50 ]      # Flat particle dist. on tail layer (cm)
