@@ -9,7 +9,7 @@
 
 
 # Define the alpha energy filter
-physics.filters.gammafilter.ParticleMinMomentum: [ 0.0056 ] #Require a minimum momentum of neutron particle mass 0 + KE 0.0056 GeV
+physics.filters.gammafilter.ParticleMinMomentum: [ 4e-3 ] #Require a minimum momentum of gamma particle mass 0 + KE 4 MeV
 
 # Rename the output file
 output.out1.fileName:    "%ifb_g4_gammafilter.root"
