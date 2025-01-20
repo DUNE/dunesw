@@ -3,4 +3,4 @@
 
 outputs.out1.fileName:    "prodmarley_nue_es_radiological_decay0_dune10kt_1x2x2_gen.root" # Default file name, can override from command line with -o or --output
 
-physics.producers.marley.marley_parameters.reactions:  "ES.react"
+physics.producers.marley.marley_parameters.reactions: [ "ES.react" ]
