@@ -1,0 +1,8 @@
+#include "prodsingle_solar_flat_radiological_decay0_dune10kt_1x2x6_centralAPA.fcl"
+
+outputs.out1.fileName: "prodneutron_solar_flat_radiological_decay0_dune10kt_1x2x6_centralAPA_gen.root"
+
+physics.producers.generator.PDG:    [ 2112 ]      # neutron 
+physics.producers.generator.PDist:    0           # Flat momentum dist. for K.E. (0-10 MeV)
+physics.producers.generator.P0:     [ 68.6e-3 ]
+physics.producers.generator.SigmaP: [ 68.6e-3 ]

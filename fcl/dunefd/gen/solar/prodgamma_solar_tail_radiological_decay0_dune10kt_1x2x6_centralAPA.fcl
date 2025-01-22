@@ -1,6 +1,0 @@
-#include "prodgamma_solar_flat_radiological_decay0_dune10kt_1x2x6_centralAPA.fcl"
-
-outputs.out1.fileName:    "prodgamma_solar_tail_radiological_decay0_dune10kt_1x2x6_centralAPA_gen.root"
-
-physics.producers.generator.Z0:     [ 1420 ]
-physics.producers.generator.SigmaZ: [ 0.50 ]      # Flat particle dist. on tail layer (cm)

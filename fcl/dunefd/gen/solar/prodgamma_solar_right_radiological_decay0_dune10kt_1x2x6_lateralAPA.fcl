@@ -1,6 +1,0 @@
-#include "prodgamma_solar_flat_radiological_decay0_dune10kt_1x2x6_lateralAPA.fcl"
-
-outputs.out1.fileName:    "prodgamma_solar_left_radiological_decay0_dune10kt_1x2x6_lateralAPA_gen.root"
-
-physics.producers.generator.X0:     [ 375. ]
-physics.producers.generator.SigmaX: [ 0.50 ]      # Flat particle dist. on right layer (cm)

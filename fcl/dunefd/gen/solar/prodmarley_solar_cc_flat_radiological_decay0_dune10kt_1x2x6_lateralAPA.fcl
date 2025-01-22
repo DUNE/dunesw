@@ -1,4 +1,0 @@
-#include "prodmarley_nue_cc_flat_radiological_decay0_dune10kt_1x2x6_lateralAPA.fcl"
-
-physics.producers.marley.marley_parameters.source.Emax: 30.
-outputs.out1.fileName:    "prodmarley_solar_cc_flat_radiological_decay0_dune10kt_1x2x6_lateralAPA_gen.root"
