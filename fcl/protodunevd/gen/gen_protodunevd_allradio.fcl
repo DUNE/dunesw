@@ -1,0 +1,98 @@
+#include "services_refactored_pdune.fcl"
+#include "singles_dune.fcl"
+#include "corsika_protodune.fcl"
+#include "CORSIKAGendp.fcl"
+#include "protodunevd_radiological_model_decay0.fcl"
+
+process_name: SinglesGen
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "gensingle_protoDUNE_hist.root" }
+  TimeTracker:       @local::dune_time_tracker
+  MemoryTracker:     @local::dune_memory_tracker
+  RandomNumberGenerator: {} #ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+  @table::protodunevd_refactored_simulation_services
+}
+
+#Start each new event with an empty event.
+source:
+{
+  module_type: EmptyEvent
+  timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
+  maxEvents:   100
+  firstRun:    1           # Run number to use for this file
+  firstEvent:  1           # number of first event in the file
+}
+
+# Define and configure some modules to do work on each event.
+# First modules are defined; they are scheduled later.
+# Modules are grouped by type.
+physics:
+{
+
+ producers:
+ {
+   ar39:             @local::protodunevd_39Ar_in_LAr
+   kr85:             @local::protodunevd_85Kr_in_LAr
+   ar42:             @local::protodunevd_42Ar_in_LAr
+   k42fromar42:      @local::protodunevd_42Kfrom42Ar_in_LAr
+   k40cathode1:      @local::protodunevd_40K_in_Cathode_nonTCOside
+   k40cathode2:      @local::protodunevd_40K_in_Cathode_TCOside
+   k40anode0:        @local::protodunevd_40K_in_Anode0
+   k40anode1:        @local::protodunevd_40K_in_Anode1
+   k40anode2:        @local::protodunevd_40K_in_Anode2
+   k40anode3:        @local::protodunevd_40K_in_Anode3
+   th232cathode1:    @local::protodunevd_232Th_chain_in_Cathode_nonTCOside
+   th232cathode2:    @local::protodunevd_232Th_chain_in_Cathode_TCOside
+   th232anode0:      @local::protodunevd_232Th_chain_in_Anode0
+   th232anode1:      @local::protodunevd_232Th_chain_in_Anode1
+   th232anode2:      @local::protodunevd_232Th_chain_in_Anode2
+   th232anode3:      @local::protodunevd_232Th_chain_in_Anode3
+   u238cathode1:     @local::protodunevd_238U_chain_in_Cathode_nonTCOside
+   u238cathode2:     @local::protodunevd_238U_chain_in_Cathode_TCOside
+   u238anode0:       @local::protodunevd_238U_chain_in_Anode0
+   u238anode1:       @local::protodunevd_238U_chain_in_Anode1
+   u238anode2:       @local::protodunevd_238U_chain_in_Anode2
+   u238anode3:       @local::protodunevd_238U_chain_in_Anode3
+}
+
+
+ #define the producer and filter modules for this path, order matters,
+ simulate: [ ar39, ar42, kr85, k42fromar42, 
+   k40cathode1,   k40cathode2,   k40anode0,   k40anode1,   k40anode2,   k40anode3,
+   th232cathode1, th232cathode2, th232anode0, th232anode1, th232anode2, th232anode3,
+   u238cathode1,  u238cathode2,  u238anode0,  u238anode1,  u238anode2,  u238anode3
+ ]
+
+ #define the output stream, there could be more than one if using filters
+ stream1:  [ out1 ]
+
+ #trigger_paths is a keyword and contains the paths that modify the art::event,
+ #ie filters and producers
+ trigger_paths: [simulate]
+
+ #end_paths is a keyword and contains the paths that do not modify the art::Event,
+ #ie analyzers and output streams.  these all run simultaneously
+ end_paths:     [stream1]
+}
+
+#block to define where the output goes.  if you defined a filter in the physics
+#block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
+#entry in the output stream you want those to go to, where XXX is the label of the filter module(s)
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName: "gensingle_protoDUNE.root" #default file name, can override from command line with -o or --output
+   dataTier: "generated"
+   compressionLevel: 1
+ }
+}
+
+services.TFileService.fileName: "gen_protodunevd_radio_hist.root"
+source.maxEvents: 1
+outputs.out1.fileName: "gen_protodunevd_radio.root"
