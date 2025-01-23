@@ -1,5 +1,6 @@
-#include "prodmarley_nue_cc_spectrum_radiological_decay0_dune10kt_1x2x2.fcl"
+#include "services_dune.fcl"
+#include "prodmarley_nue_spectrum_radiological_decay0_dune10kt_1x2x2.fcl"
 
-outputs.out1.fileName:    "prodmarley_nue_sc_radiological_decay0_dune10kt_1x2x2_gen.root" # Default file name, can override from command line with -o or --output
+outputs.out1.fileName:    "prodmarley_nue_es_radiological_decay0_dune10kt_1x2x2_gen.root" # Default file name, can override from command line with -o or --output
 
-physics.producers.marley: @local::dune_marley_nue_es_flat
+physics.producers.marley.marley_parameters.reactions: [ "ES.react" ]
