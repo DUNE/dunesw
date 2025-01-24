@@ -1,0 +1,174 @@
+#include "HDF5RawInput3.fcl"
+#include "PDVDTPCReader.fcl"
+#include "DAPHNEReaderPDHD.fcl"
+
+#include "wirecell_dune.fcl"
+#include "hitfindermodules_dune.fcl"
+#include "SpacePointSolver_dune.fcl"
+#include "cluster_dune.fcl"
+#include "trackfindermodules_dune.fcl"
+#include "pandoramodules_dune.fcl"
+#include "calorimetry_pdune.fcl"
+#include "calibration_dune.fcl"
+#include "featurelabelingmodules.fcl"
+#include "particleid.fcl"
+#include "mctrutht0matching.fcl"
+#include "t0reco.fcl"
+#include "opticaldetectormodules_dune.fcl"
+#include "showerfindermodules_dune.fcl"
+#include "emshower3d.fcl"
+#include "ProtoDUNETriggerFilter.fcl"
+#include "OpSlicer.fcl"
+#include "CRT.fcl"
+#include "T0RecoAnodePiercers.fcl"
+#include "numberofhitsfilter.fcl"
+#include "protodune_tools_dune.fcl"
+
+process_name: pdvdkeepupprocessing
+
+services:{
+   TFileService: { fileName: "%ifb_reco_hist.root" }
+   TimeTracker:       @local::dune_time_tracker
+   MemoryTracker:     @local::dune_memory_tracker
+   RandomNumberGenerator: {}
+   FileCatalogMetadata:  @local::art_file_catalog_data
+                         @table::protodunevd_reco_services
+   message:  @local::dune_message_services_prod
+        
+   HDF5RawFile3Service:  {}
+   IFDH: {}
+   DetectorPropertiesService:  @local::protodunevd_detproperties
+
+   PDVDChannelMapService:
+   {
+     FileName: "PD2VDBottomTPCChannelMap_v1.txt"
+   }
+   DAPHNEChannelMapService: {
+    FileName: "DAPHNE_vd_coldbox_ChannelMap_bde2.txt"
+    IgnoreLinks: true
+   }
+   #IPhotonCalibrator: {
+   #   BadChannels: []
+   #   service_provider: "PhotonCalibratorServiceProtoDUNESP"
+   #}
+}
+
+source: @local::hdf5rawinput3
+
+outputs: {
+  out1: {
+    module_type: RootOutput
+    fileName: "%ifb_%tc_keepup.root"
+    outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*" ]
+    compressionLevel: 1
+    dataTier: "full-reconstructed"
+    streamName: "proc_rootout"
+  }
+}
+
+physics: {
+  filters: {
+    nhitsfilter: @local::pdvd_nhitsfilter
+  }
+
+  producers: {
+    rns:            { module_type: "RandomNumberSaver" }
+    #Decoders
+    tpcrawdecoder:    @local::PDVDTPCReaderDefaults
+    pdhddaphne:       @local::DAPHNEReaderPDHD   
+    #PDS reco
+    ophit:            @local::protodune_ophit_data_internal
+    opflash:          @local::protodune_opflash_data_internal
+    opslicer:         @local::protodune_opslicer
+
+    #CRP reco
+    wclsdatavd:         @local::protodunevd_nfsp
+    gaushit:            @local::dunevdfd_gaushitfinder
+    reco3d:             @local::protodunespmc_spacepointsolver
+
+    # actual disambiguation
+    hitpdune:           @local::pdune_disambigfromsp
+    emtrkmichelid:      @local::protodune_emtrkmichelid
+
+    pandora:            @local::protodune_pandora
+    pandoraTrack:       @local::dune_pandoraTrackCreation
+    pandoraShower:      @local::dune_pandoraShowerCreation
+
+    pandoraWriter:      @local::dune_pandorawriter
+    pandoraStdcalo:     @local::pdune_vd_standard_calodata
+    pandoraGnocalo:     @local::pdune_vd_gnocchi_calodata
+
+  }
+  produce: [rns,
+	tpcrawdecoder,
+        #pdhddaphne,
+        #ophit, opflash, opslicer,
+        wclsdatavd,
+        gaushit,
+        nhitsfilter,
+        reco3d,
+        hitpdune,
+        pandora,
+        pandoraTrack,
+        pandoraShower,
+        pandoraStdcalo,
+        pandoraGnocalo #,
+        ]
+
+  read_tpc: [tpcrawdecoder]
+  output : [ out1 ]
+#  trigger_paths: [ read_tpc ]
+  trigger_paths: [ produce ]
+  end_paths : [ output ]
+}
+
+#PDS raw data decoder settings
+physics.producers.pdhddaphne.DAPHNEInterface: { tool_type: "DAPHNEInterface2" }
+
+#PDS reconstruction settings
+physics.producers.ophit.InputModule:                         "pdhddaphne"
+physics.producers.ophit.InputLabels:                         [ "daq" ]
+physics.producers.opflash.InputModule:                       "ophit"
+physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
+
+#CRP raw data decoder settings
+physics.producers.tpcrawdecoder.DecoderToolParams.DebugLevel: 0 
+
+#WireCell signal processing settings
+physics.producers.wclsdatavd.wcls_main.params.use_magnify:  "false"
+physics.producers.wclsdatavd.wcls_main.params.raw_input_label: "tpcrawdecoder:daq"
+
+#Hit finder settings
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 0.5
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 0.5
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 0.5
+physics.producers.gaushit.CalDataModuleLabel: "wclsdatavd:gauss"
+
+# CNN settings
+physics.producers.emtrkmichelid.WireLabel: "wclsdatavd:gauss"
+
+# Pandora settings
+physics.producers.pandora.ConfigFile:     "PandoraSettings_Master_ProtoDUNE_VD.xml"
+physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
+physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
+physics.producers.pandora.ShouldRunNeutrinoRecoOption: true
+physics.producers.pandora.ShouldRunCosmicRecoOption:   false
+physics.producers.pandora.ShouldRunAllHitsCosmicReco:  false
+physics.producers.pandora.ShouldRunCosmicHitRemoval:   false
+physics.producers.pandora.ShouldRunSlicing: false
+physics.producers.pandora.ShouldRunStitching: false
+physics.producers.pandora.ShouldPerformSliceId: false
+
+physics.producers.pandoraWriter.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
+physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
+physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
+physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
+physics.producers.pandoraShower.PFParticleLabel:            "pandora"
+
+physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
+physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
+
+physics.producers.pandoracalipid.CalorimetryModuleLabel:        "pandoracali"
+physics.producers.pandoracalipid.TrackModuleLabel:              "pandoraTrack"
+
+
