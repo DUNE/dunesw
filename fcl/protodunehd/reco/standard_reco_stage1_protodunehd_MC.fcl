@@ -11,7 +11,7 @@ physics.reco: [
 
 #don't need a timestamp here -- only intermittent
 outputs.out1.fileName: "%ifb_reco_stage1.root"
-outputs.out1.outputCommands: [ "keep *", "drop *_*_*_Reco"]
+outputs.out1.outputCommands: [ "keep *"]
 process_name: pdhdrecostage1
 
 physics.producers.wclsdatahdfilter.wcls_main.loglevels: @erase 

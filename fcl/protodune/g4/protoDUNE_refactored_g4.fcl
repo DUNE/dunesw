@@ -16,7 +16,7 @@ services:
   @table::protodune_larg4_services
   @table::protodune_refactored_simulation_services
 
-  NuRandomService:       @local::dune_prod_seedservice
+  #NuRandomService:       @local::dune_prod_seedservice
 }
 
 
