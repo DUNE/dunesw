@@ -2,6 +2,7 @@
 #include "IonAndScint_dune.fcl"
 #include "PDFastSim_dune.fcl"
 
+#The fast optical simulation here is based on computable graph module
 process_name: G4Stage2
 
 services:
@@ -33,7 +34,7 @@ physics:
   {
     rns: {module_type: "RandomNumberSaver"}
     IonAndScint:  @local::protodunevd_ionandscint
-    PDFastSimAr:    @local::protodune_vd_pdfastsim_ann_ar
+    PDFastSimAr:    @local::protodune_vd_v4_pdfastsim_ann_ar
   }
 
   analyzers:
