@@ -14,6 +14,7 @@
 #include "opticaldetectormodules_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "clusterfinder_dune.fcl"
+#include "SolarOpFlash.fcl"
 
 BEGIN_PROLOG
 
@@ -50,6 +51,7 @@ dunefd_vertdrift_producers:
    pmtracktc:          @local::dunefdvd_pmalgtrackmaker    #PMA using trajcluster clusters
 #   pmtracktccalo:      @local::dunevd10kt_calomc
 #   pmtracktcpid:       @local::standard_chi2pid
+   solarflash: @local::solar_opflash_dunevd10kt_1x8x14_3view_30deg
 }
 
 dunefd_vertdrift_pds_reco1:
@@ -127,6 +129,11 @@ dunefd_vertdrift_tpc_le_reco2:
     pmtracktc 
 ]
 
+dunefd_vertdrift_pds_le_reco2:
+[
+    solarflash
+]
+
 dunefd_vertdrift_tpc_le:
 [
     @sequence::dunefd_vertdrift_tpc_le_reco1,
@@ -142,7 +149,7 @@ dunefd_vertdrift_le_reco1:
 dunefd_vertdrift_le_reco2:
 [
     @sequence::dunefd_vertdrift_tpc_le_reco2,
-    @sequence::dunefd_vertdrift_pds_reco2
+    @sequence::dunefd_vertdrift_pds_le_reco2
 ]
 
 
