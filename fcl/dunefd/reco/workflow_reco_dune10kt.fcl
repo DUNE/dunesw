@@ -20,8 +20,7 @@
 #include "OpHitFinderDeco.fcl"
 #include "opticaldetectorservices_dune.fcl"
 #include "OpSlicer.fcl"
-# the following line broke the ci_reco_regression_test_dunefd CI test, Aug 20, 2024
-# #include "SolarOpFlash.fcl"
+#include "SolarOpFlash.fcl"
 
 BEGIN_PROLOG
 
@@ -230,7 +229,7 @@ dunefd_horizdrift_workflow_reco_solar:
     ophitspe,
     opflash,
     opslicer,
-#    solarflash,
+    solarflash,
     rns
 ]
 
