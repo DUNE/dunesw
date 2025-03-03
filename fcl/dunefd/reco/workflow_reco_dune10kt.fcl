@@ -188,12 +188,12 @@ dunefd_horizdrift_workflow_reco1:
 
 dunefd_horizdrift_workflow_reco2:
 [
-    @sequence::dunefd_horizdrift_2dclustering,
+#@sequence::dunefd_horizdrift_2dclustering,
     @sequence::dunefd_horizdrift_pandora,
-    @sequence::dunefd_horizdrift_pmtrack,
-    @sequence::dunefd_horizdrift_pmtrack_trajcluster,
-    @sequence::dunefd_horizdrift_pmtrack_trajcluster_pfp,
-    @sequence::dunefd_horizdrift_pmtrack_showers,
+    #@sequence::dunefd_horizdrift_pmtrack,
+#@sequence::dunefd_horizdrift_pmtrack_trajcluster,
+#@sequence::dunefd_horizdrift_pmtrack_trajcluster_pfp,
+#@sequence::dunefd_horizdrift_pmtrack_showers,
     @sequence::dunefd_horizdrift_cvn,
     @sequence::dunefd_horizdrift_nuenergy,
     @sequence::dunefd_horizdrift_pd_reco1,
@@ -232,8 +232,6 @@ dunefd_horizdrift_workflow_reco1_solar:
 
 dunefd_horizdrift_workflow_reco2_solar:
 [
-    opflash,
-    opslicer,
     solarflash
 ]
 

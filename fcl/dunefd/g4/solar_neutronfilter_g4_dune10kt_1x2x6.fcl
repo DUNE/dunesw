@@ -9,7 +9,7 @@
 
 
 # Define the alpha energy filter
-physics.filters.neutronfilter.ParticleMinMomentum: [ 0.0077 ] #Require a minimum momentum of neutron particle mass 939.5654 + KE 0.0316 MeV
+physics.filters.neutronfilter.ParticleMinMomentum: [ 86.7e-3 ] #Require a minimum momentum of neutron particle mass 939.5654 + KE 4 MeV
 
 # Rename the output file
 output.out1.fileName:    "%ifb_g4_neutronfilter.root"

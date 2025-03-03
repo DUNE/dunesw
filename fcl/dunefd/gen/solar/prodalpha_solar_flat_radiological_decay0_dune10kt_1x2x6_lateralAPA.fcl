@@ -1,8 +1,0 @@
-#include "prodelectron_solar_flat_radiological_decay0_dune10kt_1x2x6_lateralAPA.fcl"
-
-outputs.out1.fileName:    "prodalpha_solar_flat_radiological_decay0_dune10kt_1x2x6_lateralAPA_gen.root"
-
-physics.producers.generator.PDG:    [ 1000020040 ] # alpha
-physics.producers.generator.PDist:    0            # Flat K.E. dist. (1-20 MeV)
-physics.producers.generator.P0:     [ 236.24e-3 ]
-physics.producers.generator.SigmaP: [ 149.89e-3 ]
