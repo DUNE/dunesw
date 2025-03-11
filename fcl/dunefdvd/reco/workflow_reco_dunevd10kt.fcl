@@ -140,6 +140,11 @@ dunefd_vertdrift_tpc_le_reco2:
     pmtracktc 
 ]
 
+dunefd_vertdrift_pds_le_reco2:
+[
+    solarflash
+]
+
 dunefd_vertdrift_tpc_le:
 [
     @sequence::dunefd_vertdrift_tpc_le_reco1,
@@ -155,7 +160,7 @@ dunefd_vertdrift_le_reco1:
 dunefd_vertdrift_le_reco2:
 [
     @sequence::dunefd_vertdrift_tpc_le_reco2,
-    @sequence::dunefd_vertdrift_pds_reco2
+    @sequence::dunefd_vertdrift_pds_le_reco2
 ]
 
 
