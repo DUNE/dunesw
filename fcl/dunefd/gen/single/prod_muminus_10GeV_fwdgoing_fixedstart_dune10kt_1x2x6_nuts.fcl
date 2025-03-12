@@ -1,0 +1,12 @@
+#include "prod_muminus_10GeV_fwdgoing_fixedstart_dune10kt_1x2x6.fcl"
+
+process_name: SinglesGen
+
+outputs.out1.fileName: "prod_muminus_10GeV_fwdgoing_fixedstart_dune10kt_1x2x6_nuts_gen.root"
+
+services:
+{
+    @table::services
+    @table::dunefd_1x2x6_nuts_simulation_services
+}
+
