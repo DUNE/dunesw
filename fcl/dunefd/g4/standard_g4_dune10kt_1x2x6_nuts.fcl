@@ -1,0 +1,14 @@
+#include "elecdrift_dune.fcl"
+#include "standard_g4_dune10kt.fcl"
+
+services: {
+    @table::services
+    @table::dunefd_1x2x6_nuts_simulation_services
+}
+
+physics.producers: {
+    @table::physics.producers
+    elecDrift:   @local::dunefd_elecdrift
+}
+
+physics.simulate: [ @sequence::physics.simulate, elecDrift ]
