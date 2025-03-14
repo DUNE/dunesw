@@ -11,3 +11,4 @@ physics.producers:
     @table::physics.producers
     wclsmcnfsp: @local::dune10kt_1x2x2_mc_nfsp
 }
+outputs.out1.outputCommands: ["keep *", "drop recob::OpWaveforms_*_*_*Reco*"]
