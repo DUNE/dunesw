@@ -1,7 +1,7 @@
 # workflow_reco_dunevd10kt.fcl
 
 # Dom Brailsford
-# Laura Paulucci: adding pmtracktc for LE events
+# Modifications by Laura Paulucci
 
 #Configuration fcl for the reconstruction workflows
 #include "pandoramodules_dune.fcl"
@@ -16,6 +16,7 @@
 #include "clusterfinder_dune.fcl"
 #include "SolarOpFlash.fcl"
 #include "angularreco.fcl"
+#include "imagepatternalgs.fcl"
 
 BEGIN_PROLOG
 
@@ -60,7 +61,8 @@ dunefd_vertdrift_producers:
    pmtracktc:          @local::dunefdvd_pmalgtrackmaker    #PMA using trajcluster clusters
 #   pmtracktccalo:      @local::dunevd10kt_calomc
 #   pmtracktcpid:       @local::standard_chi2pid
-    solarflash: @local::solar_opflash_dunevd10kt_1x8x14_3view_30deg
+   emtrkmichelid:      @local::standard_emtrackmichelid
+   solarflash:         @local::solar_opflash_dunevd10kt_1x8x14_3view_30deg
 }
 
 dunefd_vertdrift_pds_reco1:
@@ -137,7 +139,8 @@ dunefd_vertdrift_tpc_le_reco2:
     pandorapid,
     linecluster, 
     trajcluster, 
-    pmtracktc 
+    pmtracktc,
+    emtrkmichelid
 ]
 
 dunefd_vertdrift_pds_le_reco2:
@@ -201,6 +204,7 @@ dunefd_vertdrift_reco2_solar:
     linecluster, 
     trajcluster, 
     pmtracktc,
+    opflash10ppm,
     solarflash
 ]
 
@@ -229,7 +233,12 @@ dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly
 dunefd_vertdrift_producers.ophitXeOnly.InputModule:      opdigiXeOnly
 dunefd_vertdrift_producers.opflashArOnly.InputModule:    ophitArOnly
 dunefd_vertdrift_producers.opflashXeOnly.InputModule:    ophitXeOnly
-dunefd_vertdrift_producers.opflash10ppm.InputModule:     ophit10ppm
+dunefd_vertdrift_producers.emtrkmichelid.PointIdAlg.NNetModelFile:     "CnnModels/cnn_ndkemtrk_pitch_5_wire_44_drift_48_down_6_mean_notes_AtmAndNdk.nnet"
+dunefd_vertdrift_producers.emtrkmichelid.WireLabel:                    "tpcrawdecoder:gauss"
+dunefd_vertdrift_producers.emtrkmichelid.PointIdAlg.NNetOutputs:       ["track", "em", "michel", "none"]
+dunefd_vertdrift_producers.emtrkmichelid.PointIdAlg.PatchSizeW:        44
+dunefd_vertdrift_producers.emtrkmichelid.PointIdAlg.PatchSizeD:        48
+dunefd_vertdrift_producers.emtrkmichelid.PointIdAlg.DownscaleFullView: false
 
 END_PROLOG
 

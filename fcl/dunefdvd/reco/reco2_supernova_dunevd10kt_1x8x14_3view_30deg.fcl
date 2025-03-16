@@ -6,7 +6,7 @@
 # Runs the high level reconstruction for DUNE FD
 
 #include "reco_supernova_dunevd10kt_1x8x14_3view_30deg.fcl"
-#
+
 process_name: Reco2
 
 services.TFileService.fileName: "reco2_hist.root"
