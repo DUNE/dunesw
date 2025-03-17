@@ -1,0 +1,12 @@
+#include "standard_reco1_dune10kt_1x2x6.fcl"
+
+physics.reco: [ caldata, @sequence::physics.reco ]
+
+services: 
+{
+    @table::services
+    @table::dunefd_1x2x6_nuts_reco_services
+}
+
+physics.producers.gaushit.CalDataModuleLabel: "caldata"
+physics.producers.spsolve.MinNHits: 2 #lower the threshold for low energy interactions

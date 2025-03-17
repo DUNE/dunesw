@@ -1,0 +1,40 @@
+#include "standard_detsim_dune10kt_1x2x6.fcl"
+
+
+services: {
+    @table::services
+    @table::dunefd_1x2x6_nuts_simulation_services
+}
+
+
+physics.producers:
+{
+    @table::physics.producers
+#    elecDrift:   @local::dunefd_elecdrift
+    daq:                   @local::dune_detsim
+    tpcrawdecoder:         @erase
+}
+
+physics.simulate[0]: daq #terrible way of changing the running producer from wirecell to the older detsim.  Erasing tpcrawdecoder does provide a small amount of protection against us replacing the wrong array element (as the job will not run)
+
+# Now prepend elecDrift to the modified simulate sequence
+physics.simulate: [ @sequence::physics.simulate ]
+
+# Use fixed values instead of DB for pedestals.
+services.DetPedestalService: @local::dune_fixedpeds
+
+# DetSim flags.
+physics.producers.daq.NoiseOn:     true
+physics.producers.daq.PedestalOn:  true
+physics.producers.daq.DistortOn:   false
+physics.producers.daq.SuppressOn:  true
+physics.producers.daq.SimChannelLabel: "elecDrift"
+
+# DetSim services.
+services.SimChannelExtractService: @local::scxgeneric
+services.ChannelNoiseService:      @local::chnoiseold
+services.PedestalAdditionService:  @local::padprovided
+services.AdcDistortService:        @local::stuckbits
+services.AdcSuppressService:       @local::zslegacy
+services.AdcCompressService:       @local::cmpblock
+

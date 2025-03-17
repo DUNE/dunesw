@@ -1,0 +1,19 @@
+#include "standard_reco2_dune10kt_1x2x6.fcl"
+
+
+services: 
+{
+    @table::services
+    @table::dunefd_1x2x6_nuts_reco_services
+}
+
+
+physics.reco: [ trajcluster, pmtracktc ]
+
+physics.producers.pmtrack.WireModuleLabel:    "caldata"
+physics.producers.pmtracktc.WireModuleLabel:  "caldata"
+physics.producers.emtrkmichelid.WireLabel:    "caldata"
+physics.producers.energyrecnumu.WireLabel:    "caldata"
+physics.producers.energyrecnue.WireLabel:     "caldata"
+physics.producers.energyrecnc.WireLabel:      "caldata"
+

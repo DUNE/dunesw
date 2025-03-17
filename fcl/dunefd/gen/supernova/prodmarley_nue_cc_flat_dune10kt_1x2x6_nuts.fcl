@@ -1,0 +1,12 @@
+#include "prodmarley_nue_flat_dune10kt_1x2x6.fcl"
+
+
+services: {
+    @table::services
+    @table::dunefd_1x2x6_nuts_simulation_services
+}
+
+
+physics.producers.marley: @local::dune_marley_nue_cc_flat
+
+outputs.out1.fileName: "prodmarley_nue_cc_flat_dune10kt_1x2x6_gen.root"
