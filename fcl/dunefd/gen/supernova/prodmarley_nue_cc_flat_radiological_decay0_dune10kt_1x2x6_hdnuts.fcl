@@ -1,0 +1,32 @@
+#include "prodmarley_nue_cc_flat_radiological_decay0_dune10kt_1x2x6_centralAPA.fcl"
+
+
+services: {
+    @table::services
+    @table::dunefd_1x2x6_nuts_simulation_services
+}
+
+outputs.out1.fileName: "prodmarley_nue_cc_flatradiological_decay0_dune10kt_1x2x6nuts_gen.root"
+
+physics.producers.CavernwallGammasAtLAr1x2x6lowBgAPA.X0: [ -750. , -750. , -750., -750.,    -0.5 ]
+physics.producers.CavernwallGammasAtLAr1x2x6lowBgAPA.X1: [  750. ,  750. ,  750.,  750.,     0.5 ]
+physics.producers.foamGammasAtLAr1x2x6lowBgAPA.X0:  [ -750. , -750. , -750., -750.,    -0.5 ]
+physics.producers.foamGammasAtLAr1x2x6lowBgAPA.X1:  [  750. ,  750. ,  750.,  750.,     0.5 ]
+physics.producers.CavernwallNeutronsAtLAr1x2x6lowBgAPA.X0: [ -750. , -750. , -750., -750.,    -0.5 ]
+physics.producers.CavernwallNeutronsAtLAr1x2x6lowBgAPA.X1:  [  750. ,  750. ,  750.,  750.,     0.5 ]
+physics.producers.CryostatNGammasAtLAr1x2x6lowBgAPA.X0:   [ -750. , -750. , -750., -750.,    -0.5 ]
+physics.producers.CryostatNGammasAtLAr1x2x6lowBgAPA.X1:   [  750. ,  750. ,  750.,  750.,     0.5 ]
+physics.producers.CavernNGammasAtLAr1x2x6lowBgAPA.X0: [ -750. , -750. , -750., -750.,    -0.5 ]
+physics.producers.CavernNGammasAtLAr1x2x6lowBgAPA.X1: [  750. ,  750. ,  750.,  750.,     0.5 ]
+physics.producers.CavernwallGammasAtLAr1x2x6lowBgAPA.T0:                    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000 ] # starting time in ns
+physics.producers.CavernwallGammasAtLAr1x2x6lowBgAPA.T1:                    [  4492000., 4492000., 4492000., 4492000., 4492000 ] # ending time in ns
+physics.producers.foamGammasAtLAr1x2x6lowBgAPA.T0:                    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000 ] # starting time in ns
+physics.producers.foamGammasAtLAr1x2x6lowBgAPA.T1:                    [  4492000., 4492000., 4492000., 4492000., 4492000 ] # ending time in ns
+physics.producers.CavernwallNeutronsAtLAr1x2x6lowBgAPA.T0:                    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000 ] # starting time in ns
+physics.producers.CavernwallNeutronsAtLAr1x2x6lowBgAPA.T1:                    [  4492000., 4492000., 4492000., 4492000., 4492000 ] # ending time in ns
+physics.producers.CryostatNGammasAtLAr1x2x6lowBgAPA.T0:                    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000 ] # starting time in ns
+physics.producers.CryostatNGammasAtLAr1x2x6lowBgAPA.T1:                    [  4492000., 4492000., 4492000., 4492000., 4492000 ] # ending time in ns
+physics.producers.CavernNGammasAtLAr1x2x6lowBgAPA.T0:                    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000 ] # starting time in ns
+physics.producers.CavernNGammasAtLAr1x2x6lowBgAPA. T1:                    [  4492000., 4492000., 4492000., 4492000., 4492000 ] # ending time in ns
+
+
