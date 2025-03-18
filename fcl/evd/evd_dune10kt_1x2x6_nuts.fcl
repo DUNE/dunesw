@@ -25,6 +25,7 @@ services.RecoDrawingOptions.WireModuleLabels: ["daq"]
 
 services.RawDrawingOptions.PedestalOption: 1
 services.RawDrawingOptions.RawDataLabels: ["daq"]
+services.RawDrawingOptions.TotalTicks: 8984
 #services.RawDrawingOptions.TotalTicks: 9000
 
 services.SimulationDrawingOptions.ShowMCTruthTrajectories: true
