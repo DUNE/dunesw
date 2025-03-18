@@ -1,0 +1,7 @@
+#include "standard_g4_dune10kt_1x2x6_nuts.fcl"
+
+process_name: SupernovaG4
+
+services.PhysicsList:   @local::dune_physics_list_supernova
+
+outputs.out1.outputCommands: ["keep *", "drop sim::SimEnergyDeposits_largeant_*_*G4*"]
