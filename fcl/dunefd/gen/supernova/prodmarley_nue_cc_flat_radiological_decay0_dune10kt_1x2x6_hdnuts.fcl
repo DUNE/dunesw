@@ -1,4 +1,4 @@
-#include "prodmarley_nue_cc_flat_radiological_decay0_dune10kt_1x2x6_centralAPA.fcl"
+#include "prodmarley_nue_cc_flat_radiological_decay0_dune10kt_1x2x6_lateralAPA.fcl"
 
 
 services: {
@@ -8,25 +8,33 @@ services: {
 
 outputs.out1.fileName: "prodmarley_nue_cc_flatradiological_decay0_dune10kt_1x2x6nuts_gen.root"
 
-physics.producers.CavernwallGammasAtLAr1x2x6lowBgAPA.X0: [ -750. , -750. , -750., -750.,    -0.5 ]
-physics.producers.CavernwallGammasAtLAr1x2x6lowBgAPA.X1: [  750. ,  750. ,  750.,  750.,     0.5 ]
-physics.producers.foamGammasAtLAr1x2x6lowBgAPA.X0:  [ -750. , -750. , -750., -750.,    -0.5 ]
-physics.producers.foamGammasAtLAr1x2x6lowBgAPA.X1:  [  750. ,  750. ,  750.,  750.,     0.5 ]
-physics.producers.CavernwallNeutronsAtLAr1x2x6lowBgAPA.X0: [ -750. , -750. , -750., -750.,    -0.5 ]
-physics.producers.CavernwallNeutronsAtLAr1x2x6lowBgAPA.X1:  [  750. ,  750. ,  750.,  750.,     0.5 ]
-physics.producers.CryostatNGammasAtLAr1x2x6lowBgAPA.X0:   [ -750. , -750. , -750., -750.,    -0.5 ]
-physics.producers.CryostatNGammasAtLAr1x2x6lowBgAPA.X1:   [  750. ,  750. ,  750.,  750.,     0.5 ]
-physics.producers.CavernNGammasAtLAr1x2x6lowBgAPA.X0: [ -750. , -750. , -750., -750.,    -0.5 ]
-physics.producers.CavernNGammasAtLAr1x2x6lowBgAPA.X1: [  750. ,  750. ,  750.,  750.,     0.5 ]
-physics.producers.CavernwallGammasAtLAr1x2x6lowBgAPA.T0:                    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000 ] # starting time in ns
-physics.producers.CavernwallGammasAtLAr1x2x6lowBgAPA.T1:                    [  4492000., 4492000., 4492000., 4492000., 4492000 ] # ending time in ns
-physics.producers.foamGammasAtLAr1x2x6lowBgAPA.T0:                    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000 ] # starting time in ns
-physics.producers.foamGammasAtLAr1x2x6lowBgAPA.T1:                    [  4492000., 4492000., 4492000., 4492000., 4492000 ] # ending time in ns
-physics.producers.CavernwallNeutronsAtLAr1x2x6lowBgAPA.T0:                    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000 ] # starting time in ns
-physics.producers.CavernwallNeutronsAtLAr1x2x6lowBgAPA.T1:                    [  4492000., 4492000., 4492000., 4492000., 4492000 ] # ending time in ns
-physics.producers.CryostatNGammasAtLAr1x2x6lowBgAPA.T0:                    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000 ] # starting time in ns
-physics.producers.CryostatNGammasAtLAr1x2x6lowBgAPA.T1:                    [  4492000., 4492000., 4492000., 4492000., 4492000 ] # ending time in ns
-physics.producers.CavernNGammasAtLAr1x2x6lowBgAPA.T0:                    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000 ] # starting time in ns
-physics.producers.CavernNGammasAtLAr1x2x6lowBgAPA. T1:                    [  4492000., 4492000., 4492000., 4492000., 4492000 ] # ending time in ns
+#The external backgrounds are in a sideways H-configuration: One on top, one on bottom, one at the front face, one at the rear face, and one parallel to the APA plane. 
+#There is just 1 chamber now, so the active volume is still going from -363cm to 363cm, no need to change X0 and X1 for the first 4 planes. 
+#The 5th value is related to the APA position. We'll use the same rate as in the lateral APA config but changing the X position to surround the new APA plane (according to the gdml, APA is centered at 363.5cm):
+physics.producers.CavernwallGammasAtLAr1x2x6.X0:   [ -750. , -750. , -750., -750.,    363. ]
+physics.producers.CavernwallGammasAtLAr1x2x6.X1:   [  750. ,  750. ,  750.,  750.,    364. ]
+physics.producers.foamGammasAtLAr1x2x6.X0:         [ -750. , -750. , -750., -750.,    363. ]
+physics.producers.foamGammasAtLAr1x2x6.X1:         [  750. ,  750. ,  750.,  750.,    364. ]
+physics.producers.CavernwallNeutronsAtLAr1x2x6.X0: [ -750. , -750. , -750., -750.,    363. ]
+physics.producers.CavernwallNeutronsAtLAr1x2x6.X1: [  750. ,  750. ,  750.,  750.,    364. ]
+physics.producers.CryostatNGammasAtLAr1x2x6.X0:    [ -750. , -750. , -750., -750.,    363. ]
+physics.producers.CryostatNGammasAtLAr1x2x6.X1:    [  750. ,  750. ,  750.,  750.,    364. ]
+physics.producers.CavernNGammasAtLAr1x2x6.X0:      [ -750. , -750. , -750., -750.,    363. ]
+physics.producers.CavernNGammasAtLAr1x2x6.X1:      [  750. ,  750. ,  750.,  750.,    364. ]
 
+physics.producers.CavernwallGammasAtLAr1x2x6.T0:   [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000. ] # starting time in ns
+physics.producers.CavernwallGammasAtLAr1x2x6.T1:   [  4492000., 4492000., 4492000., 4492000., 4492000. ] # ending time in ns
+physics.producers.foamGammasAtLAr1x2x6.T0:         [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000. ] # starting time in ns
+physics.producers.foamGammasAtLAr1x2x6.T1:         [  4492000., 4492000., 4492000., 4492000., 4492000. ] # ending time in ns
+physics.producers.CavernwallNeutronsAtLAr1x2x6.T0: [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000. ] # starting time in ns
+physics.producers.CavernwallNeutronsAtLAr1x2x6.T1: [  4492000., 4492000., 4492000., 4492000., 4492000. ] # ending time in ns
+physics.producers.CryostatNGammasAtLAr1x2x6.T0:    [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000. ] # starting time in ns
+physics.producers.CryostatNGammasAtLAr1x2x6.T1:    [  4492000., 4492000., 4492000., 4492000., 4492000. ] # ending time in ns
+physics.producers.CavernNGammasAtLAr1x2x6.T0:      [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000. ] # starting time in ns
+physics.producers.CavernNGammasAtLAr1x2x6.T1:      [  4492000., 4492000., 4492000., 4492000., 4492000. ] # ending time in ns
 
+#Also the APA boards bg generation needs to be adjusted to the new APA X position and longer drift
+physics.producers.U238Th232K40GenInLArAPAboards1x2x6.X0:   [ 361.5 , 361.5 , 361.5 , 361.5 , 361.5 ,361.5 ]
+physics.producers.U238Th232K40GenInLArAPAboards1x2x6.X1:   [ 365.5 , 365.5 , 365.5 , 365.5 , 365.5 , 365.5 ]
+physics.producers.U238Th232K40GenInLArAPAboards1x2x6.T0:   [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000.,-4492000. ] # starting time in ns
+physics.producers.U238Th232K40GenInLArAPAboards1x2x6.T1:   [  4492000., 4492000., 4492000., 4492000., 4492000.,-4492000. ] # ending time in ns
