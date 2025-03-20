@@ -60,7 +60,7 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "prodmarley_solar_nue_flat_dunevd10kt_gen.root" # Default file name, can override from command line with -o or --output
+    fileName:    "prodmarley_solar_cc_flat_dunevd10kt_gen.root" # Default file name, can override from command line with -o or --output
     dataTier:    "generated"
     compressionLevel: 1
   }
