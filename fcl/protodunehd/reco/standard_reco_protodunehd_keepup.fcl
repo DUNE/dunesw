@@ -69,7 +69,7 @@ services:
 
   PD2HDChannelMapService:
    {
-     FileName: "PD2HDChannelMap_WIBEth_electronics_v1.txt"
+     FileName: "PD2HDChannelMap_WIBEth_visiblewires_v1.txt"
    }
 }
 
