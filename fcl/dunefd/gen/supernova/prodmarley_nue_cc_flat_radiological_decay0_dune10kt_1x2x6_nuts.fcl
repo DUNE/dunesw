@@ -38,3 +38,12 @@ physics.producers.U238Th232K40GenInLArAPAboards1x2x6.X0:   [ 361.5 , 361.5 , 361
 physics.producers.U238Th232K40GenInLArAPAboards1x2x6.X1:   [ 365.5 , 365.5 , 365.5 , 365.5 , 365.5 , 365.5 ]
 physics.producers.U238Th232K40GenInLArAPAboards1x2x6.T0:   [ -4492000.,-4492000.,-4492000.,-4492000.,-4492000.,-4492000. ] # starting time in ns
 physics.producers.U238Th232K40GenInLArAPAboards1x2x6.T1:   [  4492000., 4492000., 4492000., 4492000., 4492000., 4492000. ] # ending time in ns
+
+physics.producers.marley.vertex: {
+  type: "box"
+  min_position: [3.634e2, 608., 1394.]
+  max_position: [-3.634e2, -608., 1.]
+  check_active: true
+  #seed: 47373
+}
+
