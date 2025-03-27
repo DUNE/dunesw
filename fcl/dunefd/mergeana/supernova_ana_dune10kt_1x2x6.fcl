@@ -2,16 +2,14 @@
 process_name: Mergeana
 
 physics.analyzers.flashmatchAna: @local::marley_flashmatchana
+physics.analyzers.analysistree:  @local::dune10kt_supernova_analysistree
 
 services.ParticleListAction.keepGenTrajectories: ["marley"]
 physics.analyzers.trajclustershweff.MCTruthModuleLabel: "marley"
-physics.analyzers.pmtrajfittceff.MCTruthModuleLabel: "marley"
-physics.analyzers.pmtrajfiteff.MCTruthModuleLabel: "marley"
+#physics.analyzers.pmtrajfittceff.MCTruthModuleLabel: "marley"
+#physics.analyzers.pmtrajfiteff.MCTruthModuleLabel: "marley"
 physics.analyzers.pmtracktceff.MCTruthModuleLabel: "marley"
 physics.analyzers.pandoraeff.MCTruthModuleLabel: "marley"
 physics.analyzers.pandorashweff.MCTruthModuleLabel: "marley"
 physics.analyzers.pmtrackeff.MCTruthModuleLabel: "marley"
 physics.analyzers.emshowershweff.MCTruthModuleLabel: "marley"
-physics.analyzers.analysistree.CryGenModuleLabel: "marley"
-physics.analyzers.analysistree.GenieGenModuleLabel: "marley"
-physics.analyzers.analysistree.POTModuleLabel: "marley"
