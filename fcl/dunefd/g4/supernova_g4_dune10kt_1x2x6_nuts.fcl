@@ -4,4 +4,6 @@ process_name: SupernovaG4
 
 services.PhysicsList:   @local::dune_physics_list_supernova
 
+services.LArG4Detector.volumeNames: [ "volTPCInner", "volTPCActiveOuter" ]
+
 outputs.out1.outputCommands: ["keep *", "drop sim::SimEnergyDeposits_largeant_*_*G4*"]
