@@ -4,3 +4,9 @@ services: {
     @table::services
     @table::dunefd_1x2x6_simulation_services
 }
+#services.PhysicsList:   @local::dune_physics_list_supernova
+
+outputs.out1.outputCommands: ["keep *", "drop sim::SimEnergyDeposits_largeant_*_*G4*"]
+
+services.LArG4Parameters.keepEMShowerDaughters: true
+services.ParticleListAction.keepEMShowerDaughters: true
