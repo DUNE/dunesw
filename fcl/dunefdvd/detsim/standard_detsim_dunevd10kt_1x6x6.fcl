@@ -1,6 +1,0 @@
-#include "standard_detsim_dunevd10kt.fcl"
-
-services: {
-    @table::services
-    @table::dunefdvd_1x6x6_simulation_services
-}
