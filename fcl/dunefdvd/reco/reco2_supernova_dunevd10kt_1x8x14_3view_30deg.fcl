@@ -6,7 +6,7 @@
 # Runs the high level reconstruction for DUNE FD
 
 #include "reco_supernova_dunevd10kt_1x8x14_3view_30deg.fcl"
-#
+
 process_name: Reco2
 
 services.TFileService.fileName: "reco2_hist.root"
@@ -14,6 +14,8 @@ services.TFileService.fileName: "reco2_hist.root"
 source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco2" ]
 
 physics.reco: [ @sequence::dunefd_vertdrift_le_reco2 ]
+
+physics.producers.pandora.ConfigFile: "PandoraSettings_Master_LowE_DUNEFD_VD.xml"
 
 outputs.out1.fileName: "%ifb_reco2.root"
 outputs.out1.dataTier: "full-reconstructed"
