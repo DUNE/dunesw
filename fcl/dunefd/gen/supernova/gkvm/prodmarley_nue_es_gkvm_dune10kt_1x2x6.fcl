@@ -4,4 +4,4 @@
 
 physics.producers.marley: @local::dune_marley_nue_es_gkvm
 
-outputs.out1.fileName: "prodmarley_nue_es_gkvm_dune10kt_1x2x6_gen.fcl"
+outputs.out1.fileName: "prodmarley_nue_es_gkvm_dune10kt_1x2x6_gen.root"
