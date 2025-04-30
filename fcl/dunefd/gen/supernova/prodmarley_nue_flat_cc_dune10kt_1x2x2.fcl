@@ -1,0 +1,12 @@
+# prodmarley_nue_flat_cc_dune10kt_1x2x2.fcl
+
+#include "prodmarley_nue_flat_dune10kt_1x2x6.fcl"
+
+services: 
+{
+    @table::services
+    @table::dunefd_1x2x2_services
+}
+
+physics.producers.marley.marley_parameters.reactions: [ "ve40ArCC_Bhattacharya2009.react" ]
+outputs.out1.fileName: "prodmarley_nue_flat_cc_dune10kt_1x2x2_gen.root"
