@@ -9,4 +9,6 @@ services:
 }
 
 physics.producers.marley.marley_parameters.reactions: [ "ve40ArCC_Bhattacharya2009.react" ]
+physics.producers.marley.marley_parameters.source.E_bin_lefts: [ 2 ] # MeV, for trigger studies might be useful to go slightly lower than 4
+
 outputs.out1.fileName: "prodmarley_nue_flat_cc_dune10kt_1x2x2_gen.root"
