@@ -1,8 +1,0 @@
-
-#include "prodmarley_nue_es_flat_radiological_decay0_dune10kt_1x2x6_centralAPA.fcl"
-
-physics.producers.marley:      @local::dune_marley_nue_es_flat_halfActiveVol
-
-physics.simulate: [ rns, marley, @sequence::dunefd_hd_backgrounds_1x2x6 ] #bg model to emulate lateral APA
-
-outputs.out1.fileName:    "prodmarley_nue_es_flat_radiological_decay0_dune10kt_1x2x6_lateralAPA_gen.root"
