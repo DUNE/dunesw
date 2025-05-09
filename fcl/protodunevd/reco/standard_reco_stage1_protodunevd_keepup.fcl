@@ -1,0 +1,26 @@
+#include "standard_reco_protodunevd_keepup.fcl"
+
+services.DAPHNEChannelMapService.IgnoreLinks: true
+
+#physics.producers.wclsdatavd: @erase
+#physics.producers.wclsdatavdfilter: @local::protodunevd_nfsp
+
+
+#Put all of the raw decoders here since they're quick
+physics.produce: [
+  tpcrawdecoder
+  triggerrawdecoder,
+#  timingrawdecoder,
+  pdhddaphne,
+  fembfilter,
+#  wclsdatavdfilter  #new to output raw digits from Wirecell
+]
+
+#don't need a timestamp here -- only intermittent
+services.TFileService.fileName: "%ifb_reco_stage1_%tc_keepup_hists.root"
+outputs.out1.fileName: "%ifb_reco_stage1_%tc_keepup.root"
+outputs.out1.outputCommands: [ "keep *"]
+process_name: pdvdkeepupstage1
+
+#physics.producers.wclsdatavdfilter.wcls_main.loglevels: @erase 
+#physics.producers.wclsdatavdfilter.wcls_main.logsinks: @erase 
