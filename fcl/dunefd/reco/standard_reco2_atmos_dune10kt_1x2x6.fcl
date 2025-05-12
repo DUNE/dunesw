@@ -2,7 +2,16 @@
 
 physics.producers.pandora.ConfigFile:   "PandoraSettings_Master_Atmos_DUNEFD.xml"
 
-physics.producers.cvnmap: @local::dunehd_atmo_1x2x6_cvnmapper
+physics.producers.cvnmap: @local::standard_cvnmapper
 physics.producers.cvneva: @local::dunehd_1x2x6_atmo_cvnevaluator
+
+physics.producers.cvneva.ReverseViews: [false,false,false]
+physics.producers.cnvmap.ReverseViews: [false,false,false]
+physics.producers.cvnmap.TdcWidth: 300
+physics.producers.cvnmap.TimeResolution: 1600
+physics.producers.cvneva.TFNetHandler.NImageTDCs: 300
+physics.producers.cvneva.TFNetHandler.NImageWires: 300
+physics.producers.cvneva.TFNetHandler.ReverseViews: [false,false,false]
+physics.producers.cvneva.TFNetHandler.TFBundle: "/cvmfs/dune.osgstorage.org/pnfs/fnal.gov/usr/dune/persistent/stash/CVN/atmos/v01_00_00/dune_cvn_hd_1x2x6_nu_2025_tf217_v01_00_00/"
 
 physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco2_atmos ]
