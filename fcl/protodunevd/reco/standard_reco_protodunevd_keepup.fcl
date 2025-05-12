@@ -1,6 +1,7 @@
 #include "HDF5RawInput3.fcl"
 #include "PDVDTPCReader.fcl"
 #include "DAPHNEReaderPDHD.fcl"
+#include "PDVDTriggerReader4.fcl"
 
 #include "wirecell_dune.fcl"
 #include "hitfindermodules_dune.fcl"
@@ -39,7 +40,7 @@ services:{
    IFDH: {}
    DetectorPropertiesService:  @local::protodunevd_detproperties
 
-   PDVDChannelMapService:
+   TPCChannelMapService:
    {
      FileName: "PD2VDBottomTPCChannelMap_v1.txt"
    }
@@ -47,10 +48,10 @@ services:{
      FileName: "PDVD_PDS_Mapping_v05092025.json"
      IgnoreLinks: true
    }
-   #IPhotonCalibrator: {
-   #   BadChannels: []
-   #   service_provider: "PhotonCalibratorServiceProtoDUNESP"
-   #}
+   IPhotonCalibrator: {
+      BadChannels: []
+      service_provider: "PhotonCalibratorServiceProtoDUNESP"
+   }
 }
 
 source: @local::hdf5rawinput3
@@ -75,6 +76,7 @@ physics: {
     rns:            { module_type: "RandomNumberSaver" }
     #Decoders
     tpcrawdecoder:    @local::PDVDTPCReaderDefaults
+    triggerrawdecoder:@local::PDVDTriggerReader4Defaults
     pdhddaphne:       @local::DAPHNEReaderPDHD   
     #PDS reco
     ophit:            @local::protodune_ophit_data_internal
