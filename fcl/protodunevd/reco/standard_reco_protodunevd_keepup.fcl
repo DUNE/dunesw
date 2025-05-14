@@ -140,6 +140,7 @@ physics.producers.tpcrawdecoder.DecoderToolParams.DebugLevel: 0
 #WireCell signal processing settings
 physics.producers.wclsdatavd.wcls_main.params.use_magnify:  "false"
 physics.producers.wclsdatavd.wcls_main.params.raw_input_label: "tpcrawdecoder:daq"
+physics.producers.wclsdatavd.wcls_main.params.use_resampler: "true"
 
 #Hit finder settings
 physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 0.5
