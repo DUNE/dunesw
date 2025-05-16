@@ -8,11 +8,12 @@ services.DAPHNEChannelMapService.IgnoreLinks: true
 
 #Put all of the raw decoders here since they're quick
 physics.produce: [
-  tpcrawdecoder
+  tpcrawdecoder,
   triggerrawdecoder,
 #  timingrawdecoder,
   pdhddaphne,
-  fembfilter,
+  ophit
+#  fembfilter
 #  wclsdatavdfilter  #new to output raw digits from Wirecell
 ]
 
