@@ -1,0 +1,7 @@
+# prodmarley_nue_cc_garching_radiological_decay0_dune10kt_1x2x2_lateralAPA.fcl
+
+#include "prodmarley_nue_cc_flat_radiological_decay0_dune10kt_1x2x2_lateralAPA.fcl"
+
+physics.producers.marley: @local::dune_marley_nue_cc_garching
+
+outputs.out1.fileName:    "prodmarley_nue_cc_garching_radiological_decay0_dune10kt_1x2x2_lateralAPA_gen.root"
