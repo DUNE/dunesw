@@ -41,7 +41,7 @@ physics:
               # TPC simulation
               tpcrawdecoder,
               # OpDet and CRT simulation
-              sipmSim, opdigi,
+              #sipmSim, opdigi,
               crt
             ] 
   stream1:  [ out1 ]
@@ -68,5 +68,5 @@ outputs:
   }
 }
 
-physics.producers.sipmSim.InputTag: "PDFastSimAr"
-services.OpDetResponseInterface.QuantumEfficiency: 0.03
+#physics.producers.sipmSim.InputTag: "PDFastSimAr"
+#services.OpDetResponseInterface.QuantumEfficiency: 0.03

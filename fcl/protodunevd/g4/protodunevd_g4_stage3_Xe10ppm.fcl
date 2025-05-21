@@ -2,7 +2,7 @@
 #include "IonAndScint_dune.fcl"
 #include "PDFastSim_dune.fcl"
 
-process_name: G4Stage2
+process_name: G4Stage3
 
 services:
 {
@@ -32,8 +32,7 @@ physics:
   producers:
   {
     rns: {module_type: "RandomNumberSaver"}
-    IonAndScint:  @local::protodunevd_ionandscint
-    PDFastSimAr:    @local::protodune_vd_pdfastsim_ann_ar
+    PDFastSimXe:    @local::protodune_vd_pdfastsim_ann_xe
   }
 
   analyzers:
@@ -41,12 +40,12 @@ physics:
 
   }
 
-  simulate:      [  rns, IonAndScint, PDFastSimAr ]
+  simulate:      [  rns, PDFastSimXe ]
 
   stream1:       [ out1 ]
 
-  trigger_paths: [  simulate ]
-  end_paths:     [  stream1  ]
+  trigger_paths: [  simulate ] 
+  end_paths:     [  stream1  ]  
 }
 
 outputs:
@@ -54,14 +53,17 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "%ifb_g4_stage2.root"
+    fileName:    "%ifb_g4PLXe_stage2.root"
     dataTier:    "simulated"
-    outputCommands: [ "keep *" ]
-    #outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_*"]
+    #outputCommands: [ "keep *" ]
+    outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_*"]
     #fastCloning: false #will fail if the split level is not the same as for the gen stage, so turn it off
-    compressionLevel: 1 #zlib argument (0-9)
+    compressionLevel: 1 #zlib argument (0-9) 
     #basketSize: 8192 #[Byte] buffer size at 8k
     #splitLevel: 0 #reduces number of buffers
     #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
   }
 }
+services.LArPropertiesService.ScintYield: 24000
+services.OpDetResponseInterface.QuantumEfficiency: 0.03
+#services.LArPropertiesService.ScintPreScale: 0.03

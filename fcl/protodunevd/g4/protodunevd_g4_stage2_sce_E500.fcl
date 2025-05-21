@@ -1,0 +1,19 @@
+#include "protodunevd_g4_stage2.fcl"
+
+services.SpaceCharge.InputFilename:  			"ProtoDUNE/VD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDVD_Sim_NoFluidFlow_E500_v2.root"
+services.SpaceCharge.CalibrationInputFilename:	        "ProtoDUNE/VD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDVD_Sim_NoFluidFlow_E500_v2.root"
+services.SpaceCharge.RepresentationType:               "Splines_TH3"
+services.SpaceCharge.service_provider:  		SpaceChargeServiceProtoDUNEvd
+
+# Electron Diverter Distortions off for VD
+services.SpaceCharge.EnableElectronDiverterDistortions: []
+services.SpaceCharge.EDZCenter:                         [] # gap center in cm
+services.SpaceCharge.EDAXPosOffs:                       []  # X distortion shift scale in cm
+services.SpaceCharge.EDBZPosOffs:                       [] #  Z distoriton shift scale in cm
+services.SpaceCharge.EDs:                               [] # width of distortion function in cm
+services.SpaceCharge.EDChargeLossZLow:                  [] # range in which charge is lost, low end, cm in Z
+services.SpaceCharge.EDChargeLossZHigh:                 [] # range in which charge is lost, high end, cm in Z
+
+services.SpaceCharge.EnableSimEfieldSCE: true
+services.SpaceCharge.EnableSimSpatialSCE: true
+services.SpaceCharge.EnableSimulationSCE: true

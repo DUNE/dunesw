@@ -31,8 +31,9 @@ physics:
   producers:
   {
     tpcrawdecoder:  @local::wirecell_protodunevd_mc
-    sipmSim:        @local::xarapuca_ar
-    opdigi:         @local::standard_vddaphne
+    sipmAr10ppm:    @local::dunefdvd_xarapuca_ar_xe10ppm
+    sipmXe10ppm:    @local::dunefdvd_xarapuca_xe_xe10ppm
+    opdigi10ppm:    @local::standard_vddaphne_xe10ppm
     crt:            @local::CRTVD_sim
     rns:            { module_type: "RandomNumberSaver" }
   }
@@ -41,7 +42,7 @@ physics:
               # TPC simulation
               tpcrawdecoder,
               # OpDet and CRT simulation
-              sipmSim, opdigi,
+              sipmAr10ppm, sipmXe10ppm, opdigi10ppm,
               crt
             ] 
   stream1:  [ out1 ]
@@ -68,5 +69,6 @@ outputs:
   }
 }
 
-physics.producers.sipmSim.InputTag: "PDFastSimAr"
+physics.producers.sipmAr10ppm.InputTag: "PDFastSimAr"
+physics.producers.sipmXe10ppm.InputTag: "PDFastSimXe"
 services.OpDetResponseInterface.QuantumEfficiency: 0.03
