@@ -37,17 +37,17 @@ services:
   message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         @table::protodunevd_reco_services
-  #ChannelStatusService: @local::pdsp_channel_status
   IFDH: {}
   DetectorPropertiesService:  @local::protodunevd_detproperties
+
+  IPhotonCalibrator: {
+     BadChannels: []
+     service_provider: "PhotonCalibratorServiceProtoDUNESP"
+  }
 }
-
-
 
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
 services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC"
-
-# services.RawDigitPrepService.ToolNames: @local::pdsim_dataprep_tools_wirecell
 
 source:
 {
@@ -66,10 +66,13 @@ physics: {
 
   producers: {
     rns:            { module_type: "RandomNumberSaver" }
-    # caldata:            @local::producer_adcprep_notool
     wclsdatavd:         @local::protodunevd_nfsp
     gaushit:            @local::dunevdfd_gaushitfinder
     reco3d:             @local::protodunespmc_spacepointsolver
+
+    ophit:              @local::protodune_ophit_data_internal
+    opflash:            @local::protodune_opflash_data_internal
+    opslicer:           @local::protodune_opslicer
 
     # actual disambiguation
     hitpdune:           @local::pdune_disambigfromsp
@@ -84,8 +87,8 @@ physics: {
     pandoraGnocalo:     @local::pdune_vd_gnocchi_calodata
   }
 
-reco: [ # caldata,
-        rns,
+reco: [ rns,
+        ophit, opflash, opslicer,
         wclsdatavd,
         gaushit,
         reco3d,
@@ -94,7 +97,7 @@ reco: [ # caldata,
         pandoraTrack,
         pandoraShower,
         pandoraStdcalo,
-        pandoraGnocalo #,
+        pandoraGnocalo
         ]
 
   stream1:  [ out1 ]
@@ -117,9 +120,10 @@ outputs:
  }
 }
 
-# physics.producers.caldata.DigitLabel: "tpcrawdecoder:daq"
-# physics.producers.caldata.WireName: "dataprep"
-# physics.producers.caldata.LogLevel: 3
+physics.producers.ophit.InputModule: "opdigi"
+physics.producers.ophit.InputLabels: [ "" ]
+physics.producers.opflash.InputModule:                       "ophit"
+physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
 
 physics.producers.wclsdatavd.wcls_main.params.use_magnify:  "false"
 
@@ -145,7 +149,3 @@ physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
 
 physics.producers.pandoracalipid.CalorimetryModuleLabel:        "pandoracali"
 physics.producers.pandoracalipid.TrackModuleLabel:              "pandoraTrack"
-
-
-# Use channel map service for data
-#services.PdspChannelMapService:        @local::pdspchannelmap
