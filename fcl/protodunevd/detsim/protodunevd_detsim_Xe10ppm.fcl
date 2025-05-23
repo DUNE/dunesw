@@ -69,6 +69,4 @@ outputs:
   }
 }
 
-physics.producers.sipmAr10ppm.InputTag: "PDFastSimAr"
-physics.producers.sipmXe10ppm.InputTag: "PDFastSimXe"
 services.OpDetResponseInterface.QuantumEfficiency: 0.03
