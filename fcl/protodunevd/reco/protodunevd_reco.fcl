@@ -2,7 +2,6 @@
 ## this fcl is currently kept; we use two stage recos once we have calibration done: protoDUNE_refactored_reco_stage1.fcl and protoDUNE_refactored_reco_stage2.fcl
 
 #include "services_refactored_pdune.fcl"
-##include "caldata_dune.fcl"
 #include "wirecell_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
