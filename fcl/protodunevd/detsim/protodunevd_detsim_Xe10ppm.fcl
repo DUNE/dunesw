@@ -33,7 +33,7 @@ physics:
     tpcrawdecoder:  @local::wirecell_protodunevd_mc
     sipmAr10ppm:    @local::dunefdvd_xarapuca_ar_xe10ppm
     sipmXe10ppm:    @local::dunefdvd_xarapuca_xe_xe10ppm
-    opdigi10ppm:    @local::standard_vddaphne_xe10ppm
+    opdigi:         @local::standard_vddaphne_xe10ppm
     crt:            @local::CRTVD_sim
     rns:            { module_type: "RandomNumberSaver" }
   }
@@ -42,7 +42,7 @@ physics:
               # TPC simulation
               tpcrawdecoder,
               # OpDet and CRT simulation
-              sipmAr10ppm, sipmXe10ppm, opdigi10ppm,
+              sipmAr10ppm, sipmXe10ppm, opdigi,
               crt
             ] 
   stream1:  [ out1 ]
