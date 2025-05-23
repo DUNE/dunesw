@@ -1,4 +1,4 @@
-#include "protodunevd_refactored_g4_stage2.fcl"
+#include "protodunevd_g4_stage2.fcl"
 
 services.SpaceCharge.InputFilename:  			"ProtoDUNE/VD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDVD_Sim_NoFluidFlow_E500_v2.root"
 services.SpaceCharge.CalibrationInputFilename:	        "ProtoDUNE/VD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDVD_Sim_NoFluidFlow_E500_v2.root"
