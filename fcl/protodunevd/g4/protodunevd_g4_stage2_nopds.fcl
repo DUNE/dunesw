@@ -13,7 +13,6 @@ services:
   message:      @local::standard_info
 
   @table::protodunevd_refactored_simulation_services
-  PhotonVisibilityService: @local::protodunevd_v4_Ar_photonvisibilityservice
 
   NuRandomService:       @local::dune_prod_seedservice
 }
@@ -34,7 +33,7 @@ physics:
   {
     rns: {module_type: "RandomNumberSaver"}
     IonAndScint:  @local::protodunevd_ionandscint
-    PDFastSim:    @local::protodune_vd_pdfastsim_pvs
+    PDFastSimAr:    @local::protodune_vd_pdfastsim_ann_ar
   }
 
   analyzers:
@@ -42,12 +41,12 @@ physics:
 
   }
 
-  simulate:      [  rns, IonAndScint, PDFastSim]
-  
+  simulate:      [  rns, IonAndScint ]
+
   stream1:       [ out1 ]
 
-  trigger_paths: [  simulate ] 
-  end_paths:     [  stream1  ]  
+  trigger_paths: [  simulate ]
+  end_paths:     [  stream1  ]
 }
 
 outputs:
@@ -55,17 +54,14 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "%ifb_g4PLAr_stage2.root"
+    fileName:    "%ifb_g4_stage2.root"
     dataTier:    "simulated"
-    #outputCommands: [ "keep *" ]
-    outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_*"]
+    outputCommands: [ "keep *" ]
+    #outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_*"]
     #fastCloning: false #will fail if the split level is not the same as for the gen stage, so turn it off
-    compressionLevel: 1 #zlib argument (0-9) 
+    compressionLevel: 1 #zlib argument (0-9)
     #basketSize: 8192 #[Byte] buffer size at 8k
     #splitLevel: 0 #reduces number of buffers
     #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
   }
 }
-services.LArPropertiesService.ScintYield: 24000
-services.OpDetResponseInterface.QuantumEfficiency: 0.03
-#services.LArPropertiesService.ScintPreScale: 0.03

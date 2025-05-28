@@ -1,0 +1,13 @@
+#include "protodunevd_reco.fcl"
+
+physics.reco: [ rns,
+        	wclsdatavd,
+        	gaushit,
+        	reco3d,
+        	hitpdune,
+        	pandora,
+        	pandoraTrack,
+        	pandoraShower,
+        	pandoraStdcalo,
+        	pandoraGnocalo
+              ]

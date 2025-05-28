@@ -2,6 +2,8 @@
 #include "wirecell_dune.fcl"
 #include "opticaldetectormodules_dune.fcl"
 #include "CRTVD.fcl"
+#include "SIPMOpSensorSim.fcl"
+#include "WaveformDigitizerSim.fcl"
 #include "tools_dune.fcl"
 
 process_name: Detsim
@@ -29,18 +31,20 @@ physics:
   producers:
   {
     tpcrawdecoder:  @local::wirecell_protodunevd_mc
-    # opdigi:         @local::protodune_opdigi_refactor
+    sipmAr10ppm:    @local::dunefdvd_xarapuca_ar_xe10ppm
+    sipmXe10ppm:    @local::dunefdvd_xarapuca_xe_xe10ppm
+    opdigi:         @local::standard_vddaphne_xe10ppm
     crt:            @local::CRTVD_sim
     rns:            { module_type: "RandomNumberSaver" }
   }
   
   simulate: [ rns, 
               # TPC simulation
-              tpcrawdecoder
+              tpcrawdecoder,
               # OpDet and CRT simulation
-              # opdigi,
-              # crt
-               ] 
+              sipmAr10ppm, sipmXe10ppm, opdigi,
+              crt
+            ] 
   stream1:  [ out1 ]
 
   trigger_paths: [simulate] 
@@ -64,3 +68,5 @@ outputs:
     ]
   }
 }
+
+services.OpDetResponseInterface.QuantumEfficiency: 0.03

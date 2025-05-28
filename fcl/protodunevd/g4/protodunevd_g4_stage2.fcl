@@ -42,7 +42,6 @@ physics:
   }
 
   simulate:      [  rns, IonAndScint, PDFastSimAr ]
-  #simulate:      [  rns, IonAndScint ]
 
   stream1:       [ out1 ]
 
