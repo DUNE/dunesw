@@ -1,5 +1,9 @@
 add_subdirectory(legacy)
-add_subdirectory(SN_pointing)
+add_subdirectory(flat)
+add_subdirectory(livermore)
+add_subdirectory(garching)
+add_subdirectory(gkvm)
+
 # Install fcl files in /job subdirectory.
 
 install_fhicl()

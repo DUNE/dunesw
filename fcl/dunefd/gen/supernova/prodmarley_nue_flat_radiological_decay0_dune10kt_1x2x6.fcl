@@ -1,6 +1,0 @@
-#include "prodmarley_nue_spectrum_radiological_decay0_dune10kt_1x2x6.fcl"
-
-physics.marley: @local::dune_marley_flat
-physics.simulate: [ rns, marley, @sequence::dunefd_hd_backgrounds_1x2x6_v3_6 ]
-
-outputs.out1.fileName: "prodmarley_flat_radiological_decay0_dune10kt_1x2x6_gen.root"

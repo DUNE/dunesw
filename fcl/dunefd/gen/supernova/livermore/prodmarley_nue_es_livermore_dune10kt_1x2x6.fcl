@@ -1,0 +1,7 @@
+# prodmarley_nue_es_livermore_dune10kt_1x2x6.fcl
+
+#include "prodmarley_nue_es_flat_dune10kt_1x2x6.fcl"
+
+physics.producers.marley: @local::dune_marley_nue_es_livermore
+
+outputs.out1.fileName: "prodmarley_nue_es_livermore_dune10kt_1x2x6_gen.root"

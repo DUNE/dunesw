@@ -1,0 +1,7 @@
+# prodmarley_nue_cc_livermore_radiological_decay0_dune10kt_1x2x6_centralAPA.fcl
+
+#include "prodmarley_nue_cc_flat_radiological_decay0_dune10kt_1x2x6_centralAPA.fcl"
+
+physics.producers.marley: @local::dune_marley_nue_cc_livermore
+
+outputs.out1.fileName:    "prodmarley_nue_cc_livermore_radiological_decay0_dune10kt_1x2x6_centralAPA_gen.root"
