@@ -1,7 +1,5 @@
 #include "standard_reco_protodunevd_keepup.fcl"
 
-services.DAPHNEChannelMapService.IgnoreLinks: true
-
 #physics.producers.wclsdatavd: @erase
 #physics.producers.wclsdatavdfilter: @local::protodunevd_nfsp
 
@@ -13,9 +11,9 @@ physics.produce: [
 #  timingrawdecoder,
   pdvddaphne,
   ophit,
-  opflash
+  opflash,
 #  fembfilter
-#  wclsdatavdfilter  #new to output raw digits from Wirecell
+  wclsdatavd 
 ]
 
 #don't need a timestamp here -- only intermittent

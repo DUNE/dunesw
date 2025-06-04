@@ -39,6 +39,11 @@ services:
   IFDH: {}
   DetectorPropertiesService:  @local::protodunevd_detproperties
 
+  DAPHNEChannelMapService: {
+     FileName: "PDVD_PDS_Mapping_v04152025.json"
+     IgnoreLinks: true
+   } 
+
   IPhotonCalibrator: {
      BadChannels: []
      service_provider: "PhotonCalibratorServiceProtoDUNESP"
@@ -69,8 +74,8 @@ physics: {
     gaushit:            @local::dunevdfd_gaushitfinder
     reco3d:             @local::protodunespmc_spacepointsolver
 
-    ophit:              @local::protodune_ophit_data_internal
-    opflash:            @local::protodune_opflash_data_internal
+    ophit:              @local::protodunevd_ophit
+    opflash:            @local::protodunevd_opflash
     opslicer:           @local::protodune_opslicer
 
     # actual disambiguation
@@ -79,7 +84,7 @@ physics: {
 
     pandora:            @local::protodune_pandora
     pandoraTrack:       @local::dune_pandoraTrackCreation
-    pandoraShower:      @local::dune_pandoraShowerCreation
+    pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
 
     pandoraWriter:      @local::dune_pandorawriter
     pandoraStdcalo:     @local::pdune_vd_standard_calodata

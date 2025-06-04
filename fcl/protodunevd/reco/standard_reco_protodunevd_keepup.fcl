@@ -45,7 +45,7 @@ services:{
      FileName: "PD2VDBottomTPCChannelMap_v1.txt"
    }
    DAPHNEChannelMapService: {
-     FileName: "PDVD_PDS_Mapping_v05092025.json"
+     FileName: "PDVD_PDS_Mapping_v04152025.json"
      IgnoreLinks: true
    }
    IPhotonCalibrator: {
@@ -94,7 +94,7 @@ physics: {
 
     pandora:            @local::protodune_pandora
     pandoraTrack:       @local::dune_pandoraTrackCreation
-    pandoraShower:      @local::dune_pandoraShowerCreation
+    pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
 
     pandoraWriter:      @local::dune_pandorawriter
     pandoraStdcalo:     @local::pdune_vd_standard_calodata
@@ -118,9 +118,7 @@ physics: {
         pandoraGnocalo #,
         ]
 
-  read_tpc: [tpcrawdecoder]
   output : [ out1 ]
-#  trigger_paths: [ read_tpc ]
   trigger_paths: [ produce ]
   end_paths : [ output ]
 }
