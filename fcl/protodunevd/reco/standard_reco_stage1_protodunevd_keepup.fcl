@@ -11,8 +11,9 @@ physics.produce: [
   tpcrawdecoder,
   triggerrawdecoder,
 #  timingrawdecoder,
-  pdhddaphne,
-  ophit
+  pdvddaphne,
+  ophit,
+  opflash
 #  fembfilter
 #  wclsdatavdfilter  #new to output raw digits from Wirecell
 ]
