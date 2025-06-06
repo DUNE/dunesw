@@ -1,9 +1,0 @@
-#include "prodmarley_solar_flat_dunevd10kt.fcl"
-
-services:
-{
-	@table::services
-        @table::dunefdvd_1x8x14_3view_30deg_simulation_services
-}
-
-outputs.out1.fileName: "prodmarley_solar_flat_dunevd10kt_1x8x14_3view_30deg_gen.root"
