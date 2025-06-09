@@ -1,0 +1,16 @@
+#include "workflow_radiological_decay0_dunevd10kt_optimistic.fcl"
+#include "prodmarley_solar_flat_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+physics:
+{
+   @table::physics
+   producers:
+   {  
+      @table::physics.producers
+      @table::dunefd_vertdrift_1x8x14_producers
+   }
+   
+   simulate: [rns, marley, @sequence::dunefdvd_backgrounds_1x8x14 ]      
+}
+
+outputs.out1.fileName:    "prodmarley_solar_cc_flat_radiological_decay0_dunevd10kt_1x8x14_optimistic_gen.root" 
