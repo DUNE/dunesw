@@ -14,6 +14,8 @@
 #include "opticaldetectormodules_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "clusterfinder_dune.fcl"
+#include "PerPlaneCluster.fcl"
+#include "SolarCluster.fcl"
 #include "SolarOpFlash.fcl"
 #include "angularreco.fcl"
 #include "imagepatternalgs.fcl"
@@ -24,9 +26,9 @@ dunefd_vertdrift_producers:
 {
    rns:            { module_type: "RandomNumberSaver" }
    wclsdatanfsp:       @local::dune10kt_dunefd_vertdrift_data_nfsp
-   # actual hit finder
+   # Actual hit finder
    gaushit:            @local::dunevdfd_gaushitfinder
-   # pattern recognition
+   # Pattern recognition
    pandora:            @local::dunefdvd_pandora_neutrino
    # Characterisation
    pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
@@ -42,7 +44,7 @@ dunefd_vertdrift_producers:
    energyrecnumumcs:     @local::dunefdvd_nuenergyreco_pandora_numu_mcs
    energyrecnue:          @local::dunefdvd_nuenergyreco_pandora_nue
    energyrecnc:           @local::dunefdvd_nuenergyreco_pandora_nc
-   #angle reco configuration
+   # Angle reco configuration
    anglereconue:  @local::dunefdvd_30deg_nuangularreco_pandora_nue
    anglereconumu: @local::dunefdvd_30deg_nuangularreco_pandora_numu
    anglereconuepfps: @local::dunefdvd_30deg_nuangularreco_pandora_nue_allpfps
@@ -55,7 +57,12 @@ dunefd_vertdrift_producers:
    opflashArOnly:   @local::dunefd_opflash
    opflashXeOnly:   @local::dunefd_opflash
    opflash10ppm:    @local::dunefd_opflash
-   #PMTRACKTC for LE events
+   
+   # LE Reco
+   # Clusters for LE events
+   perplanecluster:    @local::lowe_cluster_dunevd10kt_1x8x14_3view_30deg
+   solarcluster:       @local::solar_cluster_dunevd10kt_1x8x14_3view_30deg
+   # PMTRACKTC for LE events
    linecluster:        @local::dunefdvd_linecluster
    trajcluster:        @local::dunefdvd_trajcluster
    pmtracktc:          @local::dunefdvd_pmalgtrackmaker    #PMA using trajcluster clusters
@@ -83,7 +90,8 @@ dunefd_vertdrift_pds:
 
 dunefd_vertdrift_tpc_reco1:
 [
-    gaushit
+    gaushit,
+    perplanecluster
 ]
 
 dunefd_vertdrift_reco1:
@@ -204,6 +212,7 @@ dunefd_vertdrift_reco2_solar:
     linecluster, 
     trajcluster, 
     pmtracktc,
+    solarcluster,
     solarflash
 ]
 
