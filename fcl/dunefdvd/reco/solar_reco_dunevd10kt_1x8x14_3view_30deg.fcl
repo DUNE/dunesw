@@ -1,3 +1,4 @@
 #include "standard_reco_dunevd10kt_1x8x14_3view_30deg.fcl"
 
-physics.reco: [ @sequence::dunefd_vertdrift_reco_solar ]
+physics.reco: [ @sequence::dunefd_vertdrift_solar ]
+outputs.out1.outputCommands: [ "keep *", "drop *recob::Wire*_*_*_detsim", "drop *recob::OpWaveform*_*_*_Reco" ]

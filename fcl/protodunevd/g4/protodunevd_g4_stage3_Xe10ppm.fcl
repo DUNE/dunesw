@@ -2,7 +2,7 @@
 #include "IonAndScint_dune.fcl"
 #include "PDFastSim_dune.fcl"
 
-process_name: G4Stage2
+process_name: G4Stage3
 
 services:
 {
@@ -13,7 +13,6 @@ services:
   message:      @local::standard_info
 
   @table::protodunevd_refactored_simulation_services
-  PhotonVisibilityService: @local::protodunevd_v4_Ar_photonvisibilityservice
 
   NuRandomService:       @local::dune_prod_seedservice
 }
@@ -33,8 +32,7 @@ physics:
   producers:
   {
     rns: {module_type: "RandomNumberSaver"}
-    IonAndScint:  @local::protodunevd_ionandscint
-    PDFastSimAr:    @local::protodune_vd_pdfastsim_pvs
+    PDFastSimXe:    @local::protodune_vd_pdfastsim_ann_xe
   }
 
   analyzers:
@@ -42,8 +40,8 @@ physics:
 
   }
 
-  simulate:      [  rns, IonAndScint, PDFastSimAr ]
-  
+  simulate:      [  rns, PDFastSimXe ]
+
   stream1:       [ out1 ]
 
   trigger_paths: [  simulate ] 
@@ -55,7 +53,7 @@ outputs:
   out1:
   {
     module_type: RootOutput
-    fileName:    "%ifb_g4PLAr_stage2.root"
+    fileName:    "%ifb_g4PLXe_stage2.root"
     dataTier:    "simulated"
     #outputCommands: [ "keep *" ]
     outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_*"]
