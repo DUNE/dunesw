@@ -1,5 +1,5 @@
 #include "energyreco.fcl"
-#include "cafmaker_dune10kt_1x2x6_runreco-nuenergy.fcl"
+#include "standard_cafmaker_dunevd10kt_1x8x6_3view_30deg.fcl"
 #include "tools_dune.fcl"
 
 dunefd_vd_30deg_producers:
