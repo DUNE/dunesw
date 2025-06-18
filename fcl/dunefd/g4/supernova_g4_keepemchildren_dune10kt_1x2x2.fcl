@@ -1,6 +1,4 @@
-#include "supernova_g4_keepemchildren_dune10kt_1x2x6.fcl"
+#include "supernova_g4_dune10kt_1x2x2.fcl"
 
-services: {
-    @table::services
-    @table::dunefd_1x2x2_simulation_services
-}
+services.LArG4Parameters.KeepEMShowerDaughters: true
+services.ParticleListAction.keepEMShowerDaughters: true

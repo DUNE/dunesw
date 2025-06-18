@@ -1,4 +1,4 @@
 #include "supernova_g4_dune10kt_1x2x6.fcl"
 
-services.LArG4Parameters.keepEMShowerDaughters: true
+services.LArG4Parameters.KeepEMShowerDaughters: true
 services.ParticleListAction.keepEMShowerDaughters: true
