@@ -38,8 +38,8 @@ physics:
     energyreconue:  @local::dunefd_nuenergyreco_pandora_nue
     energyreconumu: @local::dunefd_nuenergyreco_pandora_numu
     energyreconumurange: @local::dunefd_nuenergyreco_pandora_numu
-    energyreconumumcschi2: @local::dunefd_nuenergyreco_pandora_numu
-    energyreconumumcsllhd: @local::dunefd_nuenergyreco_pandora_numu
+    energyreconumumcschi2: @local::dunefd_nuenergyreco_pandora_numu_mcs
+    energyreconumumcsllhd: @local::dunefd_nuenergyreco_pandora_numu_mcs_llhd
     energyreconc: @local::dunefd_nuenergyreco_pandora_nc
     angularreconue:  @local::dunefd_nuangularreco_pandora_nue
     angularreconumu: @local::dunefd_nuangularreco_pandora_numu
@@ -133,30 +133,6 @@ physics.producers.energyreconumurange.LongestTrackMethod: 1
 physics.producers.energyreconumumcschi2.LongestTrackMethod: 2
 physics.producers.energyreconumumcsllhd.LongestTrackMethod: 2
 
-physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MCSMethod: "LLHD"
-physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MinTrackLengthMCS: 0
-physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MaxTrackLengthMCS: 3000
-physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MaxMomentumMCS: 100000
-physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MinResolutionMCSLLHD: 0
-physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MaxResolutionMCSLLHD: 0
-physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MCSAngleMethod: 3
-
-
-physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MCSMethod: "Chi2"
-physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MinTrackLengthMCS: 0
-physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MaxTrackLengthMCS: 3000
-physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MaxMomentumMCS: 100000
-physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MinResolutionMCSChi2: 0
-physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MaxResolutionMCSChi2: 0
-physics.producers.energyreconumumcschi2.NeutrinoEnergyRecoAlg.MCSAngleMethod: 3
-
-physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MCSMethod: "LLHD"
-physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MinTrackLengthMCS: 0
-physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MaxTrackLengthMCS: 3000
-physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MaxMomentumMCS: 100000
-physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MinResolutionMCSLLHD: 0
-physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MaxResolutionMCSLLHD: 0
-physics.producers.energyreconumumcsllhd.NeutrinoEnergyRecoAlg.MCSAngleMethod: 3
 
 physics.producers.energyreconumu.NeutrinoEnergyRecoAlg.MuonRangeToMCSThreshold: -1e12
 
