@@ -30,7 +30,7 @@ physics:
 
  analyzers:
 {
- cafmaker:          @local::dunefd_cafmaker
+ cafmaker:          @local::dunefdvd_cafmaker
 }
 
  caf:  [ cafmaker]

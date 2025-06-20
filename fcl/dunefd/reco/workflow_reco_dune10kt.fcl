@@ -76,6 +76,7 @@ dunefd_horizdrift_producers:
   energyrecnumu:        @local::dunefd_nuenergyreco_pandora_numu
   energyrecnumurange:   @local::dunefd_nuenergyreco_pandora_numu_range
   energyrecnumumcs:     @local::dunefd_nuenergyreco_pandora_numu_mcs
+  energyrecnumumcsllhd: @local::dunefd_nuenergyreco_pandora_numu_mcs
   energyrecnue:          @local::dunefd_nuenergyreco_pandora_nue
   energyrecnc:           @local::dunefd_nuenergyreco_pandora_nc
   #angle reco configuration
@@ -164,7 +165,8 @@ dunefd_horizdrift_nuenergy:
     energyrecnue,
     energyrecnc,
     energyrecnumurange,
-    energyrecnumumcs
+    energyrecnumumcs,
+    energyrecnumumcsllhd
 ]
 
 dunefd_horizdrift_pd_reco1:
