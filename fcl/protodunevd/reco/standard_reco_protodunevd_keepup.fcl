@@ -45,7 +45,7 @@ services:{
      FileName: "PD2VDBottomTPCChannelMap_v1.txt"
    }
    DAPHNEChannelMapService: {
-     FileName: "PDVD_PDS_Mapping_v05092025.json"
+     FileName: "PDVD_PDS_Mapping_v04152025.json"
      IgnoreLinks: true
    }
    IPhotonCalibrator: {
@@ -77,10 +77,10 @@ physics: {
     #Decoders
     tpcrawdecoder:    @local::PDVDTPCReaderDefaults
     triggerrawdecoder:@local::PDVDTriggerReader4Defaults
-    pdhddaphne:       @local::DAPHNEReaderPDHD   
+    pdvddaphne:       @local::protodunevd_daphne  
     #PDS reco
-    ophit:            @local::protodune_ophit_data_internal
-    opflash:          @local::protodune_opflash_data_internal
+    ophit:            @local::protodunevd_ophit
+    opflash:          @local::protodunevd_opflash
     opslicer:         @local::protodune_opslicer
 
     #CRP reco
@@ -94,7 +94,7 @@ physics: {
 
     pandora:            @local::protodune_pandora
     pandoraTrack:       @local::dune_pandoraTrackCreation
-    pandoraShower:      @local::dune_pandoraShowerCreation
+    pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
 
     pandoraWriter:      @local::dune_pandorawriter
     pandoraStdcalo:     @local::pdune_vd_standard_calodata
@@ -103,8 +103,9 @@ physics: {
   }
   produce: [rns,
 	tpcrawdecoder,
-        #pdhddaphne,
-        #ophit, opflash, opslicer,
+        pdvddaphne,
+        ophit, opflash,
+        # opslicer,
         wclsdatavd,
         gaushit,
         nhitsfilter,
@@ -117,21 +118,11 @@ physics: {
         pandoraGnocalo #,
         ]
 
-  read_tpc: [tpcrawdecoder]
   output : [ out1 ]
-#  trigger_paths: [ read_tpc ]
   trigger_paths: [ produce ]
   end_paths : [ output ]
 }
 
-#PDS raw data decoder settings
-physics.producers.pdhddaphne.DAPHNEInterface: { tool_type: "DAPHNEInterface2" }
-physics.producers.pdhddaphne.SubDetString: "VD_Membrane_PDS"
-
-#PDS reconstruction settings
-physics.producers.ophit.InputModule:                         "pdhddaphne"
-physics.producers.ophit.InputLabels:                         [ "daq" ]
-physics.producers.opflash.InputModule:                       "ophit"
 physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
 
 #CRP raw data decoder settings
@@ -156,12 +147,12 @@ physics.producers.pandora.ConfigFile:     "PandoraSettings_Master_ProtoDUNE_VD.x
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
 physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
 physics.producers.pandora.ShouldRunNeutrinoRecoOption: true
-physics.producers.pandora.ShouldRunCosmicRecoOption:   false
-physics.producers.pandora.ShouldRunAllHitsCosmicReco:  false
-physics.producers.pandora.ShouldRunCosmicHitRemoval:   false
-physics.producers.pandora.ShouldRunSlicing: false
-physics.producers.pandora.ShouldRunStitching: false
-physics.producers.pandora.ShouldPerformSliceId: false
+physics.producers.pandora.ShouldRunCosmicRecoOption:   true
+physics.producers.pandora.ShouldRunAllHitsCosmicReco:  true
+physics.producers.pandora.ShouldRunCosmicHitRemoval:   true
+physics.producers.pandora.ShouldRunSlicing:            true
+physics.producers.pandora.ShouldRunStitching:          true
+physics.producers.pandora.ShouldPerformSliceId:        true
 
 physics.producers.pandoraWriter.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
 physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
