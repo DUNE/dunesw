@@ -17,6 +17,7 @@
 #include "PerPlaneCluster.fcl"
 #include "SolarCluster.fcl"
 #include "SolarOpFlash.fcl"
+#include "OpFlashFinderVerticalDrift.fcl"
 #include "angularreco.fcl"
 #include "imagepatternalgs.fcl"
 
@@ -54,9 +55,9 @@ dunefd_vertdrift_producers:
    ophitArOnly:     @local::dunefdvd_ophit
    ophitXeOnly:     @local::dunefdvd_ophit
    ophit10ppm:      @local::dunefdvd_ophit
-   opflashArOnly:   @local::dunefd_opflash
-   opflashXeOnly:   @local::dunefd_opflash
-   opflash10ppm:    @local::dunefd_opflash
+   opflashArOnly:   @local::dunefdvd_opflash
+   opflashXeOnly:   @local::dunefdvd_opflash
+   opflash10ppm:    @local::dunefdvd_opflash
    
    # LE Reco
    # Clusters for LE events

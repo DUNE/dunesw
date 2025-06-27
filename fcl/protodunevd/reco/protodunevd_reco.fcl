@@ -131,9 +131,9 @@ physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
 
 physics.producers.wclsdatavd.wcls_main.params.use_magnify:  "false"
 
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 2.0
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 2.0
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 2.0
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 0.6
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 0.6
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 0.6
 
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatavd:gauss"
 physics.producers.emtrkmichelid.WireLabel: "wclsdatavd:gauss"
