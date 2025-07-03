@@ -82,7 +82,7 @@ physics: {
   }
 
   producers: {
-    wclsdatahd:         @local::protodunehd_nfsp
+    wclsdatahd:         @local::protodunehd_nfsp_mc
     # Hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
     # space point solver
