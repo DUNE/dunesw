@@ -81,7 +81,7 @@ outputs:
  out1:
  {
    module_type: RootOutput
-   fileName:    "prod_cosmics_protodunehd.root" #default file name, can override from command line with -o or --output
+   fileName:    "prod_beam_cosmics_radio_protodunehd.root" #default file name, can override from command line with -o or --output
    dataTier: "generated"
    compressionLevel: 1
  }

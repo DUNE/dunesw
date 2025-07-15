@@ -1,2 +1,2 @@
 #include "prod_beam_cosmics_1GeV_protodunehd.fcl"
-hysics.producers.generator.NominalP: "7"
+physics.producers.generator.NominalP: "7"
