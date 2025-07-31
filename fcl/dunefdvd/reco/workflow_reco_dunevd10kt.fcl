@@ -56,11 +56,7 @@ dunefd_vertdrift_producers:
    ophit10ppm:      @local::dunefdvd_ophit
    opflashArOnly:   @local::dunefd_opflash
    opflashXeOnly:   @local::dunefd_opflash
-   opflash10ppm:    
-   {
-      @table::dunefd_opflash
-      InputModule: "ophit10ppm" # Use the 10 ppm ophit module for the FD-VD module
-   }
+   opflash10ppm:    @local::dunefd_opflash
    
    # LE Reco
    # Clusters for LE events
