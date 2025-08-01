@@ -1,0 +1,26 @@
+#include "prodgenie_common_dunevd10kt.fcl"
+
+process_name: GenieGen
+
+services:
+{
+    @table::services
+    @table::dunefdvd_1x8x14_3view_30deg_simulation_services
+}
+
+# remove some services that were configured but are useless in generation:
+services.ChannelGroupService:      @erase
+services.ChannelStatusService:     @erase
+services.DatabaseUtil:             @erase
+services.ParticleInventoryService: @erase
+services.BackTrackerService:       @erase
+services.PhotonBackTrackerService: @erase
+services.LArFFT:                   @erase
+services.SignalShapingServiceDUNE: @erase
+services.SpaceCharge:              @erase
+
+outputs.out1.fileName: "prodgenie_atmnu_max_weighted_dunevd10kt_1x8x14_3view_30deg_gen.root"
+source.firstRun: 20000063
+
+physics.producers.generator: @local::dune_fdvd_genie_atmo_max_weighted_honda
+physics.producers.generator.FiducialCut: "mbox:-325,-677,-0,325,677,2100"

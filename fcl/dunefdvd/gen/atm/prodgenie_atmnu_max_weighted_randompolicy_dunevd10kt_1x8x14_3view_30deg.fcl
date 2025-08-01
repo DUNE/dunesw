@@ -1,0 +1,3 @@
+#include "prodgenie_atmnu_max_weighted_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+services.NuRandomService: @local::random_NuRandomService # Using the random rng policy
