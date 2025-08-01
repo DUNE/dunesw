@@ -1,0 +1,13 @@
+#include "prodaddgenie_ndk_AR23_dunevd10kt.fcl"
+
+services:
+{
+    @table::services
+    @table::dunefdvd_1x8x6_3view_30deg_services
+}
+
+physics.producers.generator: @local::dunefdvd_1x8x6_add_genie
+
+outputs.out1.fileName: "prodaddgenie_ndk_AR23_dunevd10kt_1x8x6_3view_30deg.root"
+
+physics.producers.generator.fileList: @local::dune_add_genie_ndk_AR23_fileList
