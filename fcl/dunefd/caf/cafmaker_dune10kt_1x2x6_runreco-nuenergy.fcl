@@ -8,6 +8,7 @@ dunefd_hd_producers:
     energyrecnumu:      @local::dunefd_nuenergyreco_pandora_numu
     energyrecnumurange: @local::dunefd_nuenergyreco_pandora_numu_range
     energyrecnumumcs:   @local::dunefd_nuenergyreco_pandora_numu_mcs
+    energyrecnumumcsllhd: @local::dunefd_nuenergyreco_pandora_numu_mcs_llhd
     energyrecnue:       @local::dunefd_nuenergyreco_pandora_nue
     energyrecnc:        @local::dunefd_nuenergyreco_pandora_nc
     #angle reco configuration
@@ -22,6 +23,7 @@ dunefd_hd_ereco:
     energyrecnumu,
     energyrecnumurange,
     energyrecnumumcs,
+    energyrecnumumcsllhd,
     energyrecnue,
     energyrecnc
 ]
