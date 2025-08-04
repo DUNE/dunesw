@@ -1,3 +1,5 @@
+add_subdirectory(pdslibs)
+
 # Install fcl files in /job subdirectory.
 
 install_fhicl()
