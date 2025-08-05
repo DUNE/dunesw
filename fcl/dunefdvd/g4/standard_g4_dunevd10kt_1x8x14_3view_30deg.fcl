@@ -2,6 +2,6 @@
 
 services: {
   @table::services
-  @table::dunefdvd_1x8x14_3view_simulation_services
+  @table::dunefdvd_1x8x14_3view_30deg_simulation_services
 }
 
