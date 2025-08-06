@@ -16,6 +16,7 @@ dunefd_hd_producers:
     anglereconumu:      @local::dunefd_nuangularreco_pandora_numu
     anglereconuepfps:   @local::dunefd_nuangularreco_pandora_nue_allpfps
     anglereconumupfps:  @local::dunefd_nuangularreco_pandora_numu_allpfps
+    anglerecohits:      @local::dunefd_nuangularreco_pandora_hits
 }
 
 dunefd_hd_ereco:
@@ -33,7 +34,8 @@ dunefd_hd_anglereco:
     anglereconue,
     anglereconumu,
     anglereconuepfps,
-    anglereconumupfps
+    anglereconumupfps,
+    anglerecohits
 ]
 
 physics.producers: {
