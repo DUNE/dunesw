@@ -11,6 +11,7 @@ services: {
 physics:
 {
   @table::physics
+  marley: @local::dune_marley_nue_es_flat
   producers:
   {
     @table::dunefd_horizdrift_1x2x2_producers
