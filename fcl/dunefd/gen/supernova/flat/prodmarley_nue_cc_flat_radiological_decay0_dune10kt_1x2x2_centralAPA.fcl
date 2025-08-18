@@ -14,6 +14,7 @@ physics:
   producers:
   {
     @table::dunefd_horizdrift_1x2x2_producers
+    marley: @local::dune_marley_nue_cc_flat
     rns: { module_type: "RandomNumberSaver" }
   }
   simulate: [ rns, marley, @sequence::dunefd_hd_backgrounds_1x2x2_lowBgAPA ]      
