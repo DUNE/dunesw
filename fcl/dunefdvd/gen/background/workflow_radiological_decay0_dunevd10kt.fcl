@@ -66,9 +66,8 @@ dunefd_vertdrift_1x8x6_producers:
 
 }
 
-dunefd_vertdrift_1x8x14_producers:
+dunefd_vertdrift_1x8x14_specific_producers:
 {
-    @table::dunefd_vertdrift_common_producers
     ## Product of ion drifting, on Cathode, but these actually came from the liquid argon
     K42From42ArGenInUpperMesh1x8x14:         @local::dunevd10kt_1x8x14_42Kfrom42Ar_in_upperCathodeMesh
     Rn222ChainFromPo218GenInUpperMesh1x8x14: @local::dunevd10kt_1x8x14_222Rn_chain_218PoOnly_in_upperCathodeMesh
@@ -77,6 +76,12 @@ dunefd_vertdrift_1x8x14_producers:
     Rn222ChainFromPb210GenInUpperMesh1x8x14: @local::dunevd10kt_1x8x14_222Rn_chain_210PbOnly_in_upperCathodeMesh
     Rn222ChainFromBi210GenInUpperMesh1x8x14: @local::dunevd10kt_1x8x14_222Rn_chain_from210Bi_in_upperCathodeMesh
     Rn220ChainFromPb212GenInUpperMesh1x8x14: @local::dunevd10kt_1x8x14_220Rn_chain_from212Pb_in_upperCathodeMesh
+}
+
+dunefd_vertdrift_1x8x14_producers:
+{
+    @table::dunefd_vertdrift_common_producers
+    @table::dunefd_vertdrift_1x8x14_specific_producers
     ##########################################################################
     # Externals
     CavernwallGammasAtLAr1x8x14:   @local::dunevd10kt_1x8x14_gammas_from_cavernwall_atLAr
@@ -84,6 +89,19 @@ dunefd_vertdrift_1x8x14_producers:
     CavernwallNeutronsAtLAr1x8x14: @local::dunevd10kt_1x8x14_neutrons_from_cavernwall_atLAr
     CryostatNGammasAtLAr1x8x14:    @local::dunevd10kt_1x8x14_CryostatNGammas_from_CavernNeutrons_atLAr
     CavernNGammasAtLAr1x8x14:      @local::dunevd10kt_1x8x14_CavernNGammas_atLAr
+}
+
+dunefd_vertdrift_1x8x14_optimistic_producers:
+{
+    @table::dunefd_vertdrift_common_producers
+    @table::dunefd_vertdrift_1x8x14_specific_producers
+    ##########################################################################
+    # Externals
+    CavernwallGammasAtLAr1x8x14Optimistic:   @local::dunevd10kt_1x8x14_gammas_from_cavernwall_atLAr_optimistic
+    foamGammasAtLAr1x8x14Optimistic:         @local::dunevd10kt_1x8x14_gammas_from_foam_atLAr_optimistic
+    CavernwallNeutronsAtLAr1x8x14Optimistic: @local::dunevd10kt_1x8x14_neutrons_from_cavernwall_atLAr_optimistic
+    CryostatNGammasAtLAr1x8x14Optimistic:    @local::dunevd10kt_1x8x14_CryostatNGammas_from_CavernNeutrons_atLAr_optimistic
+    CavernNGammasAtLAr1x8x14Optimistic:      @local::dunevd10kt_1x8x14_CavernNGammas_atLAr_optimistic
 }
 
 dunefdvd_backgrounds_common:
@@ -135,12 +153,25 @@ dunefdvd_backgrounds_1x8x14_specific:
       Rn222ChainFromBi214GenInUpperMesh1x8x14,
       Rn222ChainFromPb210GenInUpperMesh1x8x14,
       Rn222ChainFromBi210GenInUpperMesh1x8x14,
-      Rn220ChainFromPb212GenInUpperMesh1x8x14,
+      Rn220ChainFromPb212GenInUpperMesh1x8x14
+]
+
+dunefdvd_backgrounds_1x8x14_specific_nominal:
+[
       CavernwallGammasAtLAr1x8x14,
       foamGammasAtLAr1x8x14,
       CavernwallNeutronsAtLAr1x8x14,
       CryostatNGammasAtLAr1x8x14,
       CavernNGammasAtLAr1x8x14
+]
+
+dunefdvd_backgrounds_1x8x14_specific_optimistic:
+[
+      CavernwallGammasAtLAr1x8x14Optimistic,
+      foamGammasAtLAr1x8x14Optimistic,
+      CavernwallNeutronsAtLAr1x8x14Optimistic,
+      CryostatNGammasAtLAr1x8x14Optimistic,
+      CavernNGammasAtLAr1x8x14Optimistic
 ]
 
 dunefdvd_backgrounds_1x8x6:
@@ -152,7 +183,13 @@ dunefdvd_backgrounds_1x8x6:
 dunefdvd_backgrounds_1x8x14:
 [
     @sequence::dunefdvd_backgrounds_common,
-    @sequence::dunefdvd_backgrounds_1x8x14_specific
+    @sequence::dunefdvd_backgrounds_1x8x14_specific_nominal
+]
+
+dunefdvd_backgrounds_1x8x14_optimistic:
+[
+    @sequence::dunefdvd_backgrounds_common,
+    @sequence::dunefdvd_backgrounds_1x8x14_specific_optimistic
 ]
 
 END_PROLOG
