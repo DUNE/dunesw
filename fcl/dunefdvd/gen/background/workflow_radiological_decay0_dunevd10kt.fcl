@@ -97,11 +97,11 @@ dunefd_vertdrift_1x8x14_optimistic_producers:
     @table::dunefd_vertdrift_1x8x14_specific_producers
     ##########################################################################
     # Externals
-    CavernwallGammasAtLAr1x8x14_optimistic:   @local::dunevd10kt_1x8x14_gammas_from_cavernwall_atLAr_optimistic
-    foamGammasAtLAr1x8x14_optimistic:         @local::dunevd10kt_1x8x14_gammas_from_foam_atLAr_optimistic
-    CavernwallNeutronsAtLAr1x8x14_optimistic: @local::dunevd10kt_1x8x14_neutrons_from_cavernwall_atLAr_optimistic
-    CryostatNGammasAtLAr1x8x14_optimistic:    @local::dunevd10kt_1x8x14_CryostatNGammas_from_CavernNeutrons_atLAr_optimistic
-    CavernNGammasAtLAr1x8x14_optimistic:      @local::dunevd10kt_1x8x14_CavernNGammas_atLAr_optimistic
+    CavernwallGammasAtLAr1x8x14Optimistic:   @local::dunevd10kt_1x8x14_gammas_from_cavernwall_atLAr_optimistic
+    foamGammasAtLAr1x8x14Optimistic:         @local::dunevd10kt_1x8x14_gammas_from_foam_atLAr_optimistic
+    CavernwallNeutronsAtLAr1x8x14Optimistic: @local::dunevd10kt_1x8x14_neutrons_from_cavernwall_atLAr_optimistic
+    CryostatNGammasAtLAr1x8x14Optimistic:    @local::dunevd10kt_1x8x14_CryostatNGammas_from_CavernNeutrons_atLAr_optimistic
+    CavernNGammasAtLAr1x8x14Optimistic:      @local::dunevd10kt_1x8x14_CavernNGammas_atLAr_optimistic
 }
 
 dunefdvd_backgrounds_common:
@@ -167,11 +167,11 @@ dunefdvd_backgrounds_1x8x14_specific_nominal:
 
 dunefdvd_backgrounds_1x8x14_specific_optimistic:
 [
-      CavernwallGammasAtLAr1x8x14_optimistic,
-      foamGammasAtLAr1x8x14_optimistic,
-      CavernwallNeutronsAtLAr1x8x14_optimistic,
-      CryostatNGammasAtLAr1x8x14_optimistic,
-      CavernNGammasAtLAr1x8x14_optimistic
+      CavernwallGammasAtLAr1x8x14Optimistic,
+      foamGammasAtLAr1x8x14Optimistic,
+      CavernwallNeutronsAtLAr1x8x14Optimistic,
+      CryostatNGammasAtLAr1x8x14Optimistic,
+      CavernNGammasAtLAr1x8x14Optimistic
 ]
 
 dunefdvd_backgrounds_1x8x6:
