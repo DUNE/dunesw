@@ -17,6 +17,7 @@
 #include "PerPlaneCluster.fcl"
 #include "SolarCluster.fcl"
 #include "SolarOpFlash.fcl"
+#include "SolarEvent.fcl"
 #include "angularreco.fcl"
 #include "imagepatternalgs.fcl"
 
@@ -70,6 +71,7 @@ dunefd_vertdrift_producers:
 #   pmtracktcpid:       @local::standard_chi2pid
    emtrkmichelid:      @local::standard_emtrackmichelid
    solarflash:         @local::solar_opflash_dunevd10kt_1x8x14_3view_30deg
+   solarevent:         @local::solar_event_dunevd10kt_1x8x6_3view_30deg
 }
 
 dunefd_vertdrift_pds_reco1:
@@ -153,7 +155,8 @@ dunefd_vertdrift_tpc_le_reco2:
 
 dunefd_vertdrift_pds_le_reco2:
 [
-    solarflash
+    solarflash,
+    solarevent
 ]
 
 dunefd_vertdrift_tpc_le:
@@ -209,11 +212,9 @@ dunefd_vertdrift_reco1_solar:
 
 dunefd_vertdrift_reco2_solar: 
 [ 
-    linecluster, 
-    trajcluster, 
-    pmtracktc,
     solarcluster,
-    solarflash
+    solarflash,
+    solarevent
 ]
 
 dunefd_vertdrift_solar:
