@@ -61,7 +61,7 @@ dunefd_vertdrift_producers:
    
    # LE Reco
    # Clusters for LE events
-   perplanecluster:    @local::lowe_cluster_dunevd10kt_1x8x14_3view_30deg
+   planecluster:       @local::lowe_cluster_dunevd10kt_1x8x14_3view_30deg
    solarcluster:       @local::solar_cluster_dunevd10kt_1x8x14_3view_30deg
    # PMTRACKTC for LE events
    linecluster:        @local::dunefdvd_linecluster
@@ -93,7 +93,8 @@ dunefd_vertdrift_pds:
 dunefd_vertdrift_tpc_reco1:
 [
     gaushit,
-    perplanecluster
+    planecluster,
+    solarcluster
 ]
 
 dunefd_vertdrift_reco1:
@@ -212,9 +213,7 @@ dunefd_vertdrift_reco1_solar:
 
 dunefd_vertdrift_reco2_solar: 
 [ 
-    solarcluster,
-    solarflash,
-    solarevent
+    solarflash
 ]
 
 dunefd_vertdrift_solar:

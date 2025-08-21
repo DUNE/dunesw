@@ -43,7 +43,7 @@ dunefd_horizdrift_producers:
   # 2D clustering
   linecluster:        @local::dune35t_linecluster
   trajcluster:          @local::dunefdmc_trajcluster
-  perplanecluster:    @local::lowe_cluster_dune10kt_1x2x6
+  planecluster:       @local::lowe_cluster_dune10kt_1x2x6
   solarcluster:       @local::solar_event_dune10kt_1x2x6
   # Pandora
   pandora:            @local::dunefd_pandora
@@ -229,15 +229,14 @@ dunefd_horizdrift_workflow_reco1_solar:
 [
     @sequence::dunefd_horizdrift_workflow_reco1,
     @sequence::dunefd_horizdrift_2dclustering,
-    perplanecluster,
+    planecluster,
     solarcluster,    
     @sequence::dunefd_horizdrift_pd_reco1
 ]
 
 dunefd_horizdrift_workflow_reco2_solar:
 [
-    solarflash,
-    solarevent
+    solarflash
 ]
 
 dunefd_horizdrift_workflow_reco_solar:
