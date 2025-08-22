@@ -1,6 +1,6 @@
 #include "angularreco.fcl"
 #include "hitfindermodules_dune.fcl"
-#include "PerPlaneClusterer.fcl"
+#include "PerPlaneCluster.fcl"
 #include "SolarCluster.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
