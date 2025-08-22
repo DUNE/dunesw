@@ -1,5 +1,7 @@
 #include "angularreco.fcl"
 #include "hitfindermodules_dune.fcl"
+#include "PerPlaneClusterer.fcl"
+#include "SolarCluster.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
@@ -44,7 +46,7 @@ dunefd_horizdrift_producers:
   linecluster:        @local::dune35t_linecluster
   trajcluster:          @local::dunefdmc_trajcluster
   planecluster:       @local::lowe_cluster_dune10kt_1x2x6
-  solarcluster:       @local::solar_event_dune10kt_1x2x6
+  solarcluster:       @local::solar_cluster_dune10kt_1x2x6
   # Pandora
   pandora:            @local::dunefd_pandora
   pandoraTrack:       @local::dunefdhd_pandoraTrackCreation
