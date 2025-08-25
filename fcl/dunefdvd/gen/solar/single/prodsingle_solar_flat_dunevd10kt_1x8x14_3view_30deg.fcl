@@ -20,15 +20,15 @@ physics.producers.generator: @local::standard_singlep
 physics.producers.generator.PDG:          [  22   ] # gamma
 physics.producers.generator.P0:           [  10.0 ] # 10 MeV momentum
 
-# Particle production volume from dune_radiological_model_decay0_v3_4_hd_1x2x6.fcl
+# Particle production volume from dune_radiological_model_decay0_vd_1x8x14.fcl
 physics.producers.generator.PosDist:          0     # Flat position dist.
-physics.producers.generator.X0:           [   0   ]
+physics.producers.generator.X0:           [ -35   ]
 physics.producers.generator.Y0:           [   0   ]
-physics.producers.generator.Z0:           [ 697.5 ]
+physics.producers.generator.Z0:           [1200.5 ]
 physics.producers.generator.T0:           [   0   ]
-physics.producers.generator.SigmaX:       [ 375.0 ] # x = (-3.75, 3.75) m
-physics.producers.generator.SigmaY:       [ 625.0 ] # y = (-6.25, 6.25) m
-physics.producers.generator.SigmaZ:       [ 722.5 ] # z = (-25.0, 14.2) m
+physics.producers.generator.SigmaX:       [ 385.0 ] # x = (-4.2, 3.5) m
+physics.producers.generator.SigmaY:       [ 750.0 ] # y = (-7.5, 7.5) m
+physics.producers.generator.SigmaZ:       [1097.5 ] # z = (-1.03, 21.95) m
 
 physics.producers.generator.SigmaT:       [   0   ] # In time
 physics.producers.generator.AngleDist:        0     # Flat angle dist.
