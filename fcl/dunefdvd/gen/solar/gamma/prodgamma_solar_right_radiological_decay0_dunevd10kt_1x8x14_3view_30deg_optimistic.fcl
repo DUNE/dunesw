@@ -1,0 +1,6 @@
+#include "prodgamma_solar_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimisitic.fcl"
+
+outputs.out1.fileName: "prodgamma_solar_right_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimistic_gen.root"
+
+physics.producers.generator.Y0:     [  750 ]
+physics.producers.generator.SigmaY: [ 0.50 ]      # Flat particle dist. on top layer (cm)

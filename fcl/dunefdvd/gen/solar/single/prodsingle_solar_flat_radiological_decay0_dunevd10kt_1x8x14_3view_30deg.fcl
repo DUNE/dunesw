@@ -1,20 +1,18 @@
-#include "prodsingle_common_dunefdvd10kt.fcl"
+#include "workflow_radiological_decay0_dune10kt.fcl"
+#include "prodsingle_solar_flat_dunevd10kt_1x8x14_3view_30deg.fcl"
 
-process_name: SinglesGen
-
-services:
+physics:
 {
-    @table::services
-    @table::dunefdvd_1x8x14_3view_simulation_services
+  @table::physics
+  producers:
+  {
+    @table::physics.producers
+    @table::dunefd_vertdrift_1x8x14_producers
+  }
+  simulate: [ rns, generator, @sequence::dunefdvd_backgrounds_1x8x14 ]
 }
 
-services.NuRandomService.policy: "random"
-
-#define the producer and filter modules for this path, order matters, 
-#filters reject all following items.  see lines starting physics.producers below
-simulate: [ generator ]
-
-outputs.out1.fileName: "prodsingle_solar_flat_dunevd10kt_1x8x14_3view_30deg_gen.root"
+outputs.out1.fileName: "prodsingle_solar_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_gen.root"
 
 physics.producers.generator: @local::standard_singlep
 physics.producers.generator.PDG:          [  22   ] # gamma
