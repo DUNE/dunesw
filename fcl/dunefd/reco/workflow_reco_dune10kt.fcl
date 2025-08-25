@@ -230,7 +230,6 @@ dunefd_horizdrift_workflow_reco2_atmos:
 dunefd_horizdrift_workflow_reco1_solar:
 [
     @sequence::dunefd_horizdrift_workflow_reco1,
-    @sequence::dunefd_horizdrift_2dclustering,
     planecluster,
     solarcluster,    
     @sequence::dunefd_horizdrift_pd_reco1
