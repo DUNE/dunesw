@@ -1,6 +1,6 @@
-#include "prodsingle_solar_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimisitic.fcl"
+#include "prodsingle_solar_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg.fcl"
 
-outputs.out1.fileName: "prodsingle_solar_external_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimisitic_gen.root"
+outputs.out1.fileName: "prodsingle_solar_external_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_gen.root"
 
 physics.producers.generator.PDG:          [  22  , 22  , 22  , 22  , 22   ] # gamma
 physics.producers.generator.P0:           [  10.0, 10.0, 10.0, 10.0, 10.0 ] # 10 MeV momentum
