@@ -39,32 +39,21 @@ physics:
    kr85:             @local::protodunevd_85Kr_in_LAr
    ar42:             @local::protodunevd_42Ar_in_LAr
    k42fromar42:      @local::protodunevd_42Kfrom42Ar_in_LAr
-   k40cathode1:      @local::protodunevd_40K_in_Cathode_nonTCOside
-   k40cathode2:      @local::protodunevd_40K_in_Cathode_TCOside
-   k40anode0:        @local::protodunevd_40K_in_Anode0
-   k40anode1:        @local::protodunevd_40K_in_Anode1
-   k40anode2:        @local::protodunevd_40K_in_Anode2
-   k40anode3:        @local::protodunevd_40K_in_Anode3
-   th232cathode1:    @local::protodunevd_232Th_chain_in_Cathode_nonTCOside
-   th232cathode2:    @local::protodunevd_232Th_chain_in_Cathode_TCOside
-   th232anode0:      @local::protodunevd_232Th_chain_in_Anode0
-   th232anode1:      @local::protodunevd_232Th_chain_in_Anode1
-   th232anode2:      @local::protodunevd_232Th_chain_in_Anode2
-   th232anode3:      @local::protodunevd_232Th_chain_in_Anode3
-   u238cathode1:     @local::protodunevd_238U_chain_in_Cathode_nonTCOside
-   u238cathode2:     @local::protodunevd_238U_chain_in_Cathode_TCOside
-   u238anode0:       @local::protodunevd_238U_chain_in_Anode0
-   u238anode1:       @local::protodunevd_238U_chain_in_Anode1
-   u238anode2:       @local::protodunevd_238U_chain_in_Anode2
-   u238anode3:       @local::protodunevd_238U_chain_in_Anode3
+
+   k40cathode:       @local::protodunevd_40K_in_Cathode
+   th232cathode:     @local::protodunevd_232Th_chain_in_Cathode
+   u238cathode:      @local::protodunevd_238U_chain_in_Cathode
+
+   k40anode:         @local::protodunevd_40K_in_Anode
+   th232anode:       @local::protodunevd_232Th_chain_in_Anode 
+   u238anode:        @local::protodunevd_238U_chain_in_Anode 
 }
 
 
  #define the producer and filter modules for this path, order matters,
  simulate: [ ar39, ar42, kr85, k42fromar42, 
-   k40cathode1,   k40cathode2,   k40anode0,   k40anode1,   k40anode2,   k40anode3,
-   th232cathode1, th232cathode2, th232anode0, th232anode1, th232anode2, th232anode3,
-   u238cathode1,  u238cathode2,  u238anode0,  u238anode1,  u238anode2,  u238anode3
+   k40cathode, th232cathode, u238cathode,
+   k40anode,   th232anode,   u238anode  
  ]
 
  #define the output stream, there could be more than one if using filters

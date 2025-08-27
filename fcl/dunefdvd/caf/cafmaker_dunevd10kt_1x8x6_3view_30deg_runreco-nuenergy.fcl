@@ -1,5 +1,5 @@
 #include "energyreco.fcl"
-#include "cafmaker_dune10kt_1x2x6_runreco-nuenergy.fcl"
+#include "standard_cafmaker_dunevd10kt_1x8x6_3view_30deg.fcl"
 #include "tools_dune.fcl"
 
 dunefd_vd_30deg_producers:
@@ -8,6 +8,7 @@ dunefd_vd_30deg_producers:
     energyrecnumu:      @local::dunefdvd_30deg_nuenergyreco_pandora_numu
     energyrecnumurange: @local::dunefdvd_30deg_nuenergyreco_pandora_numu_range
     energyrecnumumcs:   @local::dunefdvd_30deg_nuenergyreco_pandora_numu_mcs
+    energyrecnumumcsllhd: @local::dunefdvd_30deg_nuenergyreco_pandora_numu_mcs_llhd
     energyrecnue:       @local::dunefdvd_30deg_nuenergyreco_pandora_nue
     energyrecnc:        @local::dunefdvd_30deg_nuenergyreco_pandora_nc
 }
@@ -17,6 +18,7 @@ dunefd_vd_30deg_ereco:
     energyrecnumu,
     energyrecnumurange,
     energyrecnumumcs,
+    energyrecnumumcsllhd,
     energyrecnue,
     energyrecnc
 ]
