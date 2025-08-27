@@ -1,0 +1,21 @@
+#include "prodsingle_solar_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimisitic.fcl"
+
+outputs.out1.fileName: "prodsingle_solar_external_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimisitic_gen.root"
+
+physics.producers.generator.PDG:          [  22  , 22  , 22  , 22  , 22   ] # gamma
+physics.producers.generator.P0:           [  10.0, 10.0, 10.0, 10.0, 10.0 ] # 10 MeV momentum
+
+# Particle production volume from dune_radiological_model_decay0_vd_1x8x14.fcl
+physics.producers.generator.X0:           [ -35  ,  -35  ,  -35  ,  -35  ,  350   ]
+physics.producers.generator.Y0:           [   0  ,    0  , -750.0,  750.0,    0   ]
+physics.producers.generator.Z0:           [-103  , 2195.0, 1046.0, 1046.0, 1046.0 ]
+physics.producers.generator.T0:           [   0  ,    0  ,    0  ,    0  ,    0   ]
+physics.producers.generator.SigmaX:       [ 385.0,  385.0,  385.0,  385.0,    0.5 ] # x = (-4.2, 3.5) m
+physics.producers.generator.SigmaY:       [ 750.0,  750.0,    0.5,    0.5,  750.0 ] # y = (-7.5, 7.5) m
+physics.producers.generator.SigmaZ:       [   0.5,    0.5, 1149.0, 1149.0, 1149.0 ] # z = (-1.03, 21.95) m
+
+physics.producers.generator.SigmaT:       [   0,   0,   0,   0,   0 ] # In time
+physics.producers.generator.Theta0XZ:     [   0,   0,   0,   0,   0 ] # y-azimuth
+physics.producers.generator.Theta0YZ:     [   0,   0,   0,   0,   0 ] # y-latitude
+physics.producers.generator.SigmaThetaXZ: [ 180, 180, 180, 180, 180 ] # Quasi-isotropic
+physics.producers.generator.SigmaThetaYZ: [  90,  90,  90,  90,  90 ]

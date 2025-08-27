@@ -1,5 +1,7 @@
 #include "angularreco.fcl"
 #include "hitfindermodules_dune.fcl"
+#include "PerPlaneCluster.fcl"
+#include "SolarCluster.fcl"
 #include "cluster_dune.fcl"
 #include "trackfindermodules_dune.fcl"
 #include "pandoramodules_dune.fcl"
@@ -21,7 +23,7 @@
 #include "opticaldetectorservices_dune.fcl"
 #include "OpSlicer.fcl"
 #include "SolarOpFlash.fcl"
-#include "OpSlicer.fcl"
+#include "SolarEvent.fcl"
 
 BEGIN_PROLOG
 
@@ -43,6 +45,8 @@ dunefd_horizdrift_producers:
   # 2D clustering
   linecluster:        @local::dune35t_linecluster
   trajcluster:          @local::dunefdmc_trajcluster
+  planecluster:       @local::lowe_cluster_dune10kt_1x2x6
+  solarcluster:       @local::solar_cluster_dune10kt_1x2x6
   # Pandora
   pandora:            @local::dunefd_pandora
   pandoraTrack:       @local::dunefdhd_pandoraTrackCreation
@@ -91,7 +95,8 @@ dunefd_horizdrift_producers:
   opflash:    @local::dunefd_opflash
   opslicer:   @local::dune10kt_1x2x6_opslicer
   solarflash: @local::solar_opflash_dune10kt_1x2x6 
-
+  # LE Reco
+  solarevent: @local::solar_event_dune10kt_1x2x6
 }
 
 dunefd_horizdrift_lowlevelreco:
@@ -227,8 +232,8 @@ dunefd_horizdrift_workflow_reco2_atmos:
 dunefd_horizdrift_workflow_reco1_solar:
 [
     @sequence::dunefd_horizdrift_workflow_reco1,
-    @sequence::dunefd_horizdrift_2dclustering,
-    @sequence::dunefd_horizdrift_pmtrack_trajcluster,
+    planecluster,
+    solarcluster,    
     @sequence::dunefd_horizdrift_pd_reco1
 ]
 

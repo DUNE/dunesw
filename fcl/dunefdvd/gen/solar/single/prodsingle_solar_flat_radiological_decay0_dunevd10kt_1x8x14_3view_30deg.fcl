@@ -1,14 +1,18 @@
-#include "prodsingle_common_dunefdvd10kt.fcl"
+#include "workflow_radiological_decay0_dune10kt.fcl"
+#include "prodsingle_solar_flat_dunevd10kt_1x8x14_3view_30deg.fcl"
 
-services:
+physics:
 {
-    @table::services
-    @table::dunefdvd_1x8x14_3view_simulation_services
+  @table::physics
+  producers:
+  {
+    @table::physics.producers
+    @table::dunefd_vertdrift_1x8x14_producers
+  }
+  simulate: [ rns, generator, @sequence::dunefdvd_backgrounds_1x8x14 ]
 }
 
-services.NuRandomService.policy: "random"
-
-outputs.out1.fileName: "prodsingle_solar_flat_dunevd10kt_1x8x14_3view_30deg_gen.root"
+outputs.out1.fileName: "prodsingle_solar_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_gen.root"
 
 physics.producers.generator: @local::standard_singlep
 physics.producers.generator.PDG:          [  22   ] # gamma
@@ -30,7 +34,3 @@ physics.producers.generator.Theta0XZ:     [   0   ] # y-azimuth
 physics.producers.generator.Theta0YZ:     [   0   ] # y-latitude
 physics.producers.generator.SigmaThetaXZ: [ 180   ] # Quasi-isotropic
 physics.producers.generator.SigmaThetaYZ: [  90   ]
-
-services.AuxDetGeometry.GDML: "dunevd10kt_3view_30deg_v5_refactored_1x8x14ref.gdml"
-services.Geometry.GDML: "dunevd10kt_3view_30deg_v5_refactored_1x8x14ref.gdml"
-services.LArG4Detector.gdmlFileName_: "dunevd10kt_3view_30deg_v5_refactored_1x8x14ref.gdml"

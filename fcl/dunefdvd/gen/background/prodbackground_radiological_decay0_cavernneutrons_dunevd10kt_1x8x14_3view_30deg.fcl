@@ -1,7 +1,0 @@
-#include "prodbackground_radiological_decay0_dunevd10kt_1x8x14.fcl"
-
-physics.simulate: [ rns, CavernwallNeutronsAtLAr1x8x14 ]
-outputs.out1.fileName:    "prodradiological_decay0_cavernneutrons_dunevd10kt_1x8x14_3view_30deg_gen.root"
-
-physics.producers.CavernwallNeutronsAtLAr1x8x14.BqPercc: [ 0.00026996, 0.00026996, 0.00026996, 0.00026996, 0.00026996 ] 
-# Default: [ 0.00000026996, 0.00000026996, 0.00000026996, 0.00000026996, 0.00000026996 ]

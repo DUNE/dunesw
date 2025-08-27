@@ -1,0 +1,18 @@
+# supernova_neutronfilter_g4_dunevd10kt_1x8x14_3view_30deg.fcl
+# Author: Sergio Manthey Corchado (2025)
+# Purpose: Run the supernova g4 VD 1x8x14 3view 30deg jobset and reject any events that do not have a neutron stopping in the TPC
+#
+# V1.0
+#
+#include "larg4particlefilter_dune.fcl"
+#include "standard_g4stage2_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+
+#Define the neutron filter
+physics.filters.neutronfilter:  @local::dunefd_neutrontpcfilter
+
+#Run neutron filter at the end
+physics.simulate: [ rns, PDFastSimXe, PDFastSimXeExternal, neutronfilter ]
+
+#Tell ART to actually filter using the ART filter
+outputs.out1.SelectEvents: [ simulate ]

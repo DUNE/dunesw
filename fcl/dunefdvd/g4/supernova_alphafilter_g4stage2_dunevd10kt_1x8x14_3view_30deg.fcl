@@ -1,0 +1,18 @@
+# supernova_alphafilter_g4_dunevd10kt_1x8x14_3view_30deg.fcl
+# Author: Sergio Manthey Corchado (2025)
+# Purpose: Run the supernova g4 VD 1x8x14 3view 30deg jobset and reject any events that do not have an alpha stopping in the TPC
+#
+# V1.0
+#
+#include "larg4particlefilter_dune.fcl"
+#include "standard_g4stage2_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+
+#Define the alpha filter
+physics.filters.alphafilter:  @local::dunefd_alphafilter
+
+#Run alpha filter at the end
+physics.simulate: [ rns, PDFastSimXe, PDFastSimXeExternal, alphafilter ]
+
+#Tell ART to actually filter using the ART filter
+outputs.out1.SelectEvents: [ simulate ]

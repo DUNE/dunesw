@@ -1,0 +1,7 @@
+#include "prodsingle_solar_external_radiological_decay0_dune10kt_1x2x6_centralAPA.fcl"
+
+outputs.out1.fileName: "prodneutron_solar_external_radiological_decay0_dune10kt_1x2x6_centralAPA_gen.root"
+
+physics.producers.generator.PDG:    [ 2112   , 2112   , 2112   , 2112    ]      # neutron 
+physics.producers.generator.P0:     [ 68.6e-3, 68.6e-3, 68.6e-3, 68.6e-3 ]
+physics.producers.generator.SigmaP: [ 68.6e-3, 68.6e-3, 68.6e-3, 68.6e-3 ]

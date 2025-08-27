@@ -1,0 +1,3 @@
+#include "solar_reco_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+physics.producers.solarcluster.SignalLabel: "generator"
