@@ -9,7 +9,7 @@ services:
 physics.producers:
 {
    @table::physics.producers
-   @table::dunefd_vertdrift_1x8x14_optimisitic_producers
+   @table::dunefd_vertdrift_1x8x14_optimistic_producers
 }
 
 physics.simulate: [rns, @sequence::dunefdvd_backgrounds_1x8x14_optimistic ]
