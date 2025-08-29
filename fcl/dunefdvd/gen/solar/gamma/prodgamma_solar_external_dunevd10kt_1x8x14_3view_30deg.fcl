@@ -1,0 +1,7 @@
+#include "prodsingle_solar_external_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+outputs.out1.fileName: "prodgamma_solar_external_dunevd10kt_1x8x14_3view_30deg_gen.root"
+
+physics.producers.generator.PDG:    [ 22, 22, 22, 22, 22 ]      # gamma
+physics.producers.generator.P0:     [ 9e-3, 9e-3, 9e-3, 9e-3, 9e-3 ]
+physics.producers.generator.SigmaP: [ 5e-3, 5e-3, 5e-3, 5e-3, 5e-3 ]

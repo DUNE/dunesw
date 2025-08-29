@@ -1,0 +1,7 @@
+#include "prodsingle_solar_external_radiological_decay0_dune10kt_1x2x6_lateralAPA.fcl"
+
+outputs.out1.fileName: "prodgamma_solar_external_radiological_decay0_dune10kt_1x2x6_lateralAPA_gen.root"
+
+physics.producers.generator.PDG:    [   22,   22,   22,   22,   22 ]      # gamma
+physics.producers.generator.P0:     [ 9e-3, 9e-3, 9e-3, 9e-3, 9e-3 ]
+physics.producers.generator.SigmaP: [ 5e-3, 5e-3, 5e-3, 5e-3, 5e-3 ]

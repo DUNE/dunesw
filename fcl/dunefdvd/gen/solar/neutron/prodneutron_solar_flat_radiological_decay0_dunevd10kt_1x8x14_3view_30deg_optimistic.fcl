@@ -1,0 +1,7 @@
+#include "prodsingle_solar_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimistic.fcl"
+
+outputs.out1.fileName: "prodneutron_solar_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimistic_gen.root"
+
+physics.producers.generator.PDG:    [ 2112 ]      # neutron 
+physics.producers.generator.P0:     [ 68.6e-3 ]
+physics.producers.generator.SigmaP: [ 68.6e-3 ]
