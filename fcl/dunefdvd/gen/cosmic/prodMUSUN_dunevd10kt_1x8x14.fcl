@@ -1,4 +1,4 @@
-#include "services_dunefd_vertdrift_1x8x6.fcl"
+#include "services_dunefd_vertdrift_1x8x14.fcl"
 #include "MUSUN.fcl"
 
 process_name: MUSUNGen
@@ -12,7 +12,7 @@ services:
    RandomNumberGenerator: {} #ART native random number generator
    FileCatalogMetadata:  @local::art_file_catalog_mc
 
-   @table::dunefdvd_1x8x6_3view_30deg_simulation_services
+   @table::dunefdvd_1x8x14_3view_30deg_simulation_services
 }
 
 #Start each new event with an empty event.
@@ -74,7 +74,7 @@ physics.producers.generator.Ymax:     1405.
 physics.producers.generator.Xmin:    -1534.
 physics.producers.generator.Xmax:     1534.
 physics.producers.generator.Zmin:     -887.
-physics.producers.generator.Zmax:     1784.
+physics.producers.generator.Zmax:     2979.
 
 # Rotate VD around Z by 90 deg: y becomes -x and x becomes y
 physics.producers.generator.DetRotX:               0.         # rotation around X axis, clockwise
