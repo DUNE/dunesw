@@ -40,7 +40,7 @@ services:
   DetectorPropertiesService:  @local::protodunevd_detproperties
 
   DAPHNEChannelMapService: {
-     FileName: "PDVD_PDS_Mapping_v0708025.json"
+     FileName: "PDVD_PDS_Mapping_v07082025.json"
      IgnoreLinks: true
    } 
 
