@@ -1,6 +1,5 @@
 #include "HDF5RawInput3.fcl"
 #include "PDVDTPCReader.fcl"
-#include "DAPHNEReaderPDHD.fcl"
 #include "PDVDTriggerReader4.fcl"
 
 #include "wirecell_dune.fcl"
@@ -23,7 +22,6 @@
 #include "CRT.fcl"
 #include "T0RecoAnodePiercers.fcl"
 #include "numberofhitsfilter.fcl"
-#include "protodune_tools_dune.fcl"
 
 process_name: pdvdkeepupprocessing
 
@@ -42,7 +40,7 @@ services:{
 
    TPCChannelMapService:
    {
-     FileName: "PD2VDBottomTPCChannelMap_v1.txt"
+     FileName: "PD2VDTPCChannelMap_v2.txt"
    }
    DAPHNEChannelMapService: {
      FileName: "PDVD_PDS_Mapping_v04152025.json"
@@ -122,6 +120,8 @@ physics: {
   trigger_paths: [ produce ]
   end_paths : [ output ]
 }
+
+services.WireReadout.PDMapTool.MappingFile: "PDVD_PDS_Mapping_v07082025.json"
 
 physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
 
