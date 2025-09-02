@@ -64,4 +64,12 @@ outputs:
   }
 }
 
+physics.producers.opdigi.InputModules: [
+  "PDFastSim", #in case we do all TPCs together
+  "PDFastSimTPC1",
+  "PDFastSimTPC2",
+  "PDFastSimTPC5",
+  "PDFastSimTPC6",
+  "PDFastSimExternal"
+]
 services.WireReadout.WireReadoutClass: "DuneApaWireReadout"

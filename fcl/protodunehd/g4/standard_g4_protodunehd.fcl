@@ -15,7 +15,7 @@ services:
 
   @table::protodunehd_refactored_simulation_services
 
-  NuRandomService:       @local::dune_prod_seedservice
+  NuRandomService:       @local::dune_seedservice
 }
 
 
@@ -71,3 +71,4 @@ outputs:
     #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
   }
 }
+

@@ -16,3 +16,4 @@ process_name: pdhdrecostage1
 
 physics.producers.wclsdatahdfilter.wcls_main.loglevels: @erase 
 physics.producers.wclsdatahdfilter.wcls_main.logsinks: @erase 
+physics.producers.wclsdatahdfilter.wcls_main.params.reality: "sim"
