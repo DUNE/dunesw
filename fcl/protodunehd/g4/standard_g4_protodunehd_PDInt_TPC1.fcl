@@ -1,0 +1,9 @@
+#include "standard_g4_protodunehd_PDInt_base.fcl"
+
+process_name: PDInternalTPC1
+outputs.out1.fileName: "%ifb_pdsim_internal_TPC1.root"
+outputCommands: [ "keep *" ]
+
+physics.simulate: [
+  "PDFastSimTPC1"
+]

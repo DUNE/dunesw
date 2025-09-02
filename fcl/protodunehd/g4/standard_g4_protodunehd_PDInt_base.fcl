@@ -1,0 +1,22 @@
+#include "standard_g4_protodunehd_stage2.fcl"
+
+#Save memory with these unused services
+services.PhotonVisibilityService: @erase
+services.ParticleInventoryService: @erase
+services.PhotonBackTrackerService: @erase
+
+physics.producers.PDFastSimTPC1: @local::physics.producers.PDFastSim
+physics.producers.PDFastSimTPC1.RestrictedTPCs: [1] 
+
+physics.producers.PDFastSimTPC2: @local::physics.producers.PDFastSim
+physics.producers.PDFastSimTPC2.RestrictedTPCs: [2] 
+
+physics.producers.PDFastSimTPC5: @local::physics.producers.PDFastSim
+physics.producers.PDFastSimTPC5.RestrictedTPCs: [5] 
+
+physics.producers.PDFastSimTPC6: @local::physics.producers.PDFastSim
+physics.producers.PDFastSimTPC6.RestrictedTPCs: [6] 
+
+
+physics.simulate: [
+]
