@@ -35,25 +35,27 @@ services:
   message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_mc
                         #@table::protodunehd_reco_services
-  ChannelStatusService: @local::dunefd_channel_status
-  WireReadout:          @local::dune_wire_readout
-  GeometryConfigurationWriter:  {}
-  Geometry:                     @local::protodunehdv6_geo
-  DetectorClocksService:        @local::protodunehd_detectorclocks
-  DetectorPropertiesService:    @local::protodunehd_detproperties
-  LArPropertiesService:         @local::dunefd_properties
-  LArFFT:                       @local::dunefd_larfft
-  DatabaseUtil:                 @local::dunefd_database
-  BackTrackerService:           @local::pdsp_backtrackerservice
-  ParticleInventoryService:     @local::dunefd_particleinventoryservice
-  PhotonBackTrackerService:     @local::dunefd_photonbacktrackerservice_legacy
-  SpaceCharge:                  @local::pdhd_spacecharge
+  #ChannelStatusService: @local::dunefd_channel_status
+  #WireReadout:          @local::dune_wire_readout
+  #GeometryConfigurationWriter:  {}
+  #Geometry:                     @local::protodunehdv6_geo
+  #DetectorClocksService:        @local::protodunehd_detectorclocks
+  #DetectorPropertiesService:    @local::protodunehd_detproperties
+  #LArPropertiesService:         @local::dunefd_properties
+  #LArFFT:                       @local::dunefd_larfft
+  #DatabaseUtil:                 @local::dunefd_database
+  #BackTrackerService:           @local::pdsp_backtrackerservice
+  #ParticleInventoryService:     @local::dunefd_particleinventoryservice
+  #PhotonBackTrackerService:     @local::dunefd_photonbacktrackerservice_legacy
+  #SpaceCharge:                  @local::pdhd_spacecharge
 
+  @table::protodunehd_services
 
   IFDH: {}
 
 
 }
+services.SpaceCharge: @local::pdhd_spacecharge
 
 services.AuxDetGeometry.GDML: "protodunehd_v6_refactored.gdml"
 services.AuxDetGeometry.Name: "protodunehdv6"
@@ -128,10 +130,10 @@ physics: {
     pandora2Showercalo:         @local::pdhd_allShower_calomcsce
     pandora2Showercalonosce:    @local::pdhd_allShower_calomcnosce
 
-    pandoraGnocchicalo: @local::pdhd_gnocchi_calomc_nosce
-    pandora2Gnocchicalo: @local::pdhd_gnocchi_calomc_nosce
-    pandoraGnocchicalonosce: @local::pdhd_gnocchi_calomc_nosce
-    pandora2Gnocchicalonosce: @local::pdhd_gnocchi_calomc_nosce
+    pandoraGnocchiCalo: @local::pdhd_gnocchi_calomc_nosce
+    pandora2GnocchiCalo: @local::pdhd_gnocchi_calomc_nosce
+    pandoraGnocchiCalonosce: @local::pdhd_gnocchi_calomc_nosce
+    pandora2GnocchiCalonosce: @local::pdhd_gnocchi_calomc_nosce
   }
   #define the producer and filter modules for this path, order matters,
 #filters reject all following items.  see lines starting physics.producers below
@@ -153,16 +155,16 @@ reco: [ opdec,
         #pandorapid,
         pandoraShowercalo,
         pandoraShowercalonosce,
-        pandoraGnocchicalo,
-        pandoraGnocchicalonosce,
+        pandoraGnocchiCalo,
+        pandoraGnocchiCalonosce,
         emtrkmichelid,
         crttag,
         crtreco,
         pandora2Track,
         pandora2calo,
         pandora2calonosce,
-        pandora2Gnocchicalo,
-        pandora2Gnocchicalonosce,
+        pandora2GnocchiCalo,
+        pandora2GnocchiCalonosce,
         pandora2Shower,
         pandora2Showercalo,
         pandora2Showercalonosce
@@ -229,7 +231,9 @@ physics.producers.pandora2Shower.UseAllParticles:            true
 #physics.producers.pandora2calo.TrackModuleLabel: "pandora2Track"
 #physics.producers.pandora2calonosce.TrackModuleLabel: "pandora2Track"
 #
-#physics.producers.pandora2Gnocchicalo.TrackModuleLabel:                "pandora2Track"
-#physics.producers.pandora2Gnocchicalo.AssocHitModuleLabel:             "pandora2Track"
-#physics.producers.pandora2Gnocchicalonosce.TrackModuleLabel:                "pandora2Track"
-#physics.producers.pandora2Gnocchicalonosce.AssocHitModuleLabel:             "pandora2Track"
+#physics.producers.pandora2GnocchiCalo.TrackModuleLabel:                "pandora2Track"
+#physics.producers.pandora2GnocchiCalo.AssocHitModuleLabel:             "pandora2Track"
+#physics.producers.pandora2GnocchiCalonosce.TrackModuleLabel:                "pandora2Track"
+#physics.producers.pandora2GnocchiCalonosce.AssocHitModuleLabel:             "pandora2Track"
+physics.producers.wclsdatahd.wcls_main.params.reality: sim
+

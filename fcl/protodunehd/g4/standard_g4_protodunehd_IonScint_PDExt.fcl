@@ -1,0 +1,8 @@
+#include "standard_g4_protodunehd.fcl"
+
+process_name: IonScintPDExt
+
+physics.simulate:      [  rns, IonAndScint, IonAndScintExternal, PDFastSimExternal ]
+outputCommands: [ "keep *" ]
+
+outputs.out1.fileName: "%ifb_ionscint_pdext.root"
