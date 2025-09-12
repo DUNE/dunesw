@@ -23,7 +23,6 @@
 #include "opticaldetectorservices_dune.fcl"
 #include "OpSlicer.fcl"
 #include "SolarOpFlash.fcl"
-#include "SolarEvent.fcl"
 
 BEGIN_PROLOG
 
@@ -96,7 +95,6 @@ dunefd_horizdrift_producers:
   opslicer:   @local::dune10kt_1x2x6_opslicer
   solarflash: @local::solar_opflash_dune10kt_1x2x6 
   # LE Reco
-  solarevent: @local::solar_event_dune10kt_1x2x6
 }
 
 dunefd_horizdrift_lowlevelreco:
