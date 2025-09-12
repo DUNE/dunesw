@@ -17,7 +17,6 @@
 #include "PerPlaneCluster.fcl"
 #include "SolarCluster.fcl"
 #include "SolarOpFlash.fcl"
-#include "SolarEvent.fcl"
 #include "OpFlashFinderVerticalDrift.fcl"
 #include "angularreco.fcl"
 #include "imagepatternalgs.fcl"
