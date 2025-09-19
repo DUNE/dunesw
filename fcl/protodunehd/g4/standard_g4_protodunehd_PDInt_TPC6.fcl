@@ -1,0 +1,9 @@
+#include "standard_g4_protodunehd_PDInt_base.fcl"
+
+process_name: PDInternalTPC6
+outputs.out1.fileName: "%ifb_pdsim_internal_TPC6.root"
+outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_G4*"]
+
+physics.simulate: [
+  "PDFastSimTPC6"
+]

@@ -2,5 +2,4 @@
 
 physics.reco: [ wclsmcnfsp, @sequence::physics.reco ]
 
-dunefd_horizdrift_producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
-
+physics.producers.gaushit.CalDataModuleLabel: "wclsmcnfsp:gauss"
