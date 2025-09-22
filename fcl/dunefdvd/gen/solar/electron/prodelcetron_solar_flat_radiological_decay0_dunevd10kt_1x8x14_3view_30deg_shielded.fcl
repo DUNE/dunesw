@@ -1,0 +1,7 @@
+#include "prodsingle_solar_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_shielded.fcl"
+
+outputs.out1.fileName: "prodelectron_solar_flat_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimisitc_gen.root"
+
+physics.producers.generator.PDG:    [  11      ] # electron
+physics.producers.generator.P0:     [  9.49e-3 ]
+physics.producers.generator.SigmaP: [  5.01e-3 ]
