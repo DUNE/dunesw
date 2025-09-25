@@ -3,6 +3,7 @@
 #include "PDHDDataInterfaceWIBEth3.fcl"
 #include "PDHDTriggerReader3.fcl"
 #include "PDHDTimingRawDecoder.fcl"
+#include "PDHDCTBRawDecoder.fcl"
 #include "DAPHNEReaderPDHD.fcl"
 #
 #include "opticaldetectormodules_dune.fcl"
@@ -29,6 +30,7 @@
 #include "services_dune.fcl"
 #include "spacecharge_dune.fcl"
 #include "dune_calibanatree.fcl"
+#include "BeamEvent.fcl"
 
 process_name: pdhdkeepupprocessing
 
@@ -55,7 +57,7 @@ services:
   SpaceCharge:                  @local::pdhd_spacecharge
 
 
-  IFDH: {}
+  IFBeam: {}
 
   TFileService:
   {
@@ -89,11 +91,12 @@ physics:
     # Raw decoding
     tpcrawdecoder: @local::PDHDTPCReaderDefaults
     triggerrawdecoder: @local::PDHDTriggerReader3Defaults
+    ctbrawdecoder: @local::PDHDCTBRawDecoderDefaults
     timingrawdecoder: @local::PDHDTimingRawDecoder
     pdhddaphne: @local::DAPHNEReaderPDHD
 
     # Beam Instrumentation Info
-    # TODO
+    beamevent:          @local::pdhd_beamevent
 
     # Optical reconstruction
     opdec:              @local::protodunehd_deconvolution
@@ -136,8 +139,10 @@ physics:
 
   produce: [
     tpcrawdecoder,
-    #triggerrawdecoder,
-    #timingrawdecoder,
+    triggerrawdecoder,
+    timingrawdecoder,
+    ctbrawdecoder,
+    beamevent,
     #pdhddaphne,
     fembfilter,
     wclsdatahd,
