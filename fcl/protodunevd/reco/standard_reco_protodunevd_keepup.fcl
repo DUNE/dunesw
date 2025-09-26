@@ -33,7 +33,7 @@ services:{
    FileCatalogMetadata:  @local::art_file_catalog_data
                          @table::protodunevd_reco_services
    message:  @local::dune_message_services_prod
-        
+
    HDF5RawFile3Service:  {}
    IFDH: {}
    DetectorPropertiesService:  @local::protodunevd_detproperties
@@ -43,7 +43,7 @@ services:{
      FileName: "PD2VDTPCChannelMap_v2.txt"
    }
    DAPHNEChannelMapService: {
-     FileName: "PDVD_PDS_Mapping_v04152025.json"
+     FileName: @local::protodunevd_wire_readout.PDMapTool.MappingFile # this is set in DUNE/dunecore geometry_dune.fcl
      IgnoreLinks: true
    }
    IPhotonCalibrator: {
@@ -75,7 +75,7 @@ physics: {
     #Decoders
     tpcrawdecoder:    @local::PDVDTPCReaderDefaults
     triggerrawdecoder:@local::PDVDTriggerReader4Defaults
-    pdvddaphne:       @local::protodunevd_daphne  
+    pdvddaphne:       @local::protodunevd_daphne
     #PDS reco
     ophit:            @local::protodunevd_ophit
     opflash:          @local::protodunevd_opflash
@@ -126,7 +126,7 @@ services.WireReadout.PDMapTool.MappingFile: "PDVD_PDS_Mapping_v07082025.json"
 physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
 
 #CRP raw data decoder settings
-physics.producers.tpcrawdecoder.DecoderToolParams.DebugLevel: 0 
+physics.producers.tpcrawdecoder.DecoderToolParams.DebugLevel: 0
 
 #WireCell signal processing settings
 physics.producers.wclsdatavd.wcls_main.params.use_magnify:  "false"

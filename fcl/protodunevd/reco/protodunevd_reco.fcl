@@ -40,9 +40,9 @@ services:
   DetectorPropertiesService:  @local::protodunevd_detproperties
 
   DAPHNEChannelMapService: {
-     FileName: "PDVD_PDS_Mapping_v07082025.json"
+     FileName: @local::protodunevd_wire_readout.PDMapTool.MappingFile # this is set in DUNE/dunecore geometry_dune.fcl
      IgnoreLinks: true
-   } 
+   }
 
   IPhotonCalibrator: {
      BadChannels: []
