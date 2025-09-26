@@ -121,7 +121,7 @@ physics: {
   end_paths : [ output ]
 }
 
-services.WireReadout.PDMapTool.MappingFile: "PDVD_PDS_Mapping_v07082025.json"
+services.WireReadout.PDMapTool: @local::protodunevd_wire_readout.PDMapTool # this is set in DUNE/dunecore geometry_dune.fcl
 
 physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
 
