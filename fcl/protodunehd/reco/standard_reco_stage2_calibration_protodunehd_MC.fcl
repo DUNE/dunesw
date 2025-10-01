@@ -103,12 +103,13 @@ source:
   fileNames: ["reco_stage2_protodunehd.root"]
 }
 
-outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wire*_*_wiener_*"]
+#outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wire*_*_wiener_*"]
+outputs.out1.outputCommands: [ "keep *", "drop recob::Wire*_*_wiener_*"]
 process_name: pdhdrecostage2
 physics.filters.nhitsfilter.Verbose: true
 physics.producers.opdec.InstanceName: ""
 physics.producers.ophitspe.InputModuledigi: "opdigi"
-physics.producers.wclsdatahd.wcls_main.loglevels: ["debug"]
-physics.producers.wclsdatahd.wcls_main.logsinks: ["stdout"]
+physics.producers.wclsdatahd.wcls_main.loglevels: @erase
+physics.producers.wclsdatahd.wcls_main.logsinks: @erase
 physics.producers.wclsdatahd.wcls_main.params.reality: sim
 

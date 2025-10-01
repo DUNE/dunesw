@@ -1,0 +1,5 @@
+#include "prodbackground_radiological_decay0_dunevd10kt_1x8x14_3view_30deg_shielded.fcl"
+
+physics.simulate: [rns, CavernwallNeutronsAtLAr1x8x14Shielded ]
+
+outputs.out1.fileName: "prodneutron_dunevd10kt_1x8x14_3view_30deg_shielded_gen.root"
