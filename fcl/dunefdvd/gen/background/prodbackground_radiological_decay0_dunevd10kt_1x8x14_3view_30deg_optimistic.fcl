@@ -9,9 +9,9 @@ services:
 physics.producers:
 {
    @table::physics.producers
-   @table::dunefd_vertdrift_1x8x14_optimisitic_producers
+   @table::dunefd_vertdrift_1x8x14_optimistic_producers
 }
 
 physics.simulate: [rns, @sequence::dunefdvd_backgrounds_1x8x14_optimistic ]
 
-outputs.out1.fileName: "prodradiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimisitic_gen.root"
+outputs.out1.fileName: "prodradiological_decay0_dunevd10kt_1x8x14_3view_30deg_optimistic_gen.root"
