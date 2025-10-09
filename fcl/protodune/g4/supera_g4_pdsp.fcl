@@ -1,0 +1,124 @@
+#include "services_refactored_pdune.fcl"
+#include "LArG4_dune.fcl"
+#include "mlreco_dune.fcl"
+#include "IonAndScint_dune.fcl"
+#include "PDFastSim_dune.fcl"
+#include "mcreco_dune.fcl"
+
+process_name: G4
+
+services:
+{
+  TFileService: { fileName: "g4_protodunesp_hist.root" }
+  TimeTracker:           {}
+  MemoryTracker:         {} # default is one
+  RandomNumberGenerator: {} #ART native random number generator
+  message:      @local::standard_info
+
+  @table::protodune_larg4_services
+  @table::protodune_refactored_simulation_services
+
+  ParticleListAction: {
+                        service_type: "ParticleListActionService"
+                        EnergyCut: 1e-5                                   # Kinetic Energy cut, note Geant4 assumes this is in MeV.
+                                                                          # So: 1e-2 MeV = 10 KeV.
+                        keepEMShowerDaughters: false                      # Prevents EM shower daughters from merging with tracks - from refactored g4. If false, does not store electromagnetic shower daughter
+                                                                          # particles in the MCParticles data product.
+                        storeTrajectories: true
+                        keepGenTrajectories: ["generator"] # list of generator labels for which we want to store
+                                                                          # trajectory points.
+                        keepOnlyPrimaryFullTrajectories: false            # (defaults to false in larg4) If set to true, only
+                                                                          # the particles with MCTruth process == "primary" and
+                                                                          # their descendants will have the full set of trajetory
+                                                                          # points stored. Particles descending from primaries with
+                                                                          # MCTruth process != "primary" will not have a full set
+                                                                          # of trajectory points stored -- only their start and
+                                                                          # end points. This filter only applies to the generator
+                                                                          # labels listed in the keepGenTrajectories. E.g, for the
+                                                                          # beam generator, no "primaryBackground" particles or their
+                                                                          # descendants would have a full set of traj. points. if
+                                                                          # this is set to true.
+                        SparsifyTrajectories: true                        # call SparsifyTrajectory() method on MCParticles with full trajectories
+                                                                          # being stored. This helps reduce memory usage in the root output stage
+                                                                          # if there are many trajectory points.
+                        SparsifyMargin: 0.015                             # required when SparsifyTrajectories is set to true
+                        KeepTransportation: true                          # When sparsifying: forces steps with the 'Transportation' process to be saved
+                                                                          # Can be useful to keep the first step in the active volume
+                        KeepSecondToLast: true                            # Sparsifying could cut out the penultimate step point, which holds the correct info
+                                                                          # of the end of the track (the final step is defined to have 0 kinetic energy)
+                                                                          # This forces that true penultimate point to be saved, thus preserving the info
+                        KeepDroppedParticlesInVolumes: ["volTPCActive"]   # list of volumes for which we want to store particles that were dropped
+                                                                          # (i.e. particles that are not included in the standard list, mainly em shower
+                                                                          # daughters). Used for ml reco workflow.
+                        
+                        StoreDroppedMCParticles: true
+  }
+}
+
+
+
+source:
+{
+  module_type: RootInput
+  maxEvents:  30000
+  fileNames: ["gen_protodunesp.root"]
+}
+
+physics:
+{
+
+  producers:
+  {
+
+    #retain largeant name for compatibility
+    largeant:     @local::protodune_larg4
+    sedlite:      @local::pdunesp_sedlite
+    IonAndScint:  @local::protodune_ionandscint
+    PDFastSim:    @local::protodune_pdfastsim_pvs
+    mcreco:       @local::dune_mcreco
+    simplemerge:  @local::dune_simplemerge
+    rns: {module_type: "RandomNumberSaver"}
+  }
+
+  analyzers:
+  {
+
+  }
+
+  simulate:     [ rns
+                , largeant 
+                , simplemerge
+                , IonAndScint 
+                , PDFastSim
+                # , simdrift
+                , sedlite
+                , mcreco  ]
+
+  stream1:       [ out1 ]
+
+  trigger_paths: [  simulate ] 
+  end_paths:     [  stream1  ]  
+}
+
+outputs:
+{
+  out1:
+  {
+    module_type: RootOutput
+    fileName:    "%ifb_g4.root"
+    dataTier:    "simulated"
+    # outputCommands: [ "keep *"]
+    outputCommands: [ "keep *", "drop sim::SimEnergyDeposits_largeant_*_G4*"]
+    #fastCloning: false #will fail if the split level is not the same as for the gen stage, so turn it off
+    compressionLevel: 1 #zlib argument (0-9) 
+    #basketSize: 8192 #[Byte] buffer size at 8k
+    #splitLevel: 0 #reduces number of buffers
+    #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
+  }
+}
+
+services.LArG4Parameters.KeepEMShowerDaughters: false # cluster_labels won't be filled without this 15_2
+
+physics.producers.sedlite.SimEnergyDepositLabel: "largeant:LArG4DetectorServicevolTPCActive"
+physics.producers.sedlite.useOrigTrackID: true #needed since origTrackID not filled for sedlite in DUNE
+physics.producers.IonAndScint.ISCalcAlg: "Separate"

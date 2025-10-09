@@ -1,0 +1,3 @@
+#include "run_mpvmpr_pdsp.fcl"
+
+physics.simulate: [rns,generator,rain]

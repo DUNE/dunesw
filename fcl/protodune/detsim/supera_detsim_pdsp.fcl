@@ -1,0 +1,5 @@
+#include "standard_detsim_protodunesp.fcl"
+
+# outputs.out1.outputCommands: [ "keep *" ]
+
+services.LArG4Parameters.KeepEMShowerDaughters: false # cluster_labels won't be filled without this

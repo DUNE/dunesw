@@ -1,0 +1,5 @@
+#include "supera_reco_pdsp_doublets.fcl"
+
+#Keep doublets
+physics.producers.cluster3d.ClusterPathAlg.SaveMythicalPoints:  false
+physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: false
