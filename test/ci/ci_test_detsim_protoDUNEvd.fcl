@@ -1,4 +1,4 @@
-#include "protodunevd_refactored_detsim_pureAr.fcl"
+#include "protodunevd_detsim.fcl"
 
 services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
