@@ -1,0 +1,3 @@
+#include "prodgenie_atmnu_max_weighted_dune10kt.fcl"
+
+services.NuRandomService: @local::random_NuRandomService #Using the random rng policy
