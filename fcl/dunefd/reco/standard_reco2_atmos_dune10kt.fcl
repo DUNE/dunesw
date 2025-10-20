@@ -1,0 +1,8 @@
+#include "standard_reco2_dune10kt.fcl"
+
+physics.producers.pandora.ConfigFile:   "PandoraSettings_Master_Atmos_DUNEFD.xml"
+
+physics.producers.cvnmap: @local::dunehd_atmo_1x2x6_cvnmapper
+physics.producers.cvneva: @local::dunehd_1x2x6_atmo_cvnevaluator
+
+physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco2_atmos ]

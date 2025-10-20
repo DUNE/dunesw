@@ -1,0 +1,16 @@
+#include "prodgenie_atmnu_max_dune10kt.fcl"
+
+process_name: GenieGen
+
+outputs.out1.fileName: "prodgenie_atmnu_max_weighted_dune10kt_gen.root"
+
+services:
+{
+    @table::services
+    @table::dunefd_simulation_services
+}
+
+source.firstRun: 20000063
+
+physics.producers.generator: @local::dune_fd_genie_atmo_max_weighted_honda
+physics.producers.generator.FiducialCut: "none"
