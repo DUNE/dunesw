@@ -1,4 +1,4 @@
-#include "protodunevd_refactored_g4_stage1.fcl"
+#include "protodunevd_g4_stage1.fcl"
 
 services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
