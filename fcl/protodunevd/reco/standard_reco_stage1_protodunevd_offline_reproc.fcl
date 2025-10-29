@@ -1,4 +1,4 @@
-#include "standard_reco_protodunevd_keepup_update.fcl"
+#include "standard_reco_protodunevd_keepup.fcl"
 
 source:{
   module_type: RootInput
