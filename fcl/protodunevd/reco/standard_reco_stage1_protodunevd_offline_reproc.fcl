@@ -63,7 +63,7 @@ outputs.out1.outputCommands: [ "keep *","drop raw::RawDigit*_*_*_*",
 					"drop anab::Calorimetry*_*_*_pdvdkeepupstage1",
 					"drop larpandoraobj::PFParticleMetadata*_*_*_pdvdkeepupstage1"]
 
-process_name: pdvdkeepupstage2
+process_name: pdvdreprocstage1
 
 physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 2
 physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 2
