@@ -1,4 +1,4 @@
-#include "protodunevd_refactored_detsim.fcl"
+#include "protodunevd_detsim.fcl"
 
 # Longitudinal diffusion constant [cm2/s]
 physics.producers.tpcrawdecoder.wcls_main.structs.DL: 0.0
