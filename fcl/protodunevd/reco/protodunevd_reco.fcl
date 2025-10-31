@@ -40,7 +40,7 @@ services:
   DetectorPropertiesService:  @local::protodunevd_detproperties
 
   DAPHNEChannelMapService: {
-     FileName: "PDVD_PDS_Mapping_v07082025.json"
+     FileName: @local::protodunevd_wire_readout.PDMapTool.MappingFile 
      IgnoreLinks: true
    } 
 
@@ -92,7 +92,7 @@ physics: {
   }
 
 reco: [ rns,
-        ophit, opflash, opslicer,
+        ophit, opflash, #opslicer,
         wclsdatavd,
         gaushit,
         reco3d,
@@ -124,8 +124,6 @@ outputs:
  }
 }
 
-services.WireReadout.PDMapTool.MappingFile: "PDVD_PDS_Mapping_v07082025.json"
-
 physics.producers.ophit.InputModule: "opdigi"
 physics.producers.ophit.InputLabels: [ "" ]
 physics.producers.opflash.InputModule:                       "ophit"
@@ -133,9 +131,9 @@ physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
 
 physics.producers.wclsdatavd.wcls_main.params.use_magnify:  "false"
 
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 0.6
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 0.6
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 0.6
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 2 
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 2
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 2
 
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatavd:gauss"
 physics.producers.emtrkmichelid.WireLabel: "wclsdatavd:gauss"

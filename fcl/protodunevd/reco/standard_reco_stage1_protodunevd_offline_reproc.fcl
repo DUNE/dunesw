@@ -1,0 +1,71 @@
+#include "standard_reco_protodunevd_keepup.fcl"
+
+source:{
+  module_type: RootInput
+  maxEvents: 100
+
+}
+
+
+#physics.producers.wclsdatavd: @erase
+physics.producers.wclsdatavdfilter: @local::protodunevd_nf
+
+
+#Put all of the raw decoders here since they're quick
+physics.produce: [
+#  tpcrawdecoder,
+#  triggerrawdecoder,
+#  timingrawdecoder,
+#  pdvddaphne,
+#  ophit,
+#  opflash,
+#  fembfilter
+#  wclsdatavdfilter
+#   wclsdatavd,
+   gaushit,
+   nhitsfilter,
+   reco3d,
+   hitpdune,
+   pandora,
+   pandoraTrack,
+#   pandoraShower,
+##   pandoraStdcalo,
+   pandoraGnocalo #,
+]
+
+#don't need a timestamp here -- only intermittent
+services.TFileService.fileName: "%ifb_reco_stage1_%tc_keepup_hists.root"
+
+
+services.DetectorClocksService.DefaultTrigTime:   2500
+services.DetectorClocksService.TriggerOffsetTPC:  2500
+#services.DetectorClocksService.ClockSpeedTPC: 1.953125
+services.DetectorClocksService.ClockSpeedTPC: 2
+
+services.DetectorPropertiesService.Efield: [0.450,3.125, 5e-1, 3.125]
+services.DetectorPropertiesService.NumberTimeSamples: 10000
+services.DetectorPropertiesService.ReadOutWindowSize: 10000
+
+outputs.out1.fileName: "%ifb_%tc_reproc.root"
+outputs.out1.outputCommands: [ "keep *","drop raw::RawDigit*_*_*_*", 
+					"drop *_wclsdatavd_wiener_*", 
+					"drop *_wclsdatavd_gauss_*", 
+					"drop raw::OpDetWaveform*_*_*_*",
+					"drop recob::Hit*_*_*_pdvdkeepupstage1",
+					"drop recob::SpacePoint*_*_*_pdvdkeepupstage1",
+					"drop recob::PointCharge*_*_*_pdvdkeepupstage1",
+					"drop recob::Cluster*_*_*_pdvdkeepupstage1",
+					"drop recob::PFParticle*_*_*_pdvdkeepupstage1",
+					"drop recob::Track*_*_*_pdvdkeepupstage1",
+					"drop recob::Slice*_*_*_pdvdkeepupstage1",
+					"drop recob::Vertex*_*_*_pdvdkeepupstage1",
+					"drop anab::T0*_*_*_pdvdkeepupstage1",
+					"drop anab::Calorimetry*_*_*_pdvdkeepupstage1",
+					"drop larpandoraobj::PFParticleMetadata*_*_*_pdvdkeepupstage1"]
+
+process_name: pdvdreprocstage1
+
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 2
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 2
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 2
+
