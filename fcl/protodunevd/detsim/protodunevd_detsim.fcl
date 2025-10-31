@@ -31,8 +31,7 @@ physics:
   producers:
   {
     tpcrawdecoder:  @local::wirecell_protodunevd_mc
-    sipmSim:        @local::xarapuca_ar
-    opdigi:         @local::standard_vddaphne
+    opdigi:         @local::protodunevd_opdigi
     crt:            @local::CRTVD_sim
     rns:            { module_type: "RandomNumberSaver" }
   }
