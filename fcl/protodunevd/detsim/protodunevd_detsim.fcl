@@ -39,9 +39,10 @@ physics:
   simulate: [ rns, 
               # TPC simulation
               tpcrawdecoder,
-              # OpDet and CRT simulation
-              sipmSim, opdigi,
-              crt
+              # OpDet simulation
+              opdigi,
+              # CRT simulation
+	      crt
             ] 
   stream1:  [ out1 ]
 
