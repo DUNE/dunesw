@@ -1,0 +1,19 @@
+# "standard_reco2_dunevd10kt_3view_30deg.fcl
+#
+# Dom Brailsford
+# Dec 2025
+#
+# Runs the high level reconstruction for DUNE FD
+
+#include "standard_reco_dunevd10kt_3view_30deg.fcl"
+#
+process_name: Reco2
+
+services.TFileService.fileName: "reco2_hist.root"
+
+source.inputCommands: ["keep *_*_*_*", "drop *_*_*_Reco2" ]
+
+physics.reco: [ @sequence::dunefd_vertdrift_tpc_reco2 ]
+
+outputs.out1.fileName: "%ifb_reco2.root"
+outputs.out1.dataTier: "full-reconstructed"
