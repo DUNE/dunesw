@@ -1,0 +1,10 @@
+# standard_reco_dunevd10kt_3view_30deg.fcl 
+
+# Dom Brailsford
+#
+#
+# Job fcl for running the VD reconstruction.  
+# This fcl is created for book-keeping purposes as it does no overriding.
+#
+#
+#include "standard_reco_dunevd10kt.fcl"
