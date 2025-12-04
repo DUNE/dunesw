@@ -1,11 +1,11 @@
-# "standard_reco1_dunevd10kt_3view_30deg.fcl"
+# "standard_reco1_dunevd10kt.fcl"
 #
 # Dom Brailsford
 # Dec 2025
 #
 # Runs the low level reconstruction for DUNE FD VD
 
-#include "standard_reco_dunevd10kt_3view_30deg.fcl"
+#include "standard_reco_dunevd10kt.fcl"
 # v
 process_name: Reco1
 
