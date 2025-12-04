@@ -91,9 +91,7 @@ dunefd_vertdrift_pds:
 
 dunefd_vertdrift_tpc_reco1:
 [
-    gaushit,
-    planecluster,
-    solarcluster
+    gaushit
 ]
 
 dunefd_vertdrift_reco1:
@@ -206,6 +204,8 @@ dunefd_vertdrift_reco_le:
 dunefd_vertdrift_reco1_solar: 
 [ 
     @sequence::dunefd_vertdrift_reco1,
+    planecluster,
+    solarcluster,
     rns
 ]
 
