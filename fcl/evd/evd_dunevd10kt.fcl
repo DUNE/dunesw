@@ -1,0 +1,34 @@
+#include "evd_dune.fcl"
+process_name: EVD
+
+includedServices: @local::services
+
+services: {
+    @table::includedServices
+    @table::dunevd10kt_disp
+}
+
+services.RecoDrawingOptions.TrackModuleLabels: [ "pandoraTrack" ]
+services.RecoDrawingOptions.ShowerModuleLabels: [ "pandoraShower" ]
+services.RecoDrawingOptions.SpacePointModuleLabels: [ "pandora" ]
+services.RecoDrawingOptions.DrawClusters: 0
+services.RecoDrawingOptions.DrawSpacePoints: 0
+services.RecoDrawingOptions.DrawTrackSpacePoints: 0
+services.RecoDrawingOptions.DrawTrackTrajectoryPoints: 1
+services.RecoDrawingOptions.DrawTracks: 3
+services.RecoDrawingOptions.DrawShowers: 1
+services.RecoDrawingOptions.DrawHits: 1
+services.RecoDrawingOptions.DrawOpFlashes: 0
+services.RecoDrawingOptions.DrawVertices: 0
+services.RecoDrawingOptions.HitModuleLabels: ["gaushit"]
+services.RecoDrawingOptions.WireModuleLabels: ["tpcrawdecoder:gauss"]
+
+services.RawDrawingOptions.PedestalOption: 1
+services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
+services.RawDrawingOptions.TotalTicks: 9000
+
+services.SimulationDrawingOptions.ShowMCTruthTrajectories: true
+services.SimulationDrawingOptions.SimChannelLabel: "elecDrift"
+
+
+includedServices: @erase
