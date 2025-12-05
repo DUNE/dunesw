@@ -1,0 +1,11 @@
+#include "cluster3dalgorithms.fcl"
+#include "protodunevd_reco.fcl"
+
+physics.producers.cluster3d : @local::standard_cluster3d 
+
+physics.reco: [ rns,
+        	wclsdatavd,
+         	gaushit,
+        	cluster3d
+              ]
+physics.producers.cluster3d.Hit3DBuilderAlg:        @local::standard_snippethit3dbuilder
