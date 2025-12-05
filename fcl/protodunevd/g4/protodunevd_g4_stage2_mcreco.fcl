@@ -1,0 +1,14 @@
+#include "mcreco_dune.fcl"
+#include "protodunevd_g4_stage2_nopds.fcl"
+
+physics.producers.mcreco : @local::dune_mcreco
+physics.producers.sedlite : {
+         ElectronDriftVel: 1.6e-1
+         SimEnergyDepositLabel: "largeant:LArG4DetectorServicevolTPCActive"
+         VoxelSizeX: 5.0e-1
+         VoxelSizeY: 5.0e-1
+         VoxelSizeZ: 5.0e-1
+         module_type: "G4InfoReducer"
+         useOrigTrackID: true
+      }
+physics.simulate :   [  rns, IonAndScint,sedlite,mcreco ]
