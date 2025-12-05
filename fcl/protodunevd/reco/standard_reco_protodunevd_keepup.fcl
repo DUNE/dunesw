@@ -46,10 +46,6 @@ services:{
      FileName:  @local::protodunevd_wire_readout.PDMapTool.MappingFile
      IgnoreLinks: true
    }
-   IPhotonCalibrator: {
-      BadChannels: []
-      service_provider: "PhotonCalibratorServiceProtoDUNESP"
-   }
 }
 
 source: @local::hdf5rawinput3
