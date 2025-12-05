@@ -9,3 +9,4 @@ physics.reco: [ rns,
         	cluster3d
               ]
 physics.producers.cluster3d.Hit3DBuilderAlg:        @local::standard_snippethit3dbuilder
+physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: false  #save only the triplets
