@@ -1,10 +1,10 @@
-#include "protodunevd_refactored_g4_stage2_pureAr.fcl"
+#include "protodunevd_g4_stage2.fcl"
 
 services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
 services.NuRandomService.IonAndScint.ISCalcAlg: 1234
-services.NuRandomService.PDFastSim.photon: 1234
-services.NuRandomService.PDFastSim.scinttime: 1234
+services.NuRandomService.PDFastSimAr.photon: 1234
+services.NuRandomService.PDFastSimAr.scinttime: 1234
 
 services.RandomNumberGenerator.restoreFrom: "G4RandomSeeds_Ref_protoDUNE.dat"
 services.RandomNumberGenerator.saveTo: "G4RandomSeeds.dat"

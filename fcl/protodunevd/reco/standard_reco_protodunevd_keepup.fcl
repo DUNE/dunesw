@@ -43,12 +43,8 @@ services:{
      FileName: "PD2VDTPCChannelMap_v2.txt"
    }
    DAPHNEChannelMapService: {
-     FileName: "PDVD_PDS_Mapping_v04152025.json"
+     FileName:  @local::protodunevd_wire_readout.PDMapTool.MappingFile
      IgnoreLinks: true
-   }
-   IPhotonCalibrator: {
-      BadChannels: []
-      service_provider: "PhotonCalibratorServiceProtoDUNESP"
    }
 }
 
@@ -121,7 +117,6 @@ physics: {
   end_paths : [ output ]
 }
 
-services.WireReadout.PDMapTool.MappingFile: "PDVD_PDS_Mapping_v07082025.json"
 
 physics.producers.opslicer.OpHitModuleLabel:                 "ophit"
 
@@ -134,9 +129,9 @@ physics.producers.wclsdatavd.wcls_main.params.raw_input_label: "tpcrawdecoder:da
 physics.producers.wclsdatavd.wcls_main.params.use_resampler: "true"
 
 #Hit finder settings
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 0.5
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 0.5
-physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 0.5
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 2
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 2
+physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 2
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatavd:gauss"
 
 # CNN settings
