@@ -1,4 +1,4 @@
-#include "cluster3dalgorithms.fcl"
+#include "cluster3dalgorithms_dune.fcl"
 #include "protodunevd_reco.fcl"
 
 physics.producers.cluster3d : @local::standard_cluster3d 
@@ -8,5 +8,6 @@ physics.reco: [ rns,
          	gaushit,
         	cluster3d
               ]
-physics.producers.cluster3d.Hit3DBuilderAlg:        @local::standard_snippethit3dbuilder
-physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: false  #save only the triplets
+physics.producers.cluster3d.Hit3DBuilderAlg:        @local::standard_snippethit3dbuilderDUNE
+physics.producers.cluster3d.HitFinderModuleLabel:       ["gaushit"]
+physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: false
