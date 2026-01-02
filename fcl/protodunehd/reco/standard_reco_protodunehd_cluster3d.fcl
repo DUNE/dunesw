@@ -1,0 +1,16 @@
+#include "cluster3dalgorithms_dune.fcl"
+#include "cluster_dune.fcl"
+#include "standard_reco_protodunehd_MC.fcl"
+physics.producers.cluster3d : @local::standard_cluster3d
+
+physics.reco: [ opdec,
+                ophitspe,
+        	opflash,
+        	opslicer,
+        	wclsdatahd,
+        	gaushit,
+        	nhitsfilter,
+                cluster3d ]
+physics.producers.cluster3d.Hit3DBuilderAlg:        @local::standard_snippethit3dbuilderDUNE
+#physics.producers.cluster3d.HitFinderModuleLabel:       ["gaushit"]
+physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: false
