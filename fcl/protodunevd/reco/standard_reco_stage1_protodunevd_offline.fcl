@@ -1,5 +1,5 @@
 #include "particleid.fcl"
-##include "standard_reco_protodunevd_keepup.fcl"
+#include "standard_reco_protodunevd_keepup.fcl"
 
 source:{
   module_type: RootInput
