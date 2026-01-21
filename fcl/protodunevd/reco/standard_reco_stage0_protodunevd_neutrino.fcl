@@ -1,0 +1,3 @@
+#include "standard_reco_stage0_protodunevd_offline.fcl"
+
+physics.filters.nhitsfilter: 100000
