@@ -54,4 +54,4 @@ physics.producers.beamevent.MatchTime:            true
 
 physics.producers.cluster3d.Hit3DBuilderAlg:        @local::standard_snippethit3dbuilderDUNE
 physics.producers.cluster3d.HitFinderModuleLabel:       ["hitpdune"]
-physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: false
+physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: true
