@@ -40,7 +40,7 @@ physics:
               # TPC simulation
               tpcrawdecoder,
               # OpDet and CRT simulation
-              sipmSim, opdigi,
+              opdigi,
               crt
             ] 
   stream1:  [ out1 ]
