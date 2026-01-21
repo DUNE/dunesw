@@ -3,8 +3,8 @@ BEGIN_PROLOG
 MultiPartVertex : {
     module_type  : "MultiPartVertex"
     DebugMode    : 1
-    G4Time       : 0 #819.2 # [ns]
-    G4TimeJitter : 0 #1.6   # [ns]
+    G4Time       : 2500 #819.2 # [ns]
+    G4TimeJitter : 5000 #1.6   # [ns]
     TPCRange     : [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7]]
     XRange       : [10]
     YRange       : [10]
@@ -27,8 +27,8 @@ MultiPartVertex : {
 MultiPartRain : {
     module_type  : "MultiPartRain"
     DebugMode    : 1
-    G4Time       : 0 #819.2  # [ns]
-    G4TimeJitter : 0 #1638.4 # [ns]
+    G4Time       : 2500 #819.2  # [ns]
+    G4TimeJitter : 5000 #1638.4 # [ns]
     TPCRange     : [[0,0],[0,1],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7]]
     XRange       : [10]
     YRange       : [10]
