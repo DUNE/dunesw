@@ -1,0 +1,7 @@
+#include "standard_reco2_dune10kt_1x2x6.fcl"
+
+physics.reco: [ @sequence::dunefd_horizdrift_workflow_reco2_supernova ]
+
+physics.producers.pandora.ConfigFile: "PandoraSettings_Master_LowE_DUNEFD_NoBackground.xml"
+
+outputs.out1.outputCommands: ["keep *", "drop recob::OpWaveforms_*_*_*Reco2*", "drop sim::OpDetBacktrackerRecords_PDFastSim_Reflected_SupernovaG4*", "drop sim::SimPhotonsLites_PDFastSim_Reflected_*G4*"]
