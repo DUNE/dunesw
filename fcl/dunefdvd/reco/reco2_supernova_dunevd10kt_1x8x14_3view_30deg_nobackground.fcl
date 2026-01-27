@@ -1,0 +1,4 @@
+#include "reco2_supernova_dunevd10kt_1x8x14_3view_30deg.fcl"
+
+physics.producers.pandora.ConfigFile: "PandoraSettings_Master_LowE_DUNEFD_VD_NoBackground.xml"
+
