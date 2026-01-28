@@ -87,7 +87,7 @@ physics: {
     emtrkmichelid:      @local::protodune_emtrkmichelid
 
     pandora:            @local::protodune_pandora
-    pandoraTrack:       @local::dune_pandoraTrackCreation
+    pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
     pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
 
     pandoraWriter:      @local::dune_pandorawriter
