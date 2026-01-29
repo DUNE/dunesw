@@ -17,7 +17,9 @@ services:
   NuRandomService:       @local::dune_prod_seedservice
 }
 
-
+# Test parameters for ScintPreScale in ProtoDUNE VD Cosmic Simulation
+services.OpDetResponseInterface.QuantumEfficiency: 0.2
+services.LArPropertiesService.ScintPreScale: 0.2
 
 source:
 {
