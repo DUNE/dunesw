@@ -8,33 +8,34 @@ cet_test(test_Geometry SOURCE test_Geometry.cxx
     cetlib::cetlib cetlib_except::cetlib_except
 )
 
-cet_test(test_DetectorClocksService SOURCE test_DetectorClocksService.cxx
-  LIBRARIES
-    dunecore::ArtSupport
-    lardata::Utilities
-    art::Framework_Services_Registry
-    ROOT::Core
-    cetlib::cetlib cetlib_except::cetlib_except
-)
+# disable tests that depend on LegacyLArG4
+#cet_test(test_DetectorClocksService SOURCE test_DetectorClocksService.cxx
+#  LIBRARIES
+#    dunecore::ArtSupport
+#    lardata::Utilities
+#    art::Framework_Services_Registry
+#    ROOT::Core
+#    cetlib::cetlib cetlib_except::cetlib_except
+#)
 
-cet_test(test_DetectorProperties SOURCE test_DetectorProperties.cxx
-  LIBRARIES
-    dunecore::ArtSupport
-    lardata::Utilities
-    art::Framework_Services_Registry
-    lardataalg::DetectorInfo
-    ROOT::Core
-    cetlib::cetlib cetlib_except::cetlib_except
-)
+#cet_test(test_DetectorProperties SOURCE test_DetectorProperties.cxx
+#  LIBRARIES
+#    dunecore::ArtSupport
+#    lardata::Utilities
+#    art::Framework_Services_Registry
+#    lardataalg::DetectorInfo
+#    ROOT::Core
+#    cetlib::cetlib cetlib_except::cetlib_except
+#)
 
-cet_test(test_LArProperties SOURCE test_LArProperties.cxx
-  LIBRARIES
-    dunecore::ArtSupport
-    lardata::Utilities
-    art::Framework_Services_Registry
-    ROOT::Core
-    cetlib::cetlib cetlib_except::cetlib_except
-)
+#cet_test(test_LArProperties SOURCE test_LArProperties.cxx
+#  LIBRARIES
+#    dunecore::ArtSupport
+#    lardata::Utilities
+#    art::Framework_Services_Registry
+#    ROOT::Core
+#    cetlib::cetlib cetlib_except::cetlib_except
+#)
 
 cet_test(test_LArSeedService SOURCE test_LArSeedService.cxx
   LIBRARIES
