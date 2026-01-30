@@ -41,9 +41,10 @@ if (NOT ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
      TEST_ARGS --rethrow-all --config ./test_optical_reco_dune35t.fcl 
    )
 
-   cet_test(build_oplib_dune35t HANDBUILT
-     DATAFILES test_build_oplib_dune35t.fcl
-     TEST_EXEC lar
-     TEST_ARGS --rethrow-all --config ./test_build_oplib_dune35t.fcl 
-   )
+  # references legacylarg4
+  # cet_test(build_oplib_dune35t HANDBUILT
+  #   DATAFILES test_build_oplib_dune35t.fcl
+  #   TEST_EXEC lar
+  #   TEST_ARGS --rethrow-all --config ./test_build_oplib_dune35t.fcl 
+  # )
 endif()
