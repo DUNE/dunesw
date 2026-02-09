@@ -1,5 +1,23 @@
 Note on PDVD simulation and data reconstruction workflows
 
+# Data:
+
+The default offline reconstruction scheme is divided in three stages:
+- stage0: raw products decoding (trigger, TPC, PDS) up to hits + cluster3d spacepoints
+- stage1: pandora + supera (input to SPINE) - dropping TPC RawDigits waveforms and Wires
+- stage2: PDS + calibration
+
+The corresponding FHICL files are:
+- standard_reco_stage0_protodunevd_offline.fcl
+- standard_reco_stage1_protodunevd_offline.fcl
+- standard_reco_stage2_protodunevd_offline.fcl (yet to be setup)
+
+Various specific data taking configurations were set-up hence the multiple extensions:
+- CERN SPS beam: _beam.fcl and _beam_tdeonly.fcl (when DAQ disabled BDE)
+- Neutrino trigger: _neutrino.fcl
+- TDE DAQ: _tdedaq.fcl (data not streamed through the usual DUNE-DAQ pipeline)
+- HV scan: _hvXXX.fcl (XXX = high voltage in kV)
+
 # Simulation:
 
 The default PDS+CRP+CRT simulation and reconstruction chain makes use of
