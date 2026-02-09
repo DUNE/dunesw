@@ -21,7 +21,7 @@ physics.produce: [
   ctbrawdecoder,
   beamevent,
   pdvddaphne,
-  ophit,
+  #ophit,
   wclsdatavd,
   gaushit,
   nhitsfilter,

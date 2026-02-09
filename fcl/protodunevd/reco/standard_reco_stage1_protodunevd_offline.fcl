@@ -9,7 +9,7 @@ source:{
 physics.producers.pandorapid:         @local::standard_chi2pid
 
 physics.produce: [
-   opflash,
+   #opflash,
    pandora,
    pandoraWriter,
    pandoraTrack,
@@ -37,4 +37,16 @@ process_name: pdvdofflinestage1
 physics.producers.pandorapid.CalorimetryModuleLabel: "pandoraGnocalo"
 physics.producers.pandorapid.TrackModuleLabel:       "pandoraTrack"
 
+physics.analyzers.supera:
+{
+  module_type:       "LArSoftSuperaDriver"
+  supera_params:     "protodunevd_supera_data_config.fcl"
+  out_filename:      "larcv.root"
+  unique_filename:   true
+  stream:            "stage1"
+  StrictDataLoading: false
+}
 
+physics.analyze:  [ supera ]
+
+physics.end_paths : [ output, analyze ]
