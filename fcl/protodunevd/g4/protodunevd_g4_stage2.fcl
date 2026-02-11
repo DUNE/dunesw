@@ -1,3 +1,4 @@
+#include "mcreco_dune.fcl"
 #include "services_refactored_pdune.fcl"
 #include "IonAndScint_dune.fcl"
 #include "PDFastSim_dune.fcl"
@@ -35,7 +36,17 @@ physics:
   {
     rns: {module_type: "RandomNumberSaver"}
     IonAndScint:  @local::protodunevd_ionandscint
-    PDFastSimAr:    @local::protodune_vd_pdfastsim_ann_ar
+    PDFastSimAr:  @local::protodune_vd_pdfastsim_ann_ar
+    mcreco :      @local::dune_mcreco
+    sedlite : {
+      ElectronDriftVel: 1.6e-1
+      SimEnergyDepositLabel: "largeant:LArG4DetectorServicevolTPCActive"
+      VoxelSizeX: 5.0e-1
+      VoxelSizeY: 5.0e-1
+      VoxelSizeZ: 5.0e-1
+      module_type: "G4InfoReducer"
+      useOrigTrackID: true
+    }
   }
 
   analyzers:
@@ -43,7 +54,7 @@ physics:
 
   }
 
-  simulate:      [  rns, IonAndScint, PDFastSimAr ]
+  simulate:      [  rns, IonAndScint, sedlite, mcreco, PDFastSimAr ]
 
   stream1:       [ out1 ]
 
