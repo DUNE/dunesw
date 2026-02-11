@@ -1,0 +1,47 @@
+#include "messageservices_dune.fcl"
+#include "cluster3dalgorithms_dune.fcl"
+#include "standard_reco_protodunevd_keepup.fcl"
+
+source:
+{
+  module_type: RootInput
+  maxEvents: 100
+  saveMemoryObjectThreshold: 0
+  fileNames: ["detsim_file.root"]
+}
+
+physics.producers.cluster3d:        @local::standard_cluster3d
+
+#Put all of the raw decoders here since they're quick
+physics.produce: [
+  ophit,
+  wclsdatavd,
+  gaushit,
+  nhitsfilter,
+  reco3d,
+  hitpdune,
+  cluster3d
+]
+
+#don't need a timestamp here -- only intermittent
+services.TFileService.fileName: "%ifb_reco_stage0_%tc_sim_hists.root"
+
+services.DetectorClocksService.DefaultTrigTime:   2500
+services.DetectorClocksService.TriggerOffsetTPC:  2500
+#services.DetectorClocksService.ClockSpeedTPC: 1.953125
+services.DetectorClocksService.ClockSpeedTPC: 2
+
+services.DetectorPropertiesService.Efield: [0.450,3.125, 5e-1, 3.125]
+services.DetectorPropertiesService.NumberTimeSamples: 10000
+services.DetectorPropertiesService.ReadOutWindowSize: 10000
+
+outputs.out1.fileName: "%ifb_reco_stage0_%tc_sim.root"
+outputs.out1.outputCommands: [ "keep *"]
+process_name: pdvdsimstage0
+
+physics.producers.ophit.InputModule: "opdigi"
+physics.producers.ophit.InputLabels: [ "" ]
+
+physics.producers.cluster3d.Hit3DBuilderAlg:        @local::standard_snippethit3dbuilderDUNE
+physics.producers.cluster3d.HitFinderModuleLabel:       ["hitpdune"]
+physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: true
