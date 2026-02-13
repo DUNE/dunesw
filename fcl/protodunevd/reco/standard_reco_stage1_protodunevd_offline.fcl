@@ -10,6 +10,7 @@ physics.producers.pandorapid:         @local::standard_chi2pid
 
 physics.produce: [
    #opflash,
+   emtrkmichelid,
    pandora,
    pandoraWriter,
    pandoraTrack,

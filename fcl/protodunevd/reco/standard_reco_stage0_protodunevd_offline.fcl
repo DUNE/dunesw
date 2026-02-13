@@ -24,10 +24,10 @@ physics.produce: [
   #ophit,
   wclsdatavd,
   gaushit,
+  cluster3d,
   nhitsfilter,
   reco3d,
-  hitpdune,
-  cluster3d
+  hitpdune
 ]
 
 #don't need a timestamp here -- only intermittent
@@ -53,5 +53,5 @@ physics.producers.beamevent.ForceRead:            false
 physics.producers.beamevent.MatchTime:            true
 
 physics.producers.cluster3d.Hit3DBuilderAlg:        @local::standard_snippethit3dbuilderDUNE
-physics.producers.cluster3d.HitFinderModuleLabel:       ["hitpdune"]
+physics.producers.cluster3d.HitFinderModuleLabel:       ["gaushit"]
 physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: true
