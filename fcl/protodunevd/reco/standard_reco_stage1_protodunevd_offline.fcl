@@ -10,13 +10,13 @@ physics.producers.pandorapid:         @local::standard_chi2pid
 
 physics.produce: [
    #opflash,
-   emtrkmichelid,
    pandora,
    pandoraWriter,
    pandoraTrack,
    pandoraShower,
    pandoraGnocalo,
-   pandorapid
+   pandorapid,
+   emtrkmichelid
 ]
 
 #don't need a timestamp here -- only intermittent
