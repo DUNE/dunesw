@@ -266,10 +266,10 @@ table_fragment_end
 
 product          version
 cetmodules	 v3_24_01	-	only_for_build
-duneexamples     v10_20_00d00
-dunedataprep     v10_20_00d00
-duneana          v10_20_00d00
-protoduneana     v10_20_00d00
+duneexamples     v10_20_01
+dunedataprep     v10_20_01
+duneana          v10_20_01
+protoduneana     v10_20_01
 end_product_list
 
 
