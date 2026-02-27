@@ -1,0 +1,74 @@
+#include "dataprep_dune.fcl"
+#include "standard_reco_stage0_protodunevd_offline.fcl"
+#include "vdcb_dataprep_sequences.fcl"
+#include "protodune_tools_dune.fcl"
+
+
+# Custom TDE DAQ channel map
+services.TPCChannelMapService.FileName: "PD2VDTopTPCChannelMap_v2.txt"
+
+# Historical way to load the VD coldbox data and run signal processing (D. Adams)
+services.RawDigitPrepService: {
+      CallgrindToolNames: []
+      DoWires: true
+      LogLevel: 3
+      ToolNames: [
+         "digitReader" ,
+         "vdcb_adcChannelRawRmsFiller",
+         "adcSampleFiller"
+      ]
+      service_provider: "ToolBasedRawDigitPrepService"
+   }
+services.OnlineChannelMapService: {
+     service_provider: "VDColdboxTDEChannelMapService"
+     MapName  : "PD2VDTopTDEChannelMap_v2.txt" 
+     LogLevel :0
+   }
+
+services.AdcWireBuildingService:     @local::adcwire_std
+services.DetectorClocksService.DefaultTrigTime:   2500
+services.DetectorClocksService.TriggerOffsetTPC:  2500
+
+# TDE DAQ raw data decoder module (Slavic)
+source:{
+  module_type: VDColdboxTDERawInput
+  maxEvents: -1
+  fileNames: [ "np02rawdata.dat" ]
+  LogLevel: 10
+  SamplesPerChannel:    10000
+  OutputLabelRawDigits: "tpcrawdecoder:daq"
+  OutputLabelRDTime:    "timingrawdecoder:daq"
+  OutputLabelRDStatus:  "daq"
+  InvertBaseline: []
+  SelectCRPs: [0,1]
+}
+
+physics.producers.caldata: {
+         BeamEventLabel: ""
+         ChannelGroups: [
+            "cru"
+         ]
+         ChannelRanges: []
+         DecoderTool: ""
+         DigitLabel: "tpcrawdecoder:daq"
+         DoAssns: true
+         DoGroups: true
+         IntermediateStates: []
+         LogLevel: 1
+         OnlineChannelMapTool: ""
+         OutputDigitName: ""
+         TimeStampName: ""
+         WireName: "dataprep"
+         module_type: "DataPrepModule"
+      }
+
+physics.produce: [
+  caldata,
+  wclsdatavd,
+  gaushit,
+  nhitsfilter,
+  reco3d,
+  hitpdune,
+  cluster3d
+]
+

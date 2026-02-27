@@ -87,7 +87,7 @@ physics: {
     emtrkmichelid:      @local::protodune_emtrkmichelid
 
     pandora:            @local::protodune_pandora
-    pandoraTrack:       @local::dune_pandoraTrackCreation
+    pandoraTrack:       @local::dunefdvd_pandoraTrackCreation
     pandoraShower:      @local::dunefdvd_pandoraModularShowerCreation
 
     pandoraWriter:      @local::dune_pandorawriter
@@ -132,6 +132,7 @@ physics.producers.wclsdatavd.wcls_main.params.use_resampler: "true"
 physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane0.RoiThreshold: 2
 physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane1.RoiThreshold: 2
 physics.producers.gaushit.HitFinderToolVec.CandidateHitsPlane2.RoiThreshold: 2
+physics.producers.gaushit.LongMaxHits: [25, 25, 25]
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatavd:gauss"
 
 # CNN settings
