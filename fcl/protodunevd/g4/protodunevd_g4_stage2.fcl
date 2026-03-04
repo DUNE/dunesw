@@ -41,9 +41,9 @@ physics:
     sedlite : {
       ElectronDriftVel: 1.6e-1
       SimEnergyDepositLabel: "largeant:LArG4DetectorServicevolTPCActive"
-      VoxelSizeX: 5.0e-1
-      VoxelSizeY: 5.0e-1
-      VoxelSizeZ: 5.0e-1
+      VoxelSizeX: 0.765 
+      VoxelSizeY: 0.765
+      VoxelSizeZ: 0.765
       module_type: "G4InfoReducer"
       useOrigTrackID: true
     }
