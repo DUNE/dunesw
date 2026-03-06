@@ -17,10 +17,10 @@ physics.produce: [
   ophit,
   wclsdatavd,
   gaushit,
-  #nhitsfilter,
-  #reco3d,
-  #hitpdune,
-  cluster3d
+  cluster3d,
+  nhitsfilter,
+  reco3d,
+  hitpdune
 ]
 
 #don't need a timestamp here -- only intermittent

@@ -10,9 +10,6 @@ physics.producers.pandorapid:         @local::standard_chi2pid
 
 physics.produce: [
    opflash,
-   nhitsfilter,
-   reco3d,
-   hitpdune,
    pandora,
    pandoraWriter,
    pandoraTrack,
