@@ -90,7 +90,7 @@ ProcessDriver: {
         HitWindowTicks: 20
         HitPeakFinding: false
         PostAveraging: true
-        PostAveragingThreshold_cm: 1.5
+        PostAveragingThreshold_cm: 0.85
         DumpToCSV: false
         RecoChargeRange: [-1000,50000]
                                 VoxelDistanceThreshold: 4
