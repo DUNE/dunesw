@@ -1,0 +1,57 @@
+#include "PDVDTriggerReader4.fcl"
+#include "PDVDTimingRawDecoder.fcl"
+#include "messageservices_dune.fcl"
+#include "BeamEvent.fcl"
+#include "PDHDCTBRawDecoder.fcl"
+#include "cluster3dalgorithms_dune.fcl"
+#include "standard_reco_protodunevd_keepup.fcl"
+
+services.IFBeam:  {}
+
+physics.producers.ctbrawdecoder:    @local::PDHDCTBRawDecoderDefaults
+physics.producers.timingrawdecoder: @local::PDVDTimingRawDecoder
+physics.producers.beamevent:        @local::pdvd_beamevent
+physics.producers.cluster3d:        @local::standard_cluster3d 
+
+#Put all of the raw decoders here since they're quick
+physics.produce: [
+  tpcrawdecoder,
+  triggerrawdecoder,
+  timingrawdecoder,
+  ctbrawdecoder,
+  beamevent,
+  pdvddaphne,
+  #ophit,
+  wclsdatavd,
+  gaushit,
+  cluster3d,
+  nhitsfilter,
+  reco3d,
+  hitpdune
+]
+
+#don't need a timestamp here -- only intermittent
+services.TFileService.fileName: "%ifb_reco_stage0_%tc_offline_hists.root"
+
+services.DetectorClocksService.DefaultTrigTime:   2500
+services.DetectorClocksService.TriggerOffsetTPC:  2500
+#services.DetectorClocksService.ClockSpeedTPC: 1.953125
+services.DetectorClocksService.ClockSpeedTPC: 2
+
+services.DetectorPropertiesService.Efield: [0.450,3.125, 5e-1, 3.125]
+services.DetectorPropertiesService.NumberTimeSamples: 10000
+services.DetectorPropertiesService.ReadOutWindowSize: 10000
+
+outputs.out1.fileName: "%ifb_reco_stage0_%tc_offline.root"
+outputs.out1.outputCommands: [ "keep *"]
+process_name: pdvdofflinestage0
+
+physics.producers.tpcrawdecoder.CrateList: [-1]
+physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDVDDataInterfaceWIBEthDefaults 
+
+physics.producers.beamevent.ForceRead:            false
+physics.producers.beamevent.MatchTime:            true
+
+physics.producers.cluster3d.Hit3DBuilderAlg:        @local::standard_snippethit3dbuilderDUNE
+physics.producers.cluster3d.HitFinderModuleLabel:       ["gaushit"]
+physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: true

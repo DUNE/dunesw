@@ -44,10 +44,7 @@ services:
      IgnoreLinks: true
    } 
 
-  IPhotonCalibrator: {
-     BadChannels: []
-     service_provider: "PhotonCalibratorServiceProtoDUNESP"
-  }
+  IPhotonCalibrator: @local::protodunevd_photoncalibrator_config_beam_v400_2
 }
 
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"

@@ -1,0 +1,3 @@
+#include "standard_reco_stage1_protodunevd_offline.fcl"
+
+physics.producers.pandora.ConfigFile:     "PandoraSettings_Master_ProtoDUNE_VD_Neutrino.xml"
