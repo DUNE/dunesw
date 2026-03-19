@@ -25,7 +25,8 @@ The default PDS+CRP+CRT simulation and reconstruction chain makes use of
 - protodunevd_g4_stage1.fcl
 - protodunevd_g4_stage2.fcl
 - protodunevd_detsim.fcl
-- protodunevd_reco.fcl
+- standard_reco_stage0_protodunevd_sim.fcl
+- standard_reco_stage1_protodunevd_sim.fcl
 
 Other configuration are available by default:
 
