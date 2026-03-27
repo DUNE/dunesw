@@ -162,6 +162,12 @@ dunefd_horizdrift_cvn:
     cvneva
 ]
 
+dunefd_horizdrift_dlreco:
+[
+    @sequence::dunefd_horizdrift_cvn,
+    emtrkmichelid
+]
+
 dunefd_horizdrift_nuenergy:
 [
     energyrecnumu,
@@ -199,7 +205,7 @@ dunefd_horizdrift_workflow_reco2:
 #@sequence::dunefd_horizdrift_pmtrack_trajcluster,
 #@sequence::dunefd_horizdrift_pmtrack_trajcluster_pfp,
 #@sequence::dunefd_horizdrift_pmtrack_showers,
-    @sequence::dunefd_horizdrift_cvn,
+    @sequence::dunefd_horizdrift_dlreco,
     @sequence::dunefd_horizdrift_nuenergy,
     @sequence::dunefd_horizdrift_pd_reco1,
     @sequence::dunefd_horizdrift_pd_reco2,
@@ -372,8 +378,8 @@ dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.DownscaleFn:     "mean"
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.DownscaleFullView: false
-dunefd_horizdrift_producers.emtrkmichelid.HitModuleLabel:             "linecluster"
-dunefd_horizdrift_producers.emtrkmichelid.ClusterModuleLabel:         "linecluster"
+dunefd_horizdrift_producers.emtrkmichelid.HitModuleLabel:             "hitfd"
+dunefd_horizdrift_producers.emtrkmichelid.ClusterModuleLabel:         "pandora"
 dunefd_horizdrift_producers.emtrkmichelid.Views:                      []
 
 dunefd_horizdrift_producers.emshower.ClusterModuleLabel:    "pandora"
