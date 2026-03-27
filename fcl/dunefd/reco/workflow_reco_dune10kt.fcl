@@ -378,8 +378,8 @@ dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.PatchSizeD:      48
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.DriftWindow:     6
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.DownscaleFn:     "mean"
 dunefd_horizdrift_producers.emtrkmichelid.PointIdAlg.DownscaleFullView: false
-dunefd_horizdrift_producers.emtrkmichelid.HitModuleLabel:             "linecluster"
-dunefd_horizdrift_producers.emtrkmichelid.ClusterModuleLabel:         "linecluster"
+dunefd_horizdrift_producers.emtrkmichelid.HitModuleLabel:             "hitfd"
+dunefd_horizdrift_producers.emtrkmichelid.ClusterModuleLabel:         "pandora"
 dunefd_horizdrift_producers.emtrkmichelid.Views:                      []
 
 dunefd_horizdrift_producers.emshower.ClusterModuleLabel:    "pandora"
