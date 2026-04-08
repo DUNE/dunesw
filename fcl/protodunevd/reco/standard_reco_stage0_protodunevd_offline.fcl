@@ -25,7 +25,7 @@ physics.produce: [
   wclsdatavd,
   gaushit,
   cluster3d,
-  nhitsfilter,
+  #nhitsfilter,
   reco3d,
   hitpdune
 ]
@@ -33,7 +33,7 @@ physics.produce: [
 #don't need a timestamp here -- only intermittent
 services.TFileService.fileName: "%ifb_reco_stage0_%tc_offline_hists.root"
 
-services.DetectorClocksService.DefaultTrigTime:   2500
+services.DetectorClocksService.DefaultTrigTime:   2500 
 services.DetectorClocksService.TriggerOffsetTPC:  2500
 #services.DetectorClocksService.ClockSpeedTPC: 1.953125
 services.DetectorClocksService.ClockSpeedTPC: 2
