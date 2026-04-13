@@ -10,6 +10,7 @@ services:
   @table::dunefd_1x2x6_reco_services
   # Load the service that manages root files for histograms where the CAF info will be saved.
   TFileService: { fileName: "caf.root" }
+  message: @local::dune_message_services_prod
 }
 
 source:
