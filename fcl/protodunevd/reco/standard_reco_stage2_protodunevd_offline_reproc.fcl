@@ -34,7 +34,7 @@ physics.produce: [
 ]
 
 #don't need a timestamp here -- only intermittent
-services.TFileService.fileName: "%ifb_reco_stage1_%tc_keepup_hists.root"
+services.TFileService.fileName: "%ifb_reco_stage2_%tc_keepup_hists.root"
 
 
 services.DetectorClocksService.DefaultTrigTime:   2500

@@ -1,0 +1,4 @@
+#include "standard_reco_stage2_protodunevd_offline.fcl"
+
+services.DetectorClocksService.DefaultTrigTime:   5000  # specific setting for early runs (1 GeV/c period1, 3, 5 & 8 GeV/c)
+services.DetectorClocksService.TriggerOffsetTPC:  5000 
