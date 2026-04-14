@@ -11,6 +11,7 @@ services:
   @table::dunefdvd_1x8x6_3view_30deg_reco_services
   # Load the service that manages root files for histograms where the CAF info will be saved.
   TFileService: { fileName: "caf.root" }
+  message: @local::dune_message_services_prod
 }
 
 source:
