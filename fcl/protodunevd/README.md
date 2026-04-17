@@ -13,7 +13,10 @@ The corresponding FHICL files are:
 - standard_reco_stage2_protodunevd_offline.fcl (yet to be setup)
 
 Various specific data taking configurations were set-up hence the multiple extensions:
-- CERN SPS beam: _beam.fcl and _beam_tdeonly.fcl (when DAQ disabled BDE)
+- CERN SPS beam: 
+  - _beam.fcl  (for 1 GeV/c period 2, 0.5, 1.5, 2 and 4 GeV/c beam data - trigger offset 411 us - optimized readout window)
+  - _beam2.fcl (for 1 GeV/c period 1, 3, 5 and 8 GeV/c beam data - trigger offset 5000 us - wide readout window)
+  - _beam_tdeonly.fcl (when data streamed through TDE-DAQ - not DUNE-DAQ)
 - Neutrino trigger: _neutrino.fcl
 - TDE DAQ: _tdedaq.fcl (data not streamed through the usual DUNE-DAQ pipeline)
 - HV scan: _hvXXX.fcl (XXX = high voltage in kV)
