@@ -1,7 +1,8 @@
-#include "standard_reco_stage0_protodunevd_sim.fcl"
+#include "standard_reco_stage2_protodunevd_sim.fcl"
 
 services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
+services.NuRandomService.supera.Supera: 1234
 
 #services.RandomNumberGenerator.restoreFrom: "RecoRandomSeeds_Ref_protoDUNE.dat"
 #services.RandomNumberGenerator.saveTo: "RecoRandomSeeds.dat"

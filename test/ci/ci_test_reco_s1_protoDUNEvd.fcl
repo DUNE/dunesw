@@ -2,7 +2,6 @@
 
 services.NuRandomService.policy: "preDefinedSeed"
 services.NuRandomService.baseSeed: 1234
-services.NuRandomService.supera.Supera: 1234
 
 #services.RandomNumberGenerator.restoreFrom: "RecoRandomSeeds_Ref_protoDUNE.dat"
 #services.RandomNumberGenerator.saveTo: "RecoRandomSeeds.dat"
