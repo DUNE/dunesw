@@ -1,0 +1,127 @@
+#include "services_refactored_pdune.fcl"
+#include "singles_dune.fcl"
+#include "corsika_protodune.fcl"
+#include "CORSIKAGendp.fcl"
+#include "protodunevd_radiological_model_decay0.fcl"
+#include "dune_radiological_model_decay0_vd_1x8x6.fcl"
+
+
+process_name: TextFileGen
+
+services:
+{
+  # Load the service that manages root files for histograms.
+  TFileService: { fileName: "genPNSddg_neutron_protoDUNEVD_hist.root" }
+  TimeTracker:       @local::dune_time_tracker
+  MemoryTracker:     @local::dune_memory_tracker
+  RandomNumberGenerator: {} #ART native random number generator
+  FileCatalogMetadata:  @local::art_file_catalog_mc
+                        @table::protodunevd_refactored_simulation_services
+  Geometry: @local::protodunevd_v5_pns_geo
+}
+
+#services.Geometry.GDML: "protodunevd_v5_ggd_PNS.gdml"
+#services.Geometry.Name: "protodunevd_v5_ggd_PNS"
+#services.Geometry.ROOT: "protodunevd_v5_ggd_PNS.gdml"
+
+#Start each new event with an empty event.
+source:
+{
+  module_type: EmptyEvent
+  timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
+  maxEvents:   1000000
+  firstRun:    99999        # Run number to use for this file
+  firstEvent:  1           # number of first event in the file
+}
+
+physics:
+{
+
+  producers:{
+    #ngen:       @local::standard_textfilegen
+    ngen:        @local::dunefd_singlep
+    # radiologicals in bulk LAr
+    ar39:             @local::protodunevd_39Ar_in_LAr
+    kr85:             @local::protodunevd_85Kr_in_LAr
+    ar42:             @local::protodunevd_42Ar_in_LAr
+    k42fromar42:      @local::protodunevd_42Kfrom42Ar_in_LAr
+    # det bkg
+    k40cathode:       @local::protodunevd_40K_in_Cathode
+    th232cathode:     @local::protodunevd_232Th_chain_in_Cathode
+    u238cathode:      @local::protodunevd_238U_chain_in_Cathode
+    k40anode:         @local::protodunevd_40K_in_Anode
+    th232anode:       @local::protodunevd_232Th_chain_in_Anode
+    u238anode:        @local::protodunevd_238U_chain_in_Anode
+    # cryostat foam gamma
+    cryostatfoamgamma:       @local::dunevd10kt_1x8x6_gammas_from_foam_atLAr
+    # cosmic bkg
+    cosmicgen:  @local::protodune_corsika_cmc
+    rns:        { module_type: "RandomNumberSaver" }
+  }
+
+  simulate: [ ngen,
+  ar39, ar42, kr85, k42fromar42,
+  k40cathode, th232cathode, u238cathode,
+  k40anode,   th232anode,   u238anode,
+  cryostatfoamgamma,
+  cosmicgen ]
+
+  stream1:  [ out1 ]
+  trigger_paths: [simulate]
+  end_paths:     [stream1]
+}
+
+outputs:
+{
+ out1:
+ {
+   module_type: RootOutput
+   fileName:    "ProtoDUNE_VD_mc_gen_pns_allbkg.root" #default file name, can override from command line with -o or --output
+   dataTier:    "generated"
+   compressionLevel: 1
+ }
+}
+
+#Set generator parameters
+#physics.producers.ngen.InputFileName: "pdunesp_pns_1500n.dat"
+
+# For ProtoDUNE-VD DDG run at 350V/cm, 400us pulse used. Estimate 1E6 neutrons/sec,
+# resulting in ~180 neutrons per event. Only simulate 90 downward-going ones:
+physics.producers.ngen.PadOutVectors:  true
+physics.producers.ngen.PDG:   [
+  2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112,
+  2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112,
+  2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112,
+  2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112,
+  2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112,
+  2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112,
+  2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112,
+  2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112,
+  2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112, 2112
+]
+physics.producers.ngen.P0:      [ 0.0682522  ] # 2.45 MeV
+physics.producers.ngen.SigmaP:  [ 0.0       ]
+physics.producers.ngen.X0:      [ -20.0 ]
+physics.producers.ngen.Y0:      [ -553.0 ]
+physics.producers.ngen.Z0:      [ 189.0  ]
+physics.producers.ngen.T0:      [ 0.    ]
+physics.producers.ngen.SigmaX: [ 0.0 ] # x = (0, 256)
+physics.producers.ngen.SigmaY: [ 0.0 ] # y = (-116.5, 116.5)
+physics.producers.ngen.SigmaZ: [ 0.0 ] # z = (0, 1037)
+physics.producers.ngen.SigmaT: [ 0 ] # In time
+physics.producers.ngen.Theta0XZ: [ 0.0   ]
+physics.producers.ngen.Theta0YZ: [ 90. ]
+physics.producers.ngen.SigmaThetaXZ: [ 180. ] # Quasi-isotropic
+physics.producers.ngen.SigmaThetaYZ: [ 90. ]
+physics.producers.ngen.PDist: 0
+physics.producers.ngen.PosDist: 0
+physics.producers.ngen.AngleDist: 0
+
+physics.producers.cryostatfoamgamma.T0:                    [ -2142500.,-2142500.,-2142500.,-2142500.,-2142500 ] # starting time in ns
+physics.producers.cryostatfoamgamma.T1:                    [  2142500., 2142500., 2142500., 2142500., 2142500 ] # ending time in ns
+physics.producers.cryostatfoamgamma.X0:                    [ -420. , -420. , -420., -420. ,  349.5 ] # in cm in world coordinates, low x-values of planes
+physics.producers.cryostatfoamgamma.X1:                    [  350. ,  350. ,  350.,  350. ,  350.5 ] # in cm in world coordinates, high x-values of planes
+physics.producers.cryostatfoamgamma.Y0:                    [ -417.61, -417.61, -418.61,  417.61, -417.61  ] # in cm in world coordinates, low y-values of planes
+physics.producers.cryostatfoamgamma.Y1:                    [  417.61,  417.61, -417.61,  418.61,  417.61  ] # in cm in world coordinates, high y-values of planes
+physics.producers.cryostatfoamgamma.Z0:                    [ -156.85, 455.15, -156.35, -156.35, -156.35  ] # in cm in world coordinates, low z-values of planes
+physics.producers.cryostatfoamgamma.Z1:                    [ -155.85, 456.15,  455.65,  455.65,  455.65  ] # in cm in world coordinates, high z-values of planes
