@@ -1,0 +1,7 @@
+#include "protodunevd_g4_stage1.fcl"
+
+services.DetectorClocksService.DefaultBeamTime:  450
+services.DetectorClocksService.DefaultTrigTime:  450
+services.DetectorClocksService.G4RefTime:        450
+services.DetectorClocksService.TriggerOffsetTPC: 450
+
