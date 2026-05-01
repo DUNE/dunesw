@@ -28,7 +28,7 @@ services.RawDrawingOptions.RawDataLabels: ["tpcrawdecoder:daq"]
 services.RawDrawingOptions.TotalTicks: 9000
 
 services.SimulationDrawingOptions.ShowMCTruthTrajectories: true
-services.SimulationDrawingOptions.SimChannelLabel: "elecDrift"
+services.SimulationDrawingOptions.SimChannelLabel: "tpcrawdecoder:simpleSC"
 
 
 includedServices: @erase
