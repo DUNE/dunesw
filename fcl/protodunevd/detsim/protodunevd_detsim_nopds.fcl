@@ -1,6 +1,6 @@
 #include "protodunevd_detsim.fcl"
 
-physics:.simulate: [ rns, 
+physics.simulate: [ rns, 
                      tpcrawdecoder,
                      crt
                    ] 

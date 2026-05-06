@@ -1,7 +1,3 @@
-#include "HDF5RawInput3.fcl"
-#include "PDVDTPCReader.fcl"
-#include "PDVDTriggerReader4.fcl"
-
 #include "wirecell_dune.fcl"
 #include "hitfindermodules_dune.fcl"
 #include "SpacePointSolver_dune.fcl"
@@ -22,6 +18,8 @@
 #include "CRT.fcl"
 #include "T0RecoAnodePiercers.fcl"
 #include "numberofhitsfilter.fcl"
+#include "dataprep_dune.fcl"
+#include "protodune_tools_dune.fcl"
 
 process_name: pdvdkeepupprocessing
 
@@ -34,21 +32,55 @@ services:{
                          @table::protodunevd_reco_services
    message:  @local::dune_message_services_prod
         
-   HDF5RawFile3Service:  {}
    IFDH: {}
    DetectorPropertiesService:  @local::protodunevd_detproperties
 
+   RawDigitPrepService: {
+      CallgrindToolNames: []
+      DoWires: true
+      LogLevel: 3
+      ToolNames: [
+         "digitReader" ,
+         "vdcb_adcChannelRawRmsFiller",
+         "adcSampleFiller"
+      ]
+      service_provider: "ToolBasedRawDigitPrepService"
+   }
+   AdcWireBuildingService:     @local::adcwire_std
+
    TPCChannelMapService:
    {
-     FileName: "PD2VDTPCChannelMap_v2.txt"
+     FileName: "PD2VDTopTPCChannelMap_v2.txt"
    }
    DAPHNEChannelMapService: {
      FileName:  @local::protodunevd_wire_readout.PDMapTool.MappingFile
      IgnoreLinks: true
    }
+   IPhotonCalibrator: {
+      BadChannels: []
+      service_provider: "PhotonCalibratorServiceProtoDUNESP"
+   }
+   OnlineChannelMapService: {
+     service_provider: "VDColdboxTDEChannelMapService"
+     MapName  : "PD2VDTopTDEChannelMap_v2.txt" 
+    LogLevel :0
+   }
+
 }
 
-source: @local::hdf5rawinput3
+#source: @local::vdctdecoder_source
+source:{
+  module_type: VDColdboxTDERawInput
+  maxEvents: -1
+  fileNames: [ "np02rawdata.dat" ]
+  LogLevel: 10
+  SamplesPerChannel:    10000
+  OutputLabelRawDigits: "tpcrawdecoder:daq"
+  OutputLabelRDTime:    "timingrawdecoder:daq"
+  OutputLabelRDStatus:  "daq"
+  InvertBaseline: []
+  SelectCRPs: [0,1]
+}
 
 outputs: {
   out1: {

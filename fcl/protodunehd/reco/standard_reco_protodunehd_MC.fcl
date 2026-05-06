@@ -226,14 +226,13 @@ physics.producers.pandora2Track.UseAllParticles:             true
 physics.producers.pandora2Shower.PFParticleLabel:            "pandora"
 physics.producers.pandora2Shower.UseAllParticles:            true
 
-#physics.producers.pandora2Showercalo.ShowerTag: "pandora2Shower"
-#physics.producers.pandora2Showercalonosce.ShowerTag: "pandora2Shower"
-#physics.producers.pandora2calo.TrackModuleLabel: "pandora2Track"
-#physics.producers.pandora2calonosce.TrackModuleLabel: "pandora2Track"
+physics.producers.pandora2Showercalo.ShowerTag: "pandora2Shower"
+physics.producers.pandora2Showercalonosce.ShowerTag: "pandora2Shower"
+physics.producers.pandora2calo.TrackModuleLabel: "pandora2Track"
+physics.producers.pandora2calonosce.TrackModuleLabel: "pandora2Track"
 #
-#physics.producers.pandora2GnocchiCalo.TrackModuleLabel:                "pandora2Track"
-#physics.producers.pandora2GnocchiCalo.AssocHitModuleLabel:             "pandora2Track"
-#physics.producers.pandora2GnocchiCalonosce.TrackModuleLabel:                "pandora2Track"
-#physics.producers.pandora2GnocchiCalonosce.AssocHitModuleLabel:             "pandora2Track"
+physics.producers.pandora2GnocchiCalo.TrackModuleLabel:                "pandora2Track"
+physics.producers.pandora2GnocchiCalo.AssocHitModuleLabel:             "pandora2Track"
+physics.producers.pandora2GnocchiCalonosce.TrackModuleLabel:                "pandora2Track"
+physics.producers.pandora2GnocchiCalonosce.AssocHitModuleLabel:             "pandora2Track"
 physics.producers.wclsdatahd.wcls_main.params.reality: sim
-
