@@ -1,0 +1,4 @@
+#include "standard_reco_stage1_protodunevd_offline.fcl"
+
+services.DetectorClocksService.DefaultTrigTime:   500 
+services.DetectorClocksService.TriggerOffsetTPC:  500

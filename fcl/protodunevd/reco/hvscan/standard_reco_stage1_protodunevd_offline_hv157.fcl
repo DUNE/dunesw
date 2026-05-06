@@ -1,0 +1,4 @@
+#include "standard_reco_stage1_protodunevd_offline.fcl"
+
+# Set the E-field corresponding to -157 kV
+services.DetectorPropertiesService.Efield: [0.453,3.125, 5e-1, 3.125]

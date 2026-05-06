@@ -63,10 +63,7 @@ outputs:
     #splitLevel: 0 #reduces number of buffers
     #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
     outputCommands : [
-      "keep *", "drop sim::SimEnergyDeposit*_*_*_*"
+      "keep *", "drop sim::SimEnergyDeposits*_*_*_*"
     ]
   }
 }
-
-physics.producers.sipmSim.InputTag: "PDFastSimAr"
-services.OpDetResponseInterface.QuantumEfficiency: 0.03
