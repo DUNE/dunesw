@@ -265,7 +265,7 @@ table_fragment_end
 
 
 product          version
-cetmodules	 v3_24_01	-	only_for_build
+cetmodules	 v3_27_04	-	only_for_build
 duneexamples     v10_20_06d01
 dunedataprep     v10_20_06d01
 duneana          v10_20_06d01
