@@ -31,7 +31,7 @@ physics.analyzers: {
 }
 
 ##Just doing gnocchi now
-physics.ana: [michelremoving, michelremovinggnocchi, calibanagnocchi]
+physics.ana: [michelremovinggnocchi, calibanagnocchi]
 physics.end_paths: [output, ana]
 
 #physics.producers.pandoraGnocchiCalonosce.PFPModuleLabel: "pandora" 
@@ -41,24 +41,24 @@ physics.end_paths: [output, ana]
 #physics.producers.pandoraGnocchiCalo.T0ModuleLabel: "pandora" 
 
 
-physics.analyzers.michelremoving.SelectEvents: [produce]
+#physics.analyzers.michelremoving.SelectEvents: [produce]
 physics.analyzers.michelremovinggnocchi.SelectEvents: [produce]
-physics.analyzers.calibana.SelectEvents: [produce]
+#physics.analyzers.calibana.SelectEvents: [produce]
 physics.analyzers.calibanagnocchi.SelectEvents: [produce]
 physics.analyzers.calibanagnocchi.CALOproducer: "pandoraGnocchiCalonosce"
-physics.analyzers.calibana.CALOproducer: "pandoracalonosce"
+#physics.analyzers.calibana.CALOproducer: "pandoracalonosce"
 
 physics.analyzers.calibanagnocchi.T0producers: ["pandora"]
-physics.analyzers.calibana.T0producers: ["pandora"]
+#physics.analyzers.calibana.T0producers: ["pandora"]
 physics.analyzers.calibanagnocchi.RequireT0: true
-physics.analyzers.calibana.RequireT0: true
+#physics.analyzers.calibana.RequireT0: true
 physics.analyzers.calibanagnocchi.SelectionTools[1].RequireT0: true #: @local::fixed_sel_tools
 physics.analyzers.calibanagnocchi.SelectionTools[2].RequireT0: true
-physics.analyzers.calibana.SelectionTools[1].RequireT0: true #: @local::fixed_sel_tools
-physics.analyzers.calibana.SelectionTools[2].RequireT0: true
-physics.analyzers.calibana.RawDigitproducers: [
-  "tpcrawdecoder:daq"
-]
+#physics.analyzers.calibana.SelectionTools[1].RequireT0: true #: @local::fixed_sel_tools
+#physics.analyzers.calibana.SelectionTools[2].RequireT0: true
+#physics.analyzers.calibana.RawDigitproducers: [
+#  "tpcrawdecoder:daq"
+#]
 
 physics.analyzers.calibanagnocchi.RawDigitproducers: [
   "tpcrawdecoder:daq"

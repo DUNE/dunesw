@@ -17,11 +17,11 @@ physics.produce: [
   pandorapid, pandoraShowercalo, pandoraShowercalonosce,
   pandoraGnocchiCalo,
   pandoraGnocchiCalonosce,
-  emtrkmichelid
-  #opdec,
-  #ophitspe,
-  #opflash,
-  #opslicer
+  emtrkmichelid,
+  opdec,
+  ophitspe,
+  opflash,
+  opslicer
   #crtreco, crttag
 ]
 
@@ -47,3 +47,4 @@ source:
 outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wire*_*_wiener_*"]
 process_name: pdhdkeepupstage2
 physics.filters.nhitsfilter.Verbose: true
+services.DetectorPropertiesService: @local::protodunehd_detproperties_resampled
