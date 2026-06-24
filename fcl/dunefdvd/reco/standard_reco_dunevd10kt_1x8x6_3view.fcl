@@ -5,4 +5,4 @@ services: {
     @table::dunefdvd_1x8x6_3view_reco_services
 }
 
-physics.reco: [ @sequence::dunefd_vertdrift_reco_all_systems ]
+physics.reco: [ @sequence::dunefd_vertdrift_tpc_reco1 ]
