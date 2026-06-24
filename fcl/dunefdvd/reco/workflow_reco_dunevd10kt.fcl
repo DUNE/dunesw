@@ -21,6 +21,8 @@
 #include "angularreco.fcl"
 #include "imagepatternalgs.fcl"
 #include "SolarEvent.fcl"
+#include "cluster3Dmodule.fcl"
+#include "cluster3dalgorithms_dune.fcl"
 
 BEGIN_PROLOG
 
@@ -30,6 +32,8 @@ dunefd_vertdrift_producers:
    wclsdatanfsp:       @local::dune10kt_dunefd_vertdrift_data_nfsp
    # Actual hit finder
    gaushit:            @local::dunevdfd_gaushitfinder
+   # space points
+   cluster3d:          @local::standard_cluster3d
    # Pattern recognition
    pandora:            @local::dunefdvd_pandora_neutrino
    # Characterisation
@@ -94,7 +98,8 @@ dunefd_vertdrift_pds:
 
 dunefd_vertdrift_tpc_reco1:
 [
-    gaushit
+    gaushit,
+    cluster3d
 ]
 
 dunefd_vertdrift_reco1:
@@ -239,6 +244,12 @@ dunefd_vertdrift_atmos_reco2:
     @sequence::dunefd_vertdrift_tpc_reco2,
     @sequence::dunefd_vertdrift_nuanglereco
 ]
+
+
+dunefd_vertdrift_producers.cluster3d.HitFinderModuleLabel:               ["gaushit"]
+dunefd_vertdrift_producers.cluster3d.Hit3DBuilderAlg:                    @local::standard_snippethit3dbuilderDUNE   
+dunefd_vertdrift_producers.cluster3d.Hit3DBuilderAlg.MaxHitChiSquare:    10.
+dunefd_vertdrift_producers.cluster3d.MakeSpacePointsOnly:                true
 
 dunefd_vertdrift_producers.ophitArOnly.InputModule:      opdigiArOnly
 dunefd_vertdrift_producers.ophitXeOnly.InputModule:      opdigiXeOnly
