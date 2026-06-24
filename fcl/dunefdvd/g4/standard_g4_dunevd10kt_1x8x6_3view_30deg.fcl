@@ -7,5 +7,11 @@ services: {
 
 # New modifications since the hybrid model implementation in the VD-DUNE 1x8x14 geometry. 
 physics.producers.PDFastSimExternal: @erase
-physics.simulate: [ rns, largeant , IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimXe ]
+physics.simulate: [ rns, largeant , IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimXe, sedlite, simplemerge ]
 
+#info reducer
+physics.producers.sedlite.SimEnergyDepositLabel: "IonAndScint"
+physics.producers.sedlite.VoxelSizeX: 0.765
+physics.producers.sedlite.VoxelSizeY: 0.765
+physics.producers.sedlite.VoxelSizeZ: 0.765
+physics.producers.sedlite.useOrigTrackID: true #needed since origTrackID not filled for sedlite in SBND
