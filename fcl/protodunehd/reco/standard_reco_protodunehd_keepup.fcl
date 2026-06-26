@@ -44,7 +44,8 @@ services:
   ChannelStatusService: @local::dunefd_channel_status
   WireReadout:          @local::dune_wire_readout
   GeometryConfigurationWriter:  {}
-  Geometry:                     @local::protodunehdv6_geo
+  Geometry:                     @local::protodunehd_geo
+  AuxDetGeometry:               @local::protodunehd_auxdet_geo
   DetectorClocksService:        @local::protodunehd_detectorclocks
   DetectorPropertiesService:    @local::protodunehd_detproperties
   LArPropertiesService:         @local::dunefd_properties
@@ -73,9 +74,6 @@ services:
      FileName: "PD2HDChannelMap_WIBEth_visiblewires_v1.txt"
    }
 }
-
-services.AuxDetGeometry.GDML: "protodunehd_v6_refactored.gdml"
-services.AuxDetGeometry.Name: "protodunehdv6"
 
 physics:
 {

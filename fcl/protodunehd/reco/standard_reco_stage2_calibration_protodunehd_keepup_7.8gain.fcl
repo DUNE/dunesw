@@ -1,5 +1,2 @@
 #include "standard_reco_stage2_calibration_protodunehd_keepup.fcl"
 physics.producers.wclsdatahd.wcls_main.structs.elecGain: 7.8
-physics.filters.fembfilter.LogLevel: 1
-
-
