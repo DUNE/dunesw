@@ -3,6 +3,8 @@
 #include "elecdrift_dune.fcl"
 #include "PDFastSim_dune.fcl"
 #include "services_dune.fcl"
+#include "g4inforeducer.fcl"
+#include "simplemerge.fcl"
 
 process_name: G4
 
@@ -17,6 +19,10 @@ services:
 
   @table::dunefdvd_simulation_services
 }
+
+#services.LArG4Parameters.UseModBoxRecomb:            true
+services.ParticleListAction.StoreDroppedMCParticles: true
+services.ParticleListAction.KeepDroppedParticlesInVolumes: ["volTPCActive" ]
 
 #source is now a root file
 source:
@@ -41,12 +47,14 @@ physics:
      PDFastSimXe: @local::dunevd_pdfastsim_par_xe
      PDFastSimArExternal: @local::dunevd_pdfastsim_pvs_ar_external
      PDFastSimXeExternal: @local::dunevd_pdfastsim_pvs_xe_external
+     sedlite:     @local::dune_largeant_info_reducer    # needs to run right after largeant
+     simplemerge: @local::simplemerge                   # simplemerge for ML
      rns:         { module_type: "RandomNumberSaver" }
   }
 
   #define the producer and filter modules for this path, order matters, 
   #filters reject all following items.  see lines starting physics.producers below
-  simulate: [ rns, largeant , IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimXe, PDFastSimArExternal, PDFastSimXeExternal ]
+  simulate: [ rns, largeant , IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimXe, PDFastSimArExternal, PDFastSimXeExternal, sedlite, simplemerge ]
  
   #define the output stream, there could be more than one if using filters 
   stream1:  [ out1 ]
@@ -59,6 +67,11 @@ physics:
   #ie analyzers and output streams.  these all run simultaneously
   end_paths:     [stream1]  
 }
+
+#info reducer
+physics.producers.sedlite.SimEnergyDepositLabel: "largeant:LArG4DetectorServicevolTPCActive"
+#physics.producers.sedlite.useOrigTrackID: true #needed since origTrackID not filled for sedlite in SBND
+physics.producers.simplemerge.InputSourcesLabels: ["largeant", "largeant:droppedMCParticles" ]
 
 #block to define where the output goes.  if you defined a filter in the physics
 #block and put it in the trigger_paths then you need to put a SelectEvents: {SelectEvents: [XXX]}
