@@ -102,7 +102,7 @@ physics:
     opslicer:           @local::protodune_opslicer
 
     # Signal Processing (data prep)
-    wclsdatahd:         @local::protodunehd_nfsp
+    wclsdatahd:         @local::protodunehd_nfsp_dnnroi
     # Hit finding
     gaushit:            @local::protodunespmc_gaushitfinder
     # space point solver
