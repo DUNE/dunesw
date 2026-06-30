@@ -1,0 +1,12 @@
+#include "standard_reco_stage2_protodunevd_sim.fcl"
+
+physics.produce: [
+   pandora,
+   pandoraWriter,
+   pandoraTrack,
+   pandoraShower,
+   pandoraGnocalo,
+   pandorapid,
+   emtrkmichelid
+]
+

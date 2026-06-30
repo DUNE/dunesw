@@ -1,0 +1,11 @@
+#include "standard_reco_stage1_protodunevd_sim_nopds.fcl"
+
+physics.produce: [
+  wclsdatavd,
+  gaushit,
+  cluster3d,
+  nhitsfilter,
+  reco3d,
+  hitpdune
+]
+
