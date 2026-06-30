@@ -4,7 +4,6 @@
 #include "PDHDTriggerReader3.fcl"
 #include "PDHDTimingRawDecoder.fcl"
 #include "PDHDCTBRawDecoder.fcl"
-#include "DAPHNEReaderPDHD.fcl"
 #
 #include "opticaldetectormodules_dune.fcl"
 #include "Deconvolution.fcl"
@@ -45,7 +44,8 @@ services:
   ChannelStatusService: @local::dunefd_channel_status
   WireReadout:          @local::dune_wire_readout
   GeometryConfigurationWriter:  {}
-  Geometry:                     @local::protodunehdv6_geo
+  Geometry:                     @local::protodunehd_geo
+  AuxDetGeometry:               @local::protodunehd_auxdet_geo
   DetectorClocksService:        @local::protodunehd_detectorclocks
   DetectorPropertiesService:    @local::protodunehd_detproperties
   LArPropertiesService:         @local::dunefd_properties
@@ -75,9 +75,6 @@ services:
    }
 }
 
-services.AuxDetGeometry.GDML: "protodunehd_v6_refactored.gdml"
-services.AuxDetGeometry.Name: "protodunehdv6"
-
 physics:
 {
 
@@ -93,7 +90,7 @@ physics:
     triggerrawdecoder: @local::PDHDTriggerReader3Defaults
     ctbrawdecoder: @local::PDHDCTBRawDecoderDefaults
     timingrawdecoder: @local::PDHDTimingRawDecoder
-    pdhddaphne: @local::DAPHNEReaderPDHD
+    pdhddaphne: @local::protodunehd_daphne
 
     # Beam Instrumentation Info
     beamevent:          @local::pdhd_beamevent
@@ -105,7 +102,7 @@ physics:
     opslicer:           @local::protodune_opslicer
 
     # Signal Processing (data prep)
-    wclsdatahd:         @local::protodunehd_nfsp
+    wclsdatahd:         @local::protodunehd_nfsp_dnnroi
     # Hit finding
     gaushit:            @local::protodunespmc_gaushitfinder
     # space point solver
@@ -184,7 +181,6 @@ source: @local::hdf5rawinput3
 
 ##Check this
 physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEth3Defaults
-physics.producers.pdhddaphne.DAPHNEInterface: { tool_type: "DAPHNEInterface2" }
 physics.producers.opdec.InputModule: "pdhddaphne"
 physics.producers.opdec.InstanceName: "daq"
 physics.producers.ophitspe.InputModuledigi: "pdhddaphne:daq"

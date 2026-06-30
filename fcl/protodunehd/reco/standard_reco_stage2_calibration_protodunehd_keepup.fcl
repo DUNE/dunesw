@@ -5,7 +5,7 @@
 #make sure only one WCTK is here -- not sure this part is necessary
 #or if only one can be in the produce list
 #physics.filters.fembfilter.LogLevel: 1
-physics.producers.wclsdatahd: @local::protodunehd_sp  #Signal processing
+physics.producers.wclsdatahd: @local::protodunehd_sp_dnn_l1sp  #Signal processing
 physics.produce: [
   fembfilter,
   wclsdatahd,
@@ -17,11 +17,11 @@ physics.produce: [
   pandorapid, pandoraShowercalo, pandoraShowercalonosce,
   pandoraGnocchiCalo,
   pandoraGnocchiCalonosce,
-  emtrkmichelid
-  #opdec,
-  #ophitspe,
-  #opflash,
-  #opslicer
+  emtrkmichelid,
+  opdec,
+  ophitspe,
+  opflash,
+  opslicer
   #crtreco, crttag
 ]
 
@@ -47,3 +47,6 @@ source:
 outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wire*_*_wiener_*"]
 process_name: pdhdkeepupstage2
 physics.filters.nhitsfilter.Verbose: true
+services.DetectorPropertiesService: @local::protodunehd_detproperties_resampled
+physics.producers.wclsdatahd.wcls_main.loglevels: @erase 
+physics.producers.wclsdatahd.wcls_main.logsinks: @erase 

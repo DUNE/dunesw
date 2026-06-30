@@ -57,8 +57,8 @@ services:
 }
 services.SpaceCharge: @local::pdhd_spacecharge
 
-services.AuxDetGeometry.GDML: "protodunehd_v6_refactored.gdml"
-services.AuxDetGeometry.Name: "protodunehdv6"
+#services.AuxDetGeometry.GDML: "protodunehd_v6_refactored.gdml"
+#services.AuxDetGeometry.Name: "protodunehdv6"
 
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
@@ -84,7 +84,7 @@ physics: {
   }
 
   producers: {
-    wclsdatahd:         @local::protodunehd_nfsp
+    wclsdatahd:         @local::protodunehd_nfsp_dnnroi_mc
     # Hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
     # space point solver
