@@ -33,7 +33,7 @@ services.DetectorPropertiesService.ReadOutWindowSize: 10000
 
 outputs.out1.fileName: "%ifb_reco_stage2_%tc_sim.root"
 outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigits_*_*_*", "drop *_wclsdatavd_wiener_*", "drop *_wclsdatavd_gaus_*"]
-process_name: pdvdsimstage1
+process_name: pdvdsimstage2
 
 physics.producers.pandorapid.CalorimetryModuleLabel: "pandoraGnocalo"
 physics.producers.pandorapid.TrackModuleLabel:       "pandoraTrack"
