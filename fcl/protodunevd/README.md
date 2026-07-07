@@ -8,9 +8,9 @@ The default offline reconstruction scheme is divided in three stages:
 - stage2: PDS + calibration
 
 The corresponding FHICL files are:
-- standard_reco_stage0_protodunevd_offline.fcl
 - standard_reco_stage1_protodunevd_offline.fcl
-- standard_reco_stage2_protodunevd_offline.fcl (yet to be setup)
+- standard_reco_stage2_protodunevd_offline.fcl
+- standard_reco_stage3_protodunevd_offline.fcl (yet to be setup)
 
 Various specific data taking configurations were set-up hence the multiple extensions:
 - CERN SPS beam: 
@@ -28,16 +28,18 @@ The default PDS+CRP+CRT simulation and reconstruction chain makes use of
 - protodunevd_g4_stage1.fcl
 - protodunevd_g4_stage2.fcl
 - protodunevd_detsim.fcl
-- standard_reco_stage0_protodunevd_sim.fcl
 - standard_reco_stage1_protodunevd_sim.fcl
+- standard_reco_stage2_protodunevd_sim.fcl
 
 Other configuration are available by default:
 
-| No PDS                            | PDS with Xe dopping               | SCE                                | 3 ms electron lifetime                          |
-|---                                |---                                |---                                 |---                                              |
-| gen_protodunevd_muon_1GeV.fcl     | gen_protodunevd_muon_1GeV.fcl     | gen_protodunevd_muon_1GeV.fcl      | gen_protodunevd_muon_1GeV.fcl                   |
-| protodunevd_g4_stage1.fcl         | protodunevd_g4_stage1.fcl         | protodunevd_g4_stage1.fcl          | protodunevd_g4_stage1.fcl                       |
-| protodunevd_g4_stage2_nopds.fcl   | protodunevd_g4_stage2.fcl         | protodunevd_g4_stage2_sce_E500.fcl | protodunevd_g4_stage2.fcl                       |
-|                                   | protodunevd_g4_stage3_Xe10ppm.fcl |                                    |                                                 |
-| protodunevd_detsim_nopds.fcl      | protodunevd_detsim_Xe10ppm.fcl    | protodunevd_detsim.fcl             | protodunevd_detsim_nodiffusion_03mslifetime.fcl |
-| protodunevd_reco_nopds.fcl        | protodunevd_reco.fcl              | protodunevd_MC_reco_sce_E500.fcl   | protodunevd_reco.fcl                            |
+| No PDS                                         | PDS with Xe dopping                      | SCE                                               | 3 ms electron lifetime                          |
+|---                                             |---                                       |---                                                |---                                              |
+| gen_protodunevd_muon_1GeV.fcl                  | gen_protodunevd_muon_1GeV.fcl            | gen_protodunevd_muon_1GeV.fcl                     | gen_protodunevd_muon_1GeV.fcl                   |
+| protodunevd_g4_stage1.fcl                      | protodunevd_g4_stage1.fcl                | protodunevd_g4_stage1.fcl                         | protodunevd_g4_stage1.fcl                       |
+| protodunevd_g4_stage2_nopds.fcl                | protodunevd_g4_stage2.fcl                | protodunevd_g4_stage2_sce_E500.fcl                | protodunevd_g4_stage2.fcl                       |
+|                                                | protodunevd_g4_stage3_Xe10ppm.fcl        |                                                   |                                                 |
+| protodunevd_detsim_nopds.fcl                   | protodunevd_detsim_Xe10ppm.fcl           | protodunevd_detsim.fcl                            | protodunevd_detsim_nodiffusion_03mslifetime.fcl |
+| standard_reco_stage1_protodunevd_sim_nopds.fcl | standard_reco_stage1_protodunevd_sim.fcl | standard_reco_stage2_protodunevd_sim_sce_E500.fcl | standard_reco_stage1_protodunevd_sim.fcl        |
+| standard_reco_stage2_protodunevd_sim_nopds.fcl | standard_reco_stage2_protodunevd_sim.fcl | standard_reco_stage2_protodunevd_sim_sce_E500.fcl | standard_reco_stage2_protodunevd_sim.fcl        |
+
