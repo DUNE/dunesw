@@ -19,6 +19,7 @@
 #include "T0RecoAnodePiercers.fcl"
 #
 #include "numberofhitsfilter.fcl"
+#include "PDHDChannelSaturationFilter.fcl"
 #include "SpacePointSolver_dune.fcl"
 #include "featurelabelingmodules.fcl"
 #include "calorimetry_pdune.fcl"
@@ -81,6 +82,7 @@ physics:
   filters: {
     nhitsfilter: @local::pdhd_nhitsfilter
     fembfilter: @local::pdhdfembfilter
+    saturationfilter: @local::pdhdchannelsaturationfilter
   }
 
   producers:
@@ -143,6 +145,7 @@ physics:
     #pdhddaphne,
     fembfilter,
     wclsdatahd,
+    saturationfilter,
     gaushit,
     nhitsfilter,
     reco3d,
