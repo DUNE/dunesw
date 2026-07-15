@@ -4,7 +4,7 @@ process_name: EVD
 services.AuxDetGeometry: @local::dunedphase10kt_workspace4x2_auxdet_geo
 services.Geometry: @local::dunedphase10kt_workspace4x2_geo
 services.RawDrawingOptions.TotalTicks: 20000
-services.DetectorPropertiesService.Efield:	[0.5, 4.0, 0.0]
+services.DetectorPropertiesService.PerPlaneEfield:	[0.5, 4.0, 0.0]
 services.DetectorClocksService.ClockSpeedTPC: 2.5
 services.DetectorPropertiesService.NumberTimeSamples: 20000
 services.DetectorPropertiesService.ReadOutWindowSize: 20000

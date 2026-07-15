@@ -62,7 +62,7 @@ crp4_services: {
      FileName: "vdcbce_chanmap_v4.txt"
    }
 }
-crp4_services.DetectorPropertiesService.Efield: @local::data.crp4cb_Efield
+crp4_services.DetectorPropertiesService.PerPlaneEfield: @local::data.crp4cb_Efield
 crp4_services.RawDigitPrepService.ToolNames: @local::data.dataprep_tools #data.vdcb_dataprep_seqs.nocal
 
 #
@@ -120,7 +120,7 @@ crp6_services: {
      FileName: "vdcbce_chanmap_v4.txt"
    }
 }
-crp6_services.DetectorPropertiesService.Efield: @local::data.crp4cb_Efield
+crp6_services.DetectorPropertiesService.PerPlaneEfield: @local::data.crp4cb_Efield
 
 crp6_prod_config: {
   tpcrawdecoder: @local::PDHDTPCReaderDefaults

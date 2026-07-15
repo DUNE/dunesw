@@ -114,7 +114,7 @@ services.DetectorClocksService: @local::protodune_detectorclocks
 services.DetectorClocksService.ClockSpeedTPC: 1.953125 # 512ns per sample
 services.DetectorClocksService.ClockSpeedOptical: 62.5 # 016ns per sample
 
-services.DetectorPropertiesService.Efield: [0.438, 1, 1]
+services.DetectorPropertiesService.PerPlaneEfield: [0.438, 1, 1]
 services.DetectorPropertiesService.NumberTimeSamples: 8256
 services.DetectorPropertiesService.ReadOutWindowSize: 8256
 

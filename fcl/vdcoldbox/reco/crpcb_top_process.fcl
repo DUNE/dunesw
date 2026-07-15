@@ -44,7 +44,7 @@ crp2_july22_services: {
   SpaceCharge: @local::dunefd_spacecharge
   ChannelStatusService: @local::data.ChannelStatusService_vdcrp2
 }
-crp2_july22_services.DetectorPropertiesService.Efield: @local::data.crp3cb_oct22_Efield
+crp2_july22_services.DetectorPropertiesService.PerPlaneEfield: @local::data.crp3cb_oct22_Efield
 crp2_july22_services.RawDigitPrepService.ToolNames: @local::data.dataprep_tools #data.vdcb_dataprep_seqs.nocal
 
 crp3_oct22_services: {
@@ -53,7 +53,7 @@ crp3_oct22_services: {
   SpaceCharge: @local::dunefd_spacecharge
   ChannelStatusService: @local::data.ChannelStatusService_vdcrp3
 }
-crp3_oct22_services.DetectorPropertiesService.Efield: @local::data.crp3cb_oct22_Efield
+crp3_oct22_services.DetectorPropertiesService.PerPlaneEfield: @local::data.crp3cb_oct22_Efield
 crp3_oct22_services.RawDigitPrepService.ToolNames: @local::data.dataprep_tools #data.vdcb_dataprep_seqs.nocal
 
 

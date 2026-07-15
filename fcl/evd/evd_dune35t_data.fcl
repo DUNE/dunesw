@@ -17,7 +17,7 @@ services.RawDrawingOptions.TotalTicks:               15000
 #services.RawDrawingOptions.TotalTicks:               5200
 #services.RecoDrawingOptions.WireModuleLabels: ["caldata:TPC"]
 services.DetPedestalService.DetPedestalDUNE.UseDB: true
-services.DetectorPropertiesService.Efield: [0.25, 0.782, 1.734]
+services.DetectorPropertiesService.PerPlaneEfield: [0.25, 0.782, 1.734]
 #services.IDetPedestalService.DetPedestalDUNE.CSVFile: "/dune/app/users/mstancar/evdisp/offline_databaseRun_9754.csv"
 #services.IDetPedestalService.DetPedestalDUNE.CSVFile: "offline_databaseRun_10873.csv"
 #services.IDetPedestalService.DetPedestalDUNE.UseDefaults: true

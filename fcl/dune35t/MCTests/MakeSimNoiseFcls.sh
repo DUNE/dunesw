@@ -94,7 +94,7 @@ function MakeTheFcls(){
 #include "standard_g4_dune35t_countermu.fcl"
 
 services.DetectorPropertiesService.Electronlifetime: ${ThisLife}
-services.DetectorPropertiesService.Efield: ${ThisField}
+services.DetectorPropertiesService.PerPlaneEfield: ${ThisField}
 services.LArG4Parameters.LongitudinalDiffusion: ${ThisDiff}
 
 EOF
@@ -105,7 +105,7 @@ EOF
 #include "standard_detsim_dune35t_milliblock.fcl"
 
 services.DetectorPropertiesService.Electronlifetime: ${ThisLife}
-services.DetectorPropertiesService.Efield: ${ThisField}
+services.DetectorPropertiesService.PerPlaneEfield: ${ThisField}
 services.LArG4Parameters.LongitudinalDiffusion: ${ThisDiff}
 
 services.ChannelNoiseService: @local::chnoiseold
@@ -126,7 +126,7 @@ EOF
 #include "standard_reco_dune35tsim_milliblock.fcl"
 
 services.DetectorPropertiesService.Electronlifetime: ${ThisLife}
-services.DetectorPropertiesService.Efield: ${ThisField}
+services.DetectorPropertiesService.PerPlaneEfield: ${ThisField}
 
 EOF
     if [ $1 -eq 4 ]; then
