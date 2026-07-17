@@ -9,6 +9,7 @@ physics.producers.wclsdatahd: @local::protodunehd_sp_dnn_l1sp  #Signal processin
 physics.produce: [
   fembfilter,
   wclsdatahd,
+  saturationfilter,
   gaushit,
   nhitsfilter,
   reco3d,
@@ -47,6 +48,7 @@ source:
 outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wire*_*_wiener_*"]
 process_name: pdhdkeepupstage2
 physics.filters.nhitsfilter.Verbose: true
+physics.filters.nhitsfilter.HitLimit: 17500
 services.DetectorPropertiesService: @local::protodunehd_detproperties_resampled
 physics.producers.wclsdatahd.wcls_main.loglevels: @erase 
 physics.producers.wclsdatahd.wcls_main.logsinks: @erase 
