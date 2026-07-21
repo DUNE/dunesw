@@ -3,9 +3,9 @@ Note on PDVD simulation and data reconstruction workflows
 # Data:
 
 The default offline reconstruction scheme is divided in three stages:
-- stage0: raw products decoding (trigger, TPC, PDS) up to hits + cluster3d spacepoints
-- stage1: pandora + supera (input to SPINE) - dropping TPC RawDigits waveforms and Wires
-- stage2: PDS + calibration
+- stage1: raw products decoding (trigger, TPC, PDS) up to hits + cluster3d spacepoints
+- stage2: pandora + supera (input to SPINE) - dropping TPC RawDigits waveforms and Wires
+- stage3: PDS + calibration
 
 The corresponding FHICL files are:
 - standard_reco_stage1_protodunevd_offline.fcl
