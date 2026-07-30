@@ -42,6 +42,10 @@ int test_DetectorPropertiesService(string gname) {
 
   cout << myname << line << endl;
   cout << "Done." << endl;
+  // Destroy the art services (and thus close TFileService, which writes
+  // a ROOT file in its destructor) while ROOT/Cling is still alive.
+  // Otherwise the services are only destroyed at program exit, when the
+  // interpreter state they rely on may already be gone, causing a crash.
   ArtServiceHelper::unload_services();
   return 0;
 }
