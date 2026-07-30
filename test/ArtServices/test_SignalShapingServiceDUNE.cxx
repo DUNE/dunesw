@@ -107,6 +107,7 @@ int test_SignalShapingServiceDUNE() {
 
   cout << myname << line << endl;
   cout << "Done." << endl;
+  ArtServiceHelper::unload_services();
   return 0;
 }
 

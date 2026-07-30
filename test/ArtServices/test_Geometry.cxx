@@ -52,6 +52,7 @@ int test_Geometry(string gname) {
   cout << myname << "Geometry name: " << pgeo->DetectorName() << endl;
 
   cout << myname << line << endl;
+  ArtServiceHelper::unload_services();
   return 0;
 }
 

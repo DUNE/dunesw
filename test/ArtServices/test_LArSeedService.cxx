@@ -46,6 +46,7 @@ int test_LArSeedService(string gname) {
 
   cout << myname << line << endl;
   cout << "Done." << endl;
+  ArtServiceHelper::unload_services();
   return 0;
 }
 
