@@ -52,6 +52,11 @@ int test_Geometry(string gname) {
   cout << myname << "Geometry name: " << pgeo->DetectorName() << endl;
 
   cout << myname << line << endl;
+  // Destroy the art services (and thus close TFileService, which writes
+  // a ROOT file in its destructor) while ROOT/Cling is still alive.
+  // Otherwise the services are only destroyed at program exit, when the
+  // interpreter state they rely on may already be gone, causing a crash.
+  ArtServiceHelper::unload_services();
   return 0;
 }
 
