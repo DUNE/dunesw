@@ -1,0 +1,24 @@
+# dune_internal_cosmogenics_model_dune10kt_1x2x6.fcl
+#
+# Position overrides for the DUNE FD HD 1x2x6 geometry.
+#
+# DUNE FD HD 1x2x6 active LAr volume (approximate world coordinates):
+#   X: -365 to +365 cm  (two drift volumes of 365 cm each, APA plane at x~0)
+#   Y: -305 to +305 cm  (active height 610 cm)
+#   Z:    0 to 1394 cm  (6 APA pairs along beam direction)
+
+#include "dune_internal_cosmogenics_model.fcl"
+
+BEGIN_PROLOG
+
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6: @local::dune_internal_cosmogenic_singlep
+
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.X0:     [    0. ]   # centre of the two drift volumes
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.Y0:     [    0. ]   # vertical centre
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.Z0:     [  697. ]   # Z midpoint of active length
+
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaX: [  350. ]   # uniform over -350 to +350 cm
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaY: [  295. ]   # uniform over -295 to +295 cm
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaZ: [  685. ]   # uniform over  12 to 1382 cm
+
+END_PROLOG

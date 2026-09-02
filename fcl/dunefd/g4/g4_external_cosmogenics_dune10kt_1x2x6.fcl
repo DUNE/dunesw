@@ -1,0 +1,20 @@
+# g4_external_cosmogenics_dune10kt_1x2x6.fcl
+#
+# Geant4 stage for external cosmogenics in DUNE FD HD 1x2x6. Input is the MCTruth
+# from gen_external_cosmogenics_dune10kt_1x2x6.fcl
+#
+# Documentation: fcl/dunefd/gen/lowE_cosmogenics/README.md
+#
+# Usage:
+#   lar -c g4_external_cosmogenics_dune10kt_1x2x6.fcl \
+#       -s external_cosmogenics_gen.root -o external_cosmogenics_g4.root
+
+#include "standard_g4_dune10kt_1x2x6.fcl"
+
+process_name: ExternalCosmogenicsG4
+
+# Shielding for the neutron HP cross-sections, which QGSP_BERT lacks and which drive
+# capture and elastic scattering below 20 MeV
+services.PhysicsList.PhysicsListName: "Shielding"
+
+outputs.out1.fileName: "external_cosmogenics_g4.root"

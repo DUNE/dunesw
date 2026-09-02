@@ -1,0 +1,11 @@
+# internal_cosmogenics_rd.mac
+#
+# Raise the G4RadioactiveDecay time threshold to 1e5 s, which covers 41Ar
+# (T1/2 = 6600 s), 38Cl (2234 s), 39Cl (3300 s) and everything shorter.
+# Geological-scale isotopes (39Ar, 36Cl, 35S, 37Ar) stay far above it and are
+# still treated as stable.
+#
+# The unit is REQUIRED. A bare number is rejected by Geant4 with
+# "***** Illegal parameter (1) *****" and the threshold is left unset -- which
+# is silent unless the g4 log is read.
+/process/had/rdm/thresholdForVeryLongDecayTime 1.0e+14 ns

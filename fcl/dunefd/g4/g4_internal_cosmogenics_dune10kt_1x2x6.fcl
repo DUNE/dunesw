@@ -1,0 +1,34 @@
+# g4_internal_cosmogenics_dune10kt_1x2x6.fcl
+#
+# Geant4 stage for internal cosmogenic isotopes in DUNE FD HD 1x2x6.
+#
+# Documentation: fcl/dunefd/gen/lowE_cosmogenics/README.md
+#
+# Usage:
+#   lar -c g4_internal_cosmogenics_dune10kt_1x2x6.fcl \
+#       -s internal_cosmogenics_gen.root -o internal_cosmogenics_g4.root
+
+#include "standard_g4_dune10kt_1x2x6.fcl"
+
+process_name: InternalCosmogenicsG4
+
+# QGSP_BERT, the standard DUNE list, has no G4RadioactiveDecayPhysics: the nuclei
+# SingleGen places would be tracked as stable and produce no beta at all. Shielding
+# is a Geant4 reference list that adds it, plus HP neutrons and Livermore EM.
+services.PhysicsList.PhysicsListName: "Shielding"
+
+# Raise the RDM time threshold, defensively: measured against dunesw v10_20_09_01d00
+# every isotope in the list that is short-lived enough to matter (41Ar 6600 s,
+# 38Cl, 39Cl) already decays under the Geant4 default, and nothing in the list
+# falls between 6600 s and this macro's 1e5 s threshold, so it changes no yield
+# today. It guards against a future default that is less permissive.
+# visMacro, NOT G4MacroFiles: larg4Main reads `visMacro` (larg4Main_module.cc:138)
+# and ignores any other key, so the original G4MacroFiles line was silently inert
+# -- a nonexistent filename raised no error either. macroPath names an ENVIRONMENT
+# VARIABLE to search, not a path; same pairing as protoDUNE_refactored_g4_stage1_*.
+physics.producers.largeant.macroPath: "FW_SEARCH_PATH"
+physics.producers.largeant.visMacro: "internal_cosmogenics_rd.mac"
+
+services.ParticleListAction.keepEMShowerDaughters: true
+
+outputs.out1.fileName: "internal_cosmogenics_g4.root"

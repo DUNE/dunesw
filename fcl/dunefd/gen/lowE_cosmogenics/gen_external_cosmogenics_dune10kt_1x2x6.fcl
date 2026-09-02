@@ -1,0 +1,72 @@
+# gen_external_cosmogenics_dune10kt_1x2x6.fcl
+#
+# Generation stage for external cosmogenics in DUNE FD HD 1x2x6.
+# "External cosmogenics" are particles (gammas, neutrons, electrons, etc.)
+# produced by cosmogenic processes in the surrounding rock/structure and
+# entering the detector, pre-simulated by a standalone G4 campaign.
+#
+# Particles are read from a HEPEVT file produced by external_cosmogenics_to_hepevt.py.
+# They are placed at the central APA plane (x = 0) with isotropic directions,
+# consistent with the RadioGen gammas_from_cavernwall_atLAr convention.
+#
+# This FCL is complementary to gen_internal_cosmogenics_dune10kt_1x2x6.fcl (which generates
+# cosmogenic isotopes inside the LAr). Both should be run as separate samples.
+#
+# Workflow:
+#   1. Build the HEPEVT file from the sampling table (see README.md):
+#        python external_cosmogenics_to_hepevt.py external_cosmogenics_table.dat external_cosmogenics.hepevt
+#   2. Gen stage (run from the directory containing external_cosmogenics.hepevt):
+#        lar -c gen_external_cosmogenics_dune10kt_1x2x6.fcl -o external_cosmogenics_gen.root
+#   3. G4 stage:
+#        lar -c g4_external_cosmogenics_dune10kt_1x2x6.fcl \
+#            -s external_cosmogenics_gen.root -o external_cosmogenics_g4.root
+
+#include "services_dune.fcl"
+
+process_name: ExternalCosmogenicsGen
+
+services:
+{
+   @table::dunefd_1x2x6_simulation_services
+   TFileService:          { fileName: "external_cosmogenics_gen_hist.root" }
+   RandomNumberGenerator: {}
+}
+
+source:
+{
+   module_type: EmptyEvent
+   timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
+   maxEvents:   -1         # runs until HEPEVT file is exhausted (1 event per CSV row)
+   firstRun:    20003000
+   firstEvent:  1
+}
+
+physics:
+{
+   producers:
+   {
+      rns:       { module_type: "RandomNumberSaver" }
+      generator:
+      {
+         module_type:   "TextFileGen"
+         InputFileName: "external_cosmogenics.hepevt"
+         Offset:        0
+      }
+   }
+
+   simulate:      [ rns, generator ]
+   stream1:       [ out1 ]
+   trigger_paths: [ simulate ]
+   end_paths:     [ stream1 ]
+}
+
+outputs:
+{
+   out1:
+   {
+      module_type: RootOutput
+      fileName:    "external_cosmogenics_gen.root"
+      dataTier:    "generated"
+      compressionLevel: 1
+   }
+}
