@@ -1,10 +1,11 @@
-#include "standard_reco_protodunehd_MC.fcl"
+#include "standard_g4_protodunehd.fcl"
 
+process_name: IonScintPDExt
 
-physics.producers.pandoracalo:           @local::pdune_sp_calomcsce          #@local::pdhd_calomc
-physics.producers.pandoraShowercalo:     @local::pdune_sp_showercalomcsce    #@local::pdhd_calomc
-physics.producers.pandora2calo:          @local::pdune_sp_alltrackcalomcsce  #@local::pdhd_calomc
-physics.producers.pandora2Showercalo:    @local::pdune_sp_allshowercalomcsce #@local::pdhd_calomc
+physics.simulate:      [  rns, IonAndScint, IonAndScintExternal, PDFastSimExternal ]
+outputCommands: [ "keep *" ]
+
+outputs.out1.fileName: "%ifb_ionscint_pdext_sce_e500.root"
 
 services.SpaceCharge.InputFilename:        		"ProtoDUNE/HD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDHD_Sim_NoFluidFlow_E500_v2.root"
 services.SpaceCharge.CalibrationInputFilename:          "ProtoDUNE/HD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDHD_Sim_NoFluidFlow_E500_v2.root"
@@ -23,7 +24,3 @@ services.SpaceCharge.EDChargeLossZHigh:                 [] # range in which char
 services.SpaceCharge.EnableSimEfieldSCE: true
 services.SpaceCharge.EnableSimSpatialSCE: true
 services.SpaceCharge.EnableSimulationSCE: true
-
-services.SpaceCharge.EnableCalEfieldSCE: true
-services.SpaceCharge.EnableCalSpatialSCE: true
-services.SpaceCharge.EnableCorrSCE: true
