@@ -1,0 +1,2 @@
+#include "standard_reco_stage1_protodunehd_keepup.fcl"
+physics.producers.wclsdatahdfilter.wcls_main.structs.elecGain: 7.8

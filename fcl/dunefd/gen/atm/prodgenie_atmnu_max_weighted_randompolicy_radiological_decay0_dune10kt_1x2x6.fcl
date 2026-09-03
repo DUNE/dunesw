@@ -1,0 +1,14 @@
+#include "workflow_radiological_decay0_dune10kt.fcl"
+
+#include "prodgenie_atmnu_max_weighted_randompolicy_dune10kt_1x2x6.fcl"
+
+physics:
+{
+  @table::physics
+  producers:
+  {
+    @table::physics.producers
+    @table::dunefd_horizdrift_1x2x6_producers
+  }
+  simulate: [ rns, generator, @sequence::dunefd_hd_backgrounds_1x2x6_lowBgAPA ]      
+}

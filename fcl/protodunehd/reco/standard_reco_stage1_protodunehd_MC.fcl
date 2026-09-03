@@ -3,7 +3,7 @@
 #make sure only one WCTK is here -- not sure this part is necessary
 #or if only one can be in the produce list
 physics.producers.wclsdatahd: @erase
-physics.producers.wclsdatahdfilter: @local::protodunehd_nf
+physics.producers.wclsdatahdfilter: @local::protodunehd_nf_mc
 
 physics.reco: [
   wclsdatahdfilter  #new to output raw digits from Wirecell

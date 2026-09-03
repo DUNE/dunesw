@@ -78,3 +78,10 @@ outputs:
     #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
   }
 }
+
+services.NuRandomService.policy:                "preDefinedSeed"
+services.NuRandomService.baseSeed:              1234
+services.NuRandomService.IonAndScint.ISCalcAlg: 1234
+services.NuRandomService.PDFastSimAr.photon:    1234
+services.NuRandomService.PDFastSimAr.scinttime: 1234
+

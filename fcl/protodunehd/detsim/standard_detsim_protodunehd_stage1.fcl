@@ -9,7 +9,7 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   FileCatalogMetadata:  @local::art_file_catalog_mc
   WireReadout:       @local::dune_wire_readout
-  Geometry:          @local::protodunehdv6_geo
+  #Geometry:          @local::protodunehdv6_geo
 }
 
 physics.simulate: [tpcrawdecoder]
