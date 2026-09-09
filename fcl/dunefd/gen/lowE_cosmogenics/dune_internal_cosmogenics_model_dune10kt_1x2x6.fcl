@@ -1,23 +1,15 @@
-# dune_internal_cosmogenics_model_dune10kt_1x2x6.fcl
-#
 # Position overrides for the DUNE FD HD 1x2x6 geometry.
 #
-# Active LAr volume of dune10kt_v6_refactored_1x2x6.gdml, as reported by
-# DumpGeometry (24 TPC active boxes = 2 in x, 2 in y, 6 in z):
-#   X: -363.376 to +363.376 cm, with the APA plane occupying |x| < 3.961 cm
-#   Y: -600.019 to +600.019 cm  (TWO 600 cm APAs stacked: 1200 cm total)
-#   Z:   -0.876 to  1393.460 cm (6 APA pairs along the beam direction)
+# Active LAr volume of dune10kt_v6_refactored_1x2x6.gdml, from DumpGeometry
+# (24 TPC active boxes: 2 in x, 2 in y, 6 in z):
+#   X: -363.376 to +363.376 cm, the APA plane occupying |x| < 3.961 cm
+#   Y: -600.019 to +600.019 cm, two 600 cm APAs stacked
+#   Z:   -0.876 to  1393.460 cm, six APA pairs along the beam
 #
-# The "2" in 1x2x6 is the vertical count, so the active height is 1200 cm, not
-# the 610 cm of a single APA. An earlier revision of this file assumed 610 and
-# set SigmaY: 295, which confined every generated isotope to the middle 49% of
-# the detector height and left the outer half empty -- a factor ~2 error in any
-# rate normalised per unit active volume, plus a spatial bias towards y = 0.
-#
-# The envelope below is the full active volume less a ~0.4 cm margin, so vertices
-# stay inside it without clipping the edges. |x| < 3.961 cm (the APA plane) is
-# still included: it is ~1.1% of the width and SingleGen has no way to punch a
-# hole, so those few vertices simply deposit outside volTPCActive.
+# The envelope below is that volume less a ~0.4 cm margin, so vertices stay
+# inside without clipping the edges. The APA plane is left in: it is ~1.1% of
+# the width and SingleGen cannot punch a hole in a uniform box, so the few
+# vertices landing there deposit outside volTPCActive.
 
 #include "dune_internal_cosmogenics_model.fcl"
 
@@ -25,12 +17,12 @@ BEGIN_PROLOG
 
 dune_internal_cosmogenic_singlep_dune10kt_1x2x6: @local::dune_internal_cosmogenic_singlep
 
-dune_internal_cosmogenic_singlep_dune10kt_1x2x6.X0:     [    0. ]   # centre of the two drift volumes
-dune_internal_cosmogenic_singlep_dune10kt_1x2x6.Y0:     [    0. ]   # vertical centre of the 2-APA stack
-dune_internal_cosmogenic_singlep_dune10kt_1x2x6.Z0:     [  696.3 ]  # Z midpoint of active length
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.X0:     [    0. ]
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.Y0:     [    0. ]
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.Z0:     [  696.3 ]
 
-dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaX: [  363.0 ]  # uniform over -363.0 to +363.0 cm
-dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaY: [  599.6 ]  # uniform over -599.6 to +599.6 cm
-dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaZ: [  696.0 ]  # uniform over    0.3 to 1392.3 cm
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaX: [  363.0 ]
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaY: [  599.6 ]
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaZ: [  696.0 ]
 
 END_PROLOG

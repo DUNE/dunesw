@@ -9,9 +9,8 @@ surrounding rock that subsequently enter the DUNE FD HD detector. Their species,
 energy and angular distributions come from a standalone G4 campaign, reduced to
 external_cosmogenics_table.dat by make_external_cosmogenics_table.py.
 
-The table bins energy and direction SEPARATELY, so any correlation between the
-two is not reproduced -- see README.md, which also says how to obtain the full
-unreduced CSV if you need it.
+The table bins energy and direction separately, so any correlation between the
+two is not reproduced; README.md says how to obtain the full unreduced CSV.
 
 Entry face: central APA plane of the 1x2x6 (x = 0 cm).
 Positions are sampled uniformly over the APA face: y in [-600, 600], z in [0, 1393.4] cm.
@@ -35,9 +34,9 @@ Usage:
   python external_cosmogenics_to_hepevt.py external_cosmogenics_table.dat output.hepevt \
       --norm-ktondays 5980 --target-ktondays 36500 [--seed 42]
 
-Also writes <output.hepevt>.nevents, the exact number of events written. The gen
-stage MUST be given that number with -n: TextFileGen throws at EOF instead of
-ending the job, so `maxEvents: -1` loses the entire run.
+Also writes <output.hepevt>.nevents, the number of events written. Give that
+number to the gen stage with -n: TextFileGen throws at EOF instead of ending the
+job, so `maxEvents: -1` loses the entire run.
 """
 
 import sys
@@ -51,9 +50,7 @@ X_ENTRY = 0.0   # cm  (central APA plane)
 
 # APA face bounds, from the active volume of dune10kt_v6_refactored_1x2x6.gdml
 # as reported by DumpGeometry (see dune_internal_cosmogenics_model_dune10kt_1x2x6.fcl).
-# The 1x2x6 stacks TWO 600 cm APAs vertically, so the face is 1200 cm tall, not
-# the 610 cm of a single APA. An earlier revision used +-305 and injected over
-# only the middle half of the face.
+# The 1x2x6 stacks two 600 cm APAs vertically, so the face is 1200 cm tall.
 Y_LO, Y_HI = -600.0,  600.0   # cm
 Z_LO, Z_HI =    0.0, 1393.4   # cm
 
@@ -239,17 +236,11 @@ def main():
 
     species_count = {}
 
-    # Draw the per-species event counts up front, then shuffle the resulting
-    # list of PDG codes so the file comes out interleaved instead of one
-    # contiguous block per species.
-    #
-    # Ordering is irrelevant to a full-file run, but the file is routinely read
-    # in pieces -- a smoke test with a small -n, or a campaign split across
-    # batch jobs -- and written species-major every such slice is a single
-    # species. The first 400 events of a 6369-event test file were 400 gammas
-    # and no neutrons: a subset that looks like a clean run and is not one,
-    # while the rarest species land entirely in the final slice. Shuffling
-    # makes any contiguous run of events a fair sample of the whole file.
+    # Draw the per-species counts up front and shuffle, so the file is
+    # interleaved rather than one contiguous block per species. Ordering does not
+    # matter to a full-file run, but it does wherever the file is read in pieces:
+    # a small -n, or a campaign split across batch jobs, would otherwise get one
+    # species per slice and lose the rarest ones entirely.
     draws = []
     for pdg, sp in sorted(species.items(), key=lambda kv: -kv[1]['n']):
         draws.extend([pdg] * poisson(sp['n'] * scale))
@@ -273,11 +264,10 @@ def main():
             # HEPEVT format (TextFileGen):
             #   event_number  n_particles
             #   status pdg m1 m2 d1 d2  px py pz E mass  x y z t
-            # %.17g, not %.6e: HEPEVT stores TOTAL energy, and a thermal
-            # neutron's kinetic energy is ~1e-15 GeV against a 0.94 GeV mass.
-            # At 7 significant digits that difference rounds away entirely and
-            # the particle arrives at G4 at rest -- silently losing every
-            # neutron below ~0.1 keV, 9.3% of them in the reference sample.
+            # %.17g, not %.6e: HEPEVT stores total energy, and a thermal
+            # neutron's kinetic energy is ~1e-15 GeV against a 0.94 GeV mass. At
+            # 7 significant digits that rounds away and the neutron arrives at
+            # G4 at rest, which costs every neutron below ~0.1 keV: 9% of them.
             fout.write(f"{n_written} 1\n")
             fout.write(
                 f"1 {pdg} 0 0 0 0 "
@@ -286,12 +276,9 @@ def main():
             )
             species_count[pdg] = species_count.get(pdg, 0) + 1
 
-    # Sidecar holding the exact event count. TextFileGen THROWS when it runs off
-    # the end of the HEPEVT file rather than ending the job, so `maxEvents: -1`
-    # aborts the run at EOF and art never closes RootOutput -- the whole gen
-    # stage is lost, leaving only an orphan RootOutput-*.root temp file. art must
-    # therefore be told exactly how many events to read, and only this script
-    # knows the number, because it is a Poisson draw.
+    # Sidecar holding the event count. TextFileGen throws at EOF rather than
+    # ending the job, so art has to be told how many events to read, and only
+    # this script knows the number: it is a Poisson draw.
     nevents_path = args.output_hepevt + '.nevents'
     with open(nevents_path, 'w') as fn:
         fn.write(f"{n_written}\n")

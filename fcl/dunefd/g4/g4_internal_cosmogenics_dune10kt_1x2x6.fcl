@@ -1,39 +1,18 @@
-# g4_internal_cosmogenics_dune10kt_1x2x6.fcl
-#
-# Geant4 stage for internal cosmogenic isotopes in DUNE FD HD 1x2x6.
-#
-# Documentation: fcl/dunefd/gen/lowE_cosmogenics/README.md
-#
-# Usage:
-#   lar -c g4_internal_cosmogenics_dune10kt_1x2x6.fcl \
-#       -s internal_cosmogenics_gen.root -o internal_cosmogenics_g4.root
+# Geant4 stage for internal cosmogenic isotopes in the DUNE FD HD 1x2x6.
+# See fcl/dunefd/gen/lowE_cosmogenics/README.md.
 
 #include "standard_g4_dune10kt_1x2x6.fcl"
 
 process_name: InternalCosmogenicsG4
 
-# QGSP_BERT, the standard DUNE list, has no G4RadioactiveDecayPhysics: the nuclei
-# SingleGen places would be tracked as stable and produce no beta at all. Shielding
-# is a Geant4 reference list that adds it, plus HP neutrons and Livermore EM.
+# QGSP_BERT carries no G4RadioactiveDecayPhysics, so the nuclei SingleGen places
+# would be tracked as stable and never produce a beta. Shielding supplies it.
 services.PhysicsList.PhysicsListName: "Shielding"
 
-# Raise the RDM time threshold, defensively: measured against dunesw v10_20_09_01d00
-# every isotope in the list that is short-lived enough to matter (41Ar 6600 s,
-# 38Cl, 39Cl) already decays under the Geant4 default, and nothing in the list
-# falls between 6600 s and this macro's 1e5 s threshold, so it changes no yield
-# today. It guards against a future default that is less permissive.
-# visMacro, NOT G4MacroFiles: larg4Main reads `visMacro` (larg4Main_module.cc:138)
-# and ignores any other key, so the original G4MacroFiles line was silently inert
-# -- a nonexistent filename raised no error either. macroPath names an ENVIRONMENT
-# VARIABLE to search, not a path.
-#
-# FHICL_FILE_PATH, not FW_SEARCH_PATH. protoDUNE_refactored_g4_stage1_* pairs
-# visMacro with FW_SEARCH_PATH because its 10keV.mac ships in dunesim's
-# config_data, which is on that path. Nothing dunesw installs is: this .mac goes
-# to ${dunesw_FHICL_DIR} beside the FCLs, so FW_SEARCH_PATH cannot find it in an
-# installed release. The miss is NOT fatal -- larg4Main logs "Unable to find
-# internal_cosmogenics_rd.mac" at INFO level and runs on with the threshold
-# unset -- so it would pass unnoticed in exactly the way this macro guards against.
+# larg4Main takes the macro from visMacro and ignores any other key, and
+# macroPath names an environment variable to search rather than a path. It has to
+# be FHICL_FILE_PATH: the macro installs to ${dunesw_FHICL_DIR}, which is not on
+# FW_SEARCH_PATH, and a macro that is not found is only logged at INFO level.
 physics.producers.largeant.macroPath: "FHICL_FILE_PATH"
 physics.producers.largeant.visMacro: "internal_cosmogenics_rd.mac"
 

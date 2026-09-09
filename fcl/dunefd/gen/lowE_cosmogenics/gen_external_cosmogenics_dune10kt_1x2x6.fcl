@@ -1,30 +1,21 @@
-# gen_external_cosmogenics_dune10kt_1x2x6.fcl
+# Generation stage for external cosmogenics in the DUNE FD HD 1x2x6: gammas,
+# neutrons, electrons and a few hadrons produced by cosmogenic processes in the
+# surrounding rock and entering the detector, pre-simulated by a standalone G4
+# campaign and read here from a HEPEVT file.
 #
-# Generation stage for external cosmogenics in DUNE FD HD 1x2x6.
-# "External cosmogenics" are particles (gammas, neutrons, electrons, etc.)
-# produced by cosmogenic processes in the surrounding rock/structure and
-# entering the detector, pre-simulated by a standalone G4 campaign.
+# Particles enter at the central APA plane (x = 0), following the RadioGen
+# gammas_from_cavernwall_atLAr convention. Directions are not isotropic; they
+# come from the per-species (cos(theta), phi) distribution held in the sampling
+# table, whose azimuth is measurably non-flat.
 #
-# Particles are read from a HEPEVT file produced by external_cosmogenics_to_hepevt.py.
-# They are placed at the central APA plane (x = 0), consistent with the RadioGen
-# gammas_from_cavernwall_atLAr convention. Directions are NOT isotropic: they are
-# drawn from the per-species (cos(theta), phi) distribution held in the sampling
-# table, whose azimuth is measurably non-flat (chi2/ndf = 222 for gammas).
+# Run this and gen_internal_cosmogenics_dune10kt_1x2x6.fcl as separate samples.
 #
-# This FCL is complementary to gen_internal_cosmogenics_dune10kt_1x2x6.fcl (which generates
-# cosmogenic isotopes inside the LAr). Both should be run as separate samples.
+# The HEPEVT file is built by external_cosmogenics_to_hepevt.py and this stage
+# must run from the directory holding it. See README.md for the full workflow.
 #
-# Workflow:
-#   1. Build the HEPEVT file from the sampling table (see README.md):
-#        python external_cosmogenics_to_hepevt.py external_cosmogenics_table.dat external_cosmogenics.hepevt
-#   2. Gen stage (run from the directory containing external_cosmogenics.hepevt).
-#      -n is REQUIRED -- see the maxEvents comment in the source block below:
-#        lar -c gen_external_cosmogenics_dune10kt_1x2x6.fcl \
-#            -n $(cat external_cosmogenics.hepevt.nevents) \
-#            -o external_cosmogenics_gen.root
-#   3. G4 stage:
-#        lar -c g4_external_cosmogenics_dune10kt_1x2x6.fcl \
-#            -s external_cosmogenics_gen.root -o external_cosmogenics_g4.root
+#   lar -c gen_external_cosmogenics_dune10kt_1x2x6.fcl \
+#       -n $(cat external_cosmogenics.hepevt.nevents) \
+#       -o external_cosmogenics_gen.root
 
 #include "services_dune.fcl"
 
@@ -41,18 +32,14 @@ source:
 {
    module_type: EmptyEvent
    timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
-   # MUST be overridden with -n, using the count in <hepevt>.nevents that
+   # Override with -n, using the count in <hepevt>.nevents that
    # external_cosmogenics_to_hepevt.py writes beside the HEPEVT file.
    #
-   # -1 does NOT mean "read until EOF" here. TextFileGen throws when it runs off
-   # the end of the file instead of ending the job, so if -n is omitted art
-   # aborts on the last event, never closes RootOutput, and leaves an orphan
-   # RootOutput-*.root temp file instead of the -o name.
-   #
-   # That is kept deliberately, as a fail-closed guard. Any finite default is
-   # worse: with -n forgotten it would exit 0 and write a short file that looks
-   # valid, silently understating the exposure. A crash with no output cannot be
-   # mistaken for a good run. Give -n the sidecar count and this never fires.
+   # -1 does not mean "read until EOF" here: TextFileGen throws when it runs off
+   # the end of the file rather than ending the job, so without -n art aborts on
+   # the last event and never closes RootOutput. That is deliberate, as a
+   # fail-closed guard. A finite default is worse, since forgetting -n would then
+   # exit 0 and write a short file that looks valid.
    maxEvents:   -1
    firstRun:    20003000
    firstEvent:  1

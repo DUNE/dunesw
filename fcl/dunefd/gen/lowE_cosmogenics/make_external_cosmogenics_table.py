@@ -20,9 +20,9 @@ Per species this writes:
     of how many decades the spectrum spans (neutrons cover 11.7),
   * a 2D angular distribution in (cos(theta) about the drift axis, phi).
 
-Energy and direction are binned SEPARATELY, so their correlation is not kept --
-see README.md. Azimuth is binned rather than assumed flat: it is measurably not
-flat (chi2/ndf = 222 for gammas over 12 bins).
+Energy and direction are binned separately, so their correlation is not kept;
+see README.md. Azimuth is binned rather than assumed flat, because it measurably
+is not (chi2/ndf = 222 for gammas over 12 bins).
 
 Species with fewer than MIN_HIST entries are written as raw rows instead, since
 a histogram of a handful of particles only adds sampling noise.

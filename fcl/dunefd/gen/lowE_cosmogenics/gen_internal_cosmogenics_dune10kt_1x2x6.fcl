@@ -1,20 +1,14 @@
-# gen_internal_cosmogenics_dune10kt_1x2x6.fcl
+# Generation stage for cosmogenic beta-emitting isotopes in the DUNE FD HD
+# 1x2x6: isotopes produced by muon spallation on 40Ar that decay inside the
+# active LAr. Each event, SingleGen picks one isotope at random from the 44-entry
+# PDG list and places it at rest at a uniformly sampled position.
 #
-# Generation stage for cosmogenic beta-emitting isotopes in DUNE FD HD 1x2x6.
-# "Internal cosmogenics" are isotopes produced by muon spallation on 40Ar that
-# beta-decay entirely inside the active LAr volume (contrast with
-# gen_external_cosmogenics_dune10kt_1x2x6.fcl, whose particles arrive from outside the
-# cryostat). Each event: SingleGen picks one isotope at random from the
-# 44-entry PDG list and places it at rest at a uniformly sampled position in
-# the active LAr volume.
-#
-# USAGE:
+# Usage:
 #   lar -c gen_internal_cosmogenics_dune10kt_1x2x6.fcl -n <N*44> -o internal_cosmogenics_gen.root
 #
-# Running N*44 events gives approximately N events per isotope species
-# (Poisson fluctuations ~sqrt(N) per species).
+# N*44 events gives about N per species, with Poisson spread of ~sqrt(N).
 #
-# For exactly N events of a single species, use an override file:
+# For exactly N events of a single species, override in a wrapper fcl:
 #   #include "gen_internal_cosmogenics_dune10kt_1x2x6.fcl"
 #   physics.producers.generator.PDG: [1000030080]   # Li8 only
 #   outputs.out1.fileName: "internal_cosmogenics_Li8_gen.root"
@@ -35,7 +29,7 @@ source:
 {
    module_type: EmptyEvent
    timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
-   maxEvents:   440       # default: ~10 per species; override with -n on command line
+   maxEvents:   440       # ~10 per species; override with -n
    firstRun:    20001000
    firstEvent:  1
 }

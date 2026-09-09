@@ -1,9 +1,6 @@
-# dune_internal_cosmogenics_model.fcl
-#
-# Common SingleGen configuration for 44 cosmogenic beta-emitting isotopes
-# produced by muon spallation on 40Ar.
-# Geometry-independent: defines particle physics only.
-# Position parameters (X0/Y0/Z0/Sigma*) must be overridden in a geometry-specific include.
+# Common SingleGen configuration for the 44 cosmogenic beta-emitting isotopes
+# produced by muon spallation on 40Ar. Geometry-independent: the position
+# parameters (X0/Y0/Z0/Sigma*) are overridden in a geometry-specific include.
 #
 # PDG ion code formula: 1_000_000_000 + Z*10_000 + A*10  (ground state, I=0)
 
@@ -78,7 +75,7 @@ dune_internal_cosmogenic_singlep:
    SigmaThetaXZ: [ 0.0 ]
    AngleDist: 0
 
-   # PosDist selects the shape, NOT the coordinate: SingleGen_module.cc has
+   # PosDist selects the shape, not the coordinate: SingleGen_module.cc has
    # kUNIF=0, kGAUS=1. 0 samples uniformly over (X0-Sigma, X0+Sigma).
    # X0/Y0/Z0/SigmaX/SigmaY/SigmaZ must be overridden per geometry.
    PosDist: 0
