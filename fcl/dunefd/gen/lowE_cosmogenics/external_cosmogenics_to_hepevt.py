@@ -238,37 +238,53 @@ def main():
     n_source = sum(sp['n'] for sp in species.values())
 
     species_count = {}
+
+    # Draw the per-species event counts up front, then shuffle the resulting
+    # list of PDG codes so the file comes out interleaved instead of one
+    # contiguous block per species.
+    #
+    # Ordering is irrelevant to a full-file run, but the file is routinely read
+    # in pieces -- a smoke test with a small -n, or a campaign split across
+    # batch jobs -- and written species-major every such slice is a single
+    # species. The first 400 events of a 6369-event test file were 400 gammas
+    # and no neutrons: a subset that looks like a clean run and is not one,
+    # while the rarest species land entirely in the final slice. Shuffling
+    # makes any contiguous run of events a fair sample of the whole file.
+    draws = []
+    for pdg, sp in sorted(species.items(), key=lambda kv: -kv[1]['n']):
+        draws.extend([pdg] * poisson(sp['n'] * scale))
+    random.shuffle(draws)
+
     n_written = 0
-
     with open(args.output_hepevt, 'w') as fout:
-        for pdg, sp in sorted(species.items(), key=lambda kv: -kv[1]['n']):
-            for _ in range(poisson(sp['n'] * scale)):
-                n_written += 1
-                ekin_kev, tdx, tdy, tdz = sample_particle(sp)
-                ekin = ekin_kev / 1.0e6                 # keV -> GeV
-                # Table coords: x=beam, y=vertical, z=drift
-                # LArSoft coords: x=drift, y=vertical, z=beam  -> swap x<->z
-                dx, dy, dz = direction_with_xflip(tdz, tdy, tdx)
-                x = X_ENTRY
-                y = random.uniform(Y_LO, Y_HI)
-                z = random.uniform(Z_LO, Z_HI)
-                px, py, pz, E, mass = kinetic_to_4mom(pdg, ekin, dx, dy, dz)
+        for pdg in draws:
+            sp = species[pdg]
+            n_written += 1
+            ekin_kev, tdx, tdy, tdz = sample_particle(sp)
+            ekin = ekin_kev / 1.0e6                 # keV -> GeV
+            # Table coords: x=beam, y=vertical, z=drift
+            # LArSoft coords: x=drift, y=vertical, z=beam  -> swap x<->z
+            dx, dy, dz = direction_with_xflip(tdz, tdy, tdx)
+            x = X_ENTRY
+            y = random.uniform(Y_LO, Y_HI)
+            z = random.uniform(Z_LO, Z_HI)
+            px, py, pz, E, mass = kinetic_to_4mom(pdg, ekin, dx, dy, dz)
 
-                # HEPEVT format (TextFileGen):
-                #   event_number  n_particles
-                #   status pdg m1 m2 d1 d2  px py pz E mass  x y z t
-                # %.17g, not %.6e: HEPEVT stores TOTAL energy, and a thermal
-                # neutron's kinetic energy is ~1e-15 GeV against a 0.94 GeV mass.
-                # At 7 significant digits that difference rounds away entirely and
-                # the particle arrives at G4 at rest -- silently losing every
-                # neutron below ~0.1 keV, 9.3% of them in the reference sample.
-                fout.write(f"{n_written} 1\n")
-                fout.write(
-                    f"1 {pdg} 0 0 0 0 "
-                    f"{px:.17g} {py:.17g} {pz:.17g} {E:.17g} {mass:.17g} "
-                    f"{x:.4f} {y:.4f} {z:.4f} 0.0\n"
-                )
-                species_count[pdg] = species_count.get(pdg, 0) + 1
+            # HEPEVT format (TextFileGen):
+            #   event_number  n_particles
+            #   status pdg m1 m2 d1 d2  px py pz E mass  x y z t
+            # %.17g, not %.6e: HEPEVT stores TOTAL energy, and a thermal
+            # neutron's kinetic energy is ~1e-15 GeV against a 0.94 GeV mass.
+            # At 7 significant digits that difference rounds away entirely and
+            # the particle arrives at G4 at rest -- silently losing every
+            # neutron below ~0.1 keV, 9.3% of them in the reference sample.
+            fout.write(f"{n_written} 1\n")
+            fout.write(
+                f"1 {pdg} 0 0 0 0 "
+                f"{px:.17g} {py:.17g} {pz:.17g} {E:.17g} {mass:.17g} "
+                f"{x:.4f} {y:.4f} {z:.4f} 0.0\n"
+            )
+            species_count[pdg] = species_count.get(pdg, 0) + 1
 
     # Sidecar holding the exact event count. TextFileGen THROWS when it runs off
     # the end of the HEPEVT file rather than ending the job, so `maxEvents: -1`
