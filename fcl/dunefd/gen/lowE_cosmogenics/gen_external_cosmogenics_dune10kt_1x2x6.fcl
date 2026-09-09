@@ -1,0 +1,76 @@
+# Generation stage for external cosmogenics in the DUNE FD HD 1x2x6: gammas,
+# neutrons, electrons and a few hadrons produced by cosmogenic processes in the
+# surrounding rock and entering the detector, pre-simulated by a standalone G4
+# campaign and read here from a HEPEVT file.
+#
+# Particles enter at the central APA plane (x = 0), following the RadioGen
+# gammas_from_cavernwall_atLAr convention. Directions are not isotropic; they
+# come from the per-species (cos(theta), phi) distribution held in the sampling
+# table, whose azimuth is measurably non-flat.
+#
+# Run this and gen_internal_cosmogenics_dune10kt_1x2x6.fcl as separate samples.
+#
+# The HEPEVT file is built by external_cosmogenics_to_hepevt.py and this stage
+# must run from the directory holding it. See README.md for the full workflow.
+#
+#   lar -c gen_external_cosmogenics_dune10kt_1x2x6.fcl \
+#       -n $(cat external_cosmogenics.hepevt.nevents) \
+#       -o external_cosmogenics_gen.root
+
+#include "services_dune.fcl"
+
+process_name: ExternalCosmogenicsGen
+
+services:
+{
+   @table::dunefd_1x2x6_simulation_services
+   TFileService:          { fileName: "external_cosmogenics_gen_hist.root" }
+   RandomNumberGenerator: {}
+}
+
+source:
+{
+   module_type: EmptyEvent
+   timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
+   # Override with -n, using the count in <hepevt>.nevents that
+   # external_cosmogenics_to_hepevt.py writes beside the HEPEVT file.
+   #
+   # -1 does not mean "read until EOF" here: TextFileGen throws when it runs off
+   # the end of the file rather than ending the job, so without -n art aborts on
+   # the last event and never closes RootOutput. That is deliberate, as a
+   # fail-closed guard. A finite default is worse, since forgetting -n would then
+   # exit 0 and write a short file that looks valid.
+   maxEvents:   -1
+   firstRun:    20003000
+   firstEvent:  1
+}
+
+physics:
+{
+   producers:
+   {
+      rns:       { module_type: "RandomNumberSaver" }
+      generator:
+      {
+         module_type:   "TextFileGen"
+         InputFileName: "external_cosmogenics.hepevt"
+         Offset:        0
+      }
+   }
+
+   simulate:      [ rns, generator ]
+   stream1:       [ out1 ]
+   trigger_paths: [ simulate ]
+   end_paths:     [ stream1 ]
+}
+
+outputs:
+{
+   out1:
+   {
+      module_type: RootOutput
+      fileName:    "external_cosmogenics_gen.root"
+      dataTier:    "generated"
+      compressionLevel: 1
+   }
+}

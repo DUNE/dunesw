@@ -1,0 +1,95 @@
+# Common SingleGen configuration for the 44 cosmogenic beta-emitting isotopes
+# produced by muon spallation on 40Ar. Geometry-independent: the position
+# parameters (X0/Y0/Z0/Sigma*) are overridden in a geometry-specific include.
+#
+# PDG ion code formula: 1_000_000_000 + Z*10_000 + A*10  (ground state, I=0)
+
+BEGIN_PROLOG
+
+dune_internal_cosmogenic_singlep:
+{
+   module_type: "SingleGen"
+
+   # "singleRandom": pick ONE random entry from the PDG list each event.
+   # Run N*44 events total to get approximately N events per species.
+   ParticleSelectionMode: "singleRandom"
+   PadOutVectors: true
+
+   PDG: [
+      1000050080,   # B8   (Z=5,  A=8)
+      1000060090,   # C9   (Z=6,  A=9)
+      1000070180,   # N18  (Z=7,  A=18)
+      1000030090,   # Li9  (Z=3,  A=9)
+      1000030080,   # Li8  (Z=3,  A=8)
+      1000040110,   # Be11 (Z=4,  A=11)
+      1000020080,   # He8  (Z=2,  A=8)
+      1000070160,   # N16  (Z=7,  A=16)
+      1000060150,   # C15  (Z=6,  A=15)
+      1000110260,   # Na26 (Z=11, A=26)
+      1000110270,   # Na27 (Z=11, A=27)
+      1000070170,   # N17  (Z=7,  A=17)
+      1000130300,   # Al30 (Z=13, A=30)
+      1000090230,   # F23  (Z=9,  A=23)
+      1000060160,   # C16  (Z=6,  A=16)
+      1000130310,   # Al31 (Z=13, A=31)
+      1000120290,   # Mg29 (Z=12, A=29)
+      1000170400,   # Cl40 (Z=17, A=40)
+      1000090200,   # F20  (Z=9,  A=20)
+      1000150340,   # P34  (Z=15, A=34)
+      1000170380,   # Cl38 (Z=17, A=38)
+      1000050140,   # B14  (Z=5,  A=14)
+      1000030110,   # Li11 (Z=3,  A=11)
+      1000070120,   # N12  (Z=7,  A=12)
+      1000080130,   # O13  (Z=8,  A=13)
+      1000050130,   # B13  (Z=5,  A=13)
+      1000050120,   # B12  (Z=5,  A=12)
+      1000130320,   # Al32 (Z=13, A=32)
+      1000040120,   # Be12 (Z=4,  A=12)
+      1000180410,   # Ar41 (Z=18, A=41)
+      1000180390,   # Ar39 (Z=18, A=39)
+      1000180380,   # Ar38 (Z=18, A=38)
+      1000170370,   # Cl37 (Z=17, A=37)
+      1000170390,   # Cl39 (Z=17, A=39)
+      1000160340,   # S34  (Z=16, A=34)
+      1000170360,   # Cl36 (Z=17, A=36)
+      1000160350,   # S35  (Z=16, A=35)
+      1000160360,   # S36  (Z=16, A=36)
+      1000180370,   # Ar37 (Z=18, A=37)
+      1000170350,   # Cl35 (Z=17, A=35)
+      1000160330,   # S33  (Z=16, A=33)
+      1000150320,   # P32  (Z=15, A=32)
+      1000150330,   # P33  (Z=15, A=33)
+      1000140300    # Si30 (Z=14, A=30)
+   ]
+
+   # Nucleus at rest (kinetic energy = 0).
+   # G4RadioactiveDecayPhysics (enabled in g4_internal_cosmogenics_*.fcl) handles the beta decay.
+   P0:     [ 0.0 ]
+   SigmaP: [ 0.0 ]
+   PDist:  0          # 0 = fixed momentum
+
+   # Direction: irrelevant for particles at rest.
+   Theta0YZ:     [ 0.0 ]
+   Theta0XZ:     [ 0.0 ]
+   SigmaThetaYZ: [ 0.0 ]
+   SigmaThetaXZ: [ 0.0 ]
+   AngleDist: 0
+
+   # PosDist selects the shape, not the coordinate: SingleGen_module.cc has
+   # kUNIF=0, kGAUS=1. 0 samples uniformly over (X0-Sigma, X0+Sigma).
+   # X0/Y0/Z0/SigmaX/SigmaY/SigmaZ must be overridden per geometry.
+   PosDist: 0
+   X0:     [ 0. ]
+   Y0:     [ 0. ]
+   Z0:     [ 0. ]
+   SigmaX: [ 1. ]
+   SigmaY: [ 1. ]
+   SigmaZ: [ 1. ]
+
+   # Time: place at t=0.
+   T0:     [ 0. ]
+   SigmaT: [ 0. ]
+   TDist:  0
+}
+
+END_PROLOG

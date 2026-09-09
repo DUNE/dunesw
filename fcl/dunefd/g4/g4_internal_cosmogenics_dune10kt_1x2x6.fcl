@@ -1,0 +1,21 @@
+# Geant4 stage for internal cosmogenic isotopes in the DUNE FD HD 1x2x6.
+# See fcl/dunefd/gen/lowE_cosmogenics/README.md.
+
+#include "standard_g4_dune10kt_1x2x6.fcl"
+
+process_name: InternalCosmogenicsG4
+
+# QGSP_BERT carries no G4RadioactiveDecayPhysics, so the nuclei SingleGen places
+# would be tracked as stable and never produce a beta. Shielding supplies it.
+services.PhysicsList.PhysicsListName: "Shielding"
+
+# larg4Main takes the macro from visMacro and ignores any other key, and
+# macroPath names an environment variable to search rather than a path. It has to
+# be FHICL_FILE_PATH: the macro installs to ${dunesw_FHICL_DIR}, which is not on
+# FW_SEARCH_PATH, and a macro that is not found is only logged at INFO level.
+physics.producers.largeant.macroPath: "FHICL_FILE_PATH"
+physics.producers.largeant.visMacro: "internal_cosmogenics_rd.mac"
+
+services.ParticleListAction.keepEMShowerDaughters: true
+
+outputs.out1.fileName: "internal_cosmogenics_g4.root"

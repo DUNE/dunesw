@@ -1,0 +1,5 @@
+# Raise the G4RadioactiveDecay time threshold to cover 41Ar (T1/2 = 6600 s) and
+# everything shorter. The geological isotopes (39Ar, 36Cl, 35S, 37Ar) stay above
+# it and are still treated as stable. The unit is mandatory: a bare number is
+# rejected and the threshold left unset, which is visible only in the g4 log.
+/process/had/rdm/thresholdForVeryLongDecayTime 1.0e+14 ns

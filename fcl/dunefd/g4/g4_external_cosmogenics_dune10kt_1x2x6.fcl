@@ -1,0 +1,12 @@
+# Geant4 stage for external cosmogenics in the DUNE FD HD 1x2x6, reading the
+# MCTruth written by gen_external_cosmogenics_dune10kt_1x2x6.fcl.
+# See fcl/dunefd/gen/lowE_cosmogenics/README.md.
+
+#include "standard_g4_dune10kt_1x2x6.fcl"
+
+process_name: ExternalCosmogenicsG4
+
+# Shielding for the HP neutron cross-sections below 20 MeV, which QGSP_BERT lacks.
+services.PhysicsList.PhysicsListName: "Shielding"
+
+outputs.out1.fileName: "external_cosmogenics_g4.root"
