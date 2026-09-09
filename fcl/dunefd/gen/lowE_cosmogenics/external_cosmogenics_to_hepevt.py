@@ -14,7 +14,7 @@ two is not reproduced -- see README.md, which also says how to obtain the full
 unreduced CSV if you need it.
 
 Entry face: central APA plane of the 1x2x6 (x = 0 cm).
-Positions are sampled uniformly over the APA face: y in [-305, 305], z in [0, 1394] cm.
+Positions are sampled uniformly over the APA face: y in [-600, 600], z in [0, 1393.4] cm.
 
 Coordinate convention:
   Table uses x=beam, y=vertical, z=drift, and cos(theta) is measured about z.
@@ -34,6 +34,10 @@ Exposure scaling:
 Usage:
   python external_cosmogenics_to_hepevt.py external_cosmogenics_table.dat output.hepevt \
       --norm-ktondays 5980 --target-ktondays 36500 [--seed 42]
+
+Also writes <output.hepevt>.nevents, the exact number of events written. The gen
+stage MUST be given that number with -n: TextFileGen throws at EOF instead of
+ending the job, so `maxEvents: -1` loses the entire run.
 """
 
 import sys
@@ -45,9 +49,13 @@ import argparse
 # APA plane entry position
 X_ENTRY = 0.0   # cm  (central APA plane)
 
-# APA face bounds (from dune_cosmogenics_model_hd_1x2x6.fcl)
-Y_LO, Y_HI = -305.0,  305.0   # cm
-Z_LO, Z_HI =    0.0, 1394.0   # cm
+# APA face bounds, from the active volume of dune10kt_v6_refactored_1x2x6.gdml
+# as reported by DumpGeometry (see dune_internal_cosmogenics_model_dune10kt_1x2x6.fcl).
+# The 1x2x6 stacks TWO 600 cm APAs vertically, so the face is 1200 cm tall, not
+# the 610 cm of a single APA. An earlier revision used +-305 and injected over
+# only the middle half of the face.
+Y_LO, Y_HI = -600.0,  600.0   # cm
+Z_LO, Z_HI =    0.0, 1393.4   # cm
 
 # PDG masses in GeV
 PDG_MASS = {
@@ -262,14 +270,30 @@ def main():
                 )
                 species_count[pdg] = species_count.get(pdg, 0) + 1
 
+    # Sidecar holding the exact event count. TextFileGen THROWS when it runs off
+    # the end of the HEPEVT file rather than ending the job, so `maxEvents: -1`
+    # aborts the run at EOF and art never closes RootOutput -- the whole gen
+    # stage is lost, leaving only an orphan RootOutput-*.root temp file. art must
+    # therefore be told exactly how many events to read, and only this script
+    # knows the number, because it is a Poisson draw.
+    nevents_path = args.output_hepevt + '.nevents'
+    with open(nevents_path, 'w') as fn:
+        fn.write(f"{n_written}\n")
+
     print(f"Source particles    : {n_source}")
     print(f"Expected events out : ~{n_source * scale:.0f}")
     print(f"Written events      : {n_written}  (Poisson fluctuation)")
     print(f"Output              : {args.output_hepevt}")
+    print(f"Event count sidecar : {nevents_path}")
     print("Species breakdown:")
     for pdg, count in sorted(species_count.items(), key=lambda x: -x[1]):
         label = _LABEL.get(pdg, f'PDG={pdg}')
         print(f"  {label:14s}: {count:8d}  ({100*count/n_written:.1f}%)")
+
+    print("\nRun the gen stage with -n; without it TextFileGen aborts at EOF "
+          "and no output file is written:")
+    print(f"  lar -c gen_external_cosmogenics_dune10kt_1x2x6.fcl "
+          f"-n $(cat {nevents_path}) -o external_cosmogenics_gen.root")
 
 
 if __name__ == '__main__':

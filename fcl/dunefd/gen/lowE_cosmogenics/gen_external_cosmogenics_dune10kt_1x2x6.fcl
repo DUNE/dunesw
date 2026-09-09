@@ -6,8 +6,10 @@
 # entering the detector, pre-simulated by a standalone G4 campaign.
 #
 # Particles are read from a HEPEVT file produced by external_cosmogenics_to_hepevt.py.
-# They are placed at the central APA plane (x = 0) with isotropic directions,
-# consistent with the RadioGen gammas_from_cavernwall_atLAr convention.
+# They are placed at the central APA plane (x = 0), consistent with the RadioGen
+# gammas_from_cavernwall_atLAr convention. Directions are NOT isotropic: they are
+# drawn from the per-species (cos(theta), phi) distribution held in the sampling
+# table, whose azimuth is measurably non-flat (chi2/ndf = 222 for gammas).
 #
 # This FCL is complementary to gen_internal_cosmogenics_dune10kt_1x2x6.fcl (which generates
 # cosmogenic isotopes inside the LAr). Both should be run as separate samples.
@@ -15,8 +17,11 @@
 # Workflow:
 #   1. Build the HEPEVT file from the sampling table (see README.md):
 #        python external_cosmogenics_to_hepevt.py external_cosmogenics_table.dat external_cosmogenics.hepevt
-#   2. Gen stage (run from the directory containing external_cosmogenics.hepevt):
-#        lar -c gen_external_cosmogenics_dune10kt_1x2x6.fcl -o external_cosmogenics_gen.root
+#   2. Gen stage (run from the directory containing external_cosmogenics.hepevt).
+#      -n is REQUIRED -- see the maxEvents comment in the source block below:
+#        lar -c gen_external_cosmogenics_dune10kt_1x2x6.fcl \
+#            -n $(cat external_cosmogenics.hepevt.nevents) \
+#            -o external_cosmogenics_gen.root
 #   3. G4 stage:
 #        lar -c g4_external_cosmogenics_dune10kt_1x2x6.fcl \
 #            -s external_cosmogenics_gen.root -o external_cosmogenics_g4.root
@@ -36,7 +41,19 @@ source:
 {
    module_type: EmptyEvent
    timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
-   maxEvents:   -1         # runs until HEPEVT file is exhausted (1 event per CSV row)
+   # MUST be overridden with -n, using the count in <hepevt>.nevents that
+   # external_cosmogenics_to_hepevt.py writes beside the HEPEVT file.
+   #
+   # -1 does NOT mean "read until EOF" here. TextFileGen throws when it runs off
+   # the end of the file instead of ending the job, so if -n is omitted art
+   # aborts on the last event, never closes RootOutput, and leaves an orphan
+   # RootOutput-*.root temp file instead of the -o name.
+   #
+   # That is kept deliberately, as a fail-closed guard. Any finite default is
+   # worse: with -n forgotten it would exit 0 and write a short file that looks
+   # valid, silently understating the exposure. A crash with no output cannot be
+   # mistaken for a good run. Give -n the sidecar count and this never fires.
+   maxEvents:   -1
    firstRun:    20003000
    firstEvent:  1
 }

@@ -25,8 +25,16 @@ services.PhysicsList.PhysicsListName: "Shielding"
 # visMacro, NOT G4MacroFiles: larg4Main reads `visMacro` (larg4Main_module.cc:138)
 # and ignores any other key, so the original G4MacroFiles line was silently inert
 # -- a nonexistent filename raised no error either. macroPath names an ENVIRONMENT
-# VARIABLE to search, not a path; same pairing as protoDUNE_refactored_g4_stage1_*.
-physics.producers.largeant.macroPath: "FW_SEARCH_PATH"
+# VARIABLE to search, not a path.
+#
+# FHICL_FILE_PATH, not FW_SEARCH_PATH. protoDUNE_refactored_g4_stage1_* pairs
+# visMacro with FW_SEARCH_PATH because its 10keV.mac ships in dunesim's
+# config_data, which is on that path. Nothing dunesw installs is: this .mac goes
+# to ${dunesw_FHICL_DIR} beside the FCLs, so FW_SEARCH_PATH cannot find it in an
+# installed release. The miss is NOT fatal -- larg4Main logs "Unable to find
+# internal_cosmogenics_rd.mac" at INFO level and runs on with the threshold
+# unset -- so it would pass unnoticed in exactly the way this macro guards against.
+physics.producers.largeant.macroPath: "FHICL_FILE_PATH"
 physics.producers.largeant.visMacro: "internal_cosmogenics_rd.mac"
 
 services.ParticleListAction.keepEMShowerDaughters: true
