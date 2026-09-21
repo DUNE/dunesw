@@ -1,0 +1,33 @@
+#fhicl file to run the G4 step with a charge recovery tool in the CRP gaps
+#include "standard_g4_dunevd10kt.fcl"
+
+services: {
+  @table::services
+  @table::dunefdvd_1x8x14_3view_30deg_simulation_services
+}
+
+#the geomerty with realistic dimensions of the CRP gaps
+services.LArG4Detector.gdmlFileName_: "./dunevd10kt_3view_30deg_v7_refactored_1x8x14.gdml"
+services.Geometry.GDML:               "./dunevd10kt_3view_30deg_v7_refactored_1x8x14.gdml"
+services.AuxDetGeometry.GDML:         "./dunevd10kt_3view_30deg_v7_refactored_1x8x14.gdml"
+services.LArG4Detector.volumeNames:   ["volTPCActive", "volEnclosureTPC", "volCryostat"]
+services.LArG4Detector.stepLimits:    [0.4, 0.4, 0.4]
+
+#the charge recovery tool itself, with default parameters
+tools: {
+  GapChargeTransport: {
+    tool_type: "GapChargeTransport"
+    FunctionType: "linear"
+    ProbabilityBorder: 0.99
+    DistanceZero: 1.0
+    Shift: 0.2
+    Volume: "LArG4DetectorServicevolEnclosureTPC"
+  }
+}
+
+#the EnclosureTPC volume must be included so that IonAndSCint processes the energy deposited in the gaps
+physics.producers.IonAndScint: {
+  @table::physics.producers.IonAndScint
+  Instances: "LArG4DetectorServicevolTPCActive;LArG4DetectorServicevolEnclosureTPC"
+  ChargeTransport: @local::tools.GapChargeTransport
+}
