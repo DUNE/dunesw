@@ -1,0 +1,60 @@
+# Generation stage for cosmogenic beta-emitting isotopes in the DUNE FD HD
+# 1x2x6: isotopes produced by muon spallation on 40Ar that decay inside the
+# active LAr. Each event, SingleGen picks one isotope at random from the 44-entry
+# PDG list and places it at rest at a uniformly sampled position.
+#
+# Usage:
+#   lar -c gen_internal_cosmogenics_dune10kt_1x2x6.fcl -n <N*44> -o internal_cosmogenics_gen.root
+#
+# N*44 events gives about N per species, with Poisson spread of ~sqrt(N).
+#
+# For exactly N events of a single species, override in a wrapper fcl:
+#   #include "gen_internal_cosmogenics_dune10kt_1x2x6.fcl"
+#   physics.producers.generator.PDG: [1000030080]   # Li8 only
+#   outputs.out1.fileName: "internal_cosmogenics_Li8_gen.root"
+
+#include "services_dune.fcl"
+#include "dune_internal_cosmogenics_model_dune10kt_1x2x6.fcl"
+
+process_name: InternalCosmogenicsGen
+
+services:
+{
+   @table::dunefd_1x2x6_simulation_services
+   TFileService:          { fileName: "internal_cosmogenics_gen_hist.root" }
+   RandomNumberGenerator: {}
+}
+
+source:
+{
+   module_type: EmptyEvent
+   timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
+   maxEvents:   440       # ~10 per species; override with -n
+   firstRun:    20001000
+   firstEvent:  1
+}
+
+physics:
+{
+   producers:
+   {
+      rns:       { module_type: "RandomNumberSaver" }
+      generator: @local::dune_internal_cosmogenic_singlep_dune10kt_1x2x6
+   }
+
+   simulate:      [ rns, generator ]
+   stream1:       [ out1 ]
+   trigger_paths: [ simulate ]
+   end_paths:     [ stream1 ]
+}
+
+outputs:
+{
+   out1:
+   {
+      module_type: RootOutput
+      fileName:    "internal_cosmogenics_gen.root"
+      dataTier:    "generated"
+      compressionLevel: 1
+   }
+}

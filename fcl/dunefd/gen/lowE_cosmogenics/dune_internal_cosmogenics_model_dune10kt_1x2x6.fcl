@@ -1,0 +1,28 @@
+# Position overrides for the DUNE FD HD 1x2x6 geometry.
+#
+# Active LAr volume of dune10kt_v6_refactored_1x2x6.gdml, from DumpGeometry
+# (24 TPC active boxes: 2 in x, 2 in y, 6 in z):
+#   X: -363.376 to +363.376 cm, the APA plane occupying |x| < 3.961 cm
+#   Y: -600.019 to +600.019 cm, two 600 cm APAs stacked
+#   Z:   -0.876 to  1393.460 cm, six APA pairs along the beam
+#
+# The envelope below is that volume less a ~0.4 cm margin, so vertices stay
+# inside without clipping the edges. The APA plane is left in: it is ~1.1% of
+# the width and SingleGen cannot punch a hole in a uniform box, so the few
+# vertices landing there deposit outside volTPCActive.
+
+#include "dune_internal_cosmogenics_model.fcl"
+
+BEGIN_PROLOG
+
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6: @local::dune_internal_cosmogenic_singlep
+
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.X0:     [    0. ]
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.Y0:     [    0. ]
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.Z0:     [  696.3 ]
+
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaX: [  363.0 ]
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaY: [  599.6 ]
+dune_internal_cosmogenic_singlep_dune10kt_1x2x6.SigmaZ: [  696.0 ]
+
+END_PROLOG

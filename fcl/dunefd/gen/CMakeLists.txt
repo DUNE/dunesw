@@ -8,5 +8,6 @@ add_subdirectory(background)
 add_subdirectory(nnbar)
 add_subdirectory(bdm)
 add_subdirectory(solar)
+add_subdirectory(lowE_cosmogenics)
 
 install_fhicl()
