@@ -1,0 +1,24 @@
+#include "standard_detsim_dune10kt_1x2x6.fcl"
+
+# change process name, to be able to rerun it
+process_name: detsimLifetimem20percent
+
+source.inputCommands: [
+ "keep *",
+ "drop *_*_*_detsim",
+ "drop *_*_*_wirecell",
+ "drop *_*_*_Reco1",
+ "drop *_*_*_Reco2"
+]
+
+source.maxEvents: -1
+
+# modify detector parameters
+services.DetectorPropertiesService.Electronlifetime: 8320
+
+# make sure detector simulation parameters are correctly propagated to wirecell
+physics.producers.tpcrawdecoder.wcls_main.structs.DT:   @local::services.LArG4Parameters.TransverseDiffusion
+physics.producers.tpcrawdecoder.wcls_main.structs.DL:   @local::services.LArG4Parameters.LongitudinalDiffusion
+physics.producers.tpcrawdecoder.wcls_main.structs.lifetime:   @local::services.DetectorPropertiesService.Electronlifetime
+services.DetectorPropertiesService.Electronlifetime: 8320
+

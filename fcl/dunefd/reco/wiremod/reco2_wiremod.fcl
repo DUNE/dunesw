@@ -1,0 +1,44 @@
+#include "reco2_atmos_dune10kt_1x2x6_geov5.fcl"
+
+
+process_name: reco2WiremodDetsystVar
+
+source.inputCommands: [
+ "keep *",
+ "drop *_*_*_Reco2"
+]
+
+
+physics.producers.pandora.HitFinderModuleLabel: "hitfd"
+physics.producers.linecluster.HitFinderModuleLabel: "gaushitWireMod"
+physics.producers.cvnmap.HitsModuleLabel: "hitfd"
+
+physics.producers.anglerecohits.HitLabel: "hitfd"
+physics.producers.anglereconue.HitLabel: "gaushitWireMod"
+physics.producers.anglereconuepfps.HitLabel: "gaushitWireMod"
+physics.producers.anglereconumu.HitLabel: "hitfd"
+physics.producers.anglereconumupfps.HitLabel: "gaushitWireMod"
+
+physics.producers.energyrecnc.HitLabel: "gaushitWireMod"
+physics.producers.energyrecnue.HitLabel: "gaushitWireMod"
+physics.producers.energyrecnumu.HitLabel: "gaushitWireMod"
+physics.producers.energyrecnumumcs.HitLabel: "gaushitWireMod"
+physics.producers.energyrecnumurange.HitLabel: "gaushitWireMod"
+
+physics.producers.trajcluster.HitModuleLabel: "gaushitWireMod"
+
+physics.producers.anglerecohits.WireLabel: "duneWiremod"
+physics.producers.anglereconue.WireLabel: "duneWiremod"
+physics.producers.anglereconuepfps.WireLabel: "duneWiremod"
+physics.producers.anglereconumu.WireLabel: "duneWiremod"
+physics.producers.anglereconumupfps.WireLabel: "duneWiremod"
+
+physics.producers.energyrecnc.WireLabel: "duneWiremod"
+physics.producers.energyrecnue.WireLabel: "duneWiremod"
+physics.producers.energyrecnumu.WireLabel: "duneWiremod"
+physics.producers.energyrecnumumcs.WireLabel: "duneWiremod"
+physics.producers.energyrecnumurange.WireLabel: "duneWiremod"
+
+physics.producers.emtrkmichelid.WireLabel: "duneWiremod"
+physics.producers.pmtrack.WireModuleLabel: "duneWiremod"
+physics.producers.pmtracktc.WireModuleLabel: "duneWiremod"

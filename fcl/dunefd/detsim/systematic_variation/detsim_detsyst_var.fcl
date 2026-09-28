@@ -1,0 +1,13 @@
+#include "standard_detsim_dune10kt_1x2x6.fcl"
+
+# change process name, to be able to rerun it
+process_name: detsimDetsystVar
+
+source.inputCommands: [
+ "keep *",
+ "drop *_*_*_detsim",
+ "drop *_*_*_wirecell",
+ "drop *_*_*_Reco1",
+ "drop *_*_*_Reco2"
+]
+
