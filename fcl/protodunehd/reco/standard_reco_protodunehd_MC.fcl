@@ -5,6 +5,7 @@
 
 #include "t0reco.fcl"
 #include "pandoramodules_dune.fcl"
+#include "pandora_alltrackshower.fcl"
 #include "wirecell_dune.fcl"
 #include "particleid.fcl"
 
@@ -40,7 +41,6 @@ services:
 
 
 }
-services.SpaceCharge: @local::pdhd_spacecharge
 
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
@@ -91,8 +91,6 @@ physics: {
     pandoraShowercalo:       @local::pdhd_showercalomcsce
     pandoraShowercalonosce:  @local::pdhd_showercalomcnosce
 
-    ## Gnocchi Calorimetry
-
     # CRT Reconstruction
     crtreco: @local::TwoCRTMatching_producer
     crttag: @local::SingleCRTMatching_producer
@@ -103,64 +101,60 @@ physics: {
     opflash:            @local::protodune_opflash
     opslicer:           @local::protodune_opslicer
 
-    crtreco: @local::TwoCRTMatching_producer
-    crttag: @local::SingleCRTMatching_producer
-
     ##Producers for forcing pandora to create track or shower objects
     ##for each PFParticle
-    pandora2Track:         @local::dune_pandoraTrackCreation
+    pandora2Track:         @local::pandora_allTrack_creation
     pandora2calo:          @local::pdhd_allTrack_calomcsce
     pandora2calonosce:     @local::pdhd_allTrack_calomcnosce
-    pandora2Shower:        @local::dune_pandoraShowerCreation
+
+    pandora2Shower:        @local::pandora_allShower_creation
     pandora2Showercalo:         @local::pdhd_allShower_calomcsce
     pandora2Showercalonosce:    @local::pdhd_allShower_calomcnosce
 
+    ## Gnocchi Calorimetry
     pandoraGnocchiCalo: @local::pdhd_gnocchi_calomc
     pandora2GnocchiCalo: @local::pdhd_gnocchi_calomc
     pandoraGnocchiCalonosce: @local::pdhd_gnocchi_calomc_nosce
     pandora2GnocchiCalonosce: @local::pdhd_gnocchi_calomc_nosce
   }
   #define the producer and filter modules for this path, order matters,
-#filters reject all following items.  see lines starting physics.producers below
-reco: [ opdec,
-        ophitspe,
-        opflash,
-        opslicer,
-        wclsdatahd,
-        gaushit,
-        nhitsfilter,
-        reco3d,
-        hitpdune,
-        pandora,
-        pandoraWriter,
-        pandoraTrack,
-        pandoraShower,
-        pandoracalo,
-        pandoracalonosce,
-        #pandorapid,
-        pandoraShowercalo,
-        pandoraShowercalonosce,
-        pandoraGnocchiCalo,
-        pandoraGnocchiCalonosce,
-        emtrkmichelid,
-        crttag,
-        crtreco,
-        pandora2Track,
-        pandora2calo,
-        pandora2calonosce,
-        pandora2GnocchiCalo,
-        pandora2GnocchiCalonosce,
-        pandora2Shower,
-        pandora2Showercalo,
-        pandora2Showercalonosce
-          ]
-  #define the output stream, there could be more than one if using filters
+  #filters reject all following items.  see lines starting physics.producers below
+  reco: [ 
+    opdec,
+    ophitspe,
+    opflash,
+    opslicer,
+    wclsdatahd,
+    gaushit,
+    nhitsfilter,
+    reco3d,
+    hitpdune,
+    pandora,
+    pandoraWriter,
+    pandoraTrack,
+    pandoraShower,
+    pandoracalo,
+    pandoracalonosce,
+    #pandorapid,
+    pandoraShowercalo,
+    pandoraShowercalonosce,
+    pandoraGnocchiCalo,
+    pandoraGnocchiCalonosce,
+    emtrkmichelid,
+    crttag,
+    crtreco,
+    pandora2Track,
+    pandora2calo,
+    pandora2calonosce,
+    pandora2GnocchiCalo,
+    pandora2GnocchiCalonosce,
+    pandora2Shower,
+    pandora2Showercalo,
+    pandora2Showercalonosce
+  ]
+
   output:  [ out1 ]
-  #trigger_paths is a keyword and contains the paths that modify the art::event,
-  #ie filters and producers
   trigger_paths: [reco]
-  #end_paths is a keyword and contains the paths that do not modify the art::Event,
-  #ie analyzers and output streams.  these all run simultaneously
   end_paths:     [output]
 }
 #block to define where the output goes.  if you defined a filter in the physics
@@ -184,41 +178,42 @@ outputs:
  }
 }
 
+
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatahd:gauss"
+
+physics.filters.nhitsfilter.HitLimit: 17500
+
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
-physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
-physics.producers.pandoraWriter.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
 physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
-physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
 physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"
 physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
 physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
 
+#Truth matching with pandora
+physics.producers.pandora.GeantModuleLabel:                 "tpcrawdecoder:simpleSC"
+physics.producers.pandoraWriter.GeantModuleLabel:           "tpcrawdecoder:simpleSC"
+physics.producers.pandoraWriter.GeneratorModuleLabel:       "generator"
+
 ##Optical detector configuration
 physics.producers.opdec.InputModule: "opdigi"
 physics.producers.opdec.InstanceName: ""
-physics.producers.ophitspe.InputModuledigi: "opdigi" ##TODO check this
+physics.producers.ophitspe.InputModuledigi: "opdigi"
 physics.producers.opflash.InputModule: "ophitspe"
 physics.producers.opslicer.OpHitModuleLabel: "ophitspe"
 
-
-
 #Forcing Pandora to create either all tracks or all showers on each PFParticle object
-physics.producers.pandora2Track.PFParticleLabel:             "pandora"
-physics.producers.pandora2Track.UseAllParticles:             true
-####The above line forces pandora to fit a track to all PFParticles
-physics.producers.pandora2Shower.PFParticleLabel:            "pandora"
-physics.producers.pandora2Shower.UseAllParticles:            true
+#physics.producers.pandora2Track.PFParticleLabel:             "pandora"
+#physics.producers.pandora2Track.UseAllParticles:             true
+#####The above line forces pandora to fit a track to all PFParticles
+#physics.producers.pandora2Shower.PFParticleLabel:            "pandora"
+#physics.producers.pandora2Shower.UseAllParticles:            true
 
 physics.producers.pandora2Showercalo.ShowerTag: "pandora2Shower"
 physics.producers.pandora2Showercalonosce.ShowerTag: "pandora2Shower"
 physics.producers.pandora2calo.TrackModuleLabel: "pandora2Track"
 physics.producers.pandora2calonosce.TrackModuleLabel: "pandora2Track"
-#
 physics.producers.pandora2GnocchiCalo.TrackModuleLabel:                "pandora2Track"
 physics.producers.pandora2GnocchiCalo.AssocHitModuleLabel:             "pandora2Track"
 physics.producers.pandora2GnocchiCalonosce.TrackModuleLabel:                "pandora2Track"
 physics.producers.pandora2GnocchiCalonosce.AssocHitModuleLabel:             "pandora2Track"
-physics.producers.wclsdatahd.wcls_main.params.reality: sim
-physics.producers.wclsdatahd.wcls_main.params.raw_input_label: "tpcrawdecoder:daq"

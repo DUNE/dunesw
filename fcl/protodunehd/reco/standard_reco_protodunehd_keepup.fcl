@@ -12,6 +12,7 @@
 
 #include "t0reco.fcl"
 #include "pandoramodules_dune.fcl"
+#include "pandora_alltrackshower.fcl"
 #include "wirecell_dune.fcl"
 #include "particleid.fcl"
 
@@ -48,7 +49,7 @@ services:
   Geometry:                     @local::protodunehd_geo
   AuxDetGeometry:               @local::protodunehd_auxdet_geo
   DetectorClocksService:        @local::protodunehd_detectorclocks
-  DetectorPropertiesService:    @local::protodunehd_detproperties
+  DetectorPropertiesService:    @local::protodunehd_detproperties_resampled
   LArPropertiesService:         @local::dunefd_properties
   LArFFT:                       @local::dunefd_larfft
   DatabaseUtil:                 @local::dunefd_database
@@ -97,13 +98,9 @@ physics:
     # Beam Instrumentation Info
     beamevent:          @local::pdhd_beamevent
 
-    # Optical reconstruction
-    opdec:              @local::protodunehd_deconvolution
-    ophitspe:           @local::dune_ophit_finder_deco
-    opflash:            @local::protodune_opflash
-    opslicer:           @local::protodune_opslicer
-
-    # Signal Processing (data prep)
+    # Signal Processing
+    # WCT with NF + SP + DNN-ROI + L1SP-after-DNN (hybrid)
+    # See dunereco/DUNEWireCell/wirecell_dune.fcl
     wclsdatahd:         @local::protodunehd_nfsp_dnnroi
     # Hit finding
     gaushit:            @local::protodunespmc_gaushitfinder
@@ -127,13 +124,31 @@ physics:
     pandoraShowercalo:  @local::pdhd_showercalodata
     pandoraShowercalonosce:  @local::pdhd_showercalodatanosce
 
+    #No CRT Raw decoder yet
+    #crtreco: @local::TwoCRTMatching_producer
+    #crttag: @local::SingleCRTMatching_producer
+
+    #photon detector reconstruction
+    opdec:              @local::protodunehd_deconvolution
+    ophitspe:           @local::dune_ophit_finder_deco
+    opflash:            @local::protodune_opflash
+    opslicer:           @local::protodune_opslicer
+
+    ##Producers for forcing pandora to create track or shower objects
+    ##for each PFParticle
+    pandora2Track:         @local::pandora_allTrack_creation
+    pandora2calo:          @local::pdhd_allTrack_calodata
+    pandora2calonosce:     @local::pdhd_allTrack_calodatanosce
+
+    pandora2Shower:        @local::pandora_allShower_creation
+    pandora2Showercalo:         @local::pdhd_allShower_calodata
+    pandora2Showercalonosce:    @local::pdhd_allShower_calodatanosce
+
     ## Gnocchi Calorimetry
     pandoraGnocchiCalo: @local::pdhd_gnocchi_calodata
+    pandora2GnocchiCalo: @local::pdhd_gnocchi_calodata
     pandoraGnocchiCalonosce: @local::pdhd_gnocchi_calodata_nosce
-
-    # CRT Reconstruction
-    crtreco: @local::TwoCRTMatching_producer
-    crttag: @local::SingleCRTMatching_producer
+    pandora2GnocchiCalonosce: @local::pdhd_gnocchi_calodata_nosce
   }
 
   produce: [
@@ -142,7 +157,7 @@ physics:
     timingrawdecoder,
     ctbrawdecoder,
     beamevent,
-    #pdhddaphne,
+    pdhddaphne,
     fembfilter,
     wclsdatahd,
     saturationfilter,
@@ -150,17 +165,31 @@ physics:
     nhitsfilter,
     reco3d,
     hitpdune,
-    ###Commenting a lot out for now for just beam reco
-    pandora, pandoraWriter, pandoraTrack, pandoraShower #, pandoracalo, pandoracalonosce,
-    #pandorapid, pandoraShowercalo, pandoraShowercalonosce,
-    #pandoraGnocchiCalo,
-    #pandoraGnocchiCalonosce,
-    #emtrkmichelid,
-    #opdec,
-    #ophitspe,
-    #opflash,
-    #opslicer
+    pandora,
+    pandoraWriter,
+    pandoraTrack,
+    pandoraShower,
+    pandoracalo,
+    pandoracalonosce,
+    #pandorapid,
+    pandoraShowercalo,
+    pandoraShowercalonosce,
+    pandoraGnocchiCalo,
+    pandoraGnocchiCalonosce,
+    emtrkmichelid,
+    opdec,
+    ophitspe,
+    opflash,
+    opslicer,
     ##crtreco, crttag
+    pandora2Track,
+    pandora2calo,
+    pandora2calonosce,
+    pandora2GnocchiCalo,
+    pandora2GnocchiCalonosce,
+    pandora2Shower,
+    pandora2Showercalo,
+    pandora2Showercalonosce
   ]
 
   output: [ out1 ]
@@ -172,7 +201,8 @@ outputs:
 {
   out1:
   {
-    outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*"]
+    outputCommands: [ "keep *", "drop *_reco3d_noreg_*",
+                     "drop *_reco3d_pre_*"]
     compressionLevel: 1
     module_type: RootOutput
     fileName: "%ifb_%tc_keepup.root"
@@ -184,20 +214,14 @@ source: @local::hdf5rawinput3
 
 ##Check this
 physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDHDDataInterfaceWIBEth3Defaults
-physics.producers.opdec.InputModule: "pdhddaphne"
-physics.producers.opdec.InstanceName: "daq"
-physics.producers.ophitspe.InputModuledigi: "pdhddaphne:daq"
-physics.producers.opflash.InputModule: "ophitspe"
-physics.producers.opslicer.OpHitModuleLabel: "ophitspe"
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatahd:gauss"
 
-services.SpaceCharge.EnableSimEfieldSCE: true
-services.SpaceCharge.EnableSimSpatialSCE: true
-services.SpaceCharge.EnableSimulationSCE: true
+physics.filters.nhitsfilter.HitLimit: 17500
 
-services.SpaceCharge.EnableCalEfieldSCE: true
-services.SpaceCharge.EnableCalSpatialSCE: true
-services.SpaceCharge.EnableCorrSCE: true
+#Turn off calibration because we do not know good corrections yet
+services.SpaceCharge.EnableCalEfieldSCE: false
+services.SpaceCharge.EnableCalSpatialSCE: false
+services.SpaceCharge.EnableCorrSCE: false
 
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
 physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
@@ -205,3 +229,26 @@ physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
 physics.producers.pandoraShower.PFParticleLabel:            "pandora"
 physics.producers.pandorapid.CalorimetryModuleLabel:        "pandoracalo"
 physics.producers.pandorapid.TrackModuleLabel:              "pandoraTrack"
+
+##Optical detector configuration
+physics.producers.opdec.InputModule: "pdhddaphne"
+physics.producers.opdec.InstanceName: "daq"
+physics.producers.ophitspe.InputModuledigi: "pdhddaphne:daq"
+physics.producers.opflash.InputModule: "ophitspe"
+physics.producers.opslicer.OpHitModuleLabel: "ophitspe"
+
+#Forcing Pandora to create either all tracks or all showers on each PFParticle object
+#physics.producers.pandora2Track.PFParticleLabel:             "pandora"
+#physics.producers.pandora2Track.UseAllParticles:             true
+#####The above line forces pandora to fit a track to all PFParticles
+#physics.producers.pandora2Shower.PFParticleLabel:            "pandora"
+#physics.producers.pandora2Shower.UseAllParticles:            true
+
+physics.producers.pandora2Showercalo.ShowerTag: "pandora2Shower"
+physics.producers.pandora2Showercalonosce.ShowerTag: "pandora2Shower"
+physics.producers.pandora2calo.TrackModuleLabel: "pandora2Track"
+physics.producers.pandora2calonosce.TrackModuleLabel: "pandora2Track"
+physics.producers.pandora2GnocchiCalo.TrackModuleLabel:                "pandora2Track"
+physics.producers.pandora2GnocchiCalo.AssocHitModuleLabel:             "pandora2Track"
+physics.producers.pandora2GnocchiCalonosce.TrackModuleLabel:                "pandora2Track"
+physics.producers.pandora2GnocchiCalonosce.AssocHitModuleLabel:             "pandora2Track"

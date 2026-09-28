@@ -1,4 +1,6 @@
 #include "standard_reco_protodunehd_MC.fcl"
+
+###DO WE NEED TO SPECIFY THESE
 services.SpaceCharge.InputFilename:        		"ProtoDUNE/HD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDHD_Sim_NoFluidFlow_E500_v2.root"
 services.SpaceCharge.CalibrationInputFilename:          "ProtoDUNE/HD/SpaceCharge/Sim_NoFluidFlow/v2/SCE_PDHD_Sim_NoFluidFlow_E500_v2.root"
 services.SpaceCharge.RepresentationType:               "Splines_TH3"
@@ -20,4 +22,3 @@ services.SpaceCharge.EnableSimulationSCE: true
 services.SpaceCharge.EnableCalEfieldSCE: true
 services.SpaceCharge.EnableCalSpatialSCE: true
 services.SpaceCharge.EnableCorrSCE: true
-physics.producers.wclsdatahd.wcls_main.params.raw_input_label: "tpcrawdecoder:daq"
