@@ -1,0 +1,22 @@
+#include "standard_detsim_dune10kt_1x2x6.fcl"
+
+# change process name, to be able to rerun it
+process_name: detsimTranverseDiffusionm20percent
+
+source.inputCommands: [
+ "keep *",
+ "drop *_*_*_detsim",
+ "drop *_*_*_wirecell",
+ "drop *_*_*_Reco1",
+ "drop *_*_*_Reco2"
+]
+
+services.LArG4Parameters.TransverseDiffusion: 7.04e-9   # default is 8.8e-9
+
+# make sure detector simulation parameters are correctly propagated to wirecell
+physics.producers.tpcrawdecoder.wcls_main.structs.DT:   @local::services.LArG4Parameters.TransverseDiffusion
+physics.producers.tpcrawdecoder.wcls_main.structs.DL:   @local::services.LArG4Parameters.LongitudinalDiffusion
+physics.producers.tpcrawdecoder.wcls_main.structs.lifetime:   @local::services.DetectorPropertiesService.Electronlifetime
+services.LArG4Parameters.TransverseDiffusion: 7.04e-9   # default is 8.8e-9
+
+

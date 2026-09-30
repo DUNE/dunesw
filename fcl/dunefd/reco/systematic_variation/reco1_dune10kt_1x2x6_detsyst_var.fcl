@@ -1,0 +1,10 @@
+#include "standard_reco1_dune10kt_1x2x6.fcl"
+
+process_name: reco1DetsystVar
+
+source.inputCommands: [
+ "keep *",
+ "drop *_*_*_Reco1",
+ "drop *_*_*_Reco2"
+]
+

@@ -1,0 +1,82 @@
+#include "standard_reco1_dune10kt_1x2x6.fcl"
+
+# change process name, to be able to rerun it
+process_name: reco1WiremodLifetimep20percent
+
+source: {
+   module_type: RootInput
+   maxEvents: -1
+}
+
+source.inputCommands: [
+ "keep *",
+ "drop *_*_*_Reco1",
+ "drop *_*_*_Reco2"
+]
+
+physics.producers.duneWiremod: {
+
+  module_type: "WireModifier"
+
+  WireLabel:           "tpcrawdecoder:gauss"
+  HitLabel:            "gaushit"
+  EDepOrigLabel:       "IonAndScint"
+  EDepShftLabel:       "largeant:LArG4DetectorServicevolTPCActiveInner"
+  #EDepShftLabel:       "largeant:LArG4DetectorServicevolTPCActiveInner1" #add 1 when using v10 of larsoft?
+  SimChannelLabel:     "tpcrawdecoder:simpleSC"
+  G4Label:             "largeant"
+  # Use this for applying an offset or not.  Default is to not use an offset (the BNB).  Using an offset is for the NuMI systematics.
+  ApplyAdditionalTickOffset: false
+
+  useSimChannels: true
+
+  ApplyGainScale: false 
+  ElectronicsGainScale: 2.00
+
+  ApplyLifetimeVar: true
+  LifetimeVar: 12480 # in microseconds
+
+  ApplyModBoxVar: false
+  ModBoxAlphaVar: 0.99
+  ModBoxBetaVar: 0.212
+
+
+  ApplyLongitudinalDiffusionVar: false
+  DLvar: 12e-9
+
+  ApplyTransverseDiffusionVar: false
+  DTvar: 12e-9
+
+  SaveChargeRatioPlot: false
+  SaveEdepMatchingPlots: false
+
+  nNeighbourWires: 0
+  nTickTolerance: 0 
+
+  AdditiveModification: false
+}
+
+# --- NEW: clone gaushit and make it read Wiremod output ---
+physics.producers.gaushitWireMod: @local::physics.producers.gaushit
+physics.producers.gaushitWireMod.CalDataModuleLabel: "duneWiremod"
+
+physics.producers.spsolve.HitLabel: "gaushitWireMod"
+physics.producers.hitfd.HitModuleLabel: "gaushitWireMod"
+
+
+physics.reco: [
+  gaushit,
+  duneWiremod,
+  gaushitWireMod,
+  spsolve,
+  hitfd,
+  rns
+]
+
+physics.trigger_paths: [ reco ]
+
+services:
+{
+  @table::services
+  @table::dunefd_1x2x6_simulation_services
+}
