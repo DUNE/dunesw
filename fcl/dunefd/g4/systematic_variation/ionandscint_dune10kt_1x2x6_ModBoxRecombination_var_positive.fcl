@@ -1,0 +1,24 @@
+#include "standard_g4_dune10kt_1x2x6.fcl"
+
+# change process name, to be able to rerun it
+process_name: g4ModBoxVarPositive
+
+source: {
+   module_type: RootInput
+   maxEvents: -1
+}
+
+source.inputCommands: [
+ "keep *",
+ "drop *_*_*_IonAndScint",
+ "drop *_*_*_detsim",
+ "drop *_*_*_wirecell",
+ "drop *_*_*_Reco1",
+ "drop *_*_*_Reco2"
+]
+
+physics.simulate: [rns, IonAndScint, PDFastSim]
+
+
+services.LArG4Parameters.ModBoxA:  9.9e-1   # default is 9.3e-1
+services.LArG4Parameters.ModBoxB:  2.06e-1  # default is 2.12e-1

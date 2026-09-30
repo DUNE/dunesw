@@ -1,0 +1,24 @@
+#include "standard_g4_dune10kt_1x2x6.fcl"
+
+# change process name, to be able to rerun it
+process_name: g4TransverseDiffusionp20percent
+
+source: {
+   module_type: RootInput
+   maxEvents: -1
+}
+
+source.inputCommands: [
+ "keep *",
+ "drop *_*_*_IonAndScint",
+ "drop *_*_*_detsim",
+ "drop *_*_*_wirecell",
+ "drop *_*_*_Reco1",
+ "drop *_*_*_Reco2"
+]
+
+physics.simulate: [rns, IonAndScint, PDFastSim]
+
+
+services.LArG4Parameters.TransverseDiffusion: 1.056e-8   # default is 8.8e-9
+
