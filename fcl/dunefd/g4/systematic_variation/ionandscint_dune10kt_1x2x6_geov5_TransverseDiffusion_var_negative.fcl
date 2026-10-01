@@ -1,7 +1,7 @@
 #include "standard_g4_dune10kt_1x2x6.fcl"
 
 # change process name, to be able to rerun it
-process_name: g4ModBoxVarNegative
+process_name: g4TransverseDiffusionm20percent
 
 source: {
    module_type: RootInput
@@ -20,5 +20,7 @@ source.inputCommands: [
 physics.simulate: [rns, IonAndScint, PDFastSim]
 
 
-services.LArG4Parameters.ModBoxA:  8.7e-1   # default is 9.3e-1
-services.LArG4Parameters.ModBoxB:  2.18e-1  # default is 2.12e-1
+services.LArG4Parameters.TransverseDiffusion: 7.04e-9   # default is 8.8e-9
+
+services.Geometry: @local::dune10kt_1x2x6_v5_refactored_geo
+services.AuxDetGeometry: @local::dune10kt_1x2x6_v5_refactored_auxdet_geo
