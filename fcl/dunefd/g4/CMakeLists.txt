@@ -1,4 +1,6 @@
 add_subdirectory(legacy)
+add_subdirectory(systematic_variation)
+
 # Install fcl files in /job subdirectory.
 
 install_fhicl()

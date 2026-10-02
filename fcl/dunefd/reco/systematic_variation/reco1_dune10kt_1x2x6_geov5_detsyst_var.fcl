@@ -8,3 +8,6 @@ source.inputCommands: [
  "drop *_*_*_Reco2"
 ]
 
+services.Geometry: @local::dune10kt_1x2x6_v5_refactored_geo
+services.AuxDetGeometry: @local::dune10kt_1x2x6_v5_refactored_auxdet_geo
+
