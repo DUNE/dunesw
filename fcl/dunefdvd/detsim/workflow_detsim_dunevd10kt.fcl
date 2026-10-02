@@ -12,7 +12,7 @@ BEGIN_PROLOG
 dunefd_vertdrift_producers: 
 {
    rns:            { module_type: "RandomNumberSaver" }
-   tpcrawdecoder: @local::tpcrawdecoder_dunefd_vertdrift_2view
+   tpcrawdecoder: @local::dune10kt_vertdrift_sim_nfsp
    # for light signal 
    sipmAr10ppm:    @local::dunefdvd_xarapuca_ar_xe10ppm     #TPC Active volume
    sipmAr10ppmExt: @local::dunefdvd_xarapuca_ar_xe10ppm_ext #Region between FC and Cryostat wall
