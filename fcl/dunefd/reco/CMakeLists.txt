@@ -1,5 +1,7 @@
 add_subdirectory(legacy)
 add_subdirectory(opdet)
+add_subdirectory(systematic_variation)
+add_subdirectory(wiremod)
 
 # Install fcl files in /job subdirectory.
 

@@ -22,3 +22,5 @@ physics.simulate: [rns, IonAndScint, PDFastSim]
 
 services.LArG4Parameters.TransverseDiffusion: 1.056e-8   # default is 8.8e-9
 
+services.Geometry: @local::dune10kt_1x2x6_v5_refactored_geo
+services.AuxDetGeometry: @local::dune10kt_1x2x6_v5_refactored_auxdet_geo
