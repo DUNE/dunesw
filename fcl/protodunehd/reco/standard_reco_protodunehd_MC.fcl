@@ -97,7 +97,7 @@ physics: {
 
     #photon detector reconstruction
     opdec:              @local::protodunehd_mc_deconvolution
-    ophitspe:           @local::dune_ophit_finder_deco
+    ophitspe:           @local::protodunehd_ophit_finder_deco
     opflash:            @local::protodune_opflash
     opslicer:           @local::protodune_opslicer
 
