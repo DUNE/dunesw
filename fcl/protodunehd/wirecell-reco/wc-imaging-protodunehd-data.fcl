@@ -59,7 +59,7 @@ physics:
   {
     # Imaging
     # See dunereco/DUNEWireCell/wirecell_dune.fcl
-    wclsimaging:         @local::protodunehd_img_nfsp_input_mc
+    wclsimaging:         @local::protodunehd_img_nfsp_input
   }
 
   produce: [
