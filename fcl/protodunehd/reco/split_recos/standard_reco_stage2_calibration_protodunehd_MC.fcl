@@ -6,7 +6,7 @@
 #make sure only one WCTK is here -- not sure this part is necessary
 #or if only one can be in the produce list
 #physics.filters.fembfilter.LogLevel: 1
-physics.producers.wclsdatahd: @local::protodunehd_sp_dnn_l1sp  #Signal processing
+physics.producers.wclsdatahd: @local::protodunehd_sp_dnn_l1sp_mc  #Signal processing
 physics.reco: [
   wclsdatahd,
   gaushit,
@@ -42,8 +42,6 @@ services.TFileService: {fileName: "%ifb_%tc_hists.root" }
 physics.analyzers: {
 
 
-  ### For first pass of keepup production, keep SCE corrections Off.
-  ### We won't understand the corrections yet, so don't bias the calo/calibration
   michelremoving: {
     module_type: "michelremoving"
     TrackModuleLabel:        "pandoraTrack"
@@ -56,7 +54,7 @@ physics.analyzers: {
   michelremovinggnocchi: {
     module_type: "michelremoving"
     TrackModuleLabel:        "pandoraTrack"
-    CalorimetryModuleLabel:  "pandoraGnocchiCalonosce" ##This will have 
+    CalorimetryModuleLabel:  "pandoraGnocchiCalonosce"
     HitsModuleLabel:  "hitpdune"
     SaveTrackInfo: true
     MaxZ: 410.
@@ -67,7 +65,7 @@ physics.analyzers: {
 }
 
 ##Just doing gnocchi now
-physics.ana: [michelremoving, michelremovinggnocchi, calibanagnocchi]
+physics.ana: [michelremovinggnocchi, calibanagnocchi]
 physics.end_paths: [output, ana]
 
 
@@ -83,9 +81,6 @@ outputs:
    dataTier:    "full-reconstructed"
    compressionLevel: 1 #zlib argument (0-9)
    fastCloning: true
-   #basketSize: 8192 #[Byte] buffer size at 8k
-   #splitLevel: 0 #reduces number of buffers
-   #treeMaxVirtualSize: 1 #[Byte] limits number of buffers/branch to 1 (default is 10)
  }
 }
 
@@ -103,8 +98,9 @@ source:
   fileNames: ["reco_stage2_protodunehd.root"]
 }
 
-#outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wire*_*_wiener_*"]
-outputs.out1.outputCommands: [ "keep *", "drop recob::Wire*_*_wiener_*"]
+outputs.out1.outputCommands: [ "keep *",
+                               "drop *_reco3d_noreg_*",
+                               "drop *_reco3d_pre_*"]
 process_name: pdhdrecostage2
 physics.filters.nhitsfilter.Verbose: true
 physics.producers.opdec.InstanceName: ""
@@ -113,3 +109,11 @@ physics.producers.wclsdatahd.wcls_main.loglevels: @erase
 physics.producers.wclsdatahd.wcls_main.logsinks: @erase
 physics.producers.wclsdatahd.wcls_main.params.reality: sim
 
+physics.analyzers.michelremovinggnocchi.SelectEvents: [reco]
+physics.analyzers.calibanagnocchi.SelectEvents: [reco]
+physics.analyzers.calibanagnocchi.CALOproducer: "pandoraGnocchiCalonosce"
+
+physics.analyzers.calibanagnocchi.T0producers: ["pandora"]
+physics.analyzers.calibanagnocchi.RequireT0: true
+physics.analyzers.calibanagnocchi.SelectionTools[1].RequireT0: true #: @local::fixed_sel_tools
+physics.analyzers.calibanagnocchi.SelectionTools[2].RequireT0: true
