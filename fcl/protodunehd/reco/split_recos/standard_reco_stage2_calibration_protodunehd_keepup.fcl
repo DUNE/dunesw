@@ -15,7 +15,7 @@ physics.produce: [
   reco3d,
   hitpdune,
   pandora, pandoraWriter, pandoraTrack, pandoraShower, pandoracalo, pandoracalonosce,
-  pandorapid, pandoraShowercalo, pandoraShowercalonosce,
+  pandoraShowercalo, pandoraShowercalonosce,
   pandoraGnocchiCalo,
   pandoraGnocchiCalonosce,
   emtrkmichelid,
@@ -24,11 +24,15 @@ physics.produce: [
   opflash,
   opslicer
   #crtreco, crttag
+  pandora2Track,
+  pandora2calo,
+  pandora2calonosce,
+  pandora2GnocchiCalo,
+  pandora2GnocchiCalonosce,
+  pandora2Shower,
+  pandora2Showercalo,
+  pandora2Showercalonosce
 ]
-
-### FOR TESTING
-#physics.ana: []
-#physics.end_paths: [output]
 
 
 physics.analyzers.calibanagnocchi.RawDigitproducers: [
@@ -45,10 +49,10 @@ source:
   fileNames: ["reco_stage2_protodunehd.root"]
 }
 
-outputs.out1.outputCommands: [ "keep *", "drop raw::RawDigit*_*_*_*", "drop recob::Wire*_*_wiener_*"]
+outputs.out1.outputCommands: [ "keep *", "drop *_reco3d_noreg_*",
+                     "drop *_reco3d_pre_*"]
 process_name: pdhdkeepupstage2
 physics.filters.nhitsfilter.Verbose: true
-physics.filters.nhitsfilter.HitLimit: 17500
 services.DetectorPropertiesService: @local::protodunehd_detproperties_resampled
 physics.producers.wclsdatahd.wcls_main.loglevels: @erase 
 physics.producers.wclsdatahd.wcls_main.logsinks: @erase 

@@ -215,9 +215,9 @@ pdhd_allTrack_calodata.TrackModuleLabel: "pandora2Track"
 pdhd_allTrack_calodatanosce: @local::pdhd_calodatanosce
 pdhd_allTrack_calodatanosce.TrackModuleLabel: "pandora2Track"
 ##all Track MC
-pdhd_allTrack_calomcsce: @local::pdhd_showercalomcsce
+pdhd_allTrack_calomcsce: @local::pdhd_calomcsce
 pdhd_allTrack_calomcsce.TrackModuleLabel: "pandora2Track"
-pdhd_allTrack_calomcnosce: @local::pdhd_showercalomcnosce
+pdhd_allTrack_calomcnosce: @local::pdhd_calomcnosce
 pdhd_allTrack_calomcnosce.TrackModuleLabel: "pandora2Track"
 
 

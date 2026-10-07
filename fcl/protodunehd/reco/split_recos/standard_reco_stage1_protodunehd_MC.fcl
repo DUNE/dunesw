@@ -11,9 +11,9 @@ physics.reco: [
 
 #don't need a timestamp here -- only intermittent
 outputs.out1.fileName: "%ifb_reco_stage1.root"
-outputs.out1.outputCommands: [ "keep *"]
+outputs.out1.outputCommands: [ "keep *" ]
 process_name: pdhdrecostage1
 
 physics.producers.wclsdatahdfilter.wcls_main.loglevels: @erase 
 physics.producers.wclsdatahdfilter.wcls_main.logsinks: @erase 
-physics.producers.wclsdatahdfilter.wcls_main.params.reality: "sim"
+#physics.producers.wclsdatahdfilter.wcls_main.params.reality: "sim"

@@ -1,0 +1,13 @@
+#include "pandoramodules_dune.fcl"
+
+BEGIN_PROLOG
+
+pandora_allTrack_creation: @local::dune_pandoraTrackCreation
+pandora_allTrack_creation.UseAllParticles: true
+pandora_allTrack_creation.PFParticleLabel:            "pandora"
+
+pandora_allShower_creation: @local::dunefdhd_pandoraModularShowerCreation
+pandora_allShower_creation.UseAllParticles: true
+pandora_allShower_creation.PFParticleLabel:            "pandora"
+
+END_PROLOG
