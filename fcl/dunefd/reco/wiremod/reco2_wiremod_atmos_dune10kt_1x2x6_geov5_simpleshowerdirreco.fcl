@@ -1,0 +1,14 @@
+#include "reco2_wiremod_atmos_dune10kt_1x2x6_geov5.fcl"
+
+
+physics.producers.pandoraShower.ShowerFinderTools:[
+  @local::dune_showerpfpvertexstartposition,
+  @local::dune_showerpcadirection,
+  @local::dune_showerlengthpercentile,
+  @local::dunefdhd_showernumelectronsenergy,
+  @local::dune_3dcylindertrackhitfinder,
+  @local::dunefdhd_showerunidirectiondedx,
+  @local::dune_showerincrementaltrackhitfinder,
+  @local::dune_showerpandoraslidingfittrackfinder,
+  @local::dunefdhd_showertrajpointdedx
+]
