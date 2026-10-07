@@ -11,3 +11,5 @@ physics.producers.pandoraShower.ShowerFinderTools:[
   @local::dune_showerpandoraslidingfittrackfinder,
   @local::dunefdhd_showertrajpointdedx
 ]
+
+physics.producers.pandora.ConfigFile: "PandoraSettings_Master_Atmos_SimpleShowerGrowing_DUNEFD.xml"
