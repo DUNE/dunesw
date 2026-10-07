@@ -1,0 +1,15 @@
+#include "reco2_atmos_dune10kt_1x2x6_geov5_detsyst_var.fcl"
+
+physics.producers.pandoraShower.ShowerFinderTools:[
+  @local::dune_showerpfpvertexstartposition,
+  @local::dune_showerpcadirection,
+  @local::dune_showerlengthpercentile,
+  @local::dunefdhd_showernumelectronsenergy,
+  @local::dune_3dcylindertrackhitfinder,
+  @local::dunefdhd_showerunidirectiondedx,
+  @local::dune_showerincrementaltrackhitfinder,
+  @local::dune_showerpandoraslidingfittrackfinder,
+  @local::dunefdhd_showertrajpointdedx
+]
+
+physics.producers.pandora.ConfigFile: "PandoraSettings_Master_Atmos_SimpleShowerGrowing_DUNEFD.xml"
