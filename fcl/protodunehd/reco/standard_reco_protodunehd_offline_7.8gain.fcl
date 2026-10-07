@@ -1,2 +1,2 @@
-#include "standard_reco_protodunehd_keepup.fcl"
+#include "standard_reco_protodunehd_offline.fcl"
 physics.producers.wclsdatahd.wcls_main.structs.elecGain: 7.8

@@ -82,7 +82,7 @@ physics: {
     pandora:            @local::protodunehd_pandora
     pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
-    pandoraShower:      @local::dune_pandoraShowerCreation
+    pandoraShower:      @local::dunefdhd_pandoraModularShowerCreation
 
     ## Standard/Old PDSP style Calorimetry
     pandoracalo:        @local::pdhd_calomcsce

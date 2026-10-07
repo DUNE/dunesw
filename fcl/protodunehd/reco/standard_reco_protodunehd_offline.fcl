@@ -33,7 +33,7 @@
 #include "dune_calibanatree.fcl"
 #include "BeamEvent.fcl"
 
-process_name: pdhdkeepupprocessing
+process_name: pdhdoffline
 
 services:
 {
@@ -63,7 +63,7 @@ services:
 
   TFileService:
   {
-    fileName: "pdhd_keepup_decoder.root"
+    fileName: "pdhd_offline_decoder.root"
   }
   HDF5RawFile3Service:  {}
 
@@ -115,7 +115,7 @@ physics:
     pandora:            @local::protodunehd_pandora
     pandoraWriter:      @local::dune_pandorawriter
     pandoraTrack:       @local::dune_pandoraTrackCreation
-    pandoraShower:      @local::dune_pandoraShowerCreation
+    pandoraShower:      @local::dunefdhd_pandoraModularShowerCreation
 
     ## Standard/Old PDSP style Calorimetry
     pandoracalo:        @local::pdhd_calodata
@@ -205,7 +205,7 @@ outputs:
                      "drop *_reco3d_pre_*"]
     compressionLevel: 1
     module_type: RootOutput
-    fileName: "%ifb_%tc_keepup.root"
+    fileName: "%ifb_%tc_offline.root"
     dataTier:    "full-reconstructed"
     streamName: "out1"
   }
