@@ -6,16 +6,12 @@
 process_name: InternalCosmogenicsG4
 
 # QGSP_BERT carries no G4RadioactiveDecayPhysics, so the nuclei SingleGen places
-# would be tracked as stable and never produce a beta. Shielding supplies it.
+# would be tracked as stable and never decay. Shielding supplies it. Geant4's
+# default 1-year lifetime threshold for radioactive decay covers every unstable
+# isotope in the list.
 services.PhysicsList.PhysicsListName: "Shielding"
 
-# larg4Main takes the macro from visMacro and ignores any other key, and
-# macroPath names an environment variable to search rather than a path. It has to
-# be FHICL_FILE_PATH: the macro installs to ${dunesw_FHICL_DIR}, which is not on
-# FW_SEARCH_PATH, and a macro that is not found is only logged at INFO level.
-physics.producers.largeant.macroPath: "FHICL_FILE_PATH"
-physics.producers.largeant.visMacro: "internal_cosmogenics_rd.mac"
-
+# Keep EM shower daughters as MCParticles (the base config drops them).
 services.ParticleListAction.keepEMShowerDaughters: true
 
 outputs.out1.fileName: "internal_cosmogenics_g4.root"

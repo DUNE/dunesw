@@ -2,7 +2,7 @@
 
 Two independent samples of cosmogenic activity in the DUNE FD HD:
 
-* **Internal** — isotopes produced by muon spallation on 40Ar that beta-decay inside the active volume. `SingleGen` places one of 44 isotope species at rest uniformly in the LAr.
+* **Internal** — isotopes produced by muon spallation on 40Ar that decay inside the active volume. `SingleGen` places one of 35 isotope species at rest uniformly in the LAr.
 * **External** — mostly gammas and neutrons produced in the surrounding rock, injected at the central APA plane through `TextFileGen`.
 
 
@@ -22,17 +22,16 @@ The current table is a reduction which does not include correlations O(0.12). Co
 **The table is normalised to 5980 kton-days; a full 10-year module is 36500.**
 Scale `--target-ktondays` to the exposure you want.
 
-    # -n is required: TextFileGen throws at EOF rather than ending the job, so
-    # without it art aborts on the last event and never closes RootOutput. The
-    # count is written beside the HEPEVT file.
+    # -n is required (TextFileGen throws at EOF); the count is written beside
+    # the HEPEVT file.
     lar -c gen_external_cosmogenics_dune10kt_1x2x6.fcl \
         -n $(cat external_cosmogenics.hepevt.nevents) \
         -o external_cosmogenics_gen.root
     lar -c g4_external_cosmogenics_dune10kt_1x2x6.fcl \
         -s external_cosmogenics_gen.root -o external_cosmogenics_g4.root
 
-    # internal (N*44 events gives ~N per species. The example uses 1K of each, but tune to your leisure)
-    lar -c gen_internal_cosmogenics_dune10kt_1x2x6.fcl -n 4400 \
+    # internal (N*35 events gives ~N per species; this example gives ~100 of each)
+    lar -c gen_internal_cosmogenics_dune10kt_1x2x6.fcl -n 3500 \
         -o internal_cosmogenics_gen.root
     lar -c g4_internal_cosmogenics_dune10kt_1x2x6.fcl \
         -s internal_cosmogenics_gen.root -o internal_cosmogenics_g4.root

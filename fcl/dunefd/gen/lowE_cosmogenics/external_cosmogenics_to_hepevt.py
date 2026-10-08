@@ -48,9 +48,8 @@ import argparse
 # APA plane entry position
 X_ENTRY = 0.0   # cm  (central APA plane)
 
-# APA face bounds, from the active volume of dune10kt_v6_refactored_1x2x6.gdml
-# as reported by DumpGeometry (see dune_internal_cosmogenics_model_dune10kt_1x2x6.fcl).
-# The 1x2x6 stacks two 600 cm APAs vertically, so the face is 1200 cm tall.
+# 1x2x6 APA face bounds, from the active volume of dune10kt_v6_refactored_1x2x6.gdml
+# (see dune_internal_cosmogenics_model.fcl). Two 600 cm APAs are stacked vertically.
 Y_LO, Y_HI = -600.0,  600.0   # cm
 Z_LO, Z_HI =    0.0, 1393.4   # cm
 
@@ -236,11 +235,8 @@ def main():
 
     species_count = {}
 
-    # Draw the per-species counts up front and shuffle, so the file is
-    # interleaved rather than one contiguous block per species. Ordering does not
-    # matter to a full-file run, but it does wherever the file is read in pieces:
-    # a small -n, or a campaign split across batch jobs, would otherwise get one
-    # species per slice and lose the rarest ones entirely.
+    # Shuffle so species are interleaved: any slice of the file (a small -n, or
+    # a split batch campaign) then holds every species in proportion.
     draws = []
     for pdg, sp in sorted(species.items(), key=lambda kv: -kv[1]['n']):
         draws.extend([pdg] * poisson(sp['n'] * scale))
@@ -264,10 +260,8 @@ def main():
             # HEPEVT format (TextFileGen):
             #   event_number  n_particles
             #   status pdg m1 m2 d1 d2  px py pz E mass  x y z t
-            # %.17g, not %.6e: HEPEVT stores total energy, and a thermal
-            # neutron's kinetic energy is ~1e-15 GeV against a 0.94 GeV mass. At
-            # 7 significant digits that rounds away and the neutron arrives at
-            # G4 at rest, which costs every neutron below ~0.1 keV: 9% of them.
+            # Full precision: E is total energy, and a thermal neutron's
+            # kinetic energy (~1e-15 GeV) is lost at fewer digits.
             fout.write(f"{n_written} 1\n")
             fout.write(
                 f"1 {pdg} 0 0 0 0 "
@@ -276,9 +270,7 @@ def main():
             )
             species_count[pdg] = species_count.get(pdg, 0) + 1
 
-    # Sidecar holding the event count. TextFileGen throws at EOF rather than
-    # ending the job, so art has to be told how many events to read, and only
-    # this script knows the number: it is a Poisson draw.
+    # Event count for the gen stage's -n (TextFileGen throws at EOF).
     nevents_path = args.output_hepevt + '.nevents'
     with open(nevents_path, 'w') as fn:
         fn.write(f"{n_written}\n")

@@ -32,14 +32,8 @@ source:
 {
    module_type: EmptyEvent
    timestampPlugin: { plugin_type: "GeneratedEventTimestamp" }
-   # Override with -n, using the count in <hepevt>.nevents that
-   # external_cosmogenics_to_hepevt.py writes beside the HEPEVT file.
-   #
-   # -1 does not mean "read until EOF" here: TextFileGen throws when it runs off
-   # the end of the file rather than ending the job, so without -n art aborts on
-   # the last event and never closes RootOutput. That is deliberate, as a
-   # fail-closed guard. A finite default is worse, since forgetting -n would then
-   # exit 0 and write a short file that looks valid.
+   # Always pass -n with the count in <hepevt>.nevents. TextFileGen throws at EOF,
+   # so -1 makes a run without -n fail rather than silently write a short file.
    maxEvents:   -1
    firstRun:    20003000
    firstEvent:  1

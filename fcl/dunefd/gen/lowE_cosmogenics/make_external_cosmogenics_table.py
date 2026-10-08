@@ -5,11 +5,8 @@ make_external_cosmogenics_table.py
 Reduce the full external-cosmogenics CSV to the factorised table that
 external_cosmogenics_to_hepevt.py samples from.
 
-The CSV is a list of ~190k particles crossing into the detector, but the
-generator never reproduces a specific particle: it draws each one Poisson(scale)
-times and gives every copy a fresh position and drift-direction sign. The row
-list is therefore only ever used as an empirical distribution, and can be
-replaced by binned distributions at no cost in what the generator can produce.
+The CSV lists ~190k particles entering the detector. The generator only uses it
+as an empirical distribution, so binned distributions replace it.
 
 Per species this writes:
   * every discrete gamma line at its exact energy (511 keV annihilation,
@@ -21,8 +18,7 @@ Per species this writes:
   * a 2D angular distribution in (cos(theta) about the drift axis, phi).
 
 Energy and direction are binned separately, so their correlation is not kept;
-see README.md. Azimuth is binned rather than assumed flat, because it measurably
-is not (chi2/ndf = 222 for gammas over 12 bins).
+see README.md. Azimuth is binned because it is not flat.
 
 Species with fewer than MIN_HIST entries are written as raw rows instead, since
 a histogram of a handful of particles only adds sampling noise.
