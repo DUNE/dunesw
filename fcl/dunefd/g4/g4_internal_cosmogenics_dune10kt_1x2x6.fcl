@@ -1,0 +1,17 @@
+# Geant4 stage for internal cosmogenic isotopes in the DUNE FD HD 1x2x6.
+# See fcl/dunefd/gen/lowE_cosmogenics/README.md.
+
+#include "standard_g4_dune10kt_1x2x6.fcl"
+
+process_name: InternalCosmogenicsG4
+
+# QGSP_BERT carries no G4RadioactiveDecayPhysics, so the nuclei SingleGen places
+# would be tracked as stable and never decay. Shielding supplies it. Geant4's
+# default 1-year lifetime threshold for radioactive decay covers every unstable
+# isotope in the list.
+services.PhysicsList.PhysicsListName: "Shielding"
+
+# Keep EM shower daughters as MCParticles (the base config drops them).
+services.ParticleListAction.keepEMShowerDaughters: true
+
+outputs.out1.fileName: "internal_cosmogenics_g4.root"
