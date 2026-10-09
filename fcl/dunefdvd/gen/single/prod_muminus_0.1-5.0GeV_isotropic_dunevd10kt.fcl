@@ -16,7 +16,7 @@ physics.producers.generator.SigmaX: [ 600 ]      # x = (-6, 6)
 physics.producers.generator.SigmaY: [ 600 ]      # y = (-6, 6)
 physics.producers.generator.SigmaZ: [ 3000 ]      # z = (0, 60)
 physics.producers.generator.SigmaT: [ 0.0 ]        # T0==0
-physics.producers.generator.PDist: 0               # Flat momentum dist. (0.1-2.0 GeV)
+physics.producers.generator.PDist: 0               # Flat momentum dist. (0.1-5.0 GeV)
 physics.producers.generator.P0: [ 2.55 ]
 physics.producers.generator.SigmaP: [ 2.45 ]
 physics.producers.generator.AngleDist: 0           # Flat angle dist.
