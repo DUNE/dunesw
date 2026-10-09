@@ -2,11 +2,6 @@
 
 process_name: GenieGen
 
-#services: {
-#    @table::services
-#    @table::dunefdvd_1x6x6_simulation_services
-#}
-
 source.firstRun: 20000001
 
 outputs.out1.fileName: "prodgenie_nu_dunevd10kt_gen.root"
