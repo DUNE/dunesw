@@ -1,4 +1,3 @@
-#include "prodsingle_common_dunefdvd10kt.fcl"
 
 process_name: SinglesGen
 
