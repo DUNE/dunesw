@@ -1,7 +1,8 @@
+#include "prodsingle_common_dunefdvd10kt.fcl"
 
 process_name: SinglesGen
 
-outputs.out1.fileName: "prod_muminus_0.1-5.0GeV_isotropic_dune10ktvd_3view_30deg_gen.root"
+outputs.out1.fileName: "prod_muminus_0.1-5.0GeV_isotropic_dunevd10kt_gen.root"
 
 source.firstRun: 20000014
 
