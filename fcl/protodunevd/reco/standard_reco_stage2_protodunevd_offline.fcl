@@ -9,7 +9,7 @@ source:{
 physics.producers.pandorapid:         @local::standard_chi2pid
 
 physics.produce: [
-   #opflash,
+   opflash,
    nhitsfilter,
    pandora,
    pandoraWriter,
