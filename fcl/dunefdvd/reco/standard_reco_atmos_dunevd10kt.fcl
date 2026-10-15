@@ -1,0 +1,10 @@
+#include "standard_reco_dunevd10kt.fcl"
+
+physics.producers.pandora.ConfigFile:         "PandoraSettings_Master_Atmos_DUNEFD.xml"
+physics.producers.pandora.EnableMCParticles:  true
+
+physics.reco: [
+    @sequence::dunefd_vertdrift_tpc_reco1,
+    @sequence::dunefd_vertdrift_atmos_reco2,
+    rns
+]
