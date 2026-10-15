@@ -1,0 +1,3 @@
+#include "standard_cafmaker_dunevd10kt.fcl"
+
+physics.analyzers.cafmaker.IsAtmoCVN: true

@@ -1,3 +1,4 @@
+#include "WaveformPreProcessing.fcl"
 #include "PDVDTriggerReader4.fcl"
 #include "PDVDTimingRawDecoder.fcl"
 #include "messageservices_dune.fcl"
@@ -12,6 +13,7 @@ physics.producers.ctbrawdecoder:    @local::PDHDCTBRawDecoderDefaults
 physics.producers.timingrawdecoder: @local::PDVDTimingRawDecoder
 physics.producers.beamevent:        @local::pdvd_beamevent
 physics.producers.cluster3d:        @local::standard_cluster3d 
+physics.producers.opwfpreprocess:   @local::protodunevd_wvfpreprocessing
 
 #Put all of the raw decoders here since they're quick
 physics.produce: [
@@ -21,7 +23,8 @@ physics.produce: [
   ctbrawdecoder,
   beamevent,
   pdvddaphne,
-  #ophit,
+  opwfpreprocess,
+  ophit,
   wclsdatavd,
   gaushit,
   cluster3d,
@@ -52,6 +55,14 @@ physics.producers.tpcrawdecoder.DecoderToolParams: @local::PDVDDataInterfaceWIBE
 physics.producers.beamevent.ForceRead:            false
 physics.producers.beamevent.MatchTime:            true
 
-physics.producers.cluster3d.Hit3DBuilderAlg:        @local::standard_snippethit3dbuilderDUNE
-physics.producers.cluster3d.HitFinderModuleLabel:       ["gaushit"]
+physics.producers.cluster3d.Hit3DBuilderAlg:                    @local::standard_snippethit3dbuilderDUNE
+physics.producers.cluster3d.HitFinderModuleLabel:               ["gaushit"]
 physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: true
+physics.producers.cluster3d.MakeSpacePointsOnly:                true
+
+physics.producers.opwfpreprocess.ApplyDenoising: true
+
+physics.producers.ophit.UseCalibrator: true
+physics.producers.ophit.InputModule:   "opwfpreprocess"
+physics.producers.ophit.InputLabels:   [""]
+

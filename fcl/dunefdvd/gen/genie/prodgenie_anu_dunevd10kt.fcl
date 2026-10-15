@@ -1,0 +1,7 @@
+#include "prodgenie_nu_dunevd10kt.fcl"
+
+source.firstRun: 40000001
+
+outputs.out1.fileName: "prodgenie_anu_dunevd10kt.root"
+
+physics.producers.generator: @local::dunefdvd_10kt_genie_anu_lbnf_dk2nu
