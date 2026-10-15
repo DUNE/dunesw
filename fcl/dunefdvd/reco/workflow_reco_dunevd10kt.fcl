@@ -210,6 +210,8 @@ dunefd_vertdrift_reco_le:
 dunefd_vertdrift_reco1_solar: 
 [ 
     @sequence::dunefd_vertdrift_reco1,
+    planecluster,
+    solarcluster,
     rns
 ]
 
