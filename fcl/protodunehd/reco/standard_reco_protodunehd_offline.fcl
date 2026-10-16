@@ -202,7 +202,7 @@ outputs:
   out1:
   {
     outputCommands: [ "keep *", "drop *_reco3d_noreg_*",
-                     "drop *_reco3d_pre_*"]
+                     "drop *_reco3d_pre_*", "drop raw::RawDigit*_*_*_*" ]
     compressionLevel: 1
     module_type: RootOutput
     fileName: "%ifb_%tc_offline.root"

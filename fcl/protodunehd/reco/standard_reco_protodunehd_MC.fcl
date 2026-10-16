@@ -169,7 +169,7 @@ outputs:
    dataTier:    "full-reconstructed"
    outputCommands: [ "keep *",
                      "drop *_reco3d_noreg_*",
-                     "drop *_reco3d_pre_*" ]
+                     "drop *_reco3d_pre_*", "drop raw::RawDigit*_*_*_*" ]
    compressionLevel: 1 #zlib argument (0-9)
    fastCloning: true
    #basketSize: 8192 #[Byte] buffer size at 8k
