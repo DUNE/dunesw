@@ -71,6 +71,7 @@ physics:
   trigger_paths : [ produce ]
   end_paths: [ ] # We don't write anything out from imaging -- contingent on changes to jsonnets!!
 }
+physics.filters.fembfilter.SkipDigitCheck: true
 
 outputs:
 {
