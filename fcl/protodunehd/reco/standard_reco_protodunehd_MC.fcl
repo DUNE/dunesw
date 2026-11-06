@@ -23,6 +23,7 @@
 #include "services_dune.fcl"
 #include "spacecharge_dune.fcl"
 #include "dune_calibanatree.fcl"
+#include "cluster3Dmodule.fcl"
 
 process_name: Reco
 
@@ -72,6 +73,8 @@ physics: {
     wclsdatahd:         @local::protodunehd_nfsp_dnnroi_mc
     # Hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
+    #Cluster3D -- for spine
+    cluster3d:        @local::standard_cluster3ddune
     # space point solver
     reco3d:             @local::pdhd_mc_spacepointsolver
     # actual disambiguation
@@ -126,6 +129,7 @@ physics: {
     opslicer,
     wclsdatahd,
     gaushit,
+    cluster3d,
     nhitsfilter,
     reco3d,
     hitpdune,

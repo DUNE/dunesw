@@ -32,6 +32,7 @@
 #include "spacecharge_dune.fcl"
 #include "dune_calibanatree.fcl"
 #include "BeamEvent.fcl"
+#include "cluster3Dmodule.fcl"
 
 process_name: pdhdoffline
 
@@ -104,6 +105,8 @@ physics:
     wclsdatahd:         @local::protodunehd_nfsp_dnnroi
     # Hit finding
     gaushit:            @local::protodunespmc_gaushitfinder
+    #Cluster3D -- for spine
+    cluster3d:        @local::standard_cluster3ddune
     # space point solver
     reco3d:             @local::pdhd_data_spacepointsolver
     # actual disambiguation
@@ -162,6 +165,7 @@ physics:
     wclsdatahd,
     saturationfilter,
     gaushit,
+    cluster3d,
     nhitsfilter,
     reco3d,
     hitpdune,
