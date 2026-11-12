@@ -8,7 +8,7 @@
 #include "pandora_alltrackshower.fcl"
 #include "wirecell_dune.fcl"
 #include "particleid.fcl"
-
+##include "badchannels_list.fcl"
 #include "CRT.fcl"
 #include "T0RecoAnodePiercers.fcl"
 #include "cluster3dalgorithms_dune.fcl"
@@ -46,7 +46,7 @@ services:
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
 services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC"
-
+#services.ChannelStatusService.BadChannels: @local::BadChannels
 ##include "cluster_dune.fcl"
 #source is now a root file
 
