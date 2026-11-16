@@ -43,7 +43,7 @@ services:
   RandomNumberGenerator: {} #ART native random number generator
   message:              @local::dune_message_services_prod
   FileCatalogMetadata:  @local::art_file_catalog_data
-  ChannelStatusService: @local::dunefd_channel_status
+  ChannelStatusService: @local::protodunehd_channel_status
   WireReadout:          @local::dune_wire_readout
   GeometryConfigurationWriter:  {}
   Geometry:                     @local::protodunehd_geo
