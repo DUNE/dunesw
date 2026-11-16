@@ -1,5 +1,6 @@
 #include "messageservices_dune.fcl"
 #include "cluster3dalgorithms_dune.fcl"
+#include "cluster3Dmodule.fcl"
 #include "standard_reco_protodunevd_keepup.fcl"
 
 source:
@@ -10,7 +11,7 @@ source:
   fileNames: ["detsim_file.root"]
 }
 
-physics.producers.cluster3d:        @local::standard_cluster3d
+physics.producers.cluster3d:        @local::standard_cluster3ddune
 
 #Put all of the raw decoders here since they're quick
 physics.produce: [
