@@ -38,7 +38,7 @@ physics: {
   @table::dunefd_vertdrift_producers
  }
 
- reco: [ @sequence::dunefd_vertdrift_reco_tpc_only ]
+ reco: [ @sequence::dunefd_vertdrift_reco_all_systems ]
  stream1:  [ out1 ]
  trigger_paths: [reco] 
  end_paths:     [stream1]  

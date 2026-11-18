@@ -40,8 +40,8 @@ physics: {
  producers: {
    @table::dunefd_vertdrift_producers 
  }
-# simulate: [ rns, daq, @sequence::pd_detsim_path ]
- simulate: [ @sequence::dunefd_vertdrift_detsim_tpc_only ]
+ #simulate: [ @sequence::dunefd_vertdrift_detsim_tpc_only ]
+ simulate: [ @sequence::dunefd_vertdrift_detsim_all_systems_internal_light ]    # light simulation inside TPC only, external parts not available yet
  stream1:  [ out1 ]
  trigger_paths: [simulate] 
  end_paths:     [stream1]  
@@ -55,6 +55,10 @@ outputs: {
    compressionLevel: 1
  }
 }
+
+# light simulation inside TPC only, external parts not available yet
+physics.producers.opdigi10ppm.InputTags: [ "sipmAr10ppm", "sipmXe10ppm"]
+services.PhotonBackTrackerService.PhotonBackTracker.G4ModuleLabels: ["PDFastSimAr", "PDFastSimXe"]
 
 ## Use fixed values instead of DB for pedestals.
 #services.DetPedestalService: @local::dune_fixedpeds
