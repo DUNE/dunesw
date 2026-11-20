@@ -8,10 +8,11 @@
 #include "pandora_alltrackshower.fcl"
 #include "wirecell_dune.fcl"
 #include "particleid.fcl"
-
+##include "badchannels_list.fcl"
 #include "CRT.fcl"
 #include "T0RecoAnodePiercers.fcl"
-#
+#include "cluster3dalgorithms_dune.fcl"
+#include "cluster3Dmodule.fcl"
 #include "numberofhitsfilter.fcl"
 #include "SpacePointSolver_dune.fcl"
 #include "featurelabelingmodules.fcl"
@@ -45,7 +46,8 @@ services:
 #BackTracker Module labels
 services.BackTrackerService.BackTracker.G4ModuleLabel: "largeant"
 services.BackTrackerService.BackTracker.SimChannelModuleLabel: "tpcrawdecoder:simpleSC"
-
+#services.ChannelStatusService.BadChannels: @local::BadChannels
+##include "cluster_dune.fcl"
 #source is now a root file
 
 source:
@@ -72,6 +74,8 @@ physics: {
     wclsdatahd:         @local::protodunehd_nfsp_dnnroi_mc
     # Hit finder
     gaushit:            @local::protodunespmc_gaushitfinder
+    #cluster3d
+    cluster3d:          @local::standard_cluster3ddune
     # space point solver
     reco3d:             @local::pdhd_mc_spacepointsolver
     # actual disambiguation
@@ -127,6 +131,7 @@ physics: {
     wclsdatahd,
     gaushit,
     nhitsfilter,
+    cluster3d,
     reco3d,
     hitpdune,
     pandora,
@@ -182,7 +187,10 @@ outputs:
 physics.producers.gaushit.CalDataModuleLabel: "wclsdatahd:gauss"
 
 physics.filters.nhitsfilter.HitLimit: 17500
-
+physics.producers.cluster3d.Hit3DBuilderAlg:                    @local::standard_snippethit3dbuilderDUNE
+physics.producers.cluster3d.HitFinderModuleLabel:               ["gaushit"]
+physics.producers.cluster3d.Hit3DBuilderAlg.SaveMythicalPoints: true
+physics.producers.cluster3d.MakeSpacePointsOnly:                true
 physics.producers.pandora.HitFinderModuleLabel:             "hitpdune"
 physics.producers.pandoraWriter.HitFinderModuleLabel:       "hitpdune"
 physics.producers.pandoraTrack.PFParticleLabel:             "pandora"
