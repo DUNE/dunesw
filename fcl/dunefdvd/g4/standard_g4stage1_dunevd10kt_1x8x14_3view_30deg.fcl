@@ -2,7 +2,10 @@
 #include "jobconfig_g4_dunevd10kt_1x8x14_3view_30deg.fcl"
 
 process_name: G4Stage1
-# New modifications since we set PhotonVisibilityService by default to be dune10kt_vd_photonvisibilityservice_Ar 
+# New modifications since we set PhotonVisibilityService by default to be dune10kt_vd_1x8x14_photonvisibilityservice_Ar 
+# Swap to 1x8x14 PhotonVisibilityService (Ar)
+services.PhotonVisibilityService: @local::dune10kt_vd_1x8x14_photonvisibilityservice_Ar # changing to the 1x8x14 libaray.
+
 physics.producers.PDFastSimXe: @erase
 physics.producers.PDFastSimXeExternal: @erase
 physics.simulate: [ rns, largeant, IonAndScint, IonAndScintExternal, elecDrift, PDFastSimAr, PDFastSimArExternal]

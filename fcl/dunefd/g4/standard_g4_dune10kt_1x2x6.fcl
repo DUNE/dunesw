@@ -5,5 +5,9 @@ services: {
     @table::dunefd_1x2x6_simulation_services
 }
 
-# swap to 1x2x6 pdfastsim configuration
+# swap to 1x2x6 pdfastsim configuration and remove split Center/Ends configurations
+PDFastSimCenter: @erase
+PDFastSimEnds: @erase
+
 physics.producers.PDFastSim: @local::dunefd_1x2x6_pdfastsim
+physics.simulate: [ rns, largeant, IonAndScint, PDFastSim ]

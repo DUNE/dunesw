@@ -3,7 +3,7 @@
 
 process_name: G4Stage2
 
-services.PhotonVisibilityService: @local::dune10kt_vd_photonvisibilityservice_Xe # changing to the xenon libaray. 
+services.PhotonVisibilityService: @local::dune10kt_vd_1x8x14_photonvisibilityservice_Xe # changing to the xenon libaray. 
 
 # New modifications since we set PhotonVisibilityService by default to be dune10kt_vd_photonvisibilityservice_Ar 
 physics.producers.largeant: @erase
