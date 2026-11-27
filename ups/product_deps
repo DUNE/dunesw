@@ -87,7 +87,7 @@
 #>  define_pythonpath
 ####################################
 parent		dunesw
-defaultqual	e26
+defaultqual	e28
 ####################################
 
 ####################################
@@ -266,20 +266,18 @@ table_fragment_end
 
 product          version
 cetmodules	 v3_27_04	-	only_for_build
-duneexamples     v10_32_00d01
-dunedataprep     v10_32_00d01
-duneana          v10_32_00d01
-protoduneana     v10_32_00d01
+duneexamples     v11_00_00d00
+dunedataprep     v11_00_00d00
+duneana          v11_00_00d00
+protoduneana     v11_00_00d00
 end_product_list
 
 
 # We now define allowed qualifiers and the corresponding qualifiers for the depdencies.
 # Make a table by adding columns before "notes".
 qualifier       duneexamples   dunedataprep  duneana     protoduneana     notes
-c14:debug       c14:debug      c14:debug     c14:debug   c14:debug   
-c14:prof        c14:prof       c14:prof      c14:prof    c14:prof    
-e26:debug       e26:debug      e26:debug     e26:debug   e26:debug  
-e26:prof        e26:prof       e26:prof      e26:prof    e26:prof   
+e28:debug       e28:debug      e28:debug     e28:debug   e28:debug  
+e28:prof        e28:prof       e28:prof      e28:prof    e28:prof   
 end_qualifier_list
 
 # Preserve tabs and formatting in emacs and vi / vim:
