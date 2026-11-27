@@ -1,0 +1,5 @@
+#include "protodunevd_g4_stage1.fcl"
+
+services.DetectorPropertiesService.NumberTimeSamples: 10000
+services.DetectorPropertiesService.ReadOutWindowSize: 10000
+
