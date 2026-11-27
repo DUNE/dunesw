@@ -5,3 +5,5 @@ services: {
   @table::dunefdvd_1x8x14_3view_30deg_simulation_services
 }
 
+physics.producers.PDFastSimAr: @local::dunevd_1x8x14_pdfastsim_par_ar
+physics.producers.PDFastSimXe: @local::dunevd_1x8x14_pdfastsim_par_xe

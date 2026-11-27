@@ -8,5 +8,10 @@ services: {
   @table::dunefdvd_1x8x14_3view_30deg_simulation_services
 }
 
+physics.producers.PDFastSimAr: @local::dunevd_1x8x14_pdfastsim_par_ar
+physics.producers.PDFastSimXe: @local::dunevd_1x8x14_pdfastsim_par_xe
+physics.producers.PDFastSimArExternal: @local::dunevd_1x8x14_pdfastsim_pvs_ar_external
+physics.producers.PDFastSimXeExternal: @local::dunevd_1x8x14_pdfastsim_pvs_xe_external
+
 outputs.out1.fileName: "%ifb_%p.root"
 physics.simulate: @erase #do not run anything in this fcl

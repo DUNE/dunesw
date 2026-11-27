@@ -10,4 +10,6 @@ physics.producers:
 {
     @table::physics.producers
     tpcrawdecoder: @local::dunefd_horizdrift_1x2x6_sim_nfsp
+    opdigi:        @local::standard_template_digitizer_1x2x6
+
 }
